@@ -96,6 +96,9 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
     QFileInfo fileinfo(file);
     QNetworkRequest request;
     QUrl url("http://"+_url);
+    if(url.port() == -1) {
+        url.setPort(631);
+    }
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
 
