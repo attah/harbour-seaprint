@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>CoverPage</name>
     <message>
@@ -11,15 +11,38 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Show Page 2</source>
+        <source>Add by URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>UI Template</source>
+        <source>Add favourite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hello Sailors</source>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PrinterPage</name>
+    <message>
+        <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

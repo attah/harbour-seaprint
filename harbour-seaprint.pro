@@ -14,12 +14,18 @@ TARGET = harbour-seaprint
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-seaprint.cpp
+SOURCES += src/harbour-seaprint.cpp \
+    src/ippdiscovery.cpp \
+    src/bytestream.cpp \
+    src/ippmsg.cpp \
+    src/ippprinter.cpp
+
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
+    qml/pages/*.qml \
+    qml/pages/utils.js \
+    qml/pages/printer.svg \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \
@@ -38,3 +44,9 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-seaprint-de.ts
+
+HEADERS += \
+    src/ippdiscovery.h \
+    src/bytestream.h \
+    src/ippmsg.h \
+    src/ippprinter.h

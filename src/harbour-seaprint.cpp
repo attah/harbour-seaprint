@@ -3,10 +3,15 @@
 #endif
 
 #include <sailfishapp.h>
+#include <src/ippdiscovery.h>
+#include <src/ippprinter.h>
 
 int main(int argc, char *argv[])
 {
-    // SailfishApp::main() will display "qml/harbour-seaprint.qml", if you need more
+    qmlRegisterType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery");
+    qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
+
+    // SailfishApp::main() will display "qml/harbour-printtool.qml", if you need more
     // control over initialization, you can use:
     //
     //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
