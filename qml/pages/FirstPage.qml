@@ -11,20 +11,58 @@ Page {
     allowedOrientations: Orientation.All
 
     property string selectedFile: "/home/nemo/Downloads/1.pdf"
+    property string currentSSID: ""
+
+    onCurrentSSIDChanged: {
+        console.log(currentSSID);
+        if(currentSSID != "") {
+            var favourites = db.getFavourites(currentSSID);
+            console.log(favourites);
+            discovery.favourites = favourites;
+        }
+        else {
+            discovery.favourites = []
+        }
+    }
 
     IppDiscovery {
         id: discovery
     }
 
-    DBusAdaptor {
+    DBusInterface {
+        id: ssid_finder
+
+        bus: DBus.SystemBus
+
+        service: 'net.connman'
+        path: '/'
+        iface: 'net.connman.Manager'
+
+        signalsEnabled: true
+
+        function go() {
+            call("GetServices", undefined,
+                 function(result) {
+                     for (var i = 0; i < result.length; i++) {
+                         var entry = result[i][1];
+                         if(entry.Type == "wifi" && (entry.State == "online" || entry.State == "ready")) {
+                             page.currentSSID = entry.Name;
+                             return;
+                         }
+                     }
+                     page.currentSSID = "";
+                 },
+                 function(error, message) {
+                     console.log('call failed', error, 'message:', message);
+                     page.currentSSID = entry.Name;
+                 })
+        }
 
     }
 
     Component.onCompleted: {
         discovery.discover();
-        var favourites = db.getFavourites();
-        console.log(favourites);
-        discovery.favourites = favourites;
+        ssid_finder.go();
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -38,14 +76,17 @@ Page {
                 onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("InputDialog.qml"),
                                                         {value: qsTr("Add favourite"), title: qsTr("URL")});
                             dialog.accepted.connect(function() {
-                                db.addFavourite(dialog.value);
-                                discovery.insert(dialog.value);
+                                db.addFavourite(page.currentSSID, dialog.value);
+                                discovery.favourites = db.getFavourites(page.currentSSID);
                         })
                 }
             }
             MenuItem {
                 text: qsTr("Refresh")
-                onClicked: discovery.discover()
+                onClicked: {
+                    discovery.discover();
+                    ssid_finder.go();
+                }
             }
         }
 

@@ -17,26 +17,27 @@ ApplicationWindow
         Component.onCompleted: {
             db_conn = LocalStorage.openDatabaseSync("TintDB", "1.0", "Tint storage", 100000)
             db_conn.transaction(function (tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS Favourites (url STRING UNIQUE)');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Favourites (ssid STRING, url STRING)');
 
             });
         }
 
-        function addFavourite(url) {
+        function addFavourite(ssid, url) {
             db_conn.transaction(function (tx) {
-                tx.executeSql('REPLACE INTO Favourites VALUES(?)', [url] );
+                tx.executeSql('INSERT INTO Favourites VALUES(?, ?)', [ssid, url] );
             });
         }
 
-        function getFavourites() {
+        function getFavourites(ssid) {
             var favs = [];
             db_conn.transaction(function (tx) {
-                var res = tx.executeSql('SELECT * FROM Favourites');
+                var res = tx.executeSql('SELECT * FROM Favourites WHERE ssid=?', [ssid]);
                 if (res.rows.length !== 0) {
                     console.log(res.rows.item(0).url)
                     favs.push(res.rows.item(0).url);
                 }
             });
+            console.log(ssid, favs);
             return favs
         }
     }
