@@ -43,7 +43,6 @@ Page {
             ListElement {name: "print-color-mode";        prettyName: "Color mode";  tag: 0x23}
 //            ListElement {name: "orientation-requested";   prettyName: "Orientation"; tag: 0x23}
             ListElement {name: "print-quality";           prettyName: "Quality";     tag: 0x23}
-            // Bleh, can't create the json object with another object as value, for whatever reason
             ListElement {name: "printer-resolution";      prettyName: "Resolution";  tag: 0x32}
         }
 
@@ -72,7 +71,6 @@ Page {
                 Loader {
                     id: loader
                     anchors.fill: parent
-                    property var menu
                 }
 
                 Component.onCompleted: {

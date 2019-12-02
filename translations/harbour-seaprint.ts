@@ -2,6 +2,25 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AddPrinterDialog</name>
+    <message>
+        <source>Add printer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On WiFI:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No printer found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>My Cover</source>
@@ -12,10 +31,6 @@
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add favourite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

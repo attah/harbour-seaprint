@@ -40,6 +40,11 @@ Page {
 
         signalsEnabled: true
 
+        function servicesChanged() {
+            console.log("services changed");
+            go();
+        }
+
         function go() {
             call("GetServices", undefined,
                  function(result) {
@@ -73,12 +78,14 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Add by URL")
-                onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("InputDialog.qml"),
-                                                        {value: qsTr("Add favourite"), title: qsTr("URL")});
-                            dialog.accepted.connect(function() {
-                                db.addFavourite(page.currentSSID, dialog.value);
-                                discovery.favourites = db.getFavourites(page.currentSSID);
-                        })
+                enabled: currentSSID != ""
+                onClicked: {
+                    var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"),
+                                                {ssid: currentSSID, title: qsTr("URL")});
+                        dialog.accepted.connect(function() {
+                            db.addFavourite(page.currentSSID, dialog.value);
+                            discovery.favourites = db.getFavourites(page.currentSSID);
+                    })
                 }
             }
             MenuItem {
