@@ -15,7 +15,7 @@ ApplicationWindow
         property var db_conn
 
         Component.onCompleted: {
-            db_conn = LocalStorage.openDatabaseSync("TintDB", "1.0", "Tint storage", 100000)
+            db_conn = LocalStorage.openDatabaseSync("SeaprintDB", "1.0", "Seaprint storage", 100000)
             db_conn.transaction(function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Favourites (ssid STRING, url STRING)');
 
