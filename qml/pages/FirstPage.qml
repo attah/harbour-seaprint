@@ -11,63 +11,29 @@ Page {
     allowedOrientations: Orientation.All
 
     property string selectedFile: "/home/nemo/Downloads/1.pdf"
-    property string currentSSID: ""
-
-    onCurrentSSIDChanged: {
-        console.log(currentSSID);
-        if(currentSSID != "") {
-            var favourites = db.getFavourites(currentSSID);
-            console.log(favourites);
-            discovery.favourites = favourites;
-        }
-        else {
-            discovery.favourites = []
-        }
-    }
 
     IppDiscovery {
         id: discovery
     }
 
-    DBusInterface {
-        id: ssid_finder
+    WifiChecker {
+        id: wifi
+        onConnectedChanged: {
+            console.log("conn", connected)
+            if(connected) {
+                var favourites = db.getFavourites(ssid);
+                console.log(favourites);
+                discovery.favourites = favourites;
+            }
+            else {
+                discovery.favourites = []
+            }
 
-        bus: DBus.SystemBus
-
-        service: 'net.connman'
-        path: '/'
-        iface: 'net.connman.Manager'
-
-        signalsEnabled: true
-
-        function servicesChanged() {
-            console.log("services changed");
-            go();
         }
-
-        function go() {
-            call("GetServices", undefined,
-                 function(result) {
-                     for (var i = 0; i < result.length; i++) {
-                         var entry = result[i][1];
-                         if(entry.Type == "wifi" && (entry.State == "online" || entry.State == "ready")) {
-                             page.currentSSID = entry.Name;
-                             return;
-                         }
-                     }
-                     page.currentSSID = "";
-                 },
-                 function(error, message) {
-                     console.log('call failed', error, 'message:', message);
-                     page.currentSSID = entry.Name;
-                 })
-        }
-
     }
 
     Component.onCompleted: {
         discovery.discover();
-        ssid_finder.go();
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -78,13 +44,13 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Add by URL")
-                enabled: currentSSID != ""
+                enabled: wifi.connected
                 onClicked: {
                     var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"),
-                                                {ssid: currentSSID, title: qsTr("URL")});
+                                                {ssid: wifi.ssid, title: qsTr("URL")});
                         dialog.accepted.connect(function() {
-                            db.addFavourite(page.currentSSID, dialog.value);
-                            discovery.favourites = db.getFavourites(page.currentSSID);
+                            db.addFavourite(wifi.ssid, dialog.value);
+                            discovery.favourites = db.getFavourites(wifi.ssid);
                     })
                 }
             }
@@ -92,7 +58,6 @@ Page {
                 text: qsTr("Refresh")
                 onClicked: {
                     discovery.discover();
-                    ssid_finder.go();
                 }
             }
         }
