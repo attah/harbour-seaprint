@@ -68,6 +68,8 @@ public:
     QJsonObject getJobAttrs() {return _jobAttrs;}
     QJsonObject getOpAttrs() {return _opAttrs;}
 
+    quint16 getStatus() {return _status;}
+
 
 protected:
 private:
@@ -77,6 +79,8 @@ private:
     QJsonObject _opAttrs;
     QJsonObject _jobAttrs;
     QJsonObject _printerAttrs;
+
+    quint16 _status;
 
     static quint32 _reqid;
 };

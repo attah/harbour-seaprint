@@ -27,10 +27,9 @@ IppMsg::IppMsg(QNetworkReply* resp)
 
     quint8 majVsn;
     quint8 minVsn;
-    quint16 status;
     quint32 reqId;
 
-    bts >> majVsn >> minVsn >> status >> reqId;
+    bts >> majVsn >> minVsn >> _status >> reqId;
 
     QJsonObject* attrs = 0;
 

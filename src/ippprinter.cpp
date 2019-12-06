@@ -73,7 +73,7 @@ void IppPrinter::jobRequestFinished(QNetworkReply *reply)
     {
         try {
             IppMsg resp(reply);
-            qDebug() << resp.getOpAttrs() << resp.getJobAttrs();
+            qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             _jobAttrs = resp.getJobAttrs();
             emit jobAttrsChanged();
         }
@@ -110,6 +110,15 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
         {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}},
         {"job-name",                    QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}}},
     };
+
+    // Only include if printer supports it
+//    if (filename.endsWith("pdf"))
+//    {
+//        attrs.insert("document-format", QJsonObject {{"tag", 73}, {"value", "application/pdf"}});
+//    }
+//    else if (filename.endsWith("jpg")) {
+//        attrs.insert("document-format", QJsonObject {{"tag", 73}, {"value", "image/jpeg"}});
+//    }
 
     IppMsg job = IppMsg(o, attrs);
 
