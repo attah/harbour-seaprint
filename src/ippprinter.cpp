@@ -120,6 +120,7 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
 //        attrs.insert("document-format", QJsonObject {{"tag", 73}, {"value", "image/jpeg"}});
 //    }
 
+    qDebug() << "Printing job" << o << attrs;
     IppMsg job = IppMsg(o, attrs);
 
     QByteArray contents = job.encode(IppMsg::PrintJob);
