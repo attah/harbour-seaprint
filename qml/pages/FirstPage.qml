@@ -69,9 +69,9 @@ Page {
             spacing: Theme.paddingSmall
 
 
-            delegate: BackgroundItem {
+            delegate: ListItem {
                 id: delegate
-                height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
+                contentItem.height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
                 visible: printer.attrs["printer-name"] ? true : false
                 enabled: Utils.can_print(printer, selectedFile)
                 onClicked: {
@@ -134,6 +134,13 @@ Page {
                         color: delegate.enabled ? Theme.primaryColor : "red"
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: Utils.supported_formats(printer)
+                    }
+                }
+
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("View jobs")
+                        onClicked:  pageStack.push(Qt.resolvedUrl("JobsPage.qml"), {printer: printer})
                     }
                 }
 

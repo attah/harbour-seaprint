@@ -100,6 +100,21 @@
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View jobs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JobsPage</name>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove all</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrinterPage</name>

@@ -25,6 +25,11 @@ function _formats(printer)
          filters.push("*.jpeg");
      }
 
+     if(supported.length == 0)
+     {
+         supported.push("No relevant formats supported")
+     }
+
      return {supported: supported.join(" "), filters: filters};
 }
 

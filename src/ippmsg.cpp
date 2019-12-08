@@ -12,7 +12,7 @@ IppMsg::IppMsg()
 IppMsg::IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs)
 {
     _opAttrs = opAttrs;
-    _jobAttrs = jobAttrs;
+    _jobAttrs = QJsonArray {jobAttrs};
 }
 
 
@@ -31,24 +31,32 @@ IppMsg::IppMsg(QNetworkReply* resp)
 
     bts >> majVsn >> minVsn >> _status >> reqId;
 
-    QJsonObject* attrs = 0;
+    QJsonObject attrs;
+    IppMsg::IppTag currentAttrType = IppTag::EndAttrs;
 
     QString last_name;
 
     while(!bts.atEnd())
     {
-        if(bts>>=(quint8)IppTag::OpAttrs)
-        {
-            attrs = &_opAttrs;
-        }
-        else if (bts>>=(quint8)IppTag::JobAttrs) {
-            attrs = &_jobAttrs;
-        }
-        else if (bts>>=(quint8)IppTag::EndAttrs) {
-            break;
-        }
-        else if (bts>>=(quint8)IppTag::PrinterAttrs) {
-            attrs = &_printerAttrs;
+        if(bts.peekU8() <= IppTag::PrinterAttrs) {
+
+            if(currentAttrType == IppTag::OpAttrs) {
+                _opAttrs = attrs;
+            }
+            else if (currentAttrType == IppTag::JobAttrs) {
+                _jobAttrs.append(attrs);
+            }
+            else if (currentAttrType == IppTag::PrinterAttrs) {
+                _printerAttrs = attrs;
+            }
+
+            if(bts >>= (uint8_t)IppTag::EndAttrs) {
+                break;
+            }
+
+            currentAttrType = (IppTag)bts.getU8();
+            attrs = QJsonObject();
+
         }
         else {
             last_name = consume_attribute(attrs, bts, last_name);
@@ -56,7 +64,7 @@ IppMsg::IppMsg(QNetworkReply* resp)
     }
 }
 
-QString IppMsg::consume_attribute(QJsonObject* attrs, Bytestream& data, QString lastName)
+QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString lastName)
 {
     quint8 tag;
     quint16 tmp_len;
@@ -144,9 +152,9 @@ QString IppMsg::consume_attribute(QJsonObject* attrs, Bytestream& data, QString 
     };
 
 
-    if(attrs->contains(name))
+    if(attrs.contains(name))
     {
-        QJsonObject tmp = (*attrs)[name].toObject();
+        QJsonObject tmp = attrs[name].toObject();
         QJsonArray tmpa;
         if(tmp["value"].isArray())
         {
@@ -158,7 +166,7 @@ QString IppMsg::consume_attribute(QJsonObject* attrs, Bytestream& data, QString 
         }
         tmpa.append(value);
         tmp["value"] = tmpa;
-        attrs->insert(name, tmp);
+        attrs.insert(name, tmp);
     }
     else
     {
@@ -166,7 +174,7 @@ QString IppMsg::consume_attribute(QJsonObject* attrs, Bytestream& data, QString 
         {
             value = QJsonArray {value};
         }
-        attrs->insert(name, QJsonObject {{"tag", tag}, {"value", value}});
+        attrs.insert(name, QJsonObject {{"tag", tag}, {"value", value}});
     }
     return name;
 }
@@ -189,10 +197,11 @@ QByteArray IppMsg::encode(Operation op)
             ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
         }
     }
-    if(!_jobAttrs.empty())
+    for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.begin(); ait++)
     {
         ipp << quint8(2);
-        for(QJsonObject::iterator it = _jobAttrs.begin(); it != _jobAttrs.end(); it++)
+        QJsonObject tmpObj = ait->toObject();
+        for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
         {
             QJsonObject val = it.value().toObject();
             ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);

@@ -65,7 +65,7 @@ public:
 
     QByteArray encode(Operation op);
     QJsonObject getPrinterAttrs() {return _printerAttrs;}
-    QJsonObject getJobAttrs() {return _jobAttrs;}
+    QJsonArray getJobAttrs() {return _jobAttrs;}
     QJsonObject getOpAttrs() {return _opAttrs;}
 
     quint16 getStatus() {return _status;}
@@ -73,11 +73,11 @@ public:
 
 protected:
 private:
-    QString consume_attribute(QJsonObject* attrs, Bytestream& data, QString lastName);
+    QString consume_attribute(QJsonObject& attrs, Bytestream& data, QString lastName);
     Bytestream encode_attr(quint8 tag, QString name, QJsonValueRef value);
 
     QJsonObject _opAttrs;
-    QJsonObject _jobAttrs;
+    QJsonArray _jobAttrs;
     QJsonObject _printerAttrs;
 
     quint16 _status;
