@@ -3,7 +3,7 @@ Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-seaprint
 Exec=harbour-seaprint
-Name=harbour-seaprint
+Name=Seaprint
 # translation example:
 # your app name in German locale (de)
 #
