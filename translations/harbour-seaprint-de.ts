@@ -70,8 +70,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+        <source>Seaprint</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -121,10 +121,6 @@
     </message>
     <message>
         <source>Cancelling job</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

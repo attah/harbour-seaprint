@@ -99,9 +99,9 @@ Page {
 
                     height: Theme.itemSizeLarge
                     width: Theme.itemSizeLarge
-                    source: printer.attrs["printer-icons"] ? printer.attrs["printer-icons"].value[0] : "printer.svg"
+                    source: printer.attrs["printer-icons"] ? printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
-                    onStatusChanged: if (status == Image.Error) source = "printer.svg"
+                    onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
                 }
 
                 Column {
