@@ -112,7 +112,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove all</source>
+        <source>Cancel job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untitled job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancelling job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

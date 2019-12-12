@@ -5,9 +5,12 @@ IppPrinter::IppPrinter()
     _nam = new QNetworkAccessManager(this);
     _print_nam = new QNetworkAccessManager(this);
     _jobs_nam = new QNetworkAccessManager(this);
+    _job_cancel_nam = new QNetworkAccessManager(this);
+
     connect(_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getPrinterAttributesFinished(QNetworkReply*)));
     connect(_print_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(printRequestFinished(QNetworkReply*)));
     connect(_jobs_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getJobsRequestFinished(QNetworkReply*)));
+    connect(_job_cancel_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(cancelJobFinished(QNetworkReply*)));
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
 }
 
@@ -15,6 +18,18 @@ IppPrinter::~IppPrinter() {
     delete _nam;
     delete _print_nam;
     delete _jobs_nam;
+    delete _job_cancel_nam;
+}
+
+QJsonObject IppPrinter::opAttrs() {
+    QJsonObject o
+    {
+        {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
+        {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
+        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", "ipp://"+_url}}},
+        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}},
+    };
+    return o;
 }
 
 void IppPrinter::setUrl(QString url)
@@ -41,13 +56,7 @@ void IppPrinter::onUrlChanged()
 //    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
 
-    QJsonObject o
-    {
-        {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
-        {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
-        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", "ipp://"+_url}}},
-        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}}
-    };
+    QJsonObject o = opAttrs();
     IppMsg msg = IppMsg(o);
     _nam->post(request, msg.encode(IppMsg::GetPrinterAttrs));
 
@@ -107,6 +116,23 @@ void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
 }
 
 
+void IppPrinter::cancelJobFinished(QNetworkReply *reply)
+{
+    if(reply->error()  == QNetworkReply::NoError)
+    {
+        try {
+            IppMsg resp(reply);
+            qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
+        }
+        catch(std::exception e)
+        {
+            qDebug() << e.what();
+        }
+    }
+    getJobs();
+}
+
+
 bool IppPrinter::print(QJsonObject attrs, QString filename){
     qDebug() << "printing" << filename << attrs;
 
@@ -124,14 +150,9 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
 
-    QJsonObject o
-    {
-        {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
-        {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
-        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", "ipp://"+_url}}},
-        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}},
-        {"job-name",                    QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}}},
-    };
+    QJsonObject o = opAttrs();
+    o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
+
 
     // Only include if printer supports it
 //    if (filename.endsWith("pdf"))
@@ -158,13 +179,7 @@ bool IppPrinter::getJobs() {
 
     qDebug() << "getting jobs";
 
-    QJsonObject o
-    {
-        {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
-        {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
-        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", "ipp://"+_url}}},
-        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}}
-    };
+    QJsonObject o = opAttrs();
 
     IppMsg job = IppMsg(o, QJsonObject());
 
@@ -183,4 +198,26 @@ bool IppPrinter::getJobs() {
     return true;
 }
 
+bool IppPrinter::cancelJob(qint32 jobId) {
 
+    qDebug() << "getting jobs";
+
+    QJsonObject o = opAttrs();
+    o.insert("job-id", QJsonObject {{"tag", IppMsg::Integer}, {"value", jobId}});
+
+    IppMsg job = IppMsg(o, QJsonObject());
+
+    QNetworkRequest request;
+    QUrl url("http://"+_url);
+    if(url.port() == -1) {
+        url.setPort(631);
+    }
+
+    QByteArray contents = job.encode(IppMsg::CancelJob);
+
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    _job_cancel_nam->post(request, contents);
+
+    return true;
+}

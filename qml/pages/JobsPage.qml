@@ -19,12 +19,12 @@ Page {
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Remove all")
-                onClicked: {
-                    console.log("todo")
-                }
-            }
+//            MenuItem {
+//                text: qsTr("Remove all")
+//                onClicked: {
+//                    console.log("todo")
+//                }
+//            }
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: {
@@ -47,12 +47,36 @@ Page {
             }
 
             delegate: ListItem {
+                id: jobDelegate
 
                 Label {
+                    id: idLabel
                     leftPadding: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
                     text: printer.jobs[index]["job-id"].value
                     Component.onCompleted: console.log(JSON.stringify(printer.jobs))
+                }
+
+                Label {
+                    anchors.left: idLabel.right
+                    anchors.leftMargin: Theme.horizontalPageMargin
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: printer.jobs[index]["job-name"] ? printer.jobs[index]["job-name"].value : qsTr("Untitled job")
+                    Component.onCompleted: console.log(JSON.stringify(printer.jobs))
+                }
+
+                RemorseItem {
+                    id: cancelRemorse
+                }
+
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Cancel job")
+                        onClicked: {
+                            cancelRemorse.execute(jobDelegate, qsTr("Cancelling job"),
+                                                  function() {printer.cancelJob(printer.jobs[index]["job-id"].value) })
+                        }
+                    }
                 }
             }
 
