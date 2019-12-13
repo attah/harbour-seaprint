@@ -24,7 +24,7 @@ ApplicationWindow
 
         function addFavourite(ssid, url) {
             db_conn.transaction(function (tx) {
-                tx.executeSql('INSERT INTO Favourites VALUES(?, ?)', [ssid, url] );
+                tx.executeSql('REPLACE INTO Favourites VALUES(?, ?)', [ssid, url] );
             });
         }
 
@@ -32,13 +32,30 @@ ApplicationWindow
             var favs = [];
             db_conn.transaction(function (tx) {
                 var res = tx.executeSql('SELECT * FROM Favourites WHERE ssid=?', [ssid]);
-                if (res.rows.length !== 0) {
-                    console.log(res.rows.item(0).url)
-                    favs.push(res.rows.item(0).url);
+                for (var i = 0; i < res.rows.length; i++) {
+                    console.log(res.rows.item(i).url)
+                    favs.push(res.rows.item(i).url);
                 }
             });
             console.log(ssid, favs);
             return favs
+        }
+
+        function isFavourite(ssid, url) {
+            var isfav = false;
+            db_conn.transaction(function (tx) {
+                var res = tx.executeSql('SELECT * FROM Favourites WHERE ssid=? AND url=?', [ssid, url]);
+                if (res.rows.length > 0) {
+                    isfav = true;
+                }
+            });
+            return isfav
+        }
+
+        function removeFavourite(ssid, url) {
+            db_conn.transaction(function (tx) {
+                tx.executeSql('DELETE FROM Favourites WHERE ssid=? AND url=?', [ssid, url] );
+            });
         }
     }
 

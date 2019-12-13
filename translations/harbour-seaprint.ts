@@ -104,6 +104,10 @@
         <source>View jobs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Remove printer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>

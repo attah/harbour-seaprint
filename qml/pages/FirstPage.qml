@@ -49,6 +49,7 @@ Page {
                     var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"),
                                                 {ssid: wifi.ssid, title: qsTr("URL")});
                         dialog.accepted.connect(function() {
+                            console.log("add", wifi.ssid, dialog.value);
                             db.addFavourite(wifi.ssid, dialog.value);
                             discovery.favourites = db.getFavourites(wifi.ssid);
                     })
@@ -73,8 +74,13 @@ Page {
                 id: delegate
                 contentItem.height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
                 visible: printer.attrs["printer-name"] ? true : false
-                enabled: Utils.can_print(printer, selectedFile)
+
+                property string name: printer.attrs["printer-name"].value
+                property bool canPrint: Utils.can_print(printer, selectedFile)
+
                 onClicked: {
+                    if(!canPrint)
+                        return;
                     if(selectedFile != "")
                     {
                         pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile})
@@ -111,27 +117,27 @@ Page {
 
                     Label {
                         id: name_label
-                        color: delegate.enabled ? Theme.primaryColor : Theme.secondaryColor
-                        text: printer.attrs["printer-name"].value
+                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
+                        text: name
                     }
 
                     Label {
                         id: mm_label
-                        color: delegate.enabled ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: printer.attrs["printer-make-and-model"].value
                     }
 
                     Label {
                         id: uri_label
-                        color: Theme.secondaryColor
+                        color: canPrint ? Theme.highlightColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeTiny
                         text: model.display
                     }
 
                     Label {
                         id: format_label
-                        color: delegate.enabled ? Theme.primaryColor : "red"
+                        color: canPrint ? Theme.primaryColor : "red"
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: Utils.supported_formats(printer)
                     }
@@ -141,6 +147,14 @@ Page {
                     MenuItem {
                         text: qsTr("View jobs")
                         onClicked:  pageStack.push(Qt.resolvedUrl("JobsPage.qml"), {printer: printer})
+                    }
+                    MenuItem {
+                        text: qsTr("Remove printer")
+                        visible: db.isFavourite(wifi.ssid, model.display)
+                        onClicked:  {
+                            db.removeFavourite(wifi.ssid, model.display)
+                            discovery.favourites = db.getFavourites()
+                        }
                     }
                 }
 
