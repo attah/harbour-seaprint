@@ -23,8 +23,10 @@ ApplicationWindow
         }
 
         function addFavourite(ssid, url) {
+            if(isFavourite(ssid, url))
+                return;
             db_conn.transaction(function (tx) {
-                tx.executeSql('REPLACE INTO Favourites VALUES(?, ?)', [ssid, url] );
+                tx.executeSql('INSERT INTO Favourites VALUES(?, ?)', [ssid, url] );
             });
         }
 

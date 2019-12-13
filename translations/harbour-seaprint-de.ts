@@ -70,7 +70,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Seaprint</source>
+        <source>SeaPrint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
