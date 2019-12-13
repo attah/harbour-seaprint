@@ -42,8 +42,8 @@ Page {
 
             header: PageHeader {
                 id: pageHeader
-                title: printer.name
-
+                title: printer.attrs["printer-name"].value
+                description: printer.jobs.length==1 ?  printer.jobs.length+" "+qsTr("job") : printer.jobs.length+" "+qsTr("jobs")
             }
 
             delegate: ListItem {

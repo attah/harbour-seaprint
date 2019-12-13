@@ -116,7 +116,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel job</source>
+        <source>jobs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -124,7 +124,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Cancel job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cancelling job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>job</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -153,17 +161,6 @@
     <message>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SecondPage</name>
-    <message>
-        <source>Nested Page</source>
-        <translation>Unterseite</translation>
-    </message>
-    <message>
-        <source>Item</source>
-        <translation>Element</translation>
     </message>
 </context>
 </TS>
