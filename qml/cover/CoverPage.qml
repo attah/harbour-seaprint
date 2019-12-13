@@ -13,6 +13,6 @@ CoverBackground {
     Label {
         id: label
         anchors.centerIn: parent
-        text: qsTr("Seaprint")
+        text: qsTr("SeaPrint")
     }
 }
