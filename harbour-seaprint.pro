@@ -23,6 +23,7 @@ SOURCES += src/harbour-seaprint.cpp \
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
+    qml/components/AboutLabel.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
@@ -43,7 +44,8 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-seaprint-de.ts
+TRANSLATIONS += translations/harbour-seaprint-de.ts \
+                translations/harbour-seaprinter-zh_CN
 
 HEADERS += \
     src/ippdiscovery.h \
