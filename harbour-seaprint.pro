@@ -24,9 +24,8 @@ SOURCES += src/harbour-seaprint.cpp \
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
     qml/pages/*.qml \
-    qml/pages/WifiChecker.qml \
-    qml/pages/utils.js \
-    qml/pages/printer.svg \
+    qml/pages/*.js \
+    qml/pages/*svg \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \

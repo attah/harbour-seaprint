@@ -70,7 +70,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
+        <source>Seaprint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -98,6 +98,29 @@
     </message>
     <message>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View jobs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JobsPage</name>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untitled job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancelling job</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
