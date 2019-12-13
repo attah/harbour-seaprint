@@ -43,6 +43,10 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
+                text: qsTr("SeaPrint About")
+                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+                }
+            MenuItem {
                 text: qsTr("Add by URL")
                 enabled: wifi.connected
                 onClicked: {

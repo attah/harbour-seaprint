@@ -2,6 +2,25 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AboutPage</name>
+    <message>
+        <source>Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A simple tool to print PDF file or JPG file on Sailfish OS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
@@ -102,6 +121,10 @@
     </message>
     <message>
         <source>View jobs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
