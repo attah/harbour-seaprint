@@ -112,6 +112,10 @@
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Removing printer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>

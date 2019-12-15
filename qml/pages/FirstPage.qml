@@ -156,6 +156,10 @@ Page {
                     }
                 }
 
+                RemorseItem {
+                    id: removeRemorse
+                }
+
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("View jobs")
@@ -164,9 +168,10 @@ Page {
                     MenuItem {
                         text: qsTr("Remove printer")
                         visible: db.isFavourite(wifi.ssid, model.display)
-                        onClicked:  {
-                            db.removeFavourite(wifi.ssid, model.display)
-                            discovery.favourites = db.getFavourites()
+                        onClicked: {
+                            removeRemorse.execute(delegate, qsTr("Removing printer"),
+                                                  function() {db.removeFavourite(wifi.ssid, model.display);
+                                                              discovery.favourites = db.getFavourites()})
                         }
                     }
                 }
