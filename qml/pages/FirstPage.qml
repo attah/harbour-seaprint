@@ -73,10 +73,23 @@ Page {
             delegate: ListItem {
                 id: delegate
                 contentItem.height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
-                visible: printer.attrs["printer-name"] ? true : false
 
-                property string name: printer.attrs["printer-name"].value
+                visible: false
+
+                property string name: printer.attrs["printer-name"] ? printer.attrs["printer-name"].value : qsTr("Unknown")
                 property bool canPrint: Utils.can_print(printer, selectedFile)
+
+                Connections {
+                    target: printer
+                    onAttrsChanged: {
+                        if(Object.keys(printer.attrs).length === 0) {
+                            delegate.visible = false
+                        }
+                        else {
+                            delegate.visible = true
+                        }
+                    }
+                }
 
                 onClicked: {
                     if(!canPrint)

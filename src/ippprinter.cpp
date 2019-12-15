@@ -65,20 +65,20 @@ void IppPrinter::onUrlChanged()
 void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
 {
     qDebug() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
+    _attrs = QJsonObject();
     if(reply->error()  == QNetworkReply::NoError)
     {
         try {
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
             _attrs = resp.getPrinterAttrs();
-            emit attrsChanged();
         }
         catch(std::exception e)
         {
             qDebug() << e.what();
         }
     }
-
+    emit attrsChanged();
 }
 
 void IppPrinter::printRequestFinished(QNetworkReply *reply)
