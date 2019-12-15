@@ -4,6 +4,7 @@ import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
 import seaprint.ippprinter 1.0
 import "utils.js" as Utils
+import "../components"
 import Nemo.DBus 2.0
 
 Page {
