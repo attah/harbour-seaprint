@@ -11,7 +11,7 @@ Page {
     id: page
     allowedOrientations: Orientation.All
 
-    property string selectedFile: "/home/nemo/Downloads/1.pdf"
+    property string selectedFile: ""
 
     IppDiscovery {
         id: discovery
