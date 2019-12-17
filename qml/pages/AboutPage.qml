@@ -54,7 +54,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
-                text: "SeaPrint 0.3-1"
+                text: "SeaPrint 0.3-3"
             }
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall

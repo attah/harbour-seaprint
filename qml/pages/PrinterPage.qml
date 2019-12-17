@@ -85,7 +85,7 @@ Page {
                     console.log("handling", tag, name, prettyName, JSON.stringify(printer.attrs[name+"-supported"]), JSON.stringify(printer.attrs[name+"-default"]))
                     switch(tag) {
                     case 0x21:
-                        loader.setSource("IntegerSetting.qml",
+                        loader.setSource("../components/IntegerSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
@@ -95,7 +95,7 @@ Page {
                                          })
                         break
                     case 0x33:
-                        loader.setSource("RangeSetting.qml",
+                        loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           valid: false, //TODO
@@ -104,7 +104,7 @@ Page {
                         break
                     case 0x32:
                     case 0x23:
-                        loader.setSource("ChoiceSetting.qml",
+                        loader.setSource("../components/ChoiceSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
