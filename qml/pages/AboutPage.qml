@@ -54,7 +54,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
-                text: "SeaPrint 0.2-1"
+                text: "SeaPrint 0.3-1"
             }
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
@@ -102,7 +102,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: qsTr("SeaPrint licencing is TBD, but will be some flavor of open.")
+                text: qsTr("SeaPrint licencing is still TBD, but will be some flavor of open.")
             }
           }
         }
