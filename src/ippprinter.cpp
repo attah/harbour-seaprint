@@ -43,6 +43,10 @@ void IppPrinter::setUrl(QString url)
 
 void IppPrinter::onUrlChanged()
 {
+    refresh();
+}
+
+void IppPrinter::refresh() {
     _attrs = QJsonObject();
     emit attrsChanged();
 

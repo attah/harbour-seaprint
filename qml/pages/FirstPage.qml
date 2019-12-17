@@ -33,6 +33,8 @@ Page {
         }
     }
 
+    signal refreshed()
+
     Component.onCompleted: {
         discovery.discover();
     }
@@ -64,6 +66,7 @@ Page {
                 text: qsTr("Refresh")
                 onClicked: {
                     discovery.discover();
+                    page.refreshed();
                 }
             }
         }
@@ -93,6 +96,15 @@ Page {
                         else {
                             delegate.visible = true
                         }
+                    }
+                }
+
+
+                Connections {
+                    target: page
+                    onRefreshed: {
+                        console.log("onRefreshed")
+                        printer.refresh()
                     }
                 }
 

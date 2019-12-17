@@ -22,6 +22,8 @@ public:
     QString getUrl() {return _url;}
     void setUrl(QString url);
 
+    Q_INVOKABLE void refresh();
+
     Q_INVOKABLE bool print(QJsonObject attrs, QString file);
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
