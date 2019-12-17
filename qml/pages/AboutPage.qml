@@ -54,7 +54,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
-                text: "SeaPrint 0.3-3"
+                text: appVersion.appName +  " v" + appVersion.version
             }
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
