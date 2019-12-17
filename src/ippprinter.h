@@ -32,6 +32,8 @@ signals:
     void jobAttrsChanged();
     void jobsChanged();
 
+    void jobAttrsFinished(bool status);
+
 public slots:
     void onUrlChanged();
     void getPrinterAttributesFinished(QNetworkReply* reply);

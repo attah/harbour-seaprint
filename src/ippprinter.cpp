@@ -83,19 +83,26 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
 
 void IppPrinter::printRequestFinished(QNetworkReply *reply)
 {
+    _jobAttrs = QJsonObject();
+    bool status = false;
     if(reply->error()  == QNetworkReply::NoError)
     {
         try {
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             _jobAttrs = resp.getJobAttrs()[0].toObject();
-            emit jobAttrsChanged();
+            status = resp.getStatus() <= 0xff;
         }
         catch(std::exception e)
         {
             qDebug() << e.what();
         }
     }
+    else {
+        _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage}, {"value", "Network error"}});
+    }
+    emit jobAttrsChanged();
+    emit jobAttrsFinished(status);
 }
 
 void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)

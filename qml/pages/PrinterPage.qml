@@ -14,8 +14,16 @@ Page {
 
     Connections {
         target: printer
-        onJobAttrsChanged: {
-            notifier.notify(printer.jobAttrs["job-state-message"].value)
+        onJobAttrsFinished: {
+            var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
+                    ? printer.jobAttrs["job-state-message"].value : qsTr("Unknown")
+            if(status == true) {
+                notifier.notify(qsTr("Print success: ") + msg)
+                pageStack.pop() //or replace?
+            }
+            else {
+                notifier.notify(qsTr("Print failed: ") + msg)
+            }
         }
     }
 
