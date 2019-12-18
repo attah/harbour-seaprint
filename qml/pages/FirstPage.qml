@@ -218,6 +218,7 @@ Page {
             id: filePickerPage
             FilePickerPage {
                 title: fileButton.label
+                showSystemFiles: false
                 nameFilters: ["*.pdf", "*.jpg", "*.jpeg"]
 
                 onSelectedContentPropertiesChanged: {
