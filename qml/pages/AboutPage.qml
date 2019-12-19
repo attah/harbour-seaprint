@@ -54,7 +54,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
-                text: appVersion.appName +  " v" + appVersion.version
+                text: appWin.appName +  " v" + appWin.version
             }
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall

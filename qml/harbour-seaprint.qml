@@ -10,10 +10,10 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
-    id: appVersion
+    id: appWin
 
     property string appName: "SeaPrint"
-    property string version: "0.3-3"
+    property string version: "0.3.1-1"
 
     Item {
         id: db
