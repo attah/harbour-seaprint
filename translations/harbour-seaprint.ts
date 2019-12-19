@@ -2,6 +2,61 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AboutPage</name>
+    <message>
+        <source>GitHub repository</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report an Issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network printing for Sailfish OS.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon made by Gregguh.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General contributions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rudi Timmermans - Code and Testing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Licensing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
@@ -116,6 +171,10 @@
         <source>Removing printer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About SeaPrint</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -168,6 +227,18 @@
     </message>
     <message>
         <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print success: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print failed: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
