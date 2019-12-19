@@ -14,6 +14,13 @@ TARGET = harbour-seaprint
 
 CONFIG += sailfishapp
 
+# Write version file
+VERSION_H = \
+"$${LITERAL_HASH}ifndef SEAPRINT_VERSION" \
+"$${LITERAL_HASH}   define SEAPRINT_VERSION \"$$VERSION\"" \
+"$${LITERAL_HASH}endif"
+write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
+
 SOURCES += src/harbour-seaprint.cpp \
     src/ippdiscovery.cpp \
     src/bytestream.cpp \

@@ -1,11 +1,16 @@
 #include <QtQuick>
 
 #include <sailfishapp.h>
+#include <seaprint_version.h>
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
 
 int main(int argc, char *argv[])
 {
+    QGuiApplication* app = SailfishApp::application(argc, argv);
+
+    app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
+
     qmlRegisterType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery");
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
 

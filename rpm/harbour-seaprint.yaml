@@ -16,6 +16,9 @@ Description: |
 Configure: none
 Builder: qmake5
 
+QMakeOptions:
+  - VERSION=%{version}
+
 # This section specifies build dependencies that are resolved using pkgconfig.
 # This is the preferred way of specifying build dependencies for your package.
 PkgConfigBR:
