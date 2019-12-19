@@ -95,7 +95,7 @@ Page {
                 text: qsTr("Source code is available at GitHub. Translations, bug reports and other contributions are welcome!")
             }
             Button {
-                text: "GitHub"
+                text: qsTr("GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: Qt.openUrlExternally("https://github.com/attah/harbour-seaprint")
             }
