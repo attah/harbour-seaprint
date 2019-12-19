@@ -1,5 +1,5 @@
 Name: harbour-seaprint
-Summary: SeaPrint
+Summary: harbour-seaprint
 Version: 0.3
 Release: 3
 # The contents of the Group field should be one of the groups listed here:
@@ -14,7 +14,7 @@ Sources:
 Description: |
   Short description of my Sailfish OS Application
 Configure: none
-Builder: qmake5
+Builder: qtc5
 
 # This section specifies build dependencies that are resolved using pkgconfig.
 # This is the preferred way of specifying build dependencies for your package.

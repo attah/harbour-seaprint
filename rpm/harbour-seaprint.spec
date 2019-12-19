@@ -8,7 +8,11 @@ Name:       harbour-seaprint
 # >> macros
 # << macros
 
-Summary:    SeaPrint
+%{!?qtc_qmake:%define qtc_qmake %qmake}
+%{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
+%{!?qtc_make:%define qtc_make make}
+%{?qtc_builddir:%define _builddir %qtc_builddir}
+Summary:    harbour-seaprint
 Version:    0.3
 Release:    3
 Group:      Qt/Qt
@@ -37,9 +41,9 @@ Short description of my Sailfish OS Application
 # >> build pre
 # << build pre
 
-%qmake5 
+%qtc_qmake5 
 
-make %{?_smp_mflags}
+%qtc_make %{?_smp_mflags}
 
 # >> build post
 # << build post
