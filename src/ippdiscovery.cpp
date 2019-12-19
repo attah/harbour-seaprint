@@ -70,6 +70,8 @@ void IppDiscovery::discover() {
     QByteArray bytes((char*)(query.raw()), query.size());
     socket->writeDatagram(bytes, QHostAddress("224.0.0.251"), 5353);
 
+    qDebug() << "discovering";
+
 }
 
 void IppDiscovery::update()
@@ -157,6 +159,13 @@ void IppDiscovery::readPendingDatagrams()
             Q_ASSERT(resp.pos() == pos_before+len);
 
         }
+
+        qDebug() << "ptrs" << ptrs;
+        qDebug() << "rps" << rps;
+        qDebug() << "ports" << ports;
+        qDebug() << "targets" << targets;
+        qDebug() << "AAs" << AAs;
+        qDebug() << "AAAAs" << AAAAs;
 
         for(QMap<QString,QString>::Iterator it = ptrs.begin(); it != ptrs.end(); it++)
         {
