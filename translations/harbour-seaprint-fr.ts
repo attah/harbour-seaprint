@@ -55,7 +55,11 @@
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
         <translation>La licence de SeaPrint est encore à déterminer, mais sera quelque peu ouverte.</translation>
     </message>
-</context>    
+    <message>
+        <source>French</source>
+        <translation>Française</translation>
+    </message>
+</context>
 <context>
     <name>AddPrinterDialog</name>
     <message>
@@ -161,7 +165,7 @@
     </message>
     <message>
         <source>Remove printer</source>
-        <translation>Supprimer l'imprimante</translation>
+        <translation>Supprimer l&apos;imprimante</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -169,12 +173,12 @@
     </message>
     <message>
         <source>Removing printer</source>
-        <translation>Suppression de l'imprimante</translation>
+        <translation>Suppression de l&apos;imprimante</translation>
     </message>
     <message>
         <source>About SeaPrint</source>
         <translation>À propos de SeaPrint</translation>
-</message>    
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -231,7 +235,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation">Inconnu</translation>
+        <translation>Inconnu</translation>
     </message>
     <message>
         <source>Print success: </source>
@@ -239,7 +243,7 @@
     </message>
     <message>
         <source>Print failed: </source>
-        <translation>Échec de l'impression :</translation>
-</message>    
+        <translation>Échec de l&apos;impression :</translation>
+    </message>
 </context>
 </TS>

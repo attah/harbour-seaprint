@@ -87,6 +87,11 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry"
             }
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: qsTr("French")+" - ensag-dev"
+            }
+
 
             SectionHeader { text: qsTr("Licensing") }
 

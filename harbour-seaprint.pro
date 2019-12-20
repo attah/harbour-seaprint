@@ -52,7 +52,8 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-seaprint-de.ts \
-                translations/harbour-seaprint-zh_CN.ts
+                translations/harbour-seaprint-zh_CN.ts \
+                translations/harbour-seaprint-fr.ts
 
 HEADERS += \
     src/ippdiscovery.h \
