@@ -2,6 +2,61 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AboutPage</name>
+    <message>
+        <source>GitHub repository</source>
+        <translation>Dépôt GitHub</translation>
+    </message>
+    <message>
+        <source>Report an Issue</source>
+        <translation>Signaler un problème</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>À propos</translation>
+    </message>
+    <message>
+        <source>Network printing for Sailfish OS.</source>
+        <translation>Impression réseau pour Sailfish OS</translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation>Icônes</translation>
+    </message>
+    <message>
+        <source>Icon made by Gregguh.</source>
+        <translation>Icônes créées par Gregguh</translation>
+    </message>
+    <message>
+        <source>General contributions</source>
+        <translation>Contribution générale</translation>
+    </message>
+    <message>
+        <source>Rudi Timmermans - Code and Testing</source>
+        <translation>Rudi Timmermans - Code et test</translation>
+    </message>
+    <message>
+        <source>Translations</source>
+        <translation>Traductions</translation>
+    </message>
+    <message>
+        <source>Chinese</source>
+        <translation>Mandarin</translation>
+    </message>
+    <message>
+        <source>Licensing</source>
+        <translation>Licence</translation>
+    </message>
+    <message>
+        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
+        <translation>Le code source est disponible sur GitHub. Les traductions, signalement de bug et autres contributions sont les bienvenus !</translation>
+    </message>
+    <message>
+        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
+        <translation>La licence de SeaPrint est encore à déterminer, mais sera quelque peu ouverte.</translation>
+    </message>
+</context>    
+<context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
@@ -116,6 +171,10 @@
         <source>Removing printer</source>
         <translation>Suppression de l'imprimante</translation>
     </message>
+    <message>
+        <source>About SeaPrint</source>
+        <translation>À propos de SeaPrint</translation>
+</message>    
 </context>
 <context>
     <name>JobsPage</name>
@@ -170,5 +229,17 @@
         <source>Resolution</source>
         <translation>Résolution</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation">Inconnu</translation>
+    </message>
+    <message>
+        <source>Print success: </source>
+        <translation>Impression réussie :</translation>
+    </message>
+    <message>
+        <source>Print failed: </source>
+        <translation>Échec de l'impression :</translation>
+</message>    
 </context>
 </TS>
