@@ -51,16 +51,19 @@ Page {
                 smooth: true
                 asynchronous: true
             }
+
             AboutLabel {
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
                 text: "SeaPrint v" + Qt.application.version
             }
+
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
                 text: "© 2019 Anton Thomasson"
             }
+
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -78,20 +81,16 @@ Page {
 
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Rudi Timmermans - Code and Testing")
+                text: qsTr("Code and Testing - Rudi Timmermans")
             }
 
             SectionHeader { text: qsTr("Translations") }
 
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Chinese")+" - dashinfantry"
+                text: qsTr("Chinese")+" - dashinfantry\n"+
+                      qsTr("French")+" - ensag-dev"
             }
-            AboutLabel {
-                font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("French")+" - ensag-dev"
-            }
-
 
             SectionHeader { text: qsTr("Licensing") }
 
@@ -99,11 +98,13 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Source code is available at GitHub. Translations, bug reports and other contributions are welcome!")
             }
+
             Button {
                 text: "GitHub"
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: Qt.openUrlExternally("https://github.com/attah/harbour-seaprint")
             }
+
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
