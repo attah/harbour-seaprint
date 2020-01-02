@@ -78,6 +78,10 @@
         <source>No printer found</source>
         <translation>没有找到打印机</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChoiceSetting</name>
@@ -164,10 +168,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -177,6 +177,10 @@
     </message>
     <message>
         <source>Removing printer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
