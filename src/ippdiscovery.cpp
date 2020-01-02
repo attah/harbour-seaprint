@@ -57,9 +57,20 @@ IppDiscovery::~IppDiscovery() {
     delete socket;
 }
 
-
 void IppDiscovery::discover() {
     sendQuery(PTR, {"_ipp","_tcp","local"});
+}
+
+void IppDiscovery::reset() {
+    _ipp = QStringList();
+    _rps = QMap<QString,QString>();
+    _ports = QMap<QString,quint16>();
+    _targets = QMap<QString,QString>();
+
+    _AAs = QMultiMap<QString,QString>();
+    _AAAAs = QMultiMap<QString,QString>();
+
+    discover();
 }
 
 void IppDiscovery::sendQuery(quint16 qtype, QStringList addr) {
@@ -82,6 +93,8 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addr) {
 
 void IppDiscovery::update()
 {
+    QStringList found;
+
     for(QStringList::Iterator it = _ipp.begin(); it != _ipp.end(); it++)
     {
         quint16 port = _ports[*it];
@@ -94,17 +107,17 @@ void IppDiscovery::update()
             {
                 QString ip = ait.value();
                 QString addr = ip+":"+QString::number(port)+"/"+rp;
-                if(!_found.contains(addr))
+                if(!found.contains(addr))
                 {
-                    _found.append(addr);
-                    _found.sort(Qt::CaseInsensitive);
+                    found.append(addr);
+                    found.sort(Qt::CaseInsensitive);
                 }
             }
         }
     }
 
-    qDebug() << _favourites << _found;
-    this->setStringList(_favourites+_found);
+    qDebug() << _favourites << found;
+    this->setStringList(_favourites+found);
 }
 
 void IppDiscovery::readPendingDatagrams()

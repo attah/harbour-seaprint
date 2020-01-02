@@ -31,6 +31,9 @@ Page {
             }
 
         }
+        onSsidChanged: {
+            discovery.reset()
+        }
     }
 
     signal refreshed()

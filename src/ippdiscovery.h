@@ -12,6 +12,7 @@ public:
     ~IppDiscovery();
     Q_PROPERTY(QStringList favourites MEMBER _favourites NOTIFY favouritesChanged)
     Q_INVOKABLE void discover();
+    Q_INVOKABLE void reset();
 
 signals:
     void favouritesChanged();
@@ -33,7 +34,6 @@ private:
     QMultiMap<QString,QString> _AAAAs;
 
     QStringList _favourites;
-    QStringList _found;
     QUdpSocket* socket;
 };
 
