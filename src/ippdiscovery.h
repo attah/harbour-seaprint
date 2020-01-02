@@ -18,9 +18,20 @@ signals:
 
 public slots:
     void readPendingDatagrams();
-    void update();
 protected:
 private:
+    void sendQuery(quint16 qtype, QStringList addr);
+
+    void update();
+
+    QStringList _ipp;
+    QMap<QString,QString> _rps;
+    QMap<QString,quint16> _ports;
+    QMap<QString,QString> _targets;
+
+    QMultiMap<QString,QString> _AAs;
+    QMultiMap<QString,QString> _AAAAs;
+
     QStringList _favourites;
     QStringList _found;
     QUdpSocket* socket;
