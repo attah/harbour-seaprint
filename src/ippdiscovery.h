@@ -12,6 +12,7 @@ public:
     ~IppDiscovery();
     Q_PROPERTY(QStringList favourites MEMBER _favourites NOTIFY favouritesChanged)
     Q_INVOKABLE void discover();
+    Q_INVOKABLE void reset();
 
 signals:
     void favouritesChanged();
@@ -19,10 +20,20 @@ signals:
 public slots:
     void readPendingDatagrams();
     void update();
+
 protected:
 private:
+    void sendQuery(quint16 qtype, QStringList addr);
+
+    QStringList _ipp;
+    QMap<QString,QString> _rps;
+    QMap<QString,quint16> _ports;
+    QMap<QString,QString> _targets;
+
+    QMultiMap<QString,QString> _AAs;
+    QMultiMap<QString,QString> _AAAAs;
+
     QStringList _favourites;
-    QStringList _found;
     QUdpSocket* socket;
 };
 

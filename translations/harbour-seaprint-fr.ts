@@ -78,6 +78,10 @@
         <source>No printer found</source>
         <translation>Aucune imprimante détectée</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Inconnu</translation>
+    </message>
 </context>
 <context>
     <name>ChoiceSetting</name>
@@ -168,16 +172,16 @@
         <translation>Supprimer l&apos;imprimante</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Inconnu</translation>
-    </message>
-    <message>
         <source>Removing printer</source>
         <translation>Suppression de l&apos;imprimante</translation>
     </message>
     <message>
         <source>About SeaPrint</source>
         <translation>À propos de SeaPrint</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Inconnu</translation>
     </message>
 </context>
 <context>

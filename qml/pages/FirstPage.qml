@@ -31,6 +31,9 @@ Page {
             }
 
         }
+        onSsidChanged: {
+            discovery.reset();
+        }
     }
 
     signal refreshed()
@@ -84,7 +87,7 @@ Page {
 
                 visible: false
 
-                property string name: printer.attrs["printer-name"] ? printer.attrs["printer-name"].value : qsTr("Unknown")
+                property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
                 property bool canPrint: Utils.can_print(printer, selectedFile)
 
                 Connections {

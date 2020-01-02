@@ -7,7 +7,8 @@ Dialog {
 
     property string value
     property string ssid
-    canAccept: printer_label.text != ""
+    property var printerName: false
+    canAccept: printerName != false
 
     Column {
         width: parent.width
@@ -43,12 +44,12 @@ Dialog {
 
             Label {
                 id: found_label
-                text: printer_label.text != "" ? qsTr("Found:") : qsTr("No printer found")
+                text: printerName != false ? qsTr("Found:") : qsTr("No printer found")
             }
             Label {
                 id: printer_label
                 color: Theme.secondaryColor
-                text: ""
+                text: printerName ? printerName : ""
             }
         }
         IppPrinter {
@@ -56,11 +57,11 @@ Dialog {
             url: valueField.text
             onAttrsChanged: {
                 if(printer.attrs["printer-name"]) {
-                    printer_label.text = printer.attrs["printer-name"].value
+                    printerName = printer.attrs["printer-name"].value == "" ? qsTr("Unknown") : printer.attrs["printer-name"].value
                 }
                 else
                 {
-                    printer_label.text = ""
+                    printerName = false
                 }
 
             }
