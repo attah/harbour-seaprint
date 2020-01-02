@@ -19,11 +19,11 @@ signals:
 
 public slots:
     void readPendingDatagrams();
+    void update();
+
 protected:
 private:
     void sendQuery(quint16 qtype, QStringList addr);
-
-    void update();
 
     QStringList _ipp;
     QMap<QString,QString> _rps;
