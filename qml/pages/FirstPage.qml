@@ -166,7 +166,7 @@ Page {
                         id: uri_label
                         color: canPrint ? Theme.highlightColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeTiny
-                        text: model.display
+                        text: printer.url
                     }
 
                     Label {

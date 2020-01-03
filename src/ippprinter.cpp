@@ -26,14 +26,35 @@ QJsonObject IppPrinter::opAttrs() {
     {
         {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
         {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
-        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", "ipp://"+_url}}},
+        {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", _url.toString()}}},
         {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}},
     };
     return o;
 }
 
-void IppPrinter::setUrl(QString url)
+void IppPrinter::setUrl(QString url_s)
 {
+    QUrl url = QUrl(url_s);
+
+    qDebug() << url.scheme();
+
+    if(url.scheme() != "ipp" /* or ipps */)
+    {
+        //if https -> ipps, else:
+        if(url.scheme() == "")
+        {
+            url = QUrl("ipp://"+url_s); // Why isn't setScheme working?
+        }
+        else if (url.scheme() == "http") {
+            url.setScheme("ipp");
+        }
+        else {
+            url = QUrl();
+        }
+    }
+
+    qDebug() << url_s << url;
+
     if(url != _url)
     {
         _url = url;
@@ -51,12 +72,8 @@ void IppPrinter::refresh() {
     emit attrsChanged();
 
     QNetworkRequest request;
-    QUrl url("http://"+_url);
-    qDebug() << _url << url.port();
-    if(url.port() == -1) {
-        url.setPort(631);
-    }
-    request.setUrl(url);
+
+    request.setUrl(httpUrl());
 //    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
 
@@ -154,11 +171,8 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
 
     QFileInfo fileinfo(file);
     QNetworkRequest request;
-    QUrl url("http://"+_url);
-    if(url.port() == -1) {
-        url.setPort(631);
-    }
-    request.setUrl(url);
+
+    request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
 
     QJsonObject o = opAttrs();
@@ -196,14 +210,10 @@ bool IppPrinter::getJobs() {
     IppMsg job = IppMsg(o, QJsonObject());
 
     QNetworkRequest request;
-    QUrl url("http://"+_url);
-    if(url.port() == -1) {
-        url.setPort(631);
-    }
 
     QByteArray contents = job.encode(IppMsg::GetJobs);
 
-    request.setUrl(url);
+    request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     _jobs_nam->post(request, contents);
 
@@ -220,16 +230,22 @@ bool IppPrinter::cancelJob(qint32 jobId) {
     IppMsg job = IppMsg(o, QJsonObject());
 
     QNetworkRequest request;
-    QUrl url("http://"+_url);
-    if(url.port() == -1) {
-        url.setPort(631);
-    }
 
     QByteArray contents = job.encode(IppMsg::CancelJob);
 
-    request.setUrl(url);
+    request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     _job_cancel_nam->post(request, contents);
 
     return true;
 }
+
+QUrl IppPrinter::httpUrl() {
+    QUrl url = _url;
+    url.setScheme("http");
+    if(url.port() == -1) {
+        url.setPort(631);
+    }
+    return url;
+}
+

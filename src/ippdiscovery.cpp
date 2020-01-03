@@ -106,7 +106,8 @@ void IppDiscovery::update()
             if(ait.key() == target)
             {
                 QString ip = ait.value();
-                QString addr = ip+":"+QString::number(port)+"/"+rp;
+                QString maybePort = port != 631 ? ":"+QString::number(port) : "";
+                QString addr = "ipp://"+ip+maybePort+"/"+rp;
                 if(!found.contains(addr))
                 {
                     found.append(addr);

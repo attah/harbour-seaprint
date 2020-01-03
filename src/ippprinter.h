@@ -19,7 +19,7 @@ public:
     ~IppPrinter();
 
 
-    QString getUrl() {return _url;}
+    QString getUrl() {return _url.toString();}
     void setUrl(QString url);
 
     Q_INVOKABLE void refresh();
@@ -44,7 +44,8 @@ public slots:
     void cancelJobFinished(QNetworkReply* reply);
 
 private:
-    QString _url;
+    QUrl _url;
+    QUrl httpUrl();
 
     QJsonObject opAttrs();
 
