@@ -16,7 +16,7 @@ Page {
         target: printer
         onJobAttrsFinished: {
             var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
-                    ? printer.jobAttrs["job-state-message"].value : qsTr("Unknown")
+                    ? printer.jobAttrs["job-state-message"].value : Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
             if(status == true) {
                 notifier.notify(qsTr("Print success: ") + msg)
                 pageStack.pop() //or replace?

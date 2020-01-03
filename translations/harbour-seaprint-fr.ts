@@ -191,10 +191,6 @@
         <translation>Résolution</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Inconnu</translation>
-    </message>
-    <message>
         <source>Print success: </source>
         <translation>Impression réussie :</translation>
     </message>
