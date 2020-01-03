@@ -5,59 +5,59 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Github 库</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>报告缺陷</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation><关于/translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>旗鱼系统网络打印机软件。</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation type="unfinished"></translation>
+        <translation>图标制作者为 Gregguh 。</translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation type="unfinished"></translation>
+        <translation>一般贡献</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>翻译</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>汉语</translation>
     </message>
     <message>
         <source>Licensing</source>
-        <translation type="unfinished"></translation>
+        <translation>许可协议</translation>
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>源代码位于 Github 。欢迎提供翻译，报告缺陷及其它贡献！</translation>
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seaprint 仍然采用 TBD 许可协议，但是我非常愿意使它更加开放。</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation><法语/translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">代码及测试 - Rudi Timmermans</translation>
     </message>
 </context>
 <context>
@@ -77,6 +77,10 @@
     <message>
         <source>No printer found</source>
         <translation>没有找到打印机</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -130,7 +134,7 @@
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint（海印）</translation>
     </message>
 </context>
 <context>
@@ -161,22 +165,26 @@
     </message>
     <message>
         <source>About SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>关于 SeaPrint（海印）</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>View jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>查看作业</translation>
     </message>
     <message>
         <source>Remove printer</source>
-        <translation type="unfinished"></translation>
+        <translation>移除打印机</translation>
     </message>
     <message>
         <source>Removing printer</source>
+        <translation>正在移除打印机</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -184,27 +192,27 @@
     <name>JobsPage</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished">刷新</translation>
+        <translation>刷新</translation>
     </message>
     <message>
         <source>job</source>
-        <translation type="unfinished"></translation>
+        <translation>作业</translation>
     </message>
     <message>
         <source>jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>作业</translation>
     </message>
     <message>
         <source>Untitled job</source>
-        <translation type="unfinished"></translation>
+        <translation>无标题作业</translation>
     </message>
     <message>
         <source>Cancel job</source>
-        <translation type="unfinished"></translation>
+        <translation>取消作业</translation>
     </message>
     <message>
         <source>Cancelling job</source>
-        <translation type="unfinished"></translation>
+        <translation>正在取消作业</translation>
     </message>
 </context>
 <context>
@@ -235,15 +243,15 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished"></translation>
+        <translation>打印成功:</translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>打印失败:</translation>
     </message>
 </context>
 </TS>

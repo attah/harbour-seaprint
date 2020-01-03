@@ -5,6 +5,8 @@
 #define AAAA 28
 #define SRV 33
 
+#define ALL 255 //for querying
+
 void put_addr(Bytestream& bts, QStringList addr)
 {
     for(int i = 0; i < addr.length(); i++)
@@ -55,8 +57,24 @@ IppDiscovery::~IppDiscovery() {
     delete socket;
 }
 
-
 void IppDiscovery::discover() {
+    sendQuery(PTR, {"_ipp","_tcp","local"});
+}
+
+void IppDiscovery::reset() {
+    _ipp = QStringList();
+    _rps = QMap<QString,QString>();
+    _ports = QMap<QString,quint16>();
+    _targets = QMap<QString,QString>();
+
+    _AAs = QMultiMap<QString,QString>();
+    _AAAAs = QMultiMap<QString,QString>();
+
+    discover();
+}
+
+void IppDiscovery::sendQuery(quint16 qtype, QStringList addr) {
+    qDebug() << "discovering" << qtype << addr;
 
     Bytestream query;
     quint16 transactionid = 0;
@@ -64,20 +82,42 @@ void IppDiscovery::discover() {
     quint16 questions = 1;
 
     query << transactionid << flags << questions << (quint16)0 << (quint16)0 << (quint16)0;
-    put_addr(query, {"_ipp","_tcp","local"});
-    query << (quint16)0x000C << (quint16)0x0001;
+    put_addr(query, addr);
+    query << qtype << (quint16)0x0001;
 
     QByteArray bytes((char*)(query.raw()), query.size());
     socket->writeDatagram(bytes, QHostAddress("224.0.0.251"), 5353);
 
-    qDebug() << "discovering";
-
 }
+
 
 void IppDiscovery::update()
 {
-    qDebug() << _favourites << _found;
-    this->setStringList(_favourites+_found);
+    QStringList found;
+
+    for(QStringList::Iterator it = _ipp.begin(); it != _ipp.end(); it++)
+    {
+        quint16 port = _ports[*it];
+        QString target = _targets[*it];
+        QString rp = _rps[*it];
+
+        for(QMultiMap<QString,QString>::Iterator ait = _AAs.begin(); ait != _AAs.end(); ait++)
+        {
+            if(ait.key() == target)
+            {
+                QString ip = ait.value();
+                QString addr = ip+":"+QString::number(port)+"/"+rp;
+                if(!found.contains(addr))
+                {
+                    found.append(addr);
+                    found.sort(Qt::CaseInsensitive);
+                }
+            }
+        }
+    }
+
+    qDebug() << _favourites << found;
+    this->setStringList(_favourites+found);
 }
 
 void IppDiscovery::readPendingDatagrams()
@@ -89,12 +129,7 @@ void IppDiscovery::readPendingDatagrams()
         QHostAddress sender;
         quint16 senderPort;
 
-        QMap<QString,QString> ptrs;
-        QMap<QString,QString> rps;
-        QMap<QString,quint16> ports;
-        QMap<QString,QString> targets;
-        QMultiMap<QString,QString> AAs;
-        QMultiMap<QString,QString> AAAAs;
+        QStringList ipp_ptrs;
 
         socket->readDatagram((char*)(resp.raw()), size, &sender, &senderPort);
         sender = QHostAddress(sender.toIPv4Address());
@@ -121,7 +156,10 @@ void IppDiscovery::readPendingDatagrams()
             if (atype == PTR)
             {
                 QString tmpname = get_addr(resp).join(".");
-                ptrs[aaddr] = tmpname;
+                if(aaddr.endsWith("_ipp._tcp.local"))
+                {
+                    ipp_ptrs.append(tmpname);
+                }
             }
             else if(atype == TXT)
             {
@@ -133,7 +171,7 @@ void IppDiscovery::readPendingDatagrams()
                     {
                         std::string tmprp;
                         tmp/tmp.remaining() >> tmprp;
-                        rps[aaddr] = tmprp.c_str();
+                        _rps[aaddr] = tmprp.c_str();
                     }
                 }
             }
@@ -142,15 +180,15 @@ void IppDiscovery::readPendingDatagrams()
                 quint16 prio, w, port;
                 resp >> prio >> w >> port;
                 QString target = get_addr(resp).join(".");
-                ports[aaddr] = port;
-                targets[aaddr] = target;
+                _ports[aaddr] = port;
+                _targets[aaddr] = target;
             }
             else if(atype == A)
             {
                 quint32 addr;
                 resp >> addr;
                 QHostAddress haddr(addr);
-                AAs.insert(aaddr, haddr.toString());
+                _AAs.insert(aaddr, haddr.toString());
             }
             else
             {
@@ -160,33 +198,26 @@ void IppDiscovery::readPendingDatagrams()
 
         }
 
-        qDebug() << "ptrs" << ptrs;
-        qDebug() << "rps" << rps;
-        qDebug() << "ports" << ports;
-        qDebug() << "targets" << targets;
-        qDebug() << "AAs" << AAs;
-        qDebug() << "AAAAs" << AAAAs;
+        qDebug() << "new ipp ptrs" << ipp_ptrs;
+        qDebug() << "ipp ptrs" << _ipp;
+        qDebug() << "rps" << _rps;
+        qDebug() << "ports" << _ports;
+        qDebug() << "targets" << _targets;
+        qDebug() << "AAs" << _AAs;
+        qDebug() << "AAAAs" << _AAAAs;
 
-        for(QMap<QString,QString>::Iterator it = ptrs.begin(); it != ptrs.end(); it++)
+        for(QStringList::Iterator it = ipp_ptrs.begin(); it != ipp_ptrs.end(); it++)
         {
-            quint16 port = ports[it.value()];
-            QString target =  targets[it.value()];
-            QString rp = rps[it.value()];
-
-            for(QMultiMap<QString,QString>::Iterator ait = AAs.begin(); ait != AAs.end(); ait++)
+            if(!_ipp.contains(*it))
             {
-                if(ait.key() == target)
-                {
-                    QString ip = ait.value();
-                    QString addr = ip+":"+QString::number(port)+"/"+rp;
-                    if(!_found.contains(addr))
-                    {
-                        _found.append(addr);
-                        _found.sort(Qt::CaseInsensitive);
-                    }
-                }
+                _ipp.append(*it);
+            }
+            if(!_ports.contains(*it) || !_targets.contains(*it) || !_rps.contains(*it))
+            {  // if the PTR doesn't already resolve, ask for everything about it
+                sendQuery(ALL, it->split('.'));
             }
         }
+
     }
     this->update();
 
