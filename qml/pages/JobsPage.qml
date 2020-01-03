@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import "utils.js" as Utils
 
 Page {
     id: page
@@ -53,16 +53,24 @@ Page {
                     id: idLabel
                     leftPadding: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
+                    color: Theme.highlightColor
                     text: printer.jobs[index]["job-id"].value
                     Component.onCompleted: console.log(JSON.stringify(printer.jobs))
                 }
 
-                Label {
+                Column {
                     anchors.left: idLabel.right
                     anchors.leftMargin: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
-                    text: printer.jobs[index]["job-name"] ? printer.jobs[index]["job-name"].value : qsTr("Untitled job")
-                    Component.onCompleted: console.log(JSON.stringify(printer.jobs))
+                    Label {
+                        text: printer.jobs[index]["job-name"] ? printer.jobs[index]["job-name"].value : qsTr("Untitled job")
+                        Component.onCompleted: console.log(JSON.stringify(printer.jobs))
+                    }
+                    Label {
+                        font.pixelSize: Theme.fontSizeTiny
+                        color: Theme.secondaryColor
+                        text: Utils.ippName("job-state", printer.jobs[index]["job-state"].value)
+                    }
                 }
 
                 RemorseItem {

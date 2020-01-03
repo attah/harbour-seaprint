@@ -84,53 +84,6 @@
     </message>
 </context>
 <context>
-    <name>ChoiceSetting</name>
-    <message>
-        <source>draft</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>high</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unknown quality </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>portrait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>landscape</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reverse landscape</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reverse portrait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unknown orientation </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dpi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dots/cm</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -247,6 +200,85 @@
     </message>
     <message>
         <source>Print failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>utils</name>
+    <message>
+        <source>pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pending-held</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing-stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown state </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>draft</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown quality </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>portrait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverse landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reverse portrait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown orientation </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dpi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dots/cm</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

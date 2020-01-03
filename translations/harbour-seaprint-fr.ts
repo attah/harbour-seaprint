@@ -84,53 +84,6 @@
     </message>
 </context>
 <context>
-    <name>ChoiceSetting</name>
-    <message>
-        <source>draft</source>
-        <translation>brouillon</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>normale</translation>
-    </message>
-    <message>
-        <source>high</source>
-        <translation>haute</translation>
-    </message>
-    <message>
-        <source>unknown quality </source>
-        <translation>qualité inconnue</translation>
-    </message>
-    <message>
-        <source>portrait</source>
-        <translation>portrait</translation>
-    </message>
-    <message>
-        <source>landscape</source>
-        <translation>paysage</translation>
-    </message>
-    <message>
-        <source>reverse landscape</source>
-        <translation>paysage inversé</translation>
-    </message>
-    <message>
-        <source>reverse portrait</source>
-        <translation>portrait inversé</translation>
-    </message>
-    <message>
-        <source>unknown orientation </source>
-        <translation>orientation inconnue</translation>
-    </message>
-    <message>
-        <source>dpi</source>
-        <translation>dpi</translation>
-    </message>
-    <message>
-        <source>dots/cm</source>
-        <translation>pts/cm</translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -248,6 +201,85 @@
     <message>
         <source>Print failed: </source>
         <translation>Échec de l&apos;impression :</translation>
+    </message>
+</context>
+<context>
+    <name>utils</name>
+    <message>
+        <source>pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pending-held</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing-stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown state </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>draft</source>
+        <translation type="unfinished">brouillon</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normale</translation>
+    </message>
+    <message>
+        <source>high</source>
+        <translation type="unfinished">haute</translation>
+    </message>
+    <message>
+        <source>unknown quality </source>
+        <translation type="unfinished">qualité inconnue</translation>
+    </message>
+    <message>
+        <source>portrait</source>
+        <translation type="unfinished">portrait</translation>
+    </message>
+    <message>
+        <source>landscape</source>
+        <translation type="unfinished">paysage</translation>
+    </message>
+    <message>
+        <source>reverse landscape</source>
+        <translation type="unfinished">paysage inversé</translation>
+    </message>
+    <message>
+        <source>reverse portrait</source>
+        <translation type="unfinished">portrait inversé</translation>
+    </message>
+    <message>
+        <source>unknown orientation </source>
+        <translation type="unfinished">orientation inconnue</translation>
+    </message>
+    <message>
+        <source>dpi</source>
+        <translation type="unfinished">dpi</translation>
+    </message>
+    <message>
+        <source>dots/cm</source>
+        <translation type="unfinished">pts/cm</translation>
     </message>
 </context>
 </TS>

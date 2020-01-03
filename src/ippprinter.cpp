@@ -191,6 +191,7 @@ bool IppPrinter::getJobs() {
     qDebug() << "getting jobs";
 
     QJsonObject o = opAttrs();
+    o.insert("requested-attributes", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "all"}});
 
     IppMsg job = IppMsg(o, QJsonObject());
 

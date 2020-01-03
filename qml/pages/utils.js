@@ -28,3 +28,61 @@ function has(arrayish, what)
     }
     return false
 }
+
+function ippName(name, value)
+{
+    switch(name) {
+    case "job-state":
+        switch(value) {
+        case 3:
+            return qsTr("pending");
+        case 4:
+            return qsTr("pending-held");
+        case 5:
+            return qsTr("processing");
+        case 6:
+            return qsTr("processing-stopped");
+        case 7:
+            return qsTr("canceled");
+        case 8:
+            return qsTr("aborted");
+        case 9:
+            return qsTr("completed");
+        default:
+            return qsTr("unknown state ")+value
+        }
+    case "print-quality":
+        switch(value) {
+        case 3:
+            return qsTr("draft");
+        case 4:
+            return qsTr("normal");
+        case 5:
+            return qsTr("high");
+        default:
+            return qsTr("unknown quality ")+value
+        }
+    case "orientation-requested":
+        switch(value) {
+        case 3:
+            return qsTr("portrait");
+        case 4:
+            return qsTr("landscape");
+        case 5:
+            return qsTr("reverse landscape");
+        case 6:
+            return qsTr("reverse portrait");
+        default:
+            return qsTr("unknown orientation ")+value
+        }
+    case "printer-resolution":
+        var units = "";
+        if(value.units==3) {
+            units=qsTr("dpi");
+        } else if (units==4){
+            units=qsTr("dots/cm")
+        }
+        return ""+value.x+"x"+value.y+units;
+    }
+    return value;
+}
