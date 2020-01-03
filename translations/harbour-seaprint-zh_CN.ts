@@ -32,10 +32,6 @@
         <translation>一般贡献</translation>
     </message>
     <message>
-        <source>Rudi Timmermans - Code and Testing</source>
-        <translation>Rudi Timmermans－代码及测试</translation>
-    </message>
-    <message>
         <source>Translations</source>
         <translation>翻译</translation>
     </message>
@@ -58,6 +54,10 @@
     <message>
         <source>French</source>
         <translation><法语/translation>
+    </message>
+    <message>
+        <source>Code and Testing - Rudi Timmermans</source>
+        <translation type="unfinished">代码及测试 - Rudi Timmermans</translation>
     </message>
 </context>
 <context>

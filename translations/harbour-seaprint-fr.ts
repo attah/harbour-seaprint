@@ -32,10 +32,6 @@
         <translation>Contribution générale</translation>
     </message>
     <message>
-        <source>Rudi Timmermans - Code and Testing</source>
-        <translation>Rudi Timmermans - Code et test</translation>
-    </message>
-    <message>
         <source>Translations</source>
         <translation>Traductions</translation>
     </message>
@@ -58,6 +54,10 @@
     <message>
         <source>French</source>
         <translation>Française</translation>
+    </message>
+    <message>
+        <source>Code and Testing - Rudi Timmermans</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
