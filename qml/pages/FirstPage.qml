@@ -12,6 +12,7 @@ Page {
     allowedOrientations: Orientation.All
 
     property string selectedFile: ""
+    property string selectedFileType
 
     IppDiscovery {
         id: discovery
@@ -88,7 +89,7 @@ Page {
                 visible: false
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: Utils.can_print(printer, selectedFile)
+                property bool canPrint: printer.attrs["document-format-supported"].value.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -226,6 +227,7 @@ Page {
 
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
+                    page.selectedFileType = selectedContentProperties.mimeType
                 }
             }
         }
