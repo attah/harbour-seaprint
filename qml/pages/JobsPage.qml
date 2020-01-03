@@ -69,7 +69,9 @@ Page {
                     Label {
                         font.pixelSize: Theme.fontSizeTiny
                         color: Theme.secondaryColor
-                        text: Utils.ippName("job-state", printer.jobs[index]["job-state"].value)
+                        property var msg: printer.jobs[index]["job-printer-state-message"] && printer.jobs[index]["job-printer-state-message"].value != ""
+                                         ? " ("+printer.jobs[index]["job-printer-state-message"].value+")" : ""
+                        text: Utils.ippName("job-state", printer.jobs[index]["job-state"].value)+msg
                     }
                 }
 
