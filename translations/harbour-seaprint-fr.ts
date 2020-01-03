@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rudi Timmermans - Code et test</translation>
     </message>
 </context>
 <context>
