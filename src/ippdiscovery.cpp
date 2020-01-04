@@ -136,69 +136,77 @@ void IppDiscovery::readPendingDatagrams()
         sender = QHostAddress(sender.toIPv4Address());
 
         quint16 transactionid, flags, questions, answerRRs, authRRs, addRRs;
-        resp >> transactionid >> flags >> questions >> answerRRs >> authRRs >> addRRs;
 
-        for(quint16 i = 0; i < questions; i++)
-        {
-            quint16 qtype, qflags;
-            QString qaddr = get_addr(resp).join('.');
-            resp >> qtype >> qflags;
-        }
+        try {
 
-        for(quint16 i = 0; i < answerRRs; i++)
-        {
-            quint16 atype, aflags, len;
-            quint32 ttl;
+            resp >> transactionid >> flags >> questions >> answerRRs >> authRRs >> addRRs;
 
-            QString aaddr = get_addr(resp).join('.');
-            resp >> atype >> aflags >> ttl >> len;
-
-            quint16 pos_before = resp.pos();
-            if (atype == PTR)
+            for(quint16 i = 0; i < questions; i++)
             {
-                QString tmpname = get_addr(resp).join(".");
-                if(aaddr.endsWith("_ipp._tcp.local"))
-                {
-                    ipp_ptrs.append(tmpname);
-                }
+                quint16 qtype, qflags;
+                QString qaddr = get_addr(resp).join('.');
+                resp >> qtype >> qflags;
             }
-            else if(atype == TXT)
+
+            for(quint16 i = 0; i < answerRRs; i++)
             {
-                Bytestream tmp;
-                while(resp.pos() < pos_before+len)
+                quint16 atype, aflags, len;
+                quint32 ttl;
+
+                QString aaddr = get_addr(resp).join('.');
+                resp >> atype >> aflags >> ttl >> len;
+
+                quint16 pos_before = resp.pos();
+                if (atype == PTR)
                 {
-                    resp/resp.getU8() >> tmp;
-                    if(tmp >>= "rp=")
+                    QString tmpname = get_addr(resp).join(".");
+                    if(aaddr.endsWith("_ipp._tcp.local"))
                     {
-                        std::string tmprp;
-                        tmp/tmp.remaining() >> tmprp;
-                        _rps[aaddr] = tmprp.c_str();
+                        ipp_ptrs.append(tmpname);
                     }
                 }
-            }
-            else if (atype == SRV)
-            {
-                quint16 prio, w, port;
-                resp >> prio >> w >> port;
-                QString target = get_addr(resp).join(".");
-                _ports[aaddr] = port;
-                _targets[aaddr] = target;
-            }
-            else if(atype == A)
-            {
-                quint32 addr;
-                resp >> addr;
-                QHostAddress haddr(addr);
-                _AAs.insert(aaddr, haddr.toString());
-            }
-            else
-            {
-                resp += len;
-            }
-            Q_ASSERT(resp.pos() == pos_before+len);
+                else if(atype == TXT)
+                {
+                    Bytestream tmp;
+                    while(resp.pos() < pos_before+len)
+                    {
+                        resp/resp.getU8() >> tmp;
+                        if(tmp >>= "rp=")
+                        {
+                            std::string tmprp;
+                            tmp/tmp.remaining() >> tmprp;
+                            _rps[aaddr] = tmprp.c_str();
+                        }
+                    }
+                }
+                else if (atype == SRV)
+                {
+                    quint16 prio, w, port;
+                    resp >> prio >> w >> port;
+                    QString target = get_addr(resp).join(".");
+                    _ports[aaddr] = port;
+                    _targets[aaddr] = target;
+                }
+                else if(atype == A)
+                {
+                    quint32 addr;
+                    resp >> addr;
+                    QHostAddress haddr(addr);
+                    _AAs.insert(aaddr, haddr.toString());
+                }
+                else
+                {
+                    resp += len;
+                }
+                Q_ASSERT(resp.pos() == pos_before+len);
 
+            }
         }
-
+        catch(std::exception e)
+        {
+            qDebug() << e.what();
+            return;
+        }
         qDebug() << "new ipp ptrs" << ipp_ptrs;
         qDebug() << "ipp ptrs" << _ipp;
         qDebug() << "rps" << _rps;
