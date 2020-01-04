@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.1" language="es">
 <context>
     <name>AboutPage</name>
     <message>
@@ -280,6 +280,10 @@
     <message>
         <source>dots/cm</source>
         <translation>ppp</translation>
+    </message>
+    <message>
+        <source>No relevant formats supported</source>
+        <translation>No hay formatos relevantes compatibles</translation>
     </message>
 </context>
 </TS>

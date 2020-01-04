@@ -59,6 +59,10 @@
         <source>Code and Testing - Rudi Timmermans</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Spanish</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
@@ -275,6 +279,10 @@
     </message>
     <message>
         <source>dots/cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No relevant formats supported</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

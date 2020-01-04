@@ -13,7 +13,7 @@ function supported_formats(printer)
 
      if(supported.length == 0)
      {
-         supported.push("No relevant formats supported")
+         supported.push(qsTr("No relevant formats supported"))
      }
 
      return supported.join(" ");
