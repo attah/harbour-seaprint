@@ -21,7 +21,7 @@ Page {
     WifiChecker {
         id: wifi
         onConnectedChanged: {
-            console.log("conn", connected)
+            console.log("conn", connected, ssid)
             if(connected) {
                 var favourites = db.getFavourites(ssid);
                 console.log(favourites);
@@ -32,8 +32,16 @@ Page {
             }
 
         }
+
+        property bool initialSSIDchange: true
+
         onSsidChanged: {
-            discovery.reset();
+            console.log("ssid changed", ssid);
+            if(!initialSSIDchange)
+            {
+                discovery.reset();
+            }
+            initialSSIDchange = false;
         }
     }
 

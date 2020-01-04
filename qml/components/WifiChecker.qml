@@ -3,8 +3,10 @@ import Nemo.DBus 2.0
 
 
 Item {
+    id: checker
+
     property bool connected: false
-    property string ssid
+    property var ssid
 
     DBusInterface {
         bus: DBus.SystemBus
@@ -29,17 +31,20 @@ Item {
                      for (var i = 0; i < result.length; i++) {
                          var entry = result[i][1];
                          if(entry.Type == "wifi" && (entry.State == "online" || entry.State == "ready")) {
-                             ssid = entry.Name;
-                             connected = true;
+                             if(checker.ssid != entry.Name) {
+                                 // For whatever reason, the onchanged signal triggers when there isn't really a change
+                                 // so don't update the ssid if it is the same
+                                 checker.ssid = entry.Name;
+                             }
+                             checker.connected = true;
                              return;
                          }
                      }
-                     ssid = undefined;
-                     connected = false;
+                     checker.ssid = undefined;
+                     checker.connected = false;
                  },
                  function(error, message) {
                      console.log('call failed', error, 'message:', message);
-                     page.currentSSID = entry.Name;
                  })
         }
 
