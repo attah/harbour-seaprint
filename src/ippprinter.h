@@ -43,6 +43,8 @@ public slots:
     void getJobsRequestFinished(QNetworkReply* reply);
     void cancelJobFinished(QNetworkReply* reply);
 
+    void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
+
 private:
     QUrl _url;
     QUrl httpUrl();

@@ -8,9 +8,17 @@ IppPrinter::IppPrinter()
     _job_cancel_nam = new QNetworkAccessManager(this);
 
     connect(_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getPrinterAttributesFinished(QNetworkReply*)));
+    connect(_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+
     connect(_print_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(printRequestFinished(QNetworkReply*)));
+    connect(_print_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+
     connect(_jobs_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getJobsRequestFinished(QNetworkReply*)));
+    connect(_jobs_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+
     connect(_job_cancel_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(cancelJobFinished(QNetworkReply*)));
+    connect(_job_cancel_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
 }
 
@@ -159,6 +167,29 @@ void IppPrinter::cancelJobFinished(QNetworkReply *reply)
     }
     getJobs();
 }
+
+
+
+void IppPrinter::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+{
+    QList<QSslError> IgnoredSslErrors = {QSslError::NoError,
+                                         QSslError::SelfSignedCertificate,
+                                         QSslError::HostNameMismatch,
+                                         QSslError::UnableToGetLocalIssuerCertificate,
+                                         QSslError::UnableToVerifyFirstCertificate
+                                         };
+
+    qDebug() << errors;
+    for (QList<QSslError>::const_iterator it = errors.constBegin(); it != errors.constEnd(); it++) {
+        if(!IgnoredSslErrors.contains(it->error())) {
+            qDebug() << "Bad error: " << int(it->error()) <<  it->error();
+            return;
+        }
+    }
+    // For whatever reason, it doesn't work to pass IgnoredSslErrors here
+    reply->ignoreSslErrors(errors);
+}
+
 
 
 bool IppPrinter::print(QJsonObject attrs, QString filename){
