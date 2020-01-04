@@ -1,285 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="es_ES">
 <context>
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Repositorio en Github</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Informar de un problema</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impresión por red para Sailfish OS.</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Iconos</translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation type="unfinished"></translation>
+        <translation>Icono creado por Gregguh.</translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation type="unfinished"></translation>
+        <translation>Colaboración general</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>Traducciones</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Chino</translation>
     </message>
     <message>
         <source>Licensing</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencia</translation>
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>El código fuente está disponible en Github. ¡Las traducciones, informar sobre errores y otras colaboraciones son bienvenidas!</translation>
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation type="unfinished"></translation>
+        <translation>La licencia de Seaprint aún está por determinar, pero será algo abierta.</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Francés</translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation>Código y pruebas - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Español</translation>
     </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir impresora</translation>
     </message>
     <message>
         <source>On WiFI:</source>
-        <translation type="unfinished"></translation>
+        <translation>En WiFi:</translation>
     </message>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrada:</translation>
     </message>
     <message>
         <source>No printer found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguna impresora encontrada</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocida</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir por URL</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Elegir archivo</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>View jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver trabajos</translation>
     </message>
     <message>
         <source>Remove printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar impresora</translation>
     </message>
     <message>
         <source>Removing printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminando impresora</translation>
     </message>
     <message>
         <source>About SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de SeaPrint</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
     <name>JobsPage</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>trabajos</translation>
     </message>
     <message>
         <source>Untitled job</source>
-        <translation type="unfinished"></translation>
+        <translation>Trabajo sin título</translation>
     </message>
     <message>
         <source>Cancel job</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar trabajo</translation>
     </message>
     <message>
         <source>Cancelling job</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelando trabajo</translation>
     </message>
     <message>
         <source>job</source>
-        <translation type="unfinished"></translation>
+        <translation>trabajo</translation>
     </message>
 </context>
 <context>
     <name>PrinterPage</name>
     <message>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir</translation>
     </message>
     <message>
         <source>Sides</source>
-        <translation type="unfinished"></translation>
+        <translation>Caras</translation>
     </message>
     <message>
         <source>Copies</source>
-        <translation type="unfinished"></translation>
+        <translation>Copias</translation>
     </message>
     <message>
         <source>Color mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de color</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolución</translation>
     </message>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished"></translation>
+        <translation>Impresión correcta: </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Impresión fallida: </translation>
     </message>
 </context>
 <context>
     <name>utils</name>
     <message>
         <source>pending</source>
-        <translation type="unfinished"></translation>
+        <translation>pendiente</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation type="unfinished"></translation>
+        <translation>mantiene-pendiente</translation>
     </message>
     <message>
         <source>processing</source>
-        <translation type="unfinished"></translation>
+        <translation>procesando</translation>
     </message>
     <message>
         <source>processing-stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>procesando-detenido</translation>
     </message>
     <message>
         <source>canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>cancelado</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>abortado</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation type="unfinished"></translation>
+        <translation>completado</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation type="unfinished"></translation>
+        <translation>estado desconocido </translation>
     </message>
     <message>
         <source>draft</source>
-        <translation type="unfinished"></translation>
+        <translation>borrador</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>high</source>
-        <translation type="unfinished"></translation>
+        <translation>alta</translation>
     </message>
     <message>
         <source>unknown quality </source>
-        <translation type="unfinished"></translation>
+        <translation>calidad desconocida </translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>vertical</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontal</translation>
     </message>
     <message>
         <source>reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>horizontal invertido</translation>
     </message>
     <message>
         <source>reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>vertical invertido</translation>
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation type="unfinished"></translation>
+        <translation>orientación desconocida </translation>
     </message>
     <message>
         <source>dpi</source>
-        <translation type="unfinished"></translation>
+        <translation>dpi</translation>
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>ppp</translation>
     </message>
 </context>
 </TS>

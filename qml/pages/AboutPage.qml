@@ -89,7 +89,8 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
-                      qsTr("French")+" - ensag-dev"
+                      qsTr("French")+" - ensag-dev\n"+
+                      qsTr("Spanish")+" - carmenfdezb"
             }
 
             SectionHeader { text: qsTr("Licensing") }
