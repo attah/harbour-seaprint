@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutPage</name>
     <message>
@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation><关于/translation>
+        <translation>关于</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
@@ -53,11 +53,15 @@
     </message>
     <message>
         <source>French</source>
-        <translation><法语/translation>
+        <translation>法语</translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
         <translation type="unfinished">代码及测试 - Rudi Timmermans</translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -80,54 +84,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChoiceSetting</name>
-    <message>
-        <source>draft</source>
-        <translation>草稿</translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation>正常</translation>
-    </message>
-    <message>
-        <source>high</source>
-        <translation>高质量</translation>
-    </message>
-    <message>
-        <source>unknown quality </source>
-        <translation>质量未知</translation>
-    </message>
-    <message>
-        <source>portrait</source>
-        <translation>竖屏</translation>
-    </message>
-    <message>
-        <source>landscape</source>
-        <translation>横屏</translation>
-    </message>
-    <message>
-        <source>reverse landscape</source>
-        <translation>竖屏可旋转</translation>
-    </message>
-    <message>
-        <source>reverse portrait</source>
-        <translation>横屏可旋转</translation>
-    </message>
-    <message>
-        <source>unknown orientation </source>
-        <translation>方向位置</translation>
-    </message>
-    <message>
-        <source>dpi</source>
-        <translation>dpi</translation>
-    </message>
-    <message>
-        <source>dots/cm</source>
-        <translation>点/厘米</translation>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>
@@ -164,14 +121,6 @@
         <translation>无</translation>
     </message>
     <message>
-        <source>About SeaPrint</source>
-        <translation>关于 SeaPrint（海印）</translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation>未知</translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation>查看作业</translation>
     </message>
@@ -184,8 +133,12 @@
         <translation>正在移除打印机</translation>
     </message>
     <message>
+        <source>About SeaPrint</source>
+        <translation>关于 SeaPrint（海印）</translation>
+    </message>
+    <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
@@ -242,16 +195,91 @@
         <translation>分辨率</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>未知</translation>
-    </message>
-    <message>
         <source>Print success: </source>
         <translation>打印成功:</translation>
     </message>
     <message>
         <source>Print failed: </source>
         <translation>打印失败:</translation>
+    </message>
+</context>
+<context>
+    <name>utils</name>
+    <message>
+        <source>pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pending-held</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>processing-stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown state </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>draft</source>
+        <translation type="unfinished">草稿</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">正常</translation>
+    </message>
+    <message>
+        <source>high</source>
+        <translation type="unfinished">高质量</translation>
+    </message>
+    <message>
+        <source>unknown quality </source>
+        <translation type="unfinished">质量未知</translation>
+    </message>
+    <message>
+        <source>portrait</source>
+        <translation type="unfinished">竖屏</translation>
+    </message>
+    <message>
+        <source>landscape</source>
+        <translation type="unfinished">横屏</translation>
+    </message>
+    <message>
+        <source>reverse landscape</source>
+        <translation type="unfinished">竖屏可旋转</translation>
+    </message>
+    <message>
+        <source>reverse portrait</source>
+        <translation type="unfinished">横屏可旋转</translation>
+    </message>
+    <message>
+        <source>unknown orientation </source>
+        <translation type="unfinished">方向位置</translation>
+    </message>
+    <message>
+        <source>dpi</source>
+        <translation type="unfinished">dpi</translation>
+    </message>
+    <message>
+        <source>dots/cm</source>
+        <translation type="unfinished">点/厘米</translation>
     </message>
 </context>
 </TS>
