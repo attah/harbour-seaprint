@@ -281,5 +281,9 @@
         <source>dots/cm</source>
         <translation type="unfinished">点/厘米</translation>
     </message>
+    <message>
+        <source>No relevant formats supported</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -281,5 +281,9 @@
         <source>dots/cm</source>
         <translation>ppp</translation>
     </message>
+    <message>
+        <source>No relevant formats supported</source>
+        <translation>No hay formatos relevantes compatibles</translation>
+    </message>
 </context>
 </TS>
