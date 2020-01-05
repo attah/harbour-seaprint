@@ -44,7 +44,7 @@ QStringList get_addr(Bytestream& bts)
     return addr;
 }
 
-IppDiscovery::IppDiscovery() : QStringListModel()
+IppDiscovery::IppDiscovery() : QStringListModel(), QQuickImageProvider(QQuickImageProvider::Image)
 {
     socket = new QUdpSocket(this);
     connect(socket, SIGNAL(readyRead()),
@@ -55,6 +55,24 @@ IppDiscovery::IppDiscovery() : QStringListModel()
 
 IppDiscovery::~IppDiscovery() {
     delete socket;
+}
+
+IppDiscovery* IppDiscovery::m_Instance = 0;
+
+IppDiscovery* IppDiscovery::instance()
+{
+    static QMutex mutex;
+    if (!m_Instance)
+    {
+        mutex.lock();
+
+        if (!m_Instance)
+            m_Instance = new IppDiscovery;
+
+        mutex.unlock();
+    }
+
+    return m_Instance;
 }
 
 void IppDiscovery::discover() {
@@ -229,5 +247,61 @@ void IppDiscovery::readPendingDatagrams()
 
     }
     this->update();
+
+}
+
+void IppDiscovery::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+{
+    QList<QSslError> IgnoredSslErrors = {QSslError::NoError,
+                                         QSslError::SelfSignedCertificate,
+                                         QSslError::HostNameMismatch,
+                                         QSslError::UnableToGetLocalIssuerCertificate,
+                                         QSslError::UnableToVerifyFirstCertificate
+                                         };
+
+    qDebug() << errors;
+    for (QList<QSslError>::const_iterator it = errors.constBegin(); it != errors.constEnd(); it++) {
+        if(!IgnoredSslErrors.contains(it->error())) {
+            qDebug() << "Bad error: " << int(it->error()) <<  it->error();
+            return;
+        }
+    }
+    // For whatever reason, it doesn't work to pass IgnoredSslErrors here
+    reply->ignoreSslErrors(errors);
+}
+
+QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+{   //TODO: consider caching images (doesn't appear to be needed currently)
+    Q_UNUSED(size);
+    Q_UNUSED(requestedSize);
+    qDebug() << "requesting image" << id;
+
+    QImage img;
+
+    QNetworkAccessManager* nam = new QNetworkAccessManager(this);
+    QUrl url(id);
+    qDebug() << url.host() << _AAs;
+    // TODO IPv6
+    if(_AAs.contains(url.host()))
+    {   // TODO: retry potential other IPs
+        url.setHost(_AAs.value(url.host()));
+    }
+
+    QNetworkReply* reply = nam->get(QNetworkRequest(url));
+
+    QEventLoop el;
+    connect(reply, SIGNAL(finished()),&el,SLOT(quit()));
+    connect(nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)),
+            this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    el.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        QImageReader imageReader(reply);
+        img = imageReader.read();
+     }
+
+    delete nam;
+    return img;
 
 }

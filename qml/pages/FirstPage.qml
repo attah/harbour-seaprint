@@ -14,10 +14,6 @@ Page {
     property string selectedFile: ""
     property string selectedFileType
 
-    IppDiscovery {
-        id: discovery
-    }
-
     WifiChecker {
         id: wifi
         onConnectedChanged: {
@@ -25,10 +21,10 @@ Page {
             if(connected) {
                 var favourites = db.getFavourites(ssid);
                 console.log(favourites);
-                discovery.favourites = favourites;
+                IppDiscovery.favourites = favourites;
             }
             else {
-                discovery.favourites = []
+                IppDiscovery.favourites = []
             }
 
         }
@@ -39,7 +35,7 @@ Page {
             console.log("ssid changed", ssid);
             if(!initialSSIDchange)
             {
-                discovery.reset();
+                IppDiscovery.reset();
             }
             initialSSIDchange = false;
         }
@@ -48,7 +44,7 @@ Page {
     signal refreshed()
 
     Component.onCompleted: {
-        discovery.discover();
+        IppDiscovery.discover();
         if(selectedFile != "")
         {  // Until i can convince FilePickerPage to do its magic without user interaction
             if(Utils.endsWith(".pdf", selectedFile))
@@ -85,14 +81,14 @@ Page {
                         dialog.accepted.connect(function() {
                             console.log("add", wifi.ssid, dialog.value);
                             db.addFavourite(wifi.ssid, dialog.value);
-                            discovery.favourites = db.getFavourites(wifi.ssid);
+                            IppDiscovery.favourites = db.getFavourites(wifi.ssid);
                     })
                 }
             }
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: {
-                    discovery.discover();
+                    IppDiscovery.discover();
                     page.refreshed();
                 }
             }
@@ -101,7 +97,7 @@ Page {
         SilicaListView {
             anchors.fill: parent
             id: listView
-            model: discovery
+            model: IppDiscovery
             spacing: Theme.paddingSmall
 
 
@@ -162,7 +158,7 @@ Page {
 
                     height: Theme.itemSizeLarge
                     width: Theme.itemSizeLarge
-                    source: printer.attrs["printer-icons"] ? printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
+                    source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
                     onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
                 }
@@ -215,7 +211,7 @@ Page {
                         onClicked: {
                             removeRemorse.execute(delegate, qsTr("Removing printer"),
                                                   function() {db.removeFavourite(wifi.ssid, model.display);
-                                                              discovery.favourites = db.getFavourites()})
+                                                              IppDiscovery.favourites = db.getFavourites()})
                         }
                     }
                 }
