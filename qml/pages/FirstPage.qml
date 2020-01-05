@@ -49,6 +49,21 @@ Page {
 
     Component.onCompleted: {
         discovery.discover();
+        if(selectedFile != "")
+        {  // Until i can convince FilePickerPage to do its magic without user interaction
+            if(Utils.endsWith(".pdf", selectedFile))
+            {
+                selectedFileType = "application/pdf"
+            }
+            else if(Utils.endsWith(".jpg", selectedFile) || Utils.endsWith(".jpeg", selectedFile))
+            {
+                selectedFileType = "image/jpeg"
+            }
+            else
+            {
+                selectedFile = ""
+            }
+        }
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable

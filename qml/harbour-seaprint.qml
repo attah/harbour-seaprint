@@ -6,7 +6,7 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component { FirstPage { } }
+    initialPage: Component { FirstPage { selectedFile: Qt.application.arguments[1] ? Qt.application.arguments[1] : "" } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 

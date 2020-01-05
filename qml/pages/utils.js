@@ -86,3 +86,8 @@ function ippName(name, value)
     }
     return value;
 }
+
+function endsWith(ending, string)
+{
+    return string.lastIndexOf(ending) == (string.length - ending.length);
+}
