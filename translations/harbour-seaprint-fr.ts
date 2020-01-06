@@ -57,11 +57,11 @@
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished">Rudi Timmermans - Code et test</translation>
+        <translation>Rudi Timmermans - Code et test</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Espagnol</translation>
     </message>
 </context>
 <context>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Inconnu</translation>
+        <translation>Inconnu</translation>
     </message>
 </context>
 <context>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Inconnu</translation>
+        <translation>Inconnu</translation>
     </message>
 </context>
 <context>
@@ -215,75 +215,75 @@
     </message>
     <message>
         <source>processing</source>
-        <translation type="unfinished"></translation>
+        <translation>traitement</translation>
     </message>
     <message>
         <source>processing-stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>traitement-arrêt</translation>
     </message>
     <message>
         <source>canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>annulé</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>abandonné</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation type="unfinished"></translation>
+        <translation>terminé</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation type="unfinished"></translation>
+        <translation>état inconnu</translation>
     </message>
     <message>
         <source>draft</source>
-        <translation type="unfinished">brouillon</translation>
+        <translation>brouillon</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normale</translation>
+        <translation>normale</translation>
     </message>
     <message>
         <source>high</source>
-        <translation type="unfinished">haute</translation>
+        <translation>haute</translation>
     </message>
     <message>
         <source>unknown quality </source>
-        <translation type="unfinished">qualité inconnue</translation>
+        <translation>qualité inconnue</translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation type="unfinished">portrait</translation>
+        <translation>portrait</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation type="unfinished">paysage</translation>
+        <translation>paysage</translation>
     </message>
     <message>
         <source>reverse landscape</source>
-        <translation type="unfinished">paysage inversé</translation>
+        <translation>paysage inversé</translation>
     </message>
     <message>
         <source>reverse portrait</source>
-        <translation type="unfinished">portrait inversé</translation>
+        <translation>portrait inversé</translation>
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation type="unfinished">orientation inconnue</translation>
+        <translation>orientation inconnue</translation>
     </message>
     <message>
         <source>dpi</source>
-        <translation type="unfinished">dpi</translation>
+        <translation>dpi</translation>
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished">pts/cm</translation>
+        <translation>pts/cm</translation>
     </message>
     <message>
         <source>No relevant formats supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun format approprié n'est pris en charge</translation>
     </message>
 </context>
 </TS>
