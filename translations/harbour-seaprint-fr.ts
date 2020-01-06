@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>No relevant formats supported</source>
-        <translation>Aucun format approprié n'est pris en charge</translation>
+        <translation>Aucun format approprié n&apos;est pris en charge</translation>
     </message>
 </context>
 </TS>
