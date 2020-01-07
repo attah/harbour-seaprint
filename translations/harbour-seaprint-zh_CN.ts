@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation>源代码位于 Github 。欢迎提供翻译，报告缺陷及其它贡献！</translation>
+        <translation>源代码位于 Github 。欢迎提供翻译、报告缺陷及作出其它贡献！</translation>
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
@@ -57,11 +57,11 @@
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished">代码及测试 - Rudi Timmermans</translation>
+        <translation>代码及测试 - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>西班牙语</translation>
     </message>
 </context>
 <context>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
@@ -207,83 +207,83 @@
     <name>utils</name>
     <message>
         <source>pending</source>
-        <translation type="unfinished"></translation>
+        <translation>等候</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation type="unfinished"></translation>
+        <translation>等候保持</translation>
     </message>
     <message>
         <source>processing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在处理</translation>
     </message>
     <message>
         <source>processing-stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>处理已停止</translation>
     </message>
     <message>
         <source>canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>已取消</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>已中止</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation type="unfinished"></translation>
+        <translation>已完成</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation type="unfinished"></translation>
+        <translation>未知状态</translation>
     </message>
     <message>
         <source>draft</source>
-        <translation type="unfinished">草稿</translation>
+        <translation>草稿</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">正常</translation>
+        <translation>正常</translation>
     </message>
     <message>
         <source>high</source>
-        <translation type="unfinished">高质量</translation>
+        <translation>高质量</translation>
     </message>
     <message>
         <source>unknown quality </source>
-        <translation type="unfinished">质量未知</translation>
+        <translation>质量未知</translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation type="unfinished">竖屏</translation>
+        <translation>竖屏</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation type="unfinished">横屏</translation>
+        <translation>横屏</translation>
     </message>
     <message>
         <source>reverse landscape</source>
-        <translation type="unfinished">竖屏可旋转</translation>
+        <translation>竖屏可旋转</translation>
     </message>
     <message>
         <source>reverse portrait</source>
-        <translation type="unfinished">横屏可旋转</translation>
+        <translation>横屏可旋转</translation>
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation type="unfinished">方向位置</translation>
+        <translation>方向位置</translation>
     </message>
     <message>
         <source>dpi</source>
-        <translation type="unfinished">dpi</translation>
+        <translation>dpi</translation>
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished">点/厘米</translation>
+        <translation>点/厘米</translation>
     </message>
     <message>
         <source>No relevant formats supported</source>
-        <translation type="unfinished"></translation>
+        <translation>不支持相关格式</translation>
     </message>
 </context>
 </TS>
