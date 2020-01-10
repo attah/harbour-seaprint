@@ -282,7 +282,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No relevant formats supported</source>
+        <source>No compatible formats supported</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

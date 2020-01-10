@@ -282,8 +282,8 @@
         <translation>点/厘米</translation>
     </message>
     <message>
-        <source>No relevant formats supported</source>
-        <translation>不支持相关格式</translation>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished">不支持相关格式</translation>
     </message>
 </context>
 </TS>

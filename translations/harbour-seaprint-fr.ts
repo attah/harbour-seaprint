@@ -282,8 +282,8 @@
         <translation>pts/cm</translation>
     </message>
     <message>
-        <source>No relevant formats supported</source>
-        <translation>Aucun format approprié n&apos;est pris en charge</translation>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
