@@ -10,7 +10,7 @@ Name:       harbour-seaprint
 
 Summary:    SeaPrint
 Version:    0.4
-Release:    2
+Release:    3
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
