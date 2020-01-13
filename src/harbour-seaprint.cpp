@@ -5,24 +5,32 @@
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
 
+static QObject* ippdiscovery_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    IppDiscovery *ippdiscovery = IppDiscovery::instance();
+    return ippdiscovery;
+
+}
+
 int main(int argc, char *argv[])
 {
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
 
-    qmlRegisterType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery");
+    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", ippdiscovery_singletontype_provider);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
 
-    // SailfishApp::main() will display "qml/harbour-printtool.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //   - SailfishApp::pathToMainQml() to get a QUrl to the main QML file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
+    QQuickView* view = SailfishApp::createView();
 
-    return SailfishApp::main(argc, argv);
+    view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
+    view->engine()->addImageProvider(QLatin1String("ippdiscovery"), IppDiscovery::instance());
+
+    view->setSource(SailfishApp::pathToMainQml());
+    view->show();
+    return app->exec();
+
 }

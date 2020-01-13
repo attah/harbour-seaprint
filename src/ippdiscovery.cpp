@@ -44,7 +44,7 @@ QStringList get_addr(Bytestream& bts)
     return addr;
 }
 
-IppDiscovery::IppDiscovery() : QStringListModel()
+IppDiscovery::IppDiscovery() : QStringListModel(), QQuickImageProvider(QQuickImageProvider::Image)
 {
     socket = new QUdpSocket(this);
     connect(socket, SIGNAL(readyRead()),
@@ -55,6 +55,24 @@ IppDiscovery::IppDiscovery() : QStringListModel()
 
 IppDiscovery::~IppDiscovery() {
     delete socket;
+}
+
+IppDiscovery* IppDiscovery::m_Instance = 0;
+
+IppDiscovery* IppDiscovery::instance()
+{
+    static QMutex mutex;
+    if (!m_Instance)
+    {
+        mutex.lock();
+
+        if (!m_Instance)
+            m_Instance = new IppDiscovery;
+
+        mutex.unlock();
+    }
+
+    return m_Instance;
 }
 
 void IppDiscovery::discover() {
@@ -136,69 +154,77 @@ void IppDiscovery::readPendingDatagrams()
         sender = QHostAddress(sender.toIPv4Address());
 
         quint16 transactionid, flags, questions, answerRRs, authRRs, addRRs;
-        resp >> transactionid >> flags >> questions >> answerRRs >> authRRs >> addRRs;
 
-        for(quint16 i = 0; i < questions; i++)
-        {
-            quint16 qtype, qflags;
-            QString qaddr = get_addr(resp).join('.');
-            resp >> qtype >> qflags;
-        }
+        try {
 
-        for(quint16 i = 0; i < answerRRs; i++)
-        {
-            quint16 atype, aflags, len;
-            quint32 ttl;
+            resp >> transactionid >> flags >> questions >> answerRRs >> authRRs >> addRRs;
 
-            QString aaddr = get_addr(resp).join('.');
-            resp >> atype >> aflags >> ttl >> len;
-
-            quint16 pos_before = resp.pos();
-            if (atype == PTR)
+            for(quint16 i = 0; i < questions; i++)
             {
-                QString tmpname = get_addr(resp).join(".");
-                if(aaddr.endsWith("_ipp._tcp.local"))
-                {
-                    ipp_ptrs.append(tmpname);
-                }
+                quint16 qtype, qflags;
+                QString qaddr = get_addr(resp).join('.');
+                resp >> qtype >> qflags;
             }
-            else if(atype == TXT)
+
+            for(quint16 i = 0; i < answerRRs; i++)
             {
-                Bytestream tmp;
-                while(resp.pos() < pos_before+len)
+                quint16 atype, aflags, len;
+                quint32 ttl;
+
+                QString aaddr = get_addr(resp).join('.');
+                resp >> atype >> aflags >> ttl >> len;
+
+                quint16 pos_before = resp.pos();
+                if (atype == PTR)
                 {
-                    resp/resp.getU8() >> tmp;
-                    if(tmp >>= "rp=")
+                    QString tmpname = get_addr(resp).join(".");
+                    if(aaddr.endsWith("_ipp._tcp.local"))
                     {
-                        std::string tmprp;
-                        tmp/tmp.remaining() >> tmprp;
-                        _rps[aaddr] = tmprp.c_str();
+                        ipp_ptrs.append(tmpname);
                     }
                 }
-            }
-            else if (atype == SRV)
-            {
-                quint16 prio, w, port;
-                resp >> prio >> w >> port;
-                QString target = get_addr(resp).join(".");
-                _ports[aaddr] = port;
-                _targets[aaddr] = target;
-            }
-            else if(atype == A)
-            {
-                quint32 addr;
-                resp >> addr;
-                QHostAddress haddr(addr);
-                _AAs.insert(aaddr, haddr.toString());
-            }
-            else
-            {
-                resp += len;
-            }
-            Q_ASSERT(resp.pos() == pos_before+len);
+                else if(atype == TXT)
+                {
+                    Bytestream tmp;
+                    while(resp.pos() < pos_before+len)
+                    {
+                        resp/resp.getU8() >> tmp;
+                        if(tmp >>= "rp=")
+                        {
+                            std::string tmprp;
+                            tmp/tmp.remaining() >> tmprp;
+                            _rps[aaddr] = tmprp.c_str();
+                        }
+                    }
+                }
+                else if (atype == SRV)
+                {
+                    quint16 prio, w, port;
+                    resp >> prio >> w >> port;
+                    QString target = get_addr(resp).join(".");
+                    _ports[aaddr] = port;
+                    _targets[aaddr] = target;
+                }
+                else if(atype == A)
+                {
+                    quint32 addr;
+                    resp >> addr;
+                    QHostAddress haddr(addr);
+                    _AAs.insert(aaddr, haddr.toString());
+                }
+                else
+                {
+                    resp += len;
+                }
+                Q_ASSERT(resp.pos() == pos_before+len);
 
+            }
         }
-
+        catch(std::exception e)
+        {
+            qDebug() << e.what();
+            return;
+        }
         qDebug() << "new ipp ptrs" << ipp_ptrs;
         qDebug() << "ipp ptrs" << _ipp;
         qDebug() << "rps" << _rps;
@@ -221,5 +247,61 @@ void IppDiscovery::readPendingDatagrams()
 
     }
     this->update();
+
+}
+
+void IppDiscovery::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+{
+    QList<QSslError> IgnoredSslErrors = {QSslError::NoError,
+                                         QSslError::SelfSignedCertificate,
+                                         QSslError::HostNameMismatch,
+                                         QSslError::UnableToGetLocalIssuerCertificate,
+                                         QSslError::UnableToVerifyFirstCertificate
+                                         };
+
+    qDebug() << errors;
+    for (QList<QSslError>::const_iterator it = errors.constBegin(); it != errors.constEnd(); it++) {
+        if(!IgnoredSslErrors.contains(it->error())) {
+            qDebug() << "Bad error: " << int(it->error()) <<  it->error();
+            return;
+        }
+    }
+    // For whatever reason, it doesn't work to pass IgnoredSslErrors here
+    reply->ignoreSslErrors(errors);
+}
+
+QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+{   //TODO: consider caching images (doesn't appear to be needed currently)
+    Q_UNUSED(size);
+    Q_UNUSED(requestedSize);
+    qDebug() << "requesting image" << id;
+
+    QImage img;
+
+    QNetworkAccessManager* nam = new QNetworkAccessManager(this);
+    QUrl url(id);
+    qDebug() << url.host() << _AAs;
+    // TODO IPv6
+    if(_AAs.contains(url.host()))
+    {   // TODO: retry potential other IPs
+        url.setHost(_AAs.value(url.host()));
+    }
+
+    QNetworkReply* reply = nam->get(QNetworkRequest(url));
+
+    QEventLoop el;
+    connect(reply, SIGNAL(finished()),&el,SLOT(quit()));
+    connect(nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)),
+            this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    el.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        QImageReader imageReader(reply);
+        img = imageReader.read();
+     }
+
+    delete nam;
+    return img;
 
 }

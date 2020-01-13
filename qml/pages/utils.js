@@ -13,7 +13,7 @@ function supported_formats(printer)
 
      if(supported.length == 0)
      {
-         supported.push(qsTr("No relevant formats supported"))
+         supported.push(qsTr("No compatible formats supported"))
      }
 
      return supported.join(" ");
@@ -85,4 +85,9 @@ function ippName(name, value)
         return ""+value.x+"x"+value.y+units;
     }
     return value;
+}
+
+function endsWith(ending, string)
+{
+    return string.lastIndexOf(ending) == (string.length - ending.length);
 }
