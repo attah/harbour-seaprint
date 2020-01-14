@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>No compatible formats supported</source>
-        <translation type="unfinished">不支持相关格式</translation>
+        <translation>不支持相关格式</translation>
     </message>
 </context>
 </TS>
