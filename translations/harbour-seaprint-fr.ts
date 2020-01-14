@@ -207,11 +207,11 @@
     <name>utils</name>
     <message>
         <source>pending</source>
-        <translation type="unfinished"></translation>
+        <translation>en attente</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation type="unfinished"></translation>
+        <translation>en attente de confirmation</translation>
     </message>
     <message>
         <source>processing</source>
@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>No compatible formats supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun format compatible supporté</translation>
     </message>
 </context>
 </TS>
