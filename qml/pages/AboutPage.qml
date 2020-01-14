@@ -89,7 +89,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
-                      qsTr("French")+" - ensag-dev\n"+
+                      qsTr("French")+" - ensag-dev, Quentí\n"+
                       qsTr("Spanish")+" - carmenfdezb"
             }
 
