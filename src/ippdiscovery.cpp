@@ -1,4 +1,6 @@
 #include "ippdiscovery.h"
+#include <seaprint_version.h>
+
 #define A 1
 #define PTR 12
 #define TXT 16
@@ -287,7 +289,10 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
         url.setHost(_AAs.value(url.host()));
     }
 
-    QNetworkReply* reply = nam->get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
+    QNetworkReply* reply = nam->get(request);
 
     QEventLoop el;
     connect(reply, SIGNAL(finished()),&el,SLOT(quit()));

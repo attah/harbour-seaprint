@@ -1,4 +1,6 @@
 #include "ippprinter.h"
+#include "ioprepender.h"
+#include <seaprint_version.h>
 
 IppPrinter::IppPrinter()
 {
@@ -84,6 +86,7 @@ void IppPrinter::refresh() {
     request.setUrl(httpUrl());
 //    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
 
     QJsonObject o = opAttrs();
     IppMsg msg = IppMsg(o);
@@ -205,6 +208,7 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
 
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
@@ -246,6 +250,8 @@ bool IppPrinter::getJobs() {
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
     _jobs_nam->post(request, contents);
 
     return true;
@@ -266,6 +272,8 @@ bool IppPrinter::cancelJob(qint32 jobId) {
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
     _job_cancel_nam->post(request, contents);
 
     return true;

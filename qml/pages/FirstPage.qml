@@ -242,7 +242,7 @@ Page {
             FilePickerPage {
                 title: fileButton.label
                 showSystemFiles: false
-                nameFilters: ["*.pdf", "*.jpg", "*.jpeg"]
+                nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.pwg", "*.urf"]
 
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
