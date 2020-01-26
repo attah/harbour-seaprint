@@ -48,6 +48,9 @@ public slots:
 
     void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
+    void doWork(QString filename, QTemporaryFile* tempfile);
+
+
 private:
     QUrl _url;
     QUrl httpUrl();

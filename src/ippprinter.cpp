@@ -1,6 +1,7 @@
 #include "ippprinter.h"
-#include "ioprepender.h"
+#include "ippraster.h"
 #include <seaprint_version.h>
+#include <QtConcurrent/QtConcurrent>
 
 IppPrinter::IppPrinter()
 {
@@ -196,6 +197,71 @@ void IppPrinter::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslErro
     reply->ignoreSslErrors(errors);
 }
 
+void IppPrinter::doWork(QString filename, QTemporaryFile* tempfile)
+{
+    QNetworkRequest request;
+
+    request.setUrl(httpUrl());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
+    QProcess* muraster = new QProcess(this);
+    muraster->setProgram("/home/nemo/stuff/bin/muraster");
+    muraster->setArguments({"-F", "pgm", filename});
+
+
+    QProcess* ppm2pwg = new QProcess(this);
+    ppm2pwg->setProgram("/home/nemo/repos/pwg/ppm2pwg");
+    QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
+
+    bool apple = false;
+    if(apple)
+    {
+        env.append("URF=true");
+    }
+
+    qDebug() << "Prepend file env done";
+
+    ppm2pwg->setEnvironment(env);
+
+    muraster->setStandardOutputProcess(ppm2pwg);
+    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+    connect(muraster, SIGNAL(finished(int, QProcess::ExitStatus)), muraster, SLOT(deleteLater()));
+    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), tempfile, SLOT(deleteLater()));
+
+    qDebug() << "All connected";
+
+
+    muraster->start();
+    ppm2pwg->start();
+
+    qDebug() << "Starting";
+
+
+    if(!muraster->waitForStarted())
+    {
+        qDebug() << "muraster died";
+        return;
+    }
+    if(!ppm2pwg->waitForStarted())
+    {
+        qDebug() << "ppm2pwg died";
+        return;
+    }
+    qDebug() << "All started";
+
+    ppm2pwg->waitForFinished();
+
+    qDebug() << "Finished";
+
+//        IppRaster* raster = new IppRaster(ppm2pwg);
+//        raster->open(QIODevice::ReadOnly);
+//        request.setAttribute(QNetworkRequest::DoNotBufferUploadDataAttribute, true);
+    _print_nam->post(request, tempfile);
+    qDebug() << "posted";
+}
 
 
 void IppPrinter::print(QJsonObject attrs, QString filename){
@@ -210,11 +276,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     }
 
     QFileInfo fileinfo(file);
-    QNetworkRequest request;
-
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
 
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
@@ -236,8 +297,37 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     QByteArray filedata = file.readAll();
     contents = contents.append(filedata);
 
-    _print_nam->post(request, contents);
-    file.close();
+
+    // TODO: do this only conditionally, and to the raster suppoerted/preferred
+    bool transcode = true;
+    if(transcode)
+    {
+        file.close();
+        QTemporaryFile* tempfile = new QTemporaryFile();
+        tempfile->open();
+        tempfile->write(contents);
+        qDebug() << tempfile->fileName();
+        tempfile->close();
+
+        QtConcurrent::run(this, &IppPrinter::doWork, filename, tempfile);
+
+    }
+    else {
+
+        QNetworkRequest request;
+
+        request.setUrl(httpUrl());
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+        request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
+        QByteArray filedata = file.readAll();
+        contents = contents.append(filedata);
+        file.close();
+
+        _print_nam->post(request, contents);
+    }
+
+    return;
 }
 
 bool IppPrinter::getJobs() {

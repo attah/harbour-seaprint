@@ -26,10 +26,12 @@ SOURCES += src/harbour-seaprint.cpp \
     src/bytestream.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
-    src/mimer.cpp
+    src/mimer.cpp \
+    src/ippraster.cpp
 
 
 DISTFILES += qml/harbour-seaprint.qml \
+    ../harbour-splay/qml/pages/ChannelItem.qml \
     qml/cover/CoverPage.qml \
     qml/components/*.qml \
     qml/pages/*.qml \
@@ -63,4 +65,5 @@ HEADERS += \
     src/bytestream.h \
     src/ippmsg.h \
     src/ippprinter.h \
-    src/mimer.h
+    src/mimer.h \
+    src/ippraster.h
