@@ -131,7 +131,26 @@ Page {
                     }
                 }
 
+                Timer
+                {
+                    id: debugCountReset
+                    interval: 666
+                    repeat: false
+                    onTriggered:
+                    {
+                        debugCount = 0;
+                    }
+                }
+
+                property int debugCount: 0
+
                 onClicked: {
+                    if(++debugCount == 5)
+                    {
+                        pageStack.push(Qt.resolvedUrl("DebugPage.qml"), {printer: printer})
+                        return;
+                    }
+                    debugCountReset.restart();
                     if(!canPrint)
                         return;
                     if(selectedFile != "")
@@ -161,6 +180,7 @@ Page {
                     source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
                     onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
+
                 }
 
                 Column {

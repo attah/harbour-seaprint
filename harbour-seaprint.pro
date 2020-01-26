@@ -34,6 +34,7 @@ DISTFILES += qml/harbour-seaprint.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
+    qml/pages/DebugPage.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \
