@@ -1,13 +1,16 @@
 function supported_formats(printer)
 {
     var formats = printer.attrs["document-format-supported"].value;
+    var mimetypes = [];
     var supported = [];
      if(has(formats, "application/pdf"))
      {
+         mimetypes.push("application/pdf");
          supported.push("PDF");
      }
      if(has(formats, "image/jpeg"))
      {
+         mimetypes.push("image/jpeg");
          supported.push("JPEG");
      }
 
@@ -16,7 +19,24 @@ function supported_formats(printer)
          supported.push(qsTr("No compatible formats supported"))
      }
 
-     return supported.join(" ");
+
+     //var info = "MFG:Hewlett-Packard;CMD:PJL,BIDI-ECP,PJL,POSTSCRIPT,PDF,PCLXL,PCL;MDL:HP LaserJet P3010 Series;CLS:PRINTER;DES:Hewlett-Packard ".split(";");
+     var maybe = []
+     var info = printer.attrs["printer-info"].value.split(";");
+     for(var i in info)
+     {
+         if(info[i].split(":")[0] == "CMD")
+         {
+             if(has(info[i].split(":")[1].split(","), "PDF"))
+             {
+                 mimetypes.push("application/pdf");
+                 maybe.push("PDF");
+             }
+             break;
+         }
+     }
+
+     return {supported: supported.join(" "), maybe: maybe.join(" "), mimetypes: mimetypes};
 }
 
 function has(arrayish, what)

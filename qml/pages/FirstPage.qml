@@ -108,7 +108,7 @@ Page {
                 visible: false
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: printer.attrs["document-format-supported"].value.indexOf(selectedFileType) != -1
+                property bool canPrint: Utils.supported_formats(printer).mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -208,12 +208,23 @@ Page {
                         text: printer.url
                     }
 
-                    Label {
-                        id: format_label
-                        color: canPrint ? Theme.primaryColor : "red"
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        text: Utils.supported_formats(printer)
+                    Row {
+                        spacing: Theme.paddingMedium
+                        Label {
+                            id: format_label
+                            color: canPrint ? Theme.primaryColor : "red"
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            text: Utils.supported_formats(printer).supported
+                        }
+                        Label {
+                            id: maybe_format_label
+                            color: canPrint ? Theme.secondaryColor : "red"
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.italic: true
+                            text: Utils.supported_formats(printer).maybe
+                        }
                     }
+
                 }
 
                 RemorseItem {
