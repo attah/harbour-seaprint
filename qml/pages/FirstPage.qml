@@ -211,6 +211,13 @@ Page {
                     Row {
                         spacing: Theme.paddingMedium
                         Label {
+                            id: format_unsupported_label
+                            visible:  format_label.text == "" && maybe_format_label.text == ""
+                            color: "red"
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            text: qsTr("No compatible formats supported")
+                        }
+                        Label {
                             id: format_label
                             color: canPrint ? Theme.primaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall

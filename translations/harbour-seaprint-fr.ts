@@ -140,6 +140,10 @@
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
+    <message>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished">Aucun format compatible supporté</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -280,10 +284,6 @@
     <message>
         <source>dots/cm</source>
         <translation>pts/cm</translation>
-    </message>
-    <message>
-        <source>No compatible formats supported</source>
-        <translation>Aucun format compatible supporté</translation>
     </message>
 </context>
 </TS>

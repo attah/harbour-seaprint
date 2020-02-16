@@ -140,6 +140,10 @@
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -279,10 +283,6 @@
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No compatible formats supported</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

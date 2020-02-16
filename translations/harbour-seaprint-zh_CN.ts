@@ -140,6 +140,10 @@
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
+    <message>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished">不支持相关格式</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -280,10 +284,6 @@
     <message>
         <source>dots/cm</source>
         <translation>点/厘米</translation>
-    </message>
-    <message>
-        <source>No compatible formats supported</source>
-        <translation>不支持相关格式</translation>
     </message>
 </context>
 </TS>

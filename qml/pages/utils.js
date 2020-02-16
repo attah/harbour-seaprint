@@ -14,20 +14,15 @@ function supported_formats(printer)
          supported.push("JPEG");
      }
 
-     if(supported.length == 0)
-     {
-         supported.push(qsTr("No compatible formats supported"))
-     }
-
-
      //var info = "MFG:Hewlett-Packard;CMD:PJL,BIDI-ECP,PJL,POSTSCRIPT,PDF,PCLXL,PCL;MDL:HP LaserJet P3010 Series;CLS:PRINTER;DES:Hewlett-Packard ".split(";");
      var maybe = []
-     var info = printer.attrs["printer-info"].value.split(";");
+     var info = printer.attrs["printer-info"] ? printer.attrs["printer-info"].value.split(";") : [];
+
      for(var i in info)
      {
          if(info[i].split(":")[0] == "CMD")
          {
-             if(has(info[i].split(":")[1].split(","), "PDF"))
+             if(!has(supported, "PDF") &&  has(info[i].split(":")[1].split(","), "PDF"))
              {
                  mimetypes.push("application/pdf");
                  maybe.push("PDF");
