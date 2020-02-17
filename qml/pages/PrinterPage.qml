@@ -82,13 +82,14 @@ Page {
                 }
 
                 Component.onCompleted: {
-                    console.log("handling", tag, name, prettyName, JSON.stringify(printer.attrs[name+"-supported"]), JSON.stringify(printer.attrs[name+"-default"]))
+                    console.log("handling", tag, name, prettyName, JSON.stringify(printer.attrs), JSON.stringify(printer.attrs[name+"-supported"]), JSON.stringify(printer.attrs[name+"-default"]))
                     switch(tag) {
                     case 0x21:
                         loader.setSource("../components/IntegerSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
+                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
                                           low: printer.attrs[name+"-supported"].value.low,
                                           high: printer.attrs[name+"-supported"].value.high,
                                           default_choice: printer.attrs[name+"-default"].value
@@ -98,8 +99,8 @@ Page {
                         loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
-                                          valid: false, //TODO
-                                          tag: 0x33 // integer-range
+                                          tag: tag,
+                                          valid: false //TODO printer.attrs.hasOwnProperty(name+"-supported"),
                                          })
                         break
                     case 0x32:
@@ -108,6 +109,7 @@ Page {
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
+                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
                                           choices: printer.attrs[name+"-supported"].value,
                                           default_choice: printer.attrs[name+"-default"].value
                                          })
