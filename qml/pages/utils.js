@@ -8,6 +8,11 @@ function supported_formats(printer)
          mimetypes.push("application/pdf");
          supported.push("PDF");
      }
+     if(has(formats, "application/postscript"))
+     {
+         mimetypes.push("application/postscript");
+         supported.push("Postscript");
+     }
      if(has(formats, "image/jpeg"))
      {
          mimetypes.push("image/jpeg");
@@ -26,6 +31,11 @@ function supported_formats(printer)
              {
                  mimetypes.push("application/pdf");
                  maybe.push("PDF");
+             }
+             if(!has(supported, "Postscript") &&  has(info[i].split(":")[1].split(","), "POSTSCRIPT"))
+             {
+                 mimetypes.push("application/postscript");
+                 maybe.push("Postscript");
              }
              break;
          }

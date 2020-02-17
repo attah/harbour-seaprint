@@ -51,6 +51,10 @@ Page {
             {
                 selectedFileType = "application/pdf"
             }
+            else if(Utils.endsWith(".ps", selectedFile))
+            {
+                selectedFileType = "application/postscript"
+            }
             else if(Utils.endsWith(".jpg", selectedFile) || Utils.endsWith(".jpeg", selectedFile))
             {
                 selectedFileType = "image/jpeg"
@@ -280,7 +284,7 @@ Page {
             FilePickerPage {
                 title: fileButton.label
                 showSystemFiles: false
-                nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.pwg", "*.urf"]
+                nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.ps"]
 
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
