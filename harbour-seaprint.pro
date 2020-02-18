@@ -25,7 +25,8 @@ SOURCES += src/harbour-seaprint.cpp \
     src/ippdiscovery.cpp \
     src/bytestream.cpp \
     src/ippmsg.cpp \
-    src/ippprinter.cpp
+    src/ippprinter.cpp \
+    src/mimer.cpp
 
 
 DISTFILES += qml/harbour-seaprint.qml \
@@ -61,4 +62,5 @@ HEADERS += \
     src/ippdiscovery.h \
     src/bytestream.h \
     src/ippmsg.h \
-    src/ippprinter.h
+    src/ippprinter.h \
+    src/mimer.h

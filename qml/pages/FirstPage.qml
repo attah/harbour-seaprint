@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
 import seaprint.ippprinter 1.0
+import seaprint.mimer 1.0
 import "utils.js" as Utils
 import "../components"
 import Nemo.DBus 2.0
@@ -46,23 +47,10 @@ Page {
     Component.onCompleted: {
         IppDiscovery.discover();
         if(selectedFile != "")
-        {  // Until i can convince FilePickerPage to do its magic without user interaction
-            if(Utils.endsWith(".pdf", selectedFile))
-            {
-                selectedFileType = "application/pdf"
-            }
-            else if(Utils.endsWith(".ps", selectedFile))
-            {
-                selectedFileType = "application/postscript"
-            }
-            else if(Utils.endsWith(".jpg", selectedFile) || Utils.endsWith(".jpeg", selectedFile))
-            {
-                selectedFileType = "image/jpeg"
-            }
-            else
-            {
-                selectedFile = ""
-            }
+        {
+            var type = Mimer.get_type(selectedFile);
+            console.log(type);
+            selectedFileType = type;
         }
     }
 
@@ -288,7 +276,7 @@ Page {
 
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
-                    page.selectedFileType = selectedContentProperties.mimeType
+                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
                 }
             }
         }

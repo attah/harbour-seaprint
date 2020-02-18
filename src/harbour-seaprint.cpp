@@ -4,14 +4,16 @@
 #include <seaprint_version.h>
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
+#include <src/mimer.h>
 
-static QObject* ippdiscovery_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+template <class T>
+static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    IppDiscovery *ippdiscovery = IppDiscovery::instance();
-    return ippdiscovery;
+    T *inst = T::instance();
+    return inst;
 
 }
 
@@ -21,7 +23,8 @@ int main(int argc, char *argv[])
 
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
 
-    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", ippdiscovery_singletontype_provider);
+    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<IppDiscovery>);
+    qmlRegisterSingletonType<Mimer>("seaprint.mimer", 1, 0, "Mimer", singletontype_provider<Mimer>);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
 
     QQuickView* view = SailfishApp::createView();
