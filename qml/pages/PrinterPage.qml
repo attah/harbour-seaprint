@@ -82,7 +82,6 @@ Page {
                 }
 
                 Component.onCompleted: {
-                    console.log("handling", tag, name, prettyName, JSON.stringify(printer.attrs), JSON.stringify(printer.attrs[name+"-supported"]), JSON.stringify(printer.attrs[name+"-default"]))
                     switch(tag) {
                     case 0x21:
                         loader.setSource("../components/IntegerSetting.qml",
