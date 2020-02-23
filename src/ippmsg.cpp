@@ -268,8 +268,12 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         case Charset:
         case NaturalLanguage:
         case MimeMediaType:
-            req << quint16(value.toString().length()) << value.toString().toStdString();
+        {
+            QByteArray tmpstr = value.toString().toUtf8();
+            req << quint16(tmpstr.length());
+            req.putBytes(tmpstr.data(), tmpstr.length());
             break;
+        }
         default:
             qDebug() << "uncaught tag" << tag;
             Q_ASSERT(false);
