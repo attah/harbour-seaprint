@@ -35,6 +35,7 @@ signals:
     void jobsChanged();
 
     void jobAttrsFinished(bool status);
+    void cancelStatus(bool status);
 
 public slots:
     void onUrlChanged();

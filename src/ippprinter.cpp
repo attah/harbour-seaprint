@@ -157,17 +157,20 @@ void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
 
 void IppPrinter::cancelJobFinished(QNetworkReply *reply)
 {
+    bool status = false;
     if(reply->error()  == QNetworkReply::NoError)
     {
         try {
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
+            status = resp.getStatus() <= 0xff;
         }
         catch(std::exception e)
         {
             qDebug() << e.what();
         }
     }
+    emit cancelStatus(status);
     getJobs();
 }
 
@@ -259,7 +262,7 @@ bool IppPrinter::getJobs() {
 
 bool IppPrinter::cancelJob(qint32 jobId) {
 
-    qDebug() << "getting jobs";
+    qDebug() << "cancelling jobs";
 
     QJsonObject o = opAttrs();
     o.insert("job-id", QJsonObject {{"tag", IppMsg::Integer}, {"value", jobId}});

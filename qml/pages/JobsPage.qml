@@ -13,6 +13,15 @@ Page {
         console.log(JSON.stringify(printer.jobs))
     }
 
+    Connections {
+        target: printer
+        onCancelStatus: {
+            if(status != true) {
+                notifier.notify(qsTr("Cancelling job failed"))
+            }
+        }
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent

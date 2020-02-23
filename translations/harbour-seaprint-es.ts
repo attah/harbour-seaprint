@@ -171,6 +171,10 @@
         <source>job</source>
         <translation>trabajo</translation>
     </message>
+    <message>
+        <source>Cancelling job failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrinterPage</name>

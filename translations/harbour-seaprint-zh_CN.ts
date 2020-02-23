@@ -171,6 +171,10 @@
         <source>Cancelling job</source>
         <translation>正在取消作业</translation>
     </message>
+    <message>
+        <source>Cancelling job failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrinterPage</name>
