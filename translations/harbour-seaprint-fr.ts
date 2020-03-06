@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>No compatible formats supported</source>
-        <translation type="unfinished">Aucun format compatible supporté</translation>
+        <translation>Aucun format compatible supporté</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l'annulation de la tâche d'impression</translation>
     </message>
 </context>
 <context>
@@ -231,15 +231,15 @@
     </message>
     <message>
         <source>canceled</source>
-        <translation>annulé</translation>
+        <translation>annulée</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation>abandonné</translation>
+        <translation>abandonnée</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation>terminé</translation>
+        <translation>terminée</translation>
     </message>
     <message>
         <source>unknown state </source>
