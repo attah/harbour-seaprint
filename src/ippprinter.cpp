@@ -134,7 +134,7 @@ void IppPrinter::printRequestFinished(QNetworkReply *reply)
         _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage}, {"value", "Network error"}});
     }
     emit jobAttrsChanged();
-    emit jobAttrsFinished(status);
+    emit jobFinished(status);
 }
 
 void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
@@ -198,13 +198,16 @@ void IppPrinter::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslErro
 
 
 
-bool IppPrinter::print(QJsonObject attrs, QString filename){
+void IppPrinter::print(QJsonObject attrs, QString filename){
     qDebug() << "printing" << filename << attrs;
 
     QFile file(filename);
     bool file_ok = file.open(QIODevice::ReadOnly);
     if(!file_ok)
-        return false;
+    {
+        emit jobFinished(false);
+        return;
+    }
 
     QFileInfo fileinfo(file);
     QNetworkRequest request;
@@ -235,7 +238,6 @@ bool IppPrinter::print(QJsonObject attrs, QString filename){
 
     _print_nam->post(request, contents);
     file.close();
-    return true;
 }
 
 bool IppPrinter::getJobs() {

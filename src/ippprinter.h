@@ -24,7 +24,6 @@ public:
 
     Q_INVOKABLE void refresh();
 
-    Q_INVOKABLE bool print(QJsonObject attrs, QString file);
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
@@ -34,10 +33,13 @@ signals:
     void jobAttrsChanged();
     void jobsChanged();
 
-    void jobAttrsFinished(bool status);
+    void jobFinished(bool status);
     void cancelStatus(bool status);
 
 public slots:
+    void print(QJsonObject attrs, QString file);
+
+
     void onUrlChanged();
     void getPrinterAttributesFinished(QNetworkReply* reply);
     void printRequestFinished(QNetworkReply* reply);

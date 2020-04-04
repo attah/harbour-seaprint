@@ -14,7 +14,7 @@ Page {
 
     Connections {
         target: printer
-        onJobAttrsFinished: {
+        onJobFinished: {
             var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
                     ? printer.jobAttrs["job-state-message"].value : Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
             if(status == true) {
