@@ -113,14 +113,6 @@
         <translation>没有找到文件</translation>
     </message>
     <message>
-        <source>Choose file</source>
-        <translation>选择文件</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>无</translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation>查看作业</translation>
     </message>
@@ -143,6 +135,10 @@
     <message>
         <source>No compatible formats supported</source>
         <translation>不支持相关格式</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished">选择文件</translation>
     </message>
 </context>
 <context>

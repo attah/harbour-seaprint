@@ -255,25 +255,53 @@ Page {
     DockedPanel {
         id: fileDock
         open: true
-        height: fileButton.height*2
+        height: fileLabel.height+folderButton.height+3*Theme.paddingLarge
         width: parent.width
         dock: Dock.Bottom
 
-        ValueButton {
-            id: fileButton
+        Label {
+            id: fileLabel
             width: parent.width
-            anchors.verticalCenter: parent.verticalCenter
-            label: qsTr("Choose file")
-            value: selectedFile != "" ? selectedFile : qsTr("None")
-            onClicked: pageStack.push(filePickerPage)
+            anchors.top: parent.top
+            anchors.topMargin: Theme.paddingLarge
+            leftPadding: Theme.paddingMedium
+            color: Theme.highlightColor
+            text: selectedFile != "" ? selectedFile : qsTr("No file selected")
+        }
+
+        Row {
+            width: parent.width
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            IconButton {
+                id: folderButton
+                icon.source: "image://theme/icon-m-file-folder"
+                width: parent.width/2
+                onClicked: pageStack.push(filePickerPage)
+            }
+            IconButton {
+                icon.source: "image://theme/icon-m-file-image"
+                width: parent.width/2
+                onClicked: pageStack.push(imagePickerPage)
+            }
+
         }
         Component {
             id: filePickerPage
             FilePickerPage {
-                title: fileButton.label
+                title: qsTr("Choose file")
                 showSystemFiles: false
                 nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.ps"]
 
+                onSelectedContentPropertiesChanged: {
+                    page.selectedFile = selectedContentProperties.filePath
+                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
+                }
+            }
+        }
+        Component {
+            id: imagePickerPage
+            ImagePickerPage {
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
                     page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)

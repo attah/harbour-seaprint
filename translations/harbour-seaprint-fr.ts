@@ -113,14 +113,6 @@
         <translation>Aucun fichier sélectionné</translation>
     </message>
     <message>
-        <source>Choose file</source>
-        <translation>Choisir un fichier</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucun</translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation>Voir les travaux</translation>
     </message>
@@ -143,6 +135,10 @@
     <message>
         <source>No compatible formats supported</source>
         <translation>Aucun format compatible supporté</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished">Choisir un fichier</translation>
     </message>
 </context>
 <context>
