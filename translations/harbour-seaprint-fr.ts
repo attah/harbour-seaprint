@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation>Échec de l'annulation de la tâche d'impression</translation>
+        <translation>Échec de l&apos;annulation de la tâche d&apos;impression</translation>
     </message>
 </context>
 <context>
