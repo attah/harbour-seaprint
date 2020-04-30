@@ -210,6 +210,10 @@
         <source>Print failed: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Print media</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>utils</name>
