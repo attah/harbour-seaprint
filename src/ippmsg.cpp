@@ -197,7 +197,7 @@ QByteArray IppMsg::encode(Operation op)
             ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
         }
     }
-    for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.begin(); ait++)
+    for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
     {
         ipp << quint8(2);
         QJsonObject tmpObj = ait->toObject();
