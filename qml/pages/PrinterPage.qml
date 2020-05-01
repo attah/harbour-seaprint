@@ -15,8 +15,13 @@ Page {
     Connections {
         target: printer
         onJobAttrsFinished: {
-            var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
-                    ? printer.jobAttrs["job-state-message"].value : Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
+            var msg = ""
+            if (printer.jobAttrs.hasOwnProperty("job-state-message") && printer.jobAttrs["job-state-message"].value != "") {
+                msg = printer.jobAttrs["job-state-message"].value
+            }
+            else if (printer.jobAttrs.hasOwnProperty("job-state")) {
+                msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
+            }
             if(status == true) {
                 notifier.notify(qsTr("Print success: ") + msg)
                 pageStack.pop() //or replace?
