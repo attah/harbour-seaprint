@@ -1,4 +1,5 @@
 #include "convertworker.h"
+#include <sailfishapp.h>
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile)
 {
@@ -9,7 +10,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
 
     QProcess* ppm2pwg = new QProcess(this);
-    ppm2pwg->setProgram("/home/nemo/repos/pwg/ppm2pwg");
+    qDebug() << SailfishApp::pathTo("ppm2pwg").toString();
+    QString Ppm2pwgPath = SailfishApp::pathTo("ppm2pwg").toString().remove("file://");
+    ppm2pwg->setProgram(Ppm2pwgPath);
     QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
 
     bool apple = false;

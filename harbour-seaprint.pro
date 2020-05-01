@@ -66,3 +66,14 @@ HEADERS += \
     src/ippmsg.h \
     src/ippprinter.h \
     src/mimer.h
+
+
+QMAKE_EXTRA_TARGETS += PPM2PWG
+PRE_TARGETDEPS += PPM2PWG
+PPM2PWG.commands = make -C $$PWD/ppm2pwg
+PPM2PWG.clean_commands = git submodule foreach git clean -fdxq
+PPM2PWG.path = /usr/share/harbour-seaprint/
+PPM2PWG.files += $$PWD/ppm2pwg/ppm2pwg
+
+INSTALLS += PPM2PWG
+QMAKE_INSTALL_FILE = install -m 755 -p
