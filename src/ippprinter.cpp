@@ -23,6 +23,7 @@ IppPrinter::IppPrinter()
     connect(_job_cancel_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
 
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
+    qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
 }
 
 IppPrinter::~IppPrinter() {
@@ -229,7 +230,7 @@ void IppPrinter::doWork(QString filename, QTemporaryFile* tempfile)
 
     connect(muraster, SIGNAL(finished(int, QProcess::ExitStatus)), muraster, SLOT(deleteLater()));
     connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
-    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), tempfile, SLOT(deleteLater()));
+    //connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), tempfile, SLOT(deleteLater()));
 
     qDebug() << "All connected";
 
@@ -259,8 +260,16 @@ void IppPrinter::doWork(QString filename, QTemporaryFile* tempfile)
 //        IppRaster* raster = new IppRaster(ppm2pwg);
 //        raster->open(QIODevice::ReadOnly);
 //        request.setAttribute(QNetworkRequest::DoNotBufferUploadDataAttribute, true);
-    _print_nam->post(request, tempfile);
+    QMetaObject::invokeMethod(this, "doPost", Qt::QueuedConnection,
+                               Q_ARG(QNetworkRequest, request), Q_ARG(QTemporaryFile*, tempfile) );
     qDebug() << "posted";
+}
+
+void IppPrinter::doPost(QNetworkRequest request, QTemporaryFile* data)
+{
+    data->open();
+    _print_nam->post(request, data);
+
 }
 
 
@@ -294,9 +303,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     IppMsg job = IppMsg(o, attrs);
 
     QByteArray contents = job.encode(IppMsg::PrintJob);
-    QByteArray filedata = file.readAll();
-    contents = contents.append(filedata);
-
 
     // TODO: do this only conditionally, and to the raster suppoerted/preferred
     bool transcode = true;
