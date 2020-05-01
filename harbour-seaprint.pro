@@ -22,6 +22,7 @@ VERSION_H = \
 write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
 
 SOURCES += src/harbour-seaprint.cpp \
+    src/convertworker.cpp \
     src/ippdiscovery.cpp \
     src/bytestream.cpp \
     src/ippmsg.cpp \
@@ -61,6 +62,7 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-es.ts
 
 HEADERS += \
+    src/convertworker.h \
     src/ippdiscovery.h \
     src/bytestream.h \
     src/ippmsg.h \

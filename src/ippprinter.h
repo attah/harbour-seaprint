@@ -4,6 +4,7 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include "ippmsg.h"
+#include "convertworker.h"
 
 class IppPrinter : public QObject
 {
@@ -36,6 +37,8 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
+    void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile);
+
 public slots:
     void print(QJsonObject attrs, QString file);
 
@@ -48,8 +51,8 @@ public slots:
 
     void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
-    void doWork(QString filename, QTemporaryFile* tempfile);
-    void doPost(QNetworkRequest request, QTemporaryFile* data);
+    void convertDone(QNetworkRequest request, QTemporaryFile* data);
+    void convertFailed();
 
 private:
     QUrl _url;
@@ -65,6 +68,9 @@ private:
     QJsonObject _attrs;
     QJsonObject _jobAttrs;
     QJsonArray _jobs;
+
+    QThread _workerThread;
+    ConvertWorker* _worker;
 
 };
 
