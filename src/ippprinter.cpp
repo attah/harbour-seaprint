@@ -1,5 +1,4 @@
 #include "ippprinter.h"
-#include "ippraster.h"
 #include <seaprint_version.h>
 
 IppPrinter::IppPrinter()
