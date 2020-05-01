@@ -113,14 +113,6 @@
         <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
-        <source>Choose file</source>
-        <translation>Elegir archivo</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ninguno</translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation>Ver trabajos</translation>
     </message>
@@ -143,6 +135,10 @@
     <message>
         <source>No compatible formats supported</source>
         <translation type="unfinished">No hay formatos compatibles</translation>
+    </message>
+    <message>
+        <source>Choose file</source>
+        <translation type="unfinished">Elegir archivo</translation>
     </message>
 </context>
 <context>
@@ -209,6 +205,10 @@
     <message>
         <source>Print failed: </source>
         <translation>Impresión fallida: </translation>
+    </message>
+    <message>
+        <source>Print media</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

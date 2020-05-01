@@ -15,8 +15,13 @@ Page {
     Connections {
         target: printer
         onJobFinished: {
-            var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
-                    ? printer.jobAttrs["job-state-message"].value : Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
+            var msg = ""
+            if (printer.jobAttrs.hasOwnProperty("job-state-message") && printer.jobAttrs["job-state-message"].value != "") {
+                msg = printer.jobAttrs["job-state-message"].value
+            }
+            else if (printer.jobAttrs.hasOwnProperty("job-state")) {
+                msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
+            }
             if(status == true) {
                 notifier.notify(qsTr("Print success: ") + msg)
                 pageStack.pop() //or replace?
@@ -46,6 +51,7 @@ Page {
         ListModel {
             id:mod
             ListElement {name: "sides";                   prettyName: qsTr("Sides");       tag: 0x23}
+            ListElement {name: "media";                   prettyName: qsTr("Print media");       tag: 0x44}
             ListElement {name: "copies";                  prettyName: qsTr("Copies");      tag: 0x21}
 //            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");  tag: 0x33}
             ListElement {name: "print-color-mode";        prettyName: qsTr("Color mode");  tag: 0x23}
@@ -104,6 +110,7 @@ Page {
                         break
                     case 0x32:
                     case 0x23:
+                    case 0x44:
                         loader.setSource("../components/ChoiceSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,

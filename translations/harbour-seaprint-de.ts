@@ -113,14 +113,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View jobs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -142,6 +134,10 @@
     </message>
     <message>
         <source>No compatible formats supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -208,6 +204,10 @@
     </message>
     <message>
         <source>Print failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print media</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
