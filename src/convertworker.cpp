@@ -4,13 +4,12 @@
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile)
 {
 
-    QProcess* muraster = new QProcess(this);
-    muraster->setProgram("/home/nemo/stuff/bin/muraster");
-    muraster->setArguments({"-F", "pgm", filename});
+    QProcess* pdftoppm = new QProcess(this);
+    pdftoppm->setProgram("pdftoppm");
+    pdftoppm->setArguments({"-gray", "-rx", "300", "-ry", "300", filename});
 
 
     QProcess* ppm2pwg = new QProcess(this);
-    qDebug() << SailfishApp::pathTo("ppm2pwg").toString();
     QString Ppm2pwgPath = SailfishApp::pathTo("ppm2pwg").toString().remove("file://");
     ppm2pwg->setProgram(Ppm2pwgPath);
     QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
@@ -25,24 +24,24 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
     ppm2pwg->setEnvironment(env);
 
-    muraster->setStandardOutputProcess(ppm2pwg);
+    pdftoppm->setStandardOutputProcess(ppm2pwg);
     ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
-    connect(muraster, SIGNAL(finished(int, QProcess::ExitStatus)), muraster, SLOT(deleteLater()));
+    connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
     connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
 
     qDebug() << "All connected";
 
 
-    muraster->start();
+    pdftoppm->start();
     ppm2pwg->start();
 
     qDebug() << "Starting";
 
 
-    if(!muraster->waitForStarted())
+    if(!pdftoppm->waitForStarted())
     {
-        qDebug() << "muraster died";
+        qDebug() << "pdftoppm died";
         tempfile->deleteLater();
         emit failed();
         return;
