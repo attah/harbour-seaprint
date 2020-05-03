@@ -3,7 +3,7 @@ function supported_formats(printer)
     var formats = printer.attrs["document-format-supported"].value;
     var mimetypes = [];
     var supported = [];
-     if(has(formats, "application/pdf"))
+     if(has(formats, "application/pdf") || as(formats, "application/pwg-raster") || has(formats, "application/urf") )
      {
          mimetypes.push("application/pdf");
          supported.push("PDF");

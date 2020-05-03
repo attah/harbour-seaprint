@@ -1,7 +1,8 @@
 #include "convertworker.h"
 #include <sailfishapp.h>
 
-void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile)
+void ConvertWorker::convertPdf(QNetworkRequest request, QString filename,
+                               bool apple, QTemporaryFile* tempfile)
 {
 
     QProcess* pdftoppm = new QProcess(this);
@@ -14,7 +15,6 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     ppm2pwg->setProgram(Ppm2pwgPath);
     QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
 
-    bool apple = false;
     if(apple)
     {
         env.append("URF=true");

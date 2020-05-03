@@ -8,7 +8,8 @@ class ConvertWorker : public QObject
     Q_OBJECT
 
 public slots:
-    void convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile);
+    void convertPdf(QNetworkRequest request, QString filename,
+                    bool apple, QTemporaryFile* tempfile);
     //convertImage();
 
 signals:

@@ -28,6 +28,20 @@ public:
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
+    enum ConvertTarget
+    {
+        NoConvert,
+        PwgConvert,
+        UrfConvert
+    };
+
+    enum ConvertFrom
+    {
+        NotConvertable,
+        Pdf,
+        Image
+    };
+
 signals:
     void urlChanged();
     void attrsChanged();
@@ -37,7 +51,7 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
-    void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile);
+    void doConvertPdf(QNetworkRequest request, QString filename, bool urf, QTemporaryFile* tempfile);
 
 public slots:
     void print(QJsonObject attrs, QString file);

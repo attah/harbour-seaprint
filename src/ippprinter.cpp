@@ -1,5 +1,6 @@
 #include "ippprinter.h"
 #include <seaprint_version.h>
+#include "mimer.h"
 
 IppPrinter::IppPrinter()
 {
@@ -260,9 +261,37 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
 
-    // TODO: do this only conditionally, and to the raster suppoerted/preferred
-    bool transcode = true;
-    if(transcode)
+
+    Mimer* mimer = Mimer::instance();
+    QString mimeType = mimer->get_type(filename);
+    ConvertFrom from = NotConvertable;
+    ConvertTarget target = NoConvert;
+
+    if(mimeType == "application/pdf")
+    {
+        from = Pdf;
+    }
+    else if (mimeType.contains("image")) {
+//        from = Image; TODO: handle image conversions
+    }
+
+    QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
+
+    qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
+
+    if(from == Pdf)
+    {
+        if(supportedMimeTypes.contains("image/pwg-raster"))
+        {
+            target = PwgConvert;
+        }
+        else if (supportedMimeTypes.contains("image/urf"))
+        {
+            target = UrfConvert;
+        }
+    }
+
+    if(from == Pdf && target != NoConvert)
     {
         file.close();
         QTemporaryFile* tempfile = new QTemporaryFile();
@@ -271,10 +300,10 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         qDebug() << tempfile->fileName();
         tempfile->close();
 
-        emit doConvertPdf(request, filename, tempfile);
+        emit doConvertPdf(request, filename, target==UrfConvert, tempfile);
     }
-    else {
-
+    else
+    {
         QByteArray filedata = file.readAll();
         contents = contents.append(filedata);
         file.close();
