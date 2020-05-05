@@ -291,6 +291,20 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         }
     }
 
+    quint32 HwResX = 300;
+    quint32 HwResY = 300;
+
+    if(attrs.contains("printer-resolution")) {
+        // TODO: check that units == 3, aka dpi
+        HwResX = attrs["printer-resolution"].toObject()["value"].toObject()["x"].toInt();
+        HwResY = attrs["printer-resolution"].toObject()["value"].toObject()["y"].toInt();
+    }
+    else
+    {
+        HwResX = _attrs["printer-resolution-default"].toObject()["value"].toObject()["x"].toInt();
+        HwResY = _attrs["printer-resolution-default"].toObject()["value"].toObject()["y"].toInt();
+    }
+
     if(from == Pdf && target != NoConvert)
     {
         file.close();
@@ -300,7 +314,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         qDebug() << tempfile->fileName();
         tempfile->close();
 
-        emit doConvertPdf(request, filename, target==UrfConvert, tempfile);
+        emit doConvertPdf(request, filename, target==UrfConvert, HwResX, HwResY, tempfile);
     }
     else
     {

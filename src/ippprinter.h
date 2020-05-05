@@ -51,7 +51,7 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
-    void doConvertPdf(QNetworkRequest request, QString filename, bool urf, QTemporaryFile* tempfile);
+    void doConvertPdf(QNetworkRequest request, QString filename, bool urf, quint32 HwResX, quint32 HwResY, QTemporaryFile* tempfile);
 
 public slots:
     void print(QJsonObject attrs, QString file);

@@ -9,7 +9,7 @@ class ConvertWorker : public QObject
 
 public slots:
     void convertPdf(QNetworkRequest request, QString filename,
-                    bool apple, QTemporaryFile* tempfile);
+                    bool apple, quint32 HwResX, quint32 HwResY, QTemporaryFile* tempfile);
     //convertImage();
 
 signals:

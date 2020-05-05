@@ -2,26 +2,27 @@
 #include <sailfishapp.h>
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename,
-                               bool apple, QTemporaryFile* tempfile)
+                               bool apple, quint32 HwResX, quint32 HwResY, QTemporaryFile* tempfile)
 {
+
+    QString HwResX_s = QString::number(HwResX);
+    QString HwResY_s = QString::number(HwResY);
 
     QProcess* pdftoppm = new QProcess(this);
     pdftoppm->setProgram("pdftoppm");
-    pdftoppm->setArguments({"-gray", "-rx", "300", "-ry", "300", filename});
+    pdftoppm->setArguments({"-gray", "-rx", HwResX_s, "-ry", HwResY_s, filename});
 
 
     QProcess* ppm2pwg = new QProcess(this);
     // Yo dwag, I heard you like programs...
     ppm2pwg->setProgram("harbour-seaprint");
     ppm2pwg->setArguments({"ppm2pwg"});
-    QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
+    QStringList env = {"HWRES_X="+HwResX_s, "HWRES_Y="+HwResY_s};
 
     if(apple)
     {
         env.append("URF=true");
     }
-
-    qDebug() << "Prepend file env done";
 
     ppm2pwg->setEnvironment(env);
 
