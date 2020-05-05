@@ -6,6 +6,9 @@
 #include <src/ippprinter.h>
 #include <src/mimer.h>
 
+#define PPM2PWG_MAIN ppm2pwg_main
+#include <ppm2pwg/ppm2pwg.cpp>
+
 template <class T>
 static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -19,6 +22,12 @@ static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngi
 
 int main(int argc, char *argv[])
 {
+    if(argc >= 1 && QString("ppm2pwg") == argv[1])
+    {
+        return ppm2pwg_main(argc-1, &(argv[1]));
+    }
+
+
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));

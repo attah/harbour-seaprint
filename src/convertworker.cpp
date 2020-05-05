@@ -11,8 +11,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename,
 
 
     QProcess* ppm2pwg = new QProcess(this);
-    QString Ppm2pwgPath = SailfishApp::pathTo("ppm2pwg").toString().remove("file://");
-    ppm2pwg->setProgram(Ppm2pwgPath);
+    // Yo dwag, I heard you like programs...
+    ppm2pwg->setProgram("harbour-seaprint");
+    ppm2pwg->setArguments({"ppm2pwg"});
     QStringList env; // {"PREPEND_FILE="+tempfile->fileName()};
 
     if(apple)

@@ -24,11 +24,11 @@ write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
 SOURCES += src/harbour-seaprint.cpp \
     src/convertworker.cpp \
     src/ippdiscovery.cpp \
-    src/bytestream.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
-    src/mimer.cpp
-
+    src/mimer.cpp \
+    ppm2pwg/ppm2pwg.cpp \
+    ppm2pwg/bytestream/bytestream.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
@@ -62,18 +62,13 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 HEADERS += \
     src/convertworker.h \
     src/ippdiscovery.h \
-    src/bytestream.h \
     src/ippmsg.h \
     src/ippprinter.h \
-    src/mimer.h
+    src/mimer.h \
+    ppm2pwg/pwg_pghdr_codable.h \
+    ppm2pwg/urf_pghdr_codable.h \
+    ppm2pwg/bytestream/bytestream.h \
+    ppm2pwg/bytestream/codable.h
 
-
-QMAKE_EXTRA_TARGETS += PPM2PWG
-PRE_TARGETDEPS += PPM2PWG
-PPM2PWG.commands = make -C $$PWD/ppm2pwg
-PPM2PWG.clean_commands = git submodule foreach git clean -fdxq
-PPM2PWG.path = /usr/share/harbour-seaprint/
-PPM2PWG.files += $$PWD/ppm2pwg/ppm2pwg
-
-INSTALLS += PPM2PWG
-QMAKE_INSTALL_FILE = install -m 755 -p
+INCLUDEPATH += ppm2pwg \
+               ppm2pwg/bytestream

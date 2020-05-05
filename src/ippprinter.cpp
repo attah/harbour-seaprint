@@ -279,7 +279,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    if(from == Pdf)
+    if(from == Pdf /*&& !supportedMimeTypes.contains("application/pdf")*/)
     {
         if(supportedMimeTypes.contains("image/pwg-raster"))
         {
