@@ -88,6 +88,17 @@
     </message>
 </context>
 <context>
+    <name>BusyPage</name>
+    <message>
+        <source>Print success: </source>
+        <translation type="unfinished">Impresión correcta: </translation>
+    </message>
+    <message>
+        <source>Print failed: </source>
+        <translation type="unfinished">Impresión fallida: </translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -197,14 +208,6 @@
     <message>
         <source>Resolution</source>
         <translation>Resolución</translation>
-    </message>
-    <message>
-        <source>Print success: </source>
-        <translation>Impresión correcta: </translation>
-    </message>
-    <message>
-        <source>Print failed: </source>
-        <translation>Impresión fallida: </translation>
     </message>
 </context>
 <context>

@@ -12,26 +12,6 @@ Page {
         console.log(JSON.stringify(printer.attrs))
     }
 
-    Connections {
-        target: printer
-        onJobFinished: {
-            var msg = ""
-            if (printer.jobAttrs.hasOwnProperty("job-state-message") && printer.jobAttrs["job-state-message"].value != "") {
-                msg = printer.jobAttrs["job-state-message"].value
-            }
-            else if (printer.jobAttrs.hasOwnProperty("job-state")) {
-                msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
-            }
-            if(status == true) {
-                notifier.notify(qsTr("Print success: ") + msg)
-                pageStack.pop() //or replace?
-            }
-            else {
-                notifier.notify(qsTr("Print failed: ") + msg)
-            }
-        }
-    }
-
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
             anchors.fill: parent
@@ -42,8 +22,8 @@ Page {
                     text: qsTr("Print")
                     onClicked: {
                         console.log(JSON.stringify(jobParams))
+                        pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer})
                         printer.print(jobParams, page.selectedFile)
-
                     }
                 }
             }

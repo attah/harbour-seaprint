@@ -13,6 +13,7 @@ class IppPrinter : public QObject
     Q_PROPERTY(QJsonObject attrs MEMBER _attrs NOTIFY attrsChanged)
     Q_PROPERTY(QJsonObject jobAttrs MEMBER _jobAttrs NOTIFY jobAttrsChanged)
     Q_PROPERTY(QJsonArray jobs MEMBER _jobs NOTIFY jobsChanged)
+    Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
 
 
 public:
@@ -53,6 +54,8 @@ signals:
 
     void doConvertPdf(QNetworkRequest request, QString filename, bool urf, quint32 HwResX, quint32 HwResY, QTemporaryFile* tempfile);
 
+    void busyMessageChanged();
+
 public slots:
     void print(QJsonObject attrs, QString file);
 
@@ -74,6 +77,8 @@ private:
 
     QJsonObject opAttrs();
 
+    void setBusyMessage(QString msg);
+
     QNetworkAccessManager* _nam;
     QNetworkAccessManager* _jobs_nam;
     QNetworkAccessManager* _job_cancel_nam;
@@ -82,6 +87,7 @@ private:
     QJsonObject _attrs;
     QJsonObject _jobAttrs;
     QJsonArray _jobs;
+    QString _busyMessage;
 
     QThread _workerThread;
     ConvertWorker* _worker;

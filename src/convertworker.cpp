@@ -14,7 +14,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename,
 
 
     QProcess* ppm2pwg = new QProcess(this);
-    // Yo dwag, I heard you like programs...
+    // Yo dawg, I heard you like programs...
     ppm2pwg->setProgram("harbour-seaprint");
     ppm2pwg->setArguments({"ppm2pwg"});
     QStringList env = {"HWRES_X="+HwResX_s, "HWRES_Y="+HwResY_s};

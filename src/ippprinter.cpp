@@ -212,6 +212,9 @@ void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
 {
     connect(_print_nam, SIGNAL(finished(QNetworkReply*)), data, SLOT(deleteLater()));
     data->open();
+
+    setBusyMessage("Transferring");
+
     _print_nam->post(request, data);
 
 }
@@ -314,6 +317,8 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         qDebug() << tempfile->fileName();
         tempfile->close();
 
+        setBusyMessage("Converting");
+
         emit doConvertPdf(request, filename, target==UrfConvert, HwResX, HwResY, tempfile);
     }
     else
@@ -321,6 +326,8 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         QByteArray filedata = file.readAll();
         contents = contents.append(filedata);
         file.close();
+
+        setBusyMessage("Transferring");
 
         _print_nam->post(request, contents);
     }
@@ -381,3 +388,8 @@ QUrl IppPrinter::httpUrl() {
     return url;
 }
 
+void IppPrinter::setBusyMessage(QString msg)
+{
+    _busyMessage = msg;
+    emit busyMessageChanged();
+}

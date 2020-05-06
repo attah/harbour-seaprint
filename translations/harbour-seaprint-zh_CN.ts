@@ -88,6 +88,17 @@
     </message>
 </context>
 <context>
+    <name>BusyPage</name>
+    <message>
+        <source>Print success: </source>
+        <translation type="unfinished">打印成功:</translation>
+    </message>
+    <message>
+        <source>Print failed: </source>
+        <translation type="unfinished">打印失败:</translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -197,14 +208,6 @@
     <message>
         <source>Resolution</source>
         <translation>分辨率</translation>
-    </message>
-    <message>
-        <source>Print success: </source>
-        <translation>打印成功:</translation>
-    </message>
-    <message>
-        <source>Print failed: </source>
-        <translation>打印失败:</translation>
     </message>
 </context>
 <context>
