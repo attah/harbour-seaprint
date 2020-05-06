@@ -51,7 +51,7 @@ Page {
         ListModel {
             id:mod
             ListElement {name: "sides";                   prettyName: qsTr("Sides");       tag: 0x23}
-            ListElement {name: "media";                   prettyName: qsTr("Print media");       tag: 0x44}
+//            ListElement {name: "media";                   prettyName: qsTr("Print media");       tag: 0x44}
             ListElement {name: "copies";                  prettyName: qsTr("Copies");      tag: 0x21}
 //            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");  tag: 0x33}
             ListElement {name: "print-color-mode";        prettyName: qsTr("Color mode");  tag: 0x23}

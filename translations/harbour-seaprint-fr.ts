@@ -206,10 +206,6 @@
         <source>Print failed: </source>
         <translation>Échec de l&apos;impression :</translation>
     </message>
-    <message>
-        <source>Print media</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>utils</name>
