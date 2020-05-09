@@ -3,7 +3,7 @@ function supported_formats(printer)
     var formats = printer.attrs["document-format-supported"].value;
     var mimetypes = [];
     var supported = [];
-     if(has(formats, "application/pdf") || as(formats, "application/pwg-raster") || has(formats, "application/urf") )
+     if(has(formats, "application/pdf") || has(formats, "image/pwg-raster") || has(formats, "image/urf") )
      {
          mimetypes.push("application/pdf");
          supported.push("PDF");
@@ -46,12 +46,7 @@ function supported_formats(printer)
 
 function has(arrayish, what)
 {
-    for(var i in arrayish)
-    {
-        if(arrayish[i] == what)
-            return true
-    }
-    return false
+    return arrayish.indexOf(what) != -1;
 }
 
 function ippName(name, value)

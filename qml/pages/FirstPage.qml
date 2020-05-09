@@ -137,6 +137,8 @@ Page {
                 property int debugCount: 0
 
                 onClicked: {
+                    console.log(Utils.supported_formats(printer).mimetypes, selectedFileType, Utils.supported_formats(printer).mimetypes.indexOf(selectedFileType) != -1)
+
                     if(++debugCount == 5)
                     {
                         pageStack.push(Qt.resolvedUrl("DebugPage.qml"), {printer: printer})
@@ -182,20 +184,20 @@ Page {
 
                     Label {
                         id: name_label
-                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         text: name
                     }
 
                     Label {
                         id: mm_label
-                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: printer.attrs["printer-make-and-model"].value
                     }
 
                     Label {
                         id: uri_label
-                        color: canPrint ? Theme.highlightColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeTiny
                         text: printer.url
                     }
@@ -211,13 +213,13 @@ Page {
                         }
                         Label {
                             id: format_label
-                            color: canPrint ? Theme.primaryColor : "red"
+                            color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: Utils.supported_formats(printer).supported
                         }
                         Label {
                             id: maybe_format_label
-                            color: canPrint ? Theme.secondaryColor : "red"
+                            color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.secondaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             font.italic: true
                             text: Utils.supported_formats(printer).maybe
