@@ -294,23 +294,32 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         }
     }
 
-    quint32 HwResX = 300;
-    quint32 HwResY = 300;
+    QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
+    quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
+    quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
 
-    if(attrs.contains("printer-resolution")) {
-        // TODO: check that units == 3, aka dpi
-        HwResX = attrs["printer-resolution"].toObject()["value"].toObject()["x"].toInt();
-        HwResY = attrs["printer-resolution"].toObject()["value"].toObject()["y"].toInt();
-    }
-    else
-    {
-        HwResX = _attrs["printer-resolution-default"].toObject()["value"].toObject()["x"].toInt();
-        HwResY = _attrs["printer-resolution-default"].toObject()["value"].toObject()["y"].toInt();
-    }
+    quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
+
+    QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
+    quint32 Colors = PrintColorMode=="color" ? 3 : PrintColorMode=="monochrome" ? 1 : 0;
 
     if(from == Pdf && target != NoConvert)
     {
         file.close();
+
+        QString Sides = getAttrOrDefault(attrs, "sides").toString();
+        bool TwoSided = false;
+        bool Tumble = false;
+        if(Sides=="two-sided-long-edge")
+        {
+            TwoSided = true;
+        }
+        else if(Sides=="two-sided-short-edge")
+        {
+            TwoSided = true;
+            Tumble = true;
+        }
+
         QTemporaryFile* tempfile = new QTemporaryFile();
         tempfile->open();
         tempfile->write(contents);
@@ -319,7 +328,8 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
         setBusyMessage("Converting");
 
-        emit doConvertPdf(request, filename, target==UrfConvert, HwResX, HwResY, tempfile);
+        emit doConvertPdf(request, filename, tempfile, target==UrfConvert, Colors, Quality,
+                          HwResX, HwResY, TwoSided, Tumble);
     }
     else
     {
@@ -392,4 +402,15 @@ void IppPrinter::setBusyMessage(QString msg)
 {
     _busyMessage = msg;
     emit busyMessageChanged();
+}
+
+QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name)
+{
+    if(jobAttrs.contains(name))
+    {
+        return jobAttrs[name].toObject()["value"];
+    }
+    else {
+        return _attrs[name+"-default"].toObject()["value"];
+    }
 }

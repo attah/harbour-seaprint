@@ -52,7 +52,9 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
-    void doConvertPdf(QNetworkRequest request, QString filename, bool urf, quint32 HwResX, quint32 HwResY, QTemporaryFile* tempfile);
+    void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                      bool urf, quint32 Colors, quint32 Quality,
+                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
 
     void busyMessageChanged();
 
@@ -78,6 +80,7 @@ private:
     QJsonObject opAttrs();
 
     void setBusyMessage(QString msg);
+    QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name);
 
     QNetworkAccessManager* _nam;
     QNetworkAccessManager* _jobs_nam;
