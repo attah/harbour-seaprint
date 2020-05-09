@@ -15,9 +15,9 @@ Page {
             else if (printer.jobAttrs.hasOwnProperty("job-state")) {
                 msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
             }
+            pageStack.pop()
             if(status == true) {
                 notifier.notify(qsTr("Print success: ") + msg)
-                pageStack.pop() //or replace?
             }
             else {
                 notifier.notify(qsTr("Print failed: ") + msg)
