@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import seaprint.convertchecker 1.0
 import "../components"
 
 Page {
@@ -90,7 +91,15 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("French")+" - ensag-dev, Quentí\n"+
-                      qsTr("Spanish")+" - carmenfdezb"
+                      qsTr("Spanish")+" - carmenfdezb\n"+
+                      qsTr("Polish")+" - atlochowski"
+            }
+
+            SectionHeader { text: qsTr("Optional dependencies") }
+
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: qsTr("pdftoppm (from poppler-utils)")+" - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
             }
 
             SectionHeader { text: qsTr("Licensing") }

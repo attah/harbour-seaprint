@@ -1,9 +1,9 @@
-function supported_formats(printer)
+function supported_formats(printer, ConvertChecker)
 {
     var formats = printer.attrs["document-format-supported"].value;
     var mimetypes = [];
     var supported = [];
-     if(has(formats, "application/pdf") || has(formats, "image/pwg-raster") || has(formats, "image/urf") )
+     if(has(formats, "application/pdf") || (ConvertChecker.pdf && ( has(formats, "image/pwg-raster") || has(formats, "image/urf"))) )
      {
          mimetypes.push("application/pdf");
          supported.push("PDF");

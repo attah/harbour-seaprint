@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
+import seaprint.convertchecker 1.0
 import seaprint.ippprinter 1.0
 import seaprint.mimer 1.0
 import "utils.js" as Utils
@@ -45,6 +46,7 @@ Page {
     signal refreshed()
 
     Component.onCompleted: {
+        console.log("Can convert from PDF:", ConvertChecker.pdf)
         IppDiscovery.discover();
         if(selectedFile != "")
         {
@@ -100,7 +102,7 @@ Page {
                 visible: false
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: Utils.supported_formats(printer).mimetypes.indexOf(selectedFileType) != -1
+                property bool canPrint: Utils.supported_formats(printer, ConvertChecker).mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -137,7 +139,8 @@ Page {
                 property int debugCount: 0
 
                 onClicked: {
-                    console.log(Utils.supported_formats(printer).mimetypes, selectedFileType, Utils.supported_formats(printer).mimetypes.indexOf(selectedFileType) != -1)
+                    console.log(Utils.supported_formats(printer, ConvertChecker).mimetypes, selectedFileType,
+                                Utils.supported_formats(printer, ConvertChecker).mimetypes.indexOf(selectedFileType) != -1)
 
                     if(++debugCount == 5)
                     {
@@ -215,14 +218,14 @@ Page {
                             id: format_label
                             color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
-                            text: Utils.supported_formats(printer).supported
+                            text: Utils.supported_formats(printer, ConvertChecker).supported
                         }
                         Label {
                             id: maybe_format_label
                             color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.secondaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             font.italic: true
-                            text: Utils.supported_formats(printer).maybe
+                            text: Utils.supported_formats(printer, ConvertChecker).maybe
                         }
                     }
 

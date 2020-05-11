@@ -63,6 +63,26 @@
         <source>Spanish</source>
         <translation>Español</translation>
     </message>
+    <message>
+        <source>Polish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional dependencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pdftoppm (from poppler-utils)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not installed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
