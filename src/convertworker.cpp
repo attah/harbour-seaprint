@@ -97,3 +97,71 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     emit done(request, tempfile);
     qDebug() << "posted";
 }
+
+void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                                 bool urf, quint32 Colors, quint32 Quality, quint32 HwResX, quint32 HwResY)
+{
+    quint32 Width = 210.0/25.4*HwResX;
+    quint32 Height = 297.0/25.4*HwResY;
+
+    QImage inImage;
+    if(!inImage.load(filename))
+    {
+        qDebug() << "failed to load";
+        emit failed();
+        return;
+    }
+
+    if(inImage.width() > inImage.height())
+    {
+        inImage = inImage.transformed(QMatrix().rotate(90.0));
+    }
+    inImage = inImage.scaled(Width, Height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QImage outImage = QImage(Width, Height, inImage.format());
+    outImage.fill(Qt::white);
+    QPainter painter(&outImage);
+    painter.drawImage(0,0, inImage);
+    painter.end();
+
+    QTemporaryFile tmpImage;
+    tmpImage.open();
+    qDebug() << "Raw image: " <<  tmpImage.fileName();
+    outImage.save(tmpImage.fileName(), Colors == 1 ? "pgm" : "ppm");
+    tmpImage.close();
+
+    QProcess* ppm2pwg = new QProcess(this);
+    // Yo dawg, I heard you like programs...
+    ppm2pwg->setProgram("harbour-seaprint");
+    ppm2pwg->setArguments({"ppm2pwg"});
+
+    QStringList env;
+    ppm2PwgEnv(env, urf, Quality, HwResX, HwResY, false, false);
+    qDebug() << "ppm2pwg env is " << env;
+
+    ppm2pwg->setEnvironment(env);
+    ppm2pwg->setStandardInputFile(tmpImage.fileName());
+    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+
+    qDebug() << "All connected";
+    ppm2pwg->start();
+
+    qDebug() << "Starting";
+
+    if(!ppm2pwg->waitForStarted())
+    {
+        qDebug() << "ppm2pwg died";
+        tempfile->deleteLater();
+        emit failed();
+        return;
+    }
+    qDebug() << "All started";
+
+    ppm2pwg->waitForFinished();
+
+    qDebug() << "Finished";
+
+    emit done(request, tempfile);
+    qDebug() << "posted";
+}

@@ -30,6 +30,7 @@ IppPrinter::IppPrinter()
     connect(&_workerThread, &QThread::finished, _worker, &QObject::deleteLater);
 
     connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
+    connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
     connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
 
@@ -275,14 +276,14 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         from = Pdf;
     }
     else if (mimeType.contains("image")) {
-//        from = Image; TODO: handle image conversions
+        from = Image;
     }
 
     QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    if(from == Pdf /*&& !supportedMimeTypes.contains("application/pdf")*/)
+    if(from == Image || (from == Pdf /*&& !supportedMimeTypes.contains("application/pdf")*/))
     {
         if(supportedMimeTypes.contains("image/pwg-raster"))
         {
@@ -303,22 +304,9 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode=="color" ? 3 : PrintColorMode=="monochrome" ? 1 : 0;
 
-    if(from == Pdf && target != NoConvert)
+    if(target != NoConvert)
     {
         file.close();
-
-        QString Sides = getAttrOrDefault(attrs, "sides").toString();
-        bool TwoSided = false;
-        bool Tumble = false;
-        if(Sides=="two-sided-long-edge")
-        {
-            TwoSided = true;
-        }
-        else if(Sides=="two-sided-short-edge")
-        {
-            TwoSided = true;
-            Tumble = true;
-        }
 
         QTemporaryFile* tempfile = new QTemporaryFile();
         tempfile->open();
@@ -328,8 +316,29 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
         setBusyMessage("Converting");
 
-        emit doConvertPdf(request, filename, tempfile, target==UrfConvert, Colors, Quality,
-                          HwResX, HwResY, TwoSided, Tumble);
+        if(from == Pdf )
+        {
+
+            QString Sides = getAttrOrDefault(attrs, "sides").toString();
+            bool TwoSided = false;
+            bool Tumble = false;
+            if(Sides=="two-sided-long-edge")
+            {
+                TwoSided = true;
+            }
+            else if(Sides=="two-sided-short-edge")
+            {
+                TwoSided = true;
+                Tumble = true;
+            }
+
+            emit doConvertPdf(request, filename, tempfile, target==UrfConvert, Colors, Quality,
+                              HwResX, HwResY, TwoSided, Tumble);
+        }
+        else if (from == Image)
+        {
+            emit doConvertImage(request, filename, tempfile, target==UrfConvert, Colors, Quality, HwResX, HwResY);
+        }
     }
     else
     {

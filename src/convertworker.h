@@ -11,7 +11,9 @@ public slots:
     void convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                     bool urf, quint32 Colors, quint32 Quality,
                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
-    //convertImage();
+
+    void convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                      bool urf, quint32 Colors, quint32 Quality, quint32 HwResX, quint32 HwResY);
 
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);

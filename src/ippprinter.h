@@ -56,6 +56,9 @@ signals:
                       bool urf, quint32 Colors, quint32 Quality,
                       quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
 
+    void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile, bool urf,
+                        quint32 Colors, quint32 Quality, quint32 HwResX, quint32 HwResY);
+
     void busyMessageChanged();
 
 public slots:
