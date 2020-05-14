@@ -17,7 +17,7 @@ public slots:
 
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
-    void failed();
+    void failed(QString message);
 };
 
 #endif // CONVERTWORKER_H

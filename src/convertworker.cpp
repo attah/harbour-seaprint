@@ -78,14 +78,14 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     {
         qDebug() << "pdftoppm died";
         tempfile->deleteLater();
-        emit failed();
+        emit failed(tr("Conversion error"));
         return;
     }
     if(!ppm2pwg->waitForStarted())
     {
         qDebug() << "ppm2pwg died";
         tempfile->deleteLater();
-        emit failed();
+        emit failed(tr("Conversion error"));
         return;
     }
     qDebug() << "All started";
@@ -108,7 +108,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     if(!inImage.load(filename))
     {
         qDebug() << "failed to load";
-        emit failed();
+        emit failed(tr("Failed to load image"));
         return;
     }
 
@@ -153,7 +153,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     {
         qDebug() << "ppm2pwg died";
         tempfile->deleteLater();
-        emit failed();
+        emit failed(tr("Conversion error"));
         return;
     }
     qDebug() << "All started";

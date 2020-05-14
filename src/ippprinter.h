@@ -74,7 +74,7 @@ public slots:
     void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
     void convertDone(QNetworkRequest request, QTemporaryFile* data);
-    void convertFailed();
+    void convertFailed(QString message);
 
 private:
     QUrl _url;

@@ -119,6 +119,17 @@
     </message>
 </context>
 <context>
+    <name>ConvertWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -170,6 +181,13 @@
     <message>
         <source>Choose file</source>
         <translation type="unfinished">Elegir archivo</translation>
+    </message>
+</context>
+<context>
+    <name>IppPrinter</name>
+    <message>
+        <source>Failed to open file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

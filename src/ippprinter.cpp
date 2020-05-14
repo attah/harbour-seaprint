@@ -97,7 +97,6 @@ void IppPrinter::refresh() {
     QNetworkRequest request;
 
     request.setUrl(httpUrl());
-//    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
 
@@ -220,10 +219,10 @@ void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
 
 }
 
-void IppPrinter::convertFailed()
+void IppPrinter::convertFailed(QString message)
 {
     _jobAttrs = QJsonObject();
-    _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage}, {"value", "Internal error"}});
+    _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage}, {"value", message}});
     emit jobAttrsChanged();
     emit jobFinished(false);
 }
@@ -235,7 +234,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
     bool file_ok = file.open(QIODevice::ReadOnly);
     if(!file_ok)
     {
-        emit jobFinished(false);
+        emit convertFailed(tr("Failed to open file"));
         return;
     }
 
