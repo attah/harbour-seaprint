@@ -22,7 +22,8 @@ Page {
                     text: qsTr("Print")
                     onClicked: {
                         console.log(JSON.stringify(jobParams))
-                        pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer})
+                        pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
+                                          PageStackAction.Immediate)
                         printer.print(jobParams, page.selectedFile)
                     }
                 }
