@@ -1,6 +1,7 @@
 #include "ippprinter.h"
 #include <seaprint_version.h>
 #include "mimer.h"
+#include "papersizes.h"
 
 IppPrinter::IppPrinter()
 {
@@ -282,7 +283,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    if(from == Image || (from == Pdf && !supportedMimeTypes.contains("application/pdf")))
+    if(from == Image || (from == Pdf /*&& !supportedMimeTypes.contains("application/pdf")*/))
     {
         if(supportedMimeTypes.contains("image/pwg-raster"))
         {
@@ -302,6 +303,13 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode=="color" ? 3 : PrintColorMode=="monochrome" ? 1 : 0;
+
+    QString PaperSize = getAttrOrDefault(attrs, "media").toString();
+    if(!PaperSizes.contains(PaperSize))
+    {
+        emit convertFailed(tr("Unsupported print media"));
+        return;
+    }
 
     if(target != NoConvert)
     {
@@ -332,11 +340,12 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
             }
 
             emit doConvertPdf(request, filename, tempfile, target==UrfConvert, Colors, Quality,
-                              HwResX, HwResY, TwoSided, Tumble);
+                              PaperSize, HwResX, HwResY, TwoSided, Tumble);
         }
         else if (from == Image)
         {
-            emit doConvertImage(request, filename, tempfile, target==UrfConvert, Colors, Quality, HwResX, HwResY);
+            emit doConvertImage(request, filename, tempfile, target==UrfConvert, Colors, Quality,
+                                PaperSize, HwResX, HwResY);
         }
     }
     else

@@ -128,6 +128,14 @@
         <source>Failed to load image</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -189,6 +197,10 @@
         <source>Failed to open file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported print media</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -246,6 +258,10 @@
     <message>
         <source>Resolution</source>
         <translation>分辨率</translation>
+    </message>
+    <message>
+        <source>Print media</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

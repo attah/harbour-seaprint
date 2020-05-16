@@ -9,11 +9,12 @@ class ConvertWorker : public QObject
 
 public slots:
     void convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                    bool urf, quint32 Colors, quint32 Quality,
+                    bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
 
     void convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                      bool urf, quint32 Colors, quint32 Quality, quint32 HwResX, quint32 HwResY);
+                      bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
+                      quint32 HwResX, quint32 HwResY);
 
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);

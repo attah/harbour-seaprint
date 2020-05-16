@@ -71,7 +71,8 @@ HEADERS += \
     ppm2pwg/pwg_pghdr_codable.h \
     ppm2pwg/urf_pghdr_codable.h \
     ppm2pwg/bytestream/bytestream.h \
-    ppm2pwg/bytestream/codable.h
+    ppm2pwg/bytestream/codable.h \
+    src/papersizes.h
 
 INCLUDEPATH += ppm2pwg \
                ppm2pwg/bytestream

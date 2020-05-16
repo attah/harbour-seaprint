@@ -1,7 +1,8 @@
 #include "convertworker.h"
 #include <sailfishapp.h>
+#include "papersizes.h"
 
-void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality,
+void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
 {
     env.append("HWRES_X="+QString::number(HwResX));
@@ -17,13 +18,18 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality,
         env.append("QUALITY="+QString::number(Quality));
     }
 
+    if(PaperSize != "")
+    {
+        env.append("PAGE_SIZE_NAME="+PaperSize);
+    }
+
     env.append("DUPLEX="+QString::number(TwoSided));
     env.append("TUMBLE="+QString::number(Tumble));
 
 }
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                               bool urf, quint32 Colors, quint32 Quality,
+                               bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
 {
     if(urf)
@@ -37,6 +43,35 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         }
     }
 
+    QString ShortPaperSize;
+    if(PaperSize == "iso_a4_210x297mm")
+    {
+        ShortPaperSize = "A4";
+    }
+    else if (PaperSize == "iso_a3_297x420mm")
+    {
+        ShortPaperSize = "A3";
+    }
+    else if (PaperSize == "na_letter_8.5x11in")
+    {
+        ShortPaperSize = "letter";
+    }
+    else if (PaperSize == "na_legal_8.5x14in")
+    {
+        ShortPaperSize = "legal";
+    }
+    else
+    {
+        qDebug() << "Unsupported PDF paper size" << PaperSize;
+        tempfile->deleteLater();
+        emit failed(tr("Unsupported PDF paper size"));
+        return;
+    }
+
+    QProcess* pdftocairo = new QProcess(this);
+    pdftocairo->setProgram("pdftocairo");
+    pdftocairo->setArguments({"-pdf", "-paper", ShortPaperSize, filename, "-"});
+
     QProcess* pdftoppm = new QProcess(this);
     pdftoppm->setProgram("pdftoppm");
     QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
@@ -44,7 +79,6 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     {
         Pdf2PpmArgs.append("-gray");
     }
-    Pdf2PpmArgs.append(filename);
     pdftoppm->setArguments(Pdf2PpmArgs);
 
 
@@ -54,26 +88,34 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     ppm2pwg->setArguments({"ppm2pwg"});
 
     QStringList env;
-    ppm2PwgEnv(env, urf, Quality, HwResX, HwResY, TwoSided, Tumble);
+    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble);
     qDebug() << "ppm2pwg env is " << env;
 
     ppm2pwg->setEnvironment(env);
 
+    pdftocairo->setStandardOutputProcess(pdftoppm);
     pdftoppm->setStandardOutputProcess(ppm2pwg);
     ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
+    connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
     connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
     connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
 
     qDebug() << "All connected";
 
-
+    pdftocairo->start();
     pdftoppm->start();
     ppm2pwg->start();
 
     qDebug() << "Starting";
 
-
+    if(!pdftocairo->waitForStarted())
+    {
+        qDebug() << "pdftocairo died";
+        tempfile->deleteLater();
+        emit failed(tr("Conversion error"));
+        return;
+    }
     if(!pdftoppm->waitForStarted())
     {
         qDebug() << "pdftoppm died";
@@ -99,10 +141,21 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 }
 
 void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                                 bool urf, quint32 Colors, quint32 Quality, quint32 HwResX, quint32 HwResY)
+                                 bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
+                                 quint32 HwResX, quint32 HwResY)
 {
-    quint32 Width = 210.0/25.4*HwResX;
-    quint32 Height = 297.0/25.4*HwResY;
+    if(!PaperSizes.contains(PaperSize))
+    {
+        qDebug() << "Unsupported paper size" << PaperSize;
+        tempfile->deleteLater();
+        emit failed(tr("Unsupported paper size"));
+        return;
+    }
+    QPair<float,float> wh = PaperSizes[PaperSize];
+    quint32 Width = qRound(wh.first/25.4*HwResX);
+    quint32 Height = qRound(wh.second/25.4*HwResY);
+
+    qDebug() << "Size is" << Width << "x" << Height;
 
     QImage inImage;
     if(!inImage.load(filename))
@@ -135,7 +188,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     ppm2pwg->setArguments({"ppm2pwg"});
 
     QStringList env;
-    ppm2PwgEnv(env, urf, Quality, HwResX, HwResY, false, false);
+    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false);
     qDebug() << "ppm2pwg env is " << env;
 
     ppm2pwg->setEnvironment(env);
