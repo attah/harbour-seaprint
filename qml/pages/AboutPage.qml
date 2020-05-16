@@ -62,7 +62,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: "© 2019 Anton Thomasson"
+                text: "© 2019-2020 Anton Thomasson"
             }
 
             AboutLabel {
@@ -99,7 +99,7 @@ Page {
 
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("pdftoppm (from poppler-utils)")+" - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
+                text: "poppler-utils - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
             }
 
             SectionHeader { text: qsTr("Licensing") }
