@@ -63,7 +63,7 @@ signals:
     void busyMessageChanged();
 
 public slots:
-    void print(QJsonObject attrs, QString file);
+    void print(QJsonObject attrs, QString file, bool alwaysConvert);
 
 
     void onUrlChanged();

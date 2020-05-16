@@ -1,12 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "utils.js" as Utils
+import Nemo.Configuration 1.0
 
 Page {
     id: page
     property var printer
     property var jobParams: new Object();
     property string selectedFile
+
+    ConfigurationValue
+    {
+        id: alwaysConvert
+        key: "/apps/harbour-seaprint/settings/always_convert"
+        defaultValue: false
+    }
 
     Component.onCompleted: {
         console.log(JSON.stringify(printer.attrs))
@@ -24,7 +32,7 @@ Page {
                         console.log(JSON.stringify(jobParams))
                         pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                           PageStackAction.Immediate)
-                        printer.print(jobParams, page.selectedFile)
+                        printer.print(jobParams, page.selectedFile, alwaysConvert.value)
                     }
                 }
             }

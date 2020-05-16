@@ -201,6 +201,10 @@
         <source>Unsupported print media</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>

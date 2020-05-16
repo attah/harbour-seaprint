@@ -228,7 +228,7 @@ void IppPrinter::convertFailed(QString message)
     emit jobFinished(false);
 }
 
-void IppPrinter::print(QJsonObject attrs, QString filename){
+void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
     qDebug() << "printing" << filename << attrs;
 
     QFile file(filename);
@@ -283,7 +283,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    if(from == Image || (from == Pdf /*&& !supportedMimeTypes.contains("application/pdf")*/))
+    if(alwaysConvert || from == Image || (from == Pdf && !supportedMimeTypes.contains("application/pdf")))
     {
         if(supportedMimeTypes.contains("image/pwg-raster"))
         {
@@ -346,6 +346,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename){
         {
             emit doConvertImage(request, filename, tempfile, target==UrfConvert, Colors, Quality,
                                 PaperSize, HwResX, HwResY);
+        }
+        else
+        {
+            emit convertFailed(tr("Cannot convert this file format"));
+            return;
         }
     }
     else
