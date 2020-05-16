@@ -14,11 +14,13 @@ function supported_formats(printer, ConvertChecker)
          supported.push("Postscript");
      }
 
-     mimetypes.push("image/jpeg");
-     supported.push("JPEG");
-     mimetypes.push("image/png");
-     supported.push("PNG");
-
+     if ( has(formats, "image/pwg-raster") || has(formats, "image/urf"))
+     {
+         mimetypes.push("image/jpeg");
+         supported.push("JPEG");
+         mimetypes.push("image/png");
+         supported.push("PNG");
+     }
      //var info = "MFG:Hewlett-Packard;CMD:PJL,BIDI-ECP,PJL,POSTSCRIPT,PDF,PCLXL,PCL;MDL:HP LaserJet P3010 Series;CLS:PRINTER;DES:Hewlett-Packard ".split(";");
      var maybe = []
      var info = printer.attrs["printer-info"] ? printer.attrs["printer-info"].value.split(";") : [];
