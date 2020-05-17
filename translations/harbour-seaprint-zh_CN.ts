@@ -72,10 +72,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pdftoppm (from poppler-utils)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Installed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,6 +112,10 @@
     <message>
         <source>Print failed: </source>
         <translation type="unfinished">打印失败:</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>

@@ -8,11 +8,14 @@ Page {
     Connections {
         target: printer
         onJobFinished: {
-            var msg = ""
+            var msg = qsTr("Unknown")
             if (printer.jobAttrs.hasOwnProperty("job-state-message") && printer.jobAttrs["job-state-message"].value != "") {
                 msg = printer.jobAttrs["job-state-message"].value
             }
-            else if (printer.jobAttrs.hasOwnProperty("job-state")) {
+            else if (printer.jobAttrs.hasOwnProperty("status-message") && printer.jobAttrs["status-message"].value != "") {
+                msg = printer.jobAttrs["status-message"].value
+            }
+            else if (printer.jobAttrs.hasOwnProperty("job-state") && printer.jobAttrs["job-state"].value != "") {
                 msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
             }
             pageStack.pop()
