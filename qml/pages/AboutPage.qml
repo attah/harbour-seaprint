@@ -61,7 +61,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: "© 2019 Anton Thomasson"
+                text: "© 2019-2020 Anton Thomasson"
             }
 
             AboutLabel {
@@ -90,7 +90,8 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("French")+" - ensag-dev, Quentí\n"+
-                      qsTr("Spanish")+" - carmenfdezb"
+                      qsTr("Spanish")+" - carmenfdezb\n"+
+                      qsTr("Polish")+" - atlochowski"
             }
 
             SectionHeader { text: qsTr("Licensing") }
