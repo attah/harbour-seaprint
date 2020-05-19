@@ -199,12 +199,14 @@ QByteArray IppMsg::encode(Operation op)
     }
     for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
     {
-        ipp << quint8(2);
         QJsonObject tmpObj = ait->toObject();
-        for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
-        {
-            QJsonObject val = it.value().toObject();
-            ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+        if (!tmpObj.isEmpty()) {
+            ipp << quint8(2);
+            for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
+            {
+                QJsonObject val = it.value().toObject();
+                ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+            }
         }
     }
 
