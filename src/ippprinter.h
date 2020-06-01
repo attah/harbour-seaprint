@@ -29,6 +29,8 @@ public:
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
+    bool hasPrinterDeviceIdCmd(QString cmd);
+
     enum ConvertTarget
     {
         NoConvert,

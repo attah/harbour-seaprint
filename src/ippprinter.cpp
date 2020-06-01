@@ -228,6 +228,22 @@ void IppPrinter::convertFailed(QString message)
     emit jobFinished(false);
 }
 
+
+bool IppPrinter::hasPrinterDeviceIdCmd(QString cmd)
+{
+    QStringList printerDeviceId = _attrs["printer-device-id"].toObject()["value"].toString().split(";");
+    for (QStringList::iterator it = printerDeviceId.begin(); it != printerDeviceId.end(); it++)
+    {
+        QStringList kv = it->split(":");
+        if(kv.length()==2 && kv[0]=="CMD")
+        {
+            return kv[1].split(",").contains("PDF");
+        }
+    }
+    return false;
+}
+
+
 void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
     qDebug() << "printing" << filename << attrs;
 
@@ -283,7 +299,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    if(alwaysConvert || from == Image || (from == Pdf && !supportedMimeTypes.contains("application/pdf")))
+    bool supportsPdf = supportedMimeTypes.contains("application/pdf") || hasPrinterDeviceIdCmd("PDF");
+
+    qDebug() << "supportsPdf" << supportsPdf;
+
+    if(alwaysConvert || from == Image || (from == Pdf && !supportsPdf))
     {
         if(supportedMimeTypes.contains("image/pwg-raster"))
         {
