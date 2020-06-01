@@ -99,7 +99,7 @@ void IppPrinter::refresh() {
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     QJsonObject o = opAttrs();
     IppMsg msg = IppMsg(o);
@@ -263,7 +263,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
 
     Mimer* mimer = Mimer::instance();
@@ -382,7 +382,7 @@ bool IppPrinter::getJobs() {
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     _jobs_nam->post(request, contents);
 
@@ -404,7 +404,7 @@ bool IppPrinter::cancelJob(qint32 jobId) {
 
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     _job_cancel_nam->post(request, contents);
 
