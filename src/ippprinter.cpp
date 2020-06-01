@@ -319,6 +319,23 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
 
+    if(target == UrfConvert)
+    { // Ensure symmetric resolution for URF
+        if(HwResX < HwResY)
+        {
+            HwResY = HwResX;
+        }
+        else
+        {
+            HwResX = HwResY;
+        }
+        QJsonObject tmpObj;
+        tmpObj["units"] = PrinterResolutionRef.toObject()["units"];
+        tmpObj["x"] = (int)HwResX;
+        tmpObj["y"] = (int)HwResY;
+        attrs["printer-resolution"] = tmpObj;
+    }
+
     quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
 
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();

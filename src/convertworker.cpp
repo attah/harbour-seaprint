@@ -35,15 +35,12 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
                                bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
 {
-    if(urf)
+    if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
-        if(HwResX < HwResY)
-        {
-            HwResY = HwResX;
-        }
-        else {
-            HwResX = HwResY;
-        }
+        qDebug() << "Unsupported URF resolution" << PaperSize;
+        tempfile->deleteLater();
+        emit failed(tr("Unsupported resolution (dpi)"));
+        return;
     }
 
     QString ShortPaperSize;
@@ -147,6 +144,14 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
                                  bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY)
 {
+    if(urf && (HwResX != HwResY))
+    { // URF only supports symmetric resolutions
+        qDebug() << "Unsupported URF resolution" << PaperSize;
+        tempfile->deleteLater();
+        emit failed(tr("Unsupported resolution (dpi)"));
+        return;
+    }
+
     if(!PaperSizes.contains(PaperSize))
     {
         qDebug() << "Unsupported paper size" << PaperSize;

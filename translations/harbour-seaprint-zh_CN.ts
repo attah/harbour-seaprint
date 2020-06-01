@@ -136,6 +136,10 @@
         <source>Unsupported paper size</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
