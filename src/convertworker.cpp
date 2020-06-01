@@ -1,6 +1,9 @@
 #include "convertworker.h"
 #include <sailfishapp.h>
 #include "papersizes.h"
+#include <QImage>
+#include <QMatrix>
+#include <QPainter>
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
