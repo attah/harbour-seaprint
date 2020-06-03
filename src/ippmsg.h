@@ -19,6 +19,8 @@ public:
         JobAttrs            = 0x02,
         EndAttrs            = 0x03,
         PrinterAttrs        = 0x04,
+        UnsupportedAttrs    = 0x05,
+        Unsupported         = 0x10,
         Integer             = 0x21,
         Boolean             = 0x22,
         Enum                = 0x23,
