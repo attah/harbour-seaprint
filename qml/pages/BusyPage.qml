@@ -29,7 +29,7 @@ Page {
     }
 
     BusyLabel {
-        text: printer.busyMessage
+        text: printer.busyMessage+"\n"+printer.progress;
         running: true
     }
 }

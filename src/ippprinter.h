@@ -14,6 +14,7 @@ class IppPrinter : public QObject
     Q_PROPERTY(QJsonObject jobAttrs MEMBER _jobAttrs NOTIFY jobAttrsChanged)
     Q_PROPERTY(QJsonArray jobs MEMBER _jobs NOTIFY jobsChanged)
     Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
+    Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
 
 
 public:
@@ -63,6 +64,7 @@ signals:
                         quint32 HwResX, quint32 HwResY);
 
     void busyMessageChanged();
+    void progressChanged();
 
 public slots:
     void print(QJsonObject attrs, QString file, bool alwaysConvert);
@@ -86,6 +88,8 @@ private:
     QJsonObject opAttrs();
 
     void setBusyMessage(QString msg);
+    void setProgress(qint64 sent, qint64 total);
+
     QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name);
 
     QNetworkAccessManager* _nam;
@@ -97,6 +101,7 @@ private:
     QJsonObject _jobAttrs;
     QJsonArray _jobs;
     QString _busyMessage;
+    QString _progress;
 
     QThread _workerThread;
     ConvertWorker* _worker;

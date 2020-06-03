@@ -10,10 +10,10 @@ IppPrinter::IppPrinter()
     _jobs_nam = new QNetworkAccessManager(this);
     _job_cancel_nam = new QNetworkAccessManager(this);
 
-    connect(_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getPrinterAttributesFinished(QNetworkReply*)));
+    connect(_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(getPrinterAttributesFinished(QNetworkReply*)));
     connect(_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
 
-    connect(_print_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(printRequestFinished(QNetworkReply*)));
+    connect(_print_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(printRequestFinished(QNetworkReply*)));
     connect(_print_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
 
     connect(_jobs_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getJobsRequestFinished(QNetworkReply*)));
@@ -221,7 +221,9 @@ void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
 
     setBusyMessage("Transferring");
 
-    _print_nam->post(request, data);
+    QNetworkReply* reply = _print_nam->post(request, data);
+
+    connect(reply, &QNetworkReply::uploadProgress, this, &IppPrinter::setProgress);
 
 }
 
@@ -251,6 +253,9 @@ bool IppPrinter::hasPrinterDeviceIdCmd(QString cmd)
 
 void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
     qDebug() << "printing" << filename << attrs;
+
+    _progress = "";
+    emit progressChanged();
 
     QFile file(filename);
     bool file_ok = file.open(QIODevice::ReadOnly);
@@ -466,6 +471,16 @@ void IppPrinter::setBusyMessage(QString msg)
 {
     _busyMessage = msg;
     emit busyMessageChanged();
+}
+
+void IppPrinter::setProgress(qint64 sent, qint64 total)
+{
+    if(total == 0)
+        return;
+
+    _progress = QString::number(100*sent/total);
+    _progress += "%";
+    emit progressChanged();
 }
 
 QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name)
