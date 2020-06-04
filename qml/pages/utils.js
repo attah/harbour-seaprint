@@ -114,6 +114,27 @@ function ippName(name, value)
         {
             return value;
         }
+    case "document-format":
+        switch(value) {
+        case "application/octet-stream":
+            return qsTr("Auto-sense");
+        case "application/pdf":
+            return qsTr("PDF");
+        case "application/postscript":
+            return qsTr("Postscript");
+        case "image/pwg-raster":
+            return qsTr("PWG-raster");
+        case "image/urf":
+            return qsTr("URF-raster");
+        case "image/png":
+            return qsTr("PNG");
+        case "image/jpeg":
+            return qsTr("JPEG");
+        case "image/gif":
+            return qsTr("GIF");
+        default:
+            return value;
+        }
     }
     return value;
 }
@@ -123,6 +144,38 @@ function endsWith(ending, string)
     return string.lastIndexOf(ending) == (string.length - ending.length);
 }
 
+function canConvertPdfTo(type)
+{
+    var targets = ["application/octet-stream", "application/pdf", "image/pwg-raster", "image/urf"];
+    return has(targets, type)
+}
+
+function canConvertImageTo(type)
+{
+    var targets = ["application/octet-stream", "image/jpeg", "image/png", "image/pwg-raster", "image/urf", "image/gif"];
+    return has(targets, type)
+}
+
+function limitChoices(name, choices, mimeType)
+{
+    switch(name) {
+    case "document-format":
+        if(mimeType == "application/pdf")
+        {
+            return choices.filter(canConvertPdfTo)
+        }
+        else if(mimeType == "image/jpeg" || mimeType == "image/png")
+        {
+            return choices.filter(canConvertImageTo);
+        }
+        else
+        {
+            return ["application/octet-stream"];
+        }
+    default:
+        return choices;
+    }
+}
 
 var media =
        {"asme_f_28x40in": "28 x 40″",

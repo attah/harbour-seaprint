@@ -32,20 +32,6 @@ public:
 
     bool hasPrinterDeviceIdCmd(QString cmd);
 
-    enum ConvertTarget
-    {
-        NoConvert,
-        PwgConvert,
-        UrfConvert
-    };
-
-    enum ConvertFrom
-    {
-        NotConvertable,
-        Pdf,
-        Image
-    };
-
 signals:
     void urlChanged();
     void attrsChanged();
@@ -56,11 +42,11 @@ signals:
     void cancelStatus(bool status);
 
     void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                      bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
+                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
 
-    void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile, bool urf,
-                        quint32 Colors, quint32 Quality, QString PaperSize,
+    void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile,
+                        QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                         quint32 HwResX, quint32 HwResY);
 
     void busyMessageChanged();

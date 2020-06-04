@@ -32,9 +32,25 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
 }
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                               bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
+                               QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
 {
+    bool urf = false;
+
+    if(targetFormat == "image/urf")
+    {
+        urf = true;
+    }
+    else if(targetFormat == "image/pwg-raster")
+    {
+        //ok
+    }
+    else
+    {
+        emit failed(tr("Unsupported target format"));
+        return;
+    }
+
     if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution" << PaperSize;
@@ -141,9 +157,31 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 }
 
 void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
-                                 bool urf, quint32 Colors, quint32 Quality, QString PaperSize,
+                                 QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY)
 {
+    bool urf = false;
+    QString imageFormat = "";
+    QStringList supportedImageFormats = {"image/jpeg", "image/png", "image/gif"};
+
+    if(targetFormat == "image/urf")
+    {
+        urf = true;
+    }
+    else if(targetFormat == "image/pwg-raster")
+    {
+        //ok
+    }
+    else if(supportedImageFormats.contains(targetFormat))
+    {
+        imageFormat = targetFormat.split("/")[1];
+    }
+    else
+    {
+        emit failed(tr("Unsupported target format"));
+        return;
+    }
+
     if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution" << PaperSize;
@@ -184,44 +222,61 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     painter.drawImage(0, (outImage.height()-inImage.height())/2, inImage);
     painter.end();
 
-    QTemporaryFile tmpImage;
-    tmpImage.open();
-    qDebug() << "Raw image: " <<  tmpImage.fileName();
-    outImage.save(tmpImage.fileName(), Colors == 1 ? "pgm" : "ppm");
-    tmpImage.close();
+    if(imageFormat != "")
+    { // We are converting to a supported image format
+        QTemporaryFile tmpImage;
+        tmpImage.open();
+        qDebug() << "Raw image: " <<  tmpImage.fileName();
 
-    QProcess* ppm2pwg = new QProcess(this);
-    // Yo dawg, I heard you like programs...
-    ppm2pwg->setProgram("harbour-seaprint");
-    ppm2pwg->setArguments({"ppm2pwg"});
-
-    QStringList env;
-    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false);
-    qDebug() << "ppm2pwg env is " << env;
-
-    ppm2pwg->setEnvironment(env);
-    ppm2pwg->setStandardInputFile(tmpImage.fileName());
-    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
-
-    qDebug() << "All connected";
-    ppm2pwg->start();
-
-    qDebug() << "Starting";
-
-    if(!ppm2pwg->waitForStarted())
-    {
-        qDebug() << "ppm2pwg died";
-        tempfile->deleteLater();
-        emit failed(tr("Conversion error"));
-        return;
+        outImage.save(tmpImage.fileName(), imageFormat.toStdString().c_str());
+        QFile tempfileAsFile(tempfile->fileName());
+        tempfileAsFile.open(QIODevice::Append);
+        tempfileAsFile.write(tmpImage.readAll());
+        tempfileAsFile.close();
+        tmpImage.close();
     }
-    qDebug() << "All started";
+    else
+    { // We are converting to a raster format
+        QTemporaryFile tmpImage;
+        tmpImage.open();
+        qDebug() << "Raw image: " <<  tmpImage.fileName();
 
-    ppm2pwg->waitForFinished();
+        outImage.save(tmpImage.fileName(), Colors == 1 ? "pgm" : "ppm");
+        tmpImage.close();
 
-    qDebug() << "Finished";
+        QProcess* ppm2pwg = new QProcess(this);
+        // Yo dawg, I heard you like programs...
+        ppm2pwg->setProgram("harbour-seaprint");
+        ppm2pwg->setArguments({"ppm2pwg"});
+
+        QStringList env;
+        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false);
+        qDebug() << "ppm2pwg env is " << env;
+
+        ppm2pwg->setEnvironment(env);
+        ppm2pwg->setStandardInputFile(tmpImage.fileName());
+        ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+        connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+
+        qDebug() << "All connected";
+        ppm2pwg->start();
+
+        qDebug() << "Starting";
+
+        if(!ppm2pwg->waitForStarted())
+        {
+            qDebug() << "ppm2pwg died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+        qDebug() << "All started";
+
+        ppm2pwg->waitForFinished();
+
+        qDebug() << "Finished";
+    }
 
     emit done(request, tempfile);
     qDebug() << "posted";

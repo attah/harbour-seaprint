@@ -4,6 +4,9 @@ import "../pages/utils.js" as Utils
 
 Setting {
     property var choices
+    property string mime_type
+
+    property var limited_choices: Utils.limitChoices(name, choices, mime_type)
 
     ValueButton {
         enabled: valid
@@ -17,12 +20,12 @@ Setting {
         id: menu
         enabled: valid
         Repeater {
-            model: choices
+            model: limited_choices
             MenuItem {
-                text: Utils.ippName(name, choices[index])
+                text: Utils.ippName(name, limited_choices[index])
                 onClicked:
                 {
-                    choice = choices[index];
+                    choice = limited_choices[index];
                 }
             }
         }

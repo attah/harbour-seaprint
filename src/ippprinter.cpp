@@ -250,8 +250,9 @@ bool IppPrinter::hasPrinterDeviceIdCmd(QString cmd)
     return false;
 }
 
-
-void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
+// TODO: make alwaysConvert force ratser format
+void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
+{
     qDebug() << "printing" << filename << attrs;
 
     _progress = "";
@@ -270,15 +271,20 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
+    QJsonArray jobCreationAttributes = _attrs["job-creation-attributes-supported"].toObject()["value"].toArray();
 
-    // Only include if printer supports it
-//    if (filename.endsWith("pdf"))
-//    {
-//        attrs.insert("document-format", QJsonObject {{"tag", 73}, {"value", "application/pdf"}});
-//    }
-//    else if (filename.endsWith("jpg")) {
-//        attrs.insert("document-format", QJsonObject {{"tag", 73}, {"value", "image/jpeg"}});
-//    }
+    QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
+
+    if(documentFormat == "")
+    {
+        emit convertFailed(tr("Unknown document format"));
+        return;
+    }
+
+    if(!jobCreationAttributes.contains("document-format"))
+    { // Only include if printer supports it
+        attrs.remove("document-format");
+    }
 
     qDebug() << "Printing job" << o << attrs;
     IppMsg job = IppMsg(o, attrs);
@@ -294,16 +300,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
 
     Mimer* mimer = Mimer::instance();
     QString mimeType = mimer->get_type(filename);
-    ConvertFrom from = NotConvertable;
-    ConvertTarget target = NoConvert;
-
-    if(mimeType == "application/pdf")
-    {
-        from = Pdf;
-    }
-    else if (mimeType.contains("image")) {
-        from = Image;
-    }
 
     QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
 
@@ -313,23 +309,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
 
     qDebug() << "supportsPdf" << supportsPdf;
 
-    if(alwaysConvert || from == Image || (from == Pdf && !supportsPdf))
-    {
-        if(supportedMimeTypes.contains("image/pwg-raster"))
-        {
-            target = PwgConvert;
-        }
-        else if (supportedMimeTypes.contains("image/urf"))
-        {
-            target = UrfConvert;
-        }
-    }
-
     QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
 
-    if(target == UrfConvert)
+    if(documentFormat == "image/urf")
     { // Ensure symmetric resolution for URF
         if(HwResX < HwResY)
         {
@@ -358,7 +342,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
         return;
     }
 
-    if(target != NoConvert)
+    if(documentFormat != mimeType)
     {
         file.close();
 
@@ -370,7 +354,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
 
         setBusyMessage("Converting");
 
-        if(from == Pdf )
+        if(mimeType == "application/pdf")
         {
 
             QString Sides = getAttrOrDefault(attrs, "sides").toString();
@@ -386,12 +370,12 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert){
                 Tumble = true;
             }
 
-            emit doConvertPdf(request, filename, tempfile, target==UrfConvert, Colors, Quality,
+            emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
                               PaperSize, HwResX, HwResY, TwoSided, Tumble);
         }
-        else if (from == Image)
+        else if (mimeType.contains("image"))
         {
-            emit doConvertImage(request, filename, tempfile, target==UrfConvert, Colors, Quality,
+            emit doConvertImage(request, filename, tempfile, documentFormat, Colors, Quality,
                                 PaperSize, HwResX, HwResY);
         }
         else

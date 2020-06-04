@@ -140,6 +140,10 @@
         <source>Unsupported resolution (dpi)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -209,6 +213,10 @@
         <source>Cannot convert this file format</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unknown document format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -269,6 +277,10 @@
     </message>
     <message>
         <source>Print media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer format</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -349,6 +361,38 @@
     <message>
         <source>dots/cm</source>
         <translation>点/厘米</translation>
+    </message>
+    <message>
+        <source>Auto-sense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postscript</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PWG-raster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URF-raster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JPEG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GIF</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
