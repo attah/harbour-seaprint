@@ -298,9 +298,9 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 }
 
 // TODO: make alwaysConvert force ratser format
-void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
+void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, bool forceIncluDeDocumentFormat)
 {
-    qDebug() << "printing" << filename << attrs;
+    qDebug() << "printing" << filename << attrs << alwaysConvert << forceIncluDeDocumentFormat;
 
     _progress = "";
     emit progressChanged();
@@ -344,7 +344,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
         return;
     }
 
-    if(!jobCreationAttributes.contains("document-format"))
+    if(!jobCreationAttributes.contains("document-format") && !forceIncluDeDocumentFormat)
     { // Only include if printer supports it
         attrs.remove("document-format");
     }

@@ -55,7 +55,7 @@ signals:
     void progressChanged();
 
 public slots:
-    void print(QJsonObject attrs, QString file, bool alwaysConvert);
+    void print(QJsonObject attrs, QString file, bool alwaysConvert, bool forceIncluDeDocumentFormat);
 
 
     void onUrlChanged();

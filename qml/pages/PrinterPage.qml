@@ -17,6 +17,13 @@ Page {
         defaultValue: false
     }
 
+    ConfigurationValue
+    {
+        id: forceIncluDeDocumentFormat
+        key: "/apps/harbour-seaprint/settings/force_include_document_format"
+        defaultValue: false
+    }
+
     Component.onCompleted: {
         console.log(JSON.stringify(printer.attrs))
     }
@@ -33,7 +40,7 @@ Page {
                         console.log(JSON.stringify(jobParams))
                         pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                           PageStackAction.Immediate)
-                        printer.print(jobParams, page.selectedFile, alwaysConvert.value)
+                        printer.print(jobParams, page.selectedFile, alwaysConvert.value, forceIncluDeDocumentFormat.value)
                     }
                 }
             }
