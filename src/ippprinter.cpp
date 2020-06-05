@@ -264,6 +264,35 @@ void IppPrinter::convertFailed(QString message)
     emit jobFinished(false);
 }
 
+QString firstMatch(QJsonArray supported, QStringList wanted)
+{
+    for(QStringList::iterator it = wanted.begin(); it != wanted.end(); it++)
+    {
+        if(supported.contains(*it))
+        {
+            return *it;
+        }
+    }
+    return "";
+}
+
+QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray supportedMimeTypes)
+{
+    if(documentFormat == "application/octet-stream")
+    {
+        if(mimeType == "application/pdf")
+        {
+            return firstMatch(supportedMimeTypes, {"application/pdf", "image/pwg-raster", "image/urf" /*, "application/postscript"*/ });
+        }
+        else if (mimeType.contains("image"))
+        {
+            return firstMatch(supportedMimeTypes, {"image/png", "image/gif", "image/jpeg", "image/pwg-raster", "image/urf"});
+        }
+        return documentFormat;
+    }
+    return documentFormat;
+}
+
 // TODO: make alwaysConvert force ratser format
 void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
 {
@@ -280,6 +309,18 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
         return;
     }
 
+    Mimer* mimer = Mimer::instance();
+    QString mimeType = mimer->get_type(filename);
+
+
+    QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
+    for(QStringList::iterator it = _additionalDocumentFormats.begin(); it != _additionalDocumentFormats.end(); it++)
+    {
+        supportedMimeTypes.append(*it);
+    }
+
+    qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
+
     QFileInfo fileinfo(file);
 
     QJsonObject o = opAttrs();
@@ -288,8 +329,12 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
     QJsonArray jobCreationAttributes = _attrs["job-creation-attributes-supported"].toObject()["value"].toArray();
 
     QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
+    qDebug() << "target format:" << documentFormat;
 
-    if(documentFormat == "")
+    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes);
+    qDebug() << "adjusted target format:" << documentFormat;
+
+    if(documentFormat == "" || documentFormat == "application/octet-string")
     {
         emit convertFailed(tr("Unknown document format"));
         return;
@@ -310,18 +355,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
-
-
-    Mimer* mimer = Mimer::instance();
-    QString mimeType = mimer->get_type(filename);
-
-    QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
-    for(QStringList::iterator it = _additionalDocumentFormats.begin(); it != _additionalDocumentFormats.end(); it++)
-    {
-        supportedMimeTypes.append(*it);
-    }
-
-    qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
@@ -356,7 +389,18 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
         return;
     }
 
-    if(documentFormat != mimeType)
+                                       // Always convert images to get resizing
+    if((mimeType == documentFormat) && !mimeType.contains("image"))
+    {
+        QByteArray filedata = file.readAll();
+        contents = contents.append(filedata);
+        file.close();
+
+        setBusyMessage("Transferring");
+        QNetworkReply* reply = _print_nam->post(request, contents);
+        connect(reply, &QNetworkReply::uploadProgress, this, &IppPrinter::setProgress);
+    }
+    else
     {
         file.close();
 
@@ -397,16 +441,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
             emit convertFailed(tr("Cannot convert this file format"));
             return;
         }
-    }
-    else
-    {
-        QByteArray filedata = file.readAll();
-        contents = contents.append(filedata);
-        file.close();
-
-        setBusyMessage("Transferring");
-
-        _print_nam->post(request, contents);
     }
 
     return;
