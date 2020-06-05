@@ -384,7 +384,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
 
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
-    quint32 Colors = PrintColorMode=="color" ? 3 : PrintColorMode=="monochrome" ? 1 : 0;
+    quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
 
     QString PaperSize = getAttrOrDefault(attrs, "media").toString();
     if(!PaperSizes.contains(PaperSize))
