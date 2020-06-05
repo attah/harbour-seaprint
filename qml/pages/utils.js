@@ -156,6 +156,12 @@ function canConvertImageTo(type)
     return has(targets, type)
 }
 
+function unitsIsDpi(resolution)
+{
+    return resolution.units == 3;
+}
+
+
 function limitChoices(name, choices, mimeType)
 {
     switch(name) {
@@ -172,6 +178,8 @@ function limitChoices(name, choices, mimeType)
         {
             return ["application/octet-stream"];
         }
+    case "printer-resolution":
+        return choices.filter(unitsIsDpi);
     default:
         return choices;
     }
