@@ -276,9 +276,13 @@ QString firstMatch(QJsonArray supported, QStringList wanted)
     return "";
 }
 
-QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray supportedMimeTypes)
+QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray supportedMimeTypes, bool forceRaster)
 {
-    if(documentFormat == "application/octet-stream")
+    if(forceRaster)
+    {
+        return firstMatch(supportedMimeTypes, {"image/pwg-raster", "image/urf"});
+    }
+    else if(documentFormat == "application/octet-stream")
     {
         if(mimeType == "application/pdf")
         {
@@ -329,9 +333,9 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
     QJsonArray jobCreationAttributes = _attrs["job-creation-attributes-supported"].toObject()["value"].toArray();
 
     QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
-    qDebug() << "target format:" << documentFormat;
+    qDebug() << "target format:" << documentFormat << "alwaysConvert:" << alwaysConvert;
 
-    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes);
+    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes, alwaysConvert);
     qDebug() << "adjusted target format:" << documentFormat;
 
     if(documentFormat == "" || documentFormat == "application/octet-string")
