@@ -283,6 +283,10 @@
         <source>Transfer format</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>utils</name>

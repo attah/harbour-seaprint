@@ -40,15 +40,16 @@ Page {
 
         ListModel {
             id:mod
-            ListElement {name: "sides";                     prettyName: qsTr("Sides");          tag: 0x23}
-            ListElement {name: "media";                     prettyName: qsTr("Print media");    tag: 0x44}
-            ListElement {name: "copies";                    prettyName: qsTr("Copies");         tag: 0x21}
-//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");     tag: 0x33}
-            ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");     tag: 0x23}
-//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");    tag: 0x23}
-            ListElement {name: "print-quality";             prettyName: qsTr("Quality");        tag: 0x23}
-            ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");     tag: 0x32}
-            ListElement {name: "document-format";           prettyName: qsTr("Transfer format");     tag: 0x49}
+            ListElement {name: "sides";                     prettyName: qsTr("Sides");              tag: 0x23}
+            ListElement {name: "media";                     prettyName: qsTr("Print media");        tag: 0x44}
+            ListElement {name: "copies";                    prettyName: qsTr("Copies");             tag: 0x21}
+//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");         tag: 0x33}
+            ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");         tag: 0x23}
+//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");        tag: 0x23}
+            ListElement {name: "print-quality";             prettyName: qsTr("Quality");            tag: 0x23}
+            ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");         tag: 0x32}
+            ListElement {name: "document-format";           prettyName: qsTr("Transfer format");    tag: 0x49}
+            ListElement {name: "media-source";              prettyName: qsTr("Media source");       tag: 0x44}
         }
 
         SilicaListView {
