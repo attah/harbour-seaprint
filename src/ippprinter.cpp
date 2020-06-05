@@ -95,6 +95,10 @@ void IppPrinter::refresh() {
     _attrs = QJsonObject();
     emit attrsChanged();
 
+    _additionalDocumentFormats = QStringList();
+    emit additionalDocumentFormatsChanged();
+
+
     QNetworkRequest request;
 
     request.setUrl(httpUrl());
@@ -128,6 +132,31 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
             qDebug() << e.what();
         }
     }
+
+    if(_attrs.contains("printer-device-id"))
+    {
+        QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
+        QStringList printerDeviceId = _attrs["printer-device-id"].toObject()["value"].toString().split(";");
+        for (QStringList::iterator it = printerDeviceId.begin(); it != printerDeviceId.end(); it++)
+        {
+            QStringList kv = it->split(":");
+            if(kv.length()==2 && kv[0]=="CMD")
+            {
+                QStringList cmds = kv[1].split(",");
+                if(cmds.contains("PDF") && !supportedMimeTypes.contains("application/pdf"))
+                {
+                    _additionalDocumentFormats.append("application/pdf");
+                }
+                if(cmds.contains("POSTSCRIPT") && !supportedMimeTypes.contains("application/postscript"))
+                {
+                    _additionalDocumentFormats.append("application/postscript");
+                }
+            }
+        }
+        qDebug() << "additionalDocumentFormats" << _additionalDocumentFormats;
+        emit additionalDocumentFormatsChanged();
+    }
+
     emit attrsChanged();
 }
 
@@ -235,21 +264,6 @@ void IppPrinter::convertFailed(QString message)
     emit jobFinished(false);
 }
 
-
-bool IppPrinter::hasPrinterDeviceIdCmd(QString cmd)
-{
-    QStringList printerDeviceId = _attrs["printer-device-id"].toObject()["value"].toString().split(";");
-    for (QStringList::iterator it = printerDeviceId.begin(); it != printerDeviceId.end(); it++)
-    {
-        QStringList kv = it->split(":");
-        if(kv.length()==2 && kv[0]=="CMD")
-        {
-            return kv[1].split(",").contains("PDF");
-        }
-    }
-    return false;
-}
-
 // TODO: make alwaysConvert force ratser format
 void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
 {
@@ -302,12 +316,12 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert)
     QString mimeType = mimer->get_type(filename);
 
     QJsonArray supportedMimeTypes = _attrs["document-format-supported"].toObject()["value"].toArray();
+    for(QStringList::iterator it = _additionalDocumentFormats.begin(); it != _additionalDocumentFormats.end(); it++)
+    {
+        supportedMimeTypes.append(*it);
+    }
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
-
-    bool supportsPdf = supportedMimeTypes.contains("application/pdf") || hasPrinterDeviceIdCmd("PDF");
-
-    qDebug() << "supportsPdf" << supportsPdf;
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();

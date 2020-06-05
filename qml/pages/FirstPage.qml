@@ -107,6 +107,7 @@ Page {
                 Connections {
                     target: printer
                     onAttrsChanged: {
+                        console.log(printer.url, Object.keys(printer.attrs))
                         if(Object.keys(printer.attrs).length === 0) {
                             delegate.visible = false
                         }
@@ -209,7 +210,7 @@ Page {
                         spacing: Theme.paddingMedium
                         Label {
                             id: format_unsupported_label
-                            visible:  format_label.text == "" && maybe_format_label.text == ""
+                            visible:  format_label.text == ""
                             color: "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: qsTr("No compatible formats supported")
@@ -219,13 +220,6 @@ Page {
                             color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: Utils.supported_formats(printer, ConvertChecker).supported
-                        }
-                        Label {
-                            id: maybe_format_label
-                            color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.secondaryColor : "red"
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            font.italic: true
-                            text: Utils.supported_formats(printer, ConvertChecker).maybe
                         }
                     }
 

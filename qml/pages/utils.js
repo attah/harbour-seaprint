@@ -1,6 +1,6 @@
 function supported_formats(printer, ConvertChecker)
 {
-    var formats = printer.attrs["document-format-supported"].value;
+    var formats = printer.attrs["document-format-supported"].value+printer.additionalDocumentFormats;
     var mimetypes = [];
     var supported = [];
      if(has(formats, "application/pdf") || (ConvertChecker.pdf && ( has(formats, "image/pwg-raster") || has(formats, "image/urf"))) )
@@ -21,29 +21,8 @@ function supported_formats(printer, ConvertChecker)
          mimetypes.push("image/png");
          supported.push("PNG");
      }
-     //var info = "MFG:Hewlett-Packard;CMD:PJL,BIDI-ECP,PJL,POSTSCRIPT,PDF,PCLXL,PCL;MDL:HP LaserJet P3010 Series;CLS:PRINTER;DES:Hewlett-Packard ".split(";");
-     var maybe = []
-     var info = printer.attrs["printer-info"] ? printer.attrs["printer-info"].value.split(";") : [];
 
-     for(var i in info)
-     {
-         if(info[i].split(":")[0] == "CMD")
-         {
-             if(!has(supported, "PDF") &&  has(info[i].split(":")[1].split(","), "PDF"))
-             {
-                 mimetypes.push("application/pdf");
-                 maybe.push("PDF");
-             }
-             if(!has(supported, "Postscript") &&  has(info[i].split(":")[1].split(","), "POSTSCRIPT"))
-             {
-                 mimetypes.push("application/postscript");
-                 maybe.push("Postscript");
-             }
-             break;
-         }
-     }
-
-     return {supported: supported.join(" "), maybe: maybe.join(" "), mimetypes: mimetypes};
+     return {supported: supported.join(" "), mimetypes: mimetypes};
 }
 
 function has(arrayish, what)

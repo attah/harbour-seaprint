@@ -13,6 +13,7 @@ class IppPrinter : public QObject
     Q_PROPERTY(QJsonObject attrs MEMBER _attrs NOTIFY attrsChanged)
     Q_PROPERTY(QJsonObject jobAttrs MEMBER _jobAttrs NOTIFY jobAttrsChanged)
     Q_PROPERTY(QJsonArray jobs MEMBER _jobs NOTIFY jobsChanged)
+    Q_PROPERTY(QStringList additionalDocumentFormats MEMBER _additionalDocumentFormats NOTIFY additionalDocumentFormatsChanged)
     Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
     Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
 
@@ -49,6 +50,7 @@ signals:
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                         quint32 HwResX, quint32 HwResY);
 
+    void additionalDocumentFormatsChanged();
     void busyMessageChanged();
     void progressChanged();
 
@@ -86,6 +88,9 @@ private:
     QJsonObject _attrs;
     QJsonObject _jobAttrs;
     QJsonArray _jobs;
+
+    QStringList _additionalDocumentFormats;
+
     QString _busyMessage;
     QString _progress;
 

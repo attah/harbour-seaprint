@@ -109,7 +109,8 @@ Page {
                                           prettyName: prettyName,
                                           tag: tag,
                                           valid: printer.attrs.hasOwnProperty(name+"-supported"),
-                                          choices: printer.attrs[name+"-supported"].value,
+                                          choices: name == "document-format" ? printer.attrs[name+"-supported"].value.concat(printer.additionalDocumentFormats)
+                                                                             : printer.attrs[name+"-supported"].value,
                                           default_choice: printer.attrs[name+"-default"].value,
                                           mime_type: Mimer.get_type(selectedFile)
                                          })
