@@ -184,7 +184,7 @@ static QMap<QString, QPair<float,float>> PaperSizes =
     {"om_invite_220x220mm",          {220.00,   220.00}},
     {"om_italian_110x230mm",         {110.00,   230.00}},
     {"om_juuro-ku-kai_198x275mm",    {198.00,   275.00}},
-    {"om_large-photo_200x300",       {200.00,   3.00}},
+    {"om_large-photo_200x300",       {200.00,   300.00}},
     {"om_medium-photo_130x180mm",    {130.00,   180.00}},
     {"om_pa-kai_267x389mm",          {267.00,   389.00}},
     {"om_postfix_114x229mm",         {114.00,   229.00}},
