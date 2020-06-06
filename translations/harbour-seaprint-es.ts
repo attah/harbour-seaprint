@@ -371,10 +371,6 @@
         <translation>ppp</translation>
     </message>
     <message>
-        <source>Auto-sense</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>PDF</source>
         <translation type="unfinished"></translation>
     </message>
@@ -400,6 +396,22 @@
     </message>
     <message>
         <source>GIF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto-sense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by-pass tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tray</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

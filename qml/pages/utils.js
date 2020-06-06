@@ -99,7 +99,7 @@ function ippName(name, value)
     case "document-format":
         switch(value) {
         case "application/octet-stream":
-            return qsTr("Auto-sense");
+            return qsTr("auto-sense");
         case "application/pdf":
             return qsTr("PDF");
         case "application/postscript":
@@ -117,6 +117,20 @@ function ippName(name, value)
         default:
             return value;
         }
+    case "media-source":
+        if(value.indexOf("tray-")==0)
+        {
+            return qsTr("tray")+" "+value.split("-")[1];
+        }
+        else if(value=="by-pass-tray")
+        {
+            return qsTr("by-pass tray");
+        }
+        else if(value=="auto")
+        {
+            return qsTr("auto");
+        }
+        return value;
     }
     return value;
 }
