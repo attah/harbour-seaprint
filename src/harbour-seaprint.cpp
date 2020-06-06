@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<Mimer>("seaprint.mimer", 1, 0, "Mimer", singletontype_provider<Mimer>);
     qmlRegisterSingletonType<ConvertChecker>("seaprint.convertchecker", 1, 0, "ConvertChecker", singletontype_provider<ConvertChecker>);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
+    qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
 
     QQuickView* view = SailfishApp::createView();
 

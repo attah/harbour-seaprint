@@ -4,6 +4,7 @@
 #include "bytestream.h"
 
 #include <QByteArray>
+#include <QObject>
 #include <QDebug>
 #include <QUrl>
 #include <QtNetwork>
@@ -12,6 +13,7 @@
 
 class IppMsg
 {
+    Q_GADGET
 public:
 
     enum IppTag : quint8 {
@@ -39,6 +41,7 @@ public:
         NaturalLanguage     = 0x48,
         MimeMediaType       = 0x49
     };
+    Q_ENUMS(IppTag)
 
     enum Operation : quint16 {
         PrintJob          = 0x0002,
@@ -59,8 +62,8 @@ public:
         PurgeJobs         = 0x0012
     };
 
-    IppMsg();
-    IppMsg(QNetworkReply* resp);
+    explicit IppMsg();
+    explicit IppMsg(QNetworkReply* resp);
     IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs = QJsonObject());
     IppMsg(const IppMsg& other) = default;
     ~IppMsg();

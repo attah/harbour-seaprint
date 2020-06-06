@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import seaprint.mimer 1.0
+import seaprint.ippmsg 1.0
 import "utils.js" as Utils
 import Nemo.Configuration 1.0
 
@@ -55,16 +56,16 @@ Page {
 
         ListModel {
             id:mod
-            ListElement {name: "sides";                     prettyName: qsTr("Sides");              tag: 0x23}
-            ListElement {name: "media";                     prettyName: qsTr("Print media");        tag: 0x44}
-            ListElement {name: "copies";                    prettyName: qsTr("Copies");             tag: 0x21}
-//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");         tag: 0x33}
-            ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");         tag: 0x23}
-//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");        tag: 0x23}
-            ListElement {name: "print-quality";             prettyName: qsTr("Quality");            tag: 0x23}
-            ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");         tag: 0x32}
-            ListElement {name: "document-format";           prettyName: qsTr("Transfer format");    tag: 0x49}
-            ListElement {name: "media-source";              prettyName: qsTr("Media source");       tag: 0x44}
+            ListElement {name: "sides";                     prettyName: qsTr("Sides");              tag: IppMsg.Enum}
+            ListElement {name: "media";                     prettyName: qsTr("Print media");        tag: IppMsg.Keyword}
+            ListElement {name: "copies";                    prettyName: qsTr("Copies");             tag: IppMsg.Integer}
+//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");         tag: IppMsg.IntegerRange}
+            ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");         tag: IppMsg.Enum}
+//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");        tag: IppMsg.Enum}
+            ListElement {name: "print-quality";             prettyName: qsTr("Quality");            tag: IppMsg.Enum}
+            ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");         tag: IppMsg.Resolution}
+            ListElement {name: "document-format";           prettyName: qsTr("Transfer format");    tag: IppMsg.MimeMediaType}
+            ListElement {name: "media-source";              prettyName: qsTr("Media source");       tag: IppMsg.Keyword}
         }
 
         SilicaListView {
@@ -96,7 +97,7 @@ Page {
 
                 Component.onCompleted: {
                     switch(tag) {
-                    case 0x21:
+                    case IppMsg.Integer:
                         loader.setSource("../components/IntegerSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
@@ -107,7 +108,7 @@ Page {
                                           default_choice: printer.attrs[name+"-default"].value
                                          })
                         break
-                    case 0x33:
+                    case IppMsg.IntegerRange:
                         loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
@@ -115,10 +116,10 @@ Page {
                                           valid: false //TODO printer.attrs.hasOwnProperty(name+"-supported"),
                                          })
                         break
-                    case 0x32:
-                    case 0x23:
-                    case 0x44:
-                    case 0x49:
+                    case IppMsg.Resolution:
+                    case IppMsg.Enum:
+                    case IppMsg.Keyword:
+                    case IppMsg.MimeMediaType:
                         loader.setSource("../components/ChoiceSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
