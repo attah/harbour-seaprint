@@ -24,6 +24,13 @@ Page {
         defaultValue: false
     }
 
+    ConfigurationValue
+    {
+        id: removeDuplexAttributesForRaster
+        key: "/apps/harbour-seaprint/settings/remove_duplex_attribute_for_raster"
+        defaultValue: false
+    }
+
     Component.onCompleted: {
         console.log(JSON.stringify(printer.attrs))
     }
@@ -40,7 +47,8 @@ Page {
                         console.log(JSON.stringify(jobParams))
                         pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                           PageStackAction.Immediate)
-                        printer.print(jobParams, page.selectedFile, alwaysConvert.value, forceIncluDeDocumentFormat.value)
+                        printer.print(jobParams, page.selectedFile,
+                                      alwaysConvert.value, forceIncluDeDocumentFormat.value, removeDuplexAttributesForRaster.value)
                     }
                 }
             }

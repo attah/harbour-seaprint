@@ -297,10 +297,11 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-// TODO: make alwaysConvert force ratser format
-void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, bool forceIncluDeDocumentFormat)
+void IppPrinter::print(QJsonObject attrs, QString filename,
+                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeDuplexAttributesForRaster)
 {
-    qDebug() << "printing" << filename << attrs << alwaysConvert << forceIncluDeDocumentFormat;
+    qDebug() << "printing" << filename << attrs
+             << alwaysConvert << forceIncluDeDocumentFormat << removeDuplexAttributesForRaster;
 
     _progress = "";
     emit progressChanged();
@@ -350,9 +351,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     }
 
     qDebug() << "Printing job" << o << attrs;
-    IppMsg job = IppMsg(o, attrs);
-
-    QByteArray contents = job.encode(IppMsg::PrintJob);
 
     QNetworkRequest request;
 
@@ -393,6 +391,14 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
         return;
     }
 
+    QString Sides = getAttrOrDefault(attrs, "sides").toString();
+    if(removeDuplexAttributesForRaster && (documentFormat=="image/pwg-raster" || documentFormat=="image/urf"))
+    {
+        attrs.remove("sides");
+    }
+
+    IppMsg job = IppMsg(o, attrs);
+    QByteArray contents = job.encode(IppMsg::PrintJob);
                                        // Always convert images to get resizing
     if((mimeType == documentFormat) && !mimeType.contains("image"))
     {
@@ -418,8 +424,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
 
         if(mimeType == "application/pdf")
         {
-
-            QString Sides = getAttrOrDefault(attrs, "sides").toString();
             bool TwoSided = false;
             bool Tumble = false;
             if(Sides=="two-sided-long-edge")
