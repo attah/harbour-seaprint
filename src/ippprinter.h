@@ -56,7 +56,7 @@ signals:
 
 public slots:
     void print(QJsonObject attrs, QString file,
-               bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeDuplexAttributesForRaster);
+               bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantAttributesForRaster);
 
 
     void onUrlChanged();

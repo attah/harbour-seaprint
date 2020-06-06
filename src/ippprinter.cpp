@@ -298,10 +298,10 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 }
 
 void IppPrinter::print(QJsonObject attrs, QString filename,
-                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeDuplexAttributesForRaster)
+                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantAttributesForRaster)
 {
     qDebug() << "printing" << filename << attrs
-             << alwaysConvert << forceIncluDeDocumentFormat << removeDuplexAttributesForRaster;
+             << alwaysConvert << forceIncluDeDocumentFormat << removeRedundantAttributesForRaster;
 
     _progress = "";
     emit progressChanged();
@@ -392,10 +392,13 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(removeDuplexAttributesForRaster && (documentFormat=="image/pwg-raster" || documentFormat=="image/urf"))
+    if(removeRedundantAttributesForRaster && (documentFormat=="image/pwg-raster" || documentFormat=="image/urf"))
     {
         attrs.remove("sides");
+        attrs.remove("print-color-mode");
     }
+
+    qDebug() << "Final job attributes:" << attrs;
 
     IppMsg job = IppMsg(o, attrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
