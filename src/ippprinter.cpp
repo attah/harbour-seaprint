@@ -10,17 +10,17 @@ IppPrinter::IppPrinter()
     _jobs_nam = new QNetworkAccessManager(this);
     _job_cancel_nam = new QNetworkAccessManager(this);
 
-    connect(_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(getPrinterAttributesFinished(QNetworkReply*)));
-    connect(_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    connect(_nam, &QNetworkAccessManager::finished, this, &IppPrinter::getPrinterAttributesFinished);
+    connect(_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
 
-    connect(_print_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(printRequestFinished(QNetworkReply*)));
-    connect(_print_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    connect(_print_nam, &QNetworkAccessManager::finished, this, &IppPrinter::printRequestFinished);
+    connect(_print_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
 
-    connect(_jobs_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(getJobsRequestFinished(QNetworkReply*)));
-    connect(_jobs_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    connect(_jobs_nam, &QNetworkAccessManager::finished,this, &IppPrinter::getJobsRequestFinished);
+    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
 
-    connect(_job_cancel_nam, SIGNAL(finished(QNetworkReply*)),this, SLOT(cancelJobFinished(QNetworkReply*)));
-    connect(_job_cancel_nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
+    connect(_job_cancel_nam, &QNetworkAccessManager::finished,this, &IppPrinter::cancelJobFinished);
+    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
 
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
