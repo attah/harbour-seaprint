@@ -69,6 +69,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     }
 
     bool urf = false;
+    bool ps = false;
 
     if(targetFormat == "image/urf")
     {
@@ -77,6 +78,10 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     else if(targetFormat == "image/pwg-raster")
     {
         //ok
+    }
+    else if(targetFormat == "application/postscript")
+    {
+        ps = true;
     }
     else
     {
@@ -117,71 +122,115 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         return;
     }
 
-    QProcess* pdftocairo = new QProcess(this);
-    pdftocairo->setProgram("pdftocairo");
-    pdftocairo->setArguments({"-pdf", "-paper", ShortPaperSize, filename, "-"});
-
-    QProcess* pdftoppm = new QProcess(this);
-    pdftoppm->setProgram("pdftoppm");
-    QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
-    if(Colors != 3)
+    if(ps)
     {
-        Pdf2PpmArgs.append("-gray");
+        QProcess* pdftops = new QProcess(this);
+        pdftops->setProgram("pdftops");
+        // -duplex?
+        pdftops->setArguments({"-paper", ShortPaperSize, filename, "-"});
+
+        pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+        connect(pdftops, SIGNAL(finished(int, QProcess::ExitStatus)), pdftops, SLOT(deleteLater()));
+
+        pdftops->start();
+
+        qDebug() << "Starting";
+
+        if(!pdftops->waitForStarted())
+        {
+            qDebug() << "pdftops died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+
+        qDebug() << "Started";
+
+        if(!pdftops->waitForFinished())
+        {
+            qDebug() << "pdftops failed";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
     }
-    pdftoppm->setArguments(Pdf2PpmArgs);
-
-
-    QProcess* ppm2pwg = new QProcess(this);
-    // Yo dawg, I heard you like programs...
-    ppm2pwg->setProgram("harbour-seaprint");
-    ppm2pwg->setArguments({"ppm2pwg"});
-
-    QStringList env;
-    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, pages);
-    qDebug() << "ppm2pwg env is " << env;
-
-    ppm2pwg->setEnvironment(env);
-
-    pdftocairo->setStandardOutputProcess(pdftoppm);
-    pdftoppm->setStandardOutputProcess(ppm2pwg);
-    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-    connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
-    connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
-    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
-
-    qDebug() << "All connected";
-
-    pdftocairo->start();
-    pdftoppm->start();
-    ppm2pwg->start();
-
-    qDebug() << "Starting";
-
-    if(!pdftocairo->waitForStarted())
+    else
     {
-        qDebug() << "pdftocairo died";
-        tempfile->deleteLater();
-        emit failed(tr("Conversion error"));
-        return;
-    }
-    if(!pdftoppm->waitForStarted())
-    {
-        qDebug() << "pdftoppm died";
-        tempfile->deleteLater();
-        emit failed(tr("Conversion error"));
-        return;
-    }
-    if(!ppm2pwg->waitForStarted())
-    {
-        qDebug() << "ppm2pwg died";
-        tempfile->deleteLater();
-        emit failed(tr("Conversion error"));
-        return;
-    }
-    qDebug() << "All started";
 
-    ppm2pwg->waitForFinished();
+        QProcess* pdftocairo = new QProcess(this);
+        pdftocairo->setProgram("pdftocairo");
+        pdftocairo->setArguments({"-pdf", "-paper", ShortPaperSize, filename, "-"});
+
+        QProcess* pdftoppm = new QProcess(this);
+        pdftoppm->setProgram("pdftoppm");
+        QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
+        if(Colors != 3)
+        {
+            Pdf2PpmArgs.append("-gray");
+        }
+        pdftoppm->setArguments(Pdf2PpmArgs);
+
+
+        QProcess* ppm2pwg = new QProcess(this);
+        // Yo dawg, I heard you like programs...
+        ppm2pwg->setProgram("harbour-seaprint");
+        ppm2pwg->setArguments({"ppm2pwg"});
+
+        QStringList env;
+        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, pages);
+        qDebug() << "ppm2pwg env is " << env;
+
+        ppm2pwg->setEnvironment(env);
+
+        pdftocairo->setStandardOutputProcess(pdftoppm);
+        pdftoppm->setStandardOutputProcess(ppm2pwg);
+        ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+        connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
+        connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
+        connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+
+        qDebug() << "All connected";
+
+        pdftocairo->start();
+        pdftoppm->start();
+        ppm2pwg->start();
+
+        qDebug() << "Starting";
+
+        if(!pdftocairo->waitForStarted())
+        {
+            qDebug() << "pdftocairo died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+        if(!pdftoppm->waitForStarted())
+        {
+            qDebug() << "pdftoppm died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+        if(!ppm2pwg->waitForStarted())
+        {
+            qDebug() << "ppm2pwg died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+        qDebug() << "All started";
+
+
+        if(!ppm2pwg->waitForFinished())
+        {
+            qDebug() << "ppm2pwg failed";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+    }
+
 
     qDebug() << "Finished";
 

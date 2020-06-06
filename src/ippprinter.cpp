@@ -286,7 +286,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     {
         if(mimeType == "application/pdf")
         {
-            return firstMatch(supportedMimeTypes, {"application/pdf", "image/pwg-raster", "image/urf" /*, "application/postscript"*/ });
+            return firstMatch(supportedMimeTypes, {"application/pdf", "application/postscript", "image/pwg-raster", "image/urf" });
         }
         else if (mimeType.contains("image"))
         {
