@@ -1,6 +1,11 @@
-function supported_formats(printer, ConvertChecker)
+function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
 {
-    var formats = printer.attrs["document-format-supported"].value+printer.additionalDocumentFormats;
+    var formats = printer.attrs["document-format-supported"].value;
+    if(considerAdditionalFormats)
+    {
+        formats=formats+printer.additionalDocumentFormats;
+    }
+
     var mimetypes = [];
     var supported = [];
      if(has(formats, "application/pdf") ||

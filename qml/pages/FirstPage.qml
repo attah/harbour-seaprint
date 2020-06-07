@@ -115,7 +115,7 @@ Page {
                 visible: false
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: Utils.supported_formats(printer, ConvertChecker).mimetypes.indexOf(selectedFileType) != -1
+                property bool canPrint: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -152,8 +152,6 @@ Page {
                 property int debugCount: 0
 
                 onClicked: {
-                    console.log(Utils.supported_formats(printer, ConvertChecker).mimetypes, selectedFileType,
-                                Utils.supported_formats(printer, ConvertChecker).mimetypes.indexOf(selectedFileType) != -1)
 
                     if(++debugCount == 5)
                     {
@@ -231,7 +229,7 @@ Page {
                             id: format_label
                             color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
-                            text: Utils.supported_formats(printer, ConvertChecker).supported
+                            text: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).supported
                         }
                     }
 

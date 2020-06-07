@@ -103,5 +103,12 @@ ApplicationWindow
         key: "/apps/harbour-seaprint/settings/remove-redundant-raster-attributes"
         defaultValue: true
     }
+
+    ConfigurationValue
+    {
+        id: considerAdditionalFormatsSetting
+        key: "/apps/harbour-seaprint/settings/consider-additional-formats"
+        defaultValue: true
+    }
 }
 
