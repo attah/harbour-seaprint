@@ -93,6 +93,19 @@ Page {
                 Loader {
                     id: loader
                     anchors.fill: parent
+
+                    onLoaded: {
+                        if(loaderItem.menu.enabled)
+                        {
+                            menu = loaderItem.menu
+                            loaderItem.clicked.connect(openMenu)
+                        }
+                        loaderItem.choiceMade.connect(function(tag, choice) {
+                            console.log("choice changed", tag, JSON.stringify(choice))
+                            jobParams[name] = {tag: tag, value: choice};
+                            console.log(JSON.stringify(jobParams));
+                        })
+                    }
                 }
 
                 Component.onCompleted: {
@@ -134,17 +147,6 @@ Page {
                     }
                 }
 
-                onLoaderItemChanged: {
-                    menu = loaderItem.menu
-                    loaderItem.clicked.connect(function() {
-                        openMenu()
-                    })
-                    loaderItem.choiceMade.connect(function(tag, choice) {
-                        console.log("choice changed", tag, JSON.stringify(choice))
-                        jobParams[name] = {tag: tag, value: choice};
-                        console.log(JSON.stringify(jobParams));
-                    })
-                }
 
             }
             VerticalScrollDecorator {}

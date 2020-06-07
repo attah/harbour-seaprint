@@ -32,6 +32,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/bytestream/bytestream.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
+    qml/components/LargeChoiceDialog.qml \
     qml/cover/CoverPage.qml \
     qml/components/*.qml \
     qml/pages/*.qml \

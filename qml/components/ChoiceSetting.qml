@@ -8,6 +8,8 @@ Setting {
 
     property var limited_choices: Utils.limitChoices(name, choices, mime_type)
 
+    property int num_large_choices: 8
+
     ValueButton {
         enabled: valid
         anchors.verticalCenter: parent.verticalCenter
@@ -16,9 +18,20 @@ Setting {
         onClicked: parent.clicked()
     }
 
+    onClicked: {
+        if(limited_choices.length>num_large_choices)
+        {
+            var dialog = pageStack.push("LargeChoiceDialog.qml",
+                                        {name:name, choice: choice ? choice : default_choice, choices: limited_choices})
+            dialog.accepted.connect(function() {
+                                        choice = dialog.choice
+                                    })
+        }
+    }
+
     property var menu: ContextMenu {
         id: menu
-        enabled: valid
+        enabled: valid && limited_choices.length <= num_large_choices
         Repeater {
             model: limited_choices
             MenuItem {
