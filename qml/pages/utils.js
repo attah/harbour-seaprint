@@ -101,6 +101,38 @@ function ippName(name, value)
         {
             return value;
         }
+    case "sides":
+        switch(value) {
+        case "one-sided":
+            return qsTr("one-sided");
+        case "two-sided-long-edge":
+            return qsTr("two-sided");
+        case "two-sided-short-edge":
+            return qsTr("two-sided flipped");
+        default:
+            return value
+        }
+    case "print-color-mode":
+        switch(value) {
+        case "auto":
+            return qsTr("automatic");
+        case "auto-monochrome":
+            return qsTr("auto monochrome");
+        case "bi-level":
+            return qsTr("bi-level");
+        case "color":
+            return qsTr("color");
+        case "highlight":
+            return qsTr("highlight");
+        case "monochrome":
+            return qsTr("monochrome");
+        case "process-bi-level":
+            return qsTr("process bi-level");
+        case "process-monochrome":
+            return qsTr("process monochrome");
+        default:
+            return value
+        }
     case "document-format":
         switch(value) {
         case "application/octet-stream":
@@ -127,15 +159,37 @@ function ippName(name, value)
         {
             return qsTr("tray")+" "+value.split("-")[1];
         }
-        else if(value=="by-pass-tray")
+        else
         {
-            return qsTr("by-pass tray");
+            switch(value) {
+            case "by-pass-tray":
+                return qsTr("by-pass tray");
+            case "auto":
+                return qsTr("automatic");
+            case "bottom":
+                return qsTr("bottom");
+            case "center":
+                return qsTr("center");
+            case "main":
+                return qsTr("main");
+            case "manual":
+                return qsTr("manual");
+            case "middle":
+                return qsTr("middle");
+            case "photo":
+                return qsTr("photo");
+            case "rear":
+                return qsTr("rear");
+            case "right":
+                return qsTr("right");
+            case "side":
+                return qsTr("side");
+            case "top":
+                return qsTr("top");
+            default:
+                return value;
+            }
         }
-        else if(value=="auto")
-        {
-            return qsTr("auto");
-        }
-        return value;
     }
     return value;
 }

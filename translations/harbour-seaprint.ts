@@ -485,11 +485,91 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>auto</source>
+        <source>tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tray</source>
+        <source>bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bi-level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>process bi-level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>process monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>one-sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>two-sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>two-sided flipped</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
