@@ -82,5 +82,26 @@ ApplicationWindow
         defaultValue: 0
         property int expectedValue: 1
     }
+
+    ConfigurationValue
+    {
+        id: alwaysConvertSetting
+        key: "/apps/harbour-seaprint/settings/always-convert"
+        defaultValue: false
+    }
+
+    ConfigurationValue
+    {
+        id: forceIncluDeDocumentFormatSetting
+        key: "/apps/harbour-seaprint/settings/force-include-document-format"
+        defaultValue: false
+    }
+
+    ConfigurationValue
+    {
+        id: removeRedundantAttributesForRasterSetting
+        key: "/apps/harbour-seaprint/settings/remove-redundant-raster-attributes"
+        defaultValue: true
+    }
 }
 

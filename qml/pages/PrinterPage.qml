@@ -3,34 +3,12 @@ import Sailfish.Silica 1.0
 import seaprint.mimer 1.0
 import seaprint.ippmsg 1.0
 import "utils.js" as Utils
-import Nemo.Configuration 1.0
 
 Page {
     id: page
     property var printer
     property var jobParams: new Object();
     property string selectedFile
-
-    ConfigurationValue
-    {
-        id: alwaysConvert
-        key: "/apps/harbour-seaprint/settings/always_convert"
-        defaultValue: false
-    }
-
-    ConfigurationValue
-    {
-        id: forceIncluDeDocumentFormat
-        key: "/apps/harbour-seaprint/settings/force_include_document_format"
-        defaultValue: false
-    }
-
-    ConfigurationValue
-    {
-        id: removeRedundantAttributesForRaster
-        key: "/apps/harbour-seaprint/settings/remove_redundant_attributes_for_raster"
-        defaultValue: true
-    }
 
     Component.onCompleted: {
         console.log(JSON.stringify(printer.attrs))
@@ -49,7 +27,9 @@ Page {
                         pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                           PageStackAction.Immediate)
                         printer.print(jobParams, page.selectedFile,
-                                      alwaysConvert.value, forceIncluDeDocumentFormat.value, removeRedundantAttributesForRaster.value)
+                                      alwaysConvertSetting.value,
+                                      forceIncluDeDocumentFormatSetting.value,
+                                      removeRedundantAttributesForRasterSetting.value)
                     }
                 }
             }
