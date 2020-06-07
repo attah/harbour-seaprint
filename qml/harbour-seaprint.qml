@@ -99,8 +99,8 @@ ApplicationWindow
 
     ConfigurationValue
     {
-        id: removeRedundantAttributesForRasterSetting
-        key: "/apps/harbour-seaprint/settings/remove-redundant-raster-attributes"
+        id: removeRedundantConvertAttrsSetting
+        key: "/apps/harbour-seaprint/settings/remove-redundant-convert-attributes"
         defaultValue: true
     }
 

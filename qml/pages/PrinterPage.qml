@@ -29,7 +29,7 @@ Page {
                         printer.print(jobParams, page.selectedFile,
                                       alwaysConvertSetting.value,
                                       forceIncluDeDocumentFormatSetting.value,
-                                      removeRedundantAttributesForRasterSetting.value)
+                                      removeRedundantConvertAttrsSetting.value)
                     }
                 }
             }

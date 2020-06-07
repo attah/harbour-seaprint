@@ -298,10 +298,10 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 }
 
 void IppPrinter::print(QJsonObject attrs, QString filename,
-                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantAttributesForRaster)
+                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantConvertAttrs)
 {
     qDebug() << "printing" << filename << attrs
-             << alwaysConvert << forceIncluDeDocumentFormat << removeRedundantAttributesForRaster;
+             << alwaysConvert << forceIncluDeDocumentFormat << removeRedundantConvertAttrs;
 
     _progress = "";
     emit progressChanged();
@@ -392,10 +392,15 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(removeRedundantAttributesForRaster && (documentFormat=="image/pwg-raster" || documentFormat=="image/urf"))
+    if(removeRedundantConvertAttrs && (documentFormat=="image/pwg-raster" ||
+                                              documentFormat=="image/urf"))
     {
         attrs.remove("sides");
         attrs.remove("print-color-mode");
+    }
+    if(removeRedundantConvertAttrs && documentFormat == "application/postscript")
+    {
+        attrs.remove("sides");
     }
 
     qDebug() << "Final job attributes:" << attrs;

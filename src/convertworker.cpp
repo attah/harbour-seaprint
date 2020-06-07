@@ -126,8 +126,12 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     {
         QProcess* pdftops = new QProcess(this);
         pdftops->setProgram("pdftops");
-        // -duplex?
-        pdftops->setArguments({"-paper", ShortPaperSize, filename, "-"});
+        QStringList PdfToPsArgs = {"-paper", ShortPaperSize, filename, "-"};
+        if(TwoSided)
+        {
+            PdfToPsArgs.prepend("-duplex");
+        }
+        pdftops->setArguments(PdfToPsArgs);
 
         pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
         connect(pdftops, SIGNAL(finished(int, QProcess::ExitStatus)), pdftops, SLOT(deleteLater()));
