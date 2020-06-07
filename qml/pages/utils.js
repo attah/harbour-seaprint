@@ -146,6 +146,12 @@ function canConvertPdfTo(type)
     return has(targets, type)
 }
 
+function canTransferPdfAs(type)
+{
+    var targets = ["application/octet-stream", "application/pdf"];
+    return has(targets, type)
+}
+
 function canConvertImageTo(type)
 {
     var targets = ["application/octet-stream", "image/jpeg", "image/png", "image/pwg-raster", "image/urf", "image/gif"];
@@ -158,13 +164,21 @@ function unitsIsDpi(resolution)
 }
 
 
-function limitChoices(name, choices, mimeType)
+function limitChoices(name, choices, mimeType, ConvertChecker)
 {
     switch(name) {
     case "document-format":
         if(mimeType == "application/pdf")
         {
-            return choices.filter(canConvertPdfTo)
+            if(ConvertChecker.pdf)
+            {
+                return choices.filter(canConvertPdfTo)
+            }
+            else
+            {
+                return choices.filter(canTransferPdfAs)
+            }
+
         }
         else if(mimeType == "image/jpeg" || mimeType == "image/png")
         {
