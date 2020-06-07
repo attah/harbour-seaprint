@@ -254,6 +254,37 @@
     </message>
 </context>
 <context>
+    <name>NagScreen</name>
+    <message>
+        <source>Dismiss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional dependencies are not installed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To install, enable delveloper mode, and open a terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Become root:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install poppler-utils:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PrinterPage</name>
     <message>
         <source>Print</source>

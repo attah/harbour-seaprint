@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 import Nemo.Notifications 1.0
+import Nemo.Configuration 1.0
 import "pages"
 
 ApplicationWindow
@@ -72,6 +73,14 @@ ApplicationWindow
             previewBody = data
             publish()
         }
+    }
+
+    ConfigurationValue
+    {
+        id: nagScreenSetting
+        key: "/apps/harbour-seaprint/settings/nag-screen"
+        defaultValue: 0
+        property int expectedValue: 1
     }
 }
 

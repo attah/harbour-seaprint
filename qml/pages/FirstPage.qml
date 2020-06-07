@@ -46,13 +46,26 @@ Page {
     signal refreshed()
 
     Component.onCompleted: {
-        console.log("Can convert from PDF:", ConvertChecker.pdf)
         IppDiscovery.discover();
         if(selectedFile != "")
         {
             var type = Mimer.get_type(selectedFile);
             console.log(type);
             selectedFileType = type;
+        }
+    }
+
+    property bool nagged: false
+
+    onStatusChanged: {
+        if(status==PageStatus.Active && !nagged && nagScreenSetting.value != nagScreenSetting.expectedValue)
+        {
+            console.log("Can convert from PDF:", ConvertChecker.pdf)
+            if(!ConvertChecker.pdf)
+            {
+                nagged=true
+                pageStack.push(Qt.resolvedUrl("NagScreen.qml"))
+            }
         }
     }
 
@@ -107,7 +120,6 @@ Page {
                 Connections {
                     target: printer
                     onAttrsChanged: {
-                        console.log(printer.url, Object.keys(printer.attrs))
                         if(Object.keys(printer.attrs).length === 0) {
                             delegate.visible = false
                         }
