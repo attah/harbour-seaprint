@@ -85,6 +85,13 @@ ApplicationWindow
 
     ConfigurationValue
     {
+        id: considerAdditionalFormatsSetting
+        key: "/apps/harbour-seaprint/settings/consider-additional-formats"
+        defaultValue: true
+    }
+
+    ConfigurationValue
+    {
         id: alwaysConvertSetting
         key: "/apps/harbour-seaprint/settings/always-convert"
         defaultValue: false
@@ -104,11 +111,5 @@ ApplicationWindow
         defaultValue: true
     }
 
-    ConfigurationValue
-    {
-        id: considerAdditionalFormatsSetting
-        key: "/apps/harbour-seaprint/settings/consider-additional-formats"
-        defaultValue: true
-    }
 }
 

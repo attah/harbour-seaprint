@@ -41,6 +41,7 @@ DISTFILES += qml/harbour-seaprint.qml \
     qml/pages/BusyPage.qml \
     qml/pages/DebugPage.qml \
     qml/pages/NagScreen.qml \
+    qml/pages/SettingsPage.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \

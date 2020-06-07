@@ -78,7 +78,11 @@ Page {
             MenuItem {
                 text: qsTr("About SeaPrint")
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-                }
+            }
+            MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
             MenuItem {
                 text: qsTr("Add by URL")
                 enabled: wifi.connected

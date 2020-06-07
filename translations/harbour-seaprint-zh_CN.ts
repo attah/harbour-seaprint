@@ -202,6 +202,10 @@
         <source>Choose file</source>
         <translation type="unfinished">选择文件</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>
@@ -320,6 +324,49 @@
     </message>
     <message>
         <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Show nag-screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Consider additional formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always convert to raster format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force-include document format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove redundant attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
