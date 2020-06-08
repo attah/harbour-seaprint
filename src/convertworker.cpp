@@ -311,16 +311,11 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
 
     if(imageFormat != "")
     { // We are converting to a supported image format
-        QTemporaryFile tmpImage;
-        tmpImage.open();
-        qDebug() << "Raw image: " <<  tmpImage.fileName();
 
-        outImage.save(tmpImage.fileName(), imageFormat.toStdString().c_str());
         QFile tempfileAsFile(tempfile->fileName());
         tempfileAsFile.open(QIODevice::Append);
-        tempfileAsFile.write(tmpImage.readAll());
+        outImage.save(&tempfileAsFile, imageFormat.toStdString().c_str());
         tempfileAsFile.close();
-        tmpImage.close();
     }
     else
     { // We are converting to a raster format
