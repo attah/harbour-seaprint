@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation>图标制作者为 Gregguh 。</translation>
+        <translation>图标制作者为Gregguh 。</translation>
     </message>
     <message>
         <source>General contributions</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation>Seaprint 仍然采用 TBD 许可协议，但是我非常愿意使它更加开放。</translation>
+        <translation>Seaprint 仍然采用TBD许可协议，但是我非常愿意使它更加开放。</translation>
     </message>
     <message>
         <source>French</source>
@@ -65,19 +65,19 @@
     </message>
     <message>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>波兰语</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>可选依赖</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>已安装</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>未安装</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>On WiFI:</source>
-        <translation>Wifi连接的:</translation>
+        <translation>WiFi连接的:</translation>
     </message>
     <message>
         <source>Found:</source>
@@ -107,46 +107,46 @@
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished">打印成功:</translation>
+        <translation>打印成功:</translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished">打印失败:</translation>
+        <translation>打印失败:</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation type="unfinished"></translation>
+        <translation>转换错误</translation>
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation type="unfinished"></translation>
+        <translation>加载图像错误</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF纸张大小不受支持</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>纸张大小不受支持</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
-        <translation type="unfinished"></translation>
+        <translation>分辨率不受支持（dpi）</translation>
     </message>
     <message>
         <source>Unsupported target format</source>
-        <translation type="unfinished"></translation>
+        <translation>目标格式不受支持</translation>
     </message>
     <message>
         <source>Failed to get info about PDF file</source>
-        <translation type="unfinished"></translation>
+        <translation>获取PDF文件信息错误</translation>
     </message>
 </context>
 <context>
@@ -200,30 +200,30 @@
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished">选择文件</translation>
+        <translation>选择文件</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>设置</translation>
     </message>
 </context>
 <context>
     <name>IppPrinter</name>
     <message>
         <source>Failed to open file</source>
-        <translation type="unfinished"></translation>
+        <translation>打开文件失败</translation>
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation type="unfinished"></translation>
+        <translation>不支持打印媒体文件</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
-        <translation type="unfinished"></translation>
+        <translation>无法转换此文件格式</translation>
     </message>
     <message>
         <source>Unknown document format</source>
-        <translation type="unfinished"></translation>
+        <translation>未知文档格式</translation>
     </message>
 </context>
 <context>
@@ -261,31 +261,31 @@
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>撤销</translation>
     </message>
     <message>
         <source>Don&apos;t show again</source>
-        <translation type="unfinished"></translation>
+        <translation>请勿在此显示</translation>
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>未安装可选依赖！</translation>
     </message>
     <message>
         <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>为了转换PDF文件为其它格式，你需要来自包的实用程序。</translation>
     </message>
     <message>
         <source>To install, enable delveloper mode, and open a terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>你需要开启开发者模式然后打开 terminal 来安装。</translation>
     </message>
     <message>
         <source>Become root:</source>
-        <translation type="unfinished"></translation>
+        <translation>进入 root 模式：</translation>
     </message>
     <message>
         <source>Install poppler-utils:</source>
-        <translation type="unfinished"></translation>
+        <translation>安装 poppler-utils：</translation>
     </message>
 </context>
 <context>
@@ -316,58 +316,58 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation type="unfinished"></translation>
+        <translation>打印媒体</translation>
     </message>
     <message>
         <source>Transfer format</source>
-        <translation type="unfinished"></translation>
+        <translation>传输格式</translation>
     </message>
     <message>
         <source>Media source</source>
-        <translation type="unfinished"></translation>
+        <translation>媒体源</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Show nag-screen</source>
-        <translation type="unfinished"></translation>
+        <translation>显示 nag-screen</translation>
     </message>
     <message>
         <source>Consider additional formats</source>
-        <translation type="unfinished"></translation>
+        <translation>考虑其它格式</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation type="unfinished"></translation>
+        <translation>有些打印机支持的格式比他们宣传的要多。 可以从其他属性中推断出其它格式。 主要与支持PDF 的Postscript—兼容打印机相关。</translation>
     </message>
     <message>
         <source>Always convert to raster format</source>
-        <translation type="unfinished"></translation>
+        <translation>总是转换为光栅格式</translation>
     </message>
     <message>
         <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation type="unfinished"></translation>
+        <translation>强制转换为 PWG 或 URF 光栅格式。这主要用于测试。</translation>
     </message>
     <message>
         <source>Force-include document format</source>
-        <translation type="unfinished"></translation>
+        <translation>强制包含文档格式</translation>
     </message>
     <message>
         <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
-        <translation type="unfinished"></translation>
+        <translation>强制包含文档格式属性。 有些打印机不能很好地识别某些特定格式。如果开启此选项，即使打印机没有声明支持此属性，也会将之包含在内。</translation>
     </message>
     <message>
         <source>Remove redundant attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>移除冗余属性</translation>
     </message>
     <message>
         <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation type="unfinished"></translation>
+        <translation>删除冗余的IPP属性，如果它们也在传输格式时传递。 有些打印机即使设置一致，也会拒绝此项作业。</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation><如果没有安装可选的依赖程序，则显示警告页面。/translation>
     </message>
 </context>
 <context>
@@ -450,127 +450,127 @@
     </message>
     <message>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
         <source>Postscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Postscript</translation>
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>PWG-光栅</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>PWG-光栅</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
         <source>GIF</source>
-        <translation type="unfinished"></translation>
+        <translation>GIF</translation>
     </message>
     <message>
         <source>auto-sense</source>
-        <translation type="unfinished"></translation>
+        <translation>自适应</translation>
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation type="unfinished"></translation>
+        <translation>旁路纸盒</translation>
     </message>
     <message>
         <source>tray</source>
-        <translation type="unfinished"></translation>
+        <translation>纸盒</translation>
     </message>
     <message>
         <source>bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>底部</translation>
     </message>
     <message>
         <source>center</source>
-        <translation type="unfinished"></translation>
+        <translation>中间</translation>
     </message>
     <message>
         <source>main</source>
-        <translation type="unfinished"></translation>
+        <translation>主</translation>
     </message>
     <message>
         <source>manual</source>
-        <translation type="unfinished"></translation>
+        <translation>手动</translation>
     </message>
     <message>
         <source>middle</source>
-        <translation type="unfinished"></translation>
+        <translation>中间</translation>
     </message>
     <message>
         <source>photo</source>
-        <translation type="unfinished"></translation>
+        <translation>照片</translation>
     </message>
     <message>
         <source>rear</source>
-        <translation type="unfinished"></translation>
+        <translation>后方</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>右侧</translation>
     </message>
     <message>
         <source>side</source>
-        <translation type="unfinished"></translation>
+        <translation>侧边</translation>
     </message>
     <message>
         <source>top</source>
-        <translation type="unfinished"></translation>
+        <translation上方</translation>
     </message>
     <message>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>自动</translation>
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>自动黑白</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>单色</translation>
     </message>
     <message>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>强调</translation>
     </message>
     <message>
         <source>monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>黑白</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>单色处理</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>黑白处理</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>单面</translation>
     </message>
     <message>
         <source>two-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>双面</translation>
     </message>
     <message>
         <source>two-sided flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>双面翻转</translation>
     </message>
 </context>
 </TS>
