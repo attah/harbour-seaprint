@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import seaprint.mimer 1.0
+import seaprint.ippmsg 1.0
 import "utils.js" as Utils
 
 Page {
@@ -12,21 +14,6 @@ Page {
         console.log(JSON.stringify(printer.attrs))
     }
 
-    Connections {
-        target: printer
-        onJobAttrsFinished: {
-            var msg = printer.jobAttrs["job-state-message"] && printer.jobAttrs["job-state-message"].value != ""
-                    ? printer.jobAttrs["job-state-message"].value : Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
-            if(status == true) {
-                notifier.notify(qsTr("Print success: ") + msg)
-                pageStack.pop() //or replace?
-            }
-            else {
-                notifier.notify(qsTr("Print failed: ") + msg)
-            }
-        }
-    }
-
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
             anchors.fill: parent
@@ -37,21 +24,28 @@ Page {
                     text: qsTr("Print")
                     onClicked: {
                         console.log(JSON.stringify(jobParams))
-                        printer.print(jobParams, page.selectedFile)
-
+                        pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
+                                          PageStackAction.Immediate)
+                        printer.print(jobParams, page.selectedFile,
+                                      alwaysConvertSetting.value,
+                                      forceIncluDeDocumentFormatSetting.value,
+                                      removeRedundantConvertAttrsSetting.value)
                     }
                 }
             }
 
         ListModel {
             id:mod
-            ListElement {name: "sides";                   prettyName: qsTr("Sides");       tag: 0x23}
-            ListElement {name: "copies";                  prettyName: qsTr("Copies");      tag: 0x21}
-//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");  tag: 0x33}
-            ListElement {name: "print-color-mode";        prettyName: qsTr("Color mode");  tag: 0x23}
-//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation"); tag: 0x23}
-            ListElement {name: "print-quality";           prettyName: qsTr("Quality");     tag: 0x23}
-            ListElement {name: "printer-resolution";      prettyName: qsTr("Resolution");  tag: 0x32}
+            ListElement {name: "sides";                     prettyName: qsTr("Sides");              tag: IppMsg.Enum}
+            ListElement {name: "media";                     prettyName: qsTr("Print media");        tag: IppMsg.Keyword}
+            ListElement {name: "copies";                    prettyName: qsTr("Copies");             tag: IppMsg.Integer}
+//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");         tag: IppMsg.IntegerRange}
+            ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");         tag: IppMsg.Enum}
+//            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");        tag: IppMsg.Enum}
+            ListElement {name: "print-quality";             prettyName: qsTr("Quality");            tag: IppMsg.Enum}
+            ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");         tag: IppMsg.Resolution}
+            ListElement {name: "document-format";           prettyName: qsTr("Transfer format");    tag: IppMsg.MimeMediaType}
+            ListElement {name: "media-source";              prettyName: qsTr("Media source");       tag: IppMsg.Keyword}
         }
 
         SilicaListView {
@@ -79,52 +73,66 @@ Page {
                 Loader {
                     id: loader
                     anchors.fill: parent
+
+                    onLoaded: {
+                        if(loaderItem.menu.enabled)
+                        {
+                            menu = loaderItem.menu
+                            loaderItem.clicked.connect(openMenu)
+                        }
+                        loaderItem.choiceMade.connect(function(tag, choice) {
+                            console.log("choice changed", tag, JSON.stringify(choice))
+                            jobParams[name] = {tag: tag, value: choice};
+                            console.log(JSON.stringify(jobParams));
+                        })
+                    }
                 }
 
                 Component.onCompleted: {
-                    console.log("handling", tag, name, prettyName, JSON.stringify(printer.attrs[name+"-supported"]), JSON.stringify(printer.attrs[name+"-default"]))
                     switch(tag) {
-                    case 0x21:
+                    case IppMsg.Integer:
                         loader.setSource("../components/IntegerSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
+                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
                                           low: printer.attrs[name+"-supported"].value.low,
                                           high: printer.attrs[name+"-supported"].value.high,
                                           default_choice: printer.attrs[name+"-default"].value
                                          })
                         break
-                    case 0x33:
+                    case IppMsg.IntegerRange:
                         loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
-                                          valid: false, //TODO
-                                          tag: 0x33 // integer-range
+                                          tag: tag,
+                                          valid: false //TODO printer.attrs.hasOwnProperty(name+"-supported"),
                                          })
                         break
-                    case 0x32:
-                    case 0x23:
+                    case IppMsg.Resolution:
+                    case IppMsg.Enum:
+                    case IppMsg.Keyword:
+                    case IppMsg.MimeMediaType:
                         loader.setSource("../components/ChoiceSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
-                                          choices: printer.attrs[name+"-supported"].value,
-                                          default_choice: printer.attrs[name+"-default"].value
+                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
+                                          choices: maybeSupplementChoices(name, printer.attrs[name+"-supported"].value),
+                                          default_choice: printer.attrs[name+"-default"].value,
+                                          mime_type: Mimer.get_type(selectedFile)
                                          })
                         break
                     }
                 }
 
-                onLoaderItemChanged: {
-                    menu = loaderItem.menu
-                    loaderItem.clicked.connect(function() {
-                        openMenu()
-                    })
-                    loaderItem.choiceMade.connect(function(tag, choice) {
-                        console.log("choice changed", tag, JSON.stringify(choice))
-                        jobParams[name] = {tag: tag, value: choice};
-                        console.log(JSON.stringify(jobParams));
-                    })
+                function maybeSupplementChoices(name, choices)
+                {
+                    if(name == "document-format" && considerAdditionalFormatsSetting.value)
+                    {
+                        return choices.concat(printer.additionalDocumentFormats)
+                    }
+                    return choices
                 }
 
             }

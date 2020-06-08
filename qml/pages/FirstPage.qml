@@ -2,7 +2,9 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
+import seaprint.convertchecker 1.0
 import seaprint.ippprinter 1.0
+import seaprint.mimer 1.0
 import "utils.js" as Utils
 import "../components"
 import Nemo.DBus 2.0
@@ -46,18 +48,23 @@ Page {
     Component.onCompleted: {
         IppDiscovery.discover();
         if(selectedFile != "")
-        {  // Until i can convince FilePickerPage to do its magic without user interaction
-            if(Utils.endsWith(".pdf", selectedFile))
+        {
+            var type = Mimer.get_type(selectedFile);
+            console.log(type);
+            selectedFileType = type;
+        }
+    }
+
+    property bool nagged: false
+
+    onStatusChanged: {
+        if(status==PageStatus.Active && !nagged && nagScreenSetting.value != nagScreenSetting.expectedValue)
+        {
+            console.log("Can convert from PDF:", ConvertChecker.pdf)
+            if(!ConvertChecker.pdf)
             {
-                selectedFileType = "application/pdf"
-            }
-            else if(Utils.endsWith(".jpg", selectedFile) || Utils.endsWith(".jpeg", selectedFile))
-            {
-                selectedFileType = "image/jpeg"
-            }
-            else
-            {
-                selectedFile = ""
+                nagged=true
+                pageStack.push(Qt.resolvedUrl("NagScreen.qml"))
             }
         }
     }
@@ -71,7 +78,11 @@ Page {
             MenuItem {
                 text: qsTr("About SeaPrint")
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-                }
+            }
+            MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
             MenuItem {
                 text: qsTr("Add by URL")
                 enabled: wifi.connected
@@ -108,7 +119,7 @@ Page {
                 visible: false
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: printer.attrs["document-format-supported"].value.indexOf(selectedFileType) != -1
+                property bool canPrint: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -131,7 +142,27 @@ Page {
                     }
                 }
 
+                Timer
+                {
+                    id: debugCountReset
+                    interval: 666
+                    repeat: false
+                    onTriggered:
+                    {
+                        debugCount = 0;
+                    }
+                }
+
+                property int debugCount: 0
+
                 onClicked: {
+
+                    if(++debugCount == 5)
+                    {
+                        pageStack.push(Qt.resolvedUrl("DebugPage.qml"), {printer: printer})
+                        return;
+                    }
+                    debugCountReset.restart();
                     if(!canPrint)
                         return;
                     if(selectedFile != "")
@@ -161,6 +192,7 @@ Page {
                     source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
                     onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
+
                 }
 
                 Column {
@@ -170,30 +202,41 @@ Page {
 
                     Label {
                         id: name_label
-                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         text: name
                     }
 
                     Label {
                         id: mm_label
-                        color: canPrint ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: printer.attrs["printer-make-and-model"].value
                     }
 
                     Label {
                         id: uri_label
-                        color: canPrint ? Theme.highlightColor : Theme.secondaryColor
+                        color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeTiny
                         text: printer.url
                     }
 
-                    Label {
-                        id: format_label
-                        color: canPrint ? Theme.primaryColor : "red"
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        text: Utils.supported_formats(printer)
+                    Row {
+                        spacing: Theme.paddingMedium
+                        Label {
+                            id: format_unsupported_label
+                            visible:  format_label.text == ""
+                            color: "red"
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            text: qsTr("No compatible formats supported")
+                        }
+                        Label {
+                            id: format_label
+                            color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            text: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).supported
+                        }
                     }
+
                 }
 
                 RemorseItem {
@@ -225,28 +268,56 @@ Page {
     DockedPanel {
         id: fileDock
         open: true
-        height: fileButton.height*2
+        height: fileLabel.height+folderButton.height+3*Theme.paddingLarge
         width: parent.width
         dock: Dock.Bottom
 
-        ValueButton {
-            id: fileButton
+        Label {
+            id: fileLabel
             width: parent.width
-            anchors.verticalCenter: parent.verticalCenter
-            label: qsTr("Choose file")
-            value: selectedFile != "" ? selectedFile : qsTr("None")
-            onClicked: pageStack.push(filePickerPage)
+            anchors.top: parent.top
+            anchors.topMargin: Theme.paddingLarge
+            leftPadding: Theme.paddingMedium
+            color: Theme.highlightColor
+            text: selectedFile != "" ? selectedFile : qsTr("No file selected")
+        }
+
+        Row {
+            width: parent.width
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingLarge
+            IconButton {
+                id: folderButton
+                icon.source: "image://theme/icon-m-file-folder"
+                width: parent.width/2
+                onClicked: pageStack.push(filePickerPage)
+            }
+            IconButton {
+                icon.source: "image://theme/icon-m-file-image"
+                width: parent.width/2
+                onClicked: pageStack.push(imagePickerPage)
+            }
+
         }
         Component {
             id: filePickerPage
             FilePickerPage {
-                title: fileButton.label
+                title: qsTr("Choose file")
                 showSystemFiles: false
-                nameFilters: ["*.pdf", "*.jpg", "*.jpeg"]
+                nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.ps"]
 
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
-                    page.selectedFileType = selectedContentProperties.mimeType
+                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
+                }
+            }
+        }
+        Component {
+            id: imagePickerPage
+            ImagePickerPage {
+                onSelectedContentPropertiesChanged: {
+                    page.selectedFile = selectedContentProperties.filePath
+                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
                 }
             }
         }

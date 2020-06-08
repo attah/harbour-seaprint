@@ -1,0 +1,3 @@
+[submodule "ppm2pwg"]
+	path = ppm2pwg
+	url = https://github.com/attah/ppm2pwg.git

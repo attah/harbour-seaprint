@@ -4,25 +4,40 @@
 #include <seaprint_version.h>
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
+#include <src/mimer.h>
+#include <src/convertchecker.h>
 
-static QObject* ippdiscovery_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+#define PPM2PWG_MAIN ppm2pwg_main
+#include <ppm2pwg/ppm2pwg.cpp>
+
+template <class T>
+static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    IppDiscovery *ippdiscovery = IppDiscovery::instance();
-    return ippdiscovery;
+    T *inst = T::instance();
+    return inst;
 
 }
 
 int main(int argc, char *argv[])
 {
+    if(argc >= 1 && QString("ppm2pwg") == argv[1])
+    {
+        return ppm2pwg_main(argc-1, &(argv[1]));
+    }
+
+
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
 
-    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", ippdiscovery_singletontype_provider);
+    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<IppDiscovery>);
+    qmlRegisterSingletonType<Mimer>("seaprint.mimer", 1, 0, "Mimer", singletontype_provider<Mimer>);
+    qmlRegisterSingletonType<ConvertChecker>("seaprint.convertchecker", 1, 0, "ConvertChecker", singletontype_provider<ConvertChecker>);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
+    qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
 
     QQuickView* view = SailfishApp::createView();
 

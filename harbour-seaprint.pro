@@ -22,18 +22,26 @@ VERSION_H = \
 write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
 
 SOURCES += src/harbour-seaprint.cpp \
+    src/convertchecker.cpp \
+    src/convertworker.cpp \
     src/ippdiscovery.cpp \
-    src/bytestream.cpp \
     src/ippmsg.cpp \
-    src/ippprinter.cpp
-
+    src/ippprinter.cpp \
+    src/mimer.cpp \
+    ppm2pwg/ppm2pwg.cpp \
+    ppm2pwg/bytestream/bytestream.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
+    qml/components/LargeChoiceDialog.qml \
     qml/cover/CoverPage.qml \
     qml/components/*.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
+    qml/pages/BusyPage.qml \
+    qml/pages/DebugPage.qml \
+    qml/pages/NagScreen.qml \
+    qml/pages/SettingsPage.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \
@@ -57,7 +65,17 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-es.ts
 
 HEADERS += \
+    src/convertchecker.h \
+    src/convertworker.h \
     src/ippdiscovery.h \
-    src/bytestream.h \
     src/ippmsg.h \
-    src/ippprinter.h
+    src/ippprinter.h \
+    src/mimer.h \
+    ppm2pwg/pwg_pghdr_codable.h \
+    ppm2pwg/urf_pghdr_codable.h \
+    ppm2pwg/bytestream/bytestream.h \
+    ppm2pwg/bytestream/codable.h \
+    src/papersizes.h
+
+INCLUDEPATH += ppm2pwg \
+               ppm2pwg/bytestream

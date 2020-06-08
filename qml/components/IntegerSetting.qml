@@ -16,6 +16,7 @@ Setting {
 
     property var menu: ContextMenu {
         id: menu
+        enabled: valid
         MenuItem {
             Slider
             {

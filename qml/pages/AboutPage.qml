@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import seaprint.convertchecker 1.0
 import "../components"
 
 Page {
@@ -61,7 +62,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: "© 2019 Anton Thomasson"
+                text: "© 2019-2020 Anton Thomasson"
             }
 
             AboutLabel {
@@ -89,8 +90,16 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
-                      qsTr("French")+" - ensag-dev\n"+
-                      qsTr("Spanish")+" - carmenfdezb"
+                      qsTr("French")+" - ensag-dev, Quentí\n"+
+                      qsTr("Spanish")+" - carmenfdezb\n"+
+                      qsTr("Polish")+" - atlochowski"
+            }
+
+            SectionHeader { text: qsTr("Optional dependencies") }
+
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: "poppler-utils - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
             }
 
             SectionHeader { text: qsTr("Licensing") }

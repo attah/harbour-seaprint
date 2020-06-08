@@ -4,6 +4,7 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include "ippmsg.h"
+#include "convertworker.h"
 
 class IppPrinter : public QObject
 {
@@ -12,6 +13,9 @@ class IppPrinter : public QObject
     Q_PROPERTY(QJsonObject attrs MEMBER _attrs NOTIFY attrsChanged)
     Q_PROPERTY(QJsonObject jobAttrs MEMBER _jobAttrs NOTIFY jobAttrsChanged)
     Q_PROPERTY(QJsonArray jobs MEMBER _jobs NOTIFY jobsChanged)
+    Q_PROPERTY(QStringList additionalDocumentFormats MEMBER _additionalDocumentFormats NOTIFY additionalDocumentFormatsChanged)
+    Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
+    Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
 
 
 public:
@@ -24,7 +28,6 @@ public:
 
     Q_INVOKABLE void refresh();
 
-    Q_INVOKABLE bool print(QJsonObject attrs, QString file);
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
@@ -34,9 +37,26 @@ signals:
     void jobAttrsChanged();
     void jobsChanged();
 
-    void jobAttrsFinished(bool status);
+    void jobFinished(bool status);
+    void cancelStatus(bool status);
+
+    void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
+
+    void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile,
+                        QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                        quint32 HwResX, quint32 HwResY);
+
+    void additionalDocumentFormatsChanged();
+    void busyMessageChanged();
+    void progressChanged();
 
 public slots:
+    void print(QJsonObject attrs, QString file,
+               bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantAttributesForRaster);
+
+
     void onUrlChanged();
     void getPrinterAttributesFinished(QNetworkReply* reply);
     void printRequestFinished(QNetworkReply* reply);
@@ -45,11 +65,19 @@ public slots:
 
     void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
+    void convertDone(QNetworkRequest request, QTemporaryFile* data);
+    void convertFailed(QString message);
+
 private:
     QUrl _url;
     QUrl httpUrl();
 
     QJsonObject opAttrs();
+
+    void setBusyMessage(QString msg);
+    void setProgress(qint64 sent, qint64 total);
+
+    QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name);
 
     QNetworkAccessManager* _nam;
     QNetworkAccessManager* _jobs_nam;
@@ -59,6 +87,14 @@ private:
     QJsonObject _attrs;
     QJsonObject _jobAttrs;
     QJsonArray _jobs;
+
+    QStringList _additionalDocumentFormats;
+
+    QString _busyMessage;
+    QString _progress;
+
+    QThread _workerThread;
+    ConvertWorker* _worker;
 
 };
 

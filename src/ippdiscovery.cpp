@@ -1,4 +1,6 @@
 #include "ippdiscovery.h"
+#include <seaprint_version.h>
+
 #define A 1
 #define PTR 12
 #define TXT 16
@@ -148,7 +150,8 @@ void IppDiscovery::readPendingDatagrams()
         QHostAddress sender;
         quint16 senderPort;
 
-        QStringList ipp_ptrs;
+        QStringList new_ipp_ptrs;
+        QStringList new_targets;
 
         socket->readDatagram((char*)(resp.raw()), size, &sender, &senderPort);
         sender = QHostAddress(sender.toIPv4Address());
@@ -180,7 +183,7 @@ void IppDiscovery::readPendingDatagrams()
                     QString tmpname = get_addr(resp).join(".");
                     if(aaddr.endsWith("_ipp._tcp.local"))
                     {
-                        ipp_ptrs.append(tmpname);
+                        new_ipp_ptrs.append(tmpname);
                     }
                 }
                 else if(atype == TXT)
@@ -204,6 +207,7 @@ void IppDiscovery::readPendingDatagrams()
                     QString target = get_addr(resp).join(".");
                     _ports[aaddr] = port;
                     _targets[aaddr] = target;
+                    new_targets.append(target);
                 }
                 else if(atype == A)
                 {
@@ -225,22 +229,32 @@ void IppDiscovery::readPendingDatagrams()
             qDebug() << e.what();
             return;
         }
-        qDebug() << "new ipp ptrs" << ipp_ptrs;
+        qDebug() << "new ipp ptrs" << new_ipp_ptrs;
         qDebug() << "ipp ptrs" << _ipp;
         qDebug() << "rps" << _rps;
         qDebug() << "ports" << _ports;
+        qDebug() << "new targets" << new_targets;
         qDebug() << "targets" << _targets;
         qDebug() << "AAs" << _AAs;
         qDebug() << "AAAAs" << _AAAAs;
 
-        for(QStringList::Iterator it = ipp_ptrs.begin(); it != ipp_ptrs.end(); it++)
+        for(QStringList::Iterator it = new_ipp_ptrs.begin(); it != new_ipp_ptrs.end(); it++)
         {
             if(!_ipp.contains(*it))
             {
                 _ipp.append(*it);
             }
-            if(!_ports.contains(*it) || !_targets.contains(*it) || !_rps.contains(*it))
+            // If pointer does not resolve to a target or is missing information, query about it
+            if( !_targets.contains(*it) || !_ports.contains(*it) || !_rps.contains(*it))
             {  // if the PTR doesn't already resolve, ask for everything about it
+                sendQuery(ALL, it->split('.'));
+            }
+        }
+        for(QStringList::Iterator it = new_targets.begin(); it != new_targets.end(); it++)
+        {
+            // If target does not resolve to an address, query about it
+            if(!_AAs.contains(*it))
+            {
                 sendQuery(ALL, it->split('.'));
             }
         }
@@ -287,7 +301,10 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
         url.setHost(_AAs.value(url.host()));
     }
 
-    QNetworkReply* reply = nam->get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+
+    QNetworkReply* reply = nam->get(request);
 
     QEventLoop el;
     connect(reply, SIGNAL(finished()),&el,SLOT(quit()));

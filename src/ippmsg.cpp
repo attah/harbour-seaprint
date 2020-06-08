@@ -38,7 +38,7 @@ IppMsg::IppMsg(QNetworkReply* resp)
 
     while(!bts.atEnd())
     {
-        if(bts.peekU8() <= IppTag::PrinterAttrs) {
+        if(bts.peekU8() <= IppTag::UnsupportedAttrs) {
 
             if(currentAttrType == IppTag::OpAttrs) {
                 _opAttrs = attrs;
@@ -48,6 +48,9 @@ IppMsg::IppMsg(QNetworkReply* resp)
             }
             else if (currentAttrType == IppTag::PrinterAttrs) {
                 _printerAttrs = attrs;
+            }
+            else if (currentAttrType == IppTag::UnsupportedAttrs) {
+                qDebug() << "WARNING: unsupported attrs reported:" << attrs;
             }
 
             if(bts >>= (uint8_t)IppTag::EndAttrs) {
@@ -78,12 +81,12 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString 
     data/tmp_len >> tmp_str;
     name = tmp_str!="" ? tmp_str.c_str() : lastName;
 
-
     switch (tag) {
         case OpAttrs:
         case JobAttrs:
         case EndAttrs:
         case PrinterAttrs:
+        case UnsupportedAttrs:
             Q_ASSERT(false);
         case Integer:
         case Enum:
@@ -197,14 +200,16 @@ QByteArray IppMsg::encode(Operation op)
             ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
         }
     }
-    for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.begin(); ait++)
+    for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
     {
-        ipp << quint8(2);
         QJsonObject tmpObj = ait->toObject();
-        for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
-        {
-            QJsonObject val = it.value().toObject();
-            ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+        if (!tmpObj.isEmpty()) {
+            ipp << quint8(2);
+            for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
+            {
+                QJsonObject val = it.value().toObject();
+                ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+            }
         }
     }
 
@@ -243,7 +248,6 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         }
         case Resolution:
         {
-            qDebug() << value << value.toObject();
             qint32 x = value.toObject()["x"].toInt();
             qint32 y = value.toObject()["y"].toInt();
             qint8 units = value.toObject()["units"].toInt();
@@ -268,8 +272,12 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         case Charset:
         case NaturalLanguage:
         case MimeMediaType:
-            req << quint16(value.toString().length()) << value.toString().toStdString();
+        {
+            QByteArray tmpstr = value.toString().toUtf8();
+            req << quint16(tmpstr.length());
+            req.putBytes(tmpstr.data(), tmpstr.length());
             break;
+        }
         default:
             qDebug() << "uncaught tag" << tag;
             Q_ASSERT(false);
