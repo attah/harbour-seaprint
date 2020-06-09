@@ -65,19 +65,19 @@
     </message>
     <message>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaco</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Dependencias opcionales</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalado</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>No instalado</translation>
     </message>
 </context>
 <context>
@@ -107,46 +107,46 @@
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished">Impresión correcta: </translation>
+        <translation>Impresión correcta: </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished">Impresión fallida: </translation>
+        <translation>Impresión fallida: </translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de conversión</translation>
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al cargar imagen</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de papel en PDF no soportado</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de papel no soportado</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolución (ppp) no soportada</translation>
     </message>
     <message>
         <source>Unsupported target format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de destino no soportado</translation>
     </message>
     <message>
         <source>Failed to get info about PDF file</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al obtener info de archivo PDF</translation>
     </message>
 </context>
 <context>
@@ -196,34 +196,34 @@
     </message>
     <message>
         <source>No compatible formats supported</source>
-        <translation type="unfinished">No hay formatos compatibles</translation>
+        <translation>No admite formatos compatibles</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished">Elegir archivo</translation>
+        <translation>Elegir archivo</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes</translation>
     </message>
 </context>
 <context>
     <name>IppPrinter</name>
     <message>
         <source>Failed to open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al abrir archivo</translation>
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Medio impreso no soportado</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir este formato de archivo</translation>
     </message>
     <message>
         <source>Unknown document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de documento desconocido</translation>
     </message>
 </context>
 <context>
@@ -254,38 +254,38 @@
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelando trabajo fallido</translation>
     </message>
 </context>
 <context>
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Descartar</translation>
     </message>
     <message>
         <source>Don&apos;t show again</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar de nuevo</translation>
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Las dependencias opcionales no están instaladas!</translation>
     </message>
     <message>
         <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Para convertir los archivos PDF a otros formatos necesitas las utilidades del paquete &quot;poppler-utils&quot;</translation>
     </message>
     <message>
         <source>To install, enable delveloper mode, and open a terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para instalar, habilita el modo de desarollador y abre Terminal.</translation>
     </message>
     <message>
         <source>Become root:</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceder como root:</translation>
     </message>
     <message>
         <source>Install poppler-utils:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar poppler-utils:</translation>
     </message>
 </context>
 <context>
@@ -316,58 +316,58 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Medio impreso</translation>
     </message>
     <message>
         <source>Transfer format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de transferencia</translation>
     </message>
     <message>
         <source>Media source</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente de medios</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Show nag-screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar pantalla</translation>
     </message>
     <message>
         <source>Consider additional formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Considerar formatos adicionales</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algunas impresoras admiten más formatos de los que anuncian. Sin embargo, es posible deducir formatos adicionales a partir de otros atributos. Principalmente es relevante para impresoras compatibles con Postscript que también admiten PDF.</translation>
     </message>
     <message>
         <source>Always convert to raster format</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir siempre a formato ráster</translation>
     </message>
     <message>
         <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar conversión a formato ráster PWG/URF. Esto es para hacer pruebas principalmente.</translation>
     </message>
     <message>
         <source>Force-include document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar incluisión de formato de documento</translation>
     </message>
     <message>
         <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar la inclusión del atributo de formato de documento. Algunas impresoras tienen problemas para reconocer ciertos formatos, a veces es útil incluir este atributo aunque la impresora no asegure que lo soporte.</translation>
     </message>
     <message>
         <source>Remove redundant attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar atributos redundantes</translation>
     </message>
     <message>
         <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina los atributos IPP redundantes, si también se transmiten en el formato de transferencia. Algunas impresoras rechazan el trabajo aunque la configuración sea coherente.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar página de advertencia sobre las dependencias opcionales no instaladas cuando no están instaladas.</translation>
     </message>
 </context>
 <context>
@@ -450,127 +450,127 @@
     </message>
     <message>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
         <source>Postscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Postscript</translation>
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>ráster-PWG</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>ráster-URF</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
         <source>GIF</source>
-        <translation type="unfinished"></translation>
+        <translation>GIF</translation>
     </message>
     <message>
         <source>auto-sense</source>
-        <translation type="unfinished"></translation>
+        <translation>auto-detección</translation>
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation type="unfinished"></translation>
+        <translation>bandeja bypass</translation>
     </message>
     <message>
         <source>tray</source>
-        <translation type="unfinished"></translation>
+        <translation>bandeja</translation>
     </message>
     <message>
         <source>bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>inferior</translation>
     </message>
     <message>
         <source>center</source>
-        <translation type="unfinished"></translation>
+        <translation>centro</translation>
     </message>
     <message>
         <source>main</source>
-        <translation type="unfinished"></translation>
+        <translation>principal</translation>
     </message>
     <message>
         <source>manual</source>
-        <translation type="unfinished"></translation>
+        <translation>manual</translation>
     </message>
     <message>
         <source>middle</source>
-        <translation type="unfinished"></translation>
+        <translation>medio</translation>
     </message>
     <message>
         <source>photo</source>
-        <translation type="unfinished"></translation>
+        <translation>foto</translation>
     </message>
     <message>
         <source>rear</source>
-        <translation type="unfinished"></translation>
+        <translation>posterior</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>derecho</translation>
     </message>
     <message>
         <source>side</source>
-        <translation type="unfinished"></translation>
+        <translation>cara</translation>
     </message>
     <message>
         <source>top</source>
-        <translation type="unfinished"></translation>
+        <translation>superior</translation>
     </message>
     <message>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>automático</translation>
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>auto blanco y negro</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>dos niveles</translation>
     </message>
     <message>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>color</translation>
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>resaltado</translation>
     </message>
     <message>
         <source>monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>blanco y negro</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>proceso dos niveles</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>proceso blanco y negro</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>una cara</translation>
     </message>
     <message>
         <source>two-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>dos caras</translation>
     </message>
     <message>
         <source>two-sided flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>doble cara volteado</translation>
     </message>
 </context>
 </TS>
