@@ -28,7 +28,7 @@ Page {
             width: parent.width
             wrapMode: Text.WordWrap
 
-            text: qsTr("To install, enable delveloper mode, and open a terminal.")
+            text: qsTr("To install, enable developer mode, and open a terminal.")
         }
 
         Label {

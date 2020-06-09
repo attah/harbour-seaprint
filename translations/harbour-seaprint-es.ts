@@ -276,16 +276,16 @@
         <translation>Para convertir los archivos PDF a otros formatos necesitas las utilidades del paquete &quot;poppler-utils&quot;</translation>
     </message>
     <message>
-        <source>To install, enable delveloper mode, and open a terminal.</source>
-        <translation>Para instalar, habilita el modo de desarollador y abre Terminal.</translation>
-    </message>
-    <message>
         <source>Become root:</source>
         <translation>Acceder como root:</translation>
     </message>
     <message>
         <source>Install poppler-utils:</source>
         <translation>Instalar poppler-utils:</translation>
+    </message>
+    <message>
+        <source>To install, enable developer mode, and open a terminal.</source>
+        <translation type="unfinished">Para instalar, habilita el modo de desarrollador y abre Terminal.</translation>
     </message>
 </context>
 <context>

@@ -276,7 +276,7 @@
         <translation>为了转换PDF文件为其它格式，你需要来自包的实用程序。</translation>
     </message>
     <message>
-        <source>To install, enable delveloper mode, and open a terminal.</source>
+        <source>To install, enable developer mode, and open a terminal.</source>
         <translation>你需要开启开发者模式然后打开 terminal 来安装。</translation>
     </message>
     <message>
@@ -367,7 +367,7 @@
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation><如果没有安装可选的依赖程序，则显示警告页面。/translation>
+        <translation>如果没有安装可选的依赖程序，则显示警告页面。</translation>
     </message>
 </context>
 <context>

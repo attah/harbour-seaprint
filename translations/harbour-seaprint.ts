@@ -276,15 +276,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To install, enable delveloper mode, and open a terminal.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Become root:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Install poppler-utils:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To install, enable developer mode, and open a terminal.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
