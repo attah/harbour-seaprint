@@ -376,7 +376,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
         tmpObj["units"] = PrinterResolutionRef.toObject()["units"];
         tmpObj["x"] = (int)HwResX;
         tmpObj["y"] = (int)HwResY;
-        attrs["printer-resolution"] = tmpObj;
+        attrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
     }
 
     quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
