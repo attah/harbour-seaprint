@@ -284,22 +284,26 @@ void IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value, Bytestre
             ipp << quint16(name.length()) << name.toStdString();
             ipp << quint16(0); //Name Length
 
-            for(QJsonObject::iterator it = value.toObject().begin(); it != value.toObject().end(); it++)
-            {
+            qDebug()<< "Looping keys";
+            QJsonObject json = value.toObject();
+            foreach(const QString& key, json.keys()) {
+                QJsonObject val = json.value(key).toObject();
+                qDebug() << "Key = " << key << ", Tag = " << val["tag"];
+
                 //Member attributes
-                QJsonObject val = it.value().toObject();
+                qDebug() << "Member:" << key << val["tag"].toInt();
 
                 ipp << quint8(IppMsg::MemberName);
                 ipp << quint16(0); //Name Length
-                ipp << quint16(it.key().length()) << it.key().toStdString();
-
+                ipp << quint16(key.length()) << key.toStdString();
 
                 int t = val["tag"].toInt();
                 if (t==IppMsg::BeginCollection) {
-                    encode_sub_collection(t, it.key(), val["value"], ipp);
+                    encode_sub_collection(t, key, val["value"], ipp);
                 } else {
-                    encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp, true);
+                    encode_attr(val["tag"].toInt(), key, val["value"], ipp, true);
                 }
+
             }
             ipp << quint8(IppMsg::EndCollection);
             ipp << quint16(0); //Name Length
@@ -326,27 +330,31 @@ void IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value, Bytestre
 
 void IppMsg::encode_sub_collection(quint8 tag, QString name, QJsonValueRef value, Bytestream &ipp)
 {
+    qDebug() << "Sub Collection:" << name;
     ipp << quint8(tag);
     ipp << quint16(0); //Name
     ipp << quint16(0); //Value
 
-    for(QJsonObject::iterator it = value.toObject().begin(); it != value.toObject().end(); it++)
-    {
+    QJsonObject json = value.toObject();
+    foreach(const QString& key, json.keys()) {
+        QJsonObject val = json.value(key).toObject();
+
+        qDebug() << "Member:" << key;
         //Member attributes
-        QJsonObject val = it.value().toObject();
 
         ipp << quint8(IppMsg::MemberName);
         ipp << quint16(0); //Name Length
-        ipp << quint16(it.key().length()); //Value Length for member name
-        ipp << it.key().toStdString();
+        ipp << quint16(key.length()); //Value Length for member name
+        ipp << key.toStdString();
 
         int t = val["tag"].toInt();
         if (t==IppMsg::BeginCollection) {
-            encode_sub_collection(t, it.key(), val["value"], ipp);
+            encode_sub_collection(t, key, val["value"], ipp);
         } else { //Attribute
-            encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp, true);
+            encode_attr(val["tag"].toInt(), key, val["value"], ipp, true);
         }
     }
+
     ipp << quint8(IppMsg::EndCollection);
     ipp << quint16(0); //Name Length
     ipp << quint16(0); //Value Length
