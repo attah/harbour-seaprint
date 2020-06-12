@@ -78,7 +78,9 @@ public:
 
 protected:
 private:
-    QString consume_attribute(QJsonObject& attrs, Bytestream& data, QString lastName);
+    QJsonValue consume_value(quint8 tag, Bytestream& data);
+    QJsonArray get_unnamed_attributes(Bytestream& data);
+    QString consume_attribute(QJsonObject& attrs, Bytestream& data);
     Bytestream encode_attr(quint8 tag, QString name, QJsonValueRef value);
 
     QJsonObject _opAttrs;

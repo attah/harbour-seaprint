@@ -34,8 +34,6 @@ IppMsg::IppMsg(QNetworkReply* resp)
     QJsonObject attrs;
     IppMsg::IppTag currentAttrType = IppTag::EndAttrs;
 
-    QString last_name;
-
     while(!bts.atEnd())
     {
         if(bts.peekU8() <= IppTag::UnsupportedAttrs) {
@@ -62,24 +60,15 @@ IppMsg::IppMsg(QNetworkReply* resp)
 
         }
         else {
-            last_name = consume_attribute(attrs, bts, last_name);
+            consume_attribute(attrs, bts);
         }
     }
 }
 
-QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString lastName)
+QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
 {
-    quint8 tag;
-    quint16 tmp_len;
-    QString name;
     QJsonValue value;
-    std::string tmp_str = "";
-    bool noList = false;
-
-    data >> tag >> tmp_len;
-
-    data/tmp_len >> tmp_str;
-    name = tmp_str!="" ? tmp_str.c_str() : lastName;
+    quint16 tmp_len;
 
     switch (tag) {
         case OpAttrs:
@@ -98,7 +87,6 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString 
             quint8 tmp_bool;
             data >> tmp_len >> tmp_bool;
             value = (bool)tmp_bool;
-            noList = true;
             break;
         case DateTime:
         {
@@ -133,7 +121,6 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString 
             tmp_range.insert("low", low);
             tmp_range.insert("high", high);
             value = tmp_range;
-            noList = true;
             break;
         }
         case OctetStringUnknown:
@@ -148,31 +135,65 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data, QString 
         case NaturalLanguage:
         case MimeMediaType:
         default:
+        {
+            std::string tmp_str = "";
             data >> tmp_len;
             data/tmp_len >> tmp_str;
             value = tmp_str.c_str();
             break;
+        }
     };
+    return value;
+}
 
-
-    if(attrs.contains(name))
+QJsonArray IppMsg::get_unnamed_attributes(Bytestream& data)
+{
+    quint8 tag;
+    QJsonArray attrs;
+    while(data.remaining())
     {
-        QJsonObject tmp = attrs[name].toObject();
-        QJsonArray tmpa;
-        if(tmp["value"].isArray())
+        data >> tag;
+        if(data >>= (quint16)0)
         {
-            tmpa = tmp["value"].toArray();
+            attrs.append(consume_value(tag, data));
         }
         else
         {
-            tmpa = QJsonArray {tmp["value"]};
+            data -= 1;
+            break;
         }
-        tmpa.append(value);
-        tmp["value"] = tmpa;
-        attrs.insert(name, tmp);
+    }
+    return attrs;
+}
+
+QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
+{
+    quint8 tag;
+    quint16 tmp_len;
+    QString name;
+    QJsonValue value;
+    std::string tmp_str = "";
+
+    data >> tag >> tmp_len;
+
+    data/tmp_len >> tmp_str;
+    QString name0 = tmp_str.c_str();
+    name = tmp_str.c_str();
+
+    value = consume_value(tag, data);
+
+    QJsonArray unnamed = get_unnamed_attributes(data);
+
+    qDebug() << name0 << tag << tmp_len << value << unnamed;
+
+    if(!unnamed.empty())
+    {
+        unnamed.prepend(value);
+        attrs.insert(name, QJsonObject {{"tag", tag}, {"value", unnamed}});
     }
     else
     {
+        bool noList = value.isObject() || value.isBool();
         if((name.endsWith("-supported") || name == "printer-icons") && !noList)
         {
             value = QJsonArray {value};
