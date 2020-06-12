@@ -1,7 +1,7 @@
 #include "ippmsg.h"
 
-#define MAJ_VSN 1
-#define MIN_VSN 1
+#define MAJ_VSN 2
+#define MIN_VSN 0
 
 quint32 IppMsg::_reqid=1;
 
@@ -187,7 +187,6 @@ QByteArray IppMsg::encode(Operation op)
     Bytestream ipp;
 
     ipp << quint8(MAJ_VSN) << quint8(MIN_VSN);
-
     ipp << quint16(op);
     ipp << _reqid++;
 
@@ -197,7 +196,7 @@ QByteArray IppMsg::encode(Operation op)
         for(QJsonObject::iterator it = _opAttrs.begin(); it != _opAttrs.end(); it++)
         {
             QJsonObject val = it.value().toObject();
-            ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+            encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp);
         }
     }
     for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
@@ -208,7 +207,7 @@ QByteArray IppMsg::encode(Operation op)
             for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
             {
                 QJsonObject val = it.value().toObject();
-                ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+                encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp);
             }
         }
     }
@@ -218,7 +217,7 @@ QByteArray IppMsg::encode(Operation op)
     return QByteArray((char*)(ipp.raw()), ipp.size());
 }
 
-Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
+void IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value, Bytestream &ipp, bool inset)
 {
     Bytestream req;
 
@@ -232,7 +231,7 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         case Enum:
         {
             quint32 tmp_u32 = value.toInt();
-            req << (quint16)4 << tmp_u32;
+            req << (quint16)4 << (quint32)tmp_u32;
             break;
         }
         case Boolean:
@@ -278,17 +277,78 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
             req.putBytes(tmpstr.data(), tmpstr.length());
             break;
         }
+        case BeginCollection:
+        {
+            qDebug() << "Encoding collection:" << name << value;
+            ipp << quint8(tag);
+            ipp << quint16(name.length()) << name.toStdString();
+            ipp << quint16(0); //Name Length
+
+            for(QJsonObject::iterator it = value.toObject().begin(); it != value.toObject().end(); it++)
+            {
+                //Member attributes
+                QJsonObject val = it.value().toObject();
+
+                ipp << quint8(IppMsg::MemberName);
+                ipp << quint16(0); //Name Length
+                ipp << quint16(it.key().length()) << it.key().toStdString();
+
+
+                int t = val["tag"].toInt();
+                if (t==IppMsg::BeginCollection) {
+                    encode_sub_collection(t, it.key(), val["value"], ipp);
+                } else {
+                    encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp, true);
+                }
+            }
+            ipp << quint8(IppMsg::EndCollection);
+            ipp << quint16(0); //Name Length
+            ipp << quint16(0); //Value Length
+            return;
+        }
         default:
             qDebug() << "uncaught tag" << tag;
             Q_ASSERT(false);
             break;
     }
 
-    Bytestream actual;
     if(req.size() != 0)
     {
-        actual << tag << quint16(name.length()) << name.toStdString() << req;
+        ipp << tag;
+        if (inset) {
+            ipp << quint16(0);
+        } else {
+            ipp << quint16(name.length()) << name.toStdString();
+        }
+        ipp << req;
     }
+}
 
-    return actual;
+void IppMsg::encode_sub_collection(quint8 tag, QString name, QJsonValueRef value, Bytestream &ipp)
+{
+    ipp << quint8(tag);
+    ipp << quint16(0); //Name
+    ipp << quint16(0); //Value
+
+    for(QJsonObject::iterator it = value.toObject().begin(); it != value.toObject().end(); it++)
+    {
+        //Member attributes
+        QJsonObject val = it.value().toObject();
+
+        ipp << quint8(IppMsg::MemberName);
+        ipp << quint16(0); //Name Length
+        ipp << quint16(it.key().length()); //Value Length for member name
+        ipp << it.key().toStdString();
+
+        int t = val["tag"].toInt();
+        if (t==IppMsg::BeginCollection) {
+            encode_sub_collection(t, it.key(), val["value"], ipp);
+        } else { //Attribute
+            encode_attr(val["tag"].toInt(), it.key(), val["value"], ipp, true);
+        }
+    }
+    ipp << quint8(IppMsg::EndCollection);
+    ipp << quint16(0); //Name Length
+    ipp << quint16(0); //Value Length
+
 }
