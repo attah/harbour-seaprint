@@ -121,11 +121,6 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
             _attrs = resp.getPrinterAttrs();
-            if(resp.getOpAttrs().keys().contains("status-message"))
-            { // Sometimes there are no response attributes at all,
-              // maybe status-message from the operation attributes is somewhat useful
-                _attrs["status-message"] = resp.getOpAttrs()["status-message"];
-            }
         }
         catch(std::exception e)
         {
@@ -170,6 +165,11 @@ void IppPrinter::printRequestFinished(QNetworkReply *reply)
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             _jobAttrs = resp.getJobAttrs()[0].toObject();
+            if(resp.getOpAttrs().keys().contains("status-message"))
+            { // Sometimes there are no response attributes at all,
+              // maybe status-message from the operation attributes is somewhat useful
+                _jobAttrs["status-message"] = resp.getOpAttrs()["status-message"];
+            }
             status = resp.getStatus() <= 0xff;
         }
         catch(std::exception e)
