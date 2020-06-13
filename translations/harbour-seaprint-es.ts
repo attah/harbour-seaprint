@@ -350,14 +350,6 @@
         <translation>Forzar conversión a formato ráster PWG/URF. Esto es para hacer pruebas principalmente.</translation>
     </message>
     <message>
-        <source>Force-include document format</source>
-        <translation>Forzar incluisión de formato de documento</translation>
-    </message>
-    <message>
-        <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
-        <translation>Forzar la inclusión del atributo de formato de documento. Algunas impresoras tienen problemas para reconocer ciertos formatos, a veces es útil incluir este atributo aunque la impresora no asegure que lo soporte.</translation>
-    </message>
-    <message>
         <source>Remove redundant attributes</source>
         <translation>Eliminar atributos redundantes</translation>
     </message>

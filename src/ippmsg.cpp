@@ -297,14 +297,23 @@ QByteArray IppMsg::encode(Operation op)
     ipp << quint16(op);
     ipp << _reqid++;
 
-    if(!_opAttrs.empty())
+
+    ipp << quint8(OpAttrs);
+    // attributes-charset and attributes-natural-language are required to be first
+    // some printers fail if the other mandatory parameters are not in this specific order
+    QStringList InitialAttrs = {"attributes-charset",
+                                "attributes-natural-language",
+                                "printer-uri",
+                                "requesting-user-name"};
+    foreach(QString key, InitialAttrs)
     {
-        ipp << quint8(1);
-        for(QJsonObject::iterator it = _opAttrs.begin(); it != _opAttrs.end(); it++)
-        {
-            QJsonObject val = it.value().toObject();
-            ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
-        }
+        QJsonObject val = _opAttrs.take(key).toObject();
+        ipp << encode_attr(val["tag"].toInt(), key, val["value"]);
+    }
+    for(QJsonObject::iterator it = _opAttrs.begin(); it != _opAttrs.end(); it++)
+    { // encode any remaining op-attrs
+        QJsonObject val = it.value().toObject();
+        ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
     }
     for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
     {

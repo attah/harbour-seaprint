@@ -350,14 +350,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Force-include document format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove redundant attributes</source>
         <translation type="unfinished"></translation>
     </message>

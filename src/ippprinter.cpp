@@ -299,10 +299,10 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 }
 
 void IppPrinter::print(QJsonObject attrs, QString filename,
-                       bool alwaysConvert, bool forceIncluDeDocumentFormat, bool removeRedundantConvertAttrs)
+                       bool alwaysConvert, bool removeRedundantConvertAttrs)
 {
     qDebug() << "printing" << filename << attrs
-             << alwaysConvert << forceIncluDeDocumentFormat << removeRedundantConvertAttrs;
+             << alwaysConvert << removeRedundantConvertAttrs;
 
     _progress = "";
     emit progressChanged();
@@ -337,6 +337,10 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
     qDebug() << "target format:" << documentFormat << "alwaysConvert:" << alwaysConvert;
 
+    // document-format goes in the op-attrs and not the job-attrs
+    o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", documentFormat}});
+    attrs.remove("document-format");
+
     documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes, alwaysConvert);
     qDebug() << "adjusted target format:" << documentFormat;
 
@@ -344,11 +348,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     {
         emit convertFailed(tr("Unknown document format"));
         return;
-    }
-
-    if(!jobCreationAttributes.contains("document-format") && !forceIncluDeDocumentFormat)
-    { // Only include if printer supports it
-        attrs.remove("document-format");
     }
 
     qDebug() << "Printing job" << o << attrs;
@@ -404,6 +403,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
         attrs.remove("sides");
     }
 
+    qDebug() << "Final op attributes:" << o;
     qDebug() << "Final job attributes:" << attrs;
 
     IppMsg job = mk_msg(o, attrs);

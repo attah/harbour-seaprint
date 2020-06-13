@@ -49,15 +49,6 @@ Page {
             }
 
             TextSwitch {
-                text: qsTr("Force-include document format")
-                description: qsTr("Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.")
-                checked: forceIncluDeDocumentFormatSetting.value
-                onCheckedChanged: {
-                    forceIncluDeDocumentFormatSetting.value = checked
-                }
-            }
-
-            TextSwitch {
                 text: qsTr("Remove redundant attributes")
                 description: qsTr("Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.")
                 checked: removeRedundantConvertAttrsSetting.value

@@ -28,7 +28,6 @@ Page {
                                           PageStackAction.Immediate)
                         printer.print(jobParams, page.selectedFile,
                                       alwaysConvertSetting.value,
-                                      forceIncluDeDocumentFormatSetting.value,
                                       removeRedundantConvertAttrsSetting.value)
                     }
                 }
@@ -118,21 +117,12 @@ Page {
                                           prettyName: prettyName,
                                           tag: tag,
                                           valid: printer.attrs.hasOwnProperty(name+"-supported"),
-                                          choices: maybeSupplementChoices(name, printer.attrs[name+"-supported"].value),
+                                          choices: printer.attrs[name+"-supported"].value,
                                           default_choice: printer.attrs[name+"-default"].value,
                                           mime_type: Mimer.get_type(selectedFile)
                                          })
                         break
                     }
-                }
-
-                function maybeSupplementChoices(name, choices)
-                {
-                    if(name == "document-format" && considerAdditionalFormatsSetting.value)
-                    {
-                        return choices.concat(printer.additionalDocumentFormats)
-                    }
-                    return choices
                 }
 
             }
