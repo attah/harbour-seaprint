@@ -143,7 +143,7 @@ QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
             break;
         }
     };
-    return value;
+    return QJsonObject {{"tag", tag}, {"value", value}};
 }
 
 QJsonArray IppMsg::get_unnamed_attributes(Bytestream& data)
@@ -166,12 +166,92 @@ QJsonArray IppMsg::get_unnamed_attributes(Bytestream& data)
     return attrs;
 }
 
+QJsonArray untag_values(QJsonArray taggedValues)
+{
+    QJsonArray res;
+    foreach(QJsonValue it, taggedValues)
+    {
+        res.append(it.toObject()["value"]);
+    }
+    return res;
+}
+
+QJsonValue IppMsg::collect_attributes(QJsonArray& attrs)
+{
+    QJsonArray resArr;
+    QJsonObject resObj = QJsonObject();
+    while(!attrs.empty())
+    {
+        QJsonObject tmpobj = attrs.takeAt(0).toObject();
+        quint8 tag = tmpobj["tag"].toInt();
+        if(tag == MemberName)
+        {
+            QString key = tmpobj["value"].toString();
+            tmpobj = attrs.takeAt(0).toObject();
+            if(tmpobj["tag"] == BeginCollection)
+            {
+                resObj[key] = collect_attributes(attrs);
+            }
+            else
+            { // This should be general data attributes
+                QJsonArray restOfSet;
+                while(attrs.begin()->toObject()["tag"] == tmpobj["tag"])
+                {
+                    restOfSet.append(attrs.takeAt(0));
+                }
+
+                if(restOfSet.empty())
+                {
+                    resObj[key] = tmpobj;
+                }
+                else
+                {
+                    restOfSet.prepend(tmpobj);
+                    tmpobj["value"] = untag_values(restOfSet);
+                    resObj[key] = tmpobj;
+                }
+            }
+        }
+        else if(tag == EndCollection)
+        {
+            resArr.append(resObj);
+            resObj = QJsonObject();
+            if(attrs.empty())
+            { // end of collection
+                break;
+            }
+            else if(attrs.begin()->toObject()["tag"] == BeginCollection)
+            { // this is a 1setOf
+                continue;
+            }
+            else
+            { // the following attribute(s) belong to an outer collection
+                break;
+            }
+        }
+        else
+        {
+            qDebug() << "out of sync with collection" << tmpobj;
+            Q_ASSERT("NOOOOO!");
+        }
+    }
+
+    if(resArr.size()==1)
+    { // The code above unconditionally produces arrays, collapse if they are just a single object
+        return resArr.first();
+    }
+    else
+    {
+        return resArr;
+    }
+}
+
 QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
 {
     quint8 tag;
     quint16 tmp_len;
     QString name;
-    QJsonValue value;
+    QJsonValue taggedValue;
     std::string tmp_str = "";
 
     data >> tag >> tmp_len;
@@ -180,25 +260,33 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
     QString name0 = tmp_str.c_str();
     name = tmp_str.c_str();
 
-    value = consume_value(tag, data);
+    taggedValue = consume_value(tag, data);
 
     QJsonArray unnamed = get_unnamed_attributes(data);
 
-    qDebug() << name0 << tag << tmp_len << value << unnamed;
+//    qDebug() << name0 << tag << tmp_len << value << unnamed;
 
-    if(!unnamed.empty())
+    if(tag == BeginCollection)
     {
-        unnamed.prepend(value);
-        attrs.insert(name, QJsonObject {{"tag", tag}, {"value", unnamed}});
+        qDebug() << "Unnamed attrs for collection" << unnamed;
+
+        QJsonValue collected = collect_attributes(unnamed);
+        qDebug() << "collected" << collected;
+        taggedValue = QJsonObject {{"tag", tag}, {"value", collected}};
+    }
+
+    bool noList = (tag == Boolean || tag == IntegerRange);
+    bool forceArray = ((name.endsWith("-supported") || name == "printer-icons") && !noList);
+
+    if(!unnamed.empty() || forceArray)
+    {
+        unnamed.prepend(taggedValue);
+        attrs.insert(name, QJsonObject {{"tag", tag}, {"value", untag_values(unnamed)}});
+
     }
     else
     {
-        bool noList = value.isObject() || value.isBool();
-        if((name.endsWith("-supported") || name == "printer-icons") && !noList)
-        {
-            value = QJsonArray {value};
-        }
-        attrs.insert(name, QJsonObject {{"tag", tag}, {"value", value}});
+        attrs.insert(name, taggedValue);
     }
     return name;
 }

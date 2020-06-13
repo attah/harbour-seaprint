@@ -30,8 +30,10 @@ public:
         DateTime            = 0x31,
         Resolution          = 0x32,
         IntegerRange        = 0x33,
+        BeginCollection     = 0x34,
         TextWithLanguage    = 0x35,
         NameWithLanguage    = 0x36,
+        EndCollection       = 0x37,
         TextWithoutLanguage = 0x41,
         NameWithoutLanguage = 0x42,
         Keyword             = 0x44,
@@ -39,7 +41,8 @@ public:
         UriScheme           = 0x46,
         Charset             = 0x47,
         NaturalLanguage     = 0x48,
-        MimeMediaType       = 0x49
+        MimeMediaType       = 0x49,
+        MemberName          = 0x4A
     };
     Q_ENUMS(IppTag)
 
@@ -80,6 +83,7 @@ protected:
 private:
     QJsonValue consume_value(quint8 tag, Bytestream& data);
     QJsonArray get_unnamed_attributes(Bytestream& data);
+    QJsonValue collect_attributes(QJsonArray& attrs);
     QString consume_attribute(QJsonObject& attrs, Bytestream& data);
     Bytestream encode_attr(quint8 tag, QString name, QJsonValueRef value);
 
