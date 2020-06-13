@@ -189,7 +189,8 @@ Page {
 
                     height: Theme.itemSizeLarge
                     width: Theme.itemSizeLarge
-                    source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+printer.attrs["printer-icons"].value[0] : "icon-seaprint-nobg.svg"
+                    source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+Utils.selectIcon(printer.attrs["printer-icons"].value)
+                                                           : "icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
                     onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
 

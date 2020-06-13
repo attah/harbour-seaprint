@@ -254,6 +254,18 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
     }
 }
 
+function selectIcon(icons)
+{
+    for(var i=0; i < icons.length; i++)
+    {
+        if(endsWith("M.png", icons[i]) || endsWith("128x128.png", icons[i]))
+        {
+            return icons[i];
+        }
+    }
+    return icons[0];
+}
+
 var media =
        {"asme_f_28x40in": "28 x 40″",
         "choice_iso_a4_210x297mm_na_letter_8.5x11in": "A4 or US Letter",
