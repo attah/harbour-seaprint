@@ -135,14 +135,14 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
         for (QStringList::iterator it = printerDeviceId.begin(); it != printerDeviceId.end(); it++)
         {
             QStringList kv = it->split(":");
-            if(kv.length()==2 && kv[0]=="CMD")
+            if(kv.length()==2 && (kv[0]=="CMD" || kv[0]=="COMMAND SET"))
             {
-                QStringList cmds = kv[1].split(",");
-                if(cmds.contains("PDF") && !supportedMimeTypes.contains("application/pdf"))
+                if(!supportedMimeTypes.contains("application/pdf") && kv[1].contains("PDF"))
                 {
                     _additionalDocumentFormats.append("application/pdf");
                 }
-                if(cmds.contains("POSTSCRIPT") && !supportedMimeTypes.contains("application/postscript"))
+                if(!supportedMimeTypes.contains("application/postscript") &&
+                   kv[1].contains("Postscript", Qt::CaseInsensitive))
                 {
                     _additionalDocumentFormats.append("application/postscript");
                 }
@@ -178,7 +178,8 @@ void IppPrinter::printRequestFinished(QNetworkReply *reply)
         }
     }
     else {
-        _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage}, {"value", "Network error"}});
+        _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage},
+                                                           {"value", "Network error"}});
     }
     emit jobAttrsChanged();
     emit jobFinished(status);
