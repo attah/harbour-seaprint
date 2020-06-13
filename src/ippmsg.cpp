@@ -187,7 +187,7 @@ QJsonValue IppMsg::collect_attributes(QJsonArray& attrs)
             tmpobj = attrs.takeAt(0).toObject();
             if(tmpobj["tag"] == BeginCollection)
             {
-                resObj[key] = collect_attributes(attrs);
+                resObj[key] = QJsonObject {{"tag", BeginCollection}, {"value", collect_attributes(attrs)}};
             }
             else
             { // This should be general data attributes
@@ -333,10 +333,16 @@ QByteArray IppMsg::encode(Operation op)
     return QByteArray((char*)(ipp.raw()), ipp.size());
 }
 
-void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValueRef value)
+void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue value, bool inCollection)
 {
 
+    if(inCollection)
+    {
+        msg << (quint8)MemberName  << (quint16)0 << (quint16)name.length() << name.toStdString();
+        name = "";
+    }
     msg << tag << quint16(name.length()) << name.toStdString();
+
 
     switch (tag) {
         case OpAttrs:
@@ -375,6 +381,26 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValueRe
             qint32 low = value.toObject()["low"].toInt();
             qint32 high = value.toObject()["high"].toInt();
             msg << (quint16)8 << low << high;
+            break;
+        }
+        case BeginCollection:
+        {
+            msg << (quint16)0; // length of value
+            if(value.isObject())
+            {
+                QJsonObject collection = value.toObject();
+                foreach(QString key, collection.keys())
+                {
+                    encode_attr(msg, collection[key].toObject()["tag"].toInt(), key,
+                                collection[key].toObject()["value"], true);
+                }
+            }
+            else
+            {
+                // TODO add support for 1-setOf in collections
+                Q_ASSERT("FIXME-array");
+            }
+            msg << (quint8)EndCollection << (quint16)0 << (quint16)0;
             break;
         }
         case OctetStringUnknown:
