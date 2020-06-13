@@ -405,7 +405,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
 
     qDebug() << "Final job attributes:" << attrs;
 
-    IppMsg job = IppMsg(o, attrs);
+    IppMsg job = mk_msg(o, attrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
                                        // Always convert images to get resizing
     if((mimeType == documentFormat) && !mimeType.contains("image"))
@@ -540,4 +540,15 @@ QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name)
     else {
         return _attrs[name+"-default"].toObject()["value"];
     }
+}
+
+IppMsg IppPrinter::mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs)
+{
+    if(_attrs.contains("ipp-versions-supported") &&
+       _attrs["ipp-versions-supported"].toObject()["value"].toArray().contains("2.0"))
+    {
+        qDebug() << "TWO-POINT-ZERO";
+        return IppMsg(opAttrs, jobAttrs, 2, 0);
+    }
+    return IppMsg(opAttrs, jobAttrs);
 }

@@ -79,6 +79,8 @@ private:
 
     QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name);
 
+    IppMsg mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject());
+
     QNetworkAccessManager* _nam;
     QNetworkAccessManager* _jobs_nam;
     QNetworkAccessManager* _job_cancel_nam;

@@ -1,16 +1,15 @@
 #include "ippmsg.h"
 
-#define MAJ_VSN 1
-#define MIN_VSN 1
-
 quint32 IppMsg::_reqid=1;
 
 IppMsg::IppMsg()
 {
 }
 
-IppMsg::IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs)
+IppMsg::IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs, quint8 majVsn, quint8 minVsn)
 {
+    _majVsn = majVsn;
+    _minVsn = minVsn;
     _opAttrs = opAttrs;
     _jobAttrs = QJsonArray {jobAttrs};
 }
@@ -25,11 +24,9 @@ IppMsg::IppMsg(QNetworkReply* resp)
     QByteArray tmp = resp->readAll();
     Bytestream bts(tmp.constData(), tmp.length());
 
-    quint8 majVsn;
-    quint8 minVsn;
     quint32 reqId;
 
-    bts >> majVsn >> minVsn >> _status >> reqId;
+    bts >> _majVsn >> _minVsn >> _status >> reqId;
 
     QJsonObject attrs;
     IppMsg::IppTag currentAttrType = IppTag::EndAttrs;
@@ -295,7 +292,7 @@ QByteArray IppMsg::encode(Operation op)
 {
     Bytestream ipp;
 
-    ipp << quint8(MAJ_VSN) << quint8(MIN_VSN);
+    ipp << _majVsn << _minVsn;
 
     ipp << quint16(op);
     ipp << _reqid++;

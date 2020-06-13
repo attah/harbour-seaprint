@@ -67,7 +67,7 @@ public:
 
     explicit IppMsg();
     explicit IppMsg(QNetworkReply* resp);
-    IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs = QJsonObject());
+    IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject(), quint8 majVsn=1, quint8 minVsn=1);
     IppMsg(const IppMsg& other) = default;
     ~IppMsg();
 
@@ -86,6 +86,9 @@ private:
     QJsonValue collect_attributes(QJsonArray& attrs);
     QString consume_attribute(QJsonObject& attrs, Bytestream& data);
     Bytestream encode_attr(quint8 tag, QString name, QJsonValueRef value);
+
+    quint8 _majVsn;
+    quint8 _minVsn;
 
     QJsonObject _opAttrs;
     QJsonArray _jobAttrs;
