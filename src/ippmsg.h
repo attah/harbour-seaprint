@@ -85,7 +85,7 @@ private:
     QJsonArray get_unnamed_attributes(Bytestream& data);
     QJsonValue collect_attributes(QJsonArray& attrs);
     QString consume_attribute(QJsonObject& attrs, Bytestream& data);
-    Bytestream encode_attr(quint8 tag, QString name, QJsonValueRef value);
+    void encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValueRef value);
 
     quint8 _majVsn;
     quint8 _minVsn;

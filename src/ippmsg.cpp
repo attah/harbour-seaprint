@@ -308,12 +308,12 @@ QByteArray IppMsg::encode(Operation op)
     foreach(QString key, InitialAttrs)
     {
         QJsonObject val = _opAttrs.take(key).toObject();
-        ipp << encode_attr(val["tag"].toInt(), key, val["value"]);
+        encode_attr(ipp, val["tag"].toInt(), key, val["value"]);
     }
     for(QJsonObject::iterator it = _opAttrs.begin(); it != _opAttrs.end(); it++)
     { // encode any remaining op-attrs
         QJsonObject val = it.value().toObject();
-        ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+        encode_attr(ipp, val["tag"].toInt(), it.key(), val["value"]);
     }
     for(QJsonArray::iterator ait = _jobAttrs.begin(); ait != _jobAttrs.end(); ait++)
     {
@@ -323,7 +323,7 @@ QByteArray IppMsg::encode(Operation op)
             for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
             {
                 QJsonObject val = it.value().toObject();
-                ipp << encode_attr(val["tag"].toInt(), it.key(), val["value"]);
+                encode_attr(ipp, val["tag"].toInt(), it.key(), val["value"]);
             }
         }
     }
@@ -333,9 +333,10 @@ QByteArray IppMsg::encode(Operation op)
     return QByteArray((char*)(ipp.raw()), ipp.size());
 }
 
-Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
+void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValueRef value)
 {
-    Bytestream req;
+
+    msg << tag << quint16(name.length()) << name.toStdString();
 
     switch (tag) {
         case OpAttrs:
@@ -347,13 +348,13 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         case Enum:
         {
             quint32 tmp_u32 = value.toInt();
-            req << (quint16)4 << tmp_u32;
+            msg << (quint16)4 << tmp_u32;
             break;
         }
         case Boolean:
         {
             quint32 tmp_u8 = value.toBool();
-            req << (quint16)1 << tmp_u8;
+            msg << (quint16)1 << tmp_u8;
             break;
         }
         case DateTime:
@@ -366,14 +367,14 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
             qint32 x = value.toObject()["x"].toInt();
             qint32 y = value.toObject()["y"].toInt();
             qint8 units = value.toObject()["units"].toInt();
-            req << (quint16)9 << x << y << units;
+            msg << (quint16)9 << x << y << units;
             break;
         }
         case IntegerRange:
         {
             qint32 low = value.toObject()["low"].toInt();
             qint32 high = value.toObject()["high"].toInt();
-            req << (quint16)8 << low << high;
+            msg << (quint16)8 << low << high;
             break;
         }
         case OctetStringUnknown:
@@ -389,8 +390,8 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
         case MimeMediaType:
         {
             QByteArray tmpstr = value.toString().toUtf8();
-            req << quint16(tmpstr.length());
-            req.putBytes(tmpstr.data(), tmpstr.length());
+            msg << quint16(tmpstr.length());
+            msg.putBytes(tmpstr.data(), tmpstr.length());
             break;
         }
         default:
@@ -398,12 +399,4 @@ Bytestream IppMsg::encode_attr(quint8 tag, QString name, QJsonValueRef value)
             Q_ASSERT(false);
             break;
     }
-
-    Bytestream actual;
-    if(req.size() != 0)
-    {
-        actual << tag << quint16(name.length()) << name.toStdString() << req;
-    }
-
-    return actual;
 }
