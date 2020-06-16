@@ -225,6 +225,10 @@
         <source>Unknown document format</source>
         <translation>Formato de documento desconocido</translation>
     </message>
+    <message>
+        <source>Unknown document format dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>

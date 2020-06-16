@@ -106,6 +106,7 @@ void IppPrinter::refresh() {
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     QJsonObject o = opAttrs();
+
     IppMsg msg = IppMsg(o);
     _nam->post(request, msg.encode(IppMsg::GetPrinterAttrs));
 
@@ -332,7 +333,35 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
-    QJsonArray jobCreationAttributes = _attrs["job-creation-attributes-supported"].toObject()["value"].toArray();
+    QString PaperSize = getAttrOrDefault(attrs, "media").toString();
+
+    if(attrs.contains("media-col") && attrs.contains("media-col"))
+    {
+        qDebug() << "moving media to media-col" << PaperSize;
+        if(!PaperSizes.contains(PaperSize))
+        {
+            emit convertFailed(tr("Unknown document format dimensions"));
+            return;
+        }
+
+        int x = PaperSizes[PaperSize].first*100;
+        int y = PaperSizes[PaperSize].second*100;
+
+        QJsonObject Dimensions =
+            {{"tag", IppMsg::BeginCollection},
+             {"value", QJsonObject { {"x-dimension", QJsonObject{{"tag", IppMsg::Integer}, {"value", x}}},
+                                     {"y-dimension", QJsonObject{{"tag", IppMsg::Integer}, {"value", y}}} }
+             }};
+
+        // TODO: make a setter function
+        QJsonObject MediaCol = attrs["media-col"].toObject();
+        QJsonObject MediaColValue = MediaCol["value"].toObject();
+        MediaColValue["media-size"] = Dimensions;
+        MediaCol["value"] = MediaColValue;
+        attrs["media-col"] = MediaCol;
+
+        attrs.remove("media");
+    }
 
     QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
     qDebug() << "target format:" << documentFormat << "alwaysConvert:" << alwaysConvert;
@@ -384,7 +413,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
 
-    QString PaperSize = getAttrOrDefault(attrs, "media").toString();
     if(!PaperSizes.contains(PaperSize))
     {
         emit convertFailed(tr("Unsupported print media"));
