@@ -24,7 +24,7 @@ Setting {
                 maximumValue: high < 100 ? high : 100
                 width: parent.width
                 stepSize: 1
-                value: choice
+                value: choice ? choice : default_choice
                 onValueChanged:
                 {
                     choice = value;

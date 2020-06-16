@@ -258,6 +258,17 @@
     </message>
 </context>
 <context>
+    <name>MediaColSetting</name>
+    <message>
+        <source>true</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>false</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
@@ -324,6 +335,10 @@
     </message>
     <message>
         <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zero margins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

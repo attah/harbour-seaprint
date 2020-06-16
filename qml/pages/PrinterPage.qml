@@ -45,6 +45,7 @@ Page {
             ListElement {name: "printer-resolution";        prettyName: qsTr("Resolution");         tag: IppMsg.Resolution}
             ListElement {name: "document-format";           prettyName: qsTr("Transfer format");    tag: IppMsg.MimeMediaType}
             ListElement {name: "media-source";              prettyName: qsTr("Media source");       tag: IppMsg.Keyword}
+            ListElement {name: "media-col";                 prettyName: qsTr("Zero margins");       tag: IppMsg.BeginCollection}
         }
 
         SilicaListView {
@@ -74,6 +75,7 @@ Page {
                     anchors.fill: parent
 
                     onLoaded: {
+                        delegate.visible = true
                         if(loaderItem.menu.enabled)
                         {
                             menu = loaderItem.menu
@@ -81,7 +83,14 @@ Page {
                         }
                         loaderItem.choiceMade.connect(function(tag, choice) {
                             console.log("choice changed", tag, JSON.stringify(choice))
-                            jobParams[name] = {tag: tag, value: choice};
+                            if(choice != undefined)
+                            {
+                                jobParams[name] = {tag: tag, value: choice};
+                            }
+                            else
+                            {
+                                jobParams[name] = undefined
+                            }
                             console.log(JSON.stringify(jobParams));
                         })
                     }
@@ -97,7 +106,7 @@ Page {
                                           valid: printer.attrs.hasOwnProperty(name+"-supported"),
                                           low: printer.attrs[name+"-supported"].value.low,
                                           high: printer.attrs[name+"-supported"].value.high,
-                                          default_choice: printer.attrs[name+"-default"].value
+                                          default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : undefined
                                          })
                         break
                     case IppMsg.IntegerRange:
@@ -118,10 +127,18 @@ Page {
                                           tag: tag,
                                           valid: printer.attrs.hasOwnProperty(name+"-supported"),
                                           choices: printer.attrs[name+"-supported"].value,
-                                          default_choice: printer.attrs[name+"-default"].value,
+                                          default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : "",
                                           mime_type: Mimer.get_type(selectedFile)
                                          })
                         break
+                    case IppMsg.BeginCollection:
+                        loader.setSource("../components/MediaColSetting.qml",
+                                         {name: name,
+                                          prettyName: prettyName,
+                                          tag: tag,
+                                          valid: false,
+                                          printer: printer
+                                         })
                     }
                 }
 

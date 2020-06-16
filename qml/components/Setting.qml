@@ -7,7 +7,7 @@ Item {
     property string name
     property string prettyName
     property int tag
-    property bool valid: true
+    property bool valid: false
 
     property var choice
     property var default_choice
