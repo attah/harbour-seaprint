@@ -219,6 +219,7 @@ QJsonValue IppMsg::collect_attributes(QJsonArray& attrs)
             }
             else if(attrs.begin()->toObject()["tag"] == BeginCollection)
             { // this is a 1setOf
+                attrs.pop_front();
                 continue;
             }
             else
@@ -229,7 +230,6 @@ QJsonValue IppMsg::collect_attributes(QJsonArray& attrs)
         else
         {
             qDebug() << "out of sync with collection" << tmpobj;
-            Q_ASSERT("NOOOOO!");
         }
     }
 
@@ -265,10 +265,10 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
 
     if(tag == BeginCollection)
     {
-        qDebug() << "Unnamed attrs for collection" << unnamed;
+//        qDebug() << "Unnamed attrs for collection" << unnamed;
 
         QJsonValue collected = collect_attributes(unnamed);
-        qDebug() << "collected" << collected;
+//        qDebug() << "collected" << collected;
         taggedValue = QJsonObject {{"tag", tag}, {"value", collected}};
     }
 
