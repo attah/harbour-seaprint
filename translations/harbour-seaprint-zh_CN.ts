@@ -79,6 +79,10 @@
         <source>Not installed</source>
         <translation>未安装</translation>
     </message>
+    <message>
+        <source>Testing and Design Suggestions - piggz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
@@ -225,6 +229,10 @@
         <source>Unknown document format</source>
         <translation>未知文档格式</translation>
     </message>
+    <message>
+        <source>Unknown document format dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -255,6 +263,17 @@
     <message>
         <source>Cancelling job failed</source>
         <translation>作业失败</translation>
+    </message>
+</context>
+<context>
+    <name>MediaColSetting</name>
+    <message>
+        <source>true</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>false</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -326,6 +345,10 @@
         <source>Media source</source>
         <translation>媒体源</translation>
     </message>
+    <message>
+        <source>Zero margins</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>
@@ -350,14 +373,6 @@
         <translation>强制转换为 PWG 或 URF 光栅格式。这主要用于测试。</translation>
     </message>
     <message>
-        <source>Force-include document format</source>
-        <translation>强制包含文档格式</translation>
-    </message>
-    <message>
-        <source>Force the document-format attribute to be included. Some printers have trouble recognizing certain formats, sometimes it helps to include this atribute even if the printer does not claim to support it.</source>
-        <translation>强制包含文档格式属性。 有些打印机不能很好地识别某些特定格式。如果开启此选项，即使打印机没有声明支持此属性，也会将之包含在内。</translation>
-    </message>
-    <message>
         <source>Remove redundant attributes</source>
         <translation>移除冗余属性</translation>
     </message>
@@ -368,6 +383,14 @@
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>如果没有安装可选的依赖程序，则显示警告页面。</translation>
+    </message>
+    <message>
+        <source>Always use media-col</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -526,7 +549,7 @@
     </message>
     <message>
         <source>top</source>
-        <translation上方</translation>
+        <translation>上方</translation>
     </message>
     <message>
         <source>automatic</source>

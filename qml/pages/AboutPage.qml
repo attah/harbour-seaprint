@@ -85,6 +85,11 @@ Page {
                 text: qsTr("Code and Testing - Rudi Timmermans")
             }
 
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: qsTr("Testing and Design Suggestions - piggz")
+            }
+
             SectionHeader { text: qsTr("Translations") }
 
             AboutLabel {

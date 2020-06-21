@@ -79,6 +79,10 @@
         <source>Not installed</source>
         <translation>No instalado</translation>
     </message>
+    <message>
+        <source>Testing and Design Suggestions - piggz</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
