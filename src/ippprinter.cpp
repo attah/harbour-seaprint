@@ -437,8 +437,8 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
 
     IppMsg job = mk_msg(o, attrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
-                                       // Always convert images to get resizing
-    if((mimeType == documentFormat) && !mimeType.contains("image"))
+                                       // Always convert non-jpeg images to get resizing
+    if((mimeType == documentFormat) && (documentFormat == "image/jpeg" || !mimeType.contains("image")))
     {
         QByteArray filedata = file.readAll();
         contents = contents.append(filedata);
