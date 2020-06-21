@@ -28,7 +28,8 @@ Page {
                                           PageStackAction.Immediate)
                         printer.print(jobParams, page.selectedFile,
                                       alwaysConvertSetting.value,
-                                      removeRedundantConvertAttrsSetting.value)
+                                      removeRedundantConvertAttrsSetting.value,
+                                      alwaysUseMediaColSetting.value)
                     }
                 }
             }

@@ -111,5 +111,13 @@ ApplicationWindow
         defaultValue: true
     }
 
+    ConfigurationValue
+    {
+        id: alwaysUseMediaColSetting
+        key: "/apps/harbour-seaprint/settings/always-use-media-col"
+        defaultValue: false
+    }
+
+
 }
 

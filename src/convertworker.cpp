@@ -173,6 +173,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         {
             Pdf2PpmArgs.append("-gray");
         }
+        qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
         pdftoppm->setArguments(Pdf2PpmArgs);
 
 

@@ -300,7 +300,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 }
 
 void IppPrinter::print(QJsonObject attrs, QString filename,
-                       bool alwaysConvert, bool removeRedundantConvertAttrs)
+                       bool alwaysConvert, bool removeRedundantConvertAttrs, bool alwaysUseMediaCol)
 {
     qDebug() << "printing" << filename << attrs
              << alwaysConvert << removeRedundantConvertAttrs;
@@ -335,7 +335,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
 
     QString PaperSize = getAttrOrDefault(attrs, "media").toString();
 
-    if(attrs.contains("media-col") && attrs.contains("media-col"))
+    if((attrs.contains("media-col") || alwaysUseMediaCol) && attrs.contains("media"))
     {
         qDebug() << "moving media to media-col" << PaperSize;
         if(!PaperSizes.contains(PaperSize))
@@ -358,6 +358,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
         QJsonObject MediaColValue = MediaCol["value"].toObject();
         MediaColValue["media-size"] = Dimensions;
         MediaCol["value"] = MediaColValue;
+        MediaCol["tag"] = IppMsg::BeginCollection;
         attrs["media-col"] = MediaCol;
 
         attrs.remove("media");

@@ -54,7 +54,7 @@ signals:
 
 public slots:
     void print(QJsonObject attrs, QString file,
-               bool alwaysConvert, bool removeRedundantAttributesForRaster);
+               bool alwaysConvert, bool removeRedundantAttributesForRaster, bool alwaysUseMediaCol);
 
 
     void onUrlChanged();
