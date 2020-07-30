@@ -225,8 +225,29 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         }
         qDebug() << "All started";
 
+        bool ppm2pwgSuccess = false;
 
-        if(!ppm2pwg->waitForFinished(10000+5000*pages))
+        for(size_t i = 0; i < (5*pages+10); i++)
+        {
+            if(ppm2pwg->waitForFinished(1000))
+            {
+                ppm2pwgSuccess = true;
+                break;
+            }
+            else
+            {
+                QList<QByteArray> ppm2pwgOutput = ppm2pwg->readAllStandardError().split('\n');
+                for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
+                {
+                    if(it->startsWith("Page"))
+                    {
+                        QList<QByteArray> ppm2pwgTokens = it->split(' ');
+                        emit progress(ppm2pwgTokens.last().toInt(), pages);
+                    }
+                }
+            }
+        }
+        if(!ppm2pwgSuccess)
         {
             qDebug() << "ppm2pwg failed";
             tempfile->deleteLater();

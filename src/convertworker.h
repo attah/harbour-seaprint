@@ -18,6 +18,7 @@ public slots:
 
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
+    void progress(qint64 done, qint64 pages);
     void failed(QString message);
 };
 

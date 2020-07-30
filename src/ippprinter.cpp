@@ -33,6 +33,7 @@ IppPrinter::IppPrinter()
     connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
     connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
+    connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
 
     _workerThread.start();
