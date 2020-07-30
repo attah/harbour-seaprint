@@ -149,7 +149,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         qDebug() << "Started";
 
-        if(!pdftops->waitForFinished())
+        if(!pdftops->waitForFinished(10000+5000*pages))
         {
             qDebug() << "pdftops failed";
             tempfile->deleteLater();
@@ -226,7 +226,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         qDebug() << "All started";
 
 
-        if(!ppm2pwg->waitForFinished())
+        if(!ppm2pwg->waitForFinished(10000+5000*pages))
         {
             qDebug() << "ppm2pwg failed";
             tempfile->deleteLater();
