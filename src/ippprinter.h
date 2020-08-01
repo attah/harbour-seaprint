@@ -42,7 +42,8 @@ signals:
 
     void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
+                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                      quint32 PageRangeLow, quint32 PageRangeHigh);
 
     void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile,
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,

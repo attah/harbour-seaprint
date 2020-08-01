@@ -10,6 +10,8 @@ public:
     static ConvertChecker* instance();
     Q_PROPERTY(bool pdf MEMBER _pdf)
 
+    Q_INVOKABLE quint32 pdfPages(QString pdf);
+
 signals:
 protected:
 private:

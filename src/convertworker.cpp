@@ -1,6 +1,7 @@
 #include "convertworker.h"
 #include <sailfishapp.h>
 #include "papersizes.h"
+#include "convertchecker.h"
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>
@@ -44,34 +45,20 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                               quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
+                               quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                               quint32 PageRangeLow, quint32 PageRangeHigh)
 {
-
-    QProcess* pdfinfo = new QProcess(this);
-    pdfinfo->setProgram("pdfinfo");
-    pdfinfo->setArguments({filename});
-    pdfinfo->start();
-
-    if(!pdfinfo->waitForStarted() || !pdfinfo->waitForFinished())
+    quint32 pages = ConvertChecker::instance()->pdfPages(filename);
+    if (!pages)
     {
-        qDebug() << "pdfinfo died";
-        pdfinfo->deleteLater();
+        qDebug() << "pdfinfo returned 0 pages";
         tempfile->deleteLater();
         emit failed(tr("Failed to get info about PDF file"));
-        return;
     }
-    QByteArray pdfInfoOutput = pdfinfo->readAllStandardOutput();
-    pdfinfo->deleteLater();
-    qDebug() << pdfInfoOutput;
-    QList<QByteArray> pdfInfoOutputLines = pdfInfoOutput.split('\n');
-    quint32 pages = 0;
-    for(QList<QByteArray>::iterator it = pdfInfoOutputLines.begin(); it != pdfInfoOutputLines.end(); it++)
+
+    if(PageRangeHigh==0)
     {
-        if(it->startsWith("Pages"))
-        {
-            QList<QByteArray> pagesTokens = it->split(' ');
-            pages = pagesTokens.last().toInt();
-        }
+        PageRangeHigh=pages;
     }
 
     bool urf = false;
@@ -132,11 +119,17 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     {
         QProcess* pdftops = new QProcess(this);
         pdftops->setProgram("pdftops");
-        QStringList PdfToPsArgs = {"-paper", ShortPaperSize, filename, "-"};
+        QStringList PdfToPsArgs;
         if(TwoSided)
         {
-            PdfToPsArgs.prepend("-duplex");
+            PdfToPsArgs.append("-duplex");
         }
+        if(PageRangeLow != 0)
+        {
+            PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+        }
+        PdfToPsArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
+
         pdftops->setArguments(PdfToPsArgs);
 
         pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
@@ -169,7 +162,13 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         QProcess* pdftocairo = new QProcess(this);
         pdftocairo->setProgram("pdftocairo");
-        pdftocairo->setArguments({"-pdf", "-paper", ShortPaperSize, filename, "-"});
+        QStringList PdfToCairoArgs;
+        if(PageRangeLow != 0)
+        {
+            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+        }
+        PdfToCairoArgs << QStringList {"-pdf", "-paper", ShortPaperSize, filename, "-"};
+        pdftocairo->setArguments(PdfToCairoArgs);
 
         QProcess* pdftoppm = new QProcess(this);
         pdftoppm->setProgram("pdftoppm");

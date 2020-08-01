@@ -349,6 +349,17 @@
         <source>Zero margins</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Page range</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RangeSetting</name>
+    <message>
+        <source>all</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsPage</name>

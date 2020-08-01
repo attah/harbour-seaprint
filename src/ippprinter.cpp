@@ -432,6 +432,17 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     {
         attrs.remove("sides");
     }
+    quint32 PageRangeLow = 0;
+    quint32 PageRangeHigh = 0;
+    if(mimeType == "application/pdf" && documentFormat != "application/pdf")
+    {
+        if(attrs.contains("page-ranges"))
+        {
+            QJsonObject PageRanges = getAttrOrDefault(attrs, "page-ranges").toObject();
+            PageRangeLow = PageRanges["low"].toInt();
+            PageRangeHigh = PageRanges["high"].toInt();
+        }
+    }
 
     qDebug() << "Final op attributes:" << o;
     qDebug() << "Final job attributes:" << attrs;
@@ -476,7 +487,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
             }
 
             emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
-                              PaperSize, HwResX, HwResY, TwoSided, Tumble);
+                              PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
         }
         else if (mimeType.contains("image"))
         {

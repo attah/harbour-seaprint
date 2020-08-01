@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import seaprint.mimer 1.0
 import seaprint.ippmsg 1.0
+import seaprint.convertchecker 1.0
 import "utils.js" as Utils
 
 Page {
@@ -39,7 +40,7 @@ Page {
             ListElement {name: "sides";                     prettyName: qsTr("Sides");              tag: IppMsg.Enum}
             ListElement {name: "media";                     prettyName: qsTr("Print media");        tag: IppMsg.Keyword}
             ListElement {name: "copies";                    prettyName: qsTr("Copies");             tag: IppMsg.Integer}
-//            ListElement {name: "page-ranges";             prettyName: qsTr("Page range");         tag: IppMsg.IntegerRange}
+            ListElement {name: "page-ranges";               prettyName: qsTr("Page range");         tag: IppMsg.IntegerRange}
             ListElement {name: "print-color-mode";          prettyName: qsTr("Color mode");         tag: IppMsg.Enum}
 //            ListElement {name: "orientation-requested";   prettyName: qsTr("Orientation");        tag: IppMsg.Enum}
             ListElement {name: "print-quality";             prettyName: qsTr("Quality");            tag: IppMsg.Enum}
@@ -111,11 +112,14 @@ Page {
                                          })
                         break
                     case IppMsg.IntegerRange:
+                        var valid = printer.attrs.hasOwnProperty(name+"-supported") &&
+                                    name=="page-ranges" && Mimer.get_type(selectedFile) == "application/pdf";
                         loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
-                                          valid: false //TODO printer.attrs.hasOwnProperty(name+"-supported"),
+                                          valid: valid,
+                                          high: name=="page-ranges" ? ConvertChecker.pdfPages(selectedFile) : 0
                                          })
                         break
                     case IppMsg.Resolution:

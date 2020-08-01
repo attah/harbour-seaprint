@@ -1,5 +1,6 @@
 #include "convertchecker.h"
 #include <QProcess>
+#include <QtDebug>
 
 ConvertChecker::ConvertChecker()
 {
@@ -37,4 +38,37 @@ ConvertChecker* ConvertChecker::instance()
     }
 
     return m_Instance;
+}
+
+quint32 ConvertChecker::pdfPages(QString filename)
+{
+    quint32 pages = 0;
+    if(!_pdf)
+    {
+        return pages;
+    }
+
+    QProcess* pdfinfo = new QProcess(this);
+    pdfinfo->setProgram("pdfinfo");
+    pdfinfo->setArguments({filename});
+    pdfinfo->start();
+
+    if(!pdfinfo->waitForStarted(1000) || !pdfinfo->waitForFinished(1000))
+    {
+        pdfinfo->deleteLater();
+        return pages;
+    }
+    QByteArray pdfInfoOutput = pdfinfo->readAllStandardOutput();
+    pdfinfo->deleteLater();
+    qDebug() << pdfInfoOutput;
+    QList<QByteArray> pdfInfoOutputLines = pdfInfoOutput.split('\n');
+    for(QList<QByteArray>::iterator it = pdfInfoOutputLines.begin(); it != pdfInfoOutputLines.end(); it++)
+    {
+        if(it->startsWith("Pages"))
+        {
+            QList<QByteArray> pagesTokens = it->split(' ');
+            pages = pagesTokens.last().toInt();
+        }
+    }
+    return pages;
 }
