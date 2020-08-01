@@ -114,12 +114,13 @@ Page {
                     case IppMsg.IntegerRange:
                         var valid = printer.attrs.hasOwnProperty(name+"-supported") &&
                                     name=="page-ranges" && Mimer.get_type(selectedFile) == "application/pdf";
+                        var pdfpages = ConvertChecker.pdfPages(selectedFile);
                         loader.setSource("../components/RangeSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
                                           valid: valid,
-                                          high: name=="page-ranges" ? ConvertChecker.pdfPages(selectedFile) : 0
+                                          high: name=="page-ranges" ? (pdfpages == 0 ? 65535 : pdfpages)  : 0
                                          })
                         break
                     case IppMsg.Resolution:
