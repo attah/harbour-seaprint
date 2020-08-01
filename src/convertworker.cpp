@@ -6,7 +6,8 @@
 #include <QPainter>
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
-                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, quint32 pages)
+                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                bool ForcePortrait, quint32 pages)
 {
     env.append("HWRES_X="+QString::number(HwResX));
     env.append("HWRES_Y="+QString::number(HwResY));
@@ -28,6 +29,12 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
 
     env.append("DUPLEX="+QString::number(TwoSided));
     env.append("TUMBLE="+QString::number(Tumble));
+
+    if(ForcePortrait)
+    {
+        env.append("FORCE_PORTRAIT=true");
+    }
+
     if(pages != 0)
     {
         env.append("PAGES="+QString::number(pages));
@@ -181,7 +188,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         ppm2pwg->setArguments({"ppm2pwg"});
 
         QStringList env;
-        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, pages);
+        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
         qDebug() << "ppm2pwg env is " << env;
 
         ppm2pwg->setEnvironment(env);
@@ -227,7 +234,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         bool ppm2pwgSuccess = false;
 
-        for(size_t i = 0; i < (5*pages+10); i++)
+        for(size_t i = 0; i < (10*pages+10); i++)
         {
             if(ppm2pwg->waitForFinished(1000))
             {
@@ -242,7 +249,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
                     if(it->startsWith("Page"))
                     {
                         QList<QByteArray> ppm2pwgTokens = it->split(' ');
-                        emit progress(ppm2pwgTokens.last().toInt(), pages);
+                        emit progress(ppm2pwgTokens.last().toInt()-1, pages);
                     }
                 }
             }
@@ -352,7 +359,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
         ppm2pwg->setArguments({"ppm2pwg"});
 
         QStringList env;
-        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, 0);
+        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0);
         qDebug() << "ppm2pwg env is " << env;
 
         ppm2pwg->setEnvironment(env);
