@@ -6,12 +6,12 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
         formats=formats+printer.additionalDocumentFormats;
     }
 
+    var raster = (has(formats, "image/pwg-raster") || has(formats, "image/urf"));
+
     var mimetypes = [];
     var supported = [];
-     if(has(formats, "application/pdf") ||
-        (ConvertChecker.pdf && ( has(formats, "application/postscript") ||
-                                 has(formats, "image/pwg-raster") ||
-                                 has(formats, "image/urf"))) )
+    if(has(formats, "application/pdf") ||
+       (ConvertChecker.pdf && ( has(formats, "application/postscript") || raster )))
      {
          mimetypes.push("application/pdf");
          supported.push("PDF");
@@ -22,10 +22,13 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
          supported.push("Postscript");
      }
 
-     if ( has(formats, "image/pwg-raster") || has(formats, "image/urf"))
+     if (raster || has(formats, "image/jpeg"))
      {
          mimetypes.push("image/jpeg");
          supported.push("JPEG");
+     }
+     if(raster || has(formats, "image/png"))
+     {
          mimetypes.push("image/png");
          supported.push("PNG");
      }
