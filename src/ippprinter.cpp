@@ -47,12 +47,13 @@ IppPrinter::~IppPrinter() {
 }
 
 QJsonObject IppPrinter::opAttrs() {
+    QString name = qgetenv("USER");
     QJsonObject o
     {
         {"attributes-charset",          QJsonObject {{"tag", IppMsg::Charset},             {"value", "utf-8"}}},
         {"attributes-natural-language", QJsonObject {{"tag", IppMsg::NaturalLanguage},     {"value", "en-us"}}},
         {"printer-uri",                 QJsonObject {{"tag", IppMsg::Uri},                 {"value", _url.toString()}}},
-        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", "nemo"}}},
+        {"requesting-user-name",        QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", name}}},
     };
     return o;
 }
