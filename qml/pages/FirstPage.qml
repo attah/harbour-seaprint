@@ -303,6 +303,8 @@ Page {
         Component {
             id: filePickerPage
             FilePickerPage {
+                allowedOrientations: Orientation.All
+
                 title: qsTr("Choose file")
                 showSystemFiles: false
                 nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.ps"]
@@ -316,6 +318,8 @@ Page {
         Component {
             id: imagePickerPage
             ImagePickerPage {
+                allowedOrientations: Orientation.All
+
                 onSelectedContentPropertiesChanged: {
                     page.selectedFile = selectedContentProperties.filePath
                     page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)

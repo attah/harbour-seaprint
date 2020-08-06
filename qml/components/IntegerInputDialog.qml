@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: dialog
+    allowedOrientations: Orientation.All
 
     property int value
     property int min;

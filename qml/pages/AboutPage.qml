@@ -6,7 +6,7 @@ import "../components"
 Page {
     id: aboutPage
 
-    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
+    allowedOrientations: Orientation.All
 
     SilicaFlickable {
         id: aboutFlickable

@@ -4,6 +4,7 @@ import seaprint.ippprinter 1.0
 
 Dialog {
     id: dialog
+    allowedOrientations: Orientation.All
 
     property string value
     property string ssid

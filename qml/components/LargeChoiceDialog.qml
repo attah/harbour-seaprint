@@ -4,6 +4,7 @@ import "../pages/utils.js" as Utils
 
 Dialog {
     id: dialog
+    allowedOrientations: Orientation.All
 
     property string name
     property string choice

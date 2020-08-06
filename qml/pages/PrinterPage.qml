@@ -6,6 +6,8 @@ import seaprint.convertchecker 1.0
 import "utils.js" as Utils
 
 Page {
+    allowedOrientations: Orientation.All
+
     id: page
     property var printer
     property var jobParams: new Object();

@@ -3,6 +3,8 @@ import Sailfish.Silica 1.0
 import "utils.js" as Utils
 
 Page {
+    allowedOrientations: Orientation.All
+
     property var printer
     backNavigation: false
     Connections {
