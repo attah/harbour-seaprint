@@ -281,13 +281,19 @@ Page {
 
         Label {
             id: fileLabel
-            width: parent.width
-            anchors.top: parent.top
-            anchors.topMargin: Theme.paddingLarge
-            leftPadding: Theme.paddingMedium
-            color: Theme.highlightColor
+            width: parent.width-2*Theme.paddingLarge
+
+            anchors {
+                top: parent.top
+                topMargin: Theme.paddingLarge
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
+            truncationMode: TruncationMode.Fade
             text: selectedFile != "" ? selectedFile : qsTr("No file selected")
         }
+
 
         Row {
             width: parent.width
