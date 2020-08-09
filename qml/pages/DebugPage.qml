@@ -36,7 +36,7 @@ Page {
                 selectAll()
                 copy()
                 deselect()
-                notifier.notify("Copied to clipboard")
+                notifier.notify(qsTr("Copied to clipboard"))
             }
         }
     }

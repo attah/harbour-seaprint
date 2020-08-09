@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../components"
 
 Page {
     backNavigation: false
@@ -44,6 +45,8 @@ Page {
             font.family: "monospace"
 
             text: "devel-su"
+            Clipper {}
+
         }
 
         Label {
@@ -59,9 +62,13 @@ Page {
             font.family: "monospace"
 
             text: "pkcon install poppler-utils"
+            Clipper {}
         }
 
-        Item{}
+        Item{
+            width: parent.width
+            height: Theme.itemSizeMedium
+        }
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter

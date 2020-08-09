@@ -123,6 +123,13 @@
     </message>
 </context>
 <context>
+    <name>Clipper</name>
+    <message>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
@@ -158,6 +165,13 @@
     <message>
         <source>SeaPrint</source>
         <translation>SeaPrint（海印）</translation>
+    </message>
+</context>
+<context>
+    <name>DebugPage</name>
+    <message>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
