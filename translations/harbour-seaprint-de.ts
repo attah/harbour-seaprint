@@ -309,10 +309,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Become root:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,6 +318,10 @@
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to print PDF files with printers that does not support PDF natively, you need utilities from the package &quot;poppler-utils&quot;. This helps SeaPrint convert to formats that they are more likely to accept.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

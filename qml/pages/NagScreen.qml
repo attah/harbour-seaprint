@@ -22,7 +22,9 @@ Page {
             width: parent.width
             wrapMode: Text.WordWrap
 
-            text: qsTr("In order to convert PDF files to other formats, you need utilities from the package \"poppler-utils\"")
+            text: qsTr("In order to print PDF files with printers that does not support PDF natively,"
+                       +" you need utilities from the package \"poppler-utils\"."
+                       +" This enables SeaPrint to convert to formats that they are more likely to accept.")
         }
 
         Label {

@@ -309,10 +309,6 @@
         <translation>¡Las dependencias opcionales no están instaladas!</translation>
     </message>
     <message>
-        <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
-        <translation>Para convertir los archivos PDF a otros formatos necesitas las utilidades del paquete &quot;poppler-utils&quot;</translation>
-    </message>
-    <message>
         <source>Become root:</source>
         <translation>Acceder como root:</translation>
     </message>
@@ -323,6 +319,10 @@
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
         <translation type="unfinished">Para instalar, habilita el modo de desarrollador y abre Terminal.</translation>
+    </message>
+    <message>
+        <source>In order to print PDF files with printers that does not support PDF natively, you need utilities from the package &quot;poppler-utils&quot;. This helps SeaPrint convert to formats that they are more likely to accept.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

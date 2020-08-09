@@ -309,10 +309,6 @@
         <translation>未安装可选依赖！</translation>
     </message>
     <message>
-        <source>In order to convert PDF files to other formats, you need utilities from the package &quot;poppler-utils&quot;</source>
-        <translation>为了转换PDF文件为其它格式，你需要来自包的实用程序。</translation>
-    </message>
-    <message>
         <source>To install, enable developer mode, and open a terminal.</source>
         <translation>你需要开启开发者模式然后打开 terminal 来安装。</translation>
     </message>
@@ -323,6 +319,10 @@
     <message>
         <source>Install poppler-utils:</source>
         <translation>安装 poppler-utils：</translation>
+    </message>
+    <message>
+        <source>In order to print PDF files with printers that does not support PDF natively, you need utilities from the package &quot;poppler-utils&quot;. This helps SeaPrint convert to formats that they are more likely to accept.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
