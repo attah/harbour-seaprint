@@ -15,7 +15,9 @@ Page {
             width: parent.width - 2*Theme.paddingLarge
             spacing: Theme.paddingLarge
 
-            PageHeader{}
+            PageHeader{
+                title: qsTr("Settings")
+            }
 
             TextSwitch {
                 text: qsTr("Show nag-screen")

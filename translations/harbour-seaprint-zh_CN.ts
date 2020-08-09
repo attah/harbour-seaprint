@@ -210,6 +210,10 @@
         <source>Settings</source>
         <translation>设置</translation>
     </message>
+    <message>
+        <source>Available printers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>
@@ -402,6 +406,10 @@
     <message>
         <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">设置</translation>
     </message>
 </context>
 <context>

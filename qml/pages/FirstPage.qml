@@ -112,6 +112,12 @@ Page {
             spacing: Theme.paddingSmall
 
 
+            header: PageHeader {
+                id: pageHeader
+                title: "SeaPrint"
+                description: qsTr("Available printers")
+            }
+
             delegate: ListItem {
                 id: delegate
                 contentItem.height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
