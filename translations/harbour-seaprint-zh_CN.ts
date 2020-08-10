@@ -321,7 +321,7 @@
         <translation>安装 poppler-utils：</translation>
     </message>
     <message>
-        <source>In order to print PDF files with printers that does not support PDF natively, you need utilities from the package &quot;poppler-utils&quot;. This helps SeaPrint convert to formats that they are more likely to accept.</source>
+        <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
