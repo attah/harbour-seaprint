@@ -332,7 +332,9 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     QImage outImage = QImage(Width, Height, inImage.format());
     outImage.fill(Qt::white);
     QPainter painter(&outImage);
-    painter.drawImage(0, (outImage.height()-inImage.height())/2, inImage);
+    int xOffset = (outImage.width()-inImage.width())/2;
+    int yOffset = (outImage.height()-inImage.height())/2;
+    painter.drawImage(xOffset, yOffset, inImage);
     painter.end();
 
     if(imageFormat != "")
