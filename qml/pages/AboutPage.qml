@@ -65,6 +65,7 @@ Page {
                 text: "© 2019-2020 Anton Thomasson"
             }
 
+
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -105,6 +106,19 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 text: "poppler-utils - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
+            }
+
+            SectionHeader { text: qsTr("Donations") }
+
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                text: "paypal.me/AntonThomasson"
+                font.underline: true
+                MouseArea {
+                    anchors.fill:parent
+                    onClicked: Qt.openUrlExternally("https://"+parent.text)
+                }
             }
 
             SectionHeader { text: qsTr("Licensing") }
