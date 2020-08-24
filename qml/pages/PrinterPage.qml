@@ -103,13 +103,14 @@ Page {
                 Component.onCompleted: {
                     switch(tag) {
                     case IppMsg.Integer:
+                        var valid = printer.attrs.hasOwnProperty(name+"-supported")
                         loader.setSource("../components/IntegerSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
-                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
-                                          low: printer.attrs[name+"-supported"].value.low,
-                                          high: printer.attrs[name+"-supported"].value.high,
+                                          valid: valid,
+                                          low: valid ? printer.attrs[name+"-supported"].value.low : 0,
+                                          high: valid ? printer.attrs[name+"-supported"].value.high : 0,
                                           default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : undefined
                                          })
                         break
@@ -129,12 +130,13 @@ Page {
                     case IppMsg.Enum:
                     case IppMsg.Keyword:
                     case IppMsg.MimeMediaType:
+                        var valid = printer.attrs.hasOwnProperty(name+"-supported")
                         loader.setSource("../components/ChoiceSetting.qml",
                                          {name: name,
                                           prettyName: prettyName,
                                           tag: tag,
-                                          valid: printer.attrs.hasOwnProperty(name+"-supported"),
-                                          choices: printer.attrs[name+"-supported"].value,
+                                          valid: valid,
+                                          choices: valid ? printer.attrs[name+"-supported"].value : [],
                                           default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : "",
                                           mime_type: Mimer.get_type(selectedFile)
                                          })
