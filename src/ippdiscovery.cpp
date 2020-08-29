@@ -146,7 +146,7 @@ void IppDiscovery::readPendingDatagrams()
     while (socket->hasPendingDatagrams()) {
 
         size_t size = socket->pendingDatagramSize();
-        Bytestream resp = Bytestream::preallocated(size);
+        Bytestream resp(size);
         QHostAddress sender;
         quint16 senderPort;
 
