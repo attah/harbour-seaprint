@@ -59,7 +59,7 @@ IppDiscovery::~IppDiscovery() {
     delete socket;
 }
 
-IppDiscovery* IppDiscovery::m_Instance = 0;
+IppDiscovery* IppDiscovery::m_Instance = nullptr;
 
 IppDiscovery* IppDiscovery::instance()
 {
@@ -224,7 +224,7 @@ void IppDiscovery::readPendingDatagrams()
 
             }
         }
-        catch(std::exception e)
+        catch(const std::exception& e)
         {
             qDebug() << e.what();
             return;
@@ -302,7 +302,7 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
     }
 
     QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint "SEAPRINT_VERSION);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     QNetworkReply* reply = nam->get(request);
 

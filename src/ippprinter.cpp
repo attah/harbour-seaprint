@@ -125,7 +125,7 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
             _attrs = resp.getPrinterAttrs();
         }
-        catch(std::exception e)
+        catch(const std::exception& e)
         {
             qDebug() << e.what();
         }
@@ -175,7 +175,7 @@ void IppPrinter::printRequestFinished(QNetworkReply *reply)
             }
             status = resp.getStatus() <= 0xff;
         }
-        catch(std::exception e)
+        catch(const std::exception& e)
         {
             qDebug() << e.what();
         }
@@ -198,7 +198,7 @@ void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
             _jobs = resp.getJobAttrs();
             emit jobsChanged();
         }
-        catch(std::exception e)
+        catch(const std::exception& e)
         {
             qDebug() << e.what();
         }
@@ -216,7 +216,7 @@ void IppPrinter::cancelJobFinished(QNetworkReply *reply)
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             status = resp.getStatus() <= 0xff;
         }
-        catch(std::exception e)
+        catch(const std::exception& e)
         {
             qDebug() << e.what();
         }
