@@ -294,7 +294,14 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
         }
         else if (mimeType.contains("image"))
         {
-            return firstMatch(supportedMimeTypes, {"image/png", "image/gif", "image/jpeg", "image/pwg-raster", "image/urf"});
+            QStringList ImageFormatPrioList {"image/png", "image/gif", "image/pwg-raster", "image/urf", "image/jpeg"};
+            if(mimeType == "image/jpeg")
+            {
+                // Prioritize transferring JPEG as JPEG, as it will not be transcoded
+                // Normally, it is the last choice (as the others are lossless)
+                ImageFormatPrioList.prepend(mimeType);
+            }
+            return firstMatch(supportedMimeTypes, ImageFormatPrioList);
         }
         return documentFormat;
     }

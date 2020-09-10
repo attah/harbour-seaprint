@@ -22,15 +22,15 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
          supported.push("Postscript");
      }
 
-     if (raster || has(formats, "image/jpeg"))
+     if (raster || has(formats, "image/jpeg") || has(formats, "image/png") || has(formats, "image/gif"))
      {
          mimetypes.push("image/jpeg");
          supported.push("JPEG");
-     }
-     if(raster || has(formats, "image/png"))
-     {
          mimetypes.push("image/png");
          supported.push("PNG");
+         mimetypes.push("image/tiff");
+         mimetypes.push("image/gif");
+
      }
 
      return {supported: supported.join(" "), mimetypes: mimetypes};
@@ -242,7 +242,7 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
             }
 
         }
-        else if(mimeType == "image/jpeg" || mimeType == "image/png")
+        else if(mimeType.indexOf("image") != -1)
         {
             return choices.filter(canConvertImageTo);
         }
