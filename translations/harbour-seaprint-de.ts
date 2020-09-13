@@ -5,632 +5,632 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub repository</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler melden</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkdruck für Sailfish OS.</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icons</translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon erstellt von Gregguh.</translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeine Mitwirkung</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzungen</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesisch</translation>
     </message>
     <message>
         <source>Licensing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenzierung</translation>
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellcode ist auf GitHub verfügbar. Übersetzungen, Fehlermeldungen und andere Mitarbeit sind willkommen!</translation>
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint Lizienzierung muss noch festgelegt werden, es wird aber eine offene Lizenz sein.</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Französisch</translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmierung und Testen - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanish</translation>
     </message>
     <message>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Polnisch</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionale Abhängigkeiten</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installiert</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht installiert</translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
-        <translation type="unfinished"></translation>
+        <translation>Testen und Design Vorschläge  piggz</translation>
     </message>
     <message>
         <source>Donations</source>
-        <translation type="unfinished"></translation>
+        <translation>Spenden</translation>
     </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker hinzufügen</translation>
     </message>
     <message>
         <source>On WiFI:</source>
-        <translation type="unfinished"></translation>
+        <translation>Im WiFi:</translation>
     </message>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gefunden:</translation>
     </message>
     <message>
         <source>No printer found</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Drucker gefunden</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
 </context>
 <context>
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished"></translation>
+        <translation>Druck erfolgreich: </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Druck fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
 </context>
 <context>
     <name>Clipper</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>In die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierungsfehler</translation>
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild laden fehlgeschlagen</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte PDF Papiergröße</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte Papiergröße</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte Auflösung (dpi)</translation>
     </message>
     <message>
         <source>Unsupported target format</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichtunterstützes Zielformat</translation>
     </message>
     <message>
         <source>Failed to get info about PDF file</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF Info nicht abrufbar</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint</translation>
     </message>
 </context>
 <context>
     <name>DebugPage</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>In die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit URL hinzufügen</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Datei ausgewählt</translation>
     </message>
     <message>
         <source>View jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckaufträge anzeigen</translation>
     </message>
     <message>
         <source>Remove printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker entfernen</translation>
     </message>
     <message>
         <source>Removing printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Drucker</translation>
     </message>
     <message>
         <source>About SeaPrint</source>
-        <translation type="unfinished"></translation>
+        <translation>Über SeaPrint</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>No compatible formats supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine kompatiblen Formate unterstützt</translation>
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei auswählen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Available printers</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbare Drucker</translation>
     </message>
 </context>
 <context>
     <name>IppPrinter</name>
     <message>
         <source>Failed to open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen der Datei fehlgeschlagen</translation>
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte Druckmedium</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiformat konnte nicht konvertiert werden</translation>
     </message>
     <message>
         <source>Unknown document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekanntes Dokumentenformat</translation>
     </message>
     <message>
         <source>Unknown document format dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Dokumentenformat Größe</translation>
     </message>
 </context>
 <context>
     <name>JobsPage</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufträge</translation>
     </message>
     <message>
         <source>Untitled job</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbenannter Auftrag</translation>
     </message>
     <message>
         <source>Cancel job</source>
-        <translation type="unfinished"></translation>
+        <translation>Auftrag abbrechen</translation>
     </message>
     <message>
         <source>Cancelling job</source>
-        <translation type="unfinished"></translation>
+        <translation>Breche Auftrag ab</translation>
     </message>
     <message>
         <source>job</source>
-        <translation type="unfinished"></translation>
+        <translation>Auftrag</translation>
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbruch des Auftrags fehlgeschlagen</translation>
     </message>
 </context>
 <context>
     <name>MediaColSetting</name>
     <message>
         <source>true</source>
-        <translation type="unfinished"></translation>
+        <translation>Wahr</translation>
     </message>
     <message>
         <source>false</source>
-        <translation type="unfinished"></translation>
+        <translation>Falsch</translation>
     </message>
 </context>
 <context>
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerfen</translation>
     </message>
     <message>
         <source>Don&apos;t show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht wieder anzeigen</translation>
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionale Abhängigkeiten sind nicht installiert!</translation>
     </message>
     <message>
         <source>Become root:</source>
-        <translation type="unfinished"></translation>
+        <translation>Root werden:</translation>
     </message>
     <message>
         <source>Install poppler-utils:</source>
-        <translation type="unfinished"></translation>
+        <translation>poppler-utils installieren:</translation>
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Für die Installation muss der Entwickler Modus aktiviert und eine Konsole geöffnet werden.</translation>
     </message>
     <message>
         <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um PDF Dateien zu drucken wird für Drucker ohne PDF Support das Software Paket &quot;poppler-utils&quot; benötigt. Diese ermöglicht es SeaPrint das PDF in besser unterstützte Formate zu konvertieren.</translation>
     </message>
 </context>
 <context>
     <name>PrinterPage</name>
     <message>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken</translation>
     </message>
     <message>
         <source>Sides</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten</translation>
     </message>
     <message>
         <source>Copies</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopien</translation>
     </message>
     <message>
         <source>Color mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbmodus</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualität</translation>
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflösung</translation>
     </message>
     <message>
         <source>Print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Papier Format</translation>
     </message>
     <message>
         <source>Transfer format</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer Format</translation>
     </message>
     <message>
         <source>Media source</source>
-        <translation type="unfinished"></translation>
+        <translation>Papierquelle</translation>
     </message>
     <message>
         <source>Zero margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Ränder</translation>
     </message>
     <message>
         <source>Page range</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten Bereich</translation>
     </message>
 </context>
 <context>
     <name>RangeSetting</name>
     <message>
         <source>all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Show nag-screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Nag-Screen anzeigen</translation>
     </message>
     <message>
         <source>Consider additional formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Formate prüfen</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Drucker ünterstützen mehr Formate als sie bekannt geben. Zusätliche Formate können aus anderen Attributen geschlussffolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
     </message>
     <message>
         <source>Always convert to raster format</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer ins Raster Format konvertieren</translation>
     </message>
     <message>
         <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierung in das PWG/URF Rasterformat erzwingen. Die ist hauptsächlich für Testzwecke vorgesehen.</translation>
     </message>
     <message>
         <source>Remove redundant attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Redundante Attribute entfernen</translation>
     </message>
     <message>
         <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rdundante IPP Attribute entfernen, wenn sie in dem Tranferformat übermittelt werden. Einige Drucker lehnen Aufträge ab, selbst wenn die Einstellungen konsistent sind.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnseite über nicht installierte optionalen Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
     </message>
     <message>
         <source>Always use media-col</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer media-col nutzen</translation>
     </message>
     <message>
         <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Attribut media-col anstelle des Papierformats benutzen. Das bedeutet, dass eine Auswahl über Parameter anstatt eines Namens erfolgt. Wenn keine Seitenränder aktiviert sind, wird unabhängig von der Einstellung die Parameter Auswahl benutzt.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
 </context>
 <context>
     <name>utils</name>
     <message>
         <source>pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausstehend</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation type="unfinished"></translation>
+        <translation>Austehend angehalten</translation>
     </message>
     <message>
         <source>processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeite</translation>
     </message>
     <message>
         <source>processing-stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitung gestoppt</translation>
     </message>
     <message>
         <source>canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgebrochen</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgebrochen</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertiggestellt</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Status </translation>
     </message>
     <message>
         <source>draft</source>
-        <translation type="unfinished"></translation>
+        <translation>Entwurf</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>high</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>unknown quality </source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Qualität </translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochformat</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Querformat</translation>
     </message>
     <message>
         <source>reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgedrehtes Querformat</translation>
     </message>
     <message>
         <source>reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgedrehtes Hochformat</translation>
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Orientierung </translation>
     </message>
     <message>
         <source>dpi</source>
-        <translation type="unfinished"></translation>
+        <translation>dpi</translation>
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte/cm</translation>
     </message>
     <message>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
         <source>Postscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Postscript</translation>
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>PWG Raster</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>URF Raster</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
         <source>GIF</source>
-        <translation type="unfinished"></translation>
+        <translation>GIF</translation>
     </message>
     <message>
         <source>auto-sense</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-Sense</translation>
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Bypass Fach</translation>
     </message>
     <message>
         <source>tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Fach</translation>
     </message>
     <message>
         <source>bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <source>center</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte</translation>
     </message>
     <message>
         <source>main</source>
-        <translation type="unfinished"></translation>
+        <translation>Haupt</translation>
     </message>
     <message>
         <source>manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <source>middle</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte</translation>
     </message>
     <message>
         <source>photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückseite</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>side</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite</translation>
     </message>
     <message>
         <source>top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto Monochrom</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>Bi-Level</translation>
     </message>
     <message>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Markieren</translation>
     </message>
     <message>
         <source>monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Monochrom</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>Bi-Level verarbeiten</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Monochrom verarbeiten</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Einseitig</translation>
     </message>
     <message>
         <source>two-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Beidseitig</translation>
     </message>
     <message>
         <source>two-sided flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Beidseitig gedreht</translation>
     </message>
 </context>
 </TS>
