@@ -63,6 +63,34 @@
         <source>Spanish</source>
         <translation>Hiszpański</translation>
     </message>
+    <message>
+        <source>Testing and Design Suggestions - piggz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional dependencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
@@ -88,10 +116,70 @@
     </message>
 </context>
 <context>
+    <name>BusyPage</name>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print success: </source>
+        <translation type="unfinished">Drukowanie udane: </translation>
+    </message>
+    <message>
+        <source>Print failed: </source>
+        <translation type="unfinished">Nieudane drukowanie: </translation>
+    </message>
+</context>
+<context>
+    <name>Clipper</name>
+    <message>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConvertWorker</name>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Conversion error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
         <translation>SeaPrint</translation>
+    </message>
+</context>
+<context>
+    <name>DebugPage</name>
+    <message>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -140,6 +228,37 @@
         <source>Choose file</source>
         <translation>Wybierz plik</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available printers</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IppPrinter</name>
+    <message>
+        <source>Failed to open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown document format dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown document format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported print media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -173,6 +292,48 @@
     </message>
 </context>
 <context>
+    <name>MediaColSetting</name>
+    <message>
+        <source>true</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>false</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NagScreen</name>
+    <message>
+        <source>Optional dependencies are not installed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To install, enable developer mode, and open a terminal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Become root:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install poppler-utils:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PrinterPage</name>
     <message>
         <source>Print</source>
@@ -199,16 +360,78 @@
         <translation>Rozdzielczość</translation>
     </message>
     <message>
-        <source>Print success: </source>
-        <translation>Drukowanie udane: </translation>
-    </message>
-    <message>
-        <source>Print failed: </source>
-        <translation>Nieudane drukowanie: </translation>
-    </message>
-    <message>
         <source>Print media</source>
         <translation>Drukuj multimedia</translation>
+    </message>
+    <message>
+        <source>Page range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zero margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RangeSetting</name>
+    <message>
+        <source>all</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show nag-screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Consider additional formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always convert to raster format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove redundant attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always use media-col</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,4 +512,129 @@
         <source>dots/cm</source>
         <translation>punkty/cm</translation>
     </message>
+    <message>
+        <source>one-sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>two-sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>two-sided flipped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bi-level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>process bi-level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>process monochrome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto-sense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postscript</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PWG-raster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URF-raster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JPEG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GIF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by-pass tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
+</TS>

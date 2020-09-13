@@ -97,8 +97,9 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("French")+" - ensag-dev, Quentí\n"+
-                      qsTr("Spanish")+" - carmenfdezb\n"+
-                      qsTr("Polish")+" - atlochowski"
+                      qsTr("German")+" -  black-sheep-dev\n"+
+                      qsTr("Polish")+" - atlochowski\n"+
+                      qsTr("Spanish")+" - carmenfdezb"
             }
 
             SectionHeader { text: qsTr("Optional dependencies") }

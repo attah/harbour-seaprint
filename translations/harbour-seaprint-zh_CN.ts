@@ -87,6 +87,10 @@
         <source>Donations</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>German</source>
+        <translation type="unfinished">德语</translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>

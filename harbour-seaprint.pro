@@ -62,7 +62,8 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-zh_CN.ts \
                 translations/harbour-seaprint-fr.ts \
-                translations/harbour-seaprint-es.ts
+                translations/harbour-seaprint-es.ts \
+                translations/harbour-seaprint-pl.ts
 
 HEADERS += \
     src/convertchecker.h \
