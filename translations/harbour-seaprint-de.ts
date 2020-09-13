@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation>Netzwerk Druck für Sailfish OS.</translation>
+        <translation>Netzwerkdruck für Sailfish OS.</translation>
     </message>
     <message>
         <source>Icons</source>
@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation>Icons erstellt von Gregguh.</translation>
+        <translation>Icon erstellt von Gregguh.</translation>
     </message>
     <message>
         <source>General contributions</source>
@@ -130,7 +130,7 @@
     <name>Clipper</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation>In die Zwischenablage kopieren</translation>
+        <translation>In die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Erneuer</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>No file selected</source>
@@ -260,7 +260,7 @@
     <name>JobsPage</name>
     <message>
         <source>Refresh</source>
-        <translation>Erneuern</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>jobs</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation>Auftrag abbrechen fehlgeschlagen</translation>
+        <translation>Abbruch des Auftrags fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -322,11 +322,11 @@
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation>Für die Installation muss der Entwickler Modus aktiviert werden und eine Konsole geöffnet werden.</translation>
+        <translation>Für die Installation muss der Entwickler Modus aktiviert und eine Konsole geöffnet werden.</translation>
     </message>
     <message>
         <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
-        <translation>Um PDF Dateien zu drucken wird für Drucker ohne PDS Support das Software Paket &quot;poppler-utils&quot; benötigt. Diese ermöglicht es SeaPrint das PDF in besser unterstützte Formate zu konvertieren.</translation>
+        <translation>Um PDF Dateien zu drucken wird für Drucker ohne PDF Support das Software Paket &quot;poppler-utils&quot; benötigt. Diese ermöglicht es SeaPrint das PDF in besser unterstützte Formate zu konvertieren.</translation>
     </message>
 </context>
 <context>
@@ -357,7 +357,7 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation>Medium drucken</translation>
+        <translation>Papier Format</translation>
     </message>
     <message>
         <source>Transfer format</source>
@@ -365,7 +365,7 @@
     </message>
     <message>
         <source>Media source</source>
-        <translation>Medien Quelle</translation>
+        <translation>Papierquelle</translation>
     </message>
     <message>
         <source>Zero margins</source>
@@ -423,7 +423,7 @@
     </message>
     <message>
         <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation></translation>
+        <translation>Das Attribut media-col anstelle des Papierformats benutzen. Das bedeutet, dass eine Auswahl über Parameter anstatt eines Namens erfolgt. Wenn keine Seitenränder aktiviert sind, wird unabhängig von der Einstellung die Parameter Auswahl benutzt.</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -434,11 +434,11 @@
     <name>utils</name>
     <message>
         <source>pending</source>
-        <translation>Wartend</translation>
+        <translation>Ausstehend</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation>Wartend angehalten</translation>
+        <translation>Austehend angehalten</translation>
     </message>
     <message>
         <source>processing</source>
@@ -470,7 +470,7 @@
     </message>
     <message>
         <source>normal</source>
-        <translation>normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>high</source>
@@ -542,7 +542,7 @@
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation>Byass Fach</translation>
+        <translation>Bypass Fach</translation>
     </message>
     <message>
         <source>tray</source>
@@ -594,7 +594,7 @@
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation>Auto Monochrome</translation>
+        <translation>Auto Monochrom</translation>
     </message>
     <message>
         <source>bi-level</source>
@@ -610,19 +610,19 @@
     </message>
     <message>
         <source>monochrome</source>
-        <translation>Monochrome</translation>
+        <translation>Monochrom</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation>Mit Bi-Level verarbeiten</translation>
+        <translation>Bi-Level verarbeiten</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation>Monochrome verarbeiten</translation>
+        <translation>Monochrom verarbeiten</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation></translation>
+        <translation>Einseitig</translation>
     </message>
     <message>
         <source>two-sided</source>
