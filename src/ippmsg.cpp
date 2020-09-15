@@ -319,7 +319,7 @@ QByteArray IppMsg::encode(Operation op)
     {
         QJsonObject tmpObj = ait->toObject();
         if (!tmpObj.isEmpty()) {
-            ipp << quint8(2);
+            ipp << quint8(JobAttrs);
             for(QJsonObject::iterator it = tmpObj.begin(); it != tmpObj.end(); it++)
             {
                 QJsonObject val = it.value().toObject();
@@ -328,7 +328,7 @@ QByteArray IppMsg::encode(Operation op)
         }
     }
 
-    ipp << quint8(3);
+    ipp << quint8(EndAttrs);
 
     return QByteArray((char*)(ipp.raw()), ipp.size());
 }
