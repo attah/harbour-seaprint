@@ -31,7 +31,7 @@ Dialog {
 
             Label {
                 id: wifi_label
-                text: qsTr("On WiFI:")
+                text: qsTr("On WiFi:")
             }
             Label {
                 id: ssid_label

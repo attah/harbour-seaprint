@@ -99,8 +99,8 @@
         <translation>Dodaj drukarkę</translation>
     </message>
     <message>
-        <source>On WiFI:</source>
-        <translation>Na WIFI:</translation>
+        <source>On WiFi:</source>
+        <translation>Na WiFi:</translation>
     </message>
     <message>
         <source>Found:</source>

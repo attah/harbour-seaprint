@@ -99,7 +99,7 @@
         <translation>添加打印机</translation>
     </message>
     <message>
-        <source>On WiFI:</source>
+        <source>On WiFi:</source>
         <translation>WiFi连接的:</translation>
     </message>
     <message>

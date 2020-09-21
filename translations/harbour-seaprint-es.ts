@@ -99,7 +99,7 @@
         <translation>Añadir impresora</translation>
     </message>
     <message>
-        <source>On WiFI:</source>
+        <source>On WiFi:</source>
         <translation>En WiFi:</translation>
     </message>
     <message>
