@@ -5,82 +5,78 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation>Repositorio en Github</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation>Informar de un problema</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation>Impresión por red para Sailfish OS.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation>Iconos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation>Icono creado por Gregguh.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation>Colaboración general</translation>
-    </message>
-    <message>
-        <source>Translations</source>
-        <translation>Traducciones</translation>
-    </message>
-    <message>
-        <source>Chinese</source>
-        <translation>Chino</translation>
-    </message>
-    <message>
-        <source>Licensing</source>
-        <translation>Licencia</translation>
-    </message>
-    <message>
-        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation>El código fuente está disponible en Github. ¡Las traducciones, informar sobre errores y otras colaboraciones son bienvenidas!</translation>
-    </message>
-    <message>
-        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation>La licencia de Seaprint aún está por determinar, pero será algo abierta.</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation>Francés</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation>Código y pruebas - Rudi Timmermans</translation>
-    </message>
-    <message>
-        <source>Spanish</source>
-        <translation>Español</translation>
-    </message>
-    <message>
-        <source>Polish</source>
-        <translation>Polaco</translation>
-    </message>
-    <message>
-        <source>Optional dependencies</source>
-        <translation>Dependencias opcionales</translation>
-    </message>
-    <message>
-        <source>Installed</source>
-        <translation>Instalado</translation>
-    </message>
-    <message>
-        <source>Not installed</source>
-        <translation>No instalado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>French</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Optional dependencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -88,8 +84,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>German</source>
-        <translation type="unfinished">Alemán</translation>
+        <source>Licensing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

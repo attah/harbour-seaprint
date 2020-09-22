@@ -32,6 +32,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Code and Testing - Rudi Timmermans</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Testing and Design Suggestions - piggz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Translations</source>
         <translation type="unfinished"></translation>
     </message>
@@ -40,15 +48,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Licensing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
+        <source>Dutch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -56,15 +56,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spanish</source>
+        <source>German</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Polish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spanish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -80,15 +80,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Testing and Design Suggestions - piggz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Donations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>German</source>
+        <source>Licensing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -96,10 +100,6 @@
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>On WiFI:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -112,6 +112,10 @@
     </message>
     <message>
         <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On WiFi:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
