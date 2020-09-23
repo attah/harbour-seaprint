@@ -63,6 +63,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
     bool urf = false;
     bool ps = false;
+    bool pdf = false;
 
     if(targetFormat == "image/urf")
     {
@@ -75,6 +76,10 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     else if(targetFormat == "application/postscript")
     {
         ps = true;
+    }
+    else if (targetFormat == "application/pdf")
+    {
+        pdf = true;
     }
     else
     {
@@ -130,6 +135,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         }
         PdfToPsArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
 
+        qDebug() << "pdftops args is " << PdfToPsArgs;
         pdftops->setArguments(PdfToPsArgs);
 
         pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
@@ -152,6 +158,46 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftops->waitForFinished(10000+5000*pages))
         {
             qDebug() << "pdftops failed";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+    }
+    else if(pdf)
+    {
+        QProcess* pdftocairo = new QProcess(this);
+        pdftocairo->setProgram("pdftocairo");
+        QStringList PdfToCairoArgs = {"-pdf"};
+
+        if(PageRangeLow != 0)
+        {
+            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+        }
+        PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
+
+        qDebug() << "pdftocairo args is " << PdfToCairoArgs;
+        pdftocairo->setArguments(PdfToCairoArgs);
+
+        pdftocairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+        connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
+
+        pdftocairo->start();
+
+        qDebug() << "Starting";
+
+        if(!pdftocairo->waitForStarted())
+        {
+            qDebug() << "pdftocairo died";
+            tempfile->deleteLater();
+            emit failed(tr("Conversion error"));
+            return;
+        }
+
+        qDebug() << "Started";
+
+        if(!pdftocairo->waitForFinished(10000+5000*pages))
+        {
+            qDebug() << "pdftocairo failed";
             tempfile->deleteLater();
             emit failed(tr("Conversion error"));
             return;

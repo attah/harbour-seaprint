@@ -422,6 +422,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
 
     QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
+    bool pdfPageRangeAdjustNeeded = false;
 
     if(!PaperSizes.contains(PaperSize))
     {
@@ -429,26 +430,34 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
         return;
     }
 
+    quint32 PageRangeLow = 0;
+    quint32 PageRangeHigh = 0;
+    if(attrs.contains("page-ranges"))
+    {
+        QJsonObject PageRanges = getAttrOrDefault(attrs, "page-ranges").toObject();
+        PageRangeLow = PageRanges["low"].toInt();
+        PageRangeHigh = PageRanges["high"].toInt();
+    }
+
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
     if(removeRedundantConvertAttrs && (documentFormat=="image/pwg-raster" ||
-                                              documentFormat=="image/urf"))
+                                       documentFormat=="image/urf"))
     {
         attrs.remove("sides");
         attrs.remove("print-color-mode");
+        attrs.remove("page-ranges");
     }
-    if(removeRedundantConvertAttrs && documentFormat == "application/postscript")
+    else if(removeRedundantConvertAttrs && documentFormat == "application/postscript")
     {
         attrs.remove("sides");
+        attrs.remove("page-ranges");
     }
-    quint32 PageRangeLow = 0;
-    quint32 PageRangeHigh = 0;
-    if(mimeType == "application/pdf" && documentFormat != "application/pdf")
+    else if (documentFormat == "application/pdf")
     {
-        if(attrs.contains("page-ranges"))
+        if(attrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
         {
-            QJsonObject PageRanges = getAttrOrDefault(attrs, "page-ranges").toObject();
-            PageRangeLow = PageRanges["low"].toInt();
-            PageRangeHigh = PageRanges["high"].toInt();
+            pdfPageRangeAdjustNeeded = true;
+            attrs.remove("page-ranges");
         }
     }
 
@@ -457,8 +466,13 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
 
     IppMsg job = mk_msg(o, attrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
-                                       // Always convert non-jpeg images to get resizing
-    if((mimeType == documentFormat) && (documentFormat == "image/jpeg" || !mimeType.contains("image")))
+
+    // Non-jpeg images, Postscript and PDF (when not adjusting pages locally)
+    // Always convert non-jpeg images to get resizing
+    // TODO: make this sane
+    if((mimeType == documentFormat)
+       && (documentFormat == "image/jpeg" || !mimeType.contains("image"))
+       && !((documentFormat == "application/pdf") && pdfPageRangeAdjustNeeded))
     {
         QByteArray filedata = file.readAll();
         contents = contents.append(filedata);
