@@ -308,11 +308,9 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::print(QJsonObject attrs, QString filename,
-                       bool alwaysConvert, bool removeRedundantConvertAttrs, bool alwaysUseMediaCol)
+void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, bool alwaysUseMediaCol)
 {
-    qDebug() << "printing" << filename << attrs
-             << alwaysConvert << removeRedundantConvertAttrs;
+    qDebug() << "printing" << filename << attrs << alwaysConvert;
 
     _progress = "";
     emit progressChanged();
@@ -440,14 +438,13 @@ void IppPrinter::print(QJsonObject attrs, QString filename,
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(removeRedundantConvertAttrs && (documentFormat=="image/pwg-raster" ||
-                                       documentFormat=="image/urf"))
+    if(documentFormat=="image/pwg-raster" || documentFormat=="image/urf")
     {
         attrs.remove("sides");
         attrs.remove("print-color-mode");
         attrs.remove("page-ranges");
     }
-    else if(removeRedundantConvertAttrs && documentFormat == "application/postscript")
+    else if(documentFormat == "application/postscript")
     {
         attrs.remove("sides");
         attrs.remove("page-ranges");

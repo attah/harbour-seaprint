@@ -414,14 +414,6 @@
         <translation>强制转换为 PWG 或 URF 光栅格式。这主要用于测试。</translation>
     </message>
     <message>
-        <source>Remove redundant attributes</source>
-        <translation>移除冗余属性</translation>
-    </message>
-    <message>
-        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation>删除冗余的IPP属性，如果它们也在传输格式时传递。 有些打印机即使设置一致，也会拒绝此项作业。</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>如果没有安装可选的依赖程序，则显示警告页面。</translation>
     </message>

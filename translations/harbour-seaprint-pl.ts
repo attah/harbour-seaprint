@@ -422,14 +422,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove redundant attributes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Always use media-col</source>
         <translation type="unfinished"></translation>
     </message>

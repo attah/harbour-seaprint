@@ -106,13 +106,6 @@ ApplicationWindow
 
     ConfigurationValue
     {
-        id: removeRedundantConvertAttrsSetting
-        key: "/apps/harbour-seaprint/settings/remove-redundant-convert-attributes"
-        defaultValue: true
-    }
-
-    ConfigurationValue
-    {
         id: alwaysUseMediaColSetting
         key: "/apps/harbour-seaprint/settings/always-use-media-col"
         defaultValue: false

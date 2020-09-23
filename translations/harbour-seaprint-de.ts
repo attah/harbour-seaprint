@@ -414,14 +414,6 @@
         <translation>Konvertierung in das PWG/URF Rasterformat erzwingen. Die ist hauptsächlich für Testzwecke vorgesehen.</translation>
     </message>
     <message>
-        <source>Remove redundant attributes</source>
-        <translation>Redundante Attribute entfernen</translation>
-    </message>
-    <message>
-        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation>Rdundante IPP Attribute entfernen, wenn sie in dem Tranferformat übermittelt werden. Einige Drucker lehnen Aufträge ab, selbst wenn die Einstellungen konsistent sind.</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>Warnseite über nicht installierte optionalen Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
     </message>
