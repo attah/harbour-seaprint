@@ -12,6 +12,19 @@
 # The name of your application
 TARGET = harbour-seaprint
 
+i18n.path = /usr/share/harbour-seaprint/translations
+i18n.files = translations/harbour-seaprint-de.qm \
+             translations/harbour-seaprint-zh_CN.qm \
+             translations/harbour-seaprint-fr.qm \
+             translations/harbour-seaprint-es.qm \
+             translations/harbour-seaprint-nl.qm \
+             translations/harbour-seaprint-pl.qm
+
+INSTALLS += i18n
+
+# automatic generation of the translation .qm files from .ts files
+system(lrelease $$PWD/translations/*.ts)
+
 CONFIG += sailfishapp
 
 # Write version file

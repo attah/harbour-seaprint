@@ -73,11 +73,11 @@
     </message>
     <message>
         <source>Installed</source>
-        <translation>Ge&iuml;nstalleerd</translation>
+        <translation>Geïnstalleerd</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation>Niet ge&iuml;nstalleerd</translation>
+        <translation>Niet geïnstalleerd</translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
@@ -91,16 +91,16 @@
         <source>German</source>
         <translation>Duits</translation>
     </message>
+    <message>
+        <source>Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
         <translation>Voeg printer toe</translation>
-    </message>
-    <message>
-        <source>On WiFI:</source>
-        <translation>Op WiFi:</translation>
     </message>
     <message>
         <source>Found:</source>
@@ -113,6 +113,10 @@
     <message>
         <source>Unknown</source>
         <translation>Onbekend</translation>
+    </message>
+    <message>
+        <source>On WiFi:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,7 +318,7 @@
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation>Optionele afhankelijkheden zijn niet ge&iuml;nstalleerd!</translation>
+        <translation>Optionele afhankelijkheden zijn niet geïnstalleerd!</translation>
     </message>
     <message>
         <source>Become root:</source>
@@ -345,7 +349,7 @@
     </message>
     <message>
         <source>Copies</source>
-        <translation>Kopie&euml;n</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Color mode</source>
@@ -410,16 +414,8 @@
         <translation>Omzetting naar PWG/URF-rasterformaat forceren. Dit is voornamelijk bedoeld om te testen.</translation>
     </message>
     <message>
-        <source>Remove redundant attributes</source>
-        <translation>Overtollige attributen verwijderen</translation>
-    </message>
-    <message>
-        <source>Remove redundant IPP attributes, if they are also conveyed in the transfer format. Some printers reject the job even if the settings are consistent.</source>
-        <translation>Overtollige IPP-attributen verwijderen, ook als ze in het overdrachtsformaat worden overgebracht. Sommige printers weigeren de taak, zelfs als de instellingen consistent zijn.</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation>Waarschuwingspagina weergeven over optionele afhankelijkheden die niet worden ge&iuml;nstalleerd, als ze niet zijn ge&iuml;nstalleerd.</translation>
+        <translation>Waarschuwingspagina weergeven over optionele afhankelijkheden die niet worden geïnstalleerd, als ze niet zijn geïnstalleerd.</translation>
     </message>
     <message>
         <source>Always use media-col</source>
@@ -558,7 +554,7 @@
     </message>
     <message>
         <source>center</source>
-        <translation>middenin></translation>
+        <translation>middenin&gt;</translation>
     </message>
     <message>
         <source>main</source>
