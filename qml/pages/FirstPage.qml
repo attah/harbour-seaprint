@@ -256,6 +256,10 @@ Page {
                         onClicked:  pageStack.push(Qt.resolvedUrl("JobsPage.qml"), {printer: printer})
                     }
                     MenuItem {
+                        text: qsTr("Printer properties")
+                        onClicked:  pageStack.push(Qt.resolvedUrl("PropertiesPage.qml"), {printer: printer})
+                    }
+                    MenuItem {
                         text: qsTr("Remove printer")
                         visible: db.isFavourite(wifi.ssid, model.display)
                         onClicked: {

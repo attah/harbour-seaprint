@@ -46,6 +46,7 @@ SOURCES += src/harbour-seaprint.cpp \
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/components/LargeChoiceDialog.qml \
+    qml/components/SupplyItem.qml \
     qml/cover/CoverPage.qml \
     qml/components/*.qml \
     qml/pages/*.qml \
@@ -54,6 +55,7 @@ DISTFILES += qml/harbour-seaprint.qml \
     qml/pages/BusyPage.qml \
     qml/pages/DebugPage.qml \
     qml/pages/NagScreen.qml \
+    qml/pages/PropertiesPage.qml \
     qml/pages/SettingsPage.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \

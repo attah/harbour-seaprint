@@ -240,6 +240,10 @@
         <source>Available printers</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Printer properties</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>
@@ -385,6 +389,45 @@
     </message>
 </context>
 <context>
+    <name>PropertiesPage</name>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printer state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detailed printer state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printer state message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printer firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supply status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make and model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipp versions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipp features</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RangeSetting</name>
     <message>
         <source>all</source>
@@ -428,6 +471,17 @@
     <message>
         <source>Settings</source>
         <translation type="unfinished">Ajustes</translation>
+    </message>
+</context>
+<context>
+    <name>SupplyItem</name>
+    <message>
+        <source>Unknown supply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -631,6 +685,22 @@
     <message>
         <source>two-sided flipped</source>
         <translation>doble cara volteado</translation>
+    </message>
+    <message>
+        <source>Idle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown State </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
