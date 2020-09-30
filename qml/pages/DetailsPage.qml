@@ -37,24 +37,15 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("Printer state")
+                text: qsTr("Printer status")
             }
 
             Label {
                 text: Utils.ippName("printer-state", printer.attrs["printer-state"].value)
             }
 
-            SectionHeader {
-                text: qsTr("Detailed printer state")
-            }
-
             Label {
                 text: Utils.ippName("printer-state-reasons", printer.attrs["printer-state-reasons"].value)
-            }
-
-            SectionHeader {
-                text: qsTr("Printer state message")
-                visible: printer.attrs.hasOwnProperty("printer-state-message")
             }
 
             Label {
@@ -67,13 +58,11 @@ Page {
                 visible: printer.attrs.hasOwnProperty("ipp-versions-supported")
             }
 
-            Repeater
+
+            Label
             {
-                model: printer.attrs["ipp-versions-supported"].value.length
-                Label
-                {
-                    text: printer.attrs["ipp-versions-supported"].value[index]
-                }
+                text: printer.attrs["ipp-versions-supported"].value.join(" ")
+                visible: printer.attrs.hasOwnProperty("ipp-versions-supported")
 
             }
 

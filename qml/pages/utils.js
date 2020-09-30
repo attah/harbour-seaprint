@@ -867,7 +867,7 @@ var printerStateReasons =
         "media-path-pick-roller-missing": "Media Path Pick Roller Missing",
         "motor-failure": "Motor Failure",
         "moving-to-paused": "Printer going offline",
-        "none": "None",
+        "none": "", //"None",
         "opc-life-over": "Optical Photoconductor Life Over",
         "opc-near-eol": "OPC almost at end-of-life",
         "other": "Check the printer for errors",

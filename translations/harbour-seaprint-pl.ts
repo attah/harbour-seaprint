@@ -187,6 +187,37 @@
     </message>
 </context>
 <context>
+    <name>DetailsPage</name>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make and model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printer status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IPP versions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IPP features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supply status</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
@@ -241,7 +272,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Printer properties</source>
+        <source>Printer details</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -385,45 +416,6 @@
     </message>
     <message>
         <source>Zero margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PropertiesPage</name>
-    <message>
-        <source>Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printer state</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Detailed printer state</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printer state message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printer firmware</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Supply status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Make and model</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ipp versions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ipp features</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
