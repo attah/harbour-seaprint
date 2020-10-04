@@ -120,6 +120,18 @@ function ippName(name, value)
         {
             return printerStateReasons[value];
         }
+        else if (endsWith("-report", value))
+        {
+            return ippName(name, value.substr(0, value.length-"-report".length))+" (Report)"
+        }
+        else if (endsWith("-warning", value))
+        {
+            return ippName(name, value.substr(0, value.length-"-warning".length))+" (Warning)"
+        }
+        else if (endsWith("-error", value))
+        {
+            return ippName(name, value.substr(0, value.length-"-error".length))+" (Error)"
+        }
         else
         {
             return value;
