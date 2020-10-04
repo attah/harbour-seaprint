@@ -147,6 +147,20 @@ function ippName(name, value)
         default:
             return value
         }
+    case "multiple-document-handling":
+        switch(value) {
+        case "single-document":
+            return qsTr("single document");
+        case "separate-documents-uncollated-copies":
+            return qsTr("uncollated");
+        case "separate-documents-collated-copies":
+            return qsTr("collated");
+        case "single-document-new-sheet":
+            return qsTr("single document (new sheet)");
+        default:
+            return value
+        }
+
     case "print-color-mode":
         switch(value) {
         case "auto":
@@ -284,6 +298,9 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
         }
     case "printer-resolution":
         return choices.filter(unitsIsDpi);
+    case "multiple-document-handling" :
+        // Only collation settings valid, multiple documents not used
+        return choices.filter(function(elem) {return elem.indexOf("collated") != -1});
     default:
         return choices;
     }

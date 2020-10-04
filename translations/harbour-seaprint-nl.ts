@@ -418,6 +418,10 @@
         <source>Page range</source>
         <translation>Paginabereik</translation>
     </message>
+    <message>
+        <source>Collated copies</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>
@@ -692,6 +696,22 @@
     </message>
     <message>
         <source>Unknown State </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>single document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uncollated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>collated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>single document (new sheet)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
