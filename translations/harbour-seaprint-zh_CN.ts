@@ -5,95 +5,95 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Github 库</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>报告问题</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>关于</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>旗鱼系统网络打印软件。</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation type="unfinished"></translation>
+        <translation>图标绘制者为 Gregguh 。</translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation type="unfinished"></translation>
+        <translation>常规贡献</translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation>编码及测试-Rudi Timmermans</translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
-        <translation type="unfinished"></translation>
+        <translation>测试及设计建议-piggz</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>翻译</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>汉语</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>尼德兰语</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>法语</translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>德语</translation>
     </message>
     <message>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>波兰语</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>西班牙语</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>可选依赖</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>已安装</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>未安装</translation>
     </message>
     <message>
         <source>Donations</source>
-        <translation type="unfinished"></translation>
+        <translation>捐赠</translation>
     </message>
     <message>
         <source>Licensing</source>
-        <translation type="unfinished"></translation>
+        <translation>许可证</translation>
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>源代码位于 Github 。欢迎翻译、报告缺陷及作出其它贡献！</translation>
     </message>
     <message>
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seaprint（海印）采用 TBD 许可证，但是我很乐意使它更加开放。</translation>
     </message>
 </context>
 <context>
@@ -138,7 +138,7 @@
     <name>Clipper</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>已复制到剪切板</translation>
     </message>
 </context>
 <context>
@@ -183,45 +183,45 @@
     <name>DebugPage</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>已复制到剪切板</translation>
     </message>
 </context>
 <context>
     <name>DetailsPage</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>详情</translation>
     </message>
     <message>
         <source>Make and model</source>
-        <translation type="unfinished"></translation>
+        <translation>制作及模板</translation>
     </message>
     <message>
         <source>Printer status</source>
-        <translation type="unfinished"></translation>
+        <translation>打印机状态</translation>
     </message>
     <message>
         <source>IPP versions</source>
-        <translation type="unfinished"></translation>
+        <translation>IPP版本</translation>
     </message>
     <message>
         <source>IPP features</source>
-        <translation type="unfinished"></translation>
+        <translation>IPP功能</translation>
     </message>
     <message>
         <source>Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>固件</translation>
     </message>
     <message>
         <source>Supply status</source>
-        <translation type="unfinished"></translation>
+        <translation>支持状态</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation>通过 URL 添加</translation>
+        <translation>通过URL添加</translation>
     </message>
     <message>
         <source>URL</source>
@@ -269,11 +269,11 @@
     </message>
     <message>
         <source>Available printers</source>
-        <translation type="unfinished"></translation>
+        <translation>可用打印机</translation>
     </message>
     <message>
         <source>Printer details</source>
-        <translation type="unfinished"></translation>
+        <translation>打印机详情</translation>
     </message>
 </context>
 <context>
@@ -296,7 +296,7 @@
     </message>
     <message>
         <source>Unknown document format dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>未知稳定格式尺寸</translation>
     </message>
 </context>
 <context>
@@ -334,11 +334,11 @@
     <name>MediaColSetting</name>
     <message>
         <source>true</source>
-        <translation type="unfinished"></translation>
+        <translation>真</translation>
     </message>
     <message>
         <source>false</source>
-        <translation type="unfinished"></translation>
+        <translation>假</translation>
     </message>
 </context>
 <context>
@@ -369,7 +369,7 @@
     </message>
     <message>
         <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果你想要用打印机打印PDF文件，你需要安装包 poppler-utils 。该包能够让 SeaPrint 转换格式为更容易接受的格式。</translation>
     </message>
 </context>
 <context>
@@ -412,22 +412,22 @@
     </message>
     <message>
         <source>Zero margins</source>
-        <translation type="unfinished"></translation>
+        <translation>零页边距</translation>
     </message>
     <message>
         <source>Page range</source>
-        <translation type="unfinished"></translation>
+        <translation>页面范围</translation>
     </message>
     <message>
         <source>Collated copies</source>
-        <translation type="unfinished"></translation>
+        <translation>整理后的副本</translation>
     </message>
 </context>
 <context>
     <name>RangeSetting</name>
     <message>
         <source>all</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
 </context>
 <context>
@@ -442,7 +442,7 @@
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation>有些打印机支持的格式比他们宣传的要多。 可以从其他属性中推断出其它格式。 主要与支持PDF 的Postscript—兼容打印机相关。</translation>
+        <translation>有些打印机支持的格式比他们宣传的要多。 可以从其他属性中推断出其它格式。 主要与支持PDF的Postscript—兼容打印机相关。</translation>
     </message>
     <message>
         <source>Always convert to raster format</source>
@@ -450,7 +450,7 @@
     </message>
     <message>
         <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation>强制转换为 PWG 或 URF 光栅格式。这主要用于测试。</translation>
+        <translation>强制转换为PWG或URF光栅格式。这主要用于测试。</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
@@ -458,26 +458,26 @@
     </message>
     <message>
         <source>Always use media-col</source>
-        <translation type="unfinished"></translation>
+        <translation>总是使用media-col</translation>
     </message>
     <message>
         <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>纸张尺寸使用特性 media-col 而不是 media 。即对打印介质进行参数化选择，而不是按名称选择。 如果您使用零打印页边距，则无论此设置如何，都将使用参数选择。</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">设置</translation>
+        <translation>设置</translation>
     </message>
 </context>
 <context>
     <name>SupplyItem</name>
     <message>
         <source>Unknown supply</source>
-        <translation type="unfinished"></translation>
+        <translation>未知支持</translation>
     </message>
     <message>
         <source>Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>未知类型</translation>
     </message>
 </context>
 <context>
@@ -684,35 +684,35 @@
     </message>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>lxle</translation>
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在处理</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>已停止</translation>
     </message>
     <message>
         <source>Unknown State </source>
-        <translation type="unfinished"></translation>
+        <translation>位置状态</translation>
     </message>
     <message>
         <source>single document</source>
-        <translation type="unfinished"></translation>
+        <translation>一份文件</translation>
     </message>
     <message>
         <source>uncollated</source>
-        <translation type="unfinished"></translation>
+        <translation>未整理的</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation type="unfinished"></translation>
+        <translation>整理的</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
-        <translation type="unfinished"></translation>
+        <translation>一份文件（新纸张）</translation>
     </message>
 </context>
 </TS>
