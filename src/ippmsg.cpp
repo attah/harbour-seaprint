@@ -276,7 +276,8 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
     bool forceArray = (!noList && (name.startsWith("marker-")
                                    || name.startsWith("printer-firmware")
                                    || name.endsWith("-supported")
-                                   || name == "printer-icons"));
+                                   || name == "printer-icons"
+                                   || name.endsWith("-reasons")));
 
     if(!unnamed.empty() || forceArray)
     {

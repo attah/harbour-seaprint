@@ -44,8 +44,12 @@ Page {
                 text: Utils.ippName("printer-state", printer.attrs["printer-state"].value)
             }
 
-            Label {
-                text: Utils.ippName("printer-state-reasons", printer.attrs["printer-state-reasons"].value)
+            Repeater
+            {
+                model: printer.attrs["printer-state-reasons"].value
+                Label {
+                    text: Utils.ippName("printer-state-reasons", printer.attrs["printer-state-reasons"].value[index])
+                }
             }
 
             Label {

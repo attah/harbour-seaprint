@@ -202,6 +202,14 @@ Page {
 
                 }
 
+                Image {
+                    id: warningIcon
+                    source: "image://theme/icon-lock-warning"
+                    anchors.bottom: icon.bottom
+                    anchors.right: icon.right
+                    visible: Utils.isWaringState(printer)
+                }
+
                 Column {
                     id: column
                     anchors.left: icon.right

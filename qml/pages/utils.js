@@ -318,6 +318,19 @@ function selectIcon(icons)
     return icons[0];
 }
 
+function isWaringState(printer)
+{
+    if(printer.attrs["printer-state"].value > 4)
+    {
+        return true;
+    }
+    else if(!has(printer.attrs["printer-state-reasons"].value, "none"))
+    {
+        return true;
+    }
+    return false;
+}
+
 var media =
        {"asme_f_28x40in": "28 x 40″",
         "choice_iso_a4_210x297mm_na_letter_8.5x11in": "A4 or US Letter",
