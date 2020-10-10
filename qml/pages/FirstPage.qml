@@ -43,6 +43,13 @@ Page {
         }
     }
 
+    Label {
+        text: qsTr("Not on WiFi")
+        color: Theme.highlightColor
+        anchors.centerIn: parent
+        visible: !wifi.connected
+    }
+
     property bool initialized: false
     onVisibleChanged: {
         if (visible)

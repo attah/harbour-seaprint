@@ -275,6 +275,10 @@
         <source>Printer details</source>
         <translation>打印机详情</translation>
     </message>
+    <message>
+        <source>Not on WiFi</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>
