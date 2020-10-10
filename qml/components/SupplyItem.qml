@@ -24,14 +24,14 @@ import "../components"
         Label
         {
             anchors.verticalCenter: parent.verticalCenter
-            width: Theme.itemSizeSmall
+            width: Theme.itemSizeExtraSmall
             text: ""+(100*level/high_level)+"%"
             color: Theme.highlightColor
+            font.pixelSize: Theme.fontSizeExtraSmall
         }
         Column
         {
-            leftPadding: Theme.paddingMedium
-
+            anchors.verticalCenter: parent.verticalCenter
             Label
             {
                 text: name

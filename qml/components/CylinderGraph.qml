@@ -14,8 +14,8 @@ Item {
         z: 1
         anchors.centerIn: parent
 
-        width: Theme.itemSizeSmall*0.66
-        height: Theme.itemSizeSmall/3*0.66
+        width: Theme.itemSizeExtraSmall
+        height: Theme.itemSizeExtraSmall/3
         rotation: 90
         transformOrigin: Item.Center
 
@@ -29,16 +29,26 @@ Item {
         }
     }
     Rectangle {
-        width: Theme.itemSizeSmall*0.66*parent.value
-        height: Theme.itemSizeSmall/3*0.66
+        width: Theme.itemSizeExtraSmall*parent.value
+        height: (Theme.itemSizeExtraSmall/3)
         rotation: 90
         transformOrigin: Item.Center
 
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: withOpacity(0.2, cylinderGraph.color)}
+            GradientStop { position: 0.1; color: cylinderGraph.color}
+            GradientStop { position: 0.9; color: cylinderGraph.color}
+            GradientStop { position: 1.0; color: withOpacity(0.2, cylinderGraph.color)}
+        }
+
         anchors.horizontalCenter: effect.horizontalCenter
         anchors.bottom: effect.bottom
-        anchors.bottomMargin: -1*(Theme.itemSizeSmall*0.66-width)/2
-        color: cylinderGraph.color
+        anchors.bottomMargin: -1*(Theme.itemSizeExtraSmall-Theme.itemSizeExtraSmall*parent.value)/2
+//        color: cylinderGraph.color
 //        opacity: 0.7
     }
 
+    function withOpacity(opacity, color) {
+        Qt.rgba(color.r, color.g, color.b, opacity)
+    }
 }
