@@ -43,6 +43,16 @@ Page {
         }
     }
 
+    property bool initialized: false
+    onVisibleChanged: {
+        if (visible)
+        {
+            if(initialized)
+                page.refreshed()
+            initialized = true
+        }
+    }
+
     signal refreshed()
 
     Component.onCompleted: {
