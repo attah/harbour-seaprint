@@ -1,5 +1,6 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import "../components"
 
     Row
     {
@@ -14,11 +15,11 @@ import Sailfish.Silica 1.0
         spacing: Theme.paddingMedium
         bottomPadding: Theme.paddingMedium
 
-        Icon
+        CylinderGraph
         {
             anchors.verticalCenter: parent.verticalCenter
-            source: "image://theme/icon-s-clear-opaque-background"
-            color: item.color
+            color: parent.color
+            value: (level/high_level)
         }
         Label
         {

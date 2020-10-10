@@ -45,6 +45,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/bytestream/bytestream.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
+    qml/components/CylinderGraph.qml \
     qml/components/LargeChoiceDialog.qml \
     qml/components/SupplyItem.qml \
     qml/cover/CoverPage.qml \
