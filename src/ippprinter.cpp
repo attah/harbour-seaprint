@@ -94,11 +94,11 @@ void IppPrinter::onUrlChanged()
 }
 
 void IppPrinter::refresh() {
-    _attrs = QJsonObject();
-    emit attrsChanged();
+//    _attrs = QJsonObject();
+//    emit attrsChanged();
 
-    _additionalDocumentFormats = QStringList();
-    emit additionalDocumentFormatsChanged();
+//    _additionalDocumentFormats = QStringList();
+//    emit additionalDocumentFormatsChanged();
 
 
     QNetworkRequest request;
@@ -118,6 +118,8 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
 {
     qDebug() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
     _attrs = QJsonObject();
+    _additionalDocumentFormats = QStringList();
+
     if(reply->error()  == QNetworkReply::NoError)
     {
         try {
@@ -152,10 +154,11 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
             }
         }
         qDebug() << "additionalDocumentFormats" << _additionalDocumentFormats;
-        emit additionalDocumentFormatsChanged();
     }
 
     emit attrsChanged();
+    emit additionalDocumentFormatsChanged();
+
 }
 
 void IppPrinter::printRequestFinished(QNetworkReply *reply)
