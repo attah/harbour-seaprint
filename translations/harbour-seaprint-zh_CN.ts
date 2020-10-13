@@ -277,7 +277,7 @@
     </message>
     <message>
         <source>Not on WiFi</source>
-        <translation type="unfinished"></translation>
+        <translation>未连接WiFi</translation>
     </message>
 </context>
 <context>
