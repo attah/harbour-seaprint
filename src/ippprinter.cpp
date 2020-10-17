@@ -441,19 +441,14 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(documentFormat=="image/pwg-raster" || documentFormat=="image/urf")
-    {
-        attrs.remove("sides");
-        attrs.remove("print-color-mode");
-        attrs.remove("page-ranges");
-    }
-    else if(documentFormat == "application/postscript")
-    {
-        attrs.remove("sides");
+    if(documentFormat=="image/pwg-raster"
+      || documentFormat=="image/urf"
+      || documentFormat == "application/postscript")
+    {   // Effected locally
         attrs.remove("page-ranges");
     }
     else if (documentFormat == "application/pdf")
-    {
+    {   // Only effected locally if really needed
         if(attrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
         {
             pdfPageRangeAdjustNeeded = true;

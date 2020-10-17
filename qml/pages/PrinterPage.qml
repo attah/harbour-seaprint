@@ -38,12 +38,12 @@ Page {
 
         ListModel {
             id:mod
-            ListElement {name: "sides";                       prettyName: qsTr("Sides");              tag: IppMsg.Enum}
+            ListElement {name: "sides";                       prettyName: qsTr("Sides");              tag: IppMsg.Keyword}
             ListElement {name: "media";                       prettyName: qsTr("Print media");        tag: IppMsg.Keyword}
             ListElement {name: "copies";                      prettyName: qsTr("Copies");             tag: IppMsg.Integer}
             ListElement {name: "multiple-document-handling";  prettyName: qsTr("Collated copies");    tag: IppMsg.Keyword}
             ListElement {name: "page-ranges";                 prettyName: qsTr("Page range");         tag: IppMsg.IntegerRange}
-            ListElement {name: "print-color-mode";            prettyName: qsTr("Color mode");         tag: IppMsg.Enum}
+            ListElement {name: "print-color-mode";            prettyName: qsTr("Color mode");         tag: IppMsg.Keyword}
 //            ListElement {name: "orientation-requested";     prettyName: qsTr("Orientation");        tag: IppMsg.Enum}
             ListElement {name: "print-quality";               prettyName: qsTr("Quality");            tag: IppMsg.Enum}
             ListElement {name: "printer-resolution";          prettyName: qsTr("Resolution");         tag: IppMsg.Resolution}
