@@ -5,87 +5,87 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation type="unfinished"></translation>
+        <translation>Dépaut GitHub</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Signaler un problème</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impression réseau pour Sailfish OS.</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icônes</translation>
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation type="unfinished"></translation>
+        <translation>Icônes créées par Gregguh</translation>
     </message>
     <message>
         <source>General contributions</source>
-        <translation type="unfinished"></translation>
+        <translation>Contributions générales</translation>
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="unfinished"></translation>
+        <translation>Code et essais - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
-        <translation type="unfinished"></translation>
+        <translation>Essais et suggestions de design - piggz</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation type="unfinished"></translation>
+        <translation>Traductions</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Mandarin</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Néerlandais</translation>
     </message>
     <message>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Français</translation>
     </message>
     <message>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Allemand</translation>
     </message>
     <message>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Polonais</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Espagnol</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Dépendances optionnelles</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installées</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Non installées</translation>
     </message>
     <message>
         <source>Donations</source>
-        <translation type="unfinished"></translation>
+        <translation>Don</translation>
     </message>
     <message>
         <source>Licensing</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
@@ -123,41 +123,41 @@
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation type="unfinished">Impression réussie :</translation>
+        <translation>Impression réussie :</translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation type="unfinished">Échec de l&apos;impression :</translation>
+        <translation>Échec de l&apos;impression :</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Inconnu</translation>
+        <translation>Inconnu</translation>
     </message>
 </context>
 <context>
     <name>Clipper</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copié dans le presse-papier</translation>
     </message>
 </context>
 <context>
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de conversion</translation>
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement impossible de l'image</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de papier PDF non prise en charge</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de papier non prise en charge</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
@@ -183,14 +183,14 @@
     <name>DebugPage</name>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copié dans le presse-papiers</translation>
     </message>
 </context>
 <context>
     <name>DetailsPage</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Détails</translation>
     </message>
     <message>
         <source>Make and model</source>
@@ -198,19 +198,19 @@
     </message>
     <message>
         <source>Printer status</source>
-        <translation type="unfinished"></translation>
+        <translation>État de l'imprimante</translation>
     </message>
     <message>
         <source>IPP versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Version IPP</translation>
     </message>
     <message>
         <source>IPP features</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonctions IPP</translation>
     </message>
     <message>
         <source>Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Micrologiciel</translation>
     </message>
     <message>
         <source>Supply status</source>
@@ -261,23 +261,23 @@
     </message>
     <message>
         <source>Choose file</source>
-        <translation type="unfinished">Choisir un fichier</translation>
+        <translation>Choisir un fichier</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Available printers</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimantes disponibles</translation>
     </message>
     <message>
         <source>Printer details</source>
-        <translation type="unfinished"></translation>
+        <translation>Détails imprimante</translation>
     </message>
     <message>
         <source>Not on WiFi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas en WiFi</translation>
     </message>
 </context>
 <context>
@@ -338,22 +338,22 @@
     <name>MediaColSetting</name>
     <message>
         <source>true</source>
-        <translation type="unfinished"></translation>
+        <translation>true</translation>
     </message>
     <message>
         <source>false</source>
-        <translation type="unfinished"></translation>
+        <translation>false</translation>
     </message>
 </context>
 <context>
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <source>Don&apos;t show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher</translation>
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Média d'impression</translation>
     </message>
     <message>
         <source>Transfer format</source>
@@ -470,7 +470,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
 </context>
 <context>
