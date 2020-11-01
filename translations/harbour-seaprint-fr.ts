@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation>Chargement impossible de l'image</translation>
+        <translation>Chargement impossible de l&apos;image</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>Printer status</source>
-        <translation>État de l'imprimante</translation>
+        <translation>État de l&apos;imprimante</translation>
     </message>
     <message>
         <source>IPP versions</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation>Média d'impression</translation>
+        <translation>Média d&apos;impression</translation>
     </message>
     <message>
         <source>Transfer format</source>
