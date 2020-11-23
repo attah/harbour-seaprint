@@ -35,8 +35,6 @@ Setting {
     displayValue: choice_high==0 ? qsTr("all") : ""+choice_low+" - "+choice_high
 
     menu: ContextMenu {
-        enabled: valid
-
         MenuItem {
             Slider
             {

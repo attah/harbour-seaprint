@@ -8,7 +8,6 @@ Setting {
     displayValue: choice ? choice : default_choice
 
     menu: ContextMenu {
-        enabled: valid
         MenuItem {
             Slider
             {

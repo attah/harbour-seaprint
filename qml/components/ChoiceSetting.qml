@@ -29,7 +29,6 @@ Setting {
     }
 
     menu: ContextMenu {
-        enabled: valid && limited_choices.length <= num_large_choices
         Repeater {
             model: limited_choices
             MenuItem {

@@ -21,7 +21,6 @@ Setting {
 
     menu: ContextMenu {
         id: menu
-        enabled: true
         MenuItem {
             text: qsTr("true")
             onClicked:
