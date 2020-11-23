@@ -30,7 +30,7 @@ Setting {
 
     menu: ContextMenu {
         Repeater {
-            model: limited_choices
+            model: limited_choices.length>num_large_choices ? 0 : limited_choices
             MenuItem {
                 text: Utils.ippName(name, limited_choices[index])
                 onClicked:
