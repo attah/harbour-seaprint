@@ -2,19 +2,26 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Setting {
+    id: settingEntry
+    height: button.height +  menu.height
 
     property int low
     property int high
 
     ValueButton {
+        id: button
         enabled: valid
-        anchors.verticalCenter: parent.verticalCenter
         label: prettyName
         value: choice ? choice : default_choice
         onClicked: parent.clicked()
+        Component.onCompleted: {
+            console.log("button height: " + button.height)
+        }
     }
 
-    property var menu: ContextMenu {
+    onClicked: menu.open(settingEntry)
+
+    ContextMenu {
         id: menu
         enabled: valid
         MenuItem {
