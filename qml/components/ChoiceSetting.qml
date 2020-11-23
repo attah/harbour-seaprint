@@ -4,6 +4,9 @@ import seaprint.convertchecker 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
+    id: settingEntry
+    height: button.height +  menu.height
+
     property var choices
     property string mime_type
 
@@ -12,8 +15,8 @@ Setting {
     property int num_large_choices: 8
 
     ValueButton {
+        id: button
         enabled: valid
-        anchors.verticalCenter: parent.verticalCenter
         label: prettyName
         value: Utils.ippName(name, choice ? choice : default_choice)
         onClicked: parent.clicked()
@@ -28,9 +31,10 @@ Setting {
                                         choice = dialog.choice
                                     })
         }
+        menu.open(settingEntry)
     }
 
-    property var menu: ContextMenu {
+    ContextMenu {
         id: menu
         enabled: valid && limited_choices.length <= num_large_choices
         Repeater {
