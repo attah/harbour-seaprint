@@ -11,10 +11,7 @@ Item {
 
     property var choice
     property var default_choice
-
     signal clicked()
-    signal choiceMade(int tag, var choice)
-    onChoiceChanged: choiceMade(tag, choice)
 
     property var menu
 

@@ -18,6 +18,19 @@ Page {
         console.log(JSON.stringify(printer.attrs))
     }
 
+    function choiceMade(name, tag, choice)
+    {
+        if(choice != undefined)
+        {
+            jobParams[name] = {tag: tag, value: choice};
+        }
+        else
+        {
+            jobParams[name] = undefined
+        }
+        console.log(JSON.stringify(jobParams));
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -72,6 +85,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -81,6 +96,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             IntegerSetting {
                 tag: IppMsg.Integer
@@ -90,6 +107,8 @@ Page {
                 low: valid ? printer.attrs[name+"-supported"].value.low : 0
                 high: valid ? printer.attrs[name+"-supported"].value.high : 0
                 default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : undefined
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -99,6 +118,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             RangeSetting {
                 tag: IppMsg.IntegerRange
@@ -108,6 +129,8 @@ Page {
 
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
                 high: name=="page-ranges" ? (pdfpages == 0 ? 65535 : pdfpages)  : 0
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -117,6 +140,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Enum
@@ -126,6 +151,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Resolution
@@ -135,6 +162,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.MimeMediaType
@@ -144,6 +173,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -153,6 +184,8 @@ Page {
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: Mimer.get_type(selectedFile)
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
             MediaColSetting {
                 tag: IppMsg.BeginCollection
@@ -160,6 +193,8 @@ Page {
                 prettyName: qsTr("Zero margins")
                 valid: false
                 printer: page.printer
+
+                onChoiceChanged: page.choiceMade(name, tag, choice)
             }
         }
     }
