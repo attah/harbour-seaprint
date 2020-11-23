@@ -31,7 +31,10 @@ Setting {
                                         choice = dialog.choice
                                     })
         }
-        menu.open(settingEntry)
+        else
+        {
+            menu.open(settingEntry)
+        }
     }
 
     ContextMenu {
