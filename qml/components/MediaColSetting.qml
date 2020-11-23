@@ -5,8 +5,6 @@ import seaprint.ippmsg 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
-    id: settingEntry
-
     height: button.height +  menu.height
     property var printer
 
@@ -28,9 +26,7 @@ Setting {
         onClicked: parent.clicked()
     }
 
-    onClicked: menu.open(settingEntry)
-
-    ContextMenu {
+    menu: ContextMenu {
         id: menu
         enabled: true
         MenuItem {

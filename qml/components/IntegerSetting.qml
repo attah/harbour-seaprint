@@ -2,9 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Setting {
-    id: settingEntry
-    height: button.height +  menu.height
-
     property int low
     property int high
 
@@ -14,15 +11,9 @@ Setting {
         label: prettyName
         value: choice ? choice : default_choice
         onClicked: parent.clicked()
-        Component.onCompleted: {
-            console.log("button height: " + button.height)
-        }
     }
 
-    onClicked: menu.open(settingEntry)
-
-    ContextMenu {
-        id: menu
+    menu: ContextMenu {
         enabled: valid
         MenuItem {
             Slider

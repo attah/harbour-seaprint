@@ -2,8 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Setting {
-    id: settingEntry
-
     height: button.height +  menu.height
 
     property int high
@@ -44,10 +42,7 @@ Setting {
         onClicked: parent.clicked()
     }
 
-    onClicked: menu.open(settingEntry)
-
-    ContextMenu {
-        id: menu
+    menu: ContextMenu {
         enabled: valid
 
         MenuItem {

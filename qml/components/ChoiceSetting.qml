@@ -4,7 +4,6 @@ import seaprint.convertchecker 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
-    id: settingEntry
     height: button.height +  menu.height
 
     property var choices
@@ -33,12 +32,11 @@ Setting {
         }
         else
         {
-            menu.open(settingEntry)
+            menu.open(this)
         }
     }
 
-    ContextMenu {
-        id: menu
+    menu: ContextMenu {
         enabled: valid && limited_choices.length <= num_large_choices
         Repeater {
             model: limited_choices

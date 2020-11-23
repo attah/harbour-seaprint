@@ -11,7 +11,9 @@ Item {
 
     property var choice
     property var default_choice
+
     signal clicked()
+    onClicked: menu.open(this)
 
     property var menu
 
