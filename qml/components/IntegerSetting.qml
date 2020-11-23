@@ -5,13 +5,7 @@ Setting {
     property int low
     property int high
 
-    ValueButton {
-        id: button
-        enabled: valid
-        label: prettyName
-        value: choice ? choice : default_choice
-        onClicked: parent.clicked()
-    }
+    displayValue: choice ? choice : default_choice
 
     menu: ContextMenu {
         enabled: valid

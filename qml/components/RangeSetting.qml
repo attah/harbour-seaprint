@@ -2,8 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Setting {
-    height: button.height +  menu.height
-
     property int high
     property int choice_low: 1
     property int choice_high: 0
@@ -34,13 +32,7 @@ Setting {
         }
     }
 
-    ValueButton {
-        id: button
-        enabled: valid
-        label: prettyName
-        value: choice_high==0 ? qsTr("all") : ""+choice_low+" - "+choice_high
-        onClicked: parent.clicked()
-    }
+    displayValue: choice_high==0 ? qsTr("all") : ""+choice_low+" - "+choice_high
 
     menu: ContextMenu {
         enabled: valid

@@ -4,8 +4,6 @@ import seaprint.convertchecker 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
-    height: button.height +  menu.height
-
     property var choices
     property string mime_type
 
@@ -13,13 +11,7 @@ Setting {
 
     property int num_large_choices: 8
 
-    ValueButton {
-        id: button
-        enabled: valid
-        label: prettyName
-        value: Utils.ippName(name, choice ? choice : default_choice)
-        onClicked: parent.clicked()
-    }
+    displayValue: Utils.ippName(name, choice ? choice : default_choice)
 
     onClicked: {
         if(limited_choices.length>num_large_choices)

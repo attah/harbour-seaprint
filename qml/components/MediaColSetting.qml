@@ -5,7 +5,6 @@ import seaprint.ippmsg 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
-    height: button.height +  menu.height
     property var printer
 
     Component.onCompleted: {
@@ -18,13 +17,7 @@ Setting {
         }
     }
 
-    ValueButton {
-        id: button
-        enabled: valid
-        label: prettyName
-        value: choice ? qsTr("true") : qsTr("false")
-        onClicked: parent.clicked()
-    }
+    displayValue: choice ? qsTr("true") : qsTr("false")
 
     menu: ContextMenu {
         id: menu

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
+    height: button.height +  menu.height
     width: parent.width
 
     property string name
@@ -15,6 +16,14 @@ Item {
     signal clicked()
     onClicked: menu.open(this)
 
+    property alias displayValue: button.value
+
+    ValueButton {
+        id: button
+        enabled: valid
+        label: prettyName
+        onClicked: parent.clicked()
+    }
     property var menu
 
 }
