@@ -73,7 +73,7 @@ Page {
                     return isValid(name) ? printer.attrs[name+"-supported"].value : [];
                 }
                 function getDefaultChoice(name) {
-                    return printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : "";
+                    return printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : undefined;
                 }
             }
 
@@ -106,7 +106,7 @@ Page {
                 valid: utils.isValid(name)
                 low: valid ? printer.attrs[name+"-supported"].value.low : 0
                 high: valid ? printer.attrs[name+"-supported"].value.high : 0
-                default_choice: printer.attrs.hasOwnProperty(name+"-default") ? printer.attrs[name+"-default"].value : undefined
+                default_choice: utils.getDefaultChoice(name)
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
