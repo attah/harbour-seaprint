@@ -393,13 +393,6 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     }
     else
     { // We are converting to a raster format
-        QTemporaryFile tmpImage;
-        tmpImage.open();
-        qDebug() << "Raw image: " <<  tmpImage.fileName();
-
-        outImage.save(tmpImage.fileName(), Colors == 1 ? "pgm" : "ppm");
-        tmpImage.close();
-
         QProcess* ppm2pwg = new QProcess(this);
         // Yo dawg, I heard you like programs...
         ppm2pwg->setProgram("harbour-seaprint");
@@ -410,13 +403,14 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
         qDebug() << "ppm2pwg env is " << env;
 
         ppm2pwg->setEnvironment(env);
-        ppm2pwg->setStandardInputFile(tmpImage.fileName());
         ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
         connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
 
         qDebug() << "All connected";
         ppm2pwg->start();
+
+        outImage.save(ppm2pwg, Colors == 1 ? "pgm" : "ppm");
 
         qDebug() << "Starting";
 
