@@ -32,14 +32,6 @@
         <translation>常规贡献</translation>
     </message>
     <message>
-        <source>Code and Testing - Rudi Timmermans</source>
-        <translation type="vanished">编码及测试-Rudi Timmermans</translation>
-    </message>
-    <message>
-        <source>Testing and Design Suggestions - piggz</source>
-        <translation type="vanished">测试及设计建议-piggz</translation>
-    </message>
-    <message>
         <source>Translations</source>
         <translation>翻译</translation>
     </message>
