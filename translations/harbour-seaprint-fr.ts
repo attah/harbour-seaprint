@@ -33,11 +33,11 @@
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation>Code et essais - Rudi Timmermans</translation>
+        <translation type="vanished">Code et essais - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
-        <translation>Essais et suggestions de design - piggz</translation>
+        <translation type="vanished">Essais et suggestions de design - piggz</translation>
     </message>
     <message>
         <source>Translations</source>

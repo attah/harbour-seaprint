@@ -80,15 +80,11 @@ Page {
             }
 
             SectionHeader { text: qsTr("General contributions") }
-
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Code and Testing - Rudi Timmermans")
-            }
-
-            AboutLabel {
-                font.pixelSize: Theme.fontSizeSmall
-                text: qsTr("Testing and Design Suggestions - piggz")
+                text: "karry\n"+
+                      "piggz\n"+
+                      "Rudi Timmermans"
             }
 
             SectionHeader { text: qsTr("Translations") }

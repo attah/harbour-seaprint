@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Code and Testing - Rudi Timmermans</source>
-        <translation>Code en testen - Rudi Timmermans</translation>
+        <translation type="vanished">Code en testen - Rudi Timmermans</translation>
     </message>
     <message>
         <source>Spanish</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Testing and Design Suggestions - piggz</source>
-        <translation>Testen en ontwerpvoorstellen - piggz</translation>
+        <translation type="vanished">Testen en ontwerpvoorstellen - piggz</translation>
     </message>
     <message>
         <source>Donations</source>
