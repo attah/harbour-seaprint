@@ -296,8 +296,10 @@ Page {
                 }
 
             }
-            onCountChanged: {
-                console.log("count", count)
+            footer: Item {
+                id: footer
+                width: parent.width
+                height: fileDock.height
             }
         }
     }
