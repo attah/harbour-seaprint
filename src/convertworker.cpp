@@ -219,7 +219,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         QProcess* pdftoppm = new QProcess(this);
         pdftoppm->setProgram("pdftoppm");
         QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
-        if(Colors != 3)
+        if(Colors == 1)
         {
             Pdf2PpmArgs.append("-gray");
         }
@@ -410,7 +410,9 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
         qDebug() << "All connected";
         ppm2pwg->start();
 
-        outImage.save(ppm2pwg, Colors == 1 ? "pgm" : "ppm");
+        bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
+
+        outImage.save(ppm2pwg, gray ? "pgm" : "ppm");
 
         qDebug() << "Starting";
 
