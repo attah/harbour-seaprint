@@ -155,7 +155,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         qDebug() << "Started";
 
-        if(!pdftops->waitForFinished(10000+5000*pages))
+        if(!pdftops->waitForFinished(-1))
         {
             qDebug() << "pdftops failed";
             tempfile->deleteLater();
@@ -195,7 +195,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         qDebug() << "Started";
 
-        if(!pdftocairo->waitForFinished(10000+5000*pages))
+        if(!pdftocairo->waitForFinished(-1))
         {
             qDebug() << "pdftocairo failed";
             tempfile->deleteLater();
@@ -279,7 +279,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
         bool ppm2pwgSuccess = false;
 
-        for(size_t i = 0; i < (10*pages+10); i++)
+        for(;;)
         {
             if(ppm2pwg->waitForFinished(1000))
             {
