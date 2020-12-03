@@ -9,7 +9,7 @@ Name:       harbour-seaprint
 # << macros
 
 Summary:    SeaPrint
-Version:    0.6.3
+Version:    0
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
