@@ -71,6 +71,7 @@ public slots:
 private:
     QUrl _url;
     QUrl httpUrl();
+    QNetworkRequest mkReq();
 
     QJsonObject opAttrs();
 

@@ -101,12 +101,7 @@ void IppPrinter::refresh() {
 //    emit additionalDocumentFormatsChanged();
 
 
-    QNetworkRequest request;
-
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
-
+    QNetworkRequest request = mkReq();
     QJsonObject o = opAttrs();
 
     IppMsg msg = IppMsg(o);
@@ -392,11 +387,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
 
     qDebug() << "Printing job" << o << attrs;
 
-    QNetworkRequest request;
-
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
+    QNetworkRequest request = mkReq();
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
@@ -530,13 +521,9 @@ bool IppPrinter::getJobs() {
 
     IppMsg job = IppMsg(o, QJsonObject());
 
-    QNetworkRequest request;
+    QNetworkRequest request = mkReq();
 
     QByteArray contents = job.encode(IppMsg::GetJobs);
-
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     _jobs_nam->post(request, contents);
 
@@ -552,13 +539,10 @@ bool IppPrinter::cancelJob(qint32 jobId) {
 
     IppMsg job = IppMsg(o, QJsonObject());
 
-    QNetworkRequest request;
+    QNetworkRequest request = mkReq();
 
     QByteArray contents = job.encode(IppMsg::CancelJob);
 
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
     _job_cancel_nam->post(request, contents);
 
@@ -572,6 +556,14 @@ QUrl IppPrinter::httpUrl() {
         url.setPort(631);
     }
     return url;
+}
+
+QNetworkRequest IppPrinter::mkReq() {
+    QNetworkRequest request;
+    request.setUrl(httpUrl());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
+    return request;
 }
 
 void IppPrinter::setBusyMessage(QString msg)
