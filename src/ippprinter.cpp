@@ -563,6 +563,7 @@ QNetworkRequest IppPrinter::mkReq() {
     request.setUrl(httpUrl());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
+    request.setRawHeader("Accept-Encoding", "identity");
     return request;
 }
 
