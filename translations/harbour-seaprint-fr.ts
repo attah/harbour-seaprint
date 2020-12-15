@@ -5,7 +5,7 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation>Dépaut GitHub</translation>
+        <translation>Dépôt GitHub</translation>
     </message>
     <message>
         <source>Report an Issue</source>
