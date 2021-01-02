@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
-    height: button.height +  menu.height
+    height: button.height + (menu != undefined ? menu.height : 0)
     width: parent.width
 
     property string name
@@ -14,7 +14,12 @@ Item {
     property var default_choice
 
     signal clicked()
-    onClicked: menu.open(this)
+    onClicked: {
+        if (hasMenu)
+        {
+            menu.open(this)
+        }
+    }
 
     property alias displayValue: button.value
 
@@ -24,6 +29,8 @@ Item {
         label: prettyName
         onClicked: parent.clicked()
     }
+
     property var menu
+    property bool hasMenu: true
 
 }

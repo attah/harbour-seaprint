@@ -42,5 +42,7 @@ Setting {
 
     }
 
+    hasMenu: !limited_choices.length>num_large_choices
+
 
 }
