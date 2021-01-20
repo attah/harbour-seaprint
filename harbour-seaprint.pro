@@ -89,8 +89,10 @@ HEADERS += \
     src/ippmsg.h \
     src/ippprinter.h \
     src/mimer.h \
-    ppm2pwg/pwg_pghdr_codable.h \
-    ppm2pwg/urf_pghdr_codable.h \
+    ppm2pwg/PwgPgHdr.h \
+    ppm2pwg/PwgPgHdr.codable \
+    ppm2pwg/UrfPgHdr.h \
+    ppm2pwg/UrfPgHdr.codable \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
     src/papersizes.h
