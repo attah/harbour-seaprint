@@ -10,9 +10,20 @@ CoverBackground {
         source: "../pages/icon-seaprint-nobg-bw.svg"
     }
 
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: qsTr("SeaPrint")
+    Column {
+        width: parent.width
+        anchors.verticalCenter: parent.verticalCenter
+        Label {
+            id: msgLabel
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: appWin.busyMessage != "" ? appWin.busyMessage : qsTr("SeaPrint")
+        }
+        Label {
+            id: progressLabel
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: appWin.progress
+        }
     }
+
+
 }

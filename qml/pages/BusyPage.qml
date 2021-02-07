@@ -5,6 +5,10 @@ import "utils.js" as Utils
 Page {
     allowedOrientations: Orientation.All
 
+    Component.onCompleted: {
+        appWin.busyMessage = printer.busyMessage
+    }
+
     property var printer
     backNavigation: false
     Connections {
@@ -28,10 +32,22 @@ Page {
                 notifier.notify(qsTr("Print failed: ") + msg)
             }
         }
+        onBusyMessageChanged: {
+            appWin.busyMessage = printer.busyMessage
+        }
+
+        onProgressChanged: {
+            appWin.progress = printer.progress
+        }
     }
 
     BusyLabel {
         text: printer.busyMessage+"\n"+printer.progress;
         running: true
+    }
+
+    Component.onDestruction: {
+        appWin.busyMessage = ""
+        appWin.progress = ""
     }
 }

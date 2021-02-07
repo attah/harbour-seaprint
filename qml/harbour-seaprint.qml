@@ -7,9 +7,14 @@ import "pages"
 
 ApplicationWindow
 {
+    id: appWin
+
     initialPage: Component { FirstPage { selectedFile: Qt.application.arguments[1] ? Qt.application.arguments[1] : "" } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
+
+    property string busyMessage: ""
+    property string progress: ""
 
     Item {
         id: db
