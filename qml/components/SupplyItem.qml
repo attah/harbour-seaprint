@@ -9,8 +9,8 @@ import "../components"
         property int level: 100
         property int high_level: 100
         property int low_level: 0
-        property string name: qsTr("Unknown supply")
-        property string type: qsTr("Unknown type")
+        property string name: ""
+        property string type: ""
 
         spacing: Theme.paddingMedium
         bottomPadding: Theme.paddingMedium
@@ -34,12 +34,12 @@ import "../components"
             anchors.verticalCenter: parent.verticalCenter
             Label
             {
-                text: name
+                text: name != "" ? name : qsTr("Unknown supply")
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
             Label
             {
-                text: type
+                text: type != "" ? type :  qsTr("Unknown type")
                 font.pixelSize: Theme.fontSizeExtraSmall
                 color: Theme.secondaryColor
             }
