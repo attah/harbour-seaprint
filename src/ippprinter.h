@@ -64,7 +64,7 @@ public slots:
     void getJobsRequestFinished(QNetworkReply* reply);
     void cancelJobFinished(QNetworkReply* reply);
 
-    void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
+    static void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
     void convertDone(QNetworkRequest request, QTemporaryFile* data);
     void convertFailed(QString message);

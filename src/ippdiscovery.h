@@ -26,7 +26,6 @@ signals:
 public slots:
     void readPendingDatagrams();
     void update();
-    void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
 protected:
 private:

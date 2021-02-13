@@ -1,4 +1,5 @@
 #include "ippdiscovery.h"
+#include "ippprinter.h"
 #include <seaprint_version.h>
 
 #define A 1
@@ -264,26 +265,6 @@ void IppDiscovery::readPendingDatagrams()
 
 }
 
-void IppDiscovery::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
-{
-    QList<QSslError> IgnoredSslErrors = {QSslError::NoError,
-                                         QSslError::SelfSignedCertificate,
-                                         QSslError::HostNameMismatch,
-                                         QSslError::UnableToGetLocalIssuerCertificate,
-                                         QSslError::UnableToVerifyFirstCertificate
-                                         };
-
-    qDebug() << errors;
-    for (QList<QSslError>::const_iterator it = errors.constBegin(); it != errors.constEnd(); it++) {
-        if(!IgnoredSslErrors.contains(it->error())) {
-            qDebug() << "Bad error: " << int(it->error()) <<  it->error();
-            return;
-        }
-    }
-    // For whatever reason, it doesn't work to pass IgnoredSslErrors here
-    reply->ignoreSslErrors(errors);
-}
-
 QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {   //TODO: consider caching images (doesn't appear to be needed currently)
     Q_UNUSED(size);
@@ -292,7 +273,7 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
 
     QImage img;
 
-    QNetworkAccessManager* nam = new QNetworkAccessManager(this);
+    QNetworkAccessManager* nam = new QNetworkAccessManager();
     QUrl url(id);
     qDebug() << url.host() << _AAs;
     // TODO IPv6
@@ -304,13 +285,14 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
 
+    connect(nam, &QNetworkAccessManager::sslErrors,
+            &IppPrinter::ignoreKnownSslErrors);
+
     QNetworkReply* reply = nam->get(request);
 
-    QEventLoop el;
-    connect(reply, SIGNAL(finished()),&el,SLOT(quit()));
-    connect(nam, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)),
-            this, SLOT(ignoreKnownSslErrors(QNetworkReply*, const QList<QSslError>&)));
-    el.exec();
+    QEventLoop loop;
+    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
 
     if (reply->error() == QNetworkReply::NoError)
     {
