@@ -468,12 +468,12 @@
 <context>
     <name>SupplyItem</name>
     <message>
-        <source>Unknown supply</source>
-        <translation>未知支持</translation>
-    </message>
-    <message>
         <source>Unknown type</source>
         <translation>未知类型</translation>
+    </message>
+    <message>
+        <source>Unnamed supply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

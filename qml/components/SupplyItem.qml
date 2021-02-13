@@ -34,7 +34,7 @@ import "../components"
             anchors.verticalCenter: parent.verticalCenter
             Label
             {
-                text: name != "" ? name : qsTr("Unknown supply")
+                text: name != "" ? name : qsTr("Unnamed supply")
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
             Label
