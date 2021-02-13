@@ -260,6 +260,12 @@ function canTransferPdfAs(type)
     return has(targets, type)
 }
 
+function canTransferPostscriptAs(type)
+{
+    var targets = ["application/octet-stream", "application/postscript"];
+    return has(targets, type)
+}
+
 function canConvertImageTo(type)
 {
     var targets = ["application/octet-stream", "image/jpeg", "image/png", "image/pwg-raster", "image/urf", "image/gif"];
@@ -287,6 +293,10 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
                 return choices.filter(canTransferPdfAs)
             }
 
+        }
+        else if(mimeType == "application/postscript")
+        {
+            return choices.filter(canTransferPostscriptAs)
         }
         else if(mimeType.indexOf("image") != -1)
         {

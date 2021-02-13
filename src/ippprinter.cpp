@@ -309,6 +309,10 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
         {
             return firstMatch(supportedMimeTypes, {"application/pdf", "application/postscript", "image/pwg-raster", "image/urf" });
         }
+        else if(mimeType == "application/postscript")
+        {
+            return firstMatch(supportedMimeTypes, {"application/postscript"});
+        }
         else if (mimeType.contains("image"))
         {
             QStringList ImageFormatPrioList {"image/png", "image/gif", "image/pwg-raster", "image/urf", "image/jpeg"};
