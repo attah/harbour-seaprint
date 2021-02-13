@@ -46,7 +46,7 @@ QStringList get_addr(Bytestream& bts)
     return addr;
 }
 
-IppDiscovery::IppDiscovery() : QStringListModel(), QQuickImageProvider(QQuickImageProvider::Image)
+IppDiscovery::IppDiscovery() : QStringListModel(), QQuickImageProvider(QQuickImageProvider::Image, ForceAsynchronousImageLoading)
 {
     socket = new QUdpSocket(this);
     connect(socket, SIGNAL(readyRead()),
