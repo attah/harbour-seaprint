@@ -242,7 +242,7 @@ Page {
                         id: mm_label
                         color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
-                        text: printer.attrs["printer-make-and-model"].value
+                        text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
                     }
 
                     Label {

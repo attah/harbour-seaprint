@@ -33,7 +33,7 @@ Page {
             }
 
             Label {
-                text: printer.attrs["printer-make-and-model"].value
+                text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
             }
 
             SectionHeader {

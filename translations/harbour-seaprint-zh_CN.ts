@@ -710,5 +710,9 @@
         <source>single document (new sheet)</source>
         <translation>一份文件（新纸张）</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">未知</translation>
+    </message>
 </context>
 </TS>

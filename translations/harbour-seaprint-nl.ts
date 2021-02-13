@@ -710,5 +710,9 @@
         <source>single document (new sheet)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Onbekend</translation>
+    </message>
 </context>
 </TS>
