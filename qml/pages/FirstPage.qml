@@ -139,7 +139,12 @@ Page {
                 id: delegate
                 contentItem.height: visible ? Math.max(column.implicitHeight, Theme.itemSizeLarge+2*Theme.paddingMedium) : 0
 
-                visible: false
+                IppPrinter {
+                    id: printer
+                    url: model.display
+                }
+
+                visible: Object.keys(printer.attrs).length !== 0
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
                 property bool canPrint: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).mimetypes.indexOf(selectedFileType) != -1
@@ -196,11 +201,6 @@ Page {
                     {
                         notifier.notify(qsTr("No file selected"))
                     }
-                }
-
-                IppPrinter {
-                    id: printer
-                    url: model.display
                 }
 
                 Image {
