@@ -332,9 +332,9 @@ Page {
             anchors.bottomMargin: Theme.paddingLarge
             IconButton {
                 id: folderButton
-                icon.source: "image://theme/icon-m-file-folder"
+                icon.source: "image://theme/icon-m-file-document"
                 width: parent.width/2
-                onClicked: pageStack.push(filePickerPage)
+                onClicked: pageStack.push(documentPickerPage)
             }
             IconButton {
                 icon.source: "image://theme/icon-m-file-image"
@@ -344,17 +344,25 @@ Page {
 
         }
         Component {
-            id: filePickerPage
-            FilePickerPage {
+            id: documentPickerPage
+            DocumentPickerPage {
                 allowedOrientations: Orientation.All
 
                 title: qsTr("Choose file")
-                showSystemFiles: false
-                nameFilters: ["*.pdf", "*.jpg", "*.jpeg", "*.ps"]
 
                 onSelectedContentPropertiesChanged: {
-                    page.selectedFile = selectedContentProperties.filePath
-                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
+                    var mimeType = Mimer.get_type(selectedContentProperties.filePath)
+                    if(mimeType == "application/pdf" || mimeType == "application/postscript")
+                    {
+                        page.selectedFile = selectedContentProperties.filePath
+                        page.selectedFileType = mimeType
+                    }
+                    else
+                    {
+                        notifier.notify(qsTr("Unsupported document format"))
+                        page.selectedFile = ""
+                        page.selectedFileType = ""
+                    }
                 }
             }
         }

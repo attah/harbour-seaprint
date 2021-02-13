@@ -271,6 +271,10 @@
         <source>Not on WiFi</source>
         <translation>Pas en WiFi</translation>
     </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>
