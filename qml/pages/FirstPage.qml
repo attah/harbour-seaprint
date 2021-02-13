@@ -348,6 +348,13 @@ Page {
             DocumentPickerPage {
                 allowedOrientations: Orientation.All
 
+                Component.onCompleted: {
+                    var thingy = Qt.createComponent("../components/DocumentFilter.notqml");
+                    if (thingy.status == Component.Ready) {
+                        _contentModel.contentFilter = thingy.createObject(this);
+                    }
+                }
+
                 title: qsTr("Choose file")
 
                 onSelectedContentPropertiesChanged: {

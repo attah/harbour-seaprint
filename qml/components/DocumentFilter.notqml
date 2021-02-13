@@ -1,0 +1,14 @@
+import QtDocGallery 5.0
+
+GalleryFilterUnion {
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".pdf"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".ps"
+    }
+}
