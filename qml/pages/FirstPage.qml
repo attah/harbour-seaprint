@@ -290,7 +290,7 @@ Page {
                         onClicked: {
                             removeRemorse.execute(delegate, qsTr("Removing printer"),
                                                   function() {db.removeFavourite(wifi.ssid, model.display);
-                                                              IppDiscovery.favourites = db.getFavourites()})
+                                                              IppDiscovery.favourites = db.getFavourites(wifi.ssid)})
                         }
                     }
                 }
