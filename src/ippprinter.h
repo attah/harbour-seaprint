@@ -58,6 +58,7 @@ public slots:
 
 
     void onUrlChanged();
+    void UpdateAdditionalDocumentFormats();
     void getPrinterAttributesFinished(QNetworkReply* reply);
     void printRequestFinished(QNetworkReply* reply);
     void getJobsRequestFinished(QNetworkReply* reply);

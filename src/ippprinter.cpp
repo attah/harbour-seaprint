@@ -64,7 +64,7 @@ void IppPrinter::setUrl(QString url_s)
 
     qDebug() << url.scheme();
 
-    if(url.scheme() != "ipp" /* or ipps */)
+    if(url.scheme() != "ipp" /* or ipps */ && url.scheme() != "file")
     {
         //if https -> ipps, else:
         if(url.scheme() == "")
@@ -100,33 +100,32 @@ void IppPrinter::refresh() {
 //    _additionalDocumentFormats = QStringList();
 //    emit additionalDocumentFormatsChanged();
 
+    if(_url.scheme() == "file")
+    {
+        QFile file(_url.toLocalFile());
+        if(file.open(QIODevice::ReadOnly))
+        {
+            QJsonDocument JsonDocument = QJsonDocument::fromJson(file.readAll());
 
-    QNetworkRequest request = mkReq();
-    QJsonObject o = opAttrs();
+            _attrs = JsonDocument.object();
+            file.close();
+        }
+        emit attrsChanged();
+        UpdateAdditionalDocumentFormats();
+    }
+    else
+    {
+        QNetworkRequest request = mkReq();
+        QJsonObject o = opAttrs();
 
-    IppMsg msg = IppMsg(o);
-    _nam->post(request, msg.encode(IppMsg::GetPrinterAttrs));
-
+        IppMsg msg = IppMsg(o);
+        _nam->post(request, msg.encode(IppMsg::GetPrinterAttrs));
+    }
 }
 
-void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
+void IppPrinter::UpdateAdditionalDocumentFormats()
 {
-    qDebug() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
-    _attrs = QJsonObject();
     _additionalDocumentFormats = QStringList();
-
-    if(reply->error()  == QNetworkReply::NoError)
-    {
-        try {
-            IppMsg resp(reply);
-            qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
-            _attrs = resp.getPrinterAttrs();
-        }
-        catch(const std::exception& e)
-        {
-            qDebug() << e.what();
-        }
-    }
 
     if(_attrs.contains("printer-device-id"))
     {
@@ -150,10 +149,30 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
         }
         qDebug() << "additionalDocumentFormats" << _additionalDocumentFormats;
     }
+    emit additionalDocumentFormatsChanged();
+}
+
+void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
+{
+    qDebug() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
+    _attrs = QJsonObject();
+
+    if(reply->error()  == QNetworkReply::NoError)
+    {
+        try {
+            IppMsg resp(reply);
+            qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
+            _attrs = resp.getPrinterAttrs();
+        }
+        catch(const std::exception& e)
+        {
+            qDebug() << e.what();
+        }
+    }
 
     emit attrsChanged();
-    emit additionalDocumentFormatsChanged();
 
+    UpdateAdditionalDocumentFormats();
 }
 
 void IppPrinter::printRequestFinished(QNetworkReply *reply)
