@@ -14,8 +14,14 @@ Page {
     property var jobParams: new Object();
     property string selectedFile
 
-    Component.onCompleted: {
-        console.log(JSON.stringify(printer.attrs))
+
+    Connections {
+        target: wifi
+        onConnectedChanged: {
+            if(!wifi.connected) {
+                pageStack.pop()
+            }
+        }
     }
 
     function choiceMade(name, tag, choice)

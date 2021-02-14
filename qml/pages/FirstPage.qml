@@ -6,8 +6,6 @@ import seaprint.convertchecker 1.0
 import seaprint.ippprinter 1.0
 import seaprint.mimer 1.0
 import "utils.js" as Utils
-import "../components"
-import Nemo.DBus 2.0
 
 Page {
     id: page
@@ -16,12 +14,12 @@ Page {
     property string selectedFile: ""
     property string selectedFileType
 
-    WifiChecker {
-        id: wifi
+    Connections {
+        target: wifi
         onConnectedChanged: {
-            console.log("conn", connected, ssid)
-            if(connected) {
-                var favourites = db.getFavourites(ssid);
+            console.log("conn", wifi.connected, wifi.ssid)
+            if(wifi.connected) {
+                var favourites = db.getFavourites(wifi.ssid);
                 console.log(favourites);
                 IppDiscovery.favourites = favourites;
             }
@@ -34,7 +32,7 @@ Page {
         property bool initialSSIDchange: true
 
         onSsidChanged: {
-            console.log("ssid changed", ssid);
+            console.log("ssid changed", wifi.ssid);
             if(!initialSSIDchange)
             {
                 IppDiscovery.reset();
