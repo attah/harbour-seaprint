@@ -224,10 +224,6 @@
         <translation>Toevoegen via URL</translation>
     </message>
     <message>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
         <source>Refresh</source>
         <translation>Ververs</translation>
     </message>

@@ -102,12 +102,11 @@ Page {
                 text: qsTr("Add by URL")
                 enabled: wifi.connected
                 onClicked: {
-                    var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"),
-                                                {ssid: wifi.ssid, title: qsTr("URL")});
+                    var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"));
                         dialog.accepted.connect(function() {
                             console.log("add", wifi.ssid, dialog.value);
                             db.addFavourite(wifi.ssid, dialog.value);
-                            IppDiscovery.favourites = db.getFavourites(wifi.ssid);
+                            IppDiscovery.favourites = db.getFavourites(dialog.ssid);
                     })
                 }
             }

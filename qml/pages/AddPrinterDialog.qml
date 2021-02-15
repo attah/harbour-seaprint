@@ -11,6 +11,14 @@ Dialog {
     property var printerName: false
     canAccept: printerName != false
 
+    Connections {
+        target: wifi
+        onConnectedChanged: {
+            if(!wifi.connected) {
+                dialog.reject()
+            }
+        }
+    }
 
     Component.onCompleted: {
         valueField.forceActiveFocus()
@@ -57,7 +65,7 @@ Dialog {
             Label {
                 id: ssid_label
                 color: Theme.secondaryColor
-                text: ssid
+                text: wifi.ssid
             }
         }
         Row {
@@ -102,6 +110,7 @@ Dialog {
     onDone: {
         if (result == DialogResult.Accepted) {
             value = valueField.text
+            ssid = wifi.ssid
         }
     }
 

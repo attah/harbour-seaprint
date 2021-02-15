@@ -224,10 +224,6 @@
         <translation>Dodaj za pomocą URL</translation>
     </message>
     <message>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>

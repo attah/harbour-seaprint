@@ -224,10 +224,6 @@
         <translation>通过URL添加</translation>
     </message>
     <message>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
