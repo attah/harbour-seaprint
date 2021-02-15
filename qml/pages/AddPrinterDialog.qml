@@ -11,7 +11,28 @@ Dialog {
     property var printerName: false
     canAccept: printerName != false
 
+
+    Component.onCompleted: {
+        valueField.forceActiveFocus()
+    }
+
+    IppPrinter {
+        id: printer
+        url: valueField.text
+        onAttrsChanged: {
+            if(printer.attrs["printer-name"]) {
+                printerName = printer.attrs["printer-name"].value == "" ? qsTr("Unknown") : printer.attrs["printer-name"].value
+            }
+            else
+            {
+                printerName = false
+            }
+
+        }
+    }
+
     Column {
+        id: col
         width: parent.width
 
         DialogHeader {
@@ -53,21 +74,29 @@ Dialog {
                 text: printerName ? printerName : ""
             }
         }
-        IppPrinter {
-            id: printer
-            url: valueField.text
-            onAttrsChanged: {
-                if(printer.attrs["printer-name"]) {
-                    printerName = printer.attrs["printer-name"].value == "" ? qsTr("Unknown") : printer.attrs["printer-name"].value
-                }
-                else
-                {
-                    printerName = false
-                }
+    }
 
-            }
+    Row {
+        visible: valueField.text.indexOf(":9100") != -1
+
+        anchors.top: col.bottom
+        anchors.topMargin: Theme.paddingLarge*2
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width-2*Theme.paddingLarge
+        spacing: Theme.paddingMedium
+
+        Icon {
+            id: warningIcon
+            source: "image://theme/icon-m-warning"
+            anchors.verticalCenter: parent.verticalCenter
         }
 
+        Label {
+            width: parent.width-warningIcon.width-Theme.paddingMedium
+            color: Theme.highlightColor
+            wrapMode: Text.WordWrap
+            text: qsTr("Port 9100 is not used for IPP.")+"\n"+qsTr("It is used for raw PCL/PDL, which is not supported.")
+        }
     }
 
     onDone: {

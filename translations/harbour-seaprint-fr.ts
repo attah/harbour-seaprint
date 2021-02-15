@@ -110,6 +110,14 @@
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
+    <message>
+        <source>Port 9100 is not used for IPP.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It is used for raw PCL/PDL, which is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BusyPage</name>
