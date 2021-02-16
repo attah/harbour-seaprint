@@ -101,9 +101,10 @@ Dialog {
 
         Label {
             width: parent.width-warningIcon.width-Theme.paddingMedium
+            anchors.verticalCenter: parent.verticalCenter
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
-            text: qsTr("Port 9100 is not used for IPP.")+"\n"+qsTr("It is used for raw PCL/PDL, which is not supported.")
+            text: qsTr("Port 9100 is not used for IPP.")
         }
     }
 
