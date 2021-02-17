@@ -61,6 +61,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         PageRangeHigh=pages;
     }
 
+    // Actual number of pages to print
+    pages = PageRangeHigh-PageRangeLow;
+
     bool urf = false;
     bool ps = false;
     bool pdf = false;
