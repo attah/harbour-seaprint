@@ -56,13 +56,20 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         emit failed(tr("Failed to get info about PDF file"));
     }
 
+    if(PageRangeLow==0)
+    {
+        PageRangeLow=1;
+    }
+
     if(PageRangeHigh==0)
     {
         PageRangeHigh=pages;
     }
 
     // Actual number of pages to print
-    pages = PageRangeHigh-PageRangeLow;
+    pages = PageRangeHigh-PageRangeLow+1;
+
+    qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
 
     bool urf = false;
     bool ps = false;
@@ -132,10 +139,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         {
             PdfToPsArgs.append("-duplex");
         }
-        if(PageRangeLow != 0)
-        {
-            PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        }
+
+        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
         PdfToPsArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
 
         qDebug() << "pdftops args is " << PdfToPsArgs;
@@ -172,10 +178,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         pdftocairo->setProgram("pdftocairo");
         QStringList PdfToCairoArgs = {"-pdf"};
 
-        if(PageRangeLow != 0)
-        {
-            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        }
+
+        PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
         PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
 
         qDebug() << "pdftocairo args is " << PdfToCairoArgs;
@@ -212,10 +217,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         QProcess* pdftocairo = new QProcess(this);
         pdftocairo->setProgram("pdftocairo");
         QStringList PdfToCairoArgs;
-        if(PageRangeLow != 0)
-        {
-            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        }
+
+        PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
         PdfToCairoArgs << QStringList {"-pdf", "-paper", ShortPaperSize, filename, "-"};
         pdftocairo->setArguments(PdfToCairoArgs);
 
