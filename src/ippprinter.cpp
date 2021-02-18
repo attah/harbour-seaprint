@@ -426,11 +426,15 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
         {
             HwResX = HwResY;
         }
-        QJsonObject tmpObj;
-        tmpObj["units"] = PrinterResolutionRef.toObject()["units"];
-        tmpObj["x"] = (int)HwResX;
-        tmpObj["y"] = (int)HwResY;
-        attrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
+
+        if(attrs.contains("printer-resolution"))
+        {
+            QJsonObject tmpObj;
+            tmpObj["units"] = PrinterResolutionRef.toObject()["units"];
+            tmpObj["x"] = (int)HwResX;
+            tmpObj["y"] = (int)HwResY;
+            attrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
+        }
     }
 
     quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
