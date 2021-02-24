@@ -93,6 +93,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     }
     else
     {
+        tempfile->deleteLater();
         emit failed(tr("Unsupported target format"));
         return;
     }
@@ -344,6 +345,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     }
     else
     {
+        tempfile->deleteLater();
         emit failed(tr("Unsupported target format"));
         return;
     }
@@ -373,6 +375,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     if(!inImage.load(filename))
     {
         qDebug() << "failed to load";
+        tempfile->deleteLater();
         emit failed(tr("Failed to load image"));
         return;
     }
