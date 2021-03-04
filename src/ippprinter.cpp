@@ -136,14 +136,14 @@ void IppPrinter::UpdateAdditionalDocumentFormats()
             QStringList kv = it->split(":");
             if(kv.length()==2 && (kv[0]=="CMD" || kv[0]=="COMMAND SET"))
             {
-                if(!supportedMimeTypes.contains("application/pdf") && kv[1].contains("PDF"))
+                if(!supportedMimeTypes.contains(Mimer::PDF) && kv[1].contains("PDF"))
                 {
-                    _additionalDocumentFormats.append("application/pdf");
+                    _additionalDocumentFormats.append(Mimer::PDF);
                 }
-                if(!supportedMimeTypes.contains("application/postscript") &&
+                if(!supportedMimeTypes.contains(Mimer::Postscript) &&
                    kv[1].contains("Postscript", Qt::CaseInsensitive))
                 {
-                    _additionalDocumentFormats.append("application/postscript");
+                    _additionalDocumentFormats.append(Mimer::Postscript);
                 }
             }
         }
@@ -301,22 +301,22 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 {
     if(forceRaster)
     {
-        return firstMatch(supportedMimeTypes, {"image/pwg-raster", "image/urf"});
+        return firstMatch(supportedMimeTypes, {Mimer::PWG, Mimer::URF});
     }
-    else if(documentFormat == "application/octet-stream")
+    else if(documentFormat == Mimer::OctetStream)
     {
-        if(mimeType == "application/pdf")
+        if(mimeType == Mimer::PDF)
         {
-            return firstMatch(supportedMimeTypes, {"application/pdf", "application/postscript", "image/pwg-raster", "image/urf" });
+            return firstMatch(supportedMimeTypes, {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF });
         }
-        else if(mimeType == "application/postscript")
+        else if(mimeType == Mimer::Postscript)
         {
-            return firstMatch(supportedMimeTypes, {"application/postscript"});
+            return firstMatch(supportedMimeTypes, {Mimer::Postscript});
         }
-        else if (mimeType.contains("image"))
+        else if(Mimer::isImage(mimeType))
         {
-            QStringList ImageFormatPrioList {"image/png", "image/gif", "image/pwg-raster", "image/urf", "image/jpeg"};
-            if(mimeType == "image/jpeg")
+            QStringList ImageFormatPrioList {Mimer::PNG, Mimer::PWG, Mimer::URF, Mimer::JPEG};
+            if(mimeType == Mimer::JPEG)
             {
                 // Prioritize transferring JPEG as JPEG, as it will not be transcoded
                 // Normally, it is the last choice (as the others are lossless)
@@ -402,7 +402,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes, alwaysConvert);
     qDebug() << "adjusted target format:" << documentFormat;
 
-    if(documentFormat == "" || documentFormat == "application/octet-string")
+    if(documentFormat == "" || documentFormat == Mimer::OctetStream)
     {
         emit convertFailed(tr("Unknown document format"));
         return;
@@ -416,7 +416,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
 
-    if(documentFormat == "image/urf")
+    if(documentFormat == Mimer::URF)
     { // Ensure symmetric resolution for URF
         if(HwResX < HwResY)
         {
@@ -459,13 +459,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(documentFormat=="image/pwg-raster"
-      || documentFormat=="image/urf"
-      || documentFormat == "application/postscript")
+    if(documentFormat == Mimer::PWG || documentFormat == Mimer::URF || documentFormat == Mimer::Postscript)
     {   // Effected locally
         attrs.remove("page-ranges");
     }
-    else if (documentFormat == "application/pdf")
+    else if (documentFormat == Mimer::PDF)
     {   // Only effected locally if really needed
         if(attrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
         {
@@ -484,8 +482,8 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     // Always convert non-jpeg images to get resizing
     // TODO: make this sane
     if((mimeType == documentFormat)
-       && (documentFormat == "image/jpeg" || !mimeType.contains("image"))
-       && !((documentFormat == "application/pdf") && pdfPageRangeAdjustNeeded))
+       && (documentFormat == Mimer::JPEG || !Mimer::isImage(mimeType))
+       && !((documentFormat == Mimer::PDF) && pdfPageRangeAdjustNeeded))
     {
         QByteArray filedata = file.readAll();
         contents = contents.append(filedata);
@@ -507,7 +505,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
 
         setBusyMessage("Converting");
 
-        if(mimeType == "application/pdf")
+        if(mimeType == Mimer::PDF)
         {
             bool TwoSided = false;
             bool Tumble = false;
@@ -524,7 +522,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
             emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
                               PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
         }
-        else if (mimeType.contains("image"))
+        else if (Mimer::isImage(mimeType))
         {
             emit doConvertImage(request, filename, tempfile, documentFormat, Colors, Quality,
                                 PaperSize, HwResX, HwResY);

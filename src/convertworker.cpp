@@ -2,6 +2,7 @@
 #include <sailfishapp.h>
 #include "papersizes.h"
 #include "convertchecker.h"
+#include "mimer.h"
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>
@@ -75,19 +76,19 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     bool ps = false;
     bool pdf = false;
 
-    if(targetFormat == "image/urf")
+    if(targetFormat == Mimer::URF)
     {
         urf = true;
     }
-    else if(targetFormat == "image/pwg-raster")
+    else if(targetFormat == Mimer::PWG)
     {
         //ok
     }
-    else if(targetFormat == "application/postscript")
+    else if(targetFormat == Mimer::Postscript)
     {
         ps = true;
     }
-    else if (targetFormat == "application/pdf")
+    else if (targetFormat == Mimer::PDF)
     {
         pdf = true;
     }
@@ -329,13 +330,13 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
 {
     bool urf = false;
     QString imageFormat = "";
-    QStringList supportedImageFormats = {"image/jpeg", "image/png", "image/gif"};
+    QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
 
-    if(targetFormat == "image/urf")
+    if(targetFormat == Mimer::URF)
     {
         urf = true;
     }
-    else if(targetFormat == "image/pwg-raster")
+    else if(targetFormat == Mimer::PWG)
     {
         //ok
     }

@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import seaprint.convertchecker 1.0
 import seaprint.ippmsg 1.0
-import "../pages/utils.js" as Utils
 
 Setting {
     property var printer

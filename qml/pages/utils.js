@@ -6,30 +6,30 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
         formats=formats+printer.additionalDocumentFormats;
     }
 
-    var raster = (has(formats, "image/pwg-raster") || has(formats, "image/urf"));
+    var raster = (has(formats, Mimer.PWG) || has(formats, Mimer.URF));
 
     var mimetypes = [];
     var supported = [];
-    if(has(formats, "application/pdf") ||
-       (ConvertChecker.pdf && ( has(formats, "application/postscript") || raster )))
+    if(has(formats, Mimer.PDF) ||
+       (ConvertChecker.pdf && ( has(formats, Mimer.Postscript) || raster )))
      {
-         mimetypes.push("application/pdf");
+         mimetypes.push(Mimer.PDF);
          supported.push("PDF");
      }
-     if(has(formats, "application/postscript"))
+     if(has(formats, Mimer.Postscript))
      {
-         mimetypes.push("application/postscript");
+         mimetypes.push(Mimer.Postscript);
          supported.push("Postscript");
      }
 
-     if (raster || has(formats, "image/jpeg") || has(formats, "image/png") || has(formats, "image/gif"))
+     if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG))
      {
-         mimetypes.push("image/jpeg");
+         mimetypes.push(Mimer.JPEG);
          supported.push("JPEG");
-         mimetypes.push("image/png");
+         mimetypes.push(Mimer.PNG);
          supported.push("PNG");
-         mimetypes.push("image/tiff");
-         mimetypes.push("image/gif");
+         mimetypes.push(Mimer.TIFF);
+         mimetypes.push(Mimer.GIF);
 
      }
 
@@ -184,21 +184,21 @@ function ippName(name, value)
         }
     case "document-format":
         switch(value) {
-        case "application/octet-stream":
+        case Mimer.OctetStream:
             return qsTr("auto-sense");
-        case "application/pdf":
+        case Mimer.PDF:
             return qsTr("PDF");
-        case "application/postscript":
+        case Mimer.Postscript:
             return qsTr("Postscript");
-        case "image/pwg-raster":
+        case Mimer.PWG:
             return qsTr("PWG-raster");
-        case "image/urf":
+        case Mimer.URF:
             return qsTr("URF-raster");
-        case "image/png":
+        case Mimer.PNG:
             return qsTr("PNG");
-        case "image/jpeg":
+        case Mimer.JPEG:
             return qsTr("JPEG");
-        case "image/gif":
+        case Mimer.GIF:
             return qsTr("GIF");
         default:
             return value;
@@ -250,25 +250,25 @@ function endsWith(ending, string)
 
 function canConvertPdfTo(type)
 {
-    var targets = ["application/octet-stream", "application/pdf", "application/postscript", "image/pwg-raster", "image/urf"];
+    var targets = [Mimer.OctetStream, Mimer.PDF, Mimer.Postscript, Mimer.PWG, Mimer.URF];
     return has(targets, type)
 }
 
 function canTransferPdfAs(type)
 {
-    var targets = ["application/octet-stream", "application/pdf"];
+    var targets = [Mimer.OctetStream, Mimer.PDF];
     return has(targets, type)
 }
 
 function canTransferPostscriptAs(type)
 {
-    var targets = ["application/octet-stream", "application/postscript"];
+    var targets = [Mimer.OctetStream, Mimer.Postscript];
     return has(targets, type)
 }
 
 function canConvertImageTo(type)
 {
-    var targets = ["application/octet-stream", "image/jpeg", "image/png", "image/pwg-raster", "image/urf", "image/gif"];
+    var targets = [Mimer.OctetStream, Mimer.JPEG, Mimer.PNG, Mimer.PWG, Mimer.URF];
     return has(targets, type)
 }
 
@@ -282,7 +282,7 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
 {
     switch(name) {
     case "document-format":
-        if(mimeType == "application/pdf")
+        if(mimeType == Mimer.PDF)
         {
             if(ConvertChecker.pdf)
             {
@@ -294,7 +294,7 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
             }
 
         }
-        else if(mimeType == "application/postscript")
+        else if(mimeType == Mimer.Postscript)
         {
             return choices.filter(canTransferPostscriptAs)
         }
@@ -304,7 +304,7 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
         }
         else
         {
-            return ["application/octet-stream"];
+            return [Mimer.OctetStream];
         }
     case "printer-resolution":
         return choices.filter(unitsIsDpi);
