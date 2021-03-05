@@ -12,6 +12,11 @@ const QString Mimer::GIF = "image/gif";
 const QString Mimer::JPEG = "image/jpeg";
 const QString Mimer::TIFF = "image/tiff";
 
+const QString Mimer::DOC = "application/msword";
+const QString Mimer::DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+const QString Mimer::RTF = "text/rtf";
+const QString Mimer::ODT = "application/vnd.oasis.opendocument.text";
+
 
 Mimer::Mimer()
 {

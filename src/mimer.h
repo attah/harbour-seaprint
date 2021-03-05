@@ -37,7 +37,21 @@ public:
     static const QString JPEG;
     static const QString TIFF;
 
-    Q_INVOKABLE static bool isImage(QString mimeType) {return mimeType.startsWith("image/");}
+    static const QString DOC;
+    static const QString DOCX;
+    static const QString RTF;
+    static const QString ODT;
+
+    Q_INVOKABLE static bool isImage(QString mimeType)
+    {
+        return mimeType.startsWith("image/");
+    }
+    Q_INVOKABLE static bool isOffice(QString mimeType)
+    {
+        static QStringList OfficeForamts {DOC, DOCX, RTF, ODT};
+        return OfficeForamts.contains(mimeType);
+    }
+
 
 
 private:
