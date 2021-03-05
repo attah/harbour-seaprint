@@ -9,6 +9,12 @@ ConvertChecker::ConvertChecker()
     pdftoppm->setProgram("pdftoppm");
     pdftoppm->setArguments({"-h"});
     pdftoppm->start();
+
+    QProcess* calligraconverter = new QProcess(this);
+    calligraconverter->setProgram("calligraconverter");
+    calligraconverter->setArguments({"-h"});
+    calligraconverter->start();
+
     if(pdftoppm->waitForFinished(2000))
     {
       if(pdftoppm->exitStatus() == QProcess::NormalExit && pdftoppm->exitCode() == 0)
@@ -16,6 +22,17 @@ ConvertChecker::ConvertChecker()
           _pdf = true;
       }
     }
+
+    if(calligraconverter->waitForFinished(2000))
+    {
+      if(calligraconverter->exitStatus() == QProcess::NormalExit && pdftoppm->exitCode() == 0)
+      {
+          _calligra = true;
+      }
+    }
+
+    pdftoppm->deleteLater();
+    calligraconverter->deleteLater();
 }
 
 ConvertChecker::~ConvertChecker() {

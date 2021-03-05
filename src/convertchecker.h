@@ -9,6 +9,7 @@ class ConvertChecker : public QObject
 public:
     static ConvertChecker* instance();
     Q_PROPERTY(bool pdf MEMBER _pdf)
+    Q_PROPERTY(bool calligra MEMBER _calligra)
 
     Q_INVOKABLE quint32 pdfPages(QString pdf);
 
@@ -23,6 +24,7 @@ private:
     ConvertChecker& operator=(const ConvertChecker &);
 
     bool _pdf;
+    bool _calligra;
 };
 
 #endif // CONVERTCHECKER_H
