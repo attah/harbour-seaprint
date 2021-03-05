@@ -3,6 +3,20 @@
 #include <QObject>
 #include <QtNetwork>
 
+class ConvertFailedException: public std::exception
+{
+private:
+    QString _msg;
+public:
+    ConvertFailedException(QString msg = "") : _msg(msg = msg)
+    {
+    }
+    virtual const char* what() const throw()
+    {
+        return _msg.toStdString().c_str();
+    }
+};
+
 class ConvertWorker : public QObject
 {
     Q_OBJECT

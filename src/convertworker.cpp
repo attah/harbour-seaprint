@@ -49,12 +49,13 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh)
 {
+try {
+
     quint32 pages = ConvertChecker::instance()->pdfPages(filename);
     if (!pages)
     {
         qDebug() << "pdfinfo returned 0 pages";
-        tempfile->deleteLater();
-        emit failed(tr("Failed to get info about PDF file"));
+        throw ConvertFailedException(tr("Failed to get info about PDF file"));
     }
 
     if(PageRangeLow==0)
@@ -94,17 +95,13 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     }
     else
     {
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported target format"));
-        return;
+        throw ConvertFailedException(tr("Unsupported target format"));
     }
 
     if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution" << PaperSize;
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported resolution (dpi)"));
-        return;
+        throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
     QString ShortPaperSize;
@@ -127,9 +124,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
     else
     {
         qDebug() << "Unsupported PDF paper size" << PaperSize;
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported PDF paper size"));
-        return;
+        throw ConvertFailedException(tr("Unsupported PDF paper size"));
     }
 
     if(ps)
@@ -159,9 +154,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftops->waitForStarted())
         {
             qDebug() << "pdftops died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
 
         qDebug() << "Started";
@@ -169,9 +162,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftops->waitForFinished(-1))
         {
             qDebug() << "pdftops failed";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
     }
     else if(pdf)
@@ -198,9 +189,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftocairo->waitForStarted())
         {
             qDebug() << "pdftocairo died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
 
         qDebug() << "Started";
@@ -208,10 +197,9 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftocairo->waitForFinished(-1))
         {
             qDebug() << "pdftocairo failed";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
+
     }
     else
     {
@@ -266,23 +254,17 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!pdftocairo->waitForStarted())
         {
             qDebug() << "pdftocairo died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
         if(!pdftoppm->waitForStarted())
         {
             qDebug() << "pdftoppm died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
         if(!ppm2pwg->waitForStarted())
         {
             qDebug() << "ppm2pwg died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
         qDebug() << "All started";
 
@@ -311,9 +293,7 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
         if(!ppm2pwgSuccess)
         {
             qDebug() << "ppm2pwg failed";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
     }
 
@@ -322,12 +302,21 @@ void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTempo
 
     emit done(request, tempfile);
     qDebug() << "posted";
+
+}
+catch(const ConvertFailedException& e)
+{
+        tempfile->deleteLater();
+        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
+}
 }
 
 void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY)
 {
+try {
+
     bool urf = false;
     QString imageFormat = "";
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
@@ -346,25 +335,19 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     }
     else
     {
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported target format"));
-        return;
+        throw ConvertFailedException(tr("Unsupported target format"));
     }
 
     if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution" << PaperSize;
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported resolution (dpi)"));
-        return;
+        throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
     if(!PaperSizes.contains(PaperSize))
     {
         qDebug() << "Unsupported paper size" << PaperSize;
-        tempfile->deleteLater();
-        emit failed(tr("Unsupported paper size"));
-        return;
+        throw ConvertFailedException(tr("Unsupported paper size"));
     }
     QPair<float,float> wh = PaperSizes[PaperSize];
     quint32 Width = qRound(wh.first/25.4*HwResX);
@@ -376,9 +359,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
     if(!inImage.load(filename))
     {
         qDebug() << "failed to load";
-        tempfile->deleteLater();
-        emit failed(tr("Failed to load image"));
-        return;
+        throw ConvertFailedException(tr("Failed to load image"));
     }
 
     if(inImage.width() > inImage.height())
@@ -430,9 +411,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
         if(!ppm2pwg->waitForStarted())
         {
             qDebug() << "ppm2pwg died";
-            tempfile->deleteLater();
-            emit failed(tr("Conversion error"));
-            return;
+            throw ConvertFailedException();
         }
         qDebug() << "All started";
 
@@ -443,4 +422,11 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
 
     emit done(request, tempfile);
     qDebug() << "posted";
+
+}
+catch(const ConvertFailedException& e)
+{
+    tempfile->deleteLater();
+    emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
+}
 }
