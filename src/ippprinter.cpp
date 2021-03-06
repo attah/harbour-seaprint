@@ -464,7 +464,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     }
 
     QString Sides = getAttrOrDefault(attrs, "sides").toString();
-    if(documentFormat == Mimer::PWG || documentFormat == Mimer::URF || documentFormat == Mimer::Postscript)
+    if(documentFormat == Mimer::PWG || documentFormat == Mimer::URF || documentFormat == Mimer::Postscript || Mimer::isOffice(mimeType))
     {   // Effected locally
         attrs.remove("page-ranges");
     }

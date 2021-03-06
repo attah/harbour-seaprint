@@ -13,6 +13,7 @@ Page {
     property var printer
     property var jobParams: new Object();
     property string selectedFile
+    property string selectedFileType: Mimer.get_type(selectedFile)
 
 
     Connections {
@@ -90,7 +91,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -101,7 +102,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -123,7 +124,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -131,7 +132,8 @@ Page {
                 tag: IppMsg.IntegerRange
                 name: "page-ranges"
                 prettyName: qsTr("Page range")
-                valid: (utils.isValid(name) || ConvertChecker.pdf) && Mimer.get_type(selectedFile) == "application/pdf"
+                valid: (utils.isValid(name) || ConvertChecker.pdf) &&
+                       (selectedFileType == "application/pdf" || Mimer.isOffice(selectedFileType))
 
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
                 high: name=="page-ranges" ? (pdfpages == 0 ? 65535 : pdfpages)  : 0
@@ -145,7 +147,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -156,7 +158,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -167,7 +169,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -178,7 +180,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }
@@ -189,7 +191,7 @@ Page {
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
-                mime_type: Mimer.get_type(selectedFile)
+                mime_type: selectedFileType
 
                 onChoiceChanged: page.choiceMade(name, tag, choice)
             }

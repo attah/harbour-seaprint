@@ -502,7 +502,7 @@ try {
         PageRangeLow=1;
     }
 
-    if(PageRangeHigh==0)
+    if(PageRangeHigh==0 || PageRangeHigh > pages)
     {
         PageRangeHigh=pages;
     }
@@ -515,12 +515,50 @@ try {
     if(targetFormat == Mimer::PDF)
     {
 
-        // TODO Page ranges
+        if(PageRangeLow != 1 || PageRangeHigh != pages)
+        {
+            qDebug() << "adjusting pages in PDF" << PageRangeLow << PageRangeHigh;
 
-        QFile tempfileAsFile(tempfile->fileName());
-        tempfileAsFile.open(QIODevice::Append);
-        tempfileAsFile.write(tmpPdfFile.readAll());
-        tempfileAsFile.close();
+            QProcess* PdftoCairo = new QProcess(this);
+            PdftoCairo->setProgram("pdftocairo");
+            QStringList PdfToCairoArgs = {"-pdf"};
+
+            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
+            PdfToCairoArgs << QStringList {tmpPdfFile.fileName(), "-"};
+
+            qDebug() << "pdftocairo args is " << PdfToCairoArgs;
+            PdftoCairo->setArguments(PdfToCairoArgs);
+
+            PdftoCairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+            connect(PdftoCairo, SIGNAL(finished(int, QProcess::ExitStatus)), PdftoCairo, SLOT(deleteLater()));
+
+            PdftoCairo->start();
+
+            qDebug() << "PdftoCairo Starting";
+
+            if(!PdftoCairo->waitForStarted())
+            {
+                qDebug() << "pdftocairo died";
+                throw ConvertFailedException();
+            }
+
+            qDebug() << "PdftoCairo Started";
+
+            if(!PdftoCairo->waitForFinished(-1))
+            {
+                qDebug() << "pdftocairo failed";
+                throw ConvertFailedException();
+            }
+
+        }
+        else
+        {
+            QFile tempfileAsFile(tempfile->fileName());
+            tempfileAsFile.open(QIODevice::Append);
+            tempfileAsFile.write(tmpPdfFile.readAll());
+            tempfileAsFile.close();
+        }
 
     }
     else if(targetFormat == Mimer::Postscript)
