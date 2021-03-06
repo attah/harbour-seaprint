@@ -145,7 +145,8 @@ Page {
                 visible: Object.keys(printer.attrs).length !== 0
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property bool canPrint: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).mimetypes.indexOf(selectedFileType) != -1
+                property var supported_formats: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value)
+                property bool canPrint: supported_formats.mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -254,16 +255,44 @@ Page {
                         spacing: Theme.paddingMedium
                         Label {
                             id: format_unsupported_label
-                            visible:  format_label.text == ""
+                            visible: !supported_formats.pdf && !supported_formats.postscript && !supported_formats.office && !supported_formats.images
                             color: "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: qsTr("No compatible formats supported")
                         }
-                        Label {
-                            id: format_label
-                            color: selectedFile == "" ? Theme.secondaryColor : canPrint ? Theme.primaryColor : "red"
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            text: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value).supported
+
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.pdf
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-pdf"
+                        }
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.postscript
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-other"
+
+                        }
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.office
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-formatted"
+                        }
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.images
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-image"
                         }
                     }
 

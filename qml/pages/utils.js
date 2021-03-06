@@ -1,3 +1,5 @@
+
+// TODO move to IppPrinter and/or Mimer when i figure out how to handle considerAdditionalFormats there
 function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
 {
     var formats = printer.attrs["document-format-supported"].value;
@@ -9,37 +11,40 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
     var raster = (has(formats, Mimer.PWG) || has(formats, Mimer.URF));
 
     var mimetypes = [];
-    var supported = [];
+    var pdf = false;
+    var postscript = false;
+    var office = false;
+    var images = false;
+
     if(has(formats, Mimer.PDF) ||
        (ConvertChecker.pdf && ( has(formats, Mimer.Postscript) || raster )))
-     {
-         mimetypes.push(Mimer.PDF);
-         supported.push("PDF");
-     }
-     if(has(formats, Mimer.Postscript))
-     {
-         mimetypes.push(Mimer.Postscript);
-         supported.push("Postscript");
-     }
+    {
+        pdf = true;
+        mimetypes.push(Mimer.PDF);
+    }
+    if(has(formats, Mimer.Postscript))
+    {
+        postscript = true;
+        mimetypes.push(Mimer.Postscript);
+    }
 
-     if((ConvertChecker.pdf && ConvertChecker.calligra) &&
-             ( has(formats, Mimer.PDF) || has(formats, Mimer.Postscript) || raster ))
-     {
-         mimetypes = mimetypes.concat(Mimer.OfficeFormats);
-     }
+    if((ConvertChecker.pdf && ConvertChecker.calligra) &&
+            ( has(formats, Mimer.PDF) || has(formats, Mimer.Postscript) || raster ))
+    {
+        office = true;
+        mimetypes = mimetypes.concat(Mimer.OfficeFormats);
+    }
 
-     if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG))
-     {
-         mimetypes.push(Mimer.JPEG);
-         supported.push("JPEG");
-         mimetypes.push(Mimer.PNG);
-         supported.push("PNG");
-         mimetypes.push(Mimer.TIFF);
-         mimetypes.push(Mimer.GIF);
+    if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG))
+    {
+        images = true;
+        mimetypes.push(Mimer.JPEG);
+        mimetypes.push(Mimer.PNG);
+        mimetypes.push(Mimer.TIFF);
+        mimetypes.push(Mimer.GIF);
+    }
 
-     }
-
-     return {supported: supported.join(" "), mimetypes: mimetypes};
+    return {pdf: pdf, postscript: postscript, office: office, images: images, mimetypes: mimetypes};
 }
 
 function has(arrayish, what)
