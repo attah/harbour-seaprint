@@ -275,6 +275,10 @@
         <source>Unsupported document format</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This format may not render correctly</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IppPrinter</name>

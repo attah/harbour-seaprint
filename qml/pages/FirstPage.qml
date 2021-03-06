@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
@@ -333,40 +333,59 @@ Page {
     DockedPanel {
         id: fileDock
         open: true
-        height: fileLabel.height+folderButton.height+3*Theme.paddingLarge
+        height: panelColumn.implicitHeight
         width: parent.width
         dock: Dock.Bottom
 
-        Label {
-            id: fileLabel
-            width: parent.width-2*Theme.paddingLarge
-
-            anchors {
-                top: parent.top
-                topMargin: Theme.paddingLarge
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
-            truncationMode: TruncationMode.Fade
-            text: selectedFile != "" ? selectedFile : qsTr("No file selected")
-        }
-
-
-        Row {
+        Column {
+            id: panelColumn
             width: parent.width
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: Theme.paddingLarge
-            IconButton {
-                id: folderButton
-                icon.source: "image://theme/icon-m-file-document"
-                width: parent.width/2
-                onClicked: pageStack.push(documentPickerPage)
+            spacing: Theme.paddingLarge
+            topPadding: Theme.paddingLarge
+            bottomPadding: page.isPortrait ? 2*Theme.paddingLarge : Theme.paddingLarge
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: Mimer.isOffice(page.selectedFileType)
+
+                HighlightImage {
+                    source: "image://theme/icon-s-warning"
+                    highlighted: true
+                    highlightColor: Theme.highlightColor
+                }
+                Label
+                {
+                    text: qsTr("This format may not render correctly")
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.highlightColor
+                }
             }
-            IconButton {
-                icon.source: "image://theme/icon-m-file-image"
-                width: parent.width/2
-                onClicked: pageStack.push(imagePickerPage)
+
+            Label {
+                id: fileLabel
+                width: parent.width-2*Theme.paddingLarge
+
+                horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
+                truncationMode: TruncationMode.Fade
+                text: selectedFile != "" ? selectedFile : qsTr("No file selected")
+            }
+
+
+            Row {
+                width: parent.width
+                IconButton {
+                    id: folderButton
+                    icon.source: "image://theme/icon-m-file-document"
+                    width: parent.width/2
+                    onClicked: pageStack.push(documentPickerPage)
+                }
+                IconButton {
+                    id: imageButton
+                    icon.source: "image://theme/icon-m-file-image"
+                    width: parent.width/2
+                    onClicked: pageStack.push(imagePickerPage)
+                }
+
             }
 
         }
