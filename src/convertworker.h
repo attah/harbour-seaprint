@@ -31,6 +31,11 @@ public slots:
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY);
 
+    void convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                               QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                               quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                               quint32 PageRangeLow, quint32 PageRangeHigh);
+
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
     void progress(qint64 done, qint64 pages);

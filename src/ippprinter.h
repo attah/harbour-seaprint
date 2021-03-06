@@ -49,6 +49,11 @@ signals:
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                         quint32 HwResX, quint32 HwResY);
 
+    void doConvertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                                 QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                                 quint32 PageRangeLow, quint32 PageRangeHigh);
+
     void additionalDocumentFormatsChanged();
     void busyMessageChanged();
     void progressChanged();

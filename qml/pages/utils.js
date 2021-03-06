@@ -22,6 +22,12 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
          supported.push("Postscript");
      }
 
+     if((ConvertChecker.pdf && ConvertChecker.calligra) &&
+             ( has(formats, Mimer.PDF) || has(formats, Mimer.Postscript) || raster ))
+     {
+         mimetypes = mimetypes.concat(Mimer.OfficeFormats);
+     }
+
      if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG))
      {
          mimetypes.push(Mimer.JPEG);
@@ -266,6 +272,12 @@ function canTransferPostscriptAs(type)
     return has(targets, type)
 }
 
+function canConvertOfficeDocumentTo(type)
+{
+    var targets = [Mimer.OctetStream, Mimer.PDF, Mimer.Postscript, Mimer.PWG, Mimer.URF];
+    return has(targets, type)
+}
+
 function canConvertImageTo(type)
 {
     var targets = [Mimer.OctetStream, Mimer.JPEG, Mimer.PNG, Mimer.PWG, Mimer.URF];
@@ -298,7 +310,11 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
         {
             return choices.filter(canTransferPostscriptAs)
         }
-        else if(mimeType.indexOf("image") != -1)
+        else if(Mimer.isOffice(mimeType))
+        {
+            return choices.filter(canConvertOfficeDocumentTo)
+        }
+        else if(Mimer.isImage(mimeType))
         {
             return choices.filter(canConvertImageTo);
         }

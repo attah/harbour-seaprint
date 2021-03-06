@@ -8,8 +8,8 @@ class ConvertChecker : public QObject
     Q_OBJECT
 public:
     static ConvertChecker* instance();
-    Q_PROPERTY(bool pdf MEMBER _pdf)
-    Q_PROPERTY(bool calligra MEMBER _calligra)
+    Q_PROPERTY(bool pdf MEMBER _pdf CONSTANT)
+    Q_PROPERTY(bool calligra MEMBER _calligra CONSTANT)
 
     Q_INVOKABLE quint32 pdfPages(QString pdf);
 

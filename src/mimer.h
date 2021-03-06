@@ -25,6 +25,13 @@ public:
     Q_PROPERTY(const QString JPEG MEMBER JPEG CONSTANT);
     Q_PROPERTY(const QString TIFF MEMBER TIFF CONSTANT);
 
+    Q_PROPERTY(const QString DOC MEMBER DOC CONSTANT);
+    Q_PROPERTY(const QString DOCX MEMBER DOCX CONSTANT);
+    Q_PROPERTY(const QString RTF MEMBER RTF CONSTANT);
+    Q_PROPERTY(const QString ODT MEMBER ODT CONSTANT);
+
+    Q_PROPERTY(const QStringList OfficeFormats MEMBER OfficeFormats CONSTANT);
+
     static const QString OctetStream;
 
     static const QString PDF;
@@ -40,7 +47,10 @@ public:
     static const QString DOC;
     static const QString DOCX;
     static const QString RTF;
+    static const QString RTF_APP;
     static const QString ODT;
+
+    static const QStringList OfficeFormats;
 
     Q_INVOKABLE static bool isImage(QString mimeType)
     {
@@ -48,11 +58,8 @@ public:
     }
     Q_INVOKABLE static bool isOffice(QString mimeType)
     {
-        static QStringList OfficeForamts {DOC, DOCX, RTF, ODT};
-        return OfficeForamts.contains(mimeType);
+        return OfficeFormats.contains(mimeType);
     }
-
-
 
 private:
     Mimer();

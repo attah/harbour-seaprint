@@ -76,6 +76,7 @@ Page {
         if(status==PageStatus.Active && !nagged && nagScreenSetting.value != nagScreenSetting.expectedValue)
         {
             console.log("Can convert from PDF:", ConvertChecker.pdf)
+            console.log("Can convert from Office:", ConvertChecker.calligra)
             if(!ConvertChecker.pdf)
             {
                 nagged=true
@@ -345,24 +346,25 @@ Page {
             DocumentPickerPage {
                 allowedOrientations: Orientation.All
 
-                Component.onCompleted: {
-                    var thingy = Qt.createComponent("../components/DocumentFilter.notqml");
-                    if (thingy.status == Component.Ready) {
-                        _contentModel.contentFilter = thingy.createObject(this);
-                    }
-                }
+//                Component.onCompleted: {
+//                    var thingy = Qt.createComponent("../components/DocumentFilter.notqml");
+//                    if (thingy.status == Component.Ready) {
+//                        _contentModel.contentFilter = thingy.createObject(this);
+//                    }
+//                }
 
                 title: qsTr("Choose file")
 
                 onSelectedContentPropertiesChanged: {
                     var mimeType = Mimer.get_type(selectedContentProperties.filePath)
-                    if(mimeType == "application/pdf" || mimeType == "application/postscript")
+                    if(mimeType == "application/pdf" || mimeType == "application/postscript" || Mimer.isOffice(mimeType))
                     {
                         page.selectedFile = selectedContentProperties.filePath
                         page.selectedFileType = mimeType
                     }
                     else
                     {
+                        console.log("UNSUPPORTED", mimeType);
                         notifier.notify(qsTr("Unsupported document format"))
                         page.selectedFile = ""
                         page.selectedFileType = ""

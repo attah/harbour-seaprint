@@ -32,6 +32,7 @@ IppPrinter::IppPrinter()
 
     connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
+    connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &ConvertWorker::convertOfficeDocument);
     connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
     connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
@@ -503,22 +504,22 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
         qDebug() << tempfile->fileName();
         tempfile->close();
 
+        bool TwoSided = false;
+        bool Tumble = false;
+        if(Sides=="two-sided-long-edge")
+        {
+            TwoSided = true;
+        }
+        else if(Sides=="two-sided-short-edge")
+        {
+            TwoSided = true;
+            Tumble = true;
+        }
+
         setBusyMessage("Converting");
 
         if(mimeType == Mimer::PDF)
         {
-            bool TwoSided = false;
-            bool Tumble = false;
-            if(Sides=="two-sided-long-edge")
-            {
-                TwoSided = true;
-            }
-            else if(Sides=="two-sided-short-edge")
-            {
-                TwoSided = true;
-                Tumble = true;
-            }
-
             emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
                               PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
         }
@@ -526,6 +527,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
         {
             emit doConvertImage(request, filename, tempfile, documentFormat, Colors, Quality,
                                 PaperSize, HwResX, HwResY);
+        }
+        else if(Mimer::isOffice(mimeType))
+        {
+            emit doConvertOfficeDocument(request, filename, tempfile, documentFormat, Colors, Quality,
+                                         PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
         }
         else
         {

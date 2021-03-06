@@ -430,3 +430,232 @@ catch(const ConvertFailedException& e)
     emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
 }
+
+void ConvertWorker::convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                                          QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                                          quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                                          quint32 PageRangeLow, quint32 PageRangeHigh)
+{
+try {
+
+    if(targetFormat == Mimer::URF && (HwResX != HwResY))
+    { // URF only supports symmetric resolutions
+        qDebug() << "Unsupported URF resolution" << PaperSize;
+        throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
+    }
+
+    QString ShortPaperSize;
+    if(CalligraPaperSizes.contains(PaperSize))
+    {
+        ShortPaperSize = CalligraPaperSizes[PaperSize];
+    }
+    else
+    {
+        qDebug() << "Unsupported PDF paper size" << PaperSize;
+        throw ConvertFailedException(tr("Unsupported PDF paper size"));
+    }
+
+    QProcess* CalligraConverter = new QProcess(this);
+    CalligraConverter->setProgram("calligraconverter");
+    QStringList CalligraConverterArgs = {"--batch", "--mimetype", Mimer::PDF, "--print-orientation", "Portrait", "--print-papersize", ShortPaperSize};
+
+    CalligraConverterArgs << filename;
+
+    QTemporaryFile tmpPdfFile;
+    tmpPdfFile.open();
+    CalligraConverterArgs << tmpPdfFile.fileName();
+
+    qDebug() << "CalligraConverteArgs is" << CalligraConverterArgs;
+    CalligraConverter->setArguments(CalligraConverterArgs);
+
+    connect(CalligraConverter, SIGNAL(finished(int, QProcess::ExitStatus)), CalligraConverter, SLOT(deleteLater()));
+
+    CalligraConverter->start();
+
+    qDebug() << "CalligraConverter Starting";
+
+    if(!CalligraConverter->waitForStarted())
+    {
+        qDebug() << "CalligraConverter died";
+        throw ConvertFailedException();
+    }
+
+    qDebug() << "CalligraConverter Started";
+
+    if(!CalligraConverter->waitForFinished(-1))
+    {
+        qDebug() << "CalligraConverter failed";
+        throw ConvertFailedException();
+    }
+
+//    qDebug() << CalligraConverter->readAllStandardError();
+
+    quint32 pages = ConvertChecker::instance()->pdfPages(tmpPdfFile.fileName());
+    if (!pages)
+    {
+        qDebug() << "pdfinfo returned 0 pages";
+        throw ConvertFailedException(tr("Failed to get info about PDF file"));
+    }
+
+    if(PageRangeLow==0)
+    {
+        PageRangeLow=1;
+    }
+
+    if(PageRangeHigh==0)
+    {
+        PageRangeHigh=pages;
+    }
+
+    // Actual number of pages to print
+    pages = PageRangeHigh-PageRangeLow+1;
+
+    qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
+
+    if(targetFormat == Mimer::PDF)
+    {
+
+        // TODO Page ranges
+
+        QFile tempfileAsFile(tempfile->fileName());
+        tempfileAsFile.open(QIODevice::Append);
+        tempfileAsFile.write(tmpPdfFile.readAll());
+        tempfileAsFile.close();
+
+    }
+    else if(targetFormat == Mimer::Postscript)
+    {
+        QProcess* PdfToPs = new QProcess(this);
+        PdfToPs->setProgram("pdftops");
+        QStringList PdfToPsArgs;
+        if(TwoSided)
+        {
+            PdfToPsArgs.append("-duplex");
+        }
+
+        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+        PdfToPsArgs << QStringList {tmpPdfFile.fileName(), "-"};
+
+
+        qDebug() << "pdftops args is " << PdfToPsArgs;
+        PdfToPs->setArguments(PdfToPsArgs);
+
+
+        PdfToPs->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+        connect(PdfToPs, SIGNAL(finished(int, QProcess::ExitStatus)), PdfToPs, SLOT(deleteLater()));
+
+        PdfToPs->start();
+
+        qDebug() << "PdfToPs Starting";
+
+        if(!PdfToPs->waitForStarted())
+        {
+            qDebug() << "PdfToPs died";
+            throw ConvertFailedException();
+        }
+
+        qDebug() << "PdfToPs Started";
+
+        if(!PdfToPs->waitForFinished(-1))
+        {
+            qDebug() << "PdfToPs failed";
+            throw ConvertFailedException();
+        }
+    }
+    else
+    {
+
+        QProcess* pdftoppm = new QProcess(this);
+        pdftoppm->setProgram("pdftoppm");
+        QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
+        Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
+        if(Colors == 1)
+        {
+            Pdf2PpmArgs.append("-gray");
+        }
+        qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
+        pdftoppm->setArguments(Pdf2PpmArgs);
+
+
+        QProcess* ppm2pwg = new QProcess(this);
+        // Yo dawg, I heard you like programs...
+        ppm2pwg->setProgram("harbour-seaprint");
+        ppm2pwg->setArguments({"ppm2pwg"});
+
+        bool urf = targetFormat == Mimer::URF;
+
+        QStringList env;
+        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
+        qDebug() << "ppm2pwg env is " << env;
+
+        ppm2pwg->setEnvironment(env);
+
+        pdftoppm->setStandardInputFile(tmpPdfFile.fileName());
+        pdftoppm->setStandardOutputProcess(ppm2pwg);
+        ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+        connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
+        connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+
+        qDebug() << "All connected";
+
+        pdftoppm->start();
+        ppm2pwg->start();
+
+        qDebug() << "Starting";
+
+        if(!pdftoppm->waitForStarted())
+        {
+            qDebug() << "pdftoppm died";
+            throw ConvertFailedException();
+        }
+        if(!ppm2pwg->waitForStarted())
+        {
+            qDebug() << "ppm2pwg died";
+            throw ConvertFailedException();
+        }
+        qDebug() << "All started";
+
+        bool ppm2pwgSuccess = false;
+
+        for(;;)
+        {
+            if(ppm2pwg->waitForFinished(1000))
+            {
+                ppm2pwgSuccess = true;
+                break;
+            }
+            else
+            {
+                QList<QByteArray> ppm2pwgOutput = ppm2pwg->readAllStandardError().split('\n');
+                for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
+                {
+                    if(it->startsWith("Page"))
+                    {
+                        QList<QByteArray> ppm2pwgTokens = it->split(' ');
+                        emit progress(ppm2pwgTokens.last().toInt()-1, pages);
+                    }
+                }
+            }
+        }
+        if(!ppm2pwgSuccess)
+        {
+            qDebug() << "ppm2pwg failed";
+            throw ConvertFailedException();
+        }
+    }
+
+
+    qDebug() << "Finished";
+
+    emit done(request, tempfile);
+    qDebug() << "posted";
+
+}
+catch(const ConvertFailedException& e)
+{
+        tempfile->deleteLater();
+        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
+}
+}
