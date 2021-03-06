@@ -341,10 +341,11 @@ Page {
             id: panelColumn
             width: parent.width
             spacing: Theme.paddingLarge
-            topPadding: Theme.paddingLarge
+            topPadding: page.isPortrait && !warningRow.visible ? 2*Theme.paddingLarge : Theme.paddingLarge
             bottomPadding: page.isPortrait ? 2*Theme.paddingLarge : Theme.paddingLarge
 
             Row {
+                id: warningRow
                 anchors.horizontalCenter: parent.horizontalCenter
                 visible: Mimer.isOffice(page.selectedFileType)
 
