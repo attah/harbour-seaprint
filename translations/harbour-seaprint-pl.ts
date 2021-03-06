@@ -87,6 +87,10 @@
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Special thanks to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>

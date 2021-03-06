@@ -87,6 +87,12 @@ Page {
                       "Rudi Timmermans"
             }
 
+            SectionHeader { text: qsTr("Special thanks to") }
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: "dcaliste"
+            }
+
             SectionHeader { text: qsTr("Translations") }
 
             AboutLabel {
@@ -104,6 +110,11 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 text: "poppler-utils - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
+            }
+
+            AboutLabel {
+                font.pixelSize: Theme.fontSizeSmall
+                text: "calligraconverter - "+(ConvertChecker.calligra ? qsTr("Installed") : qsTr("Not installed"))
             }
 
             SectionHeader { text: qsTr("Donations") }

@@ -87,6 +87,10 @@
         <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
         <translation>Seaprint（海印）采用 TBD 许可证，但是我很乐意使它更加开放。</translation>
     </message>
+    <message>
+        <source>Special thanks to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
