@@ -66,7 +66,7 @@ Page {
             PageHeader {
                 id: pageHeader
                 title: printer.attrs["printer-name"].value
-                description: selectedFile
+                description: Utils.basename(selectedFile)
             }
 
             Item {

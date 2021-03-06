@@ -379,6 +379,11 @@ function unknownForEmptyString(s)
     }
 }
 
+function basename(filewithpath)
+{
+    return filewithpath.substring(filewithpath.lastIndexOf("/")+1);
+}
+
 var media =
        {"asme_f_28x40in": "28 x 40″",
         "choice_iso_a4_210x297mm_na_letter_8.5x11in": "A4 or US Letter",
