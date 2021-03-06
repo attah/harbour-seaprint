@@ -314,6 +314,10 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
         {
             return firstMatch(supportedMimeTypes, {Mimer::Postscript});
         }
+        else if(Mimer::isOffice(mimeType))
+        {
+            return firstMatch(supportedMimeTypes, {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF });
+        }
         else if(Mimer::isImage(mimeType))
         {
             QStringList ImageFormatPrioList {Mimer::PNG, Mimer::PWG, Mimer::URF, Mimer::JPEG};
