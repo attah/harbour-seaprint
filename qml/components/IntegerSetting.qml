@@ -5,20 +5,35 @@ Setting {
     property int low
     property int high
 
+    property bool suppressChange: false
+
     displayValue: choice ? choice : default_choice
+
+    onChoiceChanged: {
+        if(choice == undefined)
+        {
+            console.log("choice unset");
+            suppressChange = true;
+            slider.value = slider.minimumValue;
+            suppressChange = false;
+        }
+    }
 
     menu: ContextMenu {
         MenuItem {
             Slider
             {
+                id: slider
                 minimumValue: low
                 maximumValue: high < 100 ? high : 100
                 width: parent.width
                 stepSize: 1
-                value: choice ? choice : default_choice
                 onValueChanged:
                 {
-                    choice = value;
+                    if(!suppressChange)
+                    {
+                        choice = value;
+                    }
                 }
             }
             IconButton

@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
-    height: button.height + (menu != undefined ? menu.height : 0)
+    height: button.height + (menu != undefined ? menu.height : 0) + resetMenu.height
     width: parent.width
 
     property string name
@@ -21,6 +21,11 @@ Item {
         }
     }
 
+    signal pressAndHold()
+    onPressAndHold: {
+        resetMenu.open(this)
+    }
+
     property alias displayValue: button.value
 
     ValueButton {
@@ -28,9 +33,20 @@ Item {
         enabled: valid
         label: prettyName
         onClicked: parent.clicked()
+        onPressAndHold: parent.pressAndHold()
+        valueColor: choice != undefined ? Theme.highlightColor : Theme.secondaryHighlightColor
     }
 
     property var menu
     property bool hasMenu: true
+
+    ContextMenu {
+        id: resetMenu
+
+        MenuItem {
+            text: qsTr("Reset")
+            onClicked: choice = undefined
+        }
+    }
 
 }

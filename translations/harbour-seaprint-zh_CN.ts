@@ -451,6 +451,13 @@
     </message>
 </context>
 <context>
+    <name>Setting</name>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>Show nag-screen</source>

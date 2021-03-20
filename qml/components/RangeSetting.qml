@@ -6,29 +6,47 @@ Setting {
     property int choice_low: 1
     property int choice_high: 0
 
+    property bool suppressChange: false
 
     function update_choice() {
         choice = new Object({low: choice_low, high: choice_high});
     }
 
     onChoice_highChanged: {
-        if(choice_high < choice_low)
+        if(!suppressChange)
         {
-            low_slider.value = choice_high > 0 ? choice_high : 1;
-        }
-        else
-        {
-            update_choice()
+            if(choice_high < choice_low)
+            {
+                low_slider.value = choice_high > 0 ? choice_high : 1;
+            }
+            else
+            {
+                update_choice()
+            }
         }
     }
     onChoice_lowChanged: {
-        if(choice_low > choice_high)
+        if(!suppressChange)
         {
-            high_slider.value = choice_low
+            if(choice_low > choice_high)
+            {
+                high_slider.value = choice_low
+            }
+            else
+            {
+                update_choice()
+            }
         }
-        else
+    }
+
+    onChoiceChanged: {
+        if(choice == undefined)
         {
-            update_choice()
+            console.log("choice unset");
+            suppressChange = true;
+            low_slider.value = low_slider.minimumValue;
+            high_slider.value = high_slider.minimumValue;
+            suppressChange = false;
         }
     }
 
@@ -43,7 +61,6 @@ Setting {
                 maximumValue: high > 100 ? 100 : high
                 width: parent.width
                 stepSize: 1
-                value: choice_low
                 onValueChanged:
                 {
                     choice_low = value;
@@ -72,7 +89,6 @@ Setting {
                 maximumValue: high > 100 ? 100 : high
                 width: parent.width
                 stepSize: 1
-                value: choice_high
                 onValueChanged:
                 {
                     choice_high = value;
