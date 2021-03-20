@@ -90,7 +90,7 @@ ApplicationWindow
         id: nagScreenSetting
         key: "/apps/harbour-seaprint/settings/nag-screen"
         defaultValue: 0
-        property int expectedValue: 1
+        property int expectedValue: 2
     }
 
     ConfigurationValue

@@ -1,11 +1,19 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import seaprint.convertchecker 1.0
+
 import "../components"
 
 Page {
+    allowedOrientations: Orientation.All
     backNavigation: false
 
+    SilicaFlickable {
+        anchors.fill: parent
+        contentHeight: col.implicitHeight
+
     Column {
+        id:col
         y: Theme.paddingLarge
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width - 2*Theme.paddingLarge
@@ -14,6 +22,7 @@ Page {
         Label {
             width: parent.width
             wrapMode: Text.WordWrap
+            font.bold: true
 
             text: qsTr("Optional dependencies are not installed!")
         }
@@ -25,6 +34,14 @@ Page {
             text: qsTr("In order to print PDF files with printers that do not support PDF natively,"
                        +" you need the package \"poppler-utils\"."
                        +" This enables SeaPrint to convert to formats that are more likely to be accepted.")
+        }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+
+            text: qsTr("In order to print \"office\" documents like odt and doc(x) you <i>also</i> need "+
+                       "\"calligraconverter\" from the \"calligra\" package (version 3.2.1+, circa Sailfish OS 4.2).")
         }
 
         Label {
@@ -55,7 +72,7 @@ Page {
             width: parent.width
             wrapMode: Text.WordWrap
 
-            text: qsTr("Install poppler-utils:")
+            text: qsTr("Install poppler-utils:") + " " + (ConvertChecker.pdf ? qsTr("(done)") : "")
         }
 
         Label {
@@ -64,6 +81,22 @@ Page {
             font.family: "monospace"
 
             text: "pkcon install poppler-utils"
+            Clipper {}
+        }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+
+            text: qsTr("Install calligra:") + " " + (ConvertChecker.calligra ? qsTr("(done)") : "")
+        }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+            font.family: "monospace"
+
+            text: "pkcon install calligra"
             Clipper {}
         }
 
@@ -86,6 +119,12 @@ Page {
                 pageStack.pop()
             }
         }
+
+        Item{
+            width: parent.width
+            height: Theme.itemSizeMedium
+        }
+    }
     }
 
 }

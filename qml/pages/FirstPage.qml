@@ -77,7 +77,7 @@ Page {
         {
             console.log("Can convert from PDF:", ConvertChecker.pdf)
             console.log("Can convert from Office:", ConvertChecker.calligra)
-            if(!ConvertChecker.pdf)
+            if(!ConvertChecker.pdf || !ConvertChecker.calligra)
             {
                 nagged=true
                 pageStack.push(Qt.resolvedUrl("NagScreen.qml"))

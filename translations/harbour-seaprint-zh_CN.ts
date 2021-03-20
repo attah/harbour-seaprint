@@ -379,6 +379,18 @@
         <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
         <translation>如果你想要用打印机打印PDF文件，你需要安装包 poppler-utils 。该包能够让 SeaPrint 转换格式为更容易接受的格式。</translation>
     </message>
+    <message>
+        <source>Install calligra:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, circa Sailfish OS 4.2).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(done)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrinterPage</name>

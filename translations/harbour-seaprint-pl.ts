@@ -379,6 +379,18 @@
         <source>Don&apos;t show again</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Install calligra:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, circa Sailfish OS 4.2).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(done)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrinterPage</name>
