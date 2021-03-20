@@ -103,6 +103,8 @@ void IppPrinter::refresh() {
 
     if(_url.scheme() == "file")
     {
+        _attrs = QJsonObject();
+
         QFile file(_url.toLocalFile());
         if(file.open(QIODevice::ReadOnly))
         {
