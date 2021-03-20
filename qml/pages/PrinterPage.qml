@@ -15,7 +15,6 @@ Page {
     property string selectedFile
     property string selectedFileType: Mimer.get_type(selectedFile)
 
-
     Connections {
         target: wifi
         onConnectedChanged: {
@@ -25,15 +24,15 @@ Page {
         }
     }
 
-    function choiceMade(name, tag, choice)
+    function choiceMade(setting)
     {
-        if(choice != undefined)
+        if(setting.choice != undefined)
         {
-            jobParams[name] = {tag: tag, value: choice};
+            jobParams[setting.name] = {tag: setting.tag, value: setting.choice};
         }
         else
         {
-            jobParams[name] = undefined
+            jobParams[setting.name] = undefined;
         }
         console.log(JSON.stringify(jobParams));
     }
@@ -93,7 +92,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -104,7 +103,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             IntegerSetting {
                 tag: IppMsg.Integer
@@ -115,7 +114,7 @@ Page {
                 high: valid ? printer.attrs[name+"-supported"].value.high : 0
                 default_choice: utils.getDefaultChoice(name)
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -126,7 +125,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             RangeSetting {
                 tag: IppMsg.IntegerRange
@@ -138,7 +137,7 @@ Page {
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
                 high: name=="page-ranges" ? (pdfpages == 0 ? 65535 : pdfpages)  : 0
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -149,7 +148,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Enum
@@ -160,7 +159,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Resolution
@@ -171,7 +170,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.MimeMediaType
@@ -182,7 +181,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
@@ -193,7 +192,7 @@ Page {
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
             MediaColSetting {
                 tag: IppMsg.BeginCollection
@@ -202,7 +201,7 @@ Page {
                 valid: false
                 printer: page.printer
 
-                onChoiceChanged: page.choiceMade(name, tag, choice)
+                onChoiceChanged: page.choiceMade(this)
             }
         }
     }
