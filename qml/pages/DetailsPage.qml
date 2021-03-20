@@ -8,6 +8,7 @@ Page {
     property var printer
 
     SilicaFlickable {
+        id: detailsFlickable
         anchors.fill: parent
         contentHeight: col.height
 
@@ -15,7 +16,7 @@ Page {
             id: col
 
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - 2*Theme.paddingLarge
+            width: Math.min(Screen.width, detailsFlickable.width)-2*Theme.paddingLarge
             PageHeader {
                 title: qsTr("Details")
                 description: printer.attrs["printer-name"].value
