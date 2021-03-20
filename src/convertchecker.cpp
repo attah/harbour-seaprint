@@ -5,6 +5,7 @@
 ConvertChecker::ConvertChecker()
 {
     _pdf = false;
+    _calligra = false;
     QProcess* pdftoppm = new QProcess(this);
     pdftoppm->setProgram("pdftoppm");
     pdftoppm->setArguments({"-h"});
@@ -25,7 +26,7 @@ ConvertChecker::ConvertChecker()
 
     if(calligraconverter->waitForFinished(2000))
     {
-      if(calligraconverter->exitStatus() == QProcess::NormalExit && pdftoppm->exitCode() == 0)
+      if(calligraconverter->exitStatus() == QProcess::NormalExit && calligraconverter->exitCode() == 0)
       {
           _calligra = true;
       }
