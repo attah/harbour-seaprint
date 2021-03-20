@@ -54,6 +54,11 @@ function has(arrayish, what)
 
 function ippName(name, value)
 {
+    if(value==undefined)
+    {
+        return ""
+    }
+
     switch(name) {
     case "job-state":
         switch(value) {

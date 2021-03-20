@@ -29,7 +29,7 @@ ApplicationWindow
             db_conn = LocalStorage.openDatabaseSync("SeaprintDB", "1.0", "Seaprint storage", 100000)
             db_conn.transaction(function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Favourites (ssid STRING, url STRING)');
-
+                tx.executeSql('CREATE TABLE IF NOT EXISTS JobSettings (uuid STRING UNIQUE, data STRING)');
             });
         }
 
@@ -68,6 +68,30 @@ ApplicationWindow
         function removeFavourite(ssid, url) {
             db_conn.transaction(function (tx) {
                 tx.executeSql('DELETE FROM Favourites WHERE ssid=? AND url=?', [ssid, url] );
+            });
+        }
+
+        function setJobSettings(uuid, settings) {
+            db_conn.transaction(function (tx) {
+                tx.executeSql('REPLACE INTO JobSettings VALUES(?, ?)', [uuid, settings] );
+            });
+        }
+
+        function getJobSettings(uuid) {
+            var settings = "{}";
+            db_conn.transaction(function (tx) {
+                var res = tx.executeSql('SELECT * FROM JobSettings WHERE uuid=?', [uuid]);
+                if (res.rows.length)
+                {
+                    settings = res.rows.item(0).data
+                }
+            });
+            return settings
+        }
+
+        function removeJobSettings(uuid) {
+            db_conn.transaction(function (tx) {
+                tx.executeSql('DELETE FROM JobSettings WHERE uuid=?', [uuid] );
             });
         }
     }

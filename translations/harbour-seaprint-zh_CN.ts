@@ -442,6 +442,14 @@
         <source>Collated copies</source>
         <translation>整理后的副本</translation>
     </message>
+    <message>
+        <source>Clear default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

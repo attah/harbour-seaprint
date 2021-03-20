@@ -182,6 +182,19 @@ Page {
 
                 property int debugCount: 0
 
+                function maybeGetParams()
+                {
+                    if(printer.attrs.hasOwnProperty("printer-uuid"))
+                    {
+                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value));
+                    }
+                    else
+                    {
+                        return new Object();
+                    }
+                }
+
+
                 onClicked: {
 
                     if(++debugCount == 5)
@@ -194,7 +207,7 @@ Page {
                         return;
                     if(selectedFile != "")
                     {
-                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile})
+                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile, jobParams: maybeGetParams()})
                     }
                     else
                     {

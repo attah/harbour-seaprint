@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import seaprint.mimer 1.0
 import seaprint.ippmsg 1.0
@@ -11,7 +11,7 @@ Page {
 
     id: page
     property var printer
-    property var jobParams: new Object();
+    property var jobParams
     property string selectedFile
     property string selectedFileType: Mimer.get_type(selectedFile)
 
@@ -44,6 +44,27 @@ Page {
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
+
+            MenuItem {
+                text: qsTr("Clear default settings")
+                visible: printer.attrs.hasOwnProperty("printer-uuid")
+                onClicked: {
+                    db.removeJobSettings(printer.attrs["printer-uuid"].value);
+                    pageStack.pop();
+                }
+            }
+
+            MenuItem {
+                text: qsTr("Save default settings")
+                visible: printer.attrs.hasOwnProperty("printer-uuid")
+                onClicked: {
+                    var tmp = jobParams;
+                    // Support vries between formats and values varies between documents, would be confusing to save
+                    tmp["page-ranges"] = undefined;
+                    db.setJobSettings(printer.attrs["printer-uuid"].value, JSON.stringify(tmp))
+                }
+            }
+
             MenuItem {
                 text: qsTr("Print")
                 onClicked: {
@@ -75,6 +96,9 @@ Page {
                 function isValid(name) {
                     return printer.attrs.hasOwnProperty(name+"-supported");
                 }
+                function getInitialChoice(name) {
+                    return jobParams.hasOwnProperty(name) ? jobParams[name].value : undefined
+                }
                 function getChoices(name) {
                     return isValid(name) ? printer.attrs[name+"-supported"].value : [];
                 }
@@ -88,6 +112,7 @@ Page {
                 name: "sides"
                 prettyName: qsTr("Sides")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -99,6 +124,7 @@ Page {
                 name: "media"
                 prettyName: qsTr("Print media")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -110,6 +136,7 @@ Page {
                 name: "copies"
                 prettyName: qsTr("Copies")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 low: valid ? printer.attrs[name+"-supported"].value.low : 0
                 high: valid ? printer.attrs[name+"-supported"].value.high : 0
                 default_choice: utils.getDefaultChoice(name)
@@ -121,6 +148,7 @@ Page {
                 name: "multiple-document-handling"
                 prettyName: qsTr("Collated copies")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -133,9 +161,10 @@ Page {
                 prettyName: qsTr("Page range")
                 valid: (utils.isValid(name) || ConvertChecker.pdf) &&
                        (selectedFileType == "application/pdf" || Mimer.isOffice(selectedFileType))
+                choice: utils.getInitialChoice(name)
 
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
-                high: name=="page-ranges" ? (pdfpages == 0 ? 65535 : pdfpages)  : 0
+                high: pdfpages == 0 ? 65535 : pdfpages
 
                 onChoiceChanged: page.choiceMade(this)
             }
@@ -144,6 +173,7 @@ Page {
                 name: "print-color-mode"
                 prettyName: qsTr("Color mode")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -154,6 +184,7 @@ Page {
                 tag: IppMsg.Enum
                 name: "print-quality"
                 prettyName: qsTr("Quality")
+                choice: utils.getInitialChoice(name)
                 valid: utils.isValid(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
@@ -166,6 +197,7 @@ Page {
                 name: "printer-resolution"
                 prettyName: qsTr("Resolution")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -177,6 +209,7 @@ Page {
                 name: "document-format"
                 prettyName: qsTr("Transfer format")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -188,6 +221,7 @@ Page {
                 name: "media-source"
                 prettyName: qsTr("Media source")
                 valid: utils.isValid(name)
+                choice: utils.getInitialChoice(name)
                 choices: utils.getChoices(name)
                 default_choice: utils.getDefaultChoice(name)
                 mime_type: selectedFileType
@@ -199,6 +233,7 @@ Page {
                 name: "media-col"
                 prettyName: qsTr("Zero margins")
                 valid: false
+                choice: utils.getInitialChoice(name)
                 printer: page.printer
 
                 onChoiceChanged: page.choiceMade(this)

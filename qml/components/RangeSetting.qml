@@ -9,7 +9,14 @@ Setting {
     property bool suppressChange: false
 
     function update_choice() {
-        choice = new Object({low: choice_low, high: choice_high});
+        if (choice_high == 0)
+        {
+            choice = undefined;
+        }
+        else
+        {
+            choice = new Object({low: choice_low, high: choice_high});
+        }
     }
 
     onChoice_highChanged: {
@@ -19,10 +26,7 @@ Setting {
             {
                 low_slider.value = choice_high > 0 ? choice_high : 1;
             }
-            else
-            {
-                update_choice()
-            }
+            update_choice()
         }
     }
     onChoice_lowChanged: {
@@ -32,10 +36,7 @@ Setting {
             {
                 high_slider.value = choice_low
             }
-            else
-            {
-                update_choice()
-            }
+            update_choice()
         }
     }
 
@@ -50,7 +51,7 @@ Setting {
         }
     }
 
-    displayValue: choice_high==0 ? qsTr("all") : ""+choice_low+" - "+choice_high
+    displayValue: choice == undefined ? qsTr("all") : ""+choice.low+" - "+choice.high
 
     menu: ContextMenu {
         MenuItem {
