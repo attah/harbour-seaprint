@@ -5,7 +5,7 @@ import seaprint.mimer 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
-    property var choices
+    property var choices: parent.getChoices(name)
     property string mime_type
 
     property var limited_choices: Utils.limitChoices(name, choices, mime_type, ConvertChecker)

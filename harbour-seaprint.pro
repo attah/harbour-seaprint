@@ -48,6 +48,7 @@ DISTFILES += qml/harbour-seaprint.qml \
     qml/components/CylinderGraph.qml \
     qml/components/DocumentFilter.notqml \
     qml/components/LargeChoiceDialog.qml \
+    qml/components/SettingsColumn.qml \
     qml/components/SupplyItem.qml \
     qml/cover/CoverPage.qml \
     qml/components/*.qml \

@@ -3,17 +3,10 @@ import Sailfish.Silica 1.0
 import seaprint.ippmsg 1.0
 
 Setting {
-    property var printer
-
-    Component.onCompleted: {
-        if((printer.attrs["media-left-margin-supported"].value.indexOf(0) != -1) &&
-           (printer.attrs["media-right-margin-supported"].value.indexOf(0) != -1) &&
-           (printer.attrs["media-top-margin-supported"].value.indexOf(0) != -1) &&
-           (printer.attrs["media-bottom-margin-supported"].value.indexOf(0) != -1))
-        {
-            valid = true
-        }
-    }
+    valid: ((parent.printer.attrs["media-left-margin-supported"].value.indexOf(0) != -1) &&
+            (parent.printer.attrs["media-right-margin-supported"].value.indexOf(0) != -1) &&
+            (parent.printer.attrs["media-top-margin-supported"].value.indexOf(0) != -1) &&
+            (parent.printer.attrs["media-bottom-margin-supported"].value.indexOf(0) != -1))
 
     displayValue: choice ? qsTr("true") : qsTr("false")
 

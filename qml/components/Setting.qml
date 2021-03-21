@@ -8,10 +8,15 @@ Item {
     property string name
     property string prettyName
     property int tag
-    property bool valid: false
+    property bool _valid: parent.isValid(name)
+    property bool valid: _valid
 
     property var choice
-    property var default_choice
+    property var default_choice: parent.getDefaultChoice(name)
+
+    Component.onCompleted: parent.setInitialChoice(this)
+
+    onChoiceChanged: parent.choiceMade(this)
 
     signal clicked()
     onClicked: {

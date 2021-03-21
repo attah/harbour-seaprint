@@ -2,8 +2,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Setting {
-    property int low
-    property int high
+    property int low: valid ? parent.printer.attrs[name+"-supported"].value.low : 0
+    property int high: valid ? parent.printer.attrs[name+"-supported"].value.high : 0
 
     property bool suppressChange: false
 
