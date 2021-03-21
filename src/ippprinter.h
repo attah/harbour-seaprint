@@ -59,7 +59,7 @@ signals:
     void progressChanged();
 
 public slots:
-    void print(QJsonObject attrs, QString file, bool alwaysConvert, bool alwaysUseMediaCol);
+    void print(QJsonObject attrs, QString file, bool alwaysUseMediaCol);
 
 
     void onUrlChanged();

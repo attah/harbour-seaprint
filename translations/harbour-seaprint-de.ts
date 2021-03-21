@@ -484,14 +484,6 @@
         <translation>Einige Drucker ünterstützen mehr Formate als sie bekannt geben. Zusätliche Formate können aus anderen Attributen geschlussffolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
     </message>
     <message>
-        <source>Always convert to raster format</source>
-        <translation>Immer ins Raster Format konvertieren</translation>
-    </message>
-    <message>
-        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation>Konvertierung in das PWG/URF Rasterformat erzwingen. Die ist hauptsächlich für Testzwecke vorgesehen.</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>Warnseite über nicht installierte optionalen Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
     </message>

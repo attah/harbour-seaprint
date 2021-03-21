@@ -302,13 +302,9 @@ QString firstMatch(QJsonArray supported, QStringList wanted)
     return "";
 }
 
-QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray supportedMimeTypes, bool forceRaster)
+QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray supportedMimeTypes)
 {
-    if(forceRaster)
-    {
-        return firstMatch(supportedMimeTypes, {Mimer::PWG, Mimer::URF});
-    }
-    else if(documentFormat == Mimer::OctetStream)
+    if(documentFormat == Mimer::OctetStream)
     {
         if(mimeType == Mimer::PDF)
         {
@@ -338,9 +334,9 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, bool alwaysUseMediaCol)
+void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaCol)
 {
-    qDebug() << "printing" << filename << attrs << alwaysConvert;
+    qDebug() << "printing" << filename << attrs;
 
     _progress = "";
     emit progressChanged();
@@ -402,13 +398,13 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysConvert, 
     }
 
     QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
-    qDebug() << "target format:" << documentFormat << "alwaysConvert:" << alwaysConvert;
+    qDebug() << "target format:" << documentFormat;
 
     // document-format goes in the op-attrs and not the job-attrs
     o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", documentFormat}});
     attrs.remove("document-format");
 
-    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes, alwaysConvert);
+    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes);
     qDebug() << "adjusted target format:" << documentFormat;
 
     if(documentFormat == "" || documentFormat == Mimer::OctetStream)

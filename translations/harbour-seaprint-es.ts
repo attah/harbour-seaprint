@@ -484,14 +484,6 @@
         <translation>Algunas impresoras admiten más formatos de los que anuncian. Sin embargo, es posible deducir formatos adicionales a partir de otros atributos. Principalmente es relevante para impresoras compatibles con Postscript que también admiten PDF.</translation>
     </message>
     <message>
-        <source>Always convert to raster format</source>
-        <translation>Convertir siempre a formato ráster</translation>
-    </message>
-    <message>
-        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation>Forzar conversión a formato ráster PWG/URF. Esto es para hacer pruebas principalmente.</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>Mostrar página de advertencia sobre las dependencias opcionales no instaladas cuando no están instaladas.</translation>
     </message>

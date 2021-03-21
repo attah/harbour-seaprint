@@ -145,20 +145,6 @@ ApplicationWindow
 
     ConfigurationValue
     {
-        id: alwaysConvertSetting
-        key: "/apps/harbour-seaprint/settings/always-convert"
-        defaultValue: false
-    }
-
-    ConfigurationValue
-    {
-        id: forceIncluDeDocumentFormatSetting
-        key: "/apps/harbour-seaprint/settings/force-include-document-format"
-        defaultValue: false
-    }
-
-    ConfigurationValue
-    {
         id: alwaysUseMediaColSetting
         key: "/apps/harbour-seaprint/settings/always-use-media-col"
         defaultValue: false

@@ -484,14 +484,6 @@
         <translation>有些打印机支持的格式比他们宣传的要多。 可以从其他属性中推断出其它格式。 主要与支持PDF的Postscript—兼容打印机相关。</translation>
     </message>
     <message>
-        <source>Always convert to raster format</source>
-        <translation>总是转换为光栅格式</translation>
-    </message>
-    <message>
-        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation>强制转换为PWG或URF光栅格式。这主要用于测试。</translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation>如果没有安装可选的依赖程序，则显示警告页面。</translation>
     </message>

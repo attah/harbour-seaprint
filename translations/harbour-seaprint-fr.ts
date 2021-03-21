@@ -484,14 +484,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Always convert to raster format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force conversion to PWG/URF raster format. This is mainly intended for testing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
         <translation type="unfinished"></translation>
     </message>

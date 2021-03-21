@@ -45,15 +45,6 @@ Page {
             }
 
             TextSwitch {
-                text: qsTr("Always convert to raster format")
-                description: qsTr("Force conversion to PWG/URF raster format. This is mainly intended for testing.")
-                checked: alwaysConvertSetting.value
-                onCheckedChanged: {
-                    alwaysConvertSetting.value = checked
-                }
-            }
-
-            TextSwitch {
                 text: qsTr("Always use media-col")
                 description: qsTr("Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.")
                 checked: alwaysUseMediaColSetting.value

@@ -64,7 +64,6 @@ Page {
                     pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                       PageStackAction.Immediate)
                     printer.print(jobParams, page.selectedFile,
-                                  alwaysConvertSetting.value,
                                   alwaysUseMediaColSetting.value)
                 }
             }
