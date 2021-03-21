@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 import Nemo.Notifications 1.0
 import Nemo.Configuration 1.0
+import seaprint.mimer 1.0
 import "pages"
 import "components"
 
@@ -29,7 +30,7 @@ ApplicationWindow
             db_conn = LocalStorage.openDatabaseSync("SeaprintDB", "1.0", "Seaprint storage", 100000)
             db_conn.transaction(function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Favourites (ssid STRING, url STRING)');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS JobSettings (uuid STRING UNIQUE, data STRING)');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS JobSettings (uuid STRING, type STRING, data STRING)');
             });
         }
 
@@ -71,16 +72,31 @@ ApplicationWindow
             });
         }
 
-        function setJobSettings(uuid, settings) {
+        function simplifyType(mimetype) {
+            if(Mimer.isImage(mimetype))
+            {
+                return {simple: "image", translatable: qsTr("images")};
+            }
+            else
+            {
+                return {simple: "document", translatable: qsTr("documents")};
+
+            }
+        }
+
+        function setJobSettings(uuid, mimetype, settings) {
+            var type = simplifyType(mimetype).simple;
             db_conn.transaction(function (tx) {
-                tx.executeSql('REPLACE INTO JobSettings VALUES(?, ?)', [uuid, settings] );
+                tx.executeSql('DELETE FROM JobSettings WHERE uuid=? AND type=?', [uuid, type] );
+                tx.executeSql('INSERT INTO JobSettings VALUES(?, ?, ?)', [uuid, type, settings] );
             });
         }
 
-        function getJobSettings(uuid) {
+        function getJobSettings(uuid, mimetype) {
+            var type = simplifyType(mimetype).simple;
             var settings = "{}";
             db_conn.transaction(function (tx) {
-                var res = tx.executeSql('SELECT * FROM JobSettings WHERE uuid=?', [uuid]);
+                var res = tx.executeSql('SELECT * FROM JobSettings WHERE uuid=? AND type=?', [uuid, type]);
                 if (res.rows.length)
                 {
                     settings = res.rows.item(0).data
@@ -89,9 +105,10 @@ ApplicationWindow
             return settings
         }
 
-        function removeJobSettings(uuid) {
+        function removeJobSettings(uuid, mimetype) {
+            var type = simplifyType(mimetype).simple;
             db_conn.transaction(function (tx) {
-                tx.executeSql('DELETE FROM JobSettings WHERE uuid=?', [uuid] );
+                tx.executeSql('DELETE FROM JobSettings WHERE uuid=? AND type=?', [uuid, type] );
             });
         }
     }

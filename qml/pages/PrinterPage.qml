@@ -45,11 +45,16 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
 
+            MenuLabel {
+                text:  qsTr("Default settings for %1 on this printer").arg(db.simplifyType(selectedFileType).translatable)
+                visible: printer.attrs.hasOwnProperty("printer-uuid")
+            }
+
             MenuItem {
                 text: qsTr("Clear default settings")
                 visible: printer.attrs.hasOwnProperty("printer-uuid")
                 onClicked: {
-                    db.removeJobSettings(printer.attrs["printer-uuid"].value);
+                    db.removeJobSettings(printer.attrs["printer-uuid"].value, selectedFileType);
                     pageStack.pop();
                 }
             }
@@ -59,9 +64,9 @@ Page {
                 visible: printer.attrs.hasOwnProperty("printer-uuid")
                 onClicked: {
                     var tmp = jobParams;
-                    // Support vries between formats and values varies between documents, would be confusing to save
+                    // Support varies between formats and values varies between documents, would be confusing to save
                     tmp["page-ranges"] = undefined;
-                    db.setJobSettings(printer.attrs["printer-uuid"].value, JSON.stringify(tmp))
+                    db.setJobSettings(printer.attrs["printer-uuid"].value, selectedFileType, JSON.stringify(tmp))
                 }
             }
 

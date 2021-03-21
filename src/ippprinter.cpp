@@ -111,6 +111,8 @@ void IppPrinter::refresh() {
             QJsonDocument JsonDocument = QJsonDocument::fromJson(file.readAll());
 
             _attrs = JsonDocument.object();
+            // These won't load anyway...r
+            _attrs.remove("printer-icons");
             file.close();
         }
         emit attrsChanged();

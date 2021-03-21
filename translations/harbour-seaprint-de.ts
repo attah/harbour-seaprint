@@ -450,6 +450,10 @@
         <source>Save default settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default settings for %1 on this printer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>
@@ -512,6 +516,17 @@
     </message>
     <message>
         <source>Unnamed supply</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>harbour-seaprint</name>
+    <message>
+        <source>images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>documents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

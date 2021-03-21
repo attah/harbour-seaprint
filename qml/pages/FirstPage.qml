@@ -186,7 +186,7 @@ Page {
                 {
                     if(printer.attrs.hasOwnProperty("printer-uuid"))
                     {
-                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value));
+                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value, selectedFileType));
                     }
                     else
                     {
