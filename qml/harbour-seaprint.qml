@@ -11,6 +11,8 @@ ApplicationWindow
 {
     id: appWin
 
+    property bool expectCalligra: false
+
     initialPage: Component { FirstPage { selectedFile: Qt.application.arguments[1] ? Qt.application.arguments[1] : "" } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -131,7 +133,7 @@ ApplicationWindow
         id: nagScreenSetting
         key: "/apps/harbour-seaprint/settings/nag-screen"
         defaultValue: 0
-        property int expectedValue: 2
+        property int expectedValue: expectCalligra ? 2 : 1
     }
 
     ConfigurationValue

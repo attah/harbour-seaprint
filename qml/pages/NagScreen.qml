@@ -37,6 +37,7 @@ Page {
         }
 
         Label {
+            visible: appWin.expectCalligra
             width: parent.width
             wrapMode: Text.WordWrap
 
@@ -85,6 +86,7 @@ Page {
         }
 
         Label {
+            visible: appWin.expectCalligra
             width: parent.width
             wrapMode: Text.WordWrap
 
@@ -92,6 +94,7 @@ Page {
         }
 
         Label {
+            visible: appWin.expectCalligra
             width: parent.width
             wrapMode: Text.WordWrap
             font.family: "monospace"
