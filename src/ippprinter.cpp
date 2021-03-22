@@ -448,12 +448,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
     quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
     bool pdfPageRangeAdjustNeeded = false;
 
-    if(!PaperSizes.contains(PaperSize))
-    {
-        emit convertFailed(tr("Unsupported print media"));
-        return;
-    }
-
     quint32 PageRangeLow = 0;
     quint32 PageRangeHigh = 0;
     if(attrs.contains("page-ranges"))
@@ -501,6 +495,16 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
     else
     {
         file.close();
+
+        if(PaperSize == "")
+        {
+            PaperSize = "iso_a4_210x297mm";
+        }
+        else if(!PaperSizes.contains(PaperSize))
+        {
+            emit convertFailed(tr("Unsupported print media"));
+            return;
+        }
 
         QTemporaryFile* tempfile = new QTemporaryFile();
         tempfile->open();
