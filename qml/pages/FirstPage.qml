@@ -87,7 +87,10 @@ Page {
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
-        anchors.fill: parent
+        anchors.top: parent.top
+        width: parent.width
+        anchors.bottom: fileDock.top
+        clip: true
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
@@ -121,8 +124,8 @@ Page {
         }
 
         SilicaListView {
-            anchors.fill: parent
             id: listView
+            anchors.fill: parent
             model: IppDiscovery
             spacing: Theme.paddingSmall
 
@@ -335,11 +338,6 @@ Page {
                     }
                 }
 
-            }
-            footer: Item {
-                id: footer
-                width: parent.width
-                height: fileDock.height
             }
         }
     }
