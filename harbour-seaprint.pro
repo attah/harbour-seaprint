@@ -45,21 +45,11 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/bytestream/bytestream.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
-    qml/components/CylinderGraph.qml \
-    qml/components/DocumentFilter.notqml \
-    qml/components/LargeChoiceDialog.qml \
-    qml/components/SettingsColumn.qml \
-    qml/components/SupplyItem.qml \
     qml/cover/CoverPage.qml \
-    qml/components/*.qml \
+    qml/components/*qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
-    qml/pages/BusyPage.qml \
-    qml/pages/DebugPage.qml \
-    qml/pages/DetailsPage.qml \
-    qml/pages/NagScreen.qml \
-    qml/pages/SettingsPage.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \
