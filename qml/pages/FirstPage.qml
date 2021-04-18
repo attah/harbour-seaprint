@@ -407,7 +407,7 @@ Page {
                 allowedOrientations: Orientation.All
 
                 Component.onCompleted: {
-                    var thingy = Qt.createComponent("../components/DocumentFilter.notqml");
+                    var thingy = Qt.createComponent(ConvertChecker.calligra ? "../components/DocumentFilterOffice.notqml" : "../components/DocumentFilter.notqml");
                     if (thingy.status == Component.Ready) {
                         _contentModel.contentFilter = thingy.createObject(this);
                     }

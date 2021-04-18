@@ -1,0 +1,64 @@
+import QtDocGallery 5.0
+
+GalleryFilterUnion {
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".pdf"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".ps"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".PDF"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".PS"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".odt"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".doc"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".docx"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".rtf"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".ODT"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".DOC"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".DOCX"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".RTF"
+    }
+}
