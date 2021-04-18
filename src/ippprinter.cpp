@@ -274,7 +274,7 @@ void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
     connect(_print_nam, SIGNAL(finished(QNetworkReply*)), data, SLOT(deleteLater()));
     data->open();
 
-    setBusyMessage("Transferring");
+    setBusyMessage(tr("Transferring"));
 
     QNetworkReply* reply = _print_nam->post(request, data);
 
@@ -488,7 +488,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
         contents = contents.append(filedata);
         file.close();
 
-        setBusyMessage("Transferring");
+        setBusyMessage(tr("Transferring"));
         QNetworkReply* reply = _print_nam->post(request, contents);
         connect(reply, &QNetworkReply::uploadProgress, this, &IppPrinter::setProgress);
     }
@@ -524,7 +524,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
             Tumble = true;
         }
 
-        setBusyMessage("Converting");
+        setBusyMessage(tr("Converting"));
 
         if(mimeType == Mimer::PDF)
         {

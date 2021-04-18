@@ -306,6 +306,14 @@
         <source>Unknown document format dimensions</source>
         <translation>Onbekende afmetingen van documentformaat</translation>
     </message>
+    <message>
+        <source>Transferring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Converting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>

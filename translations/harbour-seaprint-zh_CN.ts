@@ -306,6 +306,14 @@
         <source>Unknown document format dimensions</source>
         <translation>未知稳定格式尺寸</translation>
     </message>
+    <message>
+        <source>Transferring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Converting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
