@@ -5,7 +5,7 @@
     <name>AboutPage</name>
     <message>
         <source>GitHub repository</source>
-        <translation>Github 库</translation>
+        <translation>Github 仓库</translation>
     </message>
     <message>
         <source>Report an Issue</source>
@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Special thanks to</source>
-        <translation type="unfinished"></translation>
+        <translation><特别感谢/translation>
     </message>
 </context>
 <context>
@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>Port 9100 is not used for IPP.</source>
-        <translation type="unfinished"></translation>
+        <translation>端口9100未用于IPP。</translation>
     </message>
 </context>
 <context>
@@ -277,11 +277,11 @@
     </message>
     <message>
         <source>Unsupported document format</source>
-        <translation type="unfinished"></translation>
+        <translation>不受支持的格式</translation>
     </message>
     <message>
         <source>This format may not render correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>格式可能无法正确呈现</translation>
     </message>
 </context>
 <context>
@@ -308,11 +308,11 @@
     </message>
     <message>
         <source>Transferring</source>
-        <translation type="unfinished"></translation>
+        <translation>正在传输</translation>
     </message>
     <message>
         <source>Converting</source>
-        <translation type="unfinished"></translation>
+        <translation>正在转换</translation>
     </message>
 </context>
 <context>
@@ -361,11 +361,11 @@
     <name>NagScreen</name>
     <message>
         <source>Dismiss</source>
-        <translation>撤销</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Don&apos;t show again</source>
-        <translation>请勿在此显示</translation>
+        <translation>请勿再次显示</translation>
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
@@ -389,15 +389,15 @@
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation type="unfinished"></translation>
+        <translation>安装 calligra:</translation>
     </message>
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, circa Sailfish OS 4.2).</source>
-        <translation type="unfinished"></translation>
+        <translation>如果想要打印office文档，例如odt或doc(x)，你还需要来自calligra包的calligraconverter（版本3.2.1+, circa 旗鱼系统4.2)。</translation>
     </message>
     <message>
         <source>(done)</source>
-        <translation type="unfinished"></translation>
+        <translation>（已完成）</translation>
     </message>
 </context>
 <context>
@@ -452,15 +452,15 @@
     </message>
     <message>
         <source>Clear default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>清空默认设置</translation>
     </message>
     <message>
         <source>Save default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>清空默认设置</translation>
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation type="unfinished"></translation>
+        <translation>此打印机上的 %1 默认设置。</translation>
     </message>
 </context>
 <context>
@@ -474,7 +474,7 @@
     <name>Setting</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>重置</translation>
     </message>
 </context>
 <context>
@@ -516,18 +516,18 @@
     </message>
     <message>
         <source>Unnamed supply</source>
-        <translation type="unfinished"></translation>
+        <translation>未命名供给</translation>
     </message>
 </context>
 <context>
     <name>harbour-seaprint</name>
     <message>
         <source>images</source>
-        <translation type="unfinished"></translation>
+        <translation>图像</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>文档</translation>
     </message>
 </context>
 <context>
@@ -766,7 +766,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">未知</translation>
+        <translation>未知</translation>
     </message>
 </context>
 </TS>
