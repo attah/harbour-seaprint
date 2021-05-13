@@ -272,7 +272,7 @@ try {
 
         for(;;)
         {
-            if(ppm2pwg->waitForFinished(1000))
+            if(ppm2pwg->waitForFinished(250))
             {
                 ppm2pwgSuccess = true;
                 break;
@@ -659,7 +659,7 @@ try {
 
         for(;;)
         {
-            if(ppm2pwg->waitForFinished(1000))
+            if(ppm2pwg->waitForFinished(250))
             {
                 ppm2pwgSuccess = true;
                 break;
