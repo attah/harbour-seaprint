@@ -102,22 +102,15 @@ QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
         {
             qint32 x, y;
             qint8 units;
-            QJsonObject tmp_res;
             data >> tmp_len >> x >> y >> units;
-            tmp_res.insert("x", x);
-            tmp_res.insert("y", y);
-            tmp_res.insert("units", units);
-            value = tmp_res;
+            value = QJsonObject {{"x", x}, {"y", y}, {"units", units}};
             break;
         }
         case IntegerRange:
         {
             qint32 low, high;
             data >> tmp_len >> low >> high;
-            QJsonObject tmp_range;
-            tmp_range.insert("low", low);
-            tmp_range.insert("high", high);
-            value = tmp_range;
+            value = QJsonObject {{"low", low}, {"high", high}};
             break;
         }
         case OctetStringUnknown:

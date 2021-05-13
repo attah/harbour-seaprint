@@ -434,10 +434,9 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
 
         if(attrs.contains("printer-resolution"))
         {
-            QJsonObject tmpObj;
-            tmpObj["units"] = PrinterResolutionRef.toObject()["units"];
-            tmpObj["x"] = (int)HwResX;
-            tmpObj["y"] = (int)HwResY;
+            QJsonObject tmpObj {{"units", PrinterResolutionRef.toObject()["units"]},
+                                {"x", (int)HwResX},
+                                {"y", (int)HwResY}};
             attrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
         }
     }
