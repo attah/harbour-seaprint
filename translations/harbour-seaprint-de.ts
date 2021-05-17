@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>Sides</source>
-        <translation>Seiten</translation>
+        <translation>Duplex</translation>
     </message>
     <message>
         <source>Copies</source>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source>Page range</source>
-        <translation>Seiten Bereich</translation>
+        <translation>Seiten Auswählen</translation>
     </message>
     <message>
         <source>Collated copies</source>
