@@ -267,7 +267,6 @@ void IppDiscovery::readPendingDatagrams()
 
 QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {   //TODO: consider caching images (doesn't appear to be needed currently)
-    Q_UNUSED(size);
     Q_UNUSED(requestedSize);
     qDebug() << "requesting image" << id;
 
@@ -300,6 +299,7 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
         img = imageReader.read();
      }
 
+    *size = img.size();
     delete nam;
     return img;
 
