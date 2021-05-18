@@ -26,6 +26,7 @@ INSTALLS += i18n
 system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
+QT += svg
 
 # Write version file
 VERSION_H = \
@@ -42,7 +43,8 @@ SOURCES += src/harbour-seaprint.cpp \
     src/ippprinter.cpp \
     src/mimer.cpp \
     ppm2pwg/ppm2pwg.cpp \
-    ppm2pwg/bytestream/bytestream.cpp
+    ppm2pwg/bytestream/bytestream.cpp \
+    src/svgprovider.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
@@ -88,7 +90,8 @@ HEADERS += \
     ppm2pwg/UrfPgHdr.codable \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
-    src/papersizes.h
+    src/papersizes.h \
+    src/svgprovider.h
 
 INCLUDEPATH += ppm2pwg \
                ppm2pwg/bytestream

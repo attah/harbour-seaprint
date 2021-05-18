@@ -6,7 +6,9 @@ CoverBackground {
         anchors.centerIn: parent
         height: parent.width
         width: parent.width
-        opacity: 0.33
+        sourceSize.height: height
+        sourceSize.width: width
+        opacity: 0.4
         source: "../pages/icon-seaprint-nobg-bw.png"
     }
 

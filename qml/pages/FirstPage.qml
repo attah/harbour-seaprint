@@ -227,10 +227,12 @@ Page {
 
                     height: Theme.itemSizeLarge
                     width: Theme.itemSizeLarge
+                    sourceSize.height: height
+                    sourceSize.width: width
                     source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+Utils.selectIcon(printer.attrs["printer-icons"].value)
-                                                           : "icon-seaprint-nobg.svg"
+                                                           : "image://svg/qml/pages/icon-seaprint-nobg.svg"
                     // Some printers serve their icons over https with invalid certs...
-                    onStatusChanged: if (status == Image.Error) source = "icon-seaprint-nobg.svg"
+                    onStatusChanged: if (status == Image.Error) source = "image://svg/qml/pages/icon-seaprint-nobg.svg"
 
                 }
 

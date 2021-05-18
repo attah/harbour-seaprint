@@ -6,6 +6,7 @@
 #include <src/ippprinter.h>
 #include <src/mimer.h>
 #include <src/convertchecker.h>
+#include <src/svgprovider.h>
 
 #define PPM2PWG_MAIN ppm2pwg_main
 #include <ppm2pwg/ppm2pwg.cpp>
@@ -45,6 +46,7 @@ int main(int argc, char *argv[])
 
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
     view->engine()->addImageProvider(QLatin1String("ippdiscovery"), IppDiscovery::instance());
+    view->engine()->addImageProvider(QLatin1String("svg"), SvgProvider::instance());
 
     view->setSource(SailfishApp::pathToMainQml());
     view->show();

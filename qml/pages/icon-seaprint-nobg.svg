@@ -12,8 +12,8 @@
    version="1.1"
    x="0px"
    y="0px"
-   viewBox="0 0 172 172"
-   style="enable-background:new 0 0 172 172;"
+   viewBox="0 0 86 86"
+   style="enable-background:new 0 0 86 86;"
    xml:space="preserve"
    id="svg82"
    sodipodi:docname="icon-seaprint-nobg.svg"
@@ -38,8 +38,6 @@
 	.st10{opacity:0.9;fill:url(#SVGID_9_);}
 	.st11{fill:url(#SVGID_10_);}
 </style>
-
-<g transform="scale(2)">
 
 <g
    id="Слой_3"
@@ -248,6 +246,5 @@
    class="st11"
    d="M65,59.2H21c-1.1,0-2-0.9-2-2V-2.6c0-1.1,0.9-2,2-2h44c1.1,0,2,0.9,2,2v59.9C67,58.3,66.1,59.2,65,59.2z"
    id="path79" />
-</g>
 </g>
 </svg>
