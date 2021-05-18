@@ -274,11 +274,18 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
 
     QNetworkAccessManager* nam = new QNetworkAccessManager();
     QUrl url(id);
-    qDebug() << url.host() << _AAs;
+    QString host = url.host();
+
+    if(host.endsWith("."))
+    {
+        host.chop(1);
+    }
+
+    qDebug() << url.host() << host << _AAs;
     // TODO IPv6
-    if(_AAs.contains(url.host()))
+    if(_AAs.contains(host))
     {   // TODO: retry potential other IPs
-        url.setHost(_AAs.value(url.host()));
+        url.setHost(_AAs.value(host));
     }
 
     QNetworkRequest request(url);
