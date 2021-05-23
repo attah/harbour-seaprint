@@ -1,6 +1,7 @@
 #include "convertchecker.h"
 #include <QProcess>
 #include <QtDebug>
+#include "mimer.h"
 
 ConvertChecker::ConvertChecker()
 {
@@ -61,8 +62,8 @@ ConvertChecker* ConvertChecker::instance()
 quint32 ConvertChecker::pdfPages(QString filename)
 {
     quint32 pages = 0;
-    if(!_pdf)
-    {
+    if(!_pdf || (Mimer::instance()->get_type(filename) != Mimer::PDF))
+    { // pdfinfo is a bit slow to return on some non-PDFs
         return pages;
     }
 
