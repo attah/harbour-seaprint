@@ -361,12 +361,15 @@ function isWaringState(printer)
         return true;
     }
 
-    for(var i in printer.attrs["printer-state-reasons"].value)
+    if(printer.attrs.hasOwnProperty("printer-state-reasons"))
     {
-        var value = printer.attrs["printer-state-reasons"].value[i];
-        if(value != "none" && !(endsWith("-report", value)))
+        for(var i in printer.attrs["printer-state-reasons"].value)
         {
-            return true;
+            var value = printer.attrs["printer-state-reasons"].value[i];
+            if(value != "none" && !(endsWith("-report", value)))
+            {
+                return true;
+            }
         }
     }
     return false;
