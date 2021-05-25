@@ -2,6 +2,7 @@
 #include <seaprint_version.h>
 #include "mimer.h"
 #include "papersizes.h"
+#include "overrider.h"
 
 IppPrinter::IppPrinter()
 {
@@ -114,6 +115,7 @@ void IppPrinter::refresh() {
             // These won't load anyway...r
             _attrs.remove("printer-icons");
             file.close();
+            Overrider::instance()->apply(_attrs);
         }
         emit attrsChanged();
         UpdateAdditionalDocumentFormats();
@@ -168,6 +170,8 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
             IppMsg resp(reply);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
             _attrs = resp.getPrinterAttrs();
+            Overrider::instance()->apply(_attrs);
+
         }
         catch(const std::exception& e)
         {

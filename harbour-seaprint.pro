@@ -44,6 +44,7 @@ SOURCES += src/harbour-seaprint.cpp \
     src/mimer.cpp \
     ppm2pwg/ppm2pwg.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
+    src/overrider.cpp \
     src/svgprovider.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
@@ -90,6 +91,7 @@ HEADERS += \
     ppm2pwg/UrfPgHdr.codable \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
+    src/overrider.h \
     src/papersizes.h \
     src/svgprovider.h
 
