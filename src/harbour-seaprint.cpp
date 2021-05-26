@@ -32,8 +32,15 @@ int main(int argc, char *argv[])
 
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
-//    app->setOrganizationName(QStringLiteral("net.attah"));
-//    app->setApplicationName(QStringLiteral("seaprint"));
+    QStringList appDataLocations = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+
+    for (const QString& dataLocation : appDataLocations) {
+        QString netAttahLocation = QDir(dataLocation + "/../../net.attah").absolutePath();
+        if (QDir(netAttahLocation).exists()) {
+            app->setOrganizationName(QStringLiteral("net.attah"));
+            app->setApplicationName(QStringLiteral("seaprint"));
+        }
+    }
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
 
     qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<IppDiscovery>);
