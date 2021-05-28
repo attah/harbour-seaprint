@@ -378,6 +378,7 @@ Page {
             Label {
                 id: fileLabel
                 width: parent.width-2*Theme.paddingLarge
+                leftPadding: Theme.paddingLarge
 
                 horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
                 truncationMode: TruncationMode.Fade
