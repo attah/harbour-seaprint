@@ -59,6 +59,7 @@ Page {
     }
 
     signal refreshed()
+    signal noFileSelected()
 
     Component.onCompleted: {
         IppDiscovery.discover();
@@ -206,15 +207,17 @@ Page {
                         return;
                     }
                     debugCountReset.restart();
-                    if(!canPrint)
-                        return;
-                    if(selectedFile != "")
+                    if(selectedFile == "")
                     {
-                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile, jobParams: maybeGetParams()})
+                        noFileSelected();
+                    }
+                    else if(!canPrint)
+                    {
+                        return;
                     }
                     else
                     {
-                        notifier.notify(qsTr("No file selected"))
+                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile, jobParams: maybeGetParams()})
                     }
                 }
 
@@ -383,6 +386,23 @@ Page {
                 horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
                 truncationMode: TruncationMode.Fade
                 text: selectedFile != "" ? selectedFile : qsTr("No file selected")
+
+                SequentialAnimation {
+                    id: noFileSelectedAnimation
+                    loops: 3
+
+                    ColorAnimation {target: fileLabel; property: "color"; from: Theme.primaryColor; to: Theme.highlightColor; duration: 200 }
+                    ColorAnimation {target: fileLabel; property: "color"; from: Theme.highlightColor; to: Theme.primaryColor;  duration: 200 }
+                }
+
+                Connections {
+                    target: page
+                    onNoFileSelected: {
+                        console.log("onNoFileSelected")
+                        noFileSelectedAnimation.start()
+                    }
+                }
+
             }
 
 
