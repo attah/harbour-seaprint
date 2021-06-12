@@ -211,37 +211,35 @@ try {
     }
     else
     { // We are converting to a raster format
-        QProcess* ppm2pwg = new QProcess(this);
+        QProcess ppm2pwg(this);
         // Yo dawg, I heard you like programs...
-        ppm2pwg->setProgram("harbour-seaprint");
-        ppm2pwg->setArguments({"ppm2pwg"});
+        ppm2pwg.setProgram("harbour-seaprint");
+        ppm2pwg.setArguments({"ppm2pwg"});
 
         QStringList env;
         ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0);
         qDebug() << "ppm2pwg env is " << env;
 
-        ppm2pwg->setEnvironment(env);
-        ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-        connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+        ppm2pwg.setEnvironment(env);
+        ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
         qDebug() << "All connected";
-        ppm2pwg->start();
+        ppm2pwg.start();
 
         bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
 
-        outImage.save(ppm2pwg, gray ? "pgm" : "ppm");
+        outImage.save(&ppm2pwg, gray ? "pgm" : "ppm");
 
         qDebug() << "Starting";
 
-        if(!ppm2pwg->waitForStarted())
+        if(!ppm2pwg.waitForStarted())
         {
             qDebug() << "ppm2pwg died";
             throw ConvertFailedException();
         }
         qDebug() << "All started";
 
-        ppm2pwg->waitForFinished();
+        ppm2pwg.waitForFinished();
 
         qDebug() << "Finished";
     }
@@ -281,8 +279,8 @@ try {
         throw ConvertFailedException(tr("Unsupported PDF paper size"));
     }
 
-    QProcess* CalligraConverter = new QProcess(this);
-    CalligraConverter->setProgram("calligraconverter");
+    QProcess CalligraConverter(this);
+    CalligraConverter.setProgram("calligraconverter");
     QStringList CalligraConverterArgs = {"--batch", "--mimetype", Mimer::PDF, "--print-orientation", "Portrait", "--print-papersize", ShortPaperSize};
 
     CalligraConverterArgs << filename;
@@ -292,15 +290,13 @@ try {
     CalligraConverterArgs << tmpPdfFile.fileName();
 
     qDebug() << "CalligraConverteArgs is" << CalligraConverterArgs;
-    CalligraConverter->setArguments(CalligraConverterArgs);
+    CalligraConverter.setArguments(CalligraConverterArgs);
 
-    connect(CalligraConverter, SIGNAL(finished(int, QProcess::ExitStatus)), CalligraConverter, SLOT(deleteLater()));
-
-    CalligraConverter->start();
+    CalligraConverter.start();
 
     qDebug() << "CalligraConverter Starting";
 
-    if(!CalligraConverter->waitForStarted())
+    if(!CalligraConverter.waitForStarted())
     {
         qDebug() << "CalligraConverter died";
         throw ConvertFailedException();
@@ -308,7 +304,7 @@ try {
 
     qDebug() << "CalligraConverter Started";
 
-    if(!CalligraConverter->waitForFinished(-1))
+    if(!CalligraConverter.waitForFinished(-1))
     {
         qDebug() << "CalligraConverter failed";
         throw ConvertFailedException();
@@ -413,8 +409,8 @@ QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
 void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, quint32 PageRangeHigh,
                                     QString pdfFileName, QTemporaryFile* tempfile)
 {
-    QProcess* pdftocairo = new QProcess(this);
-    pdftocairo->setProgram("pdftocairo");
+    QProcess pdftocairo(this);
+    pdftocairo.setProgram("pdftocairo");
     QStringList PdfToCairoArgs = {"-pdf"};
 
     QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
@@ -424,16 +420,15 @@ void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, qui
     PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
 
     qDebug() << "pdftocairo args is " << PdfToCairoArgs;
-    pdftocairo->setArguments(PdfToCairoArgs);
+    pdftocairo.setArguments(PdfToCairoArgs);
 
-    pdftocairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-    connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
+    pdftocairo.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
-    pdftocairo->start();
+    pdftocairo.start();
 
     qDebug() << "Starting";
 
-    if(!pdftocairo->waitForStarted())
+    if(!pdftocairo.waitForStarted())
     {
         qDebug() << "pdftocairo died";
         throw ConvertFailedException();
@@ -441,7 +436,7 @@ void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, qui
 
     qDebug() << "Started";
 
-    if(!pdftocairo->waitForFinished(-1))
+    if(!pdftocairo.waitForFinished(-1))
     {
         qDebug() << "pdftocairo failed";
         throw ConvertFailedException();
@@ -451,8 +446,8 @@ void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, qui
 void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
                             QString pdfFileName, QTemporaryFile* tempfile)
 {
-    QProcess* pdftops = new QProcess(this);
-    pdftops->setProgram("pdftops");
+    QProcess pdftops(this);
+    pdftops.setProgram("pdftops");
     QStringList PdfToPsArgs;
     if(TwoSided)
     {
@@ -466,16 +461,15 @@ void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeL
     PdfToPsArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
 
     qDebug() << "pdftops args is " << PdfToPsArgs;
-    pdftops->setArguments(PdfToPsArgs);
+    pdftops.setArguments(PdfToPsArgs);
 
-    pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-    connect(pdftops, SIGNAL(finished(int, QProcess::ExitStatus)), pdftops, SLOT(deleteLater()));
+    pdftops.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
-    pdftops->start();
+    pdftops.start();
 
     qDebug() << "Starting";
 
-    if(!pdftops->waitForStarted())
+    if(!pdftops.waitForStarted())
     {
         qDebug() << "pdftops died";
         throw ConvertFailedException();
@@ -483,7 +477,7 @@ void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeL
 
     qDebug() << "Started";
 
-    if(!pdftops->waitForFinished(-1))
+    if(!pdftops.waitForFinished(-1))
     {
         qDebug() << "pdftops failed";
         throw ConvertFailedException();
@@ -510,12 +504,12 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     pages = PageRangeHigh-PageRangeLow+1;
     qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
 
-    QProcess* pdftocairo = new QProcess(this);
-    pdftocairo->setProgram("pdftocairo");
+    QProcess pdftocairo(this);
+    pdftocairo.setProgram("pdftocairo");
     QStringList PdfToCairoArgs;
 
-    QProcess* pdftoppm = new QProcess(this);
-    pdftoppm->setProgram("pdftoppm");
+    QProcess pdftoppm(this);
+    pdftoppm.setProgram("pdftoppm");
     QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
 
     if(resize)
@@ -526,16 +520,14 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
         PageRangeLow = PageRangeHigh = 0;
         PdfToCairoArgs << QStringList {"-pdf", "-paper", ShortPaperSize, pdfFileName, "-"};
 
-        pdftocairo->setArguments(PdfToCairoArgs);
+        pdftocairo.setArguments(PdfToCairoArgs);
 
-        connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
-
-        pdftocairo->setStandardOutputProcess(pdftoppm);
+        pdftocairo.setStandardOutputProcess(&pdftoppm);
     }
     else
     {
         Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        pdftoppm->setStandardInputFile(pdfFileName);
+        pdftoppm.setStandardInputFile(pdfFileName);
 
     }
 
@@ -544,13 +536,13 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
         Pdf2PpmArgs.append("-gray");
     }
     qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
-    pdftoppm->setArguments(Pdf2PpmArgs);
+    pdftoppm.setArguments(Pdf2PpmArgs);
 
 
-    QProcess* ppm2pwg = new QProcess(this);
+    QProcess ppm2pwg(this);
     // Yo dawg, I heard you like programs...
-    ppm2pwg->setProgram("harbour-seaprint");
-    ppm2pwg->setArguments({"ppm2pwg"});
+    ppm2pwg.setProgram("harbour-seaprint");
+    ppm2pwg.setArguments({"ppm2pwg"});
 
     bool urf = targetFormat == Mimer::URF;
 
@@ -558,36 +550,29 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
     qDebug() << "ppm2pwg env is " << env;
 
-    ppm2pwg->setEnvironment(env);
+    ppm2pwg.setEnvironment(env);
 
-    pdftoppm->setStandardOutputProcess(ppm2pwg);
-    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-    connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
-    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+    pdftoppm.setStandardOutputProcess(&ppm2pwg);
+    ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
 
     qDebug() << "All connected";
 
     if(resize)
     {
-        pdftocairo->start();
-    }
-    else
-    {
-        delete pdftocairo;
+        pdftocairo.start();
     }
 
-    pdftoppm->start();
-    ppm2pwg->start();
+    pdftoppm.start();
+    ppm2pwg.start();
 
     qDebug() << "Starting";
 
-    if(!pdftoppm->waitForStarted())
+    if(!pdftoppm.waitForStarted())
     {
         qDebug() << "pdftoppm died";
         throw ConvertFailedException();
     }
-    if(!ppm2pwg->waitForStarted())
+    if(!ppm2pwg.waitForStarted())
     {
         qDebug() << "ppm2pwg died";
         throw ConvertFailedException();
@@ -598,14 +583,14 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
 
     for(;;)
     {
-        if(ppm2pwg->waitForFinished(250))
+        if(ppm2pwg.waitForFinished(250))
         {
             ppm2pwgSuccess = true;
             break;
         }
         else
         {
-            QList<QByteArray> ppm2pwgOutput = ppm2pwg->readAllStandardError().split('\n');
+            QList<QByteArray> ppm2pwgOutput = ppm2pwg.readAllStandardError().split('\n');
             for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
             {
                 if(it->startsWith("Page"))
