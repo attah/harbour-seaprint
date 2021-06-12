@@ -171,6 +171,10 @@
         <source>Failed to get info about PDF file</source>
         <translation>PDF Info nicht abrufbar</translation>
     </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Öffnen der Datei fehlgeschlagen</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

@@ -30,6 +30,8 @@ public:
     Q_PROPERTY(const QString RTF MEMBER RTF CONSTANT);
     Q_PROPERTY(const QString ODT MEMBER ODT CONSTANT);
 
+    Q_PROPERTY(const QString Plaintext MEMBER Plaintext CONSTANT);
+
     Q_PROPERTY(const QStringList OfficeFormats MEMBER OfficeFormats CONSTANT);
 
     static const QString OctetStream;
@@ -49,6 +51,8 @@ public:
     static const QString RTF;
     static const QString RTF_APP;
     static const QString ODT;
+
+    static const QString Plaintext;
 
     static const QStringList OfficeFormats;
 

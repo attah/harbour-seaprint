@@ -171,6 +171,10 @@
         <source>Failed to get info about PDF file</source>
         <translation>获取PDF文件信息错误</translation>
     </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>打开文件失败</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

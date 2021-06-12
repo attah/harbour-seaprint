@@ -14,12 +14,22 @@ GalleryFilterUnion {
 
     GalleryEndsWithFilter {
         property: "fileName"
+        value: ".txt"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
         value: ".PDF"
     }
 
     GalleryEndsWithFilter {
         property: "fileName"
         value: ".PS"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".TXT"
     }
 
 }

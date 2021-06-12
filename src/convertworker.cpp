@@ -6,6 +6,8 @@
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>
+#include <QTextDocument>
+#include <QPdfWriter>
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
@@ -379,6 +381,171 @@ catch(const ConvertFailedException& e)
 }
 }
 
+void ConvertWorker::convertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+                                     QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
+{
+try {
+
+    if(!PaperSizes.contains(PaperSize))
+    {
+        qDebug() << "Unsupported paper size" << PaperSize;
+        throw ConvertFailedException(tr("Unsupported paper size"));
+    }
+    QPair<float,float> wh = PaperSizes[PaperSize];
+
+    QFile inFile(filename);
+    if(!inFile.open(QIODevice::ReadOnly))
+    {
+        throw ConvertFailedException(tr("Failed to open file"));
+    }
+
+    quint32 resolution = std::min(HwResX, HwResY);
+
+    QTemporaryFile tmpPdfFile;
+    tmpPdfFile.open();
+
+    QPdfWriter pdfWriter(tmpPdfFile.fileName());
+    QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
+    pdfWriter.setPageSize(pageSize);
+    pdfWriter.setResolution(resolution);
+
+    qreal docHeight = pageSize.sizePixels(resolution).height();
+
+    QTextDocument doc;
+
+    QFont font = QFont("Courier");
+    font.setPointSizeF(1);
+
+    qreal charHeight = 0;
+
+    // Find the optimal font size
+    while(true) {
+        QFont tmpFont = font;
+        tmpFont.setPointSizeF(font.pointSizeF()+0.5);
+        QFontMetricsF qfm(tmpFont, &pdfWriter);
+
+        charHeight = qfm.lineSpacing();
+
+        if(charHeight*66 > docHeight)
+        {
+            break;
+        }
+        font=tmpFont;
+    }
+
+    QFontMetricsF qfm(font, &pdfWriter);
+
+    charHeight = qfm.height();
+
+    int textHeight = 60*charHeight;
+    qreal margin = ((docHeight-textHeight)/2);
+
+    doc.setDefaultFont(font);
+    (void)doc.documentLayout(); // wat
+
+    // Needs to be before painter
+    pdfWriter.setMargins({0, 0, 0, 0});
+
+    QPainter painter(&pdfWriter);
+
+    doc.documentLayout()->setPaintDevice(painter.device());
+    doc.setDocumentMargin(margin);
+
+    QRectF body = QRectF(0, 0, pdfWriter.width(), pdfWriter.height());
+    doc.setPageSize(body.size());
+
+    QString allText = inFile.readAll();
+    if(allText.startsWith("\f"))
+    {
+        allText.remove(0, 1);
+    }
+
+    if(allText.endsWith("\f"))
+    {
+        allText.chop(1);
+    }
+    else if(allText.endsWith("\f\n"))
+    {
+        allText.chop(2);
+    }
+
+    QStringList pages = allText.split('\f');
+
+    bool first = true;
+    int pageCount = 0;
+
+    foreach(QString page, pages)
+    {
+        if(!first)
+        {
+            pdfWriter.newPage();
+        }
+        first = false;
+
+        if(page.endsWith("\n"))
+        {
+            page.chop(1);
+        }
+        doc.setPlainText(page);
+
+        int p = 0; // Page number in this document, starting from 0
+
+        while(true)
+        {
+            painter.translate(body.left(), body.top() - p*body.height());
+            QRectF view(0, p*body.height(), body.width(), body.height());
+            painter.setClipRect(view);
+
+            QAbstractTextDocumentLayout::PaintContext context;
+            context.clip = view;
+            context.palette.setColor(QPalette::Text, Qt::black);
+            doc.documentLayout()->draw(&painter, context);
+
+            p++;
+            pageCount++;
+
+            if(p >= doc.pageCount())
+                break;
+
+            pdfWriter.newPage();
+        }
+    }
+
+    painter.end();
+
+
+    if(targetFormat == Mimer::PDF)
+    {
+        QFile tempfileAsFile(tempfile->fileName());
+        tempfileAsFile.open(QIODevice::Append);
+        tempfileAsFile.write(tmpPdfFile.readAll());
+        tempfileAsFile.close();
+    }
+    else if(targetFormat == Mimer::Postscript)
+    {
+        pdftoPs(PaperSize, TwoSided, 0, 0, tmpPdfFile.fileName(), tempfile);
+    }
+    else
+    {
+        pdfToRaster(targetFormat, Colors, Quality, PaperSize,
+                    HwResX, HwResY, TwoSided, Tumble,
+                    0, 0, pageCount,
+                    tmpPdfFile.fileName(), tempfile, false);
+    }
+
+    qDebug() << "Finished";
+
+    emit done(request, tempfile);
+
+}
+catch(const ConvertFailedException& e)
+{
+        tempfile->deleteLater();
+        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
+}
+}
+
 QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
 {
     QString ShortPaperSize;
@@ -456,7 +623,10 @@ void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeL
 
     QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
 
-    PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+    if(PageRangeLow != 0 && PageRangeHigh != 0)
+    {
+        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+    }
 
     PdfToPsArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
 

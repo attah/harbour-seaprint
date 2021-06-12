@@ -171,6 +171,10 @@
         <source>Failed to get info about PDF file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

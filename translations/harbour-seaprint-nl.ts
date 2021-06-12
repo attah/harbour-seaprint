@@ -171,6 +171,10 @@
         <source>Failed to get info about PDF file</source>
         <translation>Informatie over het PDF-bestand ophalen mislukt</translation>
     </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Bestand openen mislukt</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

@@ -34,6 +34,7 @@ IppPrinter::IppPrinter()
     connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
     connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &ConvertWorker::convertOfficeDocument);
+    connect(this, &IppPrinter::doConvertPlaintext, _worker, &ConvertWorker::convertPlaintext);
     connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
     connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
@@ -310,7 +311,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 {
     if(documentFormat == Mimer::OctetStream)
     {
-        if(mimeType == Mimer::PDF)
+        if(mimeType == Mimer::PDF || mimeType == Mimer::Plaintext)
         {
             return firstMatch(supportedMimeTypes, {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF });
         }
@@ -533,6 +534,11 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
         {
             emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
                               PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
+        }
+        else if(mimeType == Mimer::Plaintext)
+        {
+            emit doConvertPlaintext(request, filename, tempfile, documentFormat, Colors, Quality,
+                                    PaperSize, HwResX, HwResY, TwoSided, Tumble);
         }
         else if (Mimer::isImage(mimeType))
         {

@@ -15,12 +15,15 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
     var postscript = false;
     var office = false;
     var images = false;
+    var plaintext = false;
 
     if(has(formats, Mimer.PDF) ||
        (ConvertChecker.pdf && ( has(formats, Mimer.Postscript) || raster )))
     {
         pdf = true;
         mimetypes.push(Mimer.PDF);
+        plaintext = true;
+        mimetypes.push(Mimer.Plaintext);
     }
     if(has(formats, Mimer.Postscript))
     {
@@ -44,7 +47,7 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
         mimetypes.push(Mimer.GIF);
     }
 
-    return {pdf: pdf, postscript: postscript, office: office, images: images, mimetypes: mimetypes};
+    return {pdf: pdf, postscript: postscript, plaintext: plaintext, office: office, images: images, mimetypes: mimetypes};
 }
 
 function has(arrayish, what)
@@ -315,6 +318,18 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
                 return choices.filter(canTransferPdfAs)
             }
 
+        }
+        else if(mimeType == Mimer.Plaintext)
+        {
+            // We convert plaintext to PDF internally
+            if(ConvertChecker.pdf)
+            {
+                return choices.filter(canConvertPdfTo)
+            }
+            else
+            {
+                return choices.filter(canTransferPdfAs)
+            }
         }
         else if(mimeType == Mimer.Postscript)
         {

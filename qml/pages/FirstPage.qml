@@ -276,7 +276,8 @@ Page {
                         spacing: Theme.paddingMedium
                         Label {
                             id: format_unsupported_label
-                            visible: !supported_formats.pdf && !supported_formats.postscript && !supported_formats.office && !supported_formats.images
+                            visible: !supported_formats.pdf && !supported_formats.postscript && !supported_formats.plaintext
+                                     && !supported_formats.office && !supported_formats.images
                             color: "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: qsTr("No compatible formats supported")
@@ -298,6 +299,14 @@ Page {
                             highlighted: !(selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-other"
 
+                        }
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.plaintext
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-document"
                         }
                         HighlightImage {
                             height: Theme.itemSizeExtraSmall/2
@@ -441,7 +450,7 @@ Page {
 
                 onSelectedContentPropertiesChanged: {
                     var mimeType = Mimer.get_type(selectedContentProperties.filePath)
-                    if(mimeType == "application/pdf" || mimeType == "application/postscript" || Mimer.isOffice(mimeType))
+                    if(mimeType == Mimer.PDF || mimeType == Mimer.Postscript || mimeType == Mimer.Plaintext || Mimer.isOffice(mimeType))
                     {
                         page.selectedFile = selectedContentProperties.filePath
                         page.selectedFileType = mimeType

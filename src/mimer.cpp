@@ -18,6 +18,8 @@ const QString Mimer::RTF = "text/rtf";
 const QString Mimer::RTF_APP = "application/rtf";
 const QString Mimer::ODT = "application/vnd.oasis.opendocument.text";
 
+const QString Mimer::Plaintext = "text/plain";
+
 const QStringList Mimer::OfficeFormats = {DOC, DOCX, RTF, RTF_APP, ODT};
 
 Mimer::Mimer()
