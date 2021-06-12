@@ -71,4 +71,34 @@ GalleryFilterUnion {
         property: "fileName"
         value: ".RTF"
     }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".ppt"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".pptx"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".odp"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".PPT"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".PPTX"
+    }
+
+    GalleryEndsWithFilter {
+        property: "fileName"
+        value: ".ODP"
+    }
 }

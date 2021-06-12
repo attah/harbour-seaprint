@@ -61,6 +61,7 @@ Page {
     signal noFileSelected()
 
     Component.onCompleted: {
+        console.log("Selected file is", selectedFile)
         IppDiscovery.discover();
         if(selectedFile != "")
         {
@@ -314,6 +315,14 @@ Page {
                             highlightColor: "red"
                             highlighted: !(selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-formatted"
+                        }
+                        HighlightImage {
+                            height: Theme.itemSizeExtraSmall/2
+                            width: Theme.itemSizeExtraSmall/2
+                            visible: supported_formats.office
+                            highlightColor: "red"
+                            highlighted: !(selectedFile == "" || canPrint)
+                            source: "image://theme/icon-m-file-presentation"
                         }
                         HighlightImage {
                             height: Theme.itemSizeExtraSmall/2

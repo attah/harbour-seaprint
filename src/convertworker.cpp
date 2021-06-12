@@ -391,8 +391,6 @@ try {
     convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble,
                PageRangeLow, PageRangeHigh, BackHFlip, BackVFlip);
 
-    qDebug() << "Finished";
-
     qDebug() << "posted";
 
 }

@@ -29,6 +29,10 @@ public:
     Q_PROPERTY(const QString DOCX MEMBER DOCX CONSTANT);
     Q_PROPERTY(const QString RTF MEMBER RTF CONSTANT);
     Q_PROPERTY(const QString ODT MEMBER ODT CONSTANT);
+    Q_PROPERTY(const QString PPT MEMBER PPT CONSTANT);
+    Q_PROPERTY(const QString PPTX MEMBER PPTX CONSTANT);
+    Q_PROPERTY(const QString ODP MEMBER ODP CONSTANT);
+
 
     Q_PROPERTY(const QString Plaintext MEMBER Plaintext CONSTANT);
 
@@ -51,6 +55,9 @@ public:
     static const QString RTF;
     static const QString RTF_APP;
     static const QString ODT;
+    static const QString PPT;
+    static const QString PPTX;
+    static const QString ODP;
 
     static const QString Plaintext;
 
