@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QTextDocument>
 #include <QPdfWriter>
+#include <QAbstractTextDocumentLayout>
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
