@@ -42,6 +42,12 @@ signals:
     void failed(QString message);
 
 private:
+
+    QString getPopplerShortPaperSize(QString PaperSize);
+
+    void pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
+                 QString pdfFileName, QTemporaryFile* tempfile);
+
     void pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                      quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
                      quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,

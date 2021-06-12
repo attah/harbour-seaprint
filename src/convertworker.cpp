@@ -104,73 +104,19 @@ try {
         throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
-    QString ShortPaperSize;
-    if(PaperSize == "iso_a4_210x297mm")
-    {
-        ShortPaperSize = "A4";
-    }
-    else if (PaperSize == "iso_a3_297x420mm")
-    {
-        ShortPaperSize = "A3";
-    }
-    else if (PaperSize == "na_letter_8.5x11in")
-    {
-        ShortPaperSize = "letter";
-    }
-    else if (PaperSize == "na_legal_8.5x14in")
-    {
-        ShortPaperSize = "legal";
-    }
-    else
-    {
-        qDebug() << "Unsupported PDF paper size" << PaperSize;
-        throw ConvertFailedException(tr("Unsupported PDF paper size"));
-    }
+
 
     if(ps)
     {
-        QProcess* pdftops = new QProcess(this);
-        pdftops->setProgram("pdftops");
-        QStringList PdfToPsArgs;
-        if(TwoSided)
-        {
-            PdfToPsArgs.append("-duplex");
-        }
-
-        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-
-        PdfToPsArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
-
-        qDebug() << "pdftops args is " << PdfToPsArgs;
-        pdftops->setArguments(PdfToPsArgs);
-
-        pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-        connect(pdftops, SIGNAL(finished(int, QProcess::ExitStatus)), pdftops, SLOT(deleteLater()));
-
-        pdftops->start();
-
-        qDebug() << "Starting";
-
-        if(!pdftops->waitForStarted())
-        {
-            qDebug() << "pdftops died";
-            throw ConvertFailedException();
-        }
-
-        qDebug() << "Started";
-
-        if(!pdftops->waitForFinished(-1))
-        {
-            qDebug() << "pdftops failed";
-            throw ConvertFailedException();
-        }
+        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, filename, tempfile);
     }
     else if(pdf)
-    {
+    {   // adjusting page range
         QProcess* pdftocairo = new QProcess(this);
         pdftocairo->setProgram("pdftocairo");
         QStringList PdfToCairoArgs = {"-pdf"};
 
+        QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
 
         PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
 
@@ -476,42 +422,7 @@ try {
     }
     else if(targetFormat == Mimer::Postscript)
     {
-        QProcess* PdfToPs = new QProcess(this);
-        PdfToPs->setProgram("pdftops");
-        QStringList PdfToPsArgs;
-        if(TwoSided)
-        {
-            PdfToPsArgs.append("-duplex");
-        }
-
-        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        PdfToPsArgs << QStringList {tmpPdfFile.fileName(), "-"};
-
-
-        qDebug() << "pdftops args is " << PdfToPsArgs;
-        PdfToPs->setArguments(PdfToPsArgs);
-
-
-        PdfToPs->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-        connect(PdfToPs, SIGNAL(finished(int, QProcess::ExitStatus)), PdfToPs, SLOT(deleteLater()));
-
-        PdfToPs->start();
-
-        qDebug() << "PdfToPs Starting";
-
-        if(!PdfToPs->waitForStarted())
-        {
-            qDebug() << "PdfToPs died";
-            throw ConvertFailedException();
-        }
-
-        qDebug() << "PdfToPs Started";
-
-        if(!PdfToPs->waitForFinished(-1))
-        {
-            qDebug() << "PdfToPs failed";
-            throw ConvertFailedException();
-        }
+        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), tempfile);
     }
     else
     {
@@ -521,7 +432,6 @@ try {
                     PageRangeLow, PageRangeHigh, pages,
                     tmpPdfFile.fileName(), tempfile, false);
     }
-
 
     qDebug() << "Finished";
 
@@ -534,6 +444,75 @@ catch(const ConvertFailedException& e)
         tempfile->deleteLater();
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
+}
+
+QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
+{
+    QString ShortPaperSize;
+    if(PaperSize == "iso_a4_210x297mm")
+    {
+        ShortPaperSize = "A4";
+    }
+    else if (PaperSize == "iso_a3_297x420mm")
+    {
+        ShortPaperSize = "A3";
+    }
+    else if (PaperSize == "na_letter_8.5x11in")
+    {
+        ShortPaperSize = "letter";
+    }
+    else if (PaperSize == "na_legal_8.5x14in")
+    {
+        ShortPaperSize = "legal";
+    }
+    else
+    {
+        qDebug() << "Unsupported PDF paper size" << PaperSize;
+        throw ConvertFailedException(tr("Unsupported PDF paper size"));
+    }
+    return ShortPaperSize;
+}
+
+void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
+                            QString pdfFileName, QTemporaryFile* tempfile)
+{
+    QProcess* pdftops = new QProcess(this);
+    pdftops->setProgram("pdftops");
+    QStringList PdfToPsArgs;
+    if(TwoSided)
+    {
+        PdfToPsArgs.append("-duplex");
+    }
+
+    QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
+
+    PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
+    PdfToPsArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
+
+    qDebug() << "pdftops args is " << PdfToPsArgs;
+    pdftops->setArguments(PdfToPsArgs);
+
+    pdftops->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+    connect(pdftops, SIGNAL(finished(int, QProcess::ExitStatus)), pdftops, SLOT(deleteLater()));
+
+    pdftops->start();
+
+    qDebug() << "Starting";
+
+    if(!pdftops->waitForStarted())
+    {
+        qDebug() << "pdftops died";
+        throw ConvertFailedException();
+    }
+
+    qDebug() << "Started";
+
+    if(!pdftops->waitForFinished(-1))
+    {
+        qDebug() << "pdftops failed";
+        throw ConvertFailedException();
+    }
 }
 
 void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
@@ -566,28 +545,7 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
 
     if(resize)
     {
-        QString ShortPaperSize;
-        if(PaperSize == "iso_a4_210x297mm")
-        {
-            ShortPaperSize = "A4";
-        }
-        else if (PaperSize == "iso_a3_297x420mm")
-        {
-            ShortPaperSize = "A3";
-        }
-        else if (PaperSize == "na_letter_8.5x11in")
-        {
-            ShortPaperSize = "letter";
-        }
-        else if (PaperSize == "na_legal_8.5x14in")
-        {
-            ShortPaperSize = "legal";
-        }
-        else
-        {
-            qDebug() << "Unsupported PDF paper size" << PaperSize;
-            throw ConvertFailedException(tr("Unsupported PDF paper size"));
-        }
+        QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
 
         PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
         PageRangeLow = PageRangeHigh = 0;
@@ -601,7 +559,6 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     }
     else
     {
-
         Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
         pdftoppm->setStandardInputFile(pdfFileName);
 
@@ -640,6 +597,11 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     {
         pdftocairo->start();
     }
+    else
+    {
+        delete pdftocairo;
+    }
+
     pdftoppm->start();
     ppm2pwg->start();
 
