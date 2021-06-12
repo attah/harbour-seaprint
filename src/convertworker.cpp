@@ -111,41 +111,8 @@ try {
         pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, filename, tempfile);
     }
     else if(pdf)
-    {   // adjusting page range
-        QProcess* pdftocairo = new QProcess(this);
-        pdftocairo->setProgram("pdftocairo");
-        QStringList PdfToCairoArgs = {"-pdf"};
-
-        QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
-
-        PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-
-        PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, filename, "-"};
-
-        qDebug() << "pdftocairo args is " << PdfToCairoArgs;
-        pdftocairo->setArguments(PdfToCairoArgs);
-
-        pdftocairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-        connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
-
-        pdftocairo->start();
-
-        qDebug() << "Starting";
-
-        if(!pdftocairo->waitForStarted())
-        {
-            qDebug() << "pdftocairo died";
-            throw ConvertFailedException();
-        }
-
-        qDebug() << "Started";
-
-        if(!pdftocairo->waitForFinished(-1))
-        {
-            qDebug() << "pdftocairo failed";
-            throw ConvertFailedException();
-        }
-
+    {
+        adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, filename, tempfile);
     }
     else
     {
@@ -378,37 +345,7 @@ try {
         {
             qDebug() << "adjusting pages in PDF" << PageRangeLow << PageRangeHigh;
 
-            QProcess* PdftoCairo = new QProcess(this);
-            PdftoCairo->setProgram("pdftocairo");
-            QStringList PdfToCairoArgs = {"-pdf"};
-
-            PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-
-            PdfToCairoArgs << QStringList {tmpPdfFile.fileName(), "-"};
-
-            qDebug() << "pdftocairo args is " << PdfToCairoArgs;
-            PdftoCairo->setArguments(PdfToCairoArgs);
-
-            PdftoCairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-            connect(PdftoCairo, SIGNAL(finished(int, QProcess::ExitStatus)), PdftoCairo, SLOT(deleteLater()));
-
-            PdftoCairo->start();
-
-            qDebug() << "PdftoCairo Starting";
-
-            if(!PdftoCairo->waitForStarted())
-            {
-                qDebug() << "pdftocairo died";
-                throw ConvertFailedException();
-            }
-
-            qDebug() << "PdftoCairo Started";
-
-            if(!PdftoCairo->waitForFinished(-1))
-            {
-                qDebug() << "pdftocairo failed";
-                throw ConvertFailedException();
-            }
+            adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), tempfile);
 
         }
         else
@@ -471,6 +408,44 @@ QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
         throw ConvertFailedException(tr("Unsupported PDF paper size"));
     }
     return ShortPaperSize;
+}
+
+void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, quint32 PageRangeHigh,
+                                    QString pdfFileName, QTemporaryFile* tempfile)
+{
+    QProcess* pdftocairo = new QProcess(this);
+    pdftocairo->setProgram("pdftocairo");
+    QStringList PdfToCairoArgs = {"-pdf"};
+
+    QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
+
+    PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+
+    PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
+
+    qDebug() << "pdftocairo args is " << PdfToCairoArgs;
+    pdftocairo->setArguments(PdfToCairoArgs);
+
+    pdftocairo->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+    connect(pdftocairo, SIGNAL(finished(int, QProcess::ExitStatus)), pdftocairo, SLOT(deleteLater()));
+
+    pdftocairo->start();
+
+    qDebug() << "Starting";
+
+    if(!pdftocairo->waitForStarted())
+    {
+        qDebug() << "pdftocairo died";
+        throw ConvertFailedException();
+    }
+
+    qDebug() << "Started";
+
+    if(!pdftocairo->waitForFinished(-1))
+    {
+        qDebug() << "pdftocairo failed";
+        throw ConvertFailedException();
+    }
 }
 
 void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,

@@ -45,6 +45,9 @@ private:
 
     QString getPopplerShortPaperSize(QString PaperSize);
 
+    void adjustPageRange(QString PaperSize, quint32 PageRangeLow, quint32 PageRangeHigh,
+                         QString pdfFileName, QTemporaryFile* tempfile);
+
     void pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
                  QString pdfFileName, QTemporaryFile* tempfile);
 
