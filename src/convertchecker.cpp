@@ -7,34 +7,31 @@ ConvertChecker::ConvertChecker()
 {
     _pdf = false;
     _calligra = false;
-    QProcess* pdftoppm = new QProcess(this);
-    pdftoppm->setProgram("pdftoppm");
-    pdftoppm->setArguments({"-h"});
-    pdftoppm->start();
+    QProcess pdftoppm(this);
+    pdftoppm.setProgram("pdftoppm");
+    pdftoppm.setArguments({"-h"});
+    pdftoppm.start();
 
-    QProcess* calligraconverter = new QProcess(this);
-    calligraconverter->setProgram("calligraconverter");
-    calligraconverter->setArguments({"-h"});
-    calligraconverter->start();
+    QProcess calligraconverter(this);
+    calligraconverter.setProgram("calligraconverter");
+    calligraconverter.setArguments({"-h"});
+    calligraconverter.start();
 
-    if(pdftoppm->waitForFinished(2000))
+    if(pdftoppm.waitForFinished(2000))
     {
-      if(pdftoppm->exitStatus() == QProcess::NormalExit && pdftoppm->exitCode() == 0)
+      if(pdftoppm.exitStatus() == QProcess::NormalExit && pdftoppm.exitCode() == 0)
       {
           _pdf = true;
       }
     }
 
-    if(calligraconverter->waitForFinished(2000))
+    if(calligraconverter.waitForFinished(2000))
     {
-      if(calligraconverter->exitStatus() == QProcess::NormalExit && calligraconverter->exitCode() == 0)
+      if(calligraconverter.exitStatus() == QProcess::NormalExit && calligraconverter.exitCode() == 0)
       {
           _calligra = true;
       }
     }
-
-    pdftoppm->deleteLater();
-    calligraconverter->deleteLater();
 }
 
 ConvertChecker::~ConvertChecker() {
