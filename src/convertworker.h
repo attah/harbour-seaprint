@@ -40,6 +40,12 @@ signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
     void progress(qint64 done, qint64 pages);
     void failed(QString message);
+
+private:
+    void pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                     quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
+                     quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
+                     QTemporaryFile& tmpPdfFile, QTemporaryFile* tempfile);
 };
 
 #endif // CONVERTWORKER_H

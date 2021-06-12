@@ -603,85 +603,10 @@ try {
     else
     {
 
-        QProcess* pdftoppm = new QProcess(this);
-        pdftoppm->setProgram("pdftoppm");
-        QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
-        Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-
-        if(Colors == 1)
-        {
-            Pdf2PpmArgs.append("-gray");
-        }
-        qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
-        pdftoppm->setArguments(Pdf2PpmArgs);
-
-
-        QProcess* ppm2pwg = new QProcess(this);
-        // Yo dawg, I heard you like programs...
-        ppm2pwg->setProgram("harbour-seaprint");
-        ppm2pwg->setArguments({"ppm2pwg"});
-
-        bool urf = targetFormat == Mimer::URF;
-
-        QStringList env;
-        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
-        qDebug() << "ppm2pwg env is " << env;
-
-        ppm2pwg->setEnvironment(env);
-
-        pdftoppm->setStandardInputFile(tmpPdfFile.fileName());
-        pdftoppm->setStandardOutputProcess(ppm2pwg);
-        ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-        connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
-        connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
-
-        qDebug() << "All connected";
-
-        pdftoppm->start();
-        ppm2pwg->start();
-
-        qDebug() << "Starting";
-
-        if(!pdftoppm->waitForStarted())
-        {
-            qDebug() << "pdftoppm died";
-            throw ConvertFailedException();
-        }
-        if(!ppm2pwg->waitForStarted())
-        {
-            qDebug() << "ppm2pwg died";
-            throw ConvertFailedException();
-        }
-        qDebug() << "All started";
-
-        bool ppm2pwgSuccess = false;
-
-        for(;;)
-        {
-            if(ppm2pwg->waitForFinished(250))
-            {
-                ppm2pwgSuccess = true;
-                break;
-            }
-            else
-            {
-                QList<QByteArray> ppm2pwgOutput = ppm2pwg->readAllStandardError().split('\n');
-                for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
-                {
-                    if(it->startsWith("Page"))
-                    {
-                        QList<QByteArray> ppm2pwgTokens = it->split(' ');
-                        emit progress(ppm2pwgTokens.last().toInt()-1, pages);
-                    }
-                }
-            }
-        }
-        if(!ppm2pwgSuccess)
-        {
-            qDebug() << "ppm2pwg failed";
-            throw ConvertFailedException();
-        }
+        pdfToRaster(targetFormat, Colors, Quality, PaperSize,
+                    HwResX, HwResY, TwoSided, Tumble,
+                    PageRangeLow, PageRangeHigh, pages,
+                    tmpPdfFile, tempfile);
     }
 
 
@@ -696,4 +621,93 @@ catch(const ConvertFailedException& e)
         tempfile->deleteLater();
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
+}
+
+void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
+                                quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
+                                quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
+                                QTemporaryFile& tmpPdfFile, QTemporaryFile* tempfile)
+{
+    QProcess* pdftoppm = new QProcess(this);
+    pdftoppm->setProgram("pdftoppm");
+    QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
+    if (PageRangeLow != 0 && PageRangeHigh !=0)
+    {
+        Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
+    }
+
+    if(Colors == 1)
+    {
+        Pdf2PpmArgs.append("-gray");
+    }
+    qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
+    pdftoppm->setArguments(Pdf2PpmArgs);
+
+
+    QProcess* ppm2pwg = new QProcess(this);
+    // Yo dawg, I heard you like programs...
+    ppm2pwg->setProgram("harbour-seaprint");
+    ppm2pwg->setArguments({"ppm2pwg"});
+
+    bool urf = targetFormat == Mimer::URF;
+
+    QStringList env;
+    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
+    qDebug() << "ppm2pwg env is " << env;
+
+    ppm2pwg->setEnvironment(env);
+
+    pdftoppm->setStandardInputFile(tmpPdfFile.fileName());
+    pdftoppm->setStandardOutputProcess(ppm2pwg);
+    ppm2pwg->setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+    connect(pdftoppm, SIGNAL(finished(int, QProcess::ExitStatus)), pdftoppm, SLOT(deleteLater()));
+    connect(ppm2pwg, SIGNAL(finished(int, QProcess::ExitStatus)), ppm2pwg, SLOT(deleteLater()));
+
+    qDebug() << "All connected";
+
+    pdftoppm->start();
+    ppm2pwg->start();
+
+    qDebug() << "Starting";
+
+    if(!pdftoppm->waitForStarted())
+    {
+        qDebug() << "pdftoppm died";
+        throw ConvertFailedException();
+    }
+    if(!ppm2pwg->waitForStarted())
+    {
+        qDebug() << "ppm2pwg died";
+        throw ConvertFailedException();
+    }
+    qDebug() << "All started";
+
+    bool ppm2pwgSuccess = false;
+
+    for(;;)
+    {
+        if(ppm2pwg->waitForFinished(250))
+        {
+            ppm2pwgSuccess = true;
+            break;
+        }
+        else
+        {
+            QList<QByteArray> ppm2pwgOutput = ppm2pwg->readAllStandardError().split('\n');
+            for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
+            {
+                if(it->startsWith("Page"))
+                {
+                    QList<QByteArray> ppm2pwgTokens = it->split(' ');
+                    emit progress(ppm2pwgTokens.last().toInt()-1, pages);
+                }
+            }
+        }
+    }
+    if(!ppm2pwgSuccess)
+    {
+        qDebug() << "ppm2pwg failed";
+        throw ConvertFailedException();
+    }
 }
