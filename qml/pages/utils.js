@@ -38,7 +38,8 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
         mimetypes = mimetypes.concat(Mimer.OfficeFormats);
     }
 
-    if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG))
+    if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG) ||
+            has(formats, Mimer.PDF) || (ConvertChecker.pdf && has(formats, Mimer.Postscript)))
     {
         images = true;
         mimetypes.push(Mimer.JPEG);
@@ -293,7 +294,7 @@ function canConvertOfficeDocumentTo(type)
 
 function canConvertImageTo(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.JPEG, Mimer.PNG, Mimer.PWG, Mimer.URF];
+    var targets = [Mimer.OctetStream, Mimer.JPEG, Mimer.PNG, Mimer.PWG, Mimer.URF, Mimer.PDF, Mimer.Postscript];
     return has(targets, type)
 }
 

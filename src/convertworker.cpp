@@ -147,6 +147,7 @@ void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTem
 try {
 
     bool urf = false;
+    bool pdfOrPostscript = false;
     QString imageFormat = "";
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
 
@@ -157,6 +158,11 @@ try {
     else if(targetFormat == Mimer::PWG)
     {
         //ok
+    }
+    else if(targetFormat == Mimer::PDF || targetFormat == Mimer::Postscript)
+    {
+        HwResX = HwResY = std::min(HwResX, HwResY);
+        pdfOrPostscript = true;
     }
     else if(supportedImageFormats.contains(targetFormat))
     {
@@ -196,56 +202,90 @@ try {
         inImage = inImage.transformed(QMatrix().rotate(90.0));
     }
     inImage = inImage.scaled(Width, Height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QImage outImage = QImage(Width, Height, inImage.format());
-    outImage.fill(Qt::white);
-    QPainter painter(&outImage);
-    int xOffset = (outImage.width()-inImage.width())/2;
-    int yOffset = (outImage.height()-inImage.height())/2;
-    painter.drawImage(xOffset, yOffset, inImage);
-    painter.end();
 
-    if(imageFormat != "")
-    { // We are converting to a supported image format
+    if(pdfOrPostscript)
+    {
+        QTemporaryFile tmpPdfFile;
+        tmpPdfFile.open();
+        QPdfWriter pdfWriter(tmpPdfFile.fileName());
+        QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
+        pdfWriter.setPageSize(pageSize);
+        pdfWriter.setResolution(HwResX);
+        // Needs to be before painter
+        pdfWriter.setMargins({0, 0, 0, 0});
+        QPainter painter(&pdfWriter);
+        int xOffset = (pdfWriter.width()-inImage.width())/2;
+        int yOffset = (pdfWriter.height()-inImage.height())/2;
+        painter.drawImage(xOffset, yOffset, inImage);
+        painter.end();
 
-        QFile tempfileAsFile(tempfile->fileName());
-        tempfileAsFile.open(QIODevice::Append);
-        outImage.save(&tempfileAsFile, imageFormat.toStdString().c_str());
-        tempfileAsFile.close();
+        if(targetFormat == Mimer::PDF)
+        {
+            QFile tempfileAsFile(tempfile->fileName());
+            tempfileAsFile.open(QIODevice::Append);
+            tempfileAsFile.write(tmpPdfFile.readAll());
+            tempfileAsFile.close();
+        }
+        else if(targetFormat == Mimer::Postscript)
+        {
+            pdftoPs(PaperSize, false, 0, 0, tmpPdfFile.fileName(), tempfile);
+        }
+
     }
     else
-    { // We are converting to a raster format
-        QProcess ppm2pwg(this);
-        // Yo dawg, I heard you like programs...
-        ppm2pwg.setProgram("harbour-seaprint");
-        ppm2pwg.setArguments({"ppm2pwg"});
+    {
+        QImage outImage = QImage(Width, Height, inImage.format());
+        outImage.fill(Qt::white);
+        QPainter painter(&outImage);
+        int xOffset = (outImage.width()-inImage.width())/2;
+        int yOffset = (outImage.height()-inImage.height())/2;
+        painter.drawImage(xOffset, yOffset, inImage);
+        painter.end();
 
-        QStringList env;
-        ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0);
-        qDebug() << "ppm2pwg env is " << env;
+        if(imageFormat != "")
+        { // We are converting to a supported image format
 
-        ppm2pwg.setEnvironment(env);
-        ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-        qDebug() << "All connected";
-        ppm2pwg.start();
-
-        bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
-
-        outImage.save(&ppm2pwg, gray ? "pgm" : "ppm");
-
-        qDebug() << "Starting";
-
-        if(!ppm2pwg.waitForStarted())
-        {
-            qDebug() << "ppm2pwg died";
-            throw ConvertFailedException();
+            QFile tempfileAsFile(tempfile->fileName());
+            tempfileAsFile.open(QIODevice::Append);
+            outImage.save(&tempfileAsFile, imageFormat.toStdString().c_str());
+            tempfileAsFile.close();
         }
-        qDebug() << "All started";
+        else
+        { // We are converting to a raster format
+            QProcess ppm2pwg(this);
+            // Yo dawg, I heard you like programs...
+            ppm2pwg.setProgram("harbour-seaprint");
+            ppm2pwg.setArguments({"ppm2pwg"});
 
-        ppm2pwg.waitForFinished();
+            QStringList env;
+            ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0);
+            qDebug() << "ppm2pwg env is " << env;
 
-        qDebug() << "Finished";
+            ppm2pwg.setEnvironment(env);
+            ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+
+            qDebug() << "All connected";
+            ppm2pwg.start();
+
+            bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
+
+            outImage.save(&ppm2pwg, gray ? "pgm" : "ppm");
+
+            qDebug() << "Starting";
+
+            if(!ppm2pwg.waitForStarted())
+            {
+                qDebug() << "ppm2pwg died";
+                throw ConvertFailedException();
+            }
+            qDebug() << "All started";
+
+            ppm2pwg.waitForFinished();
+
+            qDebug() << "Finished";
+        }
     }
+
 
     emit done(request, tempfile);
     qDebug() << "posted";
@@ -410,6 +450,8 @@ try {
     QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
+    // Needs to be before painter
+    pdfWriter.setMargins({0, 0, 0, 0});
 
     qreal docHeight = pageSize.sizePixels(resolution).height();
 
@@ -445,8 +487,6 @@ try {
     doc.setDefaultFont(font);
     (void)doc.documentLayout(); // wat
 
-    // Needs to be before painter
-    pdfWriter.setMargins({0, 0, 0, 0});
 
     QPainter painter(&pdfWriter);
 
