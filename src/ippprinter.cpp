@@ -325,7 +325,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
         }
         else if(Mimer::isImage(mimeType))
         {
-            QStringList ImageFormatPrioList {Mimer::PNG, Mimer::GIF, Mimer::PWG, Mimer::URF,  Mimer::JPEG};
+            QStringList ImageFormatPrioList {Mimer::PNG, Mimer::PWG, Mimer::URF, Mimer::JPEG};
             if(mimeType == Mimer::JPEG)
             {
                 // Prioritize transferring JPEG as JPEG, as it will not be transcoded
