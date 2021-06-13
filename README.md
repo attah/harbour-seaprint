@@ -13,7 +13,7 @@ A minority of printers support only PCL and/or their own proprietary formats, th
 
 In order to work with more printers, SeaPrint can use `poppler-utils` (pdftoppm, pdftops, pdftocairo) to convert PDFs.
 
-For PDFs, your printer needs to support one of the following formats:
+For PDFs or plaintext, your printer needs to support one of the following formats:
  * PDF
  * Postscript (needs poppler-utils)
  * PWG-raster (needs poppler-utils)
@@ -23,7 +23,7 @@ For Postscript, your printer needs to support Postscript natively.
 
 For printing "Office" files, like .doc(x) and odt, you need to install
  `calligraconverter` (from the `calligra` package in Sailfish OS 4.2 onwards).
- Then the printer support follows that of PDF.
+ Then the printer support follows that of PDF (but poppler-utils is mandatory).
 
 For images, your printer needs to support one of the following formats:
  * PNG
