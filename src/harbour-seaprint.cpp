@@ -7,6 +7,7 @@
 #include <src/mimer.h>
 #include <src/convertchecker.h>
 #include <src/svgprovider.h>
+#include <src/settings.h>
 
 #define PPM2PWG_MAIN ppm2pwg_main
 #include <ppm2pwg/ppm2pwg.cpp>
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<IppDiscovery>);
     qmlRegisterSingletonType<Mimer>("seaprint.mimer", 1, 0, "Mimer", singletontype_provider<Mimer>);
     qmlRegisterSingletonType<ConvertChecker>("seaprint.convertchecker", 1, 0, "ConvertChecker", singletontype_provider<ConvertChecker>);
+    qmlRegisterSingletonType<ConvertChecker>("seaprint.settings", 1, 0, "SeaPrintSettings", singletontype_provider<Settings>);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
     qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
 

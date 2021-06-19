@@ -27,6 +27,7 @@ system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
 QT += svg
+PKGCONFIG += mlite5
 
 # Write version file
 VERSION_H = \
@@ -45,6 +46,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/ppm2pwg.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
+    src/settings.cpp \
     src/svgprovider.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
@@ -93,6 +95,7 @@ HEADERS += \
     ppm2pwg/bytestream/codable.h \
     src/overrider.h \
     src/papersizes.h \
+    src/settings.h \
     src/svgprovider.h
 
 INCLUDEPATH += ppm2pwg \

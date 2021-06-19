@@ -3,6 +3,7 @@
 #include "mimer.h"
 #include "papersizes.h"
 #include "overrider.h"
+#include "settings.h"
 
 IppPrinter::IppPrinter()
 {
@@ -339,7 +340,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaCol)
+void IppPrinter::print(QJsonObject attrs, QString filename)
 {
     qDebug() << "printing" << filename << attrs;
 
@@ -372,6 +373,7 @@ void IppPrinter::print(QJsonObject attrs, QString filename, bool alwaysUseMediaC
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
     QString PaperSize = getAttrOrDefault(attrs, "media").toString();
+    bool alwaysUseMediaCol = Settings::instance()->alwaysUseMediaCol();
 
     if((attrs.contains("media-col") || alwaysUseMediaCol) && attrs.contains("media"))
     {

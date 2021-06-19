@@ -4,6 +4,7 @@ import QtQuick.LocalStorage 2.0
 import Nemo.Notifications 1.0
 import Nemo.Configuration 1.0
 import seaprint.mimer 1.0
+import seaprint.settings 1.0
 import "pages"
 import "components"
 
@@ -146,10 +147,14 @@ ApplicationWindow
     ConfigurationValue
     {
         id: alwaysUseMediaColSetting
-        key: "/apps/harbour-seaprint/settings/always-use-media-col"
-        defaultValue: false
+        key: SeaPrintSettings.alwaysUseMediaColPath
+        defaultValue: SeaPrintSettings.alwaysUseMediaColDefault
     }
 
+    Component.onCompleted:
+    {
+        console.log(SeaPrintSettings.ignoreSslErrorsPath, SeaPrintSettings.ignoreSslErrorsDefault)
+    }
 
 }
 
