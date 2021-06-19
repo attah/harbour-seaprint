@@ -3,6 +3,7 @@
 #include "papersizes.h"
 #include "convertchecker.h"
 #include "mimer.h"
+#include "seaprint_version.h"
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>
@@ -447,6 +448,7 @@ try {
     tmpPdfFile.open();
 
     QPdfWriter pdfWriter(tmpPdfFile.fileName());
+    pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
     QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
