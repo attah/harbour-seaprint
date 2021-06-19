@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include "ippmsg.h"
 #include "convertworker.h"
+#include <mlite5/MGConfItem>
 
 class IppPrinter : public QObject
 {
@@ -16,7 +17,6 @@ class IppPrinter : public QObject
     Q_PROPERTY(QStringList additionalDocumentFormats MEMBER _additionalDocumentFormats NOTIFY additionalDocumentFormatsChanged)
     Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
     Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
-
 
 public:
     IppPrinter();
@@ -73,7 +73,7 @@ public slots:
     void getJobsRequestFinished(QNetworkReply* reply);
     void cancelJobFinished(QNetworkReply* reply);
 
-    static void ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
+    static void onSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
     void convertDone(QNetworkRequest request, QTemporaryFile* data);
     void convertFailed(QString message);
@@ -108,7 +108,6 @@ private:
 
     QThread _workerThread;
     ConvertWorker* _worker;
-
 };
 
 #endif // IPPPRINTER_H

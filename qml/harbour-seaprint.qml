@@ -5,6 +5,7 @@ import Nemo.Notifications 1.0
 import Nemo.Configuration 1.0
 import seaprint.mimer 1.0
 import seaprint.settings 1.0
+
 import "pages"
 import "components"
 
@@ -151,9 +152,11 @@ ApplicationWindow
         defaultValue: SeaPrintSettings.alwaysUseMediaColDefault
     }
 
-    Component.onCompleted:
+    ConfigurationValue
     {
-        console.log(SeaPrintSettings.ignoreSslErrorsPath, SeaPrintSettings.ignoreSslErrorsDefault)
+        id: ignoreSslErrorsSetting
+        key: SeaPrintSettings.ignoreSslErrorsPath
+        defaultValue: SeaPrintSettings.ignoreSslErrorsDefault
     }
 
 }

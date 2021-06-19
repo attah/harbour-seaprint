@@ -26,7 +26,6 @@ Page {
             else {
                 IppDiscovery.favourites = []
             }
-
         }
 
         property bool initialSSIDchange: true

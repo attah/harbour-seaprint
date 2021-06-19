@@ -511,6 +511,14 @@
         <source>Settings</source>
         <translation>设置</translation>
     </message>
+    <message>
+        <source>Ignore SSL errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SupplyItem</name>

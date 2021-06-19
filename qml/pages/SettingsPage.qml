@@ -53,6 +53,15 @@ Page {
                 }
             }
 
+            TextSwitch {
+                text: qsTr("Ignore SSL errors")
+                description: qsTr("In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.")
+                checked: ignoreSslErrorsSetting.value
+                onCheckedChanged: {
+                    ignoreSslErrorsSetting.value = checked
+                }
+            }
+
         }
     }
 }

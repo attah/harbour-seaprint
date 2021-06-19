@@ -13,16 +13,16 @@ IppPrinter::IppPrinter()
     _job_cancel_nam = new QNetworkAccessManager(this);
 
     connect(_nam, &QNetworkAccessManager::finished, this, &IppPrinter::getPrinterAttributesFinished);
-    connect(_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
+    connect(_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
 
     connect(_print_nam, &QNetworkAccessManager::finished, this, &IppPrinter::printRequestFinished);
-    connect(_print_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
+    connect(_print_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
 
     connect(_jobs_nam, &QNetworkAccessManager::finished,this, &IppPrinter::getJobsRequestFinished);
-    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
+    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
 
     connect(_job_cancel_nam, &QNetworkAccessManager::finished,this, &IppPrinter::cancelJobFinished);
-    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::ignoreKnownSslErrors);
+    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
 
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
@@ -68,15 +68,18 @@ void IppPrinter::setUrl(QString url_s)
 
     qDebug() << url.scheme();
 
-    if(url.scheme() != "ipp" /* or ipps */ && url.scheme() != "file")
+    // If not already a good scheme, try to fixup, or give an empty url
+    if(url.scheme() != "ipp" && url.scheme() != "ipps" && url.scheme() != "file")
     {
-        //if https -> ipps, else:
         if(url.scheme() == "")
         {
             url = QUrl("ipp://"+url_s); // Why isn't setScheme working?
         }
         else if (url.scheme() == "http") {
             url.setScheme("ipp");
+        }
+        else if (url.scheme() == "https") {
+            url.setScheme("ipps");
         }
         else {
             url = QUrl();
@@ -103,6 +106,12 @@ void IppPrinter::refresh() {
 
 //    _additionalDocumentFormats = QStringList();
 //    emit additionalDocumentFormatsChanged();
+
+    // FFFFUUUU
+    _nam->clearAccessCache();
+    _jobs_nam->clearAccessCache();
+    _job_cancel_nam->clearAccessCache();
+    _print_nam->clearAccessCache();
 
     if(_url.scheme() == "file")
     {
@@ -163,7 +172,7 @@ void IppPrinter::UpdateAdditionalDocumentFormats()
 
 void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
 {
-    qDebug() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
+    qDebug() << reply->request().url() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
     _attrs = QJsonObject();
 
     if(reply->error()  == QNetworkReply::NoError)
@@ -254,25 +263,14 @@ void IppPrinter::cancelJobFinished(QNetworkReply *reply)
 }
 
 
-
-void IppPrinter::ignoreKnownSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+void IppPrinter::onSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
 {
-    QList<QSslError> IgnoredSslErrors = {QSslError::NoError,
-                                         QSslError::SelfSignedCertificate,
-                                         QSslError::HostNameMismatch,
-                                         QSslError::UnableToGetLocalIssuerCertificate,
-                                         QSslError::UnableToVerifyFirstCertificate
-                                         };
-
-    qDebug() << errors;
-    for (QList<QSslError>::const_iterator it = errors.constBegin(); it != errors.constEnd(); it++) {
-        if(!IgnoredSslErrors.contains(it->error())) {
-            qDebug() << "Bad error: " << int(it->error()) <<  it->error();
-            return;
-        }
+    bool ignore = Settings::instance()->ignoreSslErrors();
+    qDebug() << reply->request().url() <<  "SSL handshake failed" << errors << ignore;
+    if(ignore)
+    {
+        reply->ignoreSslErrors(errors);
     }
-    // For whatever reason, it doesn't work to pass IgnoredSslErrors here
-    reply->ignoreSslErrors(errors);
 }
 
 void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
@@ -600,10 +598,21 @@ bool IppPrinter::cancelJob(qint32 jobId) {
 }
 
 QUrl IppPrinter::httpUrl() {
+    qDebug() << _url;
     QUrl url = _url;
-    url.setScheme("http");
-    if(url.port() == -1) {
-        url.setPort(631);
+    if(url.scheme() == "ipps")
+    {
+        url.setScheme("https");
+        if(url.port() == -1) {
+            url.setPort(443);
+        }
+    }
+    else
+    {
+        url.setScheme("http");
+        if(url.port() == -1) {
+            url.setPort(631);
+        }
     }
     return url;
 }
@@ -614,6 +623,7 @@ QNetworkRequest IppPrinter::mkReq() {
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
     request.setRawHeader("Accept-Encoding", "identity");
+    request.setSslConfiguration(QSslConfiguration());
     return request;
 }
 
