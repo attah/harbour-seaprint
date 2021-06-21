@@ -186,12 +186,13 @@ void IppDiscovery::update()
 {
     QStringList found;
     QList<QPair<QString,QString>> ippsIpRps;
+    QString target, rp;
 
     foreach(QString it, _ipps)
     {
         quint16 port = _ports[it];
-        QString target = _targets[it];
-        QString rp = _rps[it];
+        target = _targets[it];
+        rp = _rps[it];
 
         for(QMultiMap<QString,QString>::Iterator ait = _AAs.begin(); ait != _AAs.end(); ait++)
         {
@@ -211,8 +212,8 @@ void IppDiscovery::update()
     foreach(QString it, _ipp)
     {
         quint16 port = _ports[it];
-        QString target = _targets[it];
-        QString rp = _rps[it];
+        target = _targets[it];
+        rp = _rps[it];
 
         for(QMultiMap<QString,QString>::Iterator ait = _AAs.begin(); ait != _AAs.end(); ait++)
         {
@@ -279,6 +280,8 @@ void IppDiscovery::readPendingDatagrams()
         QStringList new_ipps_ptrs;
         QStringList new_targets;
 
+        QString qaddr, aaddr, tmpname, target;
+
         socket->readDatagram((char*)(resp.raw()), size, &sender, &senderPort);
         sender = QHostAddress(sender.toIPv4Address());
 
@@ -291,7 +294,7 @@ void IppDiscovery::readPendingDatagrams()
             for(quint16 i = 0; i < questions; i++)
             {
                 quint16 qtype, qflags;
-                QString qaddr = get_addr(resp).join('.');
+                qaddr = get_addr(resp).join('.');
                 resp >> qtype >> qflags;
             }
 
@@ -300,13 +303,13 @@ void IppDiscovery::readPendingDatagrams()
                 quint16 atype, aflags, len;
                 quint32 ttl;
 
-                QString aaddr = get_addr(resp).join('.');
+                aaddr = get_addr(resp).join('.');
                 resp >> atype >> aflags >> ttl >> len;
 
                 quint16 pos_before = resp.pos();
                 if (atype == PTR)
                 {
-                    QString tmpname = get_addr(resp).join(".");
+                    tmpname = get_addr(resp).join(".");
                     if(aaddr.endsWith("_ipp._tcp.local"))
                     {
                         new_ipp_ptrs.append(tmpname);
@@ -334,7 +337,7 @@ void IppDiscovery::readPendingDatagrams()
                 {
                     quint16 prio, w, port;
                     resp >> prio >> w >> port;
-                    QString target = get_addr(resp).join(".");
+                    target = get_addr(resp).join(".");
                     _ports[aaddr] = port;
                     _targets[aaddr] = target;
                     if(!new_targets.contains(target))
@@ -383,12 +386,12 @@ void IppDiscovery::readPendingDatagrams()
 
         QStringList unresolvedAddrs;
 
-        foreach(QString target, new_targets)
+        foreach(QString t, new_targets)
         {
             // If target does not resolve to an address, query about it
-            if(!_AAs.contains(target))
+            if(!_AAs.contains(t))
             {
-                unresolvedAddrs.append(target);
+                unresolvedAddrs.append(t);
             }
         }
 
