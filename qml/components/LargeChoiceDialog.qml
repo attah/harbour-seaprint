@@ -11,6 +11,8 @@ Dialog {
     property string choice
     property string new_choice: choice
     property var choices
+    property var preferred_choices
+    property string preferred_choice_suffix
     canAccept: false
 
     SilicaListView
@@ -30,6 +32,7 @@ Dialog {
                 anchors.verticalCenter: parent.verticalCenter
                 highlighted: choices[index]==new_choice
                 text: Utils.ippName(name, choices[index])
+                      + (Utils.has(preferred_choices, choices[index]) ? " "+preferred_choice_suffix : "")
             }
         }
     }

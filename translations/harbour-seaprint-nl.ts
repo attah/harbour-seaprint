@@ -470,6 +470,10 @@
         <source>Default settings for %1 on this printer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>(loaded)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

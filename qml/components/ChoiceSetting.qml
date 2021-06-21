@@ -7,6 +7,8 @@ import "../pages/utils.js" as Utils
 Setting {
     property var choices: parent.getChoices(name)
     property string mime_type
+    property var preferred_choices: []
+    property string preferred_choice_suffix: ""
 
     property var limited_choices: Utils.limitChoices(name, choices, mime_type, ConvertChecker)
 
@@ -18,7 +20,8 @@ Setting {
         if(limited_choices.length>num_large_choices)
         {
             var dialog = pageStack.push("LargeChoiceDialog.qml",
-                                        {name:name, choice: choice ? choice : default_choice, choices: limited_choices})
+                                        {name:name, choice: choice ? choice : default_choice, choices: limited_choices,
+                                         preferred_choices: preferred_choices, preferred_choice_suffix: preferred_choice_suffix})
             dialog.accepted.connect(function() {
                                         choice = dialog.choice
                                     })
@@ -34,6 +37,7 @@ Setting {
             model: limited_choices.length>num_large_choices ? 0 : limited_choices
             MenuItem {
                 text: Utils.ippName(name, limited_choices[index])
+                      + (Utils.has(preferred_choices, limited_choices[index]) ? " "+preferred_choice_suffix : "")
                 onClicked:
                 {
                     choice = limited_choices[index];

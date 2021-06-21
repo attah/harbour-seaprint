@@ -91,6 +91,8 @@ Page {
                 name: "media"
                 prettyName: qsTr("Print media")
                 mime_type: selectedFileType
+                preferred_choices: printer.attrs.hasOwnProperty("media-ready") ? printer.attrs["media-ready"].value : []
+                preferred_choice_suffix: qsTr("(loaded)")
             }
             IntegerSetting {
                 tag: IppMsg.Integer
