@@ -220,6 +220,10 @@
         <source>Supply status</source>
         <translation>支持状态</translation>
     </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>

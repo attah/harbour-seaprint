@@ -38,6 +38,17 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Location")
+                visible: Utils.existsAndNotEmpty("printer-location", printer)
+            }
+
+            Label {
+                text: printer.attrs["printer-location"].value
+                visible: Utils.existsAndNotEmpty("printer-location", printer)
+            }
+
+
+            SectionHeader {
                 text: qsTr("Printer status")
             }
 

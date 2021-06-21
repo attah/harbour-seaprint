@@ -403,6 +403,19 @@ function unknownForEmptyString(s)
     }
 }
 
+function existsAndNotEmpty(attrName, printer)
+{
+    if(printer.attrs.hasOwnProperty(attrName))
+    {
+        return printer.attrs[attrName].value != ""
+    }
+    else
+    {
+        return false
+    }
+}
+
+
 function basename(filewithpath)
 {
     return filewithpath.substring(filewithpath.lastIndexOf("/")+1);

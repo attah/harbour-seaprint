@@ -262,6 +262,7 @@ Page {
                         color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
+                              + (Utils.existsAndNotEmpty("printer-location", printer)  ? "  •  "+printer.attrs["printer-location"].value : "")
                     }
 
                     Label {
