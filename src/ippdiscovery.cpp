@@ -430,7 +430,7 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
-    connect(nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
+    connect(nam, &QNetworkAccessManager::sslErrors, &IppPrinter::ignoreSslErrors);
 
     QNetworkReply* reply = nam->get(request);
 

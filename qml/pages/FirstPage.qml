@@ -265,11 +265,22 @@ Page {
                               + (Utils.existsAndNotEmpty("printer-location", printer)  ? "  •  "+printer.attrs["printer-location"].value : "")
                     }
 
-                    Label {
-                        id: uri_label
-                        color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
-                        font.pixelSize: Theme.fontSizeTiny
-                        text: printer.url
+                    Row {
+                        Icon {
+                            visible: printer.isIpps && !printer.tainted
+                            color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
+                            height: Theme.fontSizeTiny
+                            width: Theme.fontSizeTiny
+                            anchors.verticalCenter: parent.verticalCenter
+                            source: "image://theme/icon-m-browser-permissions"
+                        }
+
+                        Label {
+                            id: uri_label
+                            color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
+                            font.pixelSize: Theme.fontSizeTiny
+                            text: printer.url
+                        }
                     }
 
                     Row {

@@ -13,16 +13,16 @@ IppPrinter::IppPrinter()
     _job_cancel_nam = new QNetworkAccessManager(this);
 
     connect(_nam, &QNetworkAccessManager::finished, this, &IppPrinter::getPrinterAttributesFinished);
-    connect(_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
+    connect(_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
 
     connect(_print_nam, &QNetworkAccessManager::finished, this, &IppPrinter::printRequestFinished);
-    connect(_print_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
+    connect(_print_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
 
     connect(_jobs_nam, &QNetworkAccessManager::finished,this, &IppPrinter::getJobsRequestFinished);
-    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
+    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
 
     connect(_job_cancel_nam, &QNetworkAccessManager::finished,this, &IppPrinter::cancelJobFinished);
-    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, &IppPrinter::onSslErrors);
+    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
 
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
@@ -41,6 +41,7 @@ IppPrinter::IppPrinter()
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
 
     _workerThread.start();
+    _tainted = false;
 }
 
 IppPrinter::~IppPrinter() {
@@ -262,8 +263,14 @@ void IppPrinter::cancelJobFinished(QNetworkReply *reply)
     getJobs();
 }
 
-
 void IppPrinter::onSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
+{
+    _tainted = true;
+    emit taintedChanged();
+    return ignoreSslErrors(reply, errors);
+}
+
+void IppPrinter::ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
 {
     bool ignore = Settings::instance()->ignoreSslErrors();
     qDebug() << reply->request().url() <<  "SSL handshake failed" << errors << ignore;
@@ -563,7 +570,6 @@ void IppPrinter::print(QJsonObject attrs, QString filename)
 bool IppPrinter::getJobs() {
 
     qDebug() << "getting jobs";
-
     QJsonObject o = opAttrs();
     o.insert("requested-attributes", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "all"}});
 
@@ -595,6 +601,11 @@ bool IppPrinter::cancelJob(qint32 jobId) {
     _job_cancel_nam->post(request, contents);
 
     return true;
+}
+
+bool IppPrinter::isIpps()
+{
+    return _url.scheme() == "ipps";
 }
 
 QUrl IppPrinter::httpUrl() {
