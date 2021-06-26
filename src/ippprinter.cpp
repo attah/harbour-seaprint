@@ -345,9 +345,32 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::print(QJsonObject attrs, QString filename)
+void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY)
 {
-    qDebug() << "printing" << filename << attrs;
+    if(documentFormat == Mimer::URF)
+    { // Ensure symmetric resolution for URF
+        if(HwResX < HwResY)
+        {
+            HwResY = HwResX;
+        }
+        else
+        {
+            HwResX = HwResY;
+        }
+
+        if(jobAttrs.contains("printer-resolution"))
+        {
+            QJsonObject tmpObj {{"units", getAttrOrDefault(jobAttrs, "printer-resolution").toObject()["units"]},
+                                {"x", (int)HwResX},
+                                {"y", (int)HwResY}};
+            jobAttrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
+        }
+    }
+}
+
+void IppPrinter::print(QJsonObject jobAttrs, QString filename)
+{
+    qDebug() << "printing" << filename << jobAttrs;
 
     _progress = "";
     emit progressChanged();
@@ -377,10 +400,10 @@ void IppPrinter::print(QJsonObject attrs, QString filename)
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
-    QString PaperSize = getAttrOrDefault(attrs, "media").toString();
+    QString PaperSize = getAttrOrDefault(jobAttrs, "media").toString();
     bool alwaysUseMediaCol = Settings::instance()->alwaysUseMediaCol();
 
-    if((attrs.contains("media-col") || alwaysUseMediaCol) && attrs.contains("media"))
+    if((jobAttrs.contains("media-col") || alwaysUseMediaCol) && jobAttrs.contains("media"))
     {
         qDebug() << "moving media to media-col" << PaperSize;
         if(!PaperSizes.contains(PaperSize))
@@ -399,22 +422,22 @@ void IppPrinter::print(QJsonObject attrs, QString filename)
              }};
 
         // TODO: make a setter function
-        QJsonObject MediaCol = attrs["media-col"].toObject();
+        QJsonObject MediaCol = jobAttrs["media-col"].toObject();
         QJsonObject MediaColValue = MediaCol["value"].toObject();
         MediaColValue["media-size"] = Dimensions;
         MediaCol["value"] = MediaColValue;
         MediaCol["tag"] = IppMsg::BeginCollection;
-        attrs["media-col"] = MediaCol;
+        jobAttrs["media-col"] = MediaCol;
 
-        attrs.remove("media");
+        jobAttrs.remove("media");
     }
 
-    QString documentFormat = getAttrOrDefault(attrs, "document-format").toString();
+    QString documentFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
     qDebug() << "target format:" << documentFormat;
 
     // document-format goes in the op-attrs and not the job-attrs
     o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", documentFormat}});
-    attrs.remove("document-format");
+    jobAttrs.remove("document-format");
 
     documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes);
     qDebug() << "adjusted target format:" << documentFormat;
@@ -425,67 +448,49 @@ void IppPrinter::print(QJsonObject attrs, QString filename)
         return;
     }
 
-    qDebug() << "Printing job" << o << attrs;
+    qDebug() << "Printing job" << o << jobAttrs;
 
     QNetworkRequest request = mkReq();
 
-    QJsonValue PrinterResolutionRef = getAttrOrDefault(attrs, "printer-resolution");
+    QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
 
-    if(documentFormat == Mimer::URF)
-    { // Ensure symmetric resolution for URF
-        if(HwResX < HwResY)
-        {
-            HwResY = HwResX;
-        }
-        else
-        {
-            HwResX = HwResY;
-        }
+    adjustRasterSettings(documentFormat, jobAttrs, HwResX, HwResY);
 
-        if(attrs.contains("printer-resolution"))
-        {
-            QJsonObject tmpObj {{"units", PrinterResolutionRef.toObject()["units"]},
-                                {"x", (int)HwResX},
-                                {"y", (int)HwResY}};
-            attrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
-        }
-    }
+    quint32 Quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
-    quint32 Quality = getAttrOrDefault(attrs, "print-quality").toInt();
-
-    QString PrintColorMode = getAttrOrDefault(attrs, "print-color-mode").toString();
+    QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
     bool pdfPageRangeAdjustNeeded = false;
 
     quint32 PageRangeLow = 0;
     quint32 PageRangeHigh = 0;
-    if(attrs.contains("page-ranges"))
+    if(jobAttrs.contains("page-ranges"))
     {
-        QJsonObject PageRanges = getAttrOrDefault(attrs, "page-ranges").toObject();
+        QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
         PageRangeLow = PageRanges["low"].toInt();
         PageRangeHigh = PageRanges["high"].toInt();
     }
 
-    QString Sides = getAttrOrDefault(attrs, "sides").toString();
+    QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
     if(documentFormat == Mimer::PWG || documentFormat == Mimer::URF || documentFormat == Mimer::Postscript || Mimer::isOffice(mimeType))
     {   // Effected locally
-        attrs.remove("page-ranges");
+        jobAttrs.remove("page-ranges");
     }
     else if (documentFormat == Mimer::PDF)
     {   // Only effected locally if really needed
-        if(attrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
+        if(jobAttrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
         {
             pdfPageRangeAdjustNeeded = true;
-            attrs.remove("page-ranges");
+            jobAttrs.remove("page-ranges");
         }
     }
 
     qDebug() << "Final op attributes:" << o;
-    qDebug() << "Final job attributes:" << attrs;
+    qDebug() << "Final job attributes:" << jobAttrs;
 
-    IppMsg job = mk_msg(o, attrs);
+    IppMsg job = mk_msg(o, jobAttrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
 
     // Non-jpeg images, Postscript and PDF (when not adjusting pages locally)

@@ -92,6 +92,8 @@ private:
 
     QJsonObject opAttrs();
 
+    void adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY);
+
     void setBusyMessage(QString msg);
     void setProgress(qint64 sent, qint64 total);
 
