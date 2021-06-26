@@ -48,7 +48,7 @@ signals:
     void doConvertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                      quint32 PageRangeLow, quint32 PageRangeHigh);
+                      quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
     void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile,
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
@@ -57,11 +57,11 @@ signals:
     void doConvertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                                 quint32 PageRangeLow, quint32 PageRangeHigh);
+                                 quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
     void doConvertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                             QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                            quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
+                            quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
     void additionalDocumentFormatsChanged();
     void busyMessageChanged();
@@ -92,7 +92,8 @@ private:
 
     QJsonObject opAttrs();
 
-    void adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY);
+    void adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY,
+                              bool& BackHFlip, bool& BackVFlip);
 
     void setBusyMessage(QString msg);
     void setProgress(qint64 sent, qint64 total);

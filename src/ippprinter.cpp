@@ -345,18 +345,17 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY)
+void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY,
+                                      bool& BackHFlip, bool& BackVFlip)
 {
+    if(documentFormat != Mimer::PWG && documentFormat != Mimer::URF)
+    {
+        return;
+    }
+
     if(documentFormat == Mimer::URF)
     { // Ensure symmetric resolution for URF
-        if(HwResX < HwResY)
-        {
-            HwResY = HwResX;
-        }
-        else
-        {
-            HwResX = HwResY;
-        }
+        HwResX = HwResY = std::min(HwResX, HwResY);
 
         if(jobAttrs.contains("printer-resolution"))
         {
@@ -366,6 +365,69 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
             jobAttrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
         }
     }
+
+    QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
+
+    if(Sides != "" && Sides != "one-sided")
+    {
+        if(documentFormat == Mimer::PWG)
+        {
+            QString DocumentSheetBack = _attrs["pwg-raster-document-sheet-back"].toObject()["value"].toString();
+            if(Sides=="two-sided-long-edge")
+            {
+                if(DocumentSheetBack=="flipped")
+                {
+                    BackVFlip=true;
+                }
+                else if(DocumentSheetBack=="rotated")
+                {
+                    BackHFlip=true;
+                    BackVFlip=true;
+                }
+            }
+            else if(Sides=="two-sided-short-edge")
+            {
+                if(DocumentSheetBack=="flipped")
+                {
+                    BackHFlip=true;
+                }
+                else if(DocumentSheetBack=="manual-tumble")
+                {
+                    BackHFlip=true;
+                    BackVFlip=true;
+                }
+            }
+        }
+        else if(documentFormat == Mimer::URF)
+        {
+            QJsonArray URfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
+            if(Sides=="two-sided-long-edge")
+            {
+                if(URfSupported.contains("DM2"))
+                {
+                    BackVFlip=true;
+                }
+                else if(URfSupported.contains("DM3"))
+                {
+                    BackHFlip=true;
+                    BackVFlip=true;
+                }
+            }
+            else if(Sides=="two-sided-short-edge")
+            {
+                if(URfSupported.contains("DM2"))
+                {
+                    BackHFlip=true;
+                }
+                else if(URfSupported.contains("DM4"))
+                {
+                    BackHFlip=true;
+                    BackVFlip=true;
+                }
+            }
+        }
+    }
+
 }
 
 void IppPrinter::print(QJsonObject jobAttrs, QString filename)
@@ -455,8 +517,10 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
+    bool BackHFlip = false;
+    bool BackVFlip = false;
 
-    adjustRasterSettings(documentFormat, jobAttrs, HwResX, HwResY);
+    adjustRasterSettings(documentFormat, jobAttrs, HwResX, HwResY, BackHFlip, BackVFlip);
 
     quint32 Quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
@@ -545,12 +609,13 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         if(mimeType == Mimer::PDF)
         {
             emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
-                              PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
+                              PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
+                              BackHFlip, BackVFlip);
         }
         else if(mimeType == Mimer::Plaintext)
         {
             emit doConvertPlaintext(request, filename, tempfile, documentFormat, Colors, Quality,
-                                    PaperSize, HwResX, HwResY, TwoSided, Tumble);
+                                    PaperSize, HwResX, HwResY, TwoSided, Tumble, BackHFlip, BackVFlip);
         }
         else if (Mimer::isImage(mimeType))
         {
@@ -560,7 +625,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         else if(Mimer::isOffice(mimeType))
         {
             emit doConvertOfficeDocument(request, filename, tempfile, documentFormat, Colors, Quality,
-                                         PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh);
+                                         PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
+                                         BackHFlip, BackVFlip);
         }
         else
         {

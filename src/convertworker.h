@@ -25,7 +25,7 @@ public slots:
     void convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                     QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                    quint32 PageRangeLow, quint32 PageRangeHigh);
+                    quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
     void convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
@@ -34,11 +34,11 @@ public slots:
     void convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                               quint32 PageRangeLow, quint32 PageRangeHigh);
+                               quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
     void convertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                          quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble);
+                          quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
@@ -58,6 +58,7 @@ private:
     void pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                      quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
                      quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
+                     bool BackHFlip, bool BackVFlip,
                      QString pdfFileName, QTemporaryFile* tempfile, bool resize);
 };
 

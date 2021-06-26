@@ -13,7 +13,7 @@
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                bool ForcePortrait, quint32 pages)
+                bool ForcePortrait, quint32 pages, bool BackHFlip, bool BackVFlip)
 {
     env.append("HWRES_X="+QString::number(HwResX));
     env.append("HWRES_Y="+QString::number(HwResY));
@@ -46,12 +46,20 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
         env.append("PAGES="+QString::number(pages));
     }
 
+    if(BackHFlip)
+    {
+        env.append("BACK_HFLIP=true");
+    }
+    if(BackVFlip)
+    {
+        env.append("BACK_VFLIP=true");
+    }
 }
 
 void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                               quint32 PageRangeLow, quint32 PageRangeHigh)
+                               quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
 {
 try {
 
@@ -122,7 +130,7 @@ try {
     {
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
-                    PageRangeLow, PageRangeHigh, pages,
+                    PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
                     filename, tempfile, true);
 
     }
@@ -259,7 +267,7 @@ try {
             ppm2pwg.setArguments({"ppm2pwg"});
 
             QStringList env;
-            ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0);
+            ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0, false, false);
             qDebug() << "ppm2pwg env is " << env;
 
             ppm2pwg.setEnvironment(env);
@@ -302,7 +310,7 @@ catch(const ConvertFailedException& e)
 void ConvertWorker::convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                                          quint32 PageRangeLow, quint32 PageRangeHigh)
+                                          quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
 {
 try {
 
@@ -406,7 +414,7 @@ try {
 
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
-                    PageRangeLow, PageRangeHigh, pages,
+                    PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
                     tmpPdfFile.fileName(), tempfile, false);
     }
 
@@ -425,7 +433,8 @@ catch(const ConvertFailedException& e)
 
 void ConvertWorker::convertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble)
+                                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
+                                     bool BackHFlip, bool BackVFlip)
 {
 try {
 
@@ -573,7 +582,7 @@ try {
     {
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
-                    0, 0, pageCount,
+                    0, 0, pageCount, BackHFlip, BackVFlip,
                     tmpPdfFile.fileName(), tempfile, false);
     }
 
@@ -700,6 +709,7 @@ void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeL
 void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                 quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
                                 quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
+                                bool BackHFlip, bool BackVFlip,
                                 QString pdfFileName, QTemporaryFile* tempfile, bool resize)
 {
 
@@ -760,7 +770,7 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     bool urf = targetFormat == Mimer::URF;
 
     QStringList env;
-    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages);
+    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages, BackHFlip, BackVFlip);
     qDebug() << "ppm2pwg env is " << env;
 
     ppm2pwg.setEnvironment(env);
