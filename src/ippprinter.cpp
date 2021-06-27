@@ -353,16 +353,59 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         return;
     }
 
+    //TODO? jobAttrs.remove("printer-resolution");
+
+    if(documentFormat == Mimer::PWG)
+    {
+        quint32 diff = std::numeric_limits<quint32>::max();
+        quint32 AdjustedHwResX = HwResX;
+        quint32 AdjustedHwResY = HwResY;
+        foreach(QJsonValue res, _attrs["pwg-raster-document-resolution-supported"].toObject()["value"].toArray())
+        {
+            QJsonObject resObj = res.toObject();
+            if(resObj["units"] != 3)
+            {
+                continue;
+            }
+            quint32 tmpDiff = std::abs(int(HwResX-resObj["x"].toInt())) + std::abs(int(HwResY-resObj["y"].toInt()));
+            if(tmpDiff < diff)
+            {
+                diff = tmpDiff;
+                AdjustedHwResX = resObj["x"].toInt();
+                AdjustedHwResY = resObj["y"].toInt();
+            }
+        }
+        HwResX = AdjustedHwResX;
+        HwResY = AdjustedHwResY;
+    }
+
     if(documentFormat == Mimer::URF)
     { // Ensure symmetric resolution for URF
         HwResX = HwResY = std::min(HwResX, HwResY);
 
-        if(jobAttrs.contains("printer-resolution"))
+        quint32 diff = std::numeric_limits<quint32>::max();
+        quint32 AdjustedHwRes = HwResX;
+
+        QJsonArray urfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
+        foreach(QJsonValue us, urfSupported)
         {
-            QJsonObject tmpObj {{"units", getAttrOrDefault(jobAttrs, "printer-resolution").toObject()["units"]},
-                                {"x", (int)HwResX},
-                                {"y", (int)HwResY}};
-            jobAttrs["printer-resolution"] = QJsonObject { {"tag", IppMsg::Resolution}, {"value", tmpObj} };
+            if(us.toString().startsWith("RS"))
+            { //RS300[-600]
+                QStringList resolutions = us.toString().mid(2).split("-");
+                foreach(QString res, resolutions)
+                {
+                    int intRes = res.toInt();
+                    quint32 tmpDiff = std::abs(int(HwResX - intRes));
+                    if(tmpDiff < diff)
+                    {
+                        diff = tmpDiff;
+                        AdjustedHwRes = intRes;
+                    }
+                }
+
+                HwResX = HwResY = AdjustedHwRes;
+                break;
+            }
         }
     }
 
