@@ -24,6 +24,15 @@ Page {
         }
     }
 
+    Connections {
+        target: printer
+        onAttrsChanged: {
+            if(Object.keys(printer.attrs).length === 0) {
+                pageStack.pop()
+            }
+        }
+    }
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
