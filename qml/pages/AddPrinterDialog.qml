@@ -51,7 +51,7 @@ Dialog {
             id: valueField
             width: parent.width
             placeholderText: "192.168.1.1/ipp/print"
-
+            inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase
             label: title
         }
         Row {
