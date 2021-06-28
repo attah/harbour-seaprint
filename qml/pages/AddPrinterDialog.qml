@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import seaprint.ippprinter 1.0
+import "utils.js" as Utils
 
 Dialog {
     id: dialog
@@ -9,7 +10,7 @@ Dialog {
     property string value
     property string ssid
     property var printerName: false
-    canAccept: printerName != false
+    canAccept: Object.keys(printer.attrs).length != 0
 
     Connections {
         target: wifi
@@ -28,12 +29,12 @@ Dialog {
         id: printer
         url: valueField.text
         onAttrsChanged: {
-            if(printer.attrs["printer-name"]) {
-                printerName = printer.attrs["printer-name"].value == "" ? qsTr("Unknown") : printer.attrs["printer-name"].value
+            if(printer.attrs.hasOwnProperty("printer-name")) {
+                printerName = Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
             }
             else
             {
-                printerName = false
+                printerName = qsTr("Unknown")
             }
 
         }
@@ -74,12 +75,12 @@ Dialog {
 
             Label {
                 id: found_label
-                text: printerName != false ? qsTr("Found:") : qsTr("No printer found")
+                text: canAccept ? qsTr("Found:") : qsTr("No printer found")
             }
             Label {
                 id: printer_label
                 color: Theme.secondaryColor
-                text: printerName ? printerName : ""
+                text: canAccept ? printerName : ""
             }
         }
 
