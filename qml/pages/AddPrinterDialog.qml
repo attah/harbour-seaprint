@@ -82,30 +82,82 @@ Dialog {
                 text: printerName ? printerName : ""
             }
         }
-    }
 
-    Row {
-        visible: valueField.text.indexOf(":9100") != -1
-
-        anchors.top: col.bottom
-        anchors.topMargin: Theme.paddingLarge*2
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.width-2*Theme.paddingLarge
-        spacing: Theme.paddingMedium
-
-        Icon {
-            id: warningIcon
-            source: "image://theme/icon-m-warning"
-            anchors.verticalCenter: parent.verticalCenter
+        Item {
+            width: 1
+            height: 2*Theme.paddingLarge
         }
 
-        Label {
-            width: parent.width-warningIcon.width-Theme.paddingMedium
-            anchors.verticalCenter: parent.verticalCenter
-            color: Theme.highlightColor
-            wrapMode: Text.WordWrap
-            text: qsTr("Port 9100 is not used for IPP.")
+        Row {
+            visible: valueField.text.indexOf(":9100") != -1
+            x: Theme.paddingLarge
+
+            width: parent.width-2*Theme.paddingLarge
+            spacing: Theme.paddingMedium
+
+            Icon {
+                id: warningIcon
+                source: "image://theme/icon-m-warning"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Label {
+                width: parent.width-warningIcon.width-Theme.paddingMedium
+                anchors.verticalCenter: parent.verticalCenter
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                text: qsTr("Port 9100 is not used for IPP.")
+            }
         }
+
+        Row {
+            id: suffixWarning
+            visible: canAccept && !printer.correctSuffix
+            x: Theme.paddingLarge
+
+            width: parent.width-2*Theme.paddingLarge
+            spacing: Theme.paddingMedium
+
+            Icon {
+                id: warningIcon2
+                source: "image://theme/icon-m-warning"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Label {
+                width: parent.width-warningIcon2.width-Theme.paddingMedium
+                anchors.verticalCenter: parent.verticalCenter
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                text: qsTr("The uri suffix is not in the printer's supported list.")+" "+
+                      qsTr("It might not accept print jobs on this address.")+" "+
+                      qsTr("Consider using a suffix like \"/ipp/print\".")
+            }
+        }
+
+        Item {
+            width: 1
+            height: 2*Theme.paddingLarge
+        }
+
+        Label
+        {
+            x: Theme.paddingLarge
+            visible: suffixWarning.visible && printer.suffixes.length != 0
+            text: qsTr("The printer/server lists these suffixes:")
+        }
+
+        Repeater
+        {
+            model: suffixWarning.visible ? printer.suffixes : 0
+            Label
+            {
+                x: Theme.paddingLarge
+                text: printer.suffixes[index]
+            }
+
+        }
+
     }
 
     onDone: {

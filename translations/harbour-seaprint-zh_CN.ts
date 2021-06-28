@@ -118,6 +118,22 @@
         <source>Port 9100 is not used for IPP.</source>
         <translation>端口9100未用于IPP。</translation>
     </message>
+    <message>
+        <source>The uri suffix is not in the printer&apos;s supported list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It might not accept print jobs on this address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The printer/server lists these suffixes:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BusyPage</name>

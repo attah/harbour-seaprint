@@ -19,7 +19,9 @@ class IppPrinter : public QObject
     Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
 
     Q_PROPERTY(bool tainted MEMBER _tainted NOTIFY taintedChanged)
-    Q_PROPERTY(bool isIpps READ isIpps() NOTIFY urlChanged)
+    Q_PROPERTY(bool isIpps READ isIpps NOTIFY urlChanged)
+    Q_PROPERTY(bool correctSuffix READ correctSuffix NOTIFY attrsChanged)
+    Q_PROPERTY(QStringList suffixes READ suffixes NOTIFY attrsChanged)
 
 public:
     IppPrinter();
@@ -35,6 +37,8 @@ public:
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
     bool isIpps();
+    bool correctSuffix();
+    QStringList suffixes();
 
 signals:
     void urlChanged();

@@ -722,6 +722,34 @@ bool IppPrinter::isIpps()
     return _url.scheme() == "ipps";
 }
 
+bool IppPrinter::correctSuffix()
+{
+    foreach(QJsonValue u, _attrs["printer-uri-supported"].toObject()["value"].toArray())
+    {
+        QUrl url(u.toString());
+        if(url.path() == _url.path())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+QStringList IppPrinter::suffixes()
+{
+    QStringList res;
+    foreach(QJsonValue u, _attrs["printer-uri-supported"].toObject()["value"].toArray())
+    {
+        QUrl url(u.toString());
+        if(!res.contains(url.path()))
+        {
+            res.append(url.path());
+        }
+    }
+    res.sort();
+    return res;
+}
+
 QUrl IppPrinter::httpUrl() {
     qDebug() << _url;
     QUrl url = _url;
