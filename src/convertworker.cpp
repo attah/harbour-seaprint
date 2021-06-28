@@ -461,8 +461,11 @@ try {
     QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
-    // Needs to be before painter
-    pdfWriter.setMargins({0, 0, 0, 0});
+
+    QPagedPaintDevice::Margins tmpMargins = pdfWriter.margins();
+    qDebug() << tmpMargins.top << tmpMargins.right << tmpMargins.bottom << tmpMargins.left;
+
+
 
     qreal docHeight = pageSize.sizePixels(resolution).height();
 
@@ -494,17 +497,25 @@ try {
 
     int textHeight = 60*charHeight;
     qreal margin = ((docHeight-textHeight)/2);
+    qreal mmMargin = margin/(resolution/25.4);
 
     doc.setDefaultFont(font);
     (void)doc.documentLayout(); // wat
 
+
+    // Needs to be before painter
+    pdfWriter.setMargins({mmMargin, mmMargin, mmMargin, mmMargin});
 
     QPainter painter(&pdfWriter);
 
     doc.documentLayout()->setPaintDevice(painter.device());
     doc.setDocumentMargin(margin);
 
-    QRectF body = QRectF(0, 0, pdfWriter.width(), pdfWriter.height());
+    // Hack to make the document and pdfWriter margins overlap
+    // Apparently calls to painter.translate() stack... who knew!
+    painter.translate(-margin, -margin);
+
+    QRectF body = pageSize.rectPixels(resolution);
     doc.setPageSize(body.size());
 
     QString allText = inFile.readAll();
