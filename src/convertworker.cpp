@@ -462,11 +462,6 @@ try {
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
 
-    QPagedPaintDevice::Margins tmpMargins = pdfWriter.margins();
-    qDebug() << tmpMargins.top << tmpMargins.right << tmpMargins.bottom << tmpMargins.left;
-
-
-
     qreal docHeight = pageSize.sizePixels(resolution).height();
 
     QTextDocument doc;
