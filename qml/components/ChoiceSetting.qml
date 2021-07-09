@@ -6,11 +6,10 @@ import "../pages/utils.js" as Utils
 
 Setting {
     property var choices: parent.getChoices(name)
-    property string mime_type
     property var preferred_choices: []
     property string preferred_choice_suffix: ""
 
-    property var limited_choices: Utils.limitChoices(name, choices, mime_type, ConvertChecker)
+    property var limited_choices: Utils.limitChoices(name, choices, parent.selectedFileType, ConvertChecker)
 
     property int num_large_choices: 8
 

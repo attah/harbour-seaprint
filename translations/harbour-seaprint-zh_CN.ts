@@ -463,10 +463,6 @@
         <translation>媒体源</translation>
     </message>
     <message>
-        <source>Zero margins</source>
-        <translation>零页边距</translation>
-    </message>
-    <message>
         <source>Page range</source>
         <translation>页面范围</translation>
     </message>
@@ -496,6 +492,22 @@
     </message>
     <message>
         <source>Media type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

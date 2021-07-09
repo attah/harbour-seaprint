@@ -93,13 +93,11 @@ Page {
                 tag: IppMsg.Keyword
                 name: "sides"
                 prettyName: qsTr("Sides")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
                 name: "media"
                 prettyName: qsTr("Print media")
-                mime_type: selectedFileType
                 preferred_choices: printer.attrs.hasOwnProperty("media-ready") ? printer.attrs["media-ready"].value : []
                 preferred_choice_suffix: qsTr("(loaded)")
             }
@@ -112,7 +110,6 @@ Page {
                 tag: IppMsg.Keyword
                 name: "multiple-document-handling"
                 prettyName: qsTr("Collated copies")
-                mime_type: selectedFileType
             }
             RangeSetting {
                 tag: IppMsg.IntegerRange
@@ -128,48 +125,62 @@ Page {
                 tag: IppMsg.Keyword
                 name: "print-color-mode"
                 prettyName: qsTr("Color mode")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Enum
                 name: "print-quality"
                 prettyName: qsTr("Quality")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Resolution
                 name: "printer-resolution"
                 prettyName: qsTr("Resolution")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.MimeMediaType
                 name: "document-format"
                 prettyName: qsTr("Transfer format")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
                 name: "media-type"
+                subkey: "media-col"
                 prettyName: qsTr("Media type")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
                 name: "media-source"
+                subkey: "media-col"
                 prettyName: qsTr("Media source")
-                mime_type: selectedFileType
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
                 name: "output-bin"
                 prettyName: qsTr("Output bin")
-                mime_type: selectedFileType
             }
-            MediaColSetting {
-                tag: IppMsg.BeginCollection
-                name: "media-col"
-                prettyName: qsTr("Zero margins")
+            ChoiceSetting {
+                tag: IppMsg.Integer
+                name: "media-top-margin"
+                subkey: "media-col"
+                prettyName: qsTr("Top")
+            }
+            ChoiceSetting {
+                tag: IppMsg.Integer
+                name: "media-bottom-margin"
+                subkey: "media-col"
+                prettyName: qsTr("Bottom")
+            }
+            ChoiceSetting {
+                tag: IppMsg.Integer
+                name: "media-left-margin"
+                subkey: "media-col"
+                prettyName: qsTr("Left")
+            }
+            ChoiceSetting {
+                tag: IppMsg.Integer
+                name: "media-right-margin"
+                subkey: "media-col"
+                prettyName: qsTr("Right")
             }
         }
     }

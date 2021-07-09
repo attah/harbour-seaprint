@@ -8,6 +8,7 @@ Item {
     property string name
     property string prettyName
     property int tag
+    property string subkey: ""
     property bool _valid: parent.isValid(name)
     property bool valid: _valid
 
