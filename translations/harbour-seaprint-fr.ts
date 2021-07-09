@@ -511,6 +511,10 @@
         <source>Scaling</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Media</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

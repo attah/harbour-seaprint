@@ -162,19 +162,27 @@ Page {
                 name: "document-format"
                 prettyName: qsTr("Transfer format")
             }
+
+            BarButton {
+                id: mediaButton
+                text: qsTr("Media")
+            }
             ChoiceSetting {
+                visible:  mediaButton.active
                 tag: IppMsg.Keyword
                 name: "media-type"
                 subkey: "media-col"
                 prettyName: qsTr("Media type")
             }
             ChoiceSetting {
+                visible:  mediaButton.active
                 tag: IppMsg.Keyword
                 name: "media-source"
                 subkey: "media-col"
                 prettyName: qsTr("Media source")
             }
             ChoiceSetting {
+                visible:  mediaButton.active
                 tag: IppMsg.Keyword
                 name: "output-bin"
                 prettyName: qsTr("Output bin")

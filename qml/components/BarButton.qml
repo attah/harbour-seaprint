@@ -31,7 +31,7 @@ BackgroundItem {
 
     Label {
         id: label
-        leftPadding: Theme.paddingLarge
+        leftPadding: Theme.paddingLarge*2
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         color: barButton.highlighted ? Theme.highlightColor : Theme.primaryColor
