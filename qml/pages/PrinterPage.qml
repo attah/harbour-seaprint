@@ -158,25 +158,34 @@ Page {
                 name: "output-bin"
                 prettyName: qsTr("Output bin")
             }
+
+            BarButton {
+                id: marginsButton
+                text: qsTr("Margins")
+            }
             ChoiceSetting {
+                visible: marginsButton.active
                 tag: IppMsg.Integer
                 name: "media-top-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Top")
             }
             ChoiceSetting {
+                visible: marginsButton.active
                 tag: IppMsg.Integer
                 name: "media-bottom-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Bottom")
             }
             ChoiceSetting {
+                visible: marginsButton.active
                 tag: IppMsg.Integer
                 name: "media-left-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Left")
             }
             ChoiceSetting {
+                visible: marginsButton.active
                 tag: IppMsg.Integer
                 name: "media-right-margin"
                 subkey: "media-col"
