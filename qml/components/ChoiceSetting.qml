@@ -13,7 +13,7 @@ Setting {
 
     property int num_large_choices: 8
 
-    displayValue: Utils.ippName(name, choice ? choice : default_choice)
+    displayValue: Utils.ippName(name, choice != undefined ? choice : default_choice)
 
     onClicked: {
         if(limited_choices.length>num_large_choices)
