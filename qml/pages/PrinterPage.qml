@@ -154,6 +154,12 @@ Page {
                 prettyName: qsTr("Media source")
                 mime_type: selectedFileType
             }
+            ChoiceSetting {
+                tag: IppMsg.Keyword
+                name: "output-bin"
+                prettyName: qsTr("Output bin")
+                mime_type: selectedFileType
+            }
             MediaColSetting {
                 tag: IppMsg.BeginCollection
                 name: "media-col"

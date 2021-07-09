@@ -228,19 +228,39 @@ function ippName(name, value)
         {
             return qsTr("tray")+" "+value.split("-")[1];
         }
+        else if(value.indexOf("roll-")==0)
+        {
+            return qsTr("roll")+" "+value.split("-")[1];
+        }
         else
         {
             switch(value) {
-            case "by-pass-tray":
-                return qsTr("by-pass tray");
+            case "alternate":
+                return qsTr("alternate");
+            case "alternate-roll":
+                return qsTr("alternate-roll");
             case "auto":
                 return qsTr("automatic");
             case "bottom":
                 return qsTr("bottom");
+            case "by-pass-tray":
+                return qsTr("by-pass tray");
             case "center":
                 return qsTr("center");
+            case "disc":
+                return qsTr("disc");
+            case "envelope":
+                return qsTr("envelope");
+            case "hagaki":
+                return qsTr("hagaki");
+            case "large-capacity":
+                return qsTr("large capacity");
+            case "left":
+                return qsTr("left");
             case "main":
                 return qsTr("main");
+            case "main-roll":
+                return qsTr("main roll");
             case "manual":
                 return qsTr("manual");
             case "middle":
@@ -255,6 +275,52 @@ function ippName(name, value)
                 return qsTr("side");
             case "top":
                 return qsTr("top");
+            default:
+                return value;
+            }
+        }
+    case "output-bin":
+        if(value.indexOf("tray-")==0)
+        {
+            return qsTr("tray")+" "+value.split("-")[1];
+        }
+        else if(value.indexOf("stacker-")==0)
+        {
+            return qsTr("stacker")+" "+value.split("-")[1];
+        }
+        else if(value.indexOf("mailbox-")==0)
+        {
+            return qsTr("mailbox")+" "+value.split("-")[1];
+        }
+        else
+        {
+            switch(value) {
+            case "auto":
+                return qsTr("automatic");
+            case "top":
+                return qsTr("top");
+            case "middle":
+                return qsTr("middle");
+            case "bottom":
+                return qsTr("bottom");
+            case "side":
+                return qsTr("side");
+            case "left":
+                return qsTr("left");
+            case "right":
+                return qsTr("right");
+            case "center":
+                return qsTr("center");
+            case "rear":
+                return qsTr("rear");
+            case "face-up":
+                return qsTr("face-up");
+            case "face-down":
+                return qsTr("face-down");
+            case "large-capacity":
+                return qsTr("large capacity");
+            case "my-mailbox":
+                return qsTr("my mailbox");
             default:
                 return value;
             }

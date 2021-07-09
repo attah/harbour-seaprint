@@ -490,6 +490,10 @@
         <source>(loaded)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Output bin</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>
@@ -802,6 +806,62 @@
     </message>
     <message>
         <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>roll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>alternate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>alternate-roll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>disc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>envelope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hagaki</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>large capacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>main roll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>stacker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mailbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>face-up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>face-down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>my mailbox</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
