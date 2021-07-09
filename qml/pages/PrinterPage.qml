@@ -150,6 +150,12 @@ Page {
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
+                name: "media-type"
+                prettyName: qsTr("Media type")
+                mime_type: selectedFileType
+            }
+            ChoiceSetting {
+                tag: IppMsg.Keyword
                 name: "media-source"
                 prettyName: qsTr("Media source")
                 mime_type: selectedFileType

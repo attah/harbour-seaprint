@@ -494,6 +494,10 @@
         <source>Output bin</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Media type</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>
