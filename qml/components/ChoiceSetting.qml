@@ -19,7 +19,7 @@ Setting {
         if(limited_choices.length>num_large_choices)
         {
             var dialog = pageStack.push("LargeChoiceDialog.qml",
-                                        {name:name, choice: choice ? choice : default_choice, choices: limited_choices,
+                                        {name:name, choice: choice != undefined ? choice : default_choice, choices: limited_choices,
                                          preferred_choices: preferred_choices, preferred_choice_suffix: preferred_choice_suffix})
             dialog.accepted.connect(function() {
                                         choice = dialog.choice

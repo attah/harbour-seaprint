@@ -503,6 +503,14 @@
         <source>Margins</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pages per page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>
@@ -871,6 +879,26 @@
     </message>
     <message>
         <source>my mailbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto (fit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>none</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

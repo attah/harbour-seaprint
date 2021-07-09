@@ -211,6 +211,22 @@ function ippName(name, value)
         default:
             return value
         }
+    case "print-scaling":
+        switch(value) {
+        case "auto":
+            return qsTr("auto");
+        case "auto-fit":
+            return qsTr("auto (fit)");
+        case "fill":
+            return qsTr("fill");
+        case "fit":
+            return qsTr("fit");
+        case "none":
+            return qsTr("none");
+        default:
+            return value;
+        }
+
     case "document-format":
         switch(value) {
         case Mimer.OctetStream:

@@ -122,6 +122,16 @@ Page {
                 high: pdfpages == 0 ? 65535 : pdfpages
             }
             ChoiceSetting {
+                tag: IppMsg.Integer
+                name: "number-up"
+                prettyName: qsTr("Pages per page")
+                valid: !Mimer.isImage(selectedFileType)
+                DependentOn {
+                    target: transferFormatSetting
+                    values: [Mimer.PDF, Mimer.Postscript]
+                }
+            }
+            ChoiceSetting {
                 tag: IppMsg.Keyword
                 name: "print-color-mode"
                 prettyName: qsTr("Color mode")
@@ -137,6 +147,17 @@ Page {
                 prettyName: qsTr("Resolution")
             }
             ChoiceSetting {
+                tag: IppMsg.Keyword
+                name: "print-scaling"
+                prettyName: qsTr("Scaling")
+                valid: _valid && selectedFileType == Mimer.JPEG
+                DependentOn {
+                    target: transferFormatSetting
+                    values: [Mimer.JPEG]
+                }
+            }
+            ChoiceSetting {
+                id: transferFormatSetting
                 tag: IppMsg.MimeMediaType
                 name: "document-format"
                 prettyName: qsTr("Transfer format")

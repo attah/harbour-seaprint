@@ -46,12 +46,17 @@ Item {
     property var menu
     property bool hasMenu: true
 
+    function reset()
+    {
+        choice = undefined
+    }
+
     ContextMenu {
         id: resetMenu
 
         MenuItem {
             text: qsTr("Reset")
-            onClicked: choice = undefined
+            onClicked: reset()
         }
     }
 

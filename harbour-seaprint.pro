@@ -50,6 +50,7 @@ SOURCES += src/harbour-seaprint.cpp \
     src/svgprovider.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
+    qml/components/DependentOn.qml \
     qml/cover/CoverPage.qml \
     qml/components/*qml \
     qml/pages/*.qml \
