@@ -148,7 +148,7 @@ Page {
                 visible: Object.keys(printer.attrs).length !== 0
 
                 property string name: printer.attrs["printer-name"].value != "" ? printer.attrs["printer-name"].value : qsTr("Unknown")
-                property var supported_formats: Utils.supported_formats(printer, ConvertChecker, considerAdditionalFormatsSetting.value)
+                property var supported_formats: Utils.supported_formats(printer, considerAdditionalFormatsSetting.value)
                 property bool canPrint: supported_formats.mimetypes.indexOf(selectedFileType) != -1
 
                 Connections {

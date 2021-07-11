@@ -1,7 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import seaprint.convertchecker 1.0
-import seaprint.mimer 1.0
 import "../pages/utils.js" as Utils
 
 Setting {
@@ -9,7 +7,7 @@ Setting {
     property var preferred_choices: []
     property string preferred_choice_suffix: ""
 
-    property var limited_choices: Utils.limitChoices(name, choices, parent.selectedFileType, ConvertChecker)
+    property var limited_choices: Utils.limitChoices(name, choices, parent.selectedFileType)
 
     property int num_large_choices: 8
 

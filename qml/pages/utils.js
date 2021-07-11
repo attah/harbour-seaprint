@@ -1,6 +1,9 @@
+.pragma library
+.import seaprint.mimer 1.0 as Mimer
+.import seaprint.convertchecker 1.0 as ConvertChecker
 
-// TODO move to IppPrinter and/or Mimer when i figure out how to handle considerAdditionalFormats there
-function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
+// TODO move to IppPrinter?
+function supported_formats(printer, considerAdditionalFormats)
 {
     var formats = printer.attrs["document-format-supported"].value;
     if(considerAdditionalFormats)
@@ -8,7 +11,7 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
         formats=formats+printer.additionalDocumentFormats;
     }
 
-    var raster = (has(formats, Mimer.PWG) || has(formats, Mimer.URF));
+    var raster = (has(formats, Mimer.Mimer.PWG) || has(formats, Mimer.Mimer.URF));
 
     var mimetypes = [];
     var pdf = false;
@@ -17,35 +20,35 @@ function supported_formats(printer, ConvertChecker, considerAdditionalFormats)
     var images = false;
     var plaintext = false;
 
-    if(has(formats, Mimer.PDF) ||
-       (ConvertChecker.pdf && ( has(formats, Mimer.Postscript) || raster )))
+    if(has(formats, Mimer.Mimer.PDF) ||
+       (ConvertChecker.ConvertChecker.pdf && ( has(formats, Mimer.Mimer.Postscript) || raster )))
     {
         pdf = true;
-        mimetypes.push(Mimer.PDF);
+        mimetypes.push(Mimer.Mimer.PDF);
         plaintext = true;
-        mimetypes.push(Mimer.Plaintext);
+        mimetypes.push(Mimer.Mimer.Plaintext);
     }
-    if(has(formats, Mimer.Postscript))
+    if(has(formats, Mimer.Mimer.Postscript))
     {
         postscript = true;
-        mimetypes.push(Mimer.Postscript);
+        mimetypes.push(Mimer.Mimer.Postscript);
     }
 
-    if((ConvertChecker.pdf && ConvertChecker.calligra) &&
-            ( has(formats, Mimer.PDF) || has(formats, Mimer.Postscript) || raster ))
+    if((ConvertChecker.ConvertChecker.pdf && ConvertChecker.ConvertChecker.calligra) &&
+            ( has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript) || raster ))
     {
         office = true;
-        mimetypes = mimetypes.concat(Mimer.OfficeFormats);
+        mimetypes = mimetypes.concat(Mimer.Mimer.OfficeFormats);
     }
 
-    if (raster || has(formats, Mimer.JPEG) || has(formats, Mimer.PNG) ||
-            has(formats, Mimer.PDF) || (ConvertChecker.pdf && has(formats, Mimer.Postscript)))
+    if (raster || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) ||
+            has(formats, Mimer.Mimer.PDF) || (ConvertChecker.ConvertChecker.pdf && has(formats, Mimer.Mimer.Postscript)))
     {
         images = true;
-        mimetypes.push(Mimer.JPEG);
-        mimetypes.push(Mimer.PNG);
-        mimetypes.push(Mimer.TIFF);
-        mimetypes.push(Mimer.GIF);
+        mimetypes.push(Mimer.Mimer.JPEG);
+        mimetypes.push(Mimer.Mimer.PNG);
+        mimetypes.push(Mimer.Mimer.TIFF);
+        mimetypes.push(Mimer.Mimer.GIF);
     }
 
     return {pdf: pdf, postscript: postscript, plaintext: plaintext, office: office, images: images, mimetypes: mimetypes};
@@ -229,21 +232,21 @@ function ippName(name, value)
 
     case "document-format":
         switch(value) {
-        case Mimer.OctetStream:
+        case Mimer.Mimer.OctetStream:
             return qsTr("auto-sense");
-        case Mimer.PDF:
+        case Mimer.Mimer.PDF:
             return qsTr("PDF");
-        case Mimer.Postscript:
+        case Mimer.Mimer.Postscript:
             return qsTr("Postscript");
-        case Mimer.PWG:
+        case Mimer.Mimer.PWG:
             return qsTr("PWG-raster");
-        case Mimer.URF:
+        case Mimer.Mimer.URF:
             return qsTr("URF-raster");
-        case Mimer.PNG:
+        case Mimer.Mimer.PNG:
             return qsTr("PNG");
-        case Mimer.JPEG:
+        case Mimer.Mimer.JPEG:
             return qsTr("JPEG");
-        case Mimer.GIF:
+        case Mimer.Mimer.GIF:
             return qsTr("GIF");
         default:
             return value;
@@ -366,31 +369,31 @@ function endsWith(ending, string)
 
 function canConvertPdfTo(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.PDF, Mimer.Postscript, Mimer.PWG, Mimer.URF];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
     return has(targets, type)
 }
 
 function canTransferPdfAs(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.PDF];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF];
     return has(targets, type)
 }
 
 function canTransferPostscriptAs(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.Postscript];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.Postscript];
     return has(targets, type)
 }
 
 function canConvertOfficeDocumentTo(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.PDF, Mimer.Postscript, Mimer.PWG, Mimer.URF];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
     return has(targets, type)
 }
 
 function canConvertImageTo(type)
 {
-    var targets = [Mimer.OctetStream, Mimer.JPEG, Mimer.PNG, Mimer.PWG, Mimer.URF, Mimer.PDF, Mimer.Postscript];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.JPEG, Mimer.Mimer.PNG, Mimer.Mimer.PWG, Mimer.Mimer.URF, Mimer.Mimer.PDF, Mimer.Mimer.Postscript];
     return has(targets, type)
 }
 
@@ -400,13 +403,13 @@ function unitsIsDpi(resolution)
 }
 
 
-function limitChoices(name, choices, mimeType, ConvertChecker)
+function limitChoices(name, choices, mimeType)
 {
     switch(name) {
     case "document-format":
-        if(mimeType == Mimer.PDF)
+        if(mimeType == Mimer.Mimer.PDF)
         {
-            if(ConvertChecker.pdf)
+            if(ConvertChecker.ConvertChecker.pdf)
             {
                 return choices.filter(canConvertPdfTo)
             }
@@ -416,10 +419,10 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
             }
 
         }
-        else if(mimeType == Mimer.Plaintext)
+        else if(mimeType == Mimer.Mimer.Plaintext)
         {
             // We convert plaintext to PDF internally
-            if(ConvertChecker.pdf)
+            if(ConvertChecker.ConvertChecker.pdf)
             {
                 return choices.filter(canConvertPdfTo)
             }
@@ -428,21 +431,21 @@ function limitChoices(name, choices, mimeType, ConvertChecker)
                 return choices.filter(canTransferPdfAs)
             }
         }
-        else if(mimeType == Mimer.Postscript)
+        else if(mimeType == Mimer.Mimer.Postscript)
         {
             return choices.filter(canTransferPostscriptAs)
         }
-        else if(Mimer.isOffice(mimeType))
+        else if(Mimer.Mimer.isOffice(mimeType))
         {
             return choices.filter(canConvertOfficeDocumentTo)
         }
-        else if(Mimer.isImage(mimeType))
+        else if(Mimer.Mimer.isImage(mimeType))
         {
             return choices.filter(canConvertImageTo);
         }
         else
         {
-            return [Mimer.OctetStream];
+            return [Mimer.Mimer.OctetStream];
         }
     case "printer-resolution":
         return choices.filter(unitsIsDpi);
