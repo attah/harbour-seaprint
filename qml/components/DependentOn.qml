@@ -21,9 +21,10 @@ Item {
         id: targetConnection
         onChoiceChanged:
         {
-            if(overlap.indexOf(target.choice) == -1)
+            if(parent.choice != undefined && overlap.indexOf(target.choice) == -1)
             {
                 parent.reset()
+                parent.highlight()
             }
         }
     }
@@ -34,6 +35,7 @@ Item {
             if(parent.choice != undefined && overlap.indexOf(targetConnection.target.choice) == -1)
             {
                 targetConnection.target.choice = overlap[0]
+                targetConnection.target.highlight()
             }
         }
     }

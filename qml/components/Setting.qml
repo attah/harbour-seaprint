@@ -60,4 +60,26 @@ Item {
         }
     }
 
+    function highlight()
+    {
+        highlightAnimation.start()
+    }
+
+    NumberAnimation
+    {
+        id: highlightAnimation
+        target: fillRectangle
+        property: "opacity"
+        from: 0.5
+        to: 0
+        duration: 1000
+    }
+
+    Rectangle {
+        id: fillRectangle
+        anchors.fill: parent
+        color: Theme.highlightBackgroundColor
+        opacity: 0
+    }
+
 }
