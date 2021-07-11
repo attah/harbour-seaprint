@@ -248,6 +248,11 @@ function ippName(name, value)
         default:
             return value;
         }
+    case "media-top-margin":
+    case "media-bottom-margin":
+    case "media-left-margin":
+    case "media-right-margin":
+        return ""+(value/100)+"mm"
     case "media-source":
         if(value.indexOf("tray-")==0)
         {
