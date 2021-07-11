@@ -165,7 +165,7 @@ Page {
 
             BarButton {
                 id: mediaButton
-                text: qsTr("Media")
+                text: qsTr("Media handling")
             }
             ChoiceSetting {
                 visible:  mediaButton.active

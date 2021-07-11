@@ -512,7 +512,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Media</source>
+        <source>Media handling</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
