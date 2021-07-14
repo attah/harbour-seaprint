@@ -29,7 +29,7 @@ public slots:
 
     void convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                      quint32 HwResX, quint32 HwResY);
+                      quint32 HwResX, quint32 HwResY, QMargins margins);
 
     void convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,

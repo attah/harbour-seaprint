@@ -5,6 +5,8 @@
 #include "overrider.h"
 #include "settings.h"
 
+Q_DECLARE_METATYPE(QMargins)
+
 IppPrinter::IppPrinter()
 {
     _nam = new QNetworkAccessManager(this);
@@ -39,6 +41,8 @@ IppPrinter::IppPrinter()
     connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
     connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
+
+    qRegisterMetaType<QMargins>();
 
     _workerThread.start();
     _tainted = false;
@@ -662,8 +666,13 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
         else if (Mimer::isImage(mimeType))
         {
+            QMargins margins(getAttrOrDefault(jobAttrs, "media-left-margin", "media-col").toInt(),
+                             getAttrOrDefault(jobAttrs, "media-top-margin", "media-col").toInt(),
+                             getAttrOrDefault(jobAttrs, "media-right-margin", "media-col").toInt(),
+                             getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
+
             emit doConvertImage(request, filename, tempfile, documentFormat, Colors, Quality,
-                                PaperSize, HwResX, HwResY);
+                                PaperSize, HwResX, HwResY, margins);
         }
         else if(Mimer::isOffice(mimeType))
         {
@@ -796,14 +805,30 @@ void IppPrinter::setProgress(qint64 sent, qint64 total)
     emit progressChanged();
 }
 
-QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name)
+QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name, QString subkey)
 {
-    if(jobAttrs.contains(name))
+    if(subkey == "")
     {
-        return jobAttrs[name].toObject()["value"];
+        if(jobAttrs.contains(name))
+        {
+            return jobAttrs[name].toObject()["value"];
+        }
+        else
+        {
+            return _attrs[name+"-default"].toObject()["value"];
+        }
     }
-    else {
-        return _attrs[name+"-default"].toObject()["value"];
+    else
+    {
+        QJsonObject subObj = jobAttrs[subkey].toObject()["value"].toObject();
+        if(subObj.contains(name))
+        {
+            return subObj[name].toObject()["value"];
+        }
+        else
+        {
+            return _attrs[name+"-default"].toObject()["value"];
+        }
     }
 }
 

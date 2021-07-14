@@ -56,7 +56,7 @@ signals:
 
     void doConvertImage(QNetworkRequest request, QString filename,  QTemporaryFile* tempfile,
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                        quint32 HwResX, quint32 HwResY);
+                        quint32 HwResX, quint32 HwResY, QMargins margins);
 
     void doConvertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
@@ -102,7 +102,7 @@ private:
     void setBusyMessage(QString msg);
     void setProgress(qint64 sent, qint64 total);
 
-    QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name);
+    QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name, QString subkey = "");
 
     IppMsg mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject());
 

@@ -151,7 +151,7 @@ catch(const ConvertFailedException& e)
 
 void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                 quint32 HwResX, quint32 HwResY)
+                                 quint32 HwResX, quint32 HwResY, QMargins margins)
 {
 try {
 
@@ -210,21 +210,30 @@ try {
     {
         inImage = inImage.transformed(QMatrix().rotate(90.0));
     }
-    inImage = inImage.scaled(Width, Height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    int leftMarginPx = (margins.left()/2540.0)*HwResX;
+    int rightMarginPx = (margins.right()/2540.0)*HwResX;
+    int topMarginPx = (margins.top()/2540.0)*HwResY;
+    int bottomMarginPx = (margins.bottom()/2540.0)*HwResY;
+
+    int totalXMarginPx = leftMarginPx+rightMarginPx;
+    int totalYMarginPx = topMarginPx+bottomMarginPx;
+
+    inImage = inImage.scaled(Width-totalXMarginPx, Height-totalYMarginPx,
+                             Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     if(pdfOrPostscript)
     {
         QTemporaryFile tmpPdfFile;
         tmpPdfFile.open();
         QPdfWriter pdfWriter(tmpPdfFile.fileName());
+        pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
         QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
         pdfWriter.setPageSize(pageSize);
         pdfWriter.setResolution(HwResX);
-        // Needs to be before painter
-        pdfWriter.setMargins({0, 0, 0, 0});
         QPainter painter(&pdfWriter);
-        int xOffset = (pdfWriter.width()-inImage.width())/2;
-        int yOffset = (pdfWriter.height()-inImage.height())/2;
+        int xOffset = ((pdfWriter.width()-totalXMarginPx)-inImage.width())/2 + leftMarginPx;
+        int yOffset = ((pdfWriter.height()-totalYMarginPx)-inImage.height())/2 + topMarginPx;
         painter.drawImage(xOffset, yOffset, inImage);
         painter.end();
 
@@ -246,8 +255,8 @@ try {
         QImage outImage = QImage(Width, Height, inImage.format());
         outImage.fill(Qt::white);
         QPainter painter(&outImage);
-        int xOffset = (outImage.width()-inImage.width())/2;
-        int yOffset = (outImage.height()-inImage.height())/2;
+        int xOffset = ((outImage.width()-totalXMarginPx)-inImage.width())/2 + leftMarginPx;
+        int yOffset = ((outImage.height()-totalYMarginPx)-inImage.height())/2 + topMarginPx;
         painter.drawImage(xOffset, yOffset, inImage);
         painter.end();
 
