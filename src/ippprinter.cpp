@@ -562,8 +562,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     QNetworkRequest request = mkReq();
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
-    quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt();
-    quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt();
+    quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt(300);
+    quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt(300);
     bool BackHFlip = false;
     bool BackVFlip = false;
 
