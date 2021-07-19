@@ -452,6 +452,20 @@ function limitChoices(name, choices, mimeType)
     case "multiple-document-handling" :
         // Only collation settings valid, multiple documents not used
         return choices.filter(function(elem) {return elem.indexOf("collated") != -1});
+    case "number-up":
+        if(choices.constructor.name === "Object")
+        {
+            var choice_array = [];
+            for(var i=choices.low; i <= choices.high; i++)
+            {
+                choice_array.push(i);
+            }
+            return choice_array;
+        }
+        else
+        {
+            return choices;
+        }
     default:
         return choices;
     }
