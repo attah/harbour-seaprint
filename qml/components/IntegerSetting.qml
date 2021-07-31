@@ -7,7 +7,7 @@ Setting {
 
     property bool suppressChange: false
 
-    displayValue: choice ? choice : default_choice
+    displayValue: choice != undefined ? choice : default_choice
 
     onChoiceChanged: {
         if(choice == undefined)
