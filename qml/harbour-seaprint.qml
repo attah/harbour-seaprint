@@ -147,13 +147,6 @@ ApplicationWindow
 
     ConfigurationValue
     {
-        id: alwaysUseMediaColSetting
-        key: SeaPrintSettings.alwaysUseMediaColPath
-        defaultValue: SeaPrintSettings.alwaysUseMediaColDefault
-    }
-
-    ConfigurationValue
-    {
         id: ignoreSslErrorsSetting
         key: SeaPrintSettings.ignoreSslErrorsPath
         defaultValue: SeaPrintSettings.ignoreSslErrorsDefault

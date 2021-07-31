@@ -2,8 +2,7 @@
 #include <QMutex>
 
 
-Settings::Settings() : _alwaysUseMediaColSetting("/apps/harbour-seaprint/settings/always-use-media-col", this),
-                       _ignoreSslErrorsSetting("/apps/harbour-seaprint/settings/ignore-ssl-errors", this)
+Settings::Settings() : _ignoreSslErrorsSetting("/apps/harbour-seaprint/settings/ignore-ssl-errors", this)
 {
 
 }
@@ -29,21 +28,9 @@ Settings* Settings::instance()
     return m_Instance;
 }
 
-
-bool Settings::alwaysUseMediaCol()
-{
-    return _alwaysUseMediaColSetting.value(_alwaysUseMediaColDefault).toBool();
-}
-
 bool Settings::ignoreSslErrors()
 {
     return _ignoreSslErrorsSetting.value(_ignoreSslErrorsDefault).toBool();
-}
-
-
-QString Settings::alwaysUseMediaColPath()
-{
-    return _alwaysUseMediaColSetting.key();
 }
 
 QString Settings::ignoreSslErrorsPath()

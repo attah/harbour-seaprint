@@ -553,14 +553,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Always use media-col</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ignore SSL errors</source>
         <translation type="unfinished"></translation>
     </message>

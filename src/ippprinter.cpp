@@ -510,9 +510,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
     QString PaperSize = getAttrOrDefault(jobAttrs, "media").toString();
-    bool alwaysUseMediaCol = Settings::instance()->alwaysUseMediaCol();
 
-    if((jobAttrs.contains("media-col") || alwaysUseMediaCol) && jobAttrs.contains("media"))
+    if(jobAttrs.contains("media-col") && jobAttrs.contains("media"))
     {
         qDebug() << "moving media to media-col" << PaperSize;
         if(!PaperSizes.contains(PaperSize))

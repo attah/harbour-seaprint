@@ -549,14 +549,6 @@
         <translation>如果没有安装可选的依赖程序，则显示警告页面。</translation>
     </message>
     <message>
-        <source>Always use media-col</source>
-        <translation>总是使用media-col</translation>
-    </message>
-    <message>
-        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation>纸张尺寸使用特性 media-col 而不是 media 。即对打印介质进行参数化选择，而不是按名称选择。 如果您使用零打印页边距，则无论此设置如何，都将使用参数选择。</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>设置</translation>
     </message>

@@ -549,14 +549,6 @@
         <translation>Waarschuwingspagina weergeven over optionele afhankelijkheden die niet worden geïnstalleerd, als ze niet zijn geïnstalleerd.</translation>
     </message>
     <message>
-        <source>Always use media-col</source>
-        <translation>Altijd media-col gebruiken</translation>
-    </message>
-    <message>
-        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation>Het kenmerk media-col gebruiken in plaats van media voor papierformaten. D.w.z. parametrische selectie maken van gedrukte media in plaats van op naam. Als u geen afdrukmarges gebruikt, wordt parametrische selectie gebruikt, ongeacht deze instelling.</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>

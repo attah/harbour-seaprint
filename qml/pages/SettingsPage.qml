@@ -45,15 +45,6 @@ Page {
             }
 
             TextSwitch {
-                text: qsTr("Always use media-col")
-                description: qsTr("Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.")
-                checked: alwaysUseMediaColSetting.value
-                onCheckedChanged: {
-                    alwaysUseMediaColSetting.value = checked
-                }
-            }
-
-            TextSwitch {
                 text: qsTr("Ignore SSL errors")
                 description: qsTr("In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.")
                 checked: ignoreSslErrorsSetting.value

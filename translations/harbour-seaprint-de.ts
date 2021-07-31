@@ -549,14 +549,6 @@
         <translation>Warnseite über nicht installierte optionalen Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
     </message>
     <message>
-        <source>Always use media-col</source>
-        <translation>Immer media-col nutzen</translation>
-    </message>
-    <message>
-        <source>Use the attribute media-col instead of media for paper sizes. I.e. do parametric selection of print media rather than by name. If you use zero print margins, parametric selection will be used regardless of this setting.</source>
-        <translation>Das Attribut media-col anstelle des Papierformats benutzen. Das bedeutet, dass eine Auswahl über Parameter anstatt eines Namens erfolgt. Wenn keine Seitenränder aktiviert sind, wird unabhängig von der Einstellung die Parameter Auswahl benutzt.</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
