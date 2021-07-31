@@ -7,17 +7,17 @@ Setting {
     property var preferred_choices: []
     property string preferred_choice_suffix: ""
 
-    property var limited_choices: Utils.limitChoices(name, choices, parent.selectedFileType)
+    property var actual_choices: Utils.fixupChoices(name, choices, parent.selectedFileType)
 
     property int num_large_choices: 8
 
     displayValue: Utils.ippName(name, choice != undefined ? choice : default_choice)
 
     onClicked: {
-        if(limited_choices.length>num_large_choices)
+        if(actual_choices.length>num_large_choices)
         {
             var dialog = pageStack.push("LargeChoiceDialog.qml",
-                                        {name:name, choice: choice != undefined ? choice : default_choice, choices: limited_choices,
+                                        {name:name, choice: choice != undefined ? choice : default_choice, choices: actual_choices,
                                          preferred_choices: preferred_choices, preferred_choice_suffix: preferred_choice_suffix})
             dialog.accepted.connect(function() {
                                         choice = dialog.choice
@@ -31,20 +31,20 @@ Setting {
 
     menu: ContextMenu {
         Repeater {
-            model: limited_choices.length>num_large_choices ? 0 : limited_choices
+            model: actual_choices.length>num_large_choices ? 0 : actual_choices
             MenuItem {
-                text: Utils.ippName(name, limited_choices[index])
-                      + (Utils.has(preferred_choices, limited_choices[index]) ? " "+preferred_choice_suffix : "")
+                text: Utils.ippName(name, actual_choices[index])
+                      + (Utils.has(preferred_choices, actual_choices[index]) ? " "+preferred_choice_suffix : "")
                 onClicked:
                 {
-                    choice = limited_choices[index];
+                    choice = actual_choices[index];
                 }
             }
         }
 
     }
 
-    hasMenu: !limited_choices.length>num_large_choices
+    hasMenu: !actual_choices.length>num_large_choices
 
 
 }

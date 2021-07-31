@@ -9,7 +9,7 @@ Item {
     {
         for(var i in values)
         {
-            if(target.limited_choices.indexOf(values[i]) != -1)
+            if(target.actual_choices.indexOf(values[i]) != -1)
             {
                 overlap.push(values[i])
             }

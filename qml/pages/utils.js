@@ -403,7 +403,7 @@ function unitsIsDpi(resolution)
 }
 
 
-function limitChoices(name, choices, mimeType)
+function fixupChoices(name, choices, mimeType)
 {
     switch(name) {
     case "document-format":
