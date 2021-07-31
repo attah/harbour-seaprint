@@ -193,9 +193,9 @@ try {
         qDebug() << "Unsupported paper size" << PaperSize;
         throw ConvertFailedException(tr("Unsupported paper size"));
     }
-    QPair<float,float> wh = PaperSizes[PaperSize];
-    quint32 Width = qRound(wh.first/25.4*HwResX);
-    quint32 Height = qRound(wh.second/25.4*HwResY);
+    QSizeF size = PaperSizes[PaperSize];
+    quint32 Width = qRound(size.width()/25.4*HwResX);
+    quint32 Height = qRound(size.height()/25.4*HwResY);
 
     qDebug() << "Size is" << Width << "x" << Height;
 
@@ -228,7 +228,7 @@ try {
         tmpPdfFile.open();
         QPdfWriter pdfWriter(tmpPdfFile.fileName());
         pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
-        QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
+        QPageSize pageSize(size, QPageSize::Millimeter);
         pdfWriter.setPageSize(pageSize);
         pdfWriter.setResolution(HwResX);
         QPainter painter(&pdfWriter);
@@ -452,7 +452,7 @@ try {
         qDebug() << "Unsupported paper size" << PaperSize;
         throw ConvertFailedException(tr("Unsupported paper size"));
     }
-    QPair<float,float> wh = PaperSizes[PaperSize];
+    QSizeF size = PaperSizes[PaperSize];
 
     QFile inFile(filename);
     if(!inFile.open(QIODevice::ReadOnly))
@@ -467,7 +467,7 @@ try {
 
     QPdfWriter pdfWriter(tmpPdfFile.fileName());
     pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
-    QPageSize pageSize(QSizeF {wh.first, wh.second}, QPageSize::Millimeter);
+    QPageSize pageSize(size, QPageSize::Millimeter);
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
 

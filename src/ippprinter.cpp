@@ -521,8 +521,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
             return;
         }
 
-        int x = PaperSizes[PaperSize].first*100;
-        int y = PaperSizes[PaperSize].second*100;
+        int x = PaperSizes[PaperSize].width()*100;
+        int y = PaperSizes[PaperSize].height()*100;
 
         QJsonObject Dimensions =
             {{"tag", IppMsg::BeginCollection},

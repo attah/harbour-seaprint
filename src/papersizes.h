@@ -1,9 +1,9 @@
 #ifndef PAPERSIZES_H
 #define PAPERSIZES_H
 #include <QMap>
-#include <QPair>
+#include <QSizeF>
 
-static QMap<QString, QPair<float,float>> PaperSizes =
+static QMap<QString, QSizeF> PaperSizes =
    {{"asme_f_28x40in",               {711.20,   1016.00}},
     {"iso_2a0_1189x1682mm",          {1189.00,  1682.00}},
     {"iso_a0_841x1189mm",            {841.00,   1189.00}},
