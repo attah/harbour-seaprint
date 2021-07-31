@@ -125,7 +125,7 @@ Page {
                 tag: IppMsg.Integer
                 name: "number-up"
                 prettyName: qsTr("Pages per page")
-                valid: !Mimer.isImage(selectedFileType)
+                valid: _valid && !Mimer.isImage(selectedFileType)
                 DependentOn {
                     target: transferFormatSetting
                     values: [Mimer.PDF, Mimer.Postscript]
