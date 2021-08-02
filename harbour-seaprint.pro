@@ -60,7 +60,6 @@ DISTFILES += qml/harbour-seaprint.qml \
     rpm/harbour-seaprint.changes.in \
     rpm/harbour-seaprint.changes.run.in \
     rpm/harbour-seaprint.spec \
-    rpm/harbour-seaprint.yaml \
     translations/*.ts \
     harbour-seaprint.desktop
 
