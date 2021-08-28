@@ -9,36 +9,23 @@ Q_DECLARE_METATYPE(QMargins)
 
 IppPrinter::IppPrinter()
 {
-    _nam = new QNetworkAccessManager(this);
-    _print_nam = new QNetworkAccessManager(this);
-    _jobs_nam = new QNetworkAccessManager(this);
-    _job_cancel_nam = new QNetworkAccessManager(this);
-
-    connect(_nam, &QNetworkAccessManager::finished, this, &IppPrinter::getPrinterAttributesFinished);
-    connect(_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
-
-    connect(_print_nam, &QNetworkAccessManager::finished, this, &IppPrinter::printRequestFinished);
-    connect(_print_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
-
-    connect(_jobs_nam, &QNetworkAccessManager::finished,this, &IppPrinter::getJobsRequestFinished);
-    connect(_jobs_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
-
-    connect(_job_cancel_nam, &QNetworkAccessManager::finished,this, &IppPrinter::cancelJobFinished);
-    connect(_job_cancel_nam, &QNetworkAccessManager::sslErrors, this, &IppPrinter::onSslErrors);
-
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
 
-    _worker = new ConvertWorker;
+    _worker = new ConvertWorker(this);
     _worker->moveToThread(&_workerThread);
 
     connect(&_workerThread, &QThread::finished, _worker, &QObject::deleteLater);
+
+    connect(this, &IppPrinter::doCommand, _worker, &ConvertWorker::command);
+    connect(this, &IppPrinter::doGetJobs, _worker, &ConvertWorker::getJobs);
+    connect(this, &IppPrinter::doCancelJob, _worker, &ConvertWorker::cancelJob);
+    connect(this, &IppPrinter::doJustUpload, _worker, &ConvertWorker::justUpload);
 
     connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
     connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &ConvertWorker::convertOfficeDocument);
     connect(this, &IppPrinter::doConvertPlaintext, _worker, &ConvertWorker::convertPlaintext);
-    connect(_worker, &ConvertWorker::done, this, &IppPrinter::convertDone);
     connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
 
@@ -49,10 +36,8 @@ IppPrinter::IppPrinter()
 }
 
 IppPrinter::~IppPrinter() {
-    delete _nam;
-    delete _print_nam;
-    delete _jobs_nam;
-    delete _job_cancel_nam;
+    // TODO: delete worker and workerthread?
+
 }
 
 QJsonObject IppPrinter::opAttrs() {
@@ -112,11 +97,6 @@ void IppPrinter::refresh() {
 //    _additionalDocumentFormats = QStringList();
 //    emit additionalDocumentFormatsChanged();
 
-    // FFFFUUUU
-    _nam->clearAccessCache();
-    _jobs_nam->clearAccessCache();
-    _job_cancel_nam->clearAccessCache();
-    _print_nam->clearAccessCache();
 
     if(_url.scheme() == "file")
     {
@@ -138,11 +118,10 @@ void IppPrinter::refresh() {
     }
     else
     {
-        QNetworkRequest request = mkReq();
         QJsonObject o = opAttrs();
 
         IppMsg msg = IppMsg(o);
-        _nam->post(request, msg.encode(IppMsg::GetPrinterAttrs));
+        emit doCommand(msg.encode(IppMsg::GetPrinterAttrs));
     }
 }
 
@@ -175,15 +154,15 @@ void IppPrinter::UpdateAdditionalDocumentFormats()
     emit additionalDocumentFormatsChanged();
 }
 
-void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
+void IppPrinter::getPrinterAttributesFinished(CURLcode res, QByteArray data)
 {
-    qDebug() << reply->request().url() << reply->error() << reply->errorString() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
+    qDebug() << res;
     _attrs = QJsonObject();
 
-    if(reply->error()  == QNetworkReply::NoError)
+    if(res == CURLE_OK)
     {
         try {
-            IppMsg resp(reply);
+            IppMsg resp(data);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
             _attrs = resp.getPrinterAttrs();
             Overrider::instance()->apply(_attrs);
@@ -200,14 +179,15 @@ void IppPrinter::getPrinterAttributesFinished(QNetworkReply *reply)
     UpdateAdditionalDocumentFormats();
 }
 
-void IppPrinter::printRequestFinished(QNetworkReply *reply)
+void IppPrinter::printRequestFinished(CURLcode res, QByteArray data)
 {
     _jobAttrs = QJsonObject();
     bool status = false;
-    if(reply->error()  == QNetworkReply::NoError)
+
+    if(res == CURLE_OK)
     {
         try {
-            IppMsg resp(reply);
+            IppMsg resp(data);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             _jobAttrs = resp.getJobAttrs()[0].toObject();
             if(resp.getOpAttrs().keys().contains("status-message"))
@@ -226,16 +206,17 @@ void IppPrinter::printRequestFinished(QNetworkReply *reply)
         _jobAttrs.insert("job-state-message", QJsonObject {{"tag", IppMsg::TextWithoutLanguage},
                                                            {"value", "Network error"}});
     }
+
     emit jobAttrsChanged();
     emit jobFinished(status);
 }
 
-void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
+void IppPrinter::getJobsRequestFinished(CURLcode res, QByteArray data)
 {
-    if(reply->error()  == QNetworkReply::NoError)
+    if(res == CURLE_OK)
     {
         try {
-            IppMsg resp(reply);
+            IppMsg resp(data);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             _jobs = resp.getJobAttrs();
             emit jobsChanged();
@@ -248,13 +229,13 @@ void IppPrinter::getJobsRequestFinished(QNetworkReply *reply)
 }
 
 
-void IppPrinter::cancelJobFinished(QNetworkReply *reply)
+void IppPrinter::cancelJobFinished(CURLcode res, QByteArray data)
 {
     bool status = false;
-    if(reply->error()  == QNetworkReply::NoError)
+    if(res == CURLE_OK)
     {
         try {
-            IppMsg resp(reply);
+            IppMsg resp(data);
             qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getJobAttrs();
             status = resp.getStatus() <= 0xff;
         }
@@ -282,19 +263,6 @@ void IppPrinter::ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &e
     {
         reply->ignoreSslErrors(errors);
     }
-}
-
-void IppPrinter::convertDone(QNetworkRequest request, QTemporaryFile* data)
-{
-    connect(_print_nam, SIGNAL(finished(QNetworkReply*)), data, SLOT(deleteLater()));
-    data->open();
-
-    setBusyMessage(tr("Transferring"));
-
-    QNetworkReply* reply = _print_nam->post(request, data);
-
-    connect(reply, &QNetworkReply::uploadProgress, this, &IppPrinter::setProgress);
-
 }
 
 void IppPrinter::convertFailed(QString message)
@@ -484,9 +452,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     _progress = "";
     emit progressChanged();
 
-    QFile file(filename);
-    bool file_ok = file.open(QIODevice::ReadOnly);
-    if(!file_ok)
+    QFileInfo fileinfo(filename);
+
+    if(!fileinfo.exists())
     {
         emit convertFailed(tr("Failed to open file"));
         return;
@@ -503,8 +471,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
-
-    QFileInfo fileinfo(file);
 
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
@@ -558,8 +524,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     qDebug() << "Printing job" << o << jobAttrs;
 
-    QNetworkRequest request = mkReq();
-
     QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
     quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt(300);
     quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt(300);
@@ -610,18 +574,12 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
        && (documentFormat == Mimer::JPEG || !Mimer::isImage(mimeType))
        && !((documentFormat == Mimer::PDF) && pdfPageRangeAdjustNeeded))
     {
-        QByteArray filedata = file.readAll();
-        contents = contents.append(filedata);
-        file.close();
 
-        setBusyMessage(tr("Transferring"));
-        QNetworkReply* reply = _print_nam->post(request, contents);
-        connect(reply, &QNetworkReply::uploadProgress, this, &IppPrinter::setProgress);
+        emit doJustUpload(filename, contents);
+
     }
     else
     {
-        file.close();
-
         if(PaperSize == "")
         {
             PaperSize = "iso_a4_210x297mm";
@@ -631,12 +589,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
             emit convertFailed(tr("Unsupported print media"));
             return;
         }
-
-        QTemporaryFile* tempfile = new QTemporaryFile();
-        tempfile->open();
-        tempfile->write(contents);
-        qDebug() << tempfile->fileName();
-        tempfile->close();
 
         bool TwoSided = false;
         bool Tumble = false;
@@ -654,13 +606,13 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
         if(mimeType == Mimer::PDF)
         {
-            emit doConvertPdf(request, filename, tempfile, documentFormat, Colors, Quality,
+            emit doConvertPdf(filename, contents, documentFormat, Colors, Quality,
                               PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
                               BackHFlip, BackVFlip);
         }
         else if(mimeType == Mimer::Plaintext)
         {
-            emit doConvertPlaintext(request, filename, tempfile, documentFormat, Colors, Quality,
+            emit doConvertPlaintext(filename, contents, documentFormat, Colors, Quality,
                                     PaperSize, HwResX, HwResY, TwoSided, Tumble, BackHFlip, BackVFlip);
         }
         else if (Mimer::isImage(mimeType))
@@ -670,12 +622,12 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
                              getAttrOrDefault(jobAttrs, "media-right-margin", "media-col").toInt(),
                              getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
 
-            emit doConvertImage(request, filename, tempfile, documentFormat, Colors, Quality,
+            emit doConvertImage(filename, contents, documentFormat, Colors, Quality,
                                 PaperSize, HwResX, HwResY, margins);
         }
         else if(Mimer::isOffice(mimeType))
         {
-            emit doConvertOfficeDocument(request, filename, tempfile, documentFormat, Colors, Quality,
+            emit doConvertOfficeDocument(filename, contents, documentFormat, Colors, Quality,
                                          PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
                                          BackHFlip, BackVFlip);
         }
@@ -697,11 +649,7 @@ bool IppPrinter::getJobs() {
 
     IppMsg job = IppMsg(o, QJsonObject());
 
-    QNetworkRequest request = mkReq();
-
-    QByteArray contents = job.encode(IppMsg::GetJobs);
-
-    _jobs_nam->post(request, contents);
+    emit doGetJobs(job.encode(IppMsg::GetJobs));
 
     return true;
 }
@@ -715,12 +663,7 @@ bool IppPrinter::cancelJob(qint32 jobId) {
 
     IppMsg job = IppMsg(o, QJsonObject());
 
-    QNetworkRequest request = mkReq();
-
-    QByteArray contents = job.encode(IppMsg::CancelJob);
-
-
-    _job_cancel_nam->post(request, contents);
+    emit doCancelJob(job.encode(IppMsg::CancelJob));
 
     return true;
 }
@@ -776,16 +719,6 @@ QUrl IppPrinter::httpUrl() {
         }
     }
     return url;
-}
-
-QNetworkRequest IppPrinter::mkReq() {
-    QNetworkRequest request;
-    request.setUrl(httpUrl());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/ipp");
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
-    request.setRawHeader("Accept-Encoding", "identity");
-    request.setSslConfiguration(QSslConfiguration());
-    return request;
 }
 
 void IppPrinter::setBusyMessage(QString msg)

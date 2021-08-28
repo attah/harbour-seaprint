@@ -331,10 +331,6 @@
         <translation>未知稳定格式尺寸</translation>
     </message>
     <message>
-        <source>Transferring</source>
-        <translation>正在传输</translation>
-    </message>
-    <message>
         <source>Converting</source>
         <translation>正在转换</translation>
     </message>

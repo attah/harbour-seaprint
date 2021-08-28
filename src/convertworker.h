@@ -2,6 +2,9 @@
 #define CONVERTWORKER_H
 #include <QObject>
 #include <QtNetwork>
+#include "curliodevice.h"
+
+class IppPrinter;
 
 class ConvertFailedException: public std::exception
 {
@@ -21,22 +24,34 @@ class ConvertWorker : public QObject
 {
     Q_OBJECT
 
+public:
+    ConvertWorker(IppPrinter* parent);
+
+private:
+    ConvertWorker();
+
 public slots:
-    void convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+    void command(QByteArray msg);
+    void getJobs(QByteArray msg);
+    void cancelJob(QByteArray msg);
+
+    void justUpload(QString filename, QByteArray header);
+
+    void convertPdf(QString filename, QByteArray header,
                     QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                     quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+    void convertImage(QString filename, QByteArray header,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY, QMargins margins);
 
-    void convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+    void convertOfficeDocument(QString filename, QByteArray header,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void convertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+    void convertPlaintext(QString filename, QByteArray header,
                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
@@ -46,6 +61,8 @@ signals:
     void failed(QString message);
 
 private:
+
+    IppPrinter* _printer;
 
     QString getPopplerShortPaperSize(QString PaperSize);
 

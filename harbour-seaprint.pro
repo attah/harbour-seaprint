@@ -27,7 +27,8 @@ system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
 QT += svg
-PKGCONFIG += mlite5
+PKGCONFIG += mlite5 libcurl
+LIBS += -lcurl
 
 # Write version file
 VERSION_H = \
@@ -39,6 +40,8 @@ write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
 SOURCES += src/harbour-seaprint.cpp \
     src/convertchecker.cpp \
     src/convertworker.cpp \
+    src/curliodevice.cpp \
+    src/curlworker.cpp \
     src/ippdiscovery.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
@@ -83,6 +86,8 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 HEADERS += \
     src/convertchecker.h \
     src/convertworker.h \
+    src/curliodevice.h \
+    src/curlworker.h \
     src/ippdiscovery.h \
     src/ippmsg.h \
     src/ippprinter.h \

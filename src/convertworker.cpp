@@ -10,6 +10,7 @@
 #include <QTextDocument>
 #include <QPdfWriter>
 #include <QAbstractTextDocumentLayout>
+#include "ippprinter.h"
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
@@ -56,7 +57,57 @@ void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
     }
 }
 
-void ConvertWorker::convertPdf(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) borks multithereading?!
+{
+    _printer = parent;
+}
+
+void ConvertWorker::command(QByteArray msg)
+{
+    CurlIODevice cid(_printer->httpUrl());
+    cid.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
+
+    qDebug() << "command...";
+
+    cid.write(msg.data(), msg.length());
+}
+
+// TODO: de-duplicate
+void ConvertWorker::getJobs(QByteArray msg)
+{
+    CurlIODevice cid(_printer->httpUrl());
+    cid.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
+
+    cid.write(msg.data(), msg.length());
+}
+
+void ConvertWorker::cancelJob(QByteArray msg)
+{
+    CurlIODevice cid(_printer->httpUrl());
+    cid.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
+
+    cid.write(msg.data(), msg.length());
+}
+
+void ConvertWorker::justUpload(QString filename, QByteArray header)
+{
+    qDebug() << "justupload";
+
+    CurlIODevice cid(_printer->httpUrl());
+    cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+
+    qDebug() << "justupload cp set";
+
+    QFile file(filename);
+    file.open(QFile::ReadOnly);
+
+    cid.write(header.data(), header.length());
+    QByteArray tmp = file.readAll();
+    cid.write(tmp.data(), tmp.length());
+    file.close();
+}
+
+void ConvertWorker::convertPdf(QString filename, QByteArray header,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -116,40 +167,41 @@ try {
         throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
-
+    QTemporaryFile tempfile;
+    tempfile.open();
+    tempfile.close();
 
     if(ps)
     {
-        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, filename, tempfile);
+        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, filename, &tempfile);
     }
     else if(pdf)
     {
-        adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, filename, tempfile);
+        adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, filename, &tempfile);
     }
     else
     {
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
                     PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
-                    filename, tempfile, true);
+                    filename, &tempfile, true);
 
     }
 
 
     qDebug() << "Finished";
 
-    emit done(request, tempfile);
+    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
 catch(const ConvertFailedException& e)
 {
-        tempfile->deleteLater();
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
 }
 
-void ConvertWorker::convertImage(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+void ConvertWorker::convertImage(QString filename, QByteArray header,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY, QMargins margins)
 {
@@ -222,6 +274,10 @@ try {
     inImage = inImage.scaled(Width-totalXMarginPx, Height-totalYMarginPx,
                              Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
+    QTemporaryFile tempfile;
+    tempfile.open();
+    tempfile.close();
+
     if(pdfOrPostscript)
     {
         QTemporaryFile tmpPdfFile;
@@ -239,14 +295,14 @@ try {
 
         if(targetFormat == Mimer::PDF)
         {
-            QFile tempfileAsFile(tempfile->fileName());
+            QFile tempfileAsFile(tempfile.fileName());
             tempfileAsFile.open(QIODevice::Append);
             tempfileAsFile.write(tmpPdfFile.readAll());
             tempfileAsFile.close();
         }
         else if(targetFormat == Mimer::Postscript)
         {
-            pdftoPs(PaperSize, false, 0, 0, tmpPdfFile.fileName(), tempfile);
+            pdftoPs(PaperSize, false, 0, 0, tmpPdfFile.fileName(), &tempfile);
         }
 
     }
@@ -263,7 +319,7 @@ try {
         if(imageFormat != "")
         { // We are converting to a supported image format
 
-            QFile tempfileAsFile(tempfile->fileName());
+            QFile tempfileAsFile(tempfile.fileName());
             tempfileAsFile.open(QIODevice::Append);
             outImage.save(&tempfileAsFile, imageFormat.toStdString().c_str());
             tempfileAsFile.close();
@@ -280,7 +336,7 @@ try {
             qDebug() << "ppm2pwg env is " << env;
 
             ppm2pwg.setEnvironment(env);
-            ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+            ppm2pwg.setStandardOutputFile(tempfile.fileName(), QIODevice::WriteOnly);
 
             qDebug() << "All connected";
             ppm2pwg.start();
@@ -304,19 +360,17 @@ try {
         }
     }
 
-
-    emit done(request, tempfile);
+    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
 catch(const ConvertFailedException& e)
 {
-    tempfile->deleteLater();
     emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
 }
 
-void ConvertWorker::convertOfficeDocument(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+void ConvertWorker::convertOfficeDocument(QString filename, QByteArray header,
                                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                           quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -395,6 +449,10 @@ try {
 
     qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
 
+    QTemporaryFile tempfile;
+    tempfile.open();
+    tempfile.close();
+
     if(targetFormat == Mimer::PDF)
     {
 
@@ -402,12 +460,12 @@ try {
         {
             qDebug() << "adjusting pages in PDF" << PageRangeLow << PageRangeHigh;
 
-            adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), tempfile);
+            adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), &tempfile);
 
         }
         else
         {
-            QFile tempfileAsFile(tempfile->fileName());
+            QFile tempfileAsFile(tempfile.fileName());
             tempfileAsFile.open(QIODevice::Append);
             tempfileAsFile.write(tmpPdfFile.readAll());
             tempfileAsFile.close();
@@ -416,7 +474,7 @@ try {
     }
     else if(targetFormat == Mimer::Postscript)
     {
-        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), tempfile);
+        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), &tempfile);
     }
     else
     {
@@ -424,23 +482,22 @@ try {
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
                     PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
-                    tmpPdfFile.fileName(), tempfile, false);
+                    tmpPdfFile.fileName(), &tempfile, false);
     }
 
     qDebug() << "Finished";
 
-    emit done(request, tempfile);
+    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
 catch(const ConvertFailedException& e)
 {
-        tempfile->deleteLater();
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
 }
 
-void ConvertWorker::convertPlaintext(QNetworkRequest request, QString filename, QTemporaryFile* tempfile,
+void ConvertWorker::convertPlaintext(QString filename, QByteArray header,
                                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                      bool BackHFlip, bool BackVFlip)
@@ -581,34 +638,37 @@ try {
 
     painter.end();
 
+    QTemporaryFile tempfile;
+    tempfile.open();
+    tempfile.close();
 
     if(targetFormat == Mimer::PDF)
     {
-        QFile tempfileAsFile(tempfile->fileName());
+        QFile tempfileAsFile(tempfile.fileName());
         tempfileAsFile.open(QIODevice::Append);
         tempfileAsFile.write(tmpPdfFile.readAll());
         tempfileAsFile.close();
     }
     else if(targetFormat == Mimer::Postscript)
     {
-        pdftoPs(PaperSize, TwoSided, 0, 0, tmpPdfFile.fileName(), tempfile);
+        pdftoPs(PaperSize, TwoSided, 0, 0, tmpPdfFile.fileName(), &tempfile);
     }
     else
     {
         pdfToRaster(targetFormat, Colors, Quality, PaperSize,
                     HwResX, HwResY, TwoSided, Tumble,
                     0, 0, pageCount, BackHFlip, BackVFlip,
-                    tmpPdfFile.fileName(), tempfile, false);
+                    tmpPdfFile.fileName(), &tempfile, false);
     }
 
     qDebug() << "Finished";
 
-    emit done(request, tempfile);
+    justUpload(tempfile.fileName(), header);
+    qDebug() << "posted";
 
 }
 catch(const ConvertFailedException& e)
 {
-        tempfile->deleteLater();
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
 }
@@ -656,7 +716,7 @@ void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, qui
     qDebug() << "pdftocairo args is " << PdfToCairoArgs;
     pdftocairo.setArguments(PdfToCairoArgs);
 
-    pdftocairo.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+    pdftocairo.setStandardOutputFile(tempfile->fileName(), QIODevice::WriteOnly);
 
     pdftocairo.start();
 
@@ -791,7 +851,7 @@ void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Qu
     ppm2pwg.setEnvironment(env);
 
     pdftoppm.setStandardOutputProcess(&ppm2pwg);
-    ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
+    ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::WriteOnly);
 
     qDebug() << "All connected";
 

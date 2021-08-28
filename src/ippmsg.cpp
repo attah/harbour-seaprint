@@ -62,6 +62,48 @@ IppMsg::IppMsg(QNetworkReply* resp)
     }
 }
 
+IppMsg::IppMsg(QByteArray resp)
+{
+    Bytestream bts(resp.constData(), resp.length());
+
+    quint32 reqId;
+
+    bts >> _majVsn >> _minVsn >> _status >> reqId;
+
+    QJsonObject attrs;
+    IppMsg::IppTag currentAttrType = IppTag::EndAttrs;
+
+    while(!bts.atEnd())
+    {
+        if(bts.peekU8() <= IppTag::UnsupportedAttrs) {
+
+            if(currentAttrType == IppTag::OpAttrs) {
+                _opAttrs = attrs;
+            }
+            else if (currentAttrType == IppTag::JobAttrs) {
+                _jobAttrs.append(attrs);
+            }
+            else if (currentAttrType == IppTag::PrinterAttrs) {
+                _printerAttrs = attrs;
+            }
+            else if (currentAttrType == IppTag::UnsupportedAttrs) {
+                qDebug() << "WARNING: unsupported attrs reported:" << attrs;
+            }
+
+            if(bts >>= (uint8_t)IppTag::EndAttrs) {
+                break;
+            }
+
+            currentAttrType = (IppTag)bts.getU8();
+            attrs = QJsonObject();
+
+        }
+        else {
+            consume_attribute(attrs, bts);
+        }
+    }
+}
+
 QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
 {
     QJsonValue value;

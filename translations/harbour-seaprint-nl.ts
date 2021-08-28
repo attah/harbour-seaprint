@@ -331,10 +331,6 @@
         <translation>Onbekende afmetingen van documentformaat</translation>
     </message>
     <message>
-        <source>Transferring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Converting</source>
         <translation type="unfinished"></translation>
     </message>

@@ -15,6 +15,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Svg)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(libcurl)
 
 %description
 Network printing for Sailfish OS

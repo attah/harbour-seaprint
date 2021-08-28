@@ -67,6 +67,7 @@ public:
 
     explicit IppMsg();
     explicit IppMsg(QNetworkReply* resp);
+    explicit IppMsg(QByteArray resp);
     IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject(), quint8 majVsn=1, quint8 minVsn=1);
     IppMsg(const IppMsg& other) = default;
     ~IppMsg();
