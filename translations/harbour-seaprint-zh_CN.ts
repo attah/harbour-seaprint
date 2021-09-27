@@ -405,12 +405,12 @@
         <translation>安装 calligra:</translation>
     </message>
     <message>
-        <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, circa Sailfish OS 4.2).</source>
-        <translation>如果想要打印office文档，例如odt或doc(x)，你还需要来自calligra包的calligraconverter（版本3.2.1+, 旗鱼系统4.2)。</translation>
-    </message>
-    <message>
         <source>(done)</source>
         <translation>（已完成）</translation>
+    </message>
+    <message>
+        <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -42,7 +42,7 @@ Page {
             wrapMode: Text.WordWrap
 
             text: qsTr("In order to print \"office\" documents like odt and doc(x) you <i>also</i> need "+
-                       "\"calligraconverter\" from the \"calligra\" package (version 3.2.1+, circa Sailfish OS 4.2).")
+                       "\"calligraconverter\" from the \"calligra\" package (version 3.2.1+, Sailfish OS 4.2).")
         }
 
         Label {

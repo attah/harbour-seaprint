@@ -13,7 +13,7 @@ ApplicationWindow
 {
     id: appWin
 
-    property bool expectCalligra: false
+    property bool expectCalligra: true
 
     initialPage: Component { FirstPage { selectedFile: Qt.application.arguments[1] ? Qt.application.arguments[1] : "" } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
