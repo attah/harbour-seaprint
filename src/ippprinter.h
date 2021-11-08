@@ -5,7 +5,7 @@
 #include <QNetworkAccessManager>
 #include "ippmsg.h"
 #include "convertworker.h"
-#include "curliodevice.h"
+#include "curlrequester.h"
 #include <mlite5/MGConfItem>
 
 class IppPrinter : public QObject

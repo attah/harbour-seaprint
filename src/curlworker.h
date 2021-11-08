@@ -2,6 +2,7 @@
 #define CURLWORKER_H
 
 #include <QThread>
+#include <QUrl>
 #include <curl/curl.h>
 #include <QtDebug>
 
@@ -9,12 +10,13 @@ class CurlWorker : public QThread
 {
     Q_OBJECT
 public:
-    CurlWorker(CURL* curl);
+    CurlWorker(QUrl addr, void* parent);
+    ~CurlWorker();
+
     void run() override;
 
     static size_t write_callback(char *ptr, size_t size, size_t nmemb, void* userdata)
     {
-        qDebug() << "writing resp" << size*nmemb;
         size_t bytes_to_write = size*nmemb;
         ((QByteArray*)userdata)->append(ptr, bytes_to_write);
         return bytes_to_write;
@@ -41,6 +43,7 @@ private:
 
     CurlWorker();
     CURL* _curl = nullptr;
+    struct curl_slist* _opts;
 };
 
 

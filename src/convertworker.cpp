@@ -11,6 +11,7 @@
 #include <QPdfWriter>
 #include <QAbstractTextDocumentLayout>
 #include "ippprinter.h"
+#include "pdf2printable.h"
 
 void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
@@ -64,7 +65,7 @@ ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) 
 
 void ConvertWorker::command(QByteArray msg)
 {
-    CurlIODevice cid(_printer->httpUrl());
+    CurlRequester cid(_printer->httpUrl());
     cid.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
 
     qDebug() << "command...";
@@ -75,7 +76,7 @@ void ConvertWorker::command(QByteArray msg)
 // TODO: de-duplicate
 void ConvertWorker::getJobs(QByteArray msg)
 {
-    CurlIODevice cid(_printer->httpUrl());
+    CurlRequester cid(_printer->httpUrl());
     cid.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
 
     cid.write(msg.data(), msg.length());
@@ -83,7 +84,7 @@ void ConvertWorker::getJobs(QByteArray msg)
 
 void ConvertWorker::cancelJob(QByteArray msg)
 {
-    CurlIODevice cid(_printer->httpUrl());
+    CurlRequester cid(_printer->httpUrl());
     cid.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
 
     cid.write(msg.data(), msg.length());
@@ -93,10 +94,8 @@ void ConvertWorker::justUpload(QString filename, QByteArray header)
 {
     qDebug() << "justupload";
 
-    CurlIODevice cid(_printer->httpUrl());
+    CurlRequester cid(_printer->httpUrl());
     cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
-
-    qDebug() << "justupload cp set";
 
     QFile file(filename);
     file.open(QFile::ReadOnly);
@@ -113,87 +112,67 @@ void ConvertWorker::convertPdf(QString filename, QByteArray header,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
 {
 try {
+    Format format;
 
-    quint32 pages = ConvertChecker::instance()->pdfPages(filename);
-    if (!pages)
-    {
-        qDebug() << "pdfinfo returned 0 pages";
-        throw ConvertFailedException(tr("Failed to get info about PDF file"));
-    }
-
-    if(PageRangeLow==0)
-    {
-        PageRangeLow=1;
-    }
-
-    if(PageRangeHigh==0)
-    {
-        PageRangeHigh=pages;
-    }
-
-    // Actual number of pages to print
-    pages = PageRangeHigh-PageRangeLow+1;
-
-    qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
-
-    bool urf = false;
-    bool ps = false;
-    bool pdf = false;
+    qDebug() << "to pdf" << HwResX << HwResY;
 
     if(targetFormat == Mimer::URF)
     {
-        urf = true;
+        format = Format::URF;
     }
     else if(targetFormat == Mimer::PWG)
     {
-        //ok
+        format = Format::PWG;
     }
     else if(targetFormat == Mimer::Postscript)
     {
-        ps = true;
+        format = Format::Postscript;
     }
     else if (targetFormat == Mimer::PDF)
     {
-        pdf = true;
+        format = Format::PDF;
     }
     else
     {
         throw ConvertFailedException(tr("Unsupported target format"));
     }
 
-    if(urf && (HwResX != HwResY))
-    { // URF only supports symmetric resolutions
-        qDebug() << "Unsupported URF resolution" << PaperSize;
-        throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
-    }
-
-    QTemporaryFile tempfile;
-    tempfile.open();
-    tempfile.close();
-
-    if(ps)
+    if(Colors == 0)
     {
-        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, filename, &tempfile);
-    }
-    else if(pdf)
-    {
-        adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, filename, &tempfile);
-    }
-    else
-    {
-        pdfToRaster(targetFormat, Colors, Quality, PaperSize,
-                    HwResX, HwResY, TwoSided, Tumble,
-                    PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
-                    filename, &tempfile, true);
-
+        Colors = 3;
     }
 
+    CurlRequester cid(_printer->httpUrl());
+    cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+
+    cid.write(header.data(), header.length());
+
+    write_fun WriteFun([&cid](unsigned char const* buf, unsigned int len) -> bool
+              {
+                qDebug() << "wf called " << len;
+                cid.write((const char*)buf, len);
+                qDebug() << "wf returns " << len;
+                return true;
+              });
+
+    if(!PaperSizes.contains(PaperSize))
+    {
+        qDebug() << "Unsupported paper size" << PaperSize;
+        throw ConvertFailedException(tr("Unsupported paper size"));
+    }
+    QSizeF size = PaperSizes[PaperSize];
+    float Width = size.width();
+    float Height = size.height();
+
+    int res = pdf_to_printable(filename.toStdString(), WriteFun, Colors, Quality, PaperSize.toStdString(), Width, Height, HwResX, HwResY,
+                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh);
+
+    if(res != 0)
+    {
+        throw ConvertFailedException("Conversion failed");
+    }
 
     qDebug() << "Finished";
-
-    justUpload(tempfile.fileName(), header);
-    qDebug() << "posted";
-
 }
 catch(const ConvertFailedException& e)
 {

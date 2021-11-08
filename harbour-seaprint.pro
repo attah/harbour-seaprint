@@ -27,8 +27,8 @@ system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
 QT += svg
-PKGCONFIG += mlite5 libcurl
-LIBS += -lcurl
+PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
+LIBS += -lcurl -lpoppler -lcairo -lglib-2.0 -lgobject-2.0 -lpoppler-glib
 
 # Write version file
 VERSION_H = \
@@ -40,13 +40,14 @@ write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
 SOURCES += src/harbour-seaprint.cpp \
     src/convertchecker.cpp \
     src/convertworker.cpp \
-    src/curliodevice.cpp \
+    src/curlrequester.cpp \
     src/curlworker.cpp \
     src/ippdiscovery.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
     src/mimer.cpp \
     ppm2pwg/ppm2pwg.cpp \
+    ppm2pwg/pdf2printable.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
     src/settings.cpp \
@@ -86,12 +87,14 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 HEADERS += \
     src/convertchecker.h \
     src/convertworker.h \
-    src/curliodevice.h \
+    src/curlrequester.h \
     src/curlworker.h \
     src/ippdiscovery.h \
     src/ippmsg.h \
     src/ippprinter.h \
     src/mimer.h \
+    ppm2pwg/ppm2pwg.h \
+    ppm2pwg/pdf2printable.h \
     ppm2pwg/PwgPgHdr.h \
     ppm2pwg/PwgPgHdr.codable \
     ppm2pwg/UrfPgHdr.h \

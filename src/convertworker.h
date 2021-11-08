@@ -2,7 +2,7 @@
 #define CONVERTWORKER_H
 #include <QObject>
 #include <QtNetwork>
-#include "curliodevice.h"
+#include "curlrequester.h"
 
 class IppPrinter;
 

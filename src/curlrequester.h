@@ -1,5 +1,5 @@
-#ifndef CURLIODEVICE_H
-#define CURLIODEVICE_H
+#ifndef CURLREQUESTER_H
+#define CURLREQUESTER_H
 
 #include <QUrl>
 #include <QThread>
@@ -9,17 +9,17 @@
 #include <QDebug>
 #include "curlworker.h"
 
-class CurlIODevice : public QObject
+class CurlRequester : public QObject
 {
     Q_OBJECT
 public:
-    CurlIODevice(QUrl addr);
-    ~CurlIODevice();
+    CurlRequester(QUrl addr);
+    ~CurlRequester();
 
     template<typename Class, typename Callback>
     bool setFinishedCallback(const Class* receiverObject, Callback cb)
     {
-        connect(_performer, &CurlWorker::done, receiverObject, cb);
+        connect(&_performer, &CurlWorker::done, receiverObject, cb);
         return true;
     }
 
@@ -33,7 +33,6 @@ private:
     QUrl _addr;
     bool _open;
 
-    CurlWorker* _performer;
 
     QSemaphore _canWrite;
     QSemaphore _canRead;
@@ -44,6 +43,7 @@ private:
     size_t _size;
     size_t _offset;
 
+    CurlWorker _performer;
 };
 
-#endif // CURLIODEVICE_H
+#endif // CURLREQUESTER_H
