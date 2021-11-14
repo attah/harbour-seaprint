@@ -155,6 +155,11 @@ try {
                 return true;
               });
 
+    progress_fun ProgressFun([this](size_t page, size_t total) -> void
+              {
+                emit progress(page, total);
+              });
+
     if(!PaperSizes.contains(PaperSize))
     {
         qDebug() << "Unsupported paper size" << PaperSize;
@@ -165,7 +170,7 @@ try {
     float Height = size.height();
 
     int res = pdf_to_printable(filename.toStdString(), WriteFun, Colors, Quality, PaperSize.toStdString(), Width, Height, HwResX, HwResY,
-                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh);
+                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh, ProgressFun);
 
     if(res != 0)
     {
