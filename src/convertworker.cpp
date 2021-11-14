@@ -115,6 +115,8 @@ try {
     Format format;
 
     qDebug() << "to pdf" << HwResX << HwResY;
+    emit busyMessage(tr("Printing"));
+
 
     if(targetFormat == Mimer::URF)
     {
@@ -149,9 +151,7 @@ try {
 
     write_fun WriteFun([&cid](unsigned char const* buf, unsigned int len) -> bool
               {
-                qDebug() << "wf called " << len;
                 cid.write((const char*)buf, len);
-                qDebug() << "wf returns " << len;
                 return true;
               });
 
@@ -174,7 +174,7 @@ try {
 
     if(res != 0)
     {
-        throw ConvertFailedException("Conversion failed");
+        throw ConvertFailedException(tr("Conversion failed"));
     }
 
     qDebug() << "Finished";
@@ -277,17 +277,8 @@ try {
         painter.drawImage(xOffset, yOffset, inImage);
         painter.end();
 
-        if(targetFormat == Mimer::PDF)
-        {
-            QFile tempfileAsFile(tempfile.fileName());
-            tempfileAsFile.open(QIODevice::Append);
-            tempfileAsFile.write(tmpPdfFile.readAll());
-            tempfileAsFile.close();
-        }
-        else if(targetFormat == Mimer::Postscript)
-        {
-            pdftoPs(PaperSize, false, 0, 0, tmpPdfFile.fileName(), &tempfile);
-        }
+        convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize,
+                   HwResX, HwResY, false, false, 0, 0, false, false);
 
     }
     else
@@ -342,9 +333,9 @@ try {
 
             qDebug() << "Finished";
         }
+        justUpload(tempfile.fileName(), header);
     }
 
-    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
@@ -433,45 +424,11 @@ try {
 
     qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
 
-    QTemporaryFile tempfile;
-    tempfile.open();
-    tempfile.close();
-
-    if(targetFormat == Mimer::PDF)
-    {
-
-        if(PageRangeLow != 1 || PageRangeHigh != pages)
-        {
-            qDebug() << "adjusting pages in PDF" << PageRangeLow << PageRangeHigh;
-
-            adjustPageRange(PaperSize, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), &tempfile);
-
-        }
-        else
-        {
-            QFile tempfileAsFile(tempfile.fileName());
-            tempfileAsFile.open(QIODevice::Append);
-            tempfileAsFile.write(tmpPdfFile.readAll());
-            tempfileAsFile.close();
-        }
-
-    }
-    else if(targetFormat == Mimer::Postscript)
-    {
-        pdftoPs(PaperSize, TwoSided, PageRangeLow, PageRangeHigh, tmpPdfFile.fileName(), &tempfile);
-    }
-    else
-    {
-
-        pdfToRaster(targetFormat, Colors, Quality, PaperSize,
-                    HwResX, HwResY, TwoSided, Tumble,
-                    PageRangeLow, PageRangeHigh, pages, BackHFlip, BackVFlip,
-                    tmpPdfFile.fileName(), &tempfile, false);
-    }
+    convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble,
+               PageRangeLow, PageRangeHigh, BackHFlip, BackVFlip);
 
     qDebug() << "Finished";
 
-    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
@@ -622,32 +579,10 @@ try {
 
     painter.end();
 
-    QTemporaryFile tempfile;
-    tempfile.open();
-    tempfile.close();
-
-    if(targetFormat == Mimer::PDF)
-    {
-        QFile tempfileAsFile(tempfile.fileName());
-        tempfileAsFile.open(QIODevice::Append);
-        tempfileAsFile.write(tmpPdfFile.readAll());
-        tempfileAsFile.close();
-    }
-    else if(targetFormat == Mimer::Postscript)
-    {
-        pdftoPs(PaperSize, TwoSided, 0, 0, tmpPdfFile.fileName(), &tempfile);
-    }
-    else
-    {
-        pdfToRaster(targetFormat, Colors, Quality, PaperSize,
-                    HwResX, HwResY, TwoSided, Tumble,
-                    0, 0, pageCount, BackHFlip, BackVFlip,
-                    tmpPdfFile.fileName(), &tempfile, false);
-    }
+    convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize, HwResX, HwResY,
+               TwoSided, Tumble, 0, 0, BackHFlip, BackVFlip);
 
     qDebug() << "Finished";
-
-    justUpload(tempfile.fileName(), header);
     qDebug() << "posted";
 
 }
@@ -682,210 +617,4 @@ QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
         throw ConvertFailedException(tr("Unsupported PDF paper size"));
     }
     return ShortPaperSize;
-}
-
-void ConvertWorker::adjustPageRange(QString PaperSize, quint32 PageRangeLow, quint32 PageRangeHigh,
-                                    QString pdfFileName, QTemporaryFile* tempfile)
-{
-    QProcess pdftocairo(this);
-    pdftocairo.setProgram("pdftocairo");
-    QStringList PdfToCairoArgs = {"-pdf"};
-
-    QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
-
-    PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-
-    PdfToCairoArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
-
-    qDebug() << "pdftocairo args is " << PdfToCairoArgs;
-    pdftocairo.setArguments(PdfToCairoArgs);
-
-    pdftocairo.setStandardOutputFile(tempfile->fileName(), QIODevice::WriteOnly);
-
-    pdftocairo.start();
-
-    qDebug() << "Starting";
-
-    if(!pdftocairo.waitForStarted())
-    {
-        qDebug() << "pdftocairo died";
-        throw ConvertFailedException();
-    }
-
-    qDebug() << "Started";
-
-    if(!pdftocairo.waitForFinished(-1))
-    {
-        qDebug() << "pdftocairo failed";
-        throw ConvertFailedException();
-    }
-}
-
-void ConvertWorker::pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
-                            QString pdfFileName, QTemporaryFile* tempfile)
-{
-    QProcess pdftops(this);
-    pdftops.setProgram("pdftops");
-    QStringList PdfToPsArgs;
-    if(TwoSided)
-    {
-        PdfToPsArgs.append("-duplex");
-    }
-
-    QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
-
-    if(PageRangeLow != 0 && PageRangeHigh != 0)
-    {
-        PdfToPsArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-    }
-
-    PdfToPsArgs << QStringList {"-paper", ShortPaperSize, pdfFileName, "-"};
-
-    qDebug() << "pdftops args is " << PdfToPsArgs;
-    pdftops.setArguments(PdfToPsArgs);
-
-    pdftops.setStandardOutputFile(tempfile->fileName(), QIODevice::Append);
-
-    pdftops.start();
-
-    qDebug() << "Starting";
-
-    if(!pdftops.waitForStarted())
-    {
-        qDebug() << "pdftops died";
-        throw ConvertFailedException();
-    }
-
-    qDebug() << "Started";
-
-    if(!pdftops.waitForFinished(-1))
-    {
-        qDebug() << "pdftops failed";
-        throw ConvertFailedException();
-    }
-}
-
-void ConvertWorker::pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
-                                quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
-                                bool BackHFlip, bool BackVFlip,
-                                QString pdfFileName, QTemporaryFile* tempfile, bool resize)
-{
-
-    if(PageRangeLow==0)
-    {
-        PageRangeLow=1;
-    }
-
-    if(PageRangeHigh==0)
-    {
-        PageRangeHigh=pages;
-    }
-
-    // Actual number of pages to print
-    pages = PageRangeHigh-PageRangeLow+1;
-    qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
-
-    QProcess pdftocairo(this);
-    pdftocairo.setProgram("pdftocairo");
-    QStringList PdfToCairoArgs;
-
-    QProcess pdftoppm(this);
-    pdftoppm.setProgram("pdftoppm");
-    QStringList Pdf2PpmArgs = {"-rx", QString::number(HwResX), "-ry", QString::number(HwResY)};
-
-    if(resize)
-    {
-        QString ShortPaperSize = getPopplerShortPaperSize(PaperSize);
-
-        PdfToCairoArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        PageRangeLow = PageRangeHigh = 0;
-        PdfToCairoArgs << QStringList {"-pdf", "-paper", ShortPaperSize, pdfFileName, "-"};
-
-        pdftocairo.setArguments(PdfToCairoArgs);
-
-        pdftocairo.setStandardOutputProcess(&pdftoppm);
-    }
-    else
-    {
-        Pdf2PpmArgs << QStringList {"-f", QString::number(PageRangeLow), "-l", QString::number(PageRangeHigh)};
-        pdftoppm.setStandardInputFile(pdfFileName);
-
-    }
-
-    if(Colors == 1)
-    {
-        Pdf2PpmArgs.append("-gray");
-    }
-    qDebug() << "pdf2ppm args is " << Pdf2PpmArgs;
-    pdftoppm.setArguments(Pdf2PpmArgs);
-
-
-    QProcess ppm2pwg(this);
-    // Yo dawg, I heard you like programs...
-    ppm2pwg.setProgram("harbour-seaprint");
-    ppm2pwg.setArguments({"ppm2pwg"});
-
-    bool urf = targetFormat == Mimer::URF;
-
-    QStringList env;
-    ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble, true, pages, BackHFlip, BackVFlip);
-    qDebug() << "ppm2pwg env is " << env;
-
-    ppm2pwg.setEnvironment(env);
-
-    pdftoppm.setStandardOutputProcess(&ppm2pwg);
-    ppm2pwg.setStandardOutputFile(tempfile->fileName(), QIODevice::WriteOnly);
-
-    qDebug() << "All connected";
-
-    if(resize)
-    {
-        pdftocairo.start();
-    }
-
-    pdftoppm.start();
-    ppm2pwg.start();
-
-    qDebug() << "Starting";
-
-    if(!pdftoppm.waitForStarted())
-    {
-        qDebug() << "pdftoppm died";
-        throw ConvertFailedException();
-    }
-    if(!ppm2pwg.waitForStarted())
-    {
-        qDebug() << "ppm2pwg died";
-        throw ConvertFailedException();
-    }
-    qDebug() << "All started";
-
-    bool ppm2pwgSuccess = false;
-
-    for(;;)
-    {
-        if(ppm2pwg.waitForFinished(250))
-        {
-            ppm2pwgSuccess = true;
-            break;
-        }
-        else
-        {
-            QList<QByteArray> ppm2pwgOutput = ppm2pwg.readAllStandardError().split('\n');
-            for(QList<QByteArray>::iterator it = ppm2pwgOutput.begin(); it != ppm2pwgOutput.end(); it++)
-            {
-                if(it->startsWith("Page"))
-                {
-                    QList<QByteArray> ppm2pwgTokens = it->split(' ');
-                    emit progress(ppm2pwgTokens.last().toInt()-1, pages);
-                }
-            }
-        }
-    }
-    if(!ppm2pwgSuccess)
-    {
-        qDebug() << "ppm2pwg failed";
-        throw ConvertFailedException();
-    }
 }

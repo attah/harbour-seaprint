@@ -191,6 +191,14 @@
         <source>Failed to open file</source>
         <translation>Error al abrir archivo</translation>
     </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

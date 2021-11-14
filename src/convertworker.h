@@ -58,6 +58,7 @@ public slots:
 signals:
     void done(QNetworkRequest request, QTemporaryFile* data);
     void progress(qint64 done, qint64 pages);
+    void busyMessage(QString msg);
     void failed(QString message);
 
 private:
@@ -65,18 +66,6 @@ private:
     IppPrinter* _printer;
 
     QString getPopplerShortPaperSize(QString PaperSize);
-
-    void adjustPageRange(QString PaperSize, quint32 PageRangeLow, quint32 PageRangeHigh,
-                         QString pdfFileName, QTemporaryFile* tempfile);
-
-    void pdftoPs(QString PaperSize, bool TwoSided, quint32 PageRangeLow, quint32 PageRangeHigh,
-                 QString pdfFileName, QTemporaryFile* tempfile);
-
-    void pdfToRaster(QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                     quint32 HwResX, quint32 HwResY,  bool TwoSided, bool Tumble,
-                     quint32 PageRangeLow, quint32 PageRangeHigh, quint32 pages,
-                     bool BackHFlip, bool BackVFlip,
-                     QString pdfFileName, QTemporaryFile* tempfile, bool resize);
 };
 
 #endif // CONVERTWORKER_H

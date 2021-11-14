@@ -27,6 +27,7 @@ IppPrinter::IppPrinter()
     connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &ConvertWorker::convertOfficeDocument);
     connect(this, &IppPrinter::doConvertPlaintext, _worker, &ConvertWorker::convertPlaintext);
     connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
+    connect(_worker, &ConvertWorker::busyMessage, this, &IppPrinter::setBusyMessage);
     connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
 
     qRegisterMetaType<QMargins>();
@@ -536,7 +537,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
     quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
-    bool pdfPageRangeAdjustNeeded = false;
 
     quint32 PageRangeLow = 0;
     quint32 PageRangeHigh = 0;
@@ -545,20 +545,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
         PageRangeLow = PageRanges["low"].toInt();
         PageRangeHigh = PageRanges["high"].toInt();
-    }
-
-    QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
-    if(documentFormat == Mimer::PWG || documentFormat == Mimer::URF || documentFormat == Mimer::Postscript || Mimer::isOffice(mimeType))
-    {   // Effected locally
+        // Always effected locally
         jobAttrs.remove("page-ranges");
-    }
-    else if (documentFormat == Mimer::PDF)
-    {   // Only effected locally if really needed
-        if(jobAttrs.contains("page-ranges") && !_attrs.contains("page-ranges-supported"))
-        {
-            pdfPageRangeAdjustNeeded = true;
-            jobAttrs.remove("page-ranges");
-        }
     }
 
     qDebug() << "Final op attributes:" << o;
@@ -567,16 +555,10 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     IppMsg job = mk_msg(o, jobAttrs);
     QByteArray contents = job.encode(IppMsg::PrintJob);
 
-    // Non-jpeg images, Postscript and PDF (when not adjusting pages locally)
-    // Always convert non-jpeg images to get resizing
-    // TODO: make this sane
-    if((mimeType == documentFormat)
-       && (documentFormat == Mimer::JPEG || !Mimer::isImage(mimeType))
-       && !((documentFormat == Mimer::PDF) && pdfPageRangeAdjustNeeded))
+    // Shouldn't and can't process these formats respectively
+    if(documentFormat == Mimer::JPEG || documentFormat == Mimer::Postscript)
     {
-
         emit doJustUpload(filename, contents);
-
     }
     else
     {
@@ -592,6 +574,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
         bool TwoSided = false;
         bool Tumble = false;
+        QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
+
         if(Sides=="two-sided-long-edge")
         {
             TwoSided = true;

@@ -115,8 +115,7 @@ Page {
                 tag: IppMsg.IntegerRange
                 name: "page-ranges"
                 prettyName: qsTr("Page range")
-                valid: (_valid || ConvertChecker.pdf) &&
-                       (selectedFileType == "application/pdf" || Mimer.isOffice(selectedFileType))
+                valid: (selectedFileType == "application/pdf" || Mimer.isOffice(selectedFileType))
 
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
                 high: pdfpages == 0 ? 65535 : pdfpages
