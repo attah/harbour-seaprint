@@ -107,6 +107,8 @@ try {
 
     write_fun WriteFun([&cid](unsigned char const* buf, unsigned int len) -> bool
               {
+                if(len == 0)
+                    return true;
                 cid.write((const char*)buf, len);
                 return true;
               });

@@ -556,7 +556,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     QByteArray contents = job.encode(IppMsg::PrintJob);
 
     // Shouldn't and can't process these formats respectively
-    if(documentFormat == Mimer::JPEG || documentFormat == Mimer::Postscript)
+    if((mimeType == documentFormat) && (documentFormat == Mimer::JPEG || documentFormat == Mimer::Postscript))
     {
         emit doJustUpload(filename, contents);
     }
