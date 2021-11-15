@@ -48,7 +48,7 @@ void ConvertWorker::cancelJob(QByteArray msg)
 
 void ConvertWorker::justUpload(QString filename, QByteArray header)
 {
-    qDebug() << "justupload";
+    emit busyMessage(tr("Printing"));
 
     CurlRequester cid(_printer->httpUrl());
     cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
@@ -70,9 +70,7 @@ void ConvertWorker::convertPdf(QString filename, QByteArray header,
 try {
     Format format;
 
-    qDebug() << "to pdf" << HwResX << HwResY;
     emit busyMessage(tr("Printing"));
-
 
     if(targetFormat == Mimer::URF)
     {

@@ -339,7 +339,7 @@
         <translation>Onbekende afmetingen van documentformaat</translation>
     </message>
     <message>
-        <source>Converting</source>
+        <source>Preparing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

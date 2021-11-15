@@ -339,8 +339,8 @@
         <translation>未知稳定格式尺寸</translation>
     </message>
     <message>
-        <source>Converting</source>
-        <translation>正在转换</translation>
+        <source>Preparing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

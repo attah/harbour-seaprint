@@ -586,7 +586,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
             Tumble = true;
         }
 
-        setBusyMessage(tr("Converting"));
+        setBusyMessage(tr("Preparing"));
 
         if(mimeType == Mimer::PDF)
         {
