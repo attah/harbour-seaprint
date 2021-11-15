@@ -33,7 +33,6 @@ IppPrinter::IppPrinter()
     qRegisterMetaType<QMargins>();
 
     _workerThread.start();
-    _tainted = false;
 }
 
 IppPrinter::~IppPrinter() {
@@ -249,12 +248,6 @@ void IppPrinter::cancelJobFinished(CURLcode res, QByteArray data)
     getJobs();
 }
 
-void IppPrinter::onSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
-{
-    _tainted = true;
-    emit taintedChanged();
-    return ignoreSslErrors(reply, errors);
-}
 
 void IppPrinter::ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
 {
@@ -653,11 +646,6 @@ bool IppPrinter::cancelJob(qint32 jobId) {
     emit doCancelJob(job.encode(IppMsg::CancelJob));
 
     return true;
-}
-
-bool IppPrinter::isIpps()
-{
-    return _url.scheme() == "ipps";
 }
 
 bool IppPrinter::correctSuffix()

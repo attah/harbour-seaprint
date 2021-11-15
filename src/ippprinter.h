@@ -22,8 +22,6 @@ class IppPrinter : public QObject
     Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
     Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
 
-    Q_PROPERTY(bool tainted MEMBER _tainted NOTIFY taintedChanged)
-    Q_PROPERTY(bool isIpps READ isIpps NOTIFY urlChanged)
     Q_PROPERTY(bool correctSuffix READ correctSuffix NOTIFY attrsChanged)
     Q_PROPERTY(QStringList suffixes READ suffixes NOTIFY attrsChanged)
 
@@ -40,7 +38,6 @@ public:
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
 
-    bool isIpps();
     bool correctSuffix();
     QStringList suffixes();
 
@@ -80,7 +77,6 @@ signals:
     void additionalDocumentFormatsChanged();
     void busyMessageChanged();
     void progressChanged();
-    void taintedChanged();
 
 public slots:
     void print(QJsonObject attrs, QString file);
@@ -93,7 +89,6 @@ public slots:
     void getJobsRequestFinished(CURLcode res, QByteArray data);
     void cancelJobFinished(CURLcode res, QByteArray data);
 
-    void onSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
     static void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
     void convertFailed(QString message);
@@ -126,7 +121,6 @@ private:
     QThread _workerThread;
     ConvertWorker* _worker;
 
-    bool _tainted;
 };
 
 #endif // IPPPRINTER_H
