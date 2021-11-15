@@ -12,51 +12,7 @@
 #include <QAbstractTextDocumentLayout>
 #include "ippprinter.h"
 #include "pdf2printable.h"
-
-void ppm2PwgEnv(QStringList& env, bool urf, quint32 Quality, QString PaperSize,
-                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                bool ForcePortrait, quint32 pages, bool BackHFlip, bool BackVFlip)
-{
-    env.append("HWRES_X="+QString::number(HwResX));
-    env.append("HWRES_Y="+QString::number(HwResY));
-
-    if(urf)
-    {
-        env.append("URF=true");
-    }
-
-    if(Quality >= 3 && Quality <= 5)
-    {
-        env.append("QUALITY="+QString::number(Quality));
-    }
-
-    if(PaperSize != "")
-    {
-        env.append("PAGE_SIZE_NAME="+PaperSize);
-    }
-
-    env.append("DUPLEX="+QString::number(TwoSided));
-    env.append("TUMBLE="+QString::number(Tumble));
-
-    if(ForcePortrait)
-    {
-        env.append("FORCE_PORTRAIT=true");
-    }
-
-    if(pages != 0)
-    {
-        env.append("PAGES="+QString::number(pages));
-    }
-
-    if(BackHFlip)
-    {
-        env.append("BACK_HFLIP=true");
-    }
-    if(BackVFlip)
-    {
-        env.append("BACK_VFLIP=true");
-    }
-}
+#include "ppm2pwg.h"
 
 ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) borks multithereading?!
 {
@@ -218,6 +174,11 @@ try {
         throw ConvertFailedException(tr("Unsupported target format"));
     }
 
+    if(Colors == 0)
+    {
+        Colors = 3;
+    }
+
     if(urf && (HwResX != HwResY))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution" << PaperSize;
@@ -244,7 +205,7 @@ try {
 
     if(inImage.width() > inImage.height())
     {
-        inImage = inImage.transformed(QMatrix().rotate(90.0));
+        inImage = inImage.transformed(QMatrix().rotate(270.0));
     }
 
     int leftMarginPx = (margins.left()/2540.0)*HwResX;
@@ -257,10 +218,6 @@ try {
 
     inImage = inImage.scaled(Width-totalXMarginPx, Height-totalYMarginPx,
                              Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    QTemporaryFile tempfile;
-    tempfile.open();
-    tempfile.close();
 
     if(pdfOrPostscript)
     {
@@ -291,49 +248,50 @@ try {
         painter.drawImage(xOffset, yOffset, inImage);
         painter.end();
 
+        QBuffer buf;
+        buf.open(QIODevice::ReadWrite);
+        Bytestream outBts;
+
         if(imageFormat != "")
         { // We are converting to a supported image format
-
-            QFile tempfileAsFile(tempfile.fileName());
-            tempfileAsFile.open(QIODevice::Append);
-            outImage.save(&tempfileAsFile, imageFormat.toStdString().c_str());
-            tempfileAsFile.close();
+            outImage.save(&buf, imageFormat.toStdString().c_str());
+            buf.seek(0);
+            outBts = Bytestream(buf.size());
+            buf.read((char*)(outBts.raw()), buf.size());
         }
         else
         { // We are converting to a raster format
-            QProcess ppm2pwg(this);
-            // Yo dawg, I heard you like programs...
-            ppm2pwg.setProgram("harbour-seaprint");
-            ppm2pwg.setArguments({"ppm2pwg"});
-
-            QStringList env;
-            ppm2PwgEnv(env, urf, Quality, PaperSize, HwResX, HwResY, false, false, false, 0, false, false);
-            qDebug() << "ppm2pwg env is " << env;
-
-            ppm2pwg.setEnvironment(env);
-            ppm2pwg.setStandardOutputFile(tempfile.fileName(), QIODevice::WriteOnly);
-
-            qDebug() << "All connected";
-            ppm2pwg.start();
 
             bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
 
-            outImage.save(&ppm2pwg, gray ? "pgm" : "ppm");
+            outImage.save(&buf, gray ? "pgm" : "ppm");
+            buf.seek(0);
+            // Skip header - TODO consider reimplementing
+            buf.readLine(255);
+            buf.readLine(255);
+            buf.readLine(255);
 
-            qDebug() << "Starting";
+            Bytestream inBts(Width*Height*Colors);
 
-            if(!ppm2pwg.waitForStarted())
+            if((buf.size()-buf.pos()) != inBts.size())
             {
-                qDebug() << "ppm2pwg died";
+                qDebug() << buf.size() << buf.pos() << inBts.size();
                 throw ConvertFailedException();
             }
-            qDebug() << "All started";
 
-            ppm2pwg.waitForFinished();
+            buf.read((char*)(inBts.raw()), inBts.size());
 
-            qDebug() << "Finished";
+            outBts << (urf ? make_urf_file_hdr(1) : make_pwg_file_hdr());
+            bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false);
         }
-        justUpload(tempfile.fileName(), header);
+
+        emit busyMessage(tr("Printing"));
+
+        CurlRequester cid(_printer->httpUrl());
+        cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+
+        cid.write(header.data(), header.length());
+        cid.write((char*)(outBts.raw()), outBts.size());
     }
 
     qDebug() << "posted";
