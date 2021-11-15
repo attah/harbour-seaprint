@@ -545,8 +545,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
         PageRangeLow = PageRanges["low"].toInt();
         PageRangeHigh = PageRanges["high"].toInt();
-        // Always effected locally
-        jobAttrs.remove("page-ranges");
+        // Effected locally, unless it is Postscript which we cant't render
+        if(documentFormat != Mimer::Postscript)
+        {
+            jobAttrs.remove("page-ranges");
+        }
     }
 
     qDebug() << "Final op attributes:" << o;
