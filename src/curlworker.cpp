@@ -1,5 +1,6 @@
 #include "curlworker.h"
 #include "curlrequester.h"
+#include "settings.h"
 #include <seaprint_version.h>
 
 Q_DECLARE_METATYPE(CURLcode)
@@ -22,10 +23,13 @@ CurlWorker::CurlWorker(QUrl addr, void* parent)
     curl_easy_setopt(_curl, CURLOPT_POST, 1L);
     curl_easy_setopt(_curl, CURLOPT_READFUNCTION, trampoline);
     curl_easy_setopt(_curl, CURLOPT_READDATA, parent);
-    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1L);
-    curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYHOST, 0L);
-    curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYSTATUS, 0L);
+//    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1L);
+    if(Settings::instance()->ignoreSslErrors())
+    {
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYHOST, 0L);
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYSTATUS, 0L);
+    }
 
     _opts = NULL;
 
