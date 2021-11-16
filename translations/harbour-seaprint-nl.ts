@@ -48,10 +48,6 @@
         <translation>De broncode is beschikbaar op GitHub. Vertalingen, bugrapporten en andere bijdragen zijn welkom!</translation>
     </message>
     <message>
-        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation>SeaPrint-licenties zijn nog nader vast te stellen, maar zullen een vorm van open zijn.</translation>
-    </message>
-    <message>
         <source>French</source>
         <translation>Frans</translation>
     </message>
@@ -89,6 +85,10 @@
     </message>
     <message>
         <source>Special thanks to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

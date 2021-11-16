@@ -84,11 +84,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
+        <source>Special thanks to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Special thanks to</source>
+        <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

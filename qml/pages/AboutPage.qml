@@ -146,7 +146,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: qsTr("SeaPrint licencing is still TBD, but will be some flavor of open.")
+                text: qsTr("SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.")
             }
           }
         }

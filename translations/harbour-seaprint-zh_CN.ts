@@ -84,12 +84,12 @@
         <translation>源代码位于 Github 。欢迎翻译、报告缺陷及作出其它贡献！</translation>
     </message>
     <message>
-        <source>SeaPrint licencing is still TBD, but will be some flavor of open.</source>
-        <translation>Seaprint（海印）采用 TBD 许可证，但是我很乐意使它更加开放。</translation>
-    </message>
-    <message>
         <source>Special thanks to</source>
         <translation>特别感谢</translation>
+    </message>
+    <message>
+        <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
