@@ -10,7 +10,13 @@ CurlRequester::CurlRequester(QUrl addr) : _addr(addr), _canWrite(1), _canRead(),
 
 CurlRequester::~CurlRequester()
 {
-    _canWrite.acquire();
+    while(!_canWrite.tryAcquire(1, 500))
+    {
+        if(!_performer.isRunning())
+        {
+            break;
+        }
+    }
     _done = true;
     _canRead.release();
     _performer.wait();
@@ -21,10 +27,16 @@ CurlRequester::~CurlRequester()
     }
 }
 
-void CurlRequester::write(const char *data, size_t size)
+bool CurlRequester::write(const char *data, size_t size)
 {
     qDebug() << "write " << size;
-    _canWrite.acquire();
+    while(!_canWrite.tryAcquire(1, 500))
+    {
+        if(!_performer.isRunning())
+        {
+            return false;
+        }
+    }
 
     if(_dest != nullptr)
     {
@@ -35,6 +47,7 @@ void CurlRequester::write(const char *data, size_t size)
     _size = size;
     _offset = 0;
     _canRead.release();
+    return true;
 }
 
 size_t CurlRequester::requestWrite(char* dest, size_t size)

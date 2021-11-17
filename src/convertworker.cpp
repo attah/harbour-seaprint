@@ -14,6 +14,8 @@
 #include "pdf2printable.h"
 #include "ppm2pwg.h"
 
+#define OK(call) if(!(call)) throw ConvertFailedException()
+
 ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) borks multithereading?!
 {
     _printer = parent;
@@ -21,45 +23,51 @@ ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) 
 
 void ConvertWorker::command(QByteArray msg)
 {
-    CurlRequester cid(_printer->httpUrl());
-    cid.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
+    CurlRequester cr(_printer->httpUrl());
+    cr.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
 
     qDebug() << "command...";
 
-    cid.write(msg.data(), msg.length());
+    cr.write(msg.data(), msg.length());
 }
 
 // TODO: de-duplicate
 void ConvertWorker::getJobs(QByteArray msg)
 {
-    CurlRequester cid(_printer->httpUrl());
-    cid.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
+    CurlRequester cr(_printer->httpUrl());
+    cr.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
 
-    cid.write(msg.data(), msg.length());
+    cr.write(msg.data(), msg.length());
 }
 
 void ConvertWorker::cancelJob(QByteArray msg)
 {
-    CurlRequester cid(_printer->httpUrl());
-    cid.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
+    CurlRequester cr(_printer->httpUrl());
+    cr.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
 
-    cid.write(msg.data(), msg.length());
+    cr.write(msg.data(), msg.length());
 }
 
 void ConvertWorker::justUpload(QString filename, QByteArray header)
 {
+try {
     emit busyMessage(tr("Printing"));
 
-    CurlRequester cid(_printer->httpUrl());
-    cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+    CurlRequester cr(_printer->httpUrl());
+    cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
 
     QFile file(filename);
     file.open(QFile::ReadOnly);
 
-    cid.write(header.data(), header.length());
+    OK(cr.write(header.data(), header.length()));
     QByteArray tmp = file.readAll();
-    cid.write(tmp.data(), tmp.length());
+    OK(cr.write(tmp.data(), tmp.length()));
     file.close();
+}
+catch(const ConvertFailedException& e)
+{
+        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
+}
 }
 
 void ConvertWorker::convertPdf(QString filename, QByteArray header,
@@ -98,17 +106,16 @@ try {
         Colors = 3;
     }
 
-    CurlRequester cid(_printer->httpUrl());
-    cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+    CurlRequester cr(_printer->httpUrl());
+    cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
 
-    cid.write(header.data(), header.length());
+    OK(cr.write(header.data(), header.length()));
 
-    write_fun WriteFun([&cid](unsigned char const* buf, unsigned int len) -> bool
+    write_fun WriteFun([&cr](unsigned char const* buf, unsigned int len) -> bool
               {
                 if(len == 0)
                     return true;
-                cid.write((const char*)buf, len);
-                return true;
+                return cr.write((const char*)buf, len);
               });
 
     progress_fun ProgressFun([this](size_t page, size_t total) -> void
@@ -287,11 +294,11 @@ try {
 
         emit busyMessage(tr("Printing"));
 
-        CurlRequester cid(_printer->httpUrl());
-        cid.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+        CurlRequester cr(_printer->httpUrl());
+        cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
 
-        cid.write(header.data(), header.length());
-        cid.write((char*)(outBts.raw()), outBts.size());
+        OK(cr.write(header.data(), header.length()));
+        OK(cr.write((char*)(outBts.raw()), outBts.size()));
     }
 
     qDebug() << "posted";

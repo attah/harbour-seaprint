@@ -23,7 +23,7 @@ public:
         return true;
     }
 
-    void write(const char *data, size_t size);
+    bool write(const char *data, size_t size);
     size_t requestWrite(char* dest, size_t size);
 
 public slots:

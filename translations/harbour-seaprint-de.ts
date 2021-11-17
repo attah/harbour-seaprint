@@ -199,6 +199,10 @@
         <source>Conversion failed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Upload error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
