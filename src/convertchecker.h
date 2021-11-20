@@ -2,6 +2,7 @@
 #define CONVERTCHECKER_H
 #include <QObject>
 #include <QMutex>
+#include "madness.h"
 
 class ConvertChecker : public QObject
 {
@@ -11,7 +12,7 @@ public:
     Q_PROPERTY(bool pdf MEMBER _pdf CONSTANT)
     Q_PROPERTY(bool calligra MEMBER _calligra CONSTANT)
 
-    Q_INVOKABLE quint32 pdfPages(QString pdf);
+    Q_INVOKABLE int pdfPages(QString pdf);
 
 signals:
 protected:
@@ -23,6 +24,7 @@ private:
     ConvertChecker(const ConvertChecker &);
     ConvertChecker& operator=(const ConvertChecker &);
 
+    LibLoader poppler;
     bool _pdf;
     bool _calligra;
 };

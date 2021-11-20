@@ -1,9 +1,12 @@
+#include <poppler/glib/poppler.h>
+#include <poppler/glib/poppler-document.h>
+
 #include "convertchecker.h"
 #include <QProcess>
 #include <QtDebug>
 #include "mimer.h"
 
-ConvertChecker::ConvertChecker()
+ConvertChecker::ConvertChecker() : poppler("libpoppler-glib.so.8")
 {
     _pdf = true;
     _calligra = false;
@@ -44,7 +47,17 @@ ConvertChecker* ConvertChecker::instance()
     return m_Instance;
 }
 
-quint32 ConvertChecker::pdfPages(QString /*filename*/)
+int ConvertChecker::pdfPages(QString filename)
 {
-    return 0;
+    FUNC(poppler, PopplerDocument*, poppler_document_new_from_file, const char*, const char*, GError**);
+    FUNC(poppler, int, poppler_document_get_n_pages, PopplerDocument*);
+    std::string url("file://");
+    url.append(filename.toStdString());
+    GError* error = nullptr;
+    PopplerDocument* doc = poppler_document_new_from_file(url.c_str(), nullptr, &error);
+
+    int pages = poppler_document_get_n_pages(doc);
+
+    g_object_unref(doc);
+    return pages;
 }
