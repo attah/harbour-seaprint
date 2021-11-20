@@ -75,9 +75,8 @@ Page {
     onStatusChanged: {
         if(status==PageStatus.Active && !nagged && nagScreenSetting.value != nagScreenSetting.expectedValue)
         {
-            console.log("Can convert from PDF:", ConvertChecker.pdf)
             console.log("Can convert from Office:", ConvertChecker.calligra)
-            if(!ConvertChecker.pdf || (expectCalligra && !ConvertChecker.calligra))
+            if(expectCalligra && !ConvertChecker.calligra)
             {
                 nagged=true
                 pageStack.push(Qt.resolvedUrl("NagScreen.qml"))

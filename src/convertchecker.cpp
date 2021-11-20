@@ -8,7 +8,6 @@
 
 ConvertChecker::ConvertChecker() : poppler("libpoppler-glib.so.8")
 {
-    _pdf = true;
     _calligra = false;
 
     QProcess calligraconverter(this);

@@ -21,7 +21,7 @@ function supported_formats(printer, considerAdditionalFormats)
     var plaintext = false;
 
     if(has(formats, Mimer.Mimer.PDF) ||
-       (ConvertChecker.ConvertChecker.pdf && ( has(formats, Mimer.Mimer.Postscript) || raster )))
+       (has(formats, Mimer.Mimer.Postscript) || raster ))
     {
         pdf = true;
         mimetypes.push(Mimer.Mimer.PDF);
@@ -34,7 +34,7 @@ function supported_formats(printer, considerAdditionalFormats)
         mimetypes.push(Mimer.Mimer.Postscript);
     }
 
-    if((ConvertChecker.ConvertChecker.pdf && ConvertChecker.ConvertChecker.calligra) &&
+    if((ConvertChecker.ConvertChecker.calligra) &&
             ( has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript) || raster ))
     {
         office = true;
@@ -42,7 +42,7 @@ function supported_formats(printer, considerAdditionalFormats)
     }
 
     if (raster || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) ||
-            has(formats, Mimer.Mimer.PDF) || (ConvertChecker.ConvertChecker.pdf && has(formats, Mimer.Mimer.Postscript)))
+            has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript))
     {
         images = true;
         mimetypes.push(Mimer.Mimer.JPEG);
@@ -373,12 +373,6 @@ function canConvertPdfTo(type)
     return has(targets, type)
 }
 
-function canTransferPdfAs(type)
-{
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF];
-    return has(targets, type)
-}
-
 function canTransferPostscriptAs(type)
 {
     var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.Postscript];
@@ -409,27 +403,12 @@ function fixupChoices(name, choices, mimeType)
     case "document-format":
         if(mimeType == Mimer.Mimer.PDF)
         {
-            if(ConvertChecker.ConvertChecker.pdf)
-            {
-                return choices.filter(canConvertPdfTo)
-            }
-            else
-            {
-                return choices.filter(canTransferPdfAs)
-            }
-
+            return choices.filter(canConvertPdfTo)
         }
         else if(mimeType == Mimer.Mimer.Plaintext)
         {
             // We convert plaintext to PDF internally
-            if(ConvertChecker.ConvertChecker.pdf)
-            {
-                return choices.filter(canConvertPdfTo)
-            }
-            else
-            {
-                return choices.filter(canTransferPdfAs)
-            }
+            return choices.filter(canConvertPdfTo)
         }
         else if(mimeType == Mimer.Mimer.Postscript)
         {

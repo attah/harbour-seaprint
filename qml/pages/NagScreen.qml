@@ -28,20 +28,11 @@ Page {
         }
 
         Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-
-            text: qsTr("In order to print PDF files with printers that do not support PDF natively,"
-                       +" you need the package \"poppler-utils\"."
-                       +" This enables SeaPrint to convert to formats that are more likely to be accepted.")
-        }
-
-        Label {
             visible: appWin.expectCalligra
             width: parent.width
             wrapMode: Text.WordWrap
 
-            text: qsTr("In order to print \"office\" documents like odt and doc(x) you <i>also</i> need "+
+            text: qsTr("In order to print \"office\" documents like odt and doc(x) you need "+
                        "\"calligraconverter\" from the \"calligra\" package (version 3.2.1+, Sailfish OS 4.2).")
         }
 
@@ -67,22 +58,6 @@ Page {
             text: "devel-su"
             Clipper {}
 
-        }
-
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-
-            text: qsTr("Install poppler-utils:") + " " + (ConvertChecker.pdf ? qsTr("(done)") : "")
-        }
-
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            font.family: "monospace"
-
-            text: "pkcon install poppler-utils"
-            Clipper {}
         }
 
         Label {

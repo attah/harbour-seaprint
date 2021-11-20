@@ -397,16 +397,8 @@
         <translation>Root werden:</translation>
     </message>
     <message>
-        <source>Install poppler-utils:</source>
-        <translation>poppler-utils installieren:</translation>
-    </message>
-    <message>
         <source>To install, enable developer mode, and open a terminal.</source>
         <translation>Für die Installation muss der Entwickler Modus aktiviert und eine Konsole geöffnet werden.</translation>
-    </message>
-    <message>
-        <source>In order to print PDF files with printers that do not support PDF natively, you need the package &quot;poppler-utils&quot;. This enables SeaPrint to convert to formats that are more likely to be accepted.</source>
-        <translation>Um PDF Dateien zu drucken wird für Drucker ohne PDF Support das Software Paket &quot;poppler-utils&quot; benötigt. Diese ermöglicht es SeaPrint das PDF in besser unterstützte Formate zu konvertieren.</translation>
     </message>
     <message>
         <source>Install calligra:</source>
@@ -417,7 +409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>In order to print &quot;office&quot; documents like odt and doc(x) you &lt;i&gt;also&lt;/i&gt; need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
+        <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

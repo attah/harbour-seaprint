@@ -109,11 +109,6 @@ Page {
 
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
-                text: "poppler-utils - "+(ConvertChecker.pdf ? qsTr("Installed") : qsTr("Not installed"))
-            }
-
-            AboutLabel {
-                font.pixelSize: Theme.fontSizeSmall
                 text: "calligraconverter - "+(ConvertChecker.calligra ? qsTr("Installed") : qsTr("Not installed"))
             }
 

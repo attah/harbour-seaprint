@@ -9,7 +9,6 @@ class ConvertChecker : public QObject
     Q_OBJECT
 public:
     static ConvertChecker* instance();
-    Q_PROPERTY(bool pdf MEMBER _pdf CONSTANT)
     Q_PROPERTY(bool calligra MEMBER _calligra CONSTANT)
 
     Q_INVOKABLE int pdfPages(QString pdf);
@@ -25,7 +24,6 @@ private:
     ConvertChecker& operator=(const ConvertChecker &);
 
     LibLoader poppler;
-    bool _pdf;
     bool _calligra;
 };
 
