@@ -28,7 +28,8 @@ system(lrelease $$PWD/translations/*.ts)
 CONFIG += sailfishapp
 QT += svg
 PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
-LIBS += -lcurl -lpoppler -lcairo -lglib-2.0 -lgobject-2.0 -lpoppler-glib
+LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
+DEFINES += MADNESS=1
 
 # Write version file
 VERSION_H = \
@@ -95,6 +96,7 @@ HEADERS += \
     src/mimer.h \
     ppm2pwg/ppm2pwg.h \
     ppm2pwg/pdf2printable.h \
+    ppm2pwg/madness.h \
     ppm2pwg/PwgPgHdr.h \
     ppm2pwg/PwgPgHdr.codable \
     ppm2pwg/UrfPgHdr.h \
