@@ -3,8 +3,6 @@
 
 CurlRequester::CurlRequester(QUrl addr) : _addr(addr), _canWrite(1), _canRead(), _reading(false), _done(false), _dest(nullptr), _size(0), _offset(0), _performer(addr, this)
 {
-
-    connect(&_performer, &CurlWorker::done, this, &CurlRequester::done);
     _performer.start();
 }
 
@@ -76,9 +74,4 @@ size_t CurlRequester::requestWrite(char* dest, size_t size)
         _canWrite.release();
     }
     return actualSize;
-}
-
-void CurlRequester::done(CURLcode)
-{
-
 }

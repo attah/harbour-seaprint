@@ -26,13 +26,9 @@ public:
     bool write(const char *data, size_t size);
     size_t requestWrite(char* dest, size_t size);
 
-public slots:
-    void done(CURLcode);
 
 private:
     QUrl _addr;
-    bool _open;
-
 
     QSemaphore _canWrite;
     QSemaphore _canRead;
