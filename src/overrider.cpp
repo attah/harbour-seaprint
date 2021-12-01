@@ -5,8 +5,7 @@
 
 Overrider::Overrider()
 {
-//    QFile file(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)+"/overrides");
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.seaprint_overrides");
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)+"/overrides");
     if(file.open(QIODevice::ReadOnly))
     {
         QJsonDocument JsonDocument = QJsonDocument::fromJson(file.readAll());

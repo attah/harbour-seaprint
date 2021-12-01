@@ -3,10 +3,9 @@ Type=Application
 Icon=harbour-seaprint
 X-Nemo-Application-Type=silica-qt5
 Exec=harbour-seaprint
-#Exec=/usr/bin/sailjail -p net.attah.seaprint.desktop /usr/bin/harbour-seaprint
 Name=SeaPrint
-#[X-Sailjail]
-#Permissions=Internet;Pictures;Documents;Downloads;MediaIndexing
-#OrganizationName=net.attah
-#ApplicationName=seaprint
+[X-Sailjail]
+Permissions=Internet;Pictures;Documents;Downloads;MediaIndexing;Compatibility
+OrganizationName=net.attah
+ApplicationName=seaprint
 
