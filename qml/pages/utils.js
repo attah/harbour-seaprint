@@ -396,6 +396,11 @@ function unitsIsDpi(resolution)
     return resolution.units == 3;
 }
 
+function notCustomPaperSize(media)
+{
+    return media.indexOf("custom_") != 0;
+}
+
 
 function fixupChoices(name, choices, mimeType)
 {
@@ -445,6 +450,8 @@ function fixupChoices(name, choices, mimeType)
         {
             return choices;
         }
+    case "media":
+        return choices.filter(notCustomPaperSize);
     default:
         return choices;
     }
