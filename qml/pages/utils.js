@@ -396,9 +396,9 @@ function unitsIsDpi(resolution)
     return resolution.units == 3;
 }
 
-function notCustomPaperSize(media)
+function knownPaperSize(mediaName)
 {
-    return media.indexOf("custom_") != 0;
+    return media.hasOwnProperty(mediaName);
 }
 
 
@@ -451,7 +451,7 @@ function fixupChoices(name, choices, mimeType)
             return choices;
         }
     case "media":
-        return choices.filter(notCustomPaperSize);
+        return choices.filter(knownPaperSize);
     default:
         return choices;
     }
