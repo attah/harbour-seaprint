@@ -522,7 +522,6 @@ function basename(filewithpath)
 
 var media =
        {"asme_f_28x40in": "28 x 40″",
-        "choice_iso_a4_210x297mm_na_letter_8.5x11in": "A4 or US Letter",
         "iso_2a0_1189x1682mm": "2a0",
         "iso_a0_841x1189mm": "A0",
         "iso_a0x3_1189x2523mm": "A0x3",
