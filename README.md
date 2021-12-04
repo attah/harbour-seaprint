@@ -42,3 +42,45 @@ Printers with any of these IPP certifications and derivative standards should li
  * WiFi Direct
 
 (obviously SeaPrint is unaffiliated and uncertified)
+
+## Dealing with misbehaving printers
+
+SeaPrint, in contrast to other printing clients, is not concerned with dealing with the idiosyncrasies of individual printers.
+If some manufacturer can't make a reasonably well-behaved printer that's on them, not something for SeaPrint to cover for.
+
+There is however a possibility for you, the user, to override certain attributes (to fix names, claimed format support etc.) in the IPP data structure.
+
+To see what your printer sent, aka "the debug info", tap it 5 times rapidly without any document selected. The format is a SeaPrint-specific JSON equivalent representation of the IPP binary data.
+
+Create the file `/home/$USER/.config/net.attah/seaprint/overrides`. (NB: New location for 1.0, and may move again)
+
+This file should contain a JSON structure, with the outermost key(s) being "what attribute to match on" (uuid recommended if available), the next level is "if this value matches". Everything beneath that is what to inject/replace into the printer's attributes (see debug info above).
+
+Example:
+```
+{
+  "printer-uuid": {
+    "urn:uuid:xxx-yyy-zzz-111-1234567890": {
+      "printer-name": {
+        "tag": 54,
+        "value": "A better name"
+      },
+      "document-format-supported": {
+        "tag": 73,
+        "value": [
+          "application/octet-stream", "application/pdf"
+        ]
+      }
+      "some-other-attribute-name": {
+        "tag": <some tag number>,
+        "value": <some value>
+      }
+    }
+  }
+}
+```
+
+## Dealing with printers using other protocols
+SeaPrint only supports IPP, not port 9100 pjl/pcl raw, lpd/lpr or anything else.
+
+Just use a PAPPL or CUPS as an intermediary. A shared printer there is IPP by definition.
