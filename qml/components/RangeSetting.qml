@@ -59,7 +59,7 @@ Setting {
             {
                 id: low_slider
                 minimumValue: 1
-                maximumValue: high > 100 ? 100 : high
+                maximumValue: high > 50 ? 50 : high
                 width: parent.width
                 stepSize: 1
                 onValueChanged:
@@ -87,7 +87,7 @@ Setting {
             {
                 id: high_slider
                 minimumValue: 0
-                maximumValue: high > 100 ? 100 : high
+                maximumValue: high > 50 ? 50 : high
                 width: parent.width
                 stepSize: 1
                 onValueChanged:

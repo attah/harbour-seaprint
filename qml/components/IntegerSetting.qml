@@ -25,7 +25,7 @@ Setting {
             {
                 id: slider
                 minimumValue: low
-                maximumValue: high < 100 ? high : 100
+                maximumValue: high < 50 ? high : 50
                 width: parent.width
                 stepSize: 1
                 onValueChanged:
