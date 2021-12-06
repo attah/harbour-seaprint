@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
-        <translation>Netzwerkdrucken für Sailfish OS</translation>
+        <translation>Netzwerkdruck für Sailfish OS</translation>
     </message>
     <message>
         <source>Icons</source>
