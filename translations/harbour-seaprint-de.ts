@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>über</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Network printing for Sailfish OS.</source>
@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
-        <translation>ERwägen Sie die Verwendung eines Suffixes wie zum Beispiel &quot;/ipp/print&quot;.</translation>
+        <translation>Erwägen Sie die Verwendung eines Suffixes wie zum Beispiel &quot;/ipp/print&quot;.</translation>
     </message>
     <message>
         <source>The printer/server lists these suffixes:</source>
@@ -139,11 +139,11 @@
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation>Druck erfolgreich: </translation>
+        <translation>Druckvorgang erfolgreich abgeschlossen: </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation>Druck fehlgeschlagen: </translation>
+        <translation>Druckvorgang fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -165,15 +165,15 @@
     </message>
     <message>
         <source>Failed to load image</source>
-        <translation>Bild laden fehlgeschlagen</translation>
+        <translation>Bild konnte nicht geladen werden</translation>
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation>Nicht unterstützte PDF Papiergröße</translation>
+        <translation>Nicht unterstützte PDF-Papierformat</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation>Nicht unterstützte Papiergröße</translation>
+        <translation>Nicht unterstütztes Papierformat</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
@@ -181,11 +181,11 @@
     </message>
     <message>
         <source>Unsupported target format</source>
-        <translation>Nichtunterstützes Zielformat</translation>
+        <translation>Nicht unterstützes Zielformat</translation>
     </message>
     <message>
         <source>Failed to get info about PDF file</source>
-        <translation>PDF Info nicht abrufbar</translation>
+        <translation>Informationen über die PDF-Datei können nicht abgerufen werden</translation>
     </message>
     <message>
         <source>Failed to open file</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>Printing</source>
-        <translation>wird gedruckt</translation>
+        <translation>Es wird gedruckt</translation>
     </message>
     <message>
         <source>Conversion failed</source>
@@ -257,7 +257,7 @@
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation>Mit URL hinzufügen</translation>
+        <translation>Drucker mit URL hinzufügen</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -277,7 +277,7 @@
     </message>
     <message>
         <source>Removing printer</source>
-        <translation>Entferne Drucker</translation>
+        <translation>Drucker entfernen</translation>
     </message>
     <message>
         <source>About SeaPrint</source>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>Preparing</source>
-        <translation>vorbereiten</translation>
+        <translation>Vorbereiten</translation>
     </message>
 </context>
 <context>
@@ -367,7 +367,7 @@
     </message>
     <message>
         <source>Cancelling job</source>
-        <translation>Breche Auftrag ab</translation>
+        <translation>Breche den Auftrag ab</translation>
     </message>
     <message>
         <source>job</source>
@@ -398,11 +398,11 @@
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation>Für die Installation muss der Entwickler Modus aktiviert und eine Konsole geöffnet werden.</translation>
+        <translation>Für die Installation muss der Entwickler-Modus aktiviert sein und eine Konsole geöffnet werden.</translation>
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation>Insalliere calligra</translation>
+        <translation>Insalliere calligra:</translation>
     </message>
     <message>
         <source>(done)</source>
@@ -441,7 +441,7 @@
     </message>
     <message>
         <source>Print media</source>
-        <translation>Papier Format</translation>
+        <translation>Druckmedien</translation>
     </message>
     <message>
         <source>Transfer format</source>
@@ -453,7 +453,7 @@
     </message>
     <message>
         <source>Page range</source>
-        <translation>Seiten Auswählen</translation>
+        <translation>Seitenbereich</translation>
     </message>
     <message>
         <source>Collated copies</source>
@@ -485,19 +485,19 @@
     </message>
     <message>
         <source>Top</source>
-        <translation>oben</translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation>unten</translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>links</translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>rechts</translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -513,7 +513,7 @@
     </message>
     <message>
         <source>Media handling</source>
-        <translation>Papier Einstellungen</translation>
+        <translation>Umgang mit Medien</translation>
     </message>
 </context>
 <context>
@@ -538,7 +538,7 @@
     </message>
     <message>
         <source>Consider additional formats</source>
-        <translation>Andere Formate prüfen</translation>
+        <translation>Zusätzliche Formate in Betracht ziehen</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
@@ -558,18 +558,18 @@
     </message>
     <message>
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
-        <translation>Um mit selbstsignierten Zertifikaten von Druckern und CUBS-Instanzen arbeiten zu können, müssen SSL-Fehler ignoriert werden.</translation>
+        <translation>Um mit selbstsignierten Zertifikaten von Druckern und CUPS-Instanzen arbeiten zu können, müssen SSL-Fehler ignoriert werden.</translation>
     </message>
 </context>
 <context>
     <name>SupplyItem</name>
     <message>
         <source>Unknown type</source>
-        <translation>unbekannter typ</translation>
+        <translation>Unbekannter Toner</translation>
     </message>
     <message>
         <source>Unnamed supply</source>
-        <translation>unbenannter Toner</translation>
+        <translation>Unbenannter Toner</translation>
     </message>
 </context>
 <context>
@@ -591,11 +591,11 @@
     </message>
     <message>
         <source>pending-held</source>
-        <translation>Austehend angehalten</translation>
+        <translation>Austehend gehalten</translation>
     </message>
     <message>
         <source>processing</source>
-        <translation>Verarbeite</translation>
+        <translation>Verarbeitung</translation>
     </message>
     <message>
         <source>processing-stopped</source>
@@ -615,7 +615,7 @@
     </message>
     <message>
         <source>unknown state </source>
-        <translation>Unbekannter Status </translation>
+        <translation>Unbekannter Status</translation>
     </message>
     <message>
         <source>draft</source>
@@ -651,7 +651,7 @@
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation>Unbekannte Orientierung </translation>
+        <translation>Unbekannte Orientierung</translation>
     </message>
     <message>
         <source>dpi</source>
@@ -695,7 +695,7 @@
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation>Bypass Fach</translation>
+        <translation>Einzelblatteinzug</translation>
     </message>
     <message>
         <source>tray</source>
@@ -795,27 +795,27 @@
     </message>
     <message>
         <source>Stopped</source>
-        <translation>angehalten</translation>
+        <translation>Angehalten</translation>
     </message>
     <message>
         <source>Unknown State </source>
-        <translation>unbekannter Status</translation>
+        <translation>Unbekannter Status</translation>
     </message>
     <message>
         <source>single document</source>
-        <translation>einzelnes Dokument</translation>
+        <translation>Einzelnes Dokument</translation>
     </message>
     <message>
         <source>uncollated</source>
-        <translation>unsortiert</translation>
+        <translation>Unsortiert</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation sortiert></translation>
+        <translation>Sortiert</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
-        <translation>single document (neue Seite)</translation>
+        <translation>Einzelnes Document (neue Seite)</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -823,7 +823,7 @@
     </message>
     <message>
         <source>roll</source>
-        <translation>rollen</translation>
+        <translation>Rollen</translation>
     </message>
     <message>
         <source>alternate</source>
@@ -831,7 +831,7 @@
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation>abwechselnd rollen</translation>
+        <translation>Abwechselnd rollen</translation>
     </message>
     <message>
         <source>disc</source>
@@ -847,11 +847,11 @@
     </message>
     <message>
         <source>large capacity</source>
-        <translation>hohe Kapazität</translation>
+        <translation>Hohe Kapazität</translation>
     </message>
     <message>
         <source>left</source>
-        <translation>links</translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>main roll</source>
@@ -875,19 +875,19 @@
     </message>
     <message>
         <source>my mailbox</source>
-        <translation>mein Postfach</translation>
+        <translation>Mein Postfach</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>auto (fit)</source>
-        <translation>automatisch Anpassen</translation>
+        <translation>Automatisch Anpassen</translation>
     </message>
     <message>
         <source>fill</source>
-        <translation>füllen</translation>
+        <translation>Füllen</translation>
     </message>
     <message>
         <source>fit</source>
@@ -895,7 +895,7 @@
     </message>
     <message>
         <source>none</source>
-        <translation>nicht</translation>
+        <translation>Nicht</translation>
     </message>
 </context>
 </TS>
