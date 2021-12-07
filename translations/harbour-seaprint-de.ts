@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>General contributions</source>
-        <translation>Mitwirkende></translation>
+        <translation>Mitwirkende</translation>
     </message>
     <message>
         <source>Translations</source>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <source>face-down</source>
-        <translation>Bedruckende Seite unten></translation>
+        <translation>Bedruckende Seite unten</translation>
     </message>
     <message>
         <source>my mailbox</source>
