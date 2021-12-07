@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Icon made by Gregguh.</source>
-        <translation>Icon designt von Gregguh</translation>
+        <translation>Icon designed von Gregguh</translation>
     </message>
     <message>
         <source>General contributions</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation>Das uri Suffix ist nicht in der Liste der unterstützten Drucker enthalten.</translation>
+        <translation>Das uri Suffix ist nicht in der Liste der unterstützen Suffixe des Druckers enthalten.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Upload error</source>
-        <translation>Fehler beim Hochladen</translation>
+        <translation>Übertragungsfehler</translation>
     </message>
 </context>
 <context>
@@ -230,11 +230,11 @@
     </message>
     <message>
         <source>Printer status</source>
-        <translation>Drucker status</translation>
+        <translation>Drucker Status</translation>
     </message>
     <message>
         <source>IPP versions</source>
-        <translation>IPP Version</translation>
+        <translation>IPP Versionen</translation>
     </message>
     <message>
         <source>IPP features</source>
@@ -328,7 +328,7 @@
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation>Nicht unterstützte Druckmedium</translation>
+        <translation>Nicht unterstütztes Druckmedium</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
@@ -402,11 +402,11 @@
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation>Insalliere calligra:</translation>
+        <translation>Installiere calligra:</translation>
     </message>
     <message>
         <source>(done)</source>
-        <translation>(erledigt)</translation>
+        <translation>(fertig)</translation>
     </message>
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
@@ -473,7 +473,7 @@
     </message>
     <message>
         <source>(loaded)</source>
-        <translation>(wird geladen)</translation>
+        <translation>(geladen)</translation>
     </message>
     <message>
         <source>Output bin</source>
@@ -505,7 +505,7 @@
     </message>
     <message>
         <source>Pages per page</source>
-        <translation>Seite für Seite</translation>
+        <translation>Seiten pro Blatt</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -527,7 +527,7 @@
     <name>Setting</name>
     <message>
         <source>Reset</source>
-        <translation>zurücksetzen</translation>
+        <translation>Zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -542,11 +542,11 @@
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation>Einige Drucker ünterstützen mehr Formate als sie bekannt geben. Zusätliche Formate können aus anderen Attributen geschlussffolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
+        <translation>Einige Drucker ünterstützen mehr Formate als sie bekannt geben. Zusätzliche Formate können aus anderen Attributen geschlussfolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation>Warnseite über nicht installierte optionalen Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
+        <translation>Warnseite über nicht installierte optionale Abhängigkeiten anzeigen, wenn diese nicht installiert sind.</translation>
     </message>
     <message>
         <source>Settings</source>
