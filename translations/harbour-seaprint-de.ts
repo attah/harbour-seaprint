@@ -461,7 +461,7 @@
     </message>
     <message>
         <source>Clear default settings</source>
-        <translation>Standardeinstellungen wiederherstellen</translation>
+        <translation>Standardeinstellungen löschen</translation>
     </message>
     <message>
         <source>Save default settings</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>Ignore SSL errors</source>
-        <translation>SSL Fehler ignorieren</translation>
+        <translation>SSL-Fehler ignorieren</translation>
     </message>
     <message>
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
