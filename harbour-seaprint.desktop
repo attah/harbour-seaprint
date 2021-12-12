@@ -4,8 +4,8 @@ Icon=harbour-seaprint
 X-Nemo-Application-Type=silica-qt5
 Exec=harbour-seaprint
 Name=SeaPrint
-[X-Sailjail]
-Permissions=Internet;Pictures;Documents;Downloads;MediaIndexing;Compatibility
-OrganizationName=net.attah
-ApplicationName=seaprint
+#[X-Sailjail]
+#Permissions=Internet;Pictures;Documents;Downloads;MediaIndexing;Compatibility
+#OrganizationName=net.attah
+#ApplicationName=seaprint
 
