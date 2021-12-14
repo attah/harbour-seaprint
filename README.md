@@ -57,7 +57,7 @@ Create the file `/home/$USER/.config/net.attah/seaprint/overrides`. (NB: New loc
 This file should contain a JSON structure, with the outermost key(s) being "what attribute to match on" (uuid recommended if available), the next level is "if this value matches". Everything beneath that is what to inject/replace into the printer's attributes (see debug info above).
 
 Example:
-```
+```JSON
 {
   "printer-uuid": {
     "urn:uuid:xxx-yyy-zzz-111-1234567890": {
@@ -70,12 +70,18 @@ Example:
         "value": [
           "application/octet-stream", "application/pdf"
         ]
-      }
+      },
       "some-other-attribute-name": {
-        "tag": <some tag number>,
-        "value": <some value>
+        "tag": 42,
+        "value": "some-value"
       }
+    },
+    "urn:uuid:other-printer-uuid": {
+      ...
     }
+  },
+  "other-attribute-to-match-other-printer-on": {
+    ...
   }
 }
 ```
