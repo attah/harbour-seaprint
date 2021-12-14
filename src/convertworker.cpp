@@ -21,34 +21,34 @@ ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) 
     _printer = parent;
 }
 
-void ConvertWorker::command(QByteArray msg)
+void ConvertWorker::command(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
 
     qDebug() << "command...";
 
-    cr.write(msg.data(), msg.length());
+    cr.write((char*)msg.raw(), msg.size());
 }
 
 // TODO: de-duplicate
-void ConvertWorker::getJobs(QByteArray msg)
+void ConvertWorker::getJobs(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
 
-    cr.write(msg.data(), msg.length());
+    cr.write((char*)msg.raw(), msg.size());
 }
 
-void ConvertWorker::cancelJob(QByteArray msg)
+void ConvertWorker::cancelJob(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
 
-    cr.write(msg.data(), msg.length());
+    cr.write((char*)msg.raw(), msg.size());
 }
 
-void ConvertWorker::justUpload(QString filename, QByteArray header)
+void ConvertWorker::justUpload(QString filename, Bytestream header)
 {
 try {
     emit busyMessage(tr("Printing"));
@@ -59,7 +59,7 @@ try {
     QFile file(filename);
     file.open(QFile::ReadOnly);
 
-    OK(cr.write(header.data(), header.length()));
+    OK(cr.write((char*)header.raw(), header.size()));
     QByteArray tmp = file.readAll();
     OK(cr.write(tmp.data(), tmp.length()));
     file.close();
@@ -70,7 +70,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertPdf(QString filename, QByteArray header,
+void ConvertWorker::convertPdf(QString filename, Bytestream header,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -109,7 +109,7 @@ try {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
 
-    OK(cr.write(header.data(), header.length()));
+    OK(cr.write((char*)header.raw(), header.size()));
 
     write_fun WriteFun([&cr](unsigned char const* buf, unsigned int len) -> bool
               {
@@ -148,7 +148,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertImage(QString filename, QByteArray header,
+void ConvertWorker::convertImage(QString filename, Bytestream header,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY, QMargins margins)
 {
@@ -297,7 +297,7 @@ try {
         CurlRequester cr(_printer->httpUrl());
         cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
 
-        OK(cr.write(header.data(), header.length()));
+        OK(cr.write((char*)header.raw(), header.size()));
         OK(cr.write((char*)(outBts.raw()), outBts.size()));
     }
 
@@ -310,7 +310,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertOfficeDocument(QString filename, QByteArray header,
+void ConvertWorker::convertOfficeDocument(QString filename, Bytestream header,
                                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                           quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -403,7 +403,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertPlaintext(QString filename, QByteArray header,
+void ConvertWorker::convertPlaintext(QString filename, Bytestream header,
                                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                      bool BackHFlip, bool BackVFlip)

@@ -5,6 +5,7 @@
 #include <QUrl>
 #include <curl/curl.h>
 #include <QtDebug>
+#include <bytestream.h>
 
 class CurlWorker : public QThread
 {
@@ -18,11 +19,11 @@ public:
     static size_t write_callback(char *ptr, size_t size, size_t nmemb, void* userdata)
     {
         size_t bytes_to_write = size*nmemb;
-        ((QByteArray*)userdata)->append(ptr, bytes_to_write);
+        ((Bytestream*)userdata)->putBytes(ptr, bytes_to_write);
         return bytes_to_write;
     }
 signals:
-    void done(CURLcode, QByteArray);
+    void done(CURLcode, Bytestream);
 
 private:
     // Container for the cURL global init and cleanup

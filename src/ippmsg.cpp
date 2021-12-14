@@ -19,52 +19,10 @@ IppMsg::~IppMsg()
 {
 }
 
-IppMsg::IppMsg(QNetworkReply* resp)
+
+IppMsg::IppMsg(Bytestream& bts)
 {
-    QByteArray tmp = resp->readAll();
-    Bytestream bts(tmp.constData(), tmp.length());
-
-    quint32 reqId;
-
-    bts >> _majVsn >> _minVsn >> _status >> reqId;
-
-    QJsonObject attrs;
-    IppMsg::IppTag currentAttrType = IppTag::EndAttrs;
-
-    while(!bts.atEnd())
-    {
-        if(bts.peekU8() <= IppTag::UnsupportedAttrs) {
-
-            if(currentAttrType == IppTag::OpAttrs) {
-                _opAttrs = attrs;
-            }
-            else if (currentAttrType == IppTag::JobAttrs) {
-                _jobAttrs.append(attrs);
-            }
-            else if (currentAttrType == IppTag::PrinterAttrs) {
-                _printerAttrs = attrs;
-            }
-            else if (currentAttrType == IppTag::UnsupportedAttrs) {
-                qDebug() << "WARNING: unsupported attrs reported:" << attrs;
-            }
-
-            if(bts >>= (uint8_t)IppTag::EndAttrs) {
-                break;
-            }
-
-            currentAttrType = (IppTag)bts.getU8();
-            attrs = QJsonObject();
-
-        }
-        else {
-            consume_attribute(attrs, bts);
-        }
-    }
-}
-
-IppMsg::IppMsg(QByteArray resp)
-{
-    Bytestream bts(resp.constData(), resp.length());
+//    Bytestream bts(resp.constData(), resp.length());
 
     quint32 reqId;
 
@@ -327,7 +285,7 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
     return name;
 }
 
-QByteArray IppMsg::encode(Operation op)
+Bytestream IppMsg::encode(Operation op)
 {
     Bytestream ipp;
 
@@ -369,7 +327,7 @@ QByteArray IppMsg::encode(Operation op)
 
     ipp << quint8(EndAttrs);
 
-    return QByteArray((char*)(ipp.raw()), ipp.size());
+    return ipp;
 }
 
 void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue value, bool inCollection)

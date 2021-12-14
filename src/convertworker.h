@@ -31,27 +31,27 @@ private:
     ConvertWorker();
 
 public slots:
-    void command(QByteArray msg);
-    void getJobs(QByteArray msg);
-    void cancelJob(QByteArray msg);
+    void command(Bytestream msg);
+    void getJobs(Bytestream msg);
+    void cancelJob(Bytestream msg);
 
-    void justUpload(QString filename, QByteArray header);
+    void justUpload(QString filename, Bytestream header);
 
-    void convertPdf(QString filename, QByteArray header,
+    void convertPdf(QString filename, Bytestream header,
                     QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                     quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void convertImage(QString filename, QByteArray header,
+    void convertImage(QString filename, Bytestream header,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY, QMargins margins);
 
-    void convertOfficeDocument(QString filename, QByteArray header,
+    void convertOfficeDocument(QString filename, Bytestream header,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void convertPlaintext(QString filename, QByteArray header,
+    void convertPlaintext(QString filename, Bytestream header,
                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 

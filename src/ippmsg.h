@@ -1,9 +1,8 @@
-#ifndef IPP_PROTO_H
-#define IPP_PROTO_H
+#ifndef IPP_MSG_H
+#define IPP_MSG_H
 
 #include "bytestream.h"
 
-#include <QByteArray>
 #include <QObject>
 #include <QDebug>
 #include <QUrl>
@@ -66,13 +65,12 @@ public:
     };
 
     explicit IppMsg();
-    explicit IppMsg(QNetworkReply* resp);
-    explicit IppMsg(QByteArray resp);
+    explicit IppMsg(Bytestream& resp);
     IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject(), quint8 majVsn=1, quint8 minVsn=1);
     IppMsg(const IppMsg& other) = default;
     ~IppMsg();
 
-    QByteArray encode(Operation op);
+    Bytestream encode(Operation op);
     QJsonObject getPrinterAttrs() {return _printerAttrs;}
     QJsonArray getJobAttrs() {return _jobAttrs;}
     QJsonObject getOpAttrs() {return _opAttrs;}
@@ -100,4 +98,4 @@ private:
     static quint32 _reqid;
 };
 
-#endif // IPP_PROTO_H
+#endif // IPP_MSG_H

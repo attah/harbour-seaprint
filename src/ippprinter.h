@@ -50,27 +50,27 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
-    void doCommand(QByteArray msg);
-    void doGetJobs(QByteArray msg);
-    void doCancelJob(QByteArray msg);
+    void doCommand(Bytestream msg);
+    void doGetJobs(Bytestream msg);
+    void doCancelJob(Bytestream msg);
 
-    void doJustUpload(QString filename, QByteArray header);
+    void doJustUpload(QString filename, Bytestream header);
 
-    void doConvertPdf(QString filename, QByteArray header,
+    void doConvertPdf(QString filename, Bytestream header,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                       quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                       quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void doConvertImage(QString filename,  QByteArray header,
+    void doConvertImage(QString filename,  Bytestream header,
                         QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                         quint32 HwResX, quint32 HwResY, QMargins margins);
 
-    void doConvertOfficeDocument(QString filename, QByteArray header,
+    void doConvertOfficeDocument(QString filename, Bytestream header,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                  quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
 
-    void doConvertPlaintext(QString filename, QByteArray header,
+    void doConvertPlaintext(QString filename, Bytestream header,
                             QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                             quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
@@ -84,10 +84,10 @@ public slots:
 
     void onUrlChanged();
     void UpdateAdditionalDocumentFormats();
-    void getPrinterAttributesFinished(CURLcode res, QByteArray data);
-    void printRequestFinished(CURLcode res, QByteArray data);
-    void getJobsRequestFinished(CURLcode res, QByteArray data);
-    void cancelJobFinished(CURLcode res, QByteArray data);
+    void getPrinterAttributesFinished(CURLcode res, Bytestream data);
+    void printRequestFinished(CURLcode res, Bytestream data);
+    void getJobsRequestFinished(CURLcode res, Bytestream data);
+    void cancelJobFinished(CURLcode res, Bytestream data);
 
     static void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 

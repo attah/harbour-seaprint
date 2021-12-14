@@ -9,6 +9,9 @@
 #include <src/svgprovider.h>
 #include <src/settings.h>
 
+Q_DECLARE_METATYPE(CURLcode)
+Q_DECLARE_METATYPE(Bytestream)
+
 template <class T>
 static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -22,6 +25,9 @@ static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngi
 
 int main(int argc, char *argv[])
 {
+    qRegisterMetaType<CURLcode>();
+    qRegisterMetaType<Bytestream>();
+
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
     app->setOrganizationName(QStringLiteral("net.attah"));

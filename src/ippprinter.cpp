@@ -154,7 +154,7 @@ void IppPrinter::UpdateAdditionalDocumentFormats()
     emit additionalDocumentFormatsChanged();
 }
 
-void IppPrinter::getPrinterAttributesFinished(CURLcode res, QByteArray data)
+void IppPrinter::getPrinterAttributesFinished(CURLcode res, Bytestream data)
 {
     qDebug() << res;
     _attrs = QJsonObject();
@@ -179,7 +179,7 @@ void IppPrinter::getPrinterAttributesFinished(CURLcode res, QByteArray data)
     UpdateAdditionalDocumentFormats();
 }
 
-void IppPrinter::printRequestFinished(CURLcode res, QByteArray data)
+void IppPrinter::printRequestFinished(CURLcode res, Bytestream data)
 {
     _jobAttrs = QJsonObject();
     bool status = false;
@@ -211,7 +211,7 @@ void IppPrinter::printRequestFinished(CURLcode res, QByteArray data)
     emit jobFinished(status);
 }
 
-void IppPrinter::getJobsRequestFinished(CURLcode res, QByteArray data)
+void IppPrinter::getJobsRequestFinished(CURLcode res, Bytestream data)
 {
     if(res == CURLE_OK)
     {
@@ -229,7 +229,7 @@ void IppPrinter::getJobsRequestFinished(CURLcode res, QByteArray data)
 }
 
 
-void IppPrinter::cancelJobFinished(CURLcode res, QByteArray data)
+void IppPrinter::cancelJobFinished(CURLcode res, Bytestream data)
 {
     bool status = false;
     if(res == CURLE_OK)
@@ -549,7 +549,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     qDebug() << "Final job attributes:" << jobAttrs;
 
     IppMsg job = mk_msg(o, jobAttrs);
-    QByteArray contents = job.encode(IppMsg::PrintJob);
+    Bytestream contents = job.encode(IppMsg::PrintJob);
 
     // Shouldn't and can't process these formats respectively
     if((mimeType == documentFormat) && (documentFormat == Mimer::JPEG || documentFormat == Mimer::Postscript))
