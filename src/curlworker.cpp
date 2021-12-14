@@ -33,6 +33,7 @@ CurlWorker::CurlWorker(QUrl addr, void* parent)
 
     _opts = NULL;
 
+    _opts = curl_slist_append(_opts, "Expect:");
     _opts = curl_slist_append(_opts, "Transfer-Encoding: chunked");
     _opts = curl_slist_append(_opts, "Content-Type: application/ipp");
     _opts = curl_slist_append(_opts, "User-Agent: SeaPrint " SEAPRINT_VERSION);
