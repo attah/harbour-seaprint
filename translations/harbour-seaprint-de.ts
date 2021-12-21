@@ -460,16 +460,16 @@
         <translation>Sortierte Kopien</translation>
     </message>
     <message>
-        <source>Clear default settings</source>
-        <translation>Standardeinstellungen löschen</translation>
+        <source>Reset default settings</source>
+        <translation>Standardeinstellungen zurücksetzen</translation>
     </message>
     <message>
-        <source>Save default settings</source>
-        <translation>Als Standarteinstellung speichern</translation>
+        <source>Save my settings as default</source>
+        <translation>Meine Einstellung als Standard speichern</translation>
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation>Standarteinstellung für %1 auf diesem Drucker</translation>
+        <translation>Standardeinstellung für %1 auf diesem Drucker</translation>
     </message>
     <message>
         <source>(loaded)</source>
