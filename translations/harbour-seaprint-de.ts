@@ -461,7 +461,8 @@
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation>Standardeinstellung für %1 auf diesem Drucker</translation>
+        <translation>Standardeinstellung für %1
+auf diesem Drucker</translation>
     </message>
     <message>
         <source>(loaded)</source>
