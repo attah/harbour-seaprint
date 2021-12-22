@@ -460,14 +460,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clear default settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save default settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Default settings for %1 on this printer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -513,6 +505,14 @@
     </message>
     <message>
         <source>Media handling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as default settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

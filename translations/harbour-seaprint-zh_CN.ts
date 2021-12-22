@@ -460,14 +460,6 @@
         <translation>整理后的副本</translation>
     </message>
     <message>
-        <source>Clear default settings</source>
-        <translation>清空默认设置</translation>
-    </message>
-    <message>
-        <source>Save default settings</source>
-        <translation>清空默认设置</translation>
-    </message>
-    <message>
         <source>Default settings for %1 on this printer</source>
         <translation>此打印机上的 %1 默认设置。</translation>
     </message>
@@ -513,6 +505,14 @@
     </message>
     <message>
         <source>Media handling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as default settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

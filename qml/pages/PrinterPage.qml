@@ -47,7 +47,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Clear default settings")
+                text: qsTr("Reset default settings")
                 visible: printer.attrs.hasOwnProperty("printer-uuid")
                 onClicked: {
                     db.removeJobSettings(printer.attrs["printer-uuid"].value, selectedFileType);
@@ -56,7 +56,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Save default settings")
+                text: qsTr("Save as default settings")
                 visible: printer.attrs.hasOwnProperty("printer-uuid")
                 onClicked: {
                     var tmp = jobParams;
