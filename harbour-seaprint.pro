@@ -30,6 +30,7 @@ QT += svg
 PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1
+DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
 
 # Write version file
 VERSION_H = \
