@@ -1,7 +1,6 @@
 #include <QtQuick>
 
 #include <sailfishapp.h>
-#include <seaprint_version.h>
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
 #include <src/mimer.h>

@@ -1,5 +1,4 @@
 #include "ippprinter.h"
-#include <seaprint_version.h>
 #include "mimer.h"
 #include "papersizes.h"
 #include "overrider.h"

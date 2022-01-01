@@ -3,7 +3,6 @@
 #include "papersizes.h"
 #include "convertchecker.h"
 #include "mimer.h"
-#include "seaprint_version.h"
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>

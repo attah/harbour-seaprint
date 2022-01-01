@@ -31,13 +31,7 @@ PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1
 DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
-
-# Write version file
-VERSION_H = \
-"$${LITERAL_HASH}ifndef SEAPRINT_VERSION" \
-"$${LITERAL_HASH}   define SEAPRINT_VERSION \"$$VERSION\"" \
-"$${LITERAL_HASH}endif"
-write_file($$$$OUT_PWD/seaprint_version.h, VERSION_H)
+DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 
 SOURCES += src/harbour-seaprint.cpp \
     src/convertchecker.cpp \

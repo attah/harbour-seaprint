@@ -1,7 +1,6 @@
 #include "curlworker.h"
 #include "curlrequester.h"
 #include "settings.h"
-#include <seaprint_version.h>
 
 static size_t trampoline(char* dest, size_t size, size_t nmemb, void* userp)
 {

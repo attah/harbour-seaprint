@@ -1,7 +1,6 @@
 #include "ippdiscovery.h"
 #include "ippprinter.h"
 #include "settings.h"
-#include <seaprint_version.h>
 
 #define A 1
 #define PTR 12

@@ -41,7 +41,3 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
-
-# Automatically generated
-
-seaprint_version.h
