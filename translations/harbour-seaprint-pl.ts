@@ -139,7 +139,7 @@
     <name>BusyPage</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nieznana drukarka</translation>
     </message>
     <message>
         <source>Print success: </source>
@@ -815,7 +815,7 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nieznana drukarka</translation>
     </message>
     <message>
         <source>roll</source>
