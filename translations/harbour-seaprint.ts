@@ -284,10 +284,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No compatible formats supported</source>
         <translation type="unfinished"></translation>
     </message>

@@ -284,10 +284,6 @@
         <translation>O SeaPrint</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Nieznany</translation>
-    </message>
-    <message>
         <source>No compatible formats supported</source>
         <translation>Brak obsługiwanych kompatybilnych formatów</translation>
     </message>

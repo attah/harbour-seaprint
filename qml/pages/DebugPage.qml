@@ -1,5 +1,6 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import "utils.js" as Utils
 
 Page {
 
@@ -17,7 +18,7 @@ Page {
 
         PageHeader {
             id: header
-            title: printer.attrs["printer-name"].value
+            title: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
         }
 
         TextArea {

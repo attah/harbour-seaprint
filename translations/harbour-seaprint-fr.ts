@@ -284,10 +284,6 @@
         <translation>À propos de SeaPrint</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Inconnu</translation>
-    </message>
-    <message>
         <source>No compatible formats supported</source>
         <translation>Aucun format compatible supporté</translation>
     </message>

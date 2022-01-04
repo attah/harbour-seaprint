@@ -85,7 +85,7 @@ Page {
 
             PageHeader {
                 id: pageHeader
-                title: printer.attrs["printer-name"].value
+                title: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
                 description: Utils.basename(selectedFile)
             }
 

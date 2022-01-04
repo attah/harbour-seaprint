@@ -284,10 +284,6 @@
         <translation>Over SeaPrint</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Onbekend</translation>
-    </message>
-    <message>
         <source>No compatible formats supported</source>
         <translation>Geen ondersteunde formaten beschikbaar</translation>
     </message>

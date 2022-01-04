@@ -284,10 +284,6 @@
         <translation>关于 SeaPrint（海印）</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>未知</translation>
-    </message>
-    <message>
         <source>No compatible formats supported</source>
         <translation>不支持相关格式</translation>
     </message>

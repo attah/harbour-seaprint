@@ -19,7 +19,7 @@ Page {
             width: Math.min(Screen.width, detailsFlickable.width)-2*Theme.paddingLarge
             PageHeader {
                 title: qsTr("Details")
-                description: printer.attrs["printer-name"].value
+                description: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
             }
 
             // TODO:
