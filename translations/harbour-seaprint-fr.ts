@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>Port 9100 is not used for IPP.</source>
-        <translation>Le port 9100 n'est pas utilisé pour IPP</translation>
+        <translation>Le port 9100 n&apos;est pas utilisé pour IPP</translation>
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation>Pour l'&apos;installation, activer le mode développeur et ouvrir un terminal.</translation>
+        <translation>Pour l&apos;installation, activer le mode développeur et ouvrir un terminal.</translation>
     </message>
     <message>
         <source>Install calligra:</source>
@@ -457,7 +457,8 @@
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation>Paramètres par défaut pour %1 sur cette imprimante</translation>
+        <translation>Paramètres par défaut pour %1
+sur cette imprimante</translation>
     </message>
     <message>
         <source>(loaded)</source>
@@ -799,7 +800,7 @@
     </message>
     <message>
         <source>single document</source>
-        <translation >document unique</translation>
+        <translation>document unique</translation>
     </message>
     <message>
         <source>uncollated</source>
