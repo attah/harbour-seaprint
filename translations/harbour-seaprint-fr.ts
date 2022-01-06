@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>Printing</source>
-        <translation>Impression en cours d&apos;</translation>
+        <translation>Impression en cours</translation>
     </message>
     <message>
         <source>Conversion failed</source>
@@ -324,7 +324,7 @@
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation>média d&apos;impression non supporté</translation>
+        <translation>Média d&apos;impression non supporté</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation type="unfinished">Pour l'&apos;installation, activer le mode développeur et ouvrir un terminal.</translation>
+        <translation>Pour l'&apos;installation, activer le mode développeur et ouvrir un terminal.</translation>
     </message>
     <message>
         <source>Install calligra:</source>
@@ -505,18 +505,18 @@
     </message>
     <message>
         <source>Reset default settings</source>
-        <translation>Réinitialiser aux paramètres par défaut</translation>
+        <translation>Réinitialiser paramètres par défaut</translation>
     </message>
     <message>
         <source>Save as default settings</source>
-        <translation>Sauvegarder comme paramètres par défaut</translation>
+        <translation>Sauvegarder paramètres par défaut</translation>
     </message>
 </context>
 <context>
     <name>RangeSetting</name>
     <message>
         <source>all</source>
-        <translation>Tout</translation>
+        <translation>tout</translation>
     </message>
 </context>
 <context>
@@ -691,7 +691,7 @@
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation></translation>
+        <translation>bac auxiliaire</translation>
     </message>
     <message>
         <source>tray</source>
@@ -743,11 +743,11 @@
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation>auto monochrome</translation>
+        <translation>monochrome auto</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>binaire</translation>
     </message>
     <message>
         <source>color</source>
@@ -755,7 +755,7 @@
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>éclaircir</translation>
     </message>
     <message>
         <source>monochrome</source>
@@ -763,11 +763,11 @@
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>traiter binaire</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>traiter monochrome</translation>
     </message>
     <message>
         <source>one-sided</source>
@@ -787,7 +787,7 @@
     </message>
     <message>
         <source>Processing</source>
-        <translation>En cours de traitemenbt</translation>
+        <translation>En cours de traitement</translation>
     </message>
     <message>
         <source>Stopped</source>
@@ -795,7 +795,7 @@
     </message>
     <message>
         <source>Unknown State </source>
-        <translation>Etat inconnu</translation>
+        <translation>État inconnu</translation>
     </message>
     <message>
         <source>single document</source>
@@ -819,15 +819,15 @@
     </message>
     <message>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau</translation>
     </message>
     <message>
         <source>alternate</source>
-        <translation></translation>
+        <translation>secondaire</translation>
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau secondaire</translation>
     </message>
     <message>
         <source>disc</source>
@@ -851,15 +851,15 @@
     </message>
     <message>
         <source>main roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau principal</translation>
     </message>
     <message>
         <source>stacker</source>
-        <translation type="unfinished"></translation>
+        <translation>empileur</translation>
     </message>
     <message>
         <source>mailbox</source>
-        <translation type="unfinished">boîte à lettres</translation>
+        <translation>boîte mail</translation>
     </message>
     <message>
         <source>face-up</source>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <source>my mailbox</source>
-        <translation type="unfinished">ma boîte à lettre</translation>
+        <translation>ma boîte mail</translation>
     </message>
     <message>
         <source>auto</source>
