@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Donations</source>
-        <translation>Don</translation>
+        <translation>Dons</translation>
     </message>
     <message>
         <source>Licensing</source>
@@ -81,15 +81,15 @@
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le code Source est disponible sur Github. Traductions, rapports de bug et autres contributions sont bienvenues !</translation>
     </message>
     <message>
         <source>Special thanks to</source>
-        <translation type="unfinished"></translation>
+        <translation>Remerciements tout particulier à</translation>
     </message>
     <message>
         <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint est un logiciel libre distribué sous Licence GNU General Public (GPL) version 3 ou ultérieure.</translation>
     </message>
 </context>
 <context>
@@ -116,23 +116,23 @@
     </message>
     <message>
         <source>Port 9100 is not used for IPP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le port 9100 n'est pas utilisé pour IPP</translation>
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le suffixe uri n&apos;est pas dans la liste supportée de l&apos;imprimante.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elle pourrait ne pas accepter les tâches d&apos;impression à cette adresse</translation>
     </message>
     <message>
         <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Envisagez d&apos;utiliser un suffixe comme &quot;/ipp/print&quot;.</translation>
     </message>
     <message>
         <source>The printer/server lists these suffixes:</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;imprimante/le serveur liste ces suffixes :</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@
     <name>ConvertWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation>Error de conversion</translation>
+        <translation>Erreur de conversion</translation>
     </message>
     <message>
         <source>Failed to load image</source>
@@ -177,31 +177,31 @@
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
-        <translation type="unfinished"></translation>
+        <translation>Résolution (dpi) non prise en charge</translation>
     </message>
     <message>
         <source>Unsupported target format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format cible non pris en charge</translation>
     </message>
     <message>
         <source>Failed to get info about PDF file</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;obtention d&apos;informations du fichier PDF</translation>
     </message>
     <message>
         <source>Failed to open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;ouverture du fichier</translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Impression en cours</translation>
     </message>
     <message>
         <source>Conversion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la conversion</translation>
     </message>
     <message>
         <source>Upload error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de chargement</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Make and model</source>
-        <translation type="unfinished"></translation>
+        <translation>Constructeur et modèle</translation>
     </message>
     <message>
         <source>Printer status</source>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>IPP versions</source>
-        <translation>Version IPP</translation>
+        <translation>Versions IPP</translation>
     </message>
     <message>
         <source>IPP features</source>
@@ -246,11 +246,11 @@
     </message>
     <message>
         <source>Supply status</source>
-        <translation type="unfinished"></translation>
+        <translation>Statut des consommables</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Localisation</translation>
     </message>
 </context>
 <context>
@@ -269,7 +269,7 @@
     </message>
     <message>
         <source>View jobs</source>
-        <translation>Voir les travaux</translation>
+        <translation>Voir les tâches</translation>
     </message>
     <message>
         <source>Remove printer</source>
@@ -309,38 +309,38 @@
     </message>
     <message>
         <source>Unsupported document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de document non supporté</translation>
     </message>
     <message>
         <source>This format may not render correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce format peut ne pas être rendu correctement</translation>
     </message>
 </context>
 <context>
     <name>IppPrinter</name>
     <message>
         <source>Failed to open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;ouverture du fichier</translation>
     </message>
     <message>
         <source>Unsupported print media</source>
-        <translation type="unfinished"></translation>
+        <translation>Média d&apos;impression non supporté</translation>
     </message>
     <message>
         <source>Cannot convert this file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de convertir ce format de fichier</translation>
     </message>
     <message>
         <source>Unknown document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de document inconnu</translation>
     </message>
     <message>
         <source>Unknown document format dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de dimensions du document inconnu</translation>
     </message>
     <message>
         <source>Preparing</source>
-        <translation type="unfinished"></translation>
+        <translation>En cours de préparation</translation>
     </message>
 </context>
 <context>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Cancelling job failed</source>
-        <translation>Échec de l&apos;annulation de la tâche d&apos;impression</translation>
+        <translation>Échec de l&apos;annulation de la tâche</translation>
     </message>
 </context>
 <context>
@@ -386,27 +386,27 @@
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Les dépendances optionnelles ne sont pas installées !</translation>
     </message>
     <message>
         <source>Become root:</source>
-        <translation type="unfinished"></translation>
+        <translation>Devenez super-utilisateur :</translation>
     </message>
     <message>
         <source>To install, enable developer mode, and open a terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour l'&apos;installation, activer le mode développeur et ouvrir un terminal.</translation>
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer Calligra :</translation>
     </message>
     <message>
         <source>(done)</source>
-        <translation type="unfinished"></translation>
+        <translation>(fait)</translation>
     </message>
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
-        <translation type="unfinished"></translation>
+        <translation>Afin d&apos;imprimer les documents &apos;office&apos; (.odt et .doc(x)), vous avez besoin de &quot;calligraconverter&quot; du paquet &quot;calligra&quot; (version 3.2.1+, Sailfish OS 4.2).</translation>
     </message>
 </context>
 <context>
@@ -417,7 +417,7 @@
     </message>
     <message>
         <source>Sides</source>
-        <translation>Côté</translation>
+        <translation>Côtés</translation>
     </message>
     <message>
         <source>Copies</source>
@@ -441,108 +441,108 @@
     </message>
     <message>
         <source>Transfer format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de transfert</translation>
     </message>
     <message>
         <source>Media source</source>
-        <translation type="unfinished"></translation>
+        <translation>Source du média</translation>
     </message>
     <message>
         <source>Page range</source>
-        <translation type="unfinished"></translation>
+        <translation>Plage de pages</translation>
     </message>
     <message>
         <source>Collated copies</source>
-        <translation type="unfinished"></translation>
+        <translation>Copies assemblées</translation>
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres par défaut pour %1 sur cette imprimante</translation>
     </message>
     <message>
         <source>(loaded)</source>
-        <translation type="unfinished"></translation>
+        <translation>(chargé)</translation>
     </message>
     <message>
         <source>Output bin</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac de sortie</translation>
     </message>
     <message>
         <source>Media type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de média</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Droit</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Pages per page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pages par page</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à l&apos;échelle</translation>
     </message>
     <message>
         <source>Media handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestion du média</translation>
     </message>
     <message>
         <source>Reset default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser paramètres par défaut</translation>
     </message>
     <message>
         <source>Save as default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder paramètres par défaut</translation>
     </message>
 </context>
 <context>
     <name>RangeSetting</name>
     <message>
         <source>all</source>
-        <translation type="unfinished"></translation>
+        <translation>tout</translation>
     </message>
 </context>
 <context>
     <name>Setting</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Show nag-screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;écran d&apos;avertissement</translation>
     </message>
     <message>
         <source>Consider additional formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Envisager des formats additionnels</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation type="unfinished"></translation>
+        <translation>Certaines imprimantes supportent plus de formats que ce qu&apos;elles annoncent. Toutefois, les formats additionnels peuvent être déduits d&apos;autres attributs. Principalement pertinent pour les imprimantes compatibles Postscript qui supportent aussi le PDF.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche la page d&apos;avertissement concernant les dépendances optionnelles non installées</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -550,33 +550,33 @@
     </message>
     <message>
         <source>Ignore SSL errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les erreurs SSL</translation>
     </message>
     <message>
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afin de fonctionner avec des certificats autosignés des imprimantes et des instances CUPS, les erreurs SSL doivent être ignorées.</translation>
     </message>
 </context>
 <context>
     <name>SupplyItem</name>
     <message>
         <source>Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type inconnu</translation>
     </message>
     <message>
         <source>Unnamed supply</source>
-        <translation type="unfinished"></translation>
+        <translation>Consommable sans nom</translation>
     </message>
 </context>
 <context>
     <name>harbour-seaprint</name>
     <message>
         <source>images</source>
-        <translation type="unfinished"></translation>
+        <translation>images</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documents</translation>
     </message>
 </context>
 <context>
@@ -591,7 +591,7 @@
     </message>
     <message>
         <source>processing</source>
-        <translation>traitement</translation>
+        <translation>en cours de traitement</translation>
     </message>
     <message>
         <source>processing-stopped</source>
@@ -659,239 +659,239 @@
     </message>
     <message>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
         <source>Postscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Postscript</translation>
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>PWG-raster</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>URF-raster</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
         <source>GIF</source>
-        <translation type="unfinished"></translation>
+        <translation>GIF</translation>
     </message>
     <message>
         <source>auto-sense</source>
-        <translation type="unfinished"></translation>
+        <translation>détection automatique</translation>
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation type="unfinished"></translation>
+        <translation>bac auxiliaire</translation>
     </message>
     <message>
         <source>tray</source>
-        <translation type="unfinished"></translation>
+        <translation>bac</translation>
     </message>
     <message>
         <source>bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>bas</translation>
     </message>
     <message>
         <source>center</source>
-        <translation type="unfinished"></translation>
+        <translation>centre</translation>
     </message>
     <message>
         <source>main</source>
-        <translation type="unfinished"></translation>
+        <translation>principal</translation>
     </message>
     <message>
         <source>manual</source>
-        <translation type="unfinished"></translation>
+        <translation>manuel</translation>
     </message>
     <message>
         <source>middle</source>
-        <translation type="unfinished"></translation>
+        <translation>milieu</translation>
     </message>
     <message>
         <source>photo</source>
-        <translation type="unfinished"></translation>
+        <translation>photo</translation>
     </message>
     <message>
         <source>rear</source>
-        <translation type="unfinished"></translation>
+        <translation>arrière</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>droit</translation>
     </message>
     <message>
         <source>side</source>
-        <translation type="unfinished"></translation>
+        <translation>côté</translation>
     </message>
     <message>
         <source>top</source>
-        <translation type="unfinished"></translation>
+        <translation>haut</translation>
     </message>
     <message>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>automatique</translation>
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>monochrome auto</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>binaire</translation>
     </message>
     <message>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>couleur</translation>
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>éclaircir</translation>
     </message>
     <message>
         <source>monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>monochrome</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>traiter binaire</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>traiter monochrome</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>recto</translation>
     </message>
     <message>
         <source>two-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>recto-verso</translation>
     </message>
     <message>
         <source>two-sided flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>recto-verso inversé</translation>
     </message>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>En attente</translation>
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>En cours de traitement</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêtée</translation>
     </message>
     <message>
         <source>Unknown State </source>
-        <translation type="unfinished"></translation>
+        <translation>État inconnu</translation>
     </message>
     <message>
         <source>single document</source>
-        <translation type="unfinished"></translation>
+        <translation >document unique</translation>
     </message>
     <message>
         <source>uncollated</source>
-        <translation type="unfinished"></translation>
+        <translation>non assemblés</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation type="unfinished"></translation>
+        <translation>assemblés</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
-        <translation type="unfinished"></translation>
+        <translation>document unique (nouvelle feuille)</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Inconnu</translation>
+        <translation>Inconnu</translation>
     </message>
     <message>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau</translation>
     </message>
     <message>
         <source>alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>secondaire</translation>
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau secondaire</translation>
     </message>
     <message>
         <source>disc</source>
-        <translation type="unfinished"></translation>
+        <translation>disque</translation>
     </message>
     <message>
         <source>envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>enveloppe</translation>
     </message>
     <message>
         <source>hagaki</source>
-        <translation type="unfinished"></translation>
+        <translation>hagaki</translation>
     </message>
     <message>
         <source>large capacity</source>
-        <translation type="unfinished"></translation>
+        <translation>grande capacité</translation>
     </message>
     <message>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation>gauche</translation>
     </message>
     <message>
         <source>main roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rouleau principal</translation>
     </message>
     <message>
         <source>stacker</source>
-        <translation type="unfinished"></translation>
+        <translation>empileur</translation>
     </message>
     <message>
         <source>mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>boîte mail</translation>
     </message>
     <message>
         <source>face-up</source>
-        <translation type="unfinished"></translation>
+        <translation>face visible</translation>
     </message>
     <message>
         <source>face-down</source>
-        <translation type="unfinished"></translation>
+        <translation>face cachée</translation>
     </message>
     <message>
         <source>my mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>ma boîte mail</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>auto (fit)</source>
-        <translation type="unfinished"></translation>
+        <translation>auto (ajusté)</translation>
     </message>
     <message>
         <source>fill</source>
-        <translation type="unfinished"></translation>
+        <translation>remplir</translation>
     </message>
     <message>
         <source>fit</source>
-        <translation type="unfinished"></translation>
+        <translation>ajusté</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>aucun</translation>
     </message>
 </context>
 </TS>
