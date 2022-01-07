@@ -35,7 +35,6 @@ DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 
 SOURCES += src/harbour-seaprint.cpp \
     src/convertchecker.cpp \
-    src/convertworker.cpp \
     src/curlrequester.cpp \
     src/curlworker.cpp \
     src/ippdiscovery.cpp \
@@ -46,6 +45,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/pdf2printable.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
+    src/printerworker.cpp \
     src/settings.cpp \
     src/svgprovider.cpp
 
@@ -82,7 +82,6 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 
 HEADERS += \
     src/convertchecker.h \
-    src/convertworker.h \
     src/curlrequester.h \
     src/curlworker.h \
     src/ippdiscovery.h \
@@ -100,6 +99,7 @@ HEADERS += \
     ppm2pwg/bytestream/codable.h \
     src/overrider.h \
     src/papersizes.h \
+    src/printerworker.h \
     src/settings.h \
     src/svgprovider.h
 

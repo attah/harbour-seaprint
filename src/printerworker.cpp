@@ -1,4 +1,4 @@
-#include "convertworker.h"
+#include "printerworker.h"
 #include <sailfishapp.h>
 #include "papersizes.h"
 #include "convertchecker.h"
@@ -15,39 +15,33 @@
 
 #define OK(call) if(!(call)) throw ConvertFailedException()
 
-ConvertWorker::ConvertWorker(IppPrinter* parent) // : QObject((QObject*)parent) borks multithereading?!
+PrinterWorker::PrinterWorker(IppPrinter* parent)
 {
     _printer = parent;
 }
 
-void ConvertWorker::command(Bytestream msg)
+void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
-
-    qDebug() << "command...";
-
     cr.write((char*)msg.raw(), msg.size());
 }
 
-// TODO: de-duplicate
-void ConvertWorker::getJobs(Bytestream msg)
+void PrinterWorker::getJobs(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
-
     cr.write((char*)msg.raw(), msg.size());
 }
 
-void ConvertWorker::cancelJob(Bytestream msg)
+void PrinterWorker::cancelJob(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
     cr.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
-
     cr.write((char*)msg.raw(), msg.size());
 }
 
-void ConvertWorker::justUpload(QString filename, Bytestream header)
+void PrinterWorker::justUpload(QString filename, Bytestream header)
 {
 try {
     emit busyMessage(tr("Printing"));
@@ -69,7 +63,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertPdf(QString filename, Bytestream header,
+void PrinterWorker::convertPdf(QString filename, Bytestream header,
                                QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -147,7 +141,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertImage(QString filename, Bytestream header,
+void PrinterWorker::convertImage(QString filename, Bytestream header,
                                  QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                  quint32 HwResX, quint32 HwResY, QMargins margins)
 {
@@ -289,9 +283,8 @@ try {
 
             outBts << (urf ? make_urf_file_hdr(1) : make_pwg_file_hdr());
             bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false);
+            emit busyMessage(tr("Printing"));
         }
-
-        emit busyMessage(tr("Printing"));
 
         CurlRequester cr(_printer->httpUrl());
         cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
@@ -309,7 +302,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertOfficeDocument(QString filename, Bytestream header,
+void PrinterWorker::convertOfficeDocument(QString filename, Bytestream header,
                                           QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                           quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
@@ -400,7 +393,7 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void ConvertWorker::convertPlaintext(QString filename, Bytestream header,
+void PrinterWorker::convertPlaintext(QString filename, Bytestream header,
                                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
                                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
                                      bool BackHFlip, bool BackVFlip)
@@ -552,31 +545,4 @@ catch(const ConvertFailedException& e)
 {
         emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
 }
-}
-
-QString ConvertWorker::getPopplerShortPaperSize(QString PaperSize)
-{
-    QString ShortPaperSize;
-    if(PaperSize == "iso_a4_210x297mm")
-    {
-        ShortPaperSize = "A4";
-    }
-    else if (PaperSize == "iso_a3_297x420mm")
-    {
-        ShortPaperSize = "A3";
-    }
-    else if (PaperSize == "na_letter_8.5x11in")
-    {
-        ShortPaperSize = "letter";
-    }
-    else if (PaperSize == "na_legal_8.5x14in")
-    {
-        ShortPaperSize = "legal";
-    }
-    else
-    {
-        qDebug() << "Unsupported PDF paper size" << PaperSize;
-        throw ConvertFailedException(tr("Unsupported PDF paper size"));
-    }
-    return ShortPaperSize;
 }

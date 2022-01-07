@@ -158,53 +158,6 @@
     </message>
 </context>
 <context>
-    <name>ConvertWorker</name>
-    <message>
-        <source>Conversion error</source>
-        <translation>转换错误</translation>
-    </message>
-    <message>
-        <source>Failed to load image</source>
-        <translation>加载图像错误</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>PDF纸张大小不受支持</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>纸张大小不受支持</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>分辨率不受支持（dpi）</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>目标格式不受支持</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>获取PDF文件信息错误</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>打开文件失败</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Conversion failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upload error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -509,6 +462,53 @@
     </message>
     <message>
         <source>Save as default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PrinterWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation>转换错误</translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation>加载图像错误</translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation>PDF纸张大小不受支持</translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>纸张大小不受支持</translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation>分辨率不受支持（dpi）</translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation>目标格式不受支持</translation>
+    </message>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation>获取PDF文件信息错误</translation>
+    </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>打开文件失败</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

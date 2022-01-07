@@ -158,53 +158,6 @@
     </message>
 </context>
 <context>
-    <name>ConvertWorker</name>
-    <message>
-        <source>Conversion error</source>
-        <translation>Konvertierungsfehler</translation>
-    </message>
-    <message>
-        <source>Failed to load image</source>
-        <translation>Bild konnte nicht geladen werden</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>Nicht unterstützte PDF-Papierformat</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Nicht unterstütztes Papierformat</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>Nicht unterstützte Auflösung (dpi)</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Nicht unterstützes Zielformat</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Informationen über die PDF-Datei können nicht abgerufen werden</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>Öffnen der Datei fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>Es wird gedruckt</translation>
-    </message>
-    <message>
-        <source>Conversion failed</source>
-        <translation>Konvertierung fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Upload error</source>
-        <translation>Übertragungsfehler</translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -511,6 +464,53 @@ auf diesem Drucker</translation>
     <message>
         <source>Save as default settings</source>
         <translation>Als Standarteinstellung speichern</translation>
+    </message>
+</context>
+<context>
+    <name>PrinterWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation>Konvertierungsfehler</translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation>Bild konnte nicht geladen werden</translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation>Nicht unterstützte PDF-Papierformat</translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Nicht unterstütztes Papierformat</translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation>Nicht unterstützte Auflösung (dpi)</translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation>Nicht unterstützes Zielformat</translation>
+    </message>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation>Informationen über die PDF-Datei können nicht abgerufen werden</translation>
+    </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Öffnen der Datei fehlgeschlagen</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>Es wird gedruckt</translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation>Konvertierung fehlgeschlagen</translation>
+    </message>
+    <message>
+        <source>Upload error</source>
+        <translation>Übertragungsfehler</translation>
     </message>
 </context>
 <context>

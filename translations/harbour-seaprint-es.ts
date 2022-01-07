@@ -158,53 +158,6 @@
     </message>
 </context>
 <context>
-    <name>ConvertWorker</name>
-    <message>
-        <source>Conversion error</source>
-        <translation>Error de conversión</translation>
-    </message>
-    <message>
-        <source>Failed to load image</source>
-        <translation>Error al cargar imagen</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>Tamaño de papel en PDF no soportado</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Tamaño de papel no soportado</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>Resolución (ppp) no soportada</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Formato de destino no soportado</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Error al obtener info de archivo PDF</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>Error al abrir archivo</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Conversion failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upload error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -509,6 +462,53 @@
     </message>
     <message>
         <source>Save as default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PrinterWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation>Error de conversión</translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation>Error al cargar imagen</translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation>Tamaño de papel en PDF no soportado</translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Tamaño de papel no soportado</translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation>Resolución (ppp) no soportada</translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation>Formato de destino no soportado</translation>
+    </message>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation>Error al obtener info de archivo PDF</translation>
+    </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Error al abrir archivo</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

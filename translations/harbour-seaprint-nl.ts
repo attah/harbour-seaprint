@@ -158,53 +158,6 @@
     </message>
 </context>
 <context>
-    <name>ConvertWorker</name>
-    <message>
-        <source>Conversion error</source>
-        <translation>Conversiefout</translation>
-    </message>
-    <message>
-        <source>Failed to load image</source>
-        <translation>Afbeelding laden mislukt</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>Niet-ondersteund PDF-papierformaat</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Niet-ondersteund papierformaat</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>Niet-ondersteunde resolutie (dpi)</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Niet-ondersteund doelformaat</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Informatie over het PDF-bestand ophalen mislukt</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>Bestand openen mislukt</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Conversion failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upload error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -509,6 +462,53 @@
     </message>
     <message>
         <source>Save as default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PrinterWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation>Conversiefout</translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation>Afbeelding laden mislukt</translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation>Niet-ondersteund PDF-papierformaat</translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Niet-ondersteund papierformaat</translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation>Niet-ondersteunde resolutie (dpi)</translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation>Niet-ondersteund doelformaat</translation>
+    </message>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation>Informatie over het PDF-bestand ophalen mislukt</translation>
+    </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Bestand openen mislukt</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upload error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

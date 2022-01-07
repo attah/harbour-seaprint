@@ -1,5 +1,5 @@
-#ifndef CONVERTWORKER_H
-#define CONVERTWORKER_H
+#ifndef PRINTERWORKER_H
+#define PRINTERWORKER_H
 #include <QObject>
 #include <QtNetwork>
 #include "curlrequester.h"
@@ -20,18 +20,18 @@ public:
     }
 };
 
-class ConvertWorker : public QObject
+class PrinterWorker : public QObject
 {
     Q_OBJECT
 
 public:
-    ConvertWorker(IppPrinter* parent);
+    PrinterWorker(IppPrinter* parent);
 
 private:
-    ConvertWorker();
+    PrinterWorker();
 
 public slots:
-    void command(Bytestream msg);
+    void getPrinterAttributes(Bytestream msg);
     void getJobs(Bytestream msg);
     void cancelJob(Bytestream msg);
 
@@ -65,7 +65,6 @@ private:
 
     IppPrinter* _printer;
 
-    QString getPopplerShortPaperSize(QString PaperSize);
 };
 
-#endif // CONVERTWORKER_H
+#endif // PRINTERWORKER_H

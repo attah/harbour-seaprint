@@ -11,23 +11,23 @@ IppPrinter::IppPrinter()
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
 
-    _worker = new ConvertWorker(this);
+    _worker = new PrinterWorker(this);
     _worker->moveToThread(&_workerThread);
 
     connect(&_workerThread, &QThread::finished, _worker, &QObject::deleteLater);
 
-    connect(this, &IppPrinter::doCommand, _worker, &ConvertWorker::command);
-    connect(this, &IppPrinter::doGetJobs, _worker, &ConvertWorker::getJobs);
-    connect(this, &IppPrinter::doCancelJob, _worker, &ConvertWorker::cancelJob);
-    connect(this, &IppPrinter::doJustUpload, _worker, &ConvertWorker::justUpload);
+    connect(this, &IppPrinter::doDoGetPrinterAttributes, _worker, &PrinterWorker::getPrinterAttributes);
+    connect(this, &IppPrinter::doGetJobs, _worker, &PrinterWorker::getJobs);
+    connect(this, &IppPrinter::doCancelJob, _worker, &PrinterWorker::cancelJob);
+    connect(this, &IppPrinter::doJustUpload, _worker, &PrinterWorker::justUpload);
 
-    connect(this, &IppPrinter::doConvertPdf, _worker, &ConvertWorker::convertPdf);
-    connect(this, &IppPrinter::doConvertImage, _worker, &ConvertWorker::convertImage);
-    connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &ConvertWorker::convertOfficeDocument);
-    connect(this, &IppPrinter::doConvertPlaintext, _worker, &ConvertWorker::convertPlaintext);
-    connect(_worker, &ConvertWorker::progress, this, &IppPrinter::setProgress);
-    connect(_worker, &ConvertWorker::busyMessage, this, &IppPrinter::setBusyMessage);
-    connect(_worker, &ConvertWorker::failed, this, &IppPrinter::convertFailed);
+    connect(this, &IppPrinter::doConvertPdf, _worker, &PrinterWorker::convertPdf);
+    connect(this, &IppPrinter::doConvertImage, _worker, &PrinterWorker::convertImage);
+    connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &PrinterWorker::convertOfficeDocument);
+    connect(this, &IppPrinter::doConvertPlaintext, _worker, &PrinterWorker::convertPlaintext);
+    connect(_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
+    connect(_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
+    connect(_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
 
     qRegisterMetaType<QMargins>();
 
@@ -120,7 +120,7 @@ void IppPrinter::refresh() {
         QJsonObject o = opAttrs();
 
         IppMsg msg = IppMsg(o);
-        emit doCommand(msg.encode(IppMsg::GetPrinterAttrs));
+        emit doDoGetPrinterAttributes(msg.encode(IppMsg::GetPrinterAttrs));
     }
 }
 

@@ -4,7 +4,7 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include "ippmsg.h"
-#include "convertworker.h"
+#include "printerworker.h"
 #include "curlrequester.h"
 #include <mlite5/MGConfItem>
 
@@ -12,7 +12,7 @@ class IppPrinter : public QObject
 {
     Q_OBJECT
 
-    friend class ConvertWorker;
+    friend class PrinterWorker;
 
     Q_PROPERTY(QString url READ getUrl WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QJsonObject attrs MEMBER _attrs NOTIFY attrsChanged)
@@ -50,7 +50,7 @@ signals:
     void jobFinished(bool status);
     void cancelStatus(bool status);
 
-    void doCommand(Bytestream msg);
+    void doDoGetPrinterAttributes(Bytestream msg);
     void doGetJobs(Bytestream msg);
     void doCancelJob(Bytestream msg);
 
@@ -119,7 +119,7 @@ private:
     QString _progress;
 
     QThread _workerThread;
-    ConvertWorker* _worker;
+    PrinterWorker* _worker;
 
 };
 

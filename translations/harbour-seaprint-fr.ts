@@ -158,53 +158,6 @@
     </message>
 </context>
 <context>
-    <name>ConvertWorker</name>
-    <message>
-        <source>Conversion error</source>
-        <translation>Erreur de conversion</translation>
-    </message>
-    <message>
-        <source>Failed to load image</source>
-        <translation>Chargement impossible de l&apos;image</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>Taille de papier PDF non prise en charge</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Taille de papier non prise en charge</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>Résolution (dpi) non prise en charge</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Format cible non pris en charge</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Échec de l&apos;obtention d&apos;informations du fichier PDF</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>Échec de l&apos;ouverture du fichier</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>Impression en cours</translation>
-    </message>
-    <message>
-        <source>Conversion failed</source>
-        <translation>Échec de la conversion</translation>
-    </message>
-    <message>
-        <source>Upload error</source>
-        <translation>Erreur de chargement</translation>
-    </message>
-</context>
-<context>
     <name>CoverPage</name>
     <message>
         <source>SeaPrint</source>
@@ -511,6 +464,53 @@ sur cette imprimante</translation>
     <message>
         <source>Save as default settings</source>
         <translation>Sauvegarder paramètres par défaut</translation>
+    </message>
+</context>
+<context>
+    <name>PrinterWorker</name>
+    <message>
+        <source>Conversion error</source>
+        <translation>Erreur de conversion</translation>
+    </message>
+    <message>
+        <source>Failed to load image</source>
+        <translation>Chargement impossible de l&apos;image</translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation>Taille de papier PDF non prise en charge</translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Taille de papier non prise en charge</translation>
+    </message>
+    <message>
+        <source>Unsupported resolution (dpi)</source>
+        <translation>Résolution (dpi) non prise en charge</translation>
+    </message>
+    <message>
+        <source>Unsupported target format</source>
+        <translation>Format cible non pris en charge</translation>
+    </message>
+    <message>
+        <source>Failed to get info about PDF file</source>
+        <translation>Échec de l&apos;obtention d&apos;informations du fichier PDF</translation>
+    </message>
+    <message>
+        <source>Failed to open file</source>
+        <translation>Échec de l&apos;ouverture du fichier</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>Impression en cours</translation>
+    </message>
+    <message>
+        <source>Conversion failed</source>
+        <translation>Échec de la conversion</translation>
+    </message>
+    <message>
+        <source>Upload error</source>
+        <translation>Erreur de chargement</translation>
     </message>
 </context>
 <context>
