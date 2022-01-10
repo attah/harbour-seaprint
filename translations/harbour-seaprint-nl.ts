@@ -81,15 +81,15 @@
     </message>
     <message>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederlands</translation>
     </message>
     <message>
         <source>Special thanks to</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciale dank aan</translation>
     </message>
     <message>
         <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>SeaPrint is gratis software die is uitgebracht onder de GNU General Public License (GPL), versie 3 of hoger.</translation>
     </message>
 </context>
 <context>
@@ -112,27 +112,27 @@
     </message>
     <message>
         <source>On WiFi:</source>
-        <translation type="unfinished"></translation>
+        <translation>Via Wifi:</translation>
     </message>
     <message>
         <source>Port 9100 is not used for IPP.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poort 9100 wordt niet gebruikt voor IPP.</translation>
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het uri-achtervoegsel staat niet in de lijst met ondersteunde printers.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het accepteert mogelijk geen afdruktaken op dit adres.</translation>
     </message>
     <message>
         <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Overweeg het gebruik van een achtervoegsel zoals &quot;/ipp/print&quot;.</translation>
     </message>
     <message>
         <source>The printer/server lists these suffixes:</source>
-        <translation type="unfinished"></translation>
+        <translation>De printer/server vermeldt deze achtervoegsels:</translation>
     </message>
 </context>
 <context>
@@ -175,35 +175,35 @@
     <name>DetailsPage</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Details</translation>
     </message>
     <message>
         <source>Make and model</source>
-        <translation type="unfinished"></translation>
+        <translation>Merk en model</translation>
     </message>
     <message>
         <source>Printer status</source>
-        <translation type="unfinished"></translation>
+        <translation>Printer status</translation>
     </message>
     <message>
         <source>IPP versions</source>
-        <translation type="unfinished"></translation>
+        <translation>IPP versie</translation>
     </message>
     <message>
         <source>IPP features</source>
-        <translation type="unfinished"></translation>
+        <translation>IPP functies</translation>
     </message>
     <message>
         <source>Firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmware</translation>
     </message>
     <message>
         <source>Supply status</source>
-        <translation type="unfinished"></translation>
+        <translation>Drukwerk status</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Locatie</translation>
     </message>
 </context>
 <context>
@@ -254,19 +254,19 @@
     </message>
     <message>
         <source>Printer details</source>
-        <translation type="unfinished"></translation>
+        <translation>Printer details</translation>
     </message>
     <message>
         <source>Not on WiFi</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet via WiFi bereikbaar</translation>
     </message>
     <message>
         <source>Unsupported document format</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-ondersteunde documentindeling</translation>
     </message>
     <message>
         <source>This format may not render correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit formaat wordt mogelijk niet correct weergegeven</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
     </message>
     <message>
         <source>Preparing</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbereiden</translation>
     </message>
 </context>
 <context>
@@ -351,15 +351,15 @@
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalligra installeren:</translation>
     </message>
     <message>
         <source>(done)</source>
-        <translation type="unfinished"></translation>
+        <translation>(voltooid)</translation>
     </message>
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
-        <translation type="unfinished"></translation>
+        <translation>Om documenten zoals odt en doc(x) af te drukken, hebt u &quot;calligraconverter&quot; van het &quot;calligra&quot; pakket nodig (versie 3.2.1+, Sailfish OS 4.2).</translation>
     </message>
 </context>
 <context>
@@ -406,63 +406,63 @@
     </message>
     <message>
         <source>Collated copies</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesorteerde exemplaren</translation>
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardinstellingen voor %1 op deze printer</translation>
     </message>
     <message>
         <source>(loaded)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geladen)</translation>
     </message>
     <message>
         <source>Output bin</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitvoerbak</translation>
     </message>
     <message>
         <source>Media type</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediatype</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Boven</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Onder</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Pages per page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina&quot;s per pagina</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Schalen</translation>
     </message>
     <message>
         <source>Media handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediaverwerking</translation>
     </message>
     <message>
         <source>Reset default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardinstellingen herstellen</translation>
     </message>
     <message>
         <source>Save as default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als standaardinstellingen</translation>
     </message>
 </context>
 <context>
@@ -501,15 +501,15 @@
     </message>
     <message>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Afdrukken</translation>
     </message>
     <message>
         <source>Conversion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversie mislukt</translation>
     </message>
     <message>
         <source>Upload error</source>
-        <translation type="unfinished"></translation>
+        <translation>Uploadfout</translation>
     </message>
 </context>
 <context>
@@ -523,7 +523,7 @@
     <name>Setting</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen</translation>
     </message>
 </context>
 <context>
@@ -550,33 +550,33 @@
     </message>
     <message>
         <source>Ignore SSL errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Negeer SSL-fouten</translation>
     </message>
     <message>
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Om te kunnen werken met zelfondertekende certificaten van printers en CUPS-instanties, moeten SSL-fouten worden genegeerd.</translation>
     </message>
 </context>
 <context>
     <name>SupplyItem</name>
     <message>
         <source>Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend type</translation>
     </message>
     <message>
         <source>Unnamed supply</source>
-        <translation type="unfinished"></translation>
+        <translation>Naamloos drukwerk</translation>
     </message>
 </context>
 <context>
     <name>harbour-seaprint</name>
     <message>
         <source>images</source>
-        <translation type="unfinished"></translation>
+        <translation>afbeeldingen</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documenten</translation>
     </message>
 </context>
 <context>
@@ -783,115 +783,115 @@
     </message>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>Inactief</translation>
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerken</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestopt</translation>
     </message>
     <message>
         <source>Unknown State </source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende status</translation>
     </message>
     <message>
         <source>single document</source>
-        <translation type="unfinished"></translation>
+        <translation>enkel document</translation>
     </message>
     <message>
         <source>uncollated</source>
-        <translation type="unfinished"></translation>
+        <translation>ongesorteerd</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation type="unfinished"></translation>
+        <translation>gesorteerd</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
-        <translation type="unfinished"></translation>
+        <translation>enkel document (nieuw blad)</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Onbekend</translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation>rol</translation>
     </message>
     <message>
         <source>alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>afwisselend</translation>
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation type="unfinished"></translation>
+        <translation>afwisselend op rol</translation>
     </message>
     <message>
         <source>disc</source>
-        <translation type="unfinished"></translation>
+        <translation>disk</translation>
     </message>
     <message>
         <source>envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>envelop</translation>
     </message>
     <message>
         <source>hagaki</source>
-        <translation type="unfinished"></translation>
+        <translation> hagaki </translation>
     </message>
     <message>
         <source>large capacity</source>
-        <translation type="unfinished"></translation>
+        <translation>grote capaciteit</translation>
     </message>
     <message>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation>links</translation>
     </message>
     <message>
         <source>main roll</source>
-        <translation type="unfinished"></translation>
+        <translation>hoofdrol</translation>
     </message>
     <message>
         <source>stacker</source>
-        <translation type="unfinished"></translation>
+        <translation>stapelaar</translation>
     </message>
     <message>
         <source>mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>postbus</translation>
     </message>
     <message>
         <source>face-up</source>
-        <translation type="unfinished"></translation>
+        <translation>afdrukzijde boven</translation>
     </message>
     <message>
         <source>face-down</source>
-        <translation type="unfinished"></translation>
+        <translation>afdrukzijde onder</translation>
     </message>
     <message>
         <source>my mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>mijn postbus</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>auto (fit)</source>
-        <translation type="unfinished"></translation>
+        <translation>auto (passend)</translation>
     </message>
     <message>
         <source>fill</source>
-        <translation type="unfinished"></translation>
+        <translation>vullend</translation>
     </message>
     <message>
         <source>fit</source>
-        <translation type="unfinished"></translation>
+        <translation>passend</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>geen</translation>
     </message>
 </context>
 </TS>
