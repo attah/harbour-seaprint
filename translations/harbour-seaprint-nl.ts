@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation>Het uri-achtervoegsel staat niet in de lijst met ondersteunde printers.</translation>
+        <translation>Het uri-achtervoegsel staat niet in de door deze printer ondersteunde lijst.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Not on WiFi</source>
-        <translation>Niet via WiFi bereikbaar</translation>
+        <translation>Niet met WiFi netwerk verbonden</translation>
     </message>
     <message>
         <source>Unsupported document format</source>
@@ -351,7 +351,7 @@
     </message>
     <message>
         <source>Install calligra:</source>
-        <translation>Kalligra installeren:</translation>
+        <translation>Calligra installeren:</translation>
     </message>
     <message>
         <source>(done)</source>
@@ -823,11 +823,11 @@
     </message>
     <message>
         <source>alternate</source>
-        <translation>afwisselend</translation>
+        <translation>alternatief</translation>
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation>afwisselend op rol</translation>
+        <translation>alternatieve rol</translation>
     </message>
     <message>
         <source>disc</source>
@@ -839,7 +839,7 @@
     </message>
     <message>
         <source>hagaki</source>
-        <translation> hagaki </translation>
+        <translation>hagaki</translation>
     </message>
     <message>
         <source>large capacity</source>
