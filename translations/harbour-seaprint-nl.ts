@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
-        <translation>SeaPrint is gratis software die is uitgebracht onder de GNU General Public License (GPL), versie 3 of hoger.</translation>
+        <translation>SeaPrint is vrije software die is uitgebracht onder de GNU General Public License (GPL), versie 3 of hoger.</translation>
     </message>
 </context>
 <context>
