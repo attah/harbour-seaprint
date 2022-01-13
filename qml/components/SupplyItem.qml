@@ -8,7 +8,7 @@ import "../components"
         property var color: "white"
         property int level: 100
         property int high_level: 100
-        property int low_level: 0
+        property int low_level: 10
         property string name: ""
         property string type: ""
 
@@ -26,7 +26,7 @@ import "../components"
             anchors.verticalCenter: parent.verticalCenter
             width: Theme.itemSizeExtraSmall
             text: ""+(100*level/high_level)+"%"
-            color: Theme.highlightColor
+            color: level <= low_level ? "red" : Theme.highlightColor
             font.pixelSize: Theme.fontSizeExtraSmall
         }
         Column
