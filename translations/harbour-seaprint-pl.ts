@@ -205,6 +205,18 @@
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Performance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pages/min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pages/min (color)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>

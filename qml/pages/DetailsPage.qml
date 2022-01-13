@@ -70,6 +70,27 @@ Page {
             }
 
             SectionHeader {
+                text: qsTr("Supply status")
+                visible: printer.attrs.hasOwnProperty("marker-colors")
+            }
+
+            Repeater
+            {
+                model: printer.attrs["marker-colors"].value.length
+
+                SupplyItem
+                {
+                    color: printer.attrs["marker-colors"].value[index]
+                    level: printer.attrs["marker-levels"].value[index]
+                    high_level: printer.attrs["marker-high-levels"].value[index]
+                    low_level: printer.attrs["marker-low-levels"].value[index]
+                    name: printer.attrs["marker-names"].value[index]
+                    type: printer.attrs["marker-types"].value[index]
+
+                }
+            }
+
+            SectionHeader {
                 text: qsTr("IPP versions")
                 visible: printer.attrs.hasOwnProperty("ipp-versions-supported")
             }
@@ -115,25 +136,24 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("Supply status")
-                visible: printer.attrs.hasOwnProperty("marker-colors")
+                text: qsTr("Performance")
+                visible: printer.attrs.hasOwnProperty("pages-per-minute") || printer.attrs.hasOwnProperty("pages-per-minute-color")
             }
 
-            Repeater
+            Label
             {
-                model: printer.attrs["marker-colors"].value.length
+                text: ""+printer.attrs["pages-per-minute"].value+" "+qsTr("pages/min")
+                visible: printer.attrs.hasOwnProperty("pages-per-minute")
 
-                SupplyItem
-                {
-                    color: printer.attrs["marker-colors"].value[index]
-                    level: printer.attrs["marker-levels"].value[index]
-                    high_level: printer.attrs["marker-high-levels"].value[index]
-                    low_level: printer.attrs["marker-low-levels"].value[index]
-                    name: printer.attrs["marker-names"].value[index]
-                    type: printer.attrs["marker-types"].value[index]
-
-                }
             }
+
+            Label
+            {
+                text: ""+printer.attrs["pages-per-minute-color"].value+" "+qsTr("pages/min (color)")
+                visible: printer.attrs.hasOwnProperty("pages-per-minute-color")
+
+            }
+
         }
     }
 }
