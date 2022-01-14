@@ -129,7 +129,7 @@ private:
     QString _progress;
 
     QThread _workerThread;
-    PrinterWorker* _worker;
+    PrinterWorker _worker;
 
 };
 

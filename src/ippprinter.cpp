@@ -7,31 +7,30 @@
 
 Q_DECLARE_METATYPE(QMargins)
 
-IppPrinter::IppPrinter()
+IppPrinter::IppPrinter() : _worker(this)
 {
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
 
-    _worker = new PrinterWorker(this);
-    _worker->moveToThread(&_workerThread);
+    _worker.moveToThread(&_workerThread);
 
-    connect(&_workerThread, &QThread::finished, _worker, &QObject::deleteLater);
+    connect(&_workerThread, &QThread::finished, &_worker, &QObject::deleteLater);
 
-    connect(this, &IppPrinter::doDoGetPrinterAttributes, _worker, &PrinterWorker::getPrinterAttributes);
-    connect(this, &IppPrinter::doGetJobs, _worker, &PrinterWorker::getJobs);
-    connect(this, &IppPrinter::doCancelJob, _worker, &PrinterWorker::cancelJob);
-    connect(this, &IppPrinter::doJustUpload, _worker, &PrinterWorker::justUpload);
+    connect(this, &IppPrinter::doDoGetPrinterAttributes, &_worker, &PrinterWorker::getPrinterAttributes);
+    connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
+    connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
+    connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
 
-    connect(this, &IppPrinter::doConvertPdf, _worker, &PrinterWorker::convertPdf);
-    connect(this, &IppPrinter::doConvertImage, _worker, &PrinterWorker::convertImage);
-    connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &PrinterWorker::convertOfficeDocument);
-    connect(this, &IppPrinter::doConvertPlaintext, _worker, &PrinterWorker::convertPlaintext);
+    connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
+    connect(this, &IppPrinter::doConvertImage, &_worker, &PrinterWorker::convertImage);
+    connect(this, &IppPrinter::doConvertOfficeDocument, &_worker, &PrinterWorker::convertOfficeDocument);
+    connect(this, &IppPrinter::doConvertPlaintext, &_worker, &PrinterWorker::convertPlaintext);
 
-    connect(this, &IppPrinter::doGetStrings, _worker, &PrinterWorker::getStrings);
+    connect(this, &IppPrinter::doGetStrings, &_worker, &PrinterWorker::getStrings);
 
-    connect(_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
-    connect(_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
-    connect(_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
+    connect(&_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
+    connect(&_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
+    connect(&_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
 
     qRegisterMetaType<QMargins>();
 
@@ -39,7 +38,6 @@ IppPrinter::IppPrinter()
 }
 
 IppPrinter::~IppPrinter() {
-    // TODO: delete worker and workerthread?
 
 }
 
