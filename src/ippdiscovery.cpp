@@ -404,6 +404,22 @@ void IppDiscovery::readPendingDatagrams()
 
 }
 
+void IppDiscovery::resolve(QUrl& url)
+{
+    QString host = url.host();
+
+    if(host.endsWith("."))
+    {
+        host.chop(1);
+    }
+
+    // TODO IPv6
+    if(_AAs.contains(host))
+    {   // TODO: retry potential other IPs
+        url.setHost(_AAs.value(host));
+    }
+}
+
 QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {   //TODO: consider caching images (doesn't appear to be needed currently)
     Q_UNUSED(requestedSize);
@@ -413,19 +429,8 @@ QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &r
 
     QNetworkAccessManager* nam = new QNetworkAccessManager();
     QUrl url(id);
-    QString host = url.host();
 
-    if(host.endsWith("."))
-    {
-        host.chop(1);
-    }
-
-    qDebug() << url.host() << host << _AAs;
-    // TODO IPv6
-    if(_AAs.contains(host))
-    {   // TODO: retry potential other IPs
-        url.setHost(_AAs.value(host));
-    }
+    resolve(url);
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);

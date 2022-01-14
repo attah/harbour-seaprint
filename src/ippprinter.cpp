@@ -1,4 +1,5 @@
 #include "ippprinter.h"
+#include "ippdiscovery.h"
 #include "mimer.h"
 #include "papersizes.h"
 #include "overrider.h"
@@ -125,10 +126,11 @@ void IppPrinter::refresh() {
 
 void IppPrinter::MaybeGetStrings()
 {
-    // TODO: resolve .local
     if(_attrs.contains("printer-strings-uri") && _strings.empty())
     {
-        emit doGetStrings(QUrl(_attrs["printer-strings-uri"].toObject()["value"].toString()));
+        QUrl url(_attrs["printer-strings-uri"].toObject()["value"].toString());
+        IppDiscovery::instance()->resolve(url);
+        emit doGetStrings(url);
     }
 }
 
