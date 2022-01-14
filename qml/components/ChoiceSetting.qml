@@ -11,14 +11,15 @@ Setting {
 
     property int num_large_choices: 8
 
-    displayValue: Utils.ippName(name, choice != undefined ? choice : default_choice)
+    displayValue: Utils.ippName(name, choice != undefined ? choice : default_choice, strings)
 
     onClicked: {
         if(actual_choices.length>num_large_choices)
         {
             var dialog = pageStack.push("LargeChoiceDialog.qml",
                                         {name:name, choice: choice != undefined ? choice : default_choice, choices: actual_choices,
-                                         preferred_choices: preferred_choices, preferred_choice_suffix: preferred_choice_suffix})
+                                         preferred_choices: preferred_choices, preferred_choice_suffix: preferred_choice_suffix,
+                                         strings: strings})
             dialog.accepted.connect(function() {
                                         choice = dialog.choice
                                     })
@@ -33,7 +34,7 @@ Setting {
         Repeater {
             model: actual_choices.length>num_large_choices ? 0 : actual_choices
             MenuItem {
-                text: Utils.ippName(name, actual_choices[index])
+                text: Utils.ippName(name, actual_choices[index], strings)
                       + (Utils.has(preferred_choices, actual_choices[index]) ? " "+preferred_choice_suffix : "")
                 onClicked:
                 {

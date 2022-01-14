@@ -59,7 +59,7 @@ function has(arrayish, what)
     return arrayish.indexOf(what) != -1;
 }
 
-function ippName(name, value)
+function ippName(name, value, strings)
 {
     if(value==undefined)
     {
@@ -142,6 +142,10 @@ function ippName(name, value)
         if(mediaType.hasOwnProperty(value))
         {
             return mediaType[value];
+        }
+        else if(strings != undefined && strings.hasOwnProperty("media-type."+value))
+        {
+            return strings["media-type."+value];
         }
         else
         {

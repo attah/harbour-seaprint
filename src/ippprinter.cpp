@@ -25,6 +25,9 @@ IppPrinter::IppPrinter()
     connect(this, &IppPrinter::doConvertImage, _worker, &PrinterWorker::convertImage);
     connect(this, &IppPrinter::doConvertOfficeDocument, _worker, &PrinterWorker::convertOfficeDocument);
     connect(this, &IppPrinter::doConvertPlaintext, _worker, &PrinterWorker::convertPlaintext);
+
+    connect(this, &IppPrinter::doGetStrings, _worker, &PrinterWorker::getStrings);
+
     connect(_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
     connect(_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
     connect(_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
@@ -90,12 +93,6 @@ void IppPrinter::onUrlChanged()
 }
 
 void IppPrinter::refresh() {
-//    _attrs = QJsonObject();
-//    emit attrsChanged();
-
-//    _additionalDocumentFormats = QStringList();
-//    emit additionalDocumentFormatsChanged();
-
 
     if(_url.scheme() == "file")
     {
@@ -113,6 +110,8 @@ void IppPrinter::refresh() {
             Overrider::instance()->apply(_attrs);
         }
         emit attrsChanged();
+
+        MaybeGetStrings();
         UpdateAdditionalDocumentFormats();
     }
     else
@@ -121,6 +120,15 @@ void IppPrinter::refresh() {
 
         IppMsg msg = IppMsg(o);
         emit doDoGetPrinterAttributes(msg.encode(IppMsg::GetPrinterAttrs));
+    }
+}
+
+void IppPrinter::MaybeGetStrings()
+{
+    // TODO: resolve .local
+    if(_attrs.contains("printer-strings-uri") && _strings.empty())
+    {
+        emit doGetStrings(QUrl(_attrs["printer-strings-uri"].toObject()["value"].toString()));
     }
 }
 
@@ -175,6 +183,7 @@ void IppPrinter::getPrinterAttributesFinished(CURLcode res, Bytestream data)
 
     emit attrsChanged();
 
+    MaybeGetStrings();
     UpdateAdditionalDocumentFormats();
 }
 
@@ -247,6 +256,25 @@ void IppPrinter::cancelJobFinished(CURLcode res, Bytestream data)
     getJobs();
 }
 
+void IppPrinter::getStringsFinished(CURLcode res, Bytestream data)
+{
+    qDebug() << res << data.size();
+    if(res == CURLE_OK)
+    {
+        QByteArray ba((char*)data.raw(), data.size());
+        // "media-type.com.epson-coated" = "Epson Photo Quality Ink Jet";
+        QRegularExpression re("^\\\"(.*)\\\"\\s*=\\s*\\\"(.*)\\\";");
+        QList<QByteArray> bl = ba.split('\n');
+        foreach(QByteArray l, bl)
+        {
+            QRegularExpressionMatch match = re.match(l);
+            if(match.hasMatch())
+            {
+                _strings[match.captured(1)] = match.captured(2);
+            }
+        }
+    }
+}
 
 void IppPrinter::ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
 {

@@ -15,6 +15,8 @@ Item {
     property var choice
     property var default_choice: parent.getDefaultChoice(name)
 
+    property var strings: parent.printer.strings
+
     Component.onCompleted: parent.setInitialChoice(this)
 
     onChoiceChanged: parent.choiceMade(this)

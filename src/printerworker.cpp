@@ -20,24 +20,30 @@ PrinterWorker::PrinterWorker(IppPrinter* parent)
     _printer = parent;
 }
 
+void PrinterWorker::getStrings(QUrl url)
+{
+    CurlRequester cr(url, CurlRequester::HttpGetRequest);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::getStringsFinished);
+}
+
 void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
-    cr.setFinishedCallback(_printer, &IppPrinter::getPrinterAttributesFinished);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::getPrinterAttributesFinished);
     cr.write((char*)msg.raw(), msg.size());
 }
 
 void PrinterWorker::getJobs(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
-    cr.setFinishedCallback(_printer, &IppPrinter::getJobsRequestFinished);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::getJobsRequestFinished);
     cr.write((char*)msg.raw(), msg.size());
 }
 
 void PrinterWorker::cancelJob(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
-    cr.setFinishedCallback(_printer, &IppPrinter::cancelJobFinished);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::cancelJobFinished);
     cr.write((char*)msg.raw(), msg.size());
 }
 
@@ -47,7 +53,7 @@ try {
     emit busyMessage(tr("Printing"));
 
     CurlRequester cr(_printer->httpUrl());
-    cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
     QFile file(filename);
     file.open(QFile::ReadOnly);
@@ -100,7 +106,7 @@ try {
     }
 
     CurlRequester cr(_printer->httpUrl());
-    cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
     OK(cr.write((char*)header.raw(), header.size()));
 
@@ -287,7 +293,7 @@ try {
         }
 
         CurlRequester cr(_printer->httpUrl());
-        cr.setFinishedCallback(_printer, &IppPrinter::printRequestFinished);
+        connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
         OK(cr.write((char*)header.raw(), header.size()));
         OK(cr.write((char*)(outBts.raw()), outBts.size()));

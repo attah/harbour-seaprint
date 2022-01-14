@@ -31,6 +31,7 @@ private:
     PrinterWorker();
 
 public slots:
+    void getStrings(QUrl url);
     void getPrinterAttributes(Bytestream msg);
     void getJobs(Bytestream msg);
     void cancelJob(Bytestream msg);
