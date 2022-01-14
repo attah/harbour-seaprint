@@ -36,7 +36,6 @@ DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 SOURCES += src/harbour-seaprint.cpp \
     src/convertchecker.cpp \
     src/curlrequester.cpp \
-    src/curlworker.cpp \
     src/ippdiscovery.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
@@ -83,7 +82,6 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 HEADERS += \
     src/convertchecker.h \
     src/curlrequester.h \
-    src/curlworker.h \
     src/ippdiscovery.h \
     src/ippmsg.h \
     src/ippprinter.h \

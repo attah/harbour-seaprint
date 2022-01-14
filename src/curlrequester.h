@@ -5,29 +5,56 @@
 #include <QThread>
 #include <QSemaphore>
 #include <QMetaMethod>
+#include <QtConcurrent/QtConcurrent>
 #include <curl/curl.h>
+#include <bytestream.h>
 #include <QDebug>
-#include "curlworker.h"
+#include <functional>
 
 class CurlRequester : public QObject
 {
     Q_OBJECT
 public:
-    CurlRequester(QUrl addr);
-    ~CurlRequester();
+    enum Role {
+        IppRequest,
+        HttpGetRequest
+    };
 
-    template<typename Class, typename Callback>
-    bool setFinishedCallback(const Class* receiverObject, Callback cb)
-    {
-        connect(&_performer, &CurlWorker::done, receiverObject, cb);
-        return true;
-    }
+    CurlRequester(QUrl addr, Role role = IppRequest);
+    ~CurlRequester();
 
     bool write(const char *data, size_t size);
     size_t requestWrite(char* dest, size_t size);
 
+    static size_t write_callback(char *ptr, size_t size, size_t nmemb, void* userdata)
+    {
+        size_t bytes_to_write = size*nmemb;
+        ((Bytestream*)userdata)->putBytes(ptr, bytes_to_write);
+        return bytes_to_write;
+    }
+
+signals:
+    void done(CURLcode, Bytestream);
 
 private:
+    CurlRequester();
+
+    // Container for the cURL global init and cleanup
+    class GlobalEnv
+    {
+    public:
+        GlobalEnv()
+        {
+            curl_global_init(CURL_GLOBAL_DEFAULT);
+        }
+        ~GlobalEnv()
+        {
+            curl_global_cleanup();
+        }
+    };
+    // Must be run exactly once, thus static
+    static GlobalEnv _gEnv;
+
     QUrl _addr;
 
     QSemaphore _canWrite;
@@ -39,7 +66,12 @@ private:
     size_t _size;
     size_t _offset;
 
-    CurlWorker _performer;
+    friend class CurlWorker;
+
+    CURL* _curl;
+    struct curl_slist* _opts = NULL;
+
+    QFuture<void> _worker;
 };
 
 #endif // CURLREQUESTER_H
