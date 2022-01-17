@@ -41,15 +41,15 @@
     </message>
     <message>
         <source>Dutch</source>
-        <translation>Holand&eacute;s</translation>
+        <translation>Holandés</translation>
     </message>
     <message>
         <source>French</source>
-        <translation>Franc&eacute;s</translation>
+        <translation>Francés</translation>
     </message>
     <message>
         <source>German</source>
-        <translation>Alem&aacute;n</translation>
+        <translation>Alemán</translation>
     </message>
     <message>
         <source>Polish</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Spanish</source>
-        <translation>Espa&ntilde;ol</translation>
+        <translation>Español</translation>
     </message>
     <message>
         <source>Optional dependencies</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation>El c&oacute;digo fuente est&aacute; disponible en GitHub. Traducciones, informes de errores y otras contribuciones son bienvenidas!</translation>
+        <translation>El código fuente está disponible en GitHub. Traducciones, informes de errores y otras contribuciones son bienvenidas!</translation>
     </message>
     <message>
         <source>Special thanks to</source>
@@ -89,14 +89,14 @@
     </message>
     <message>
         <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
-        <translation>SeaPrint es software libre liberado bajo la licencia p&uacute;blica general de GNU (GPL), versi&oacute;n 3 o posterior.</translation>
+        <translation>SeaPrint es software libre liberado bajo la licencia pública general de GNU (GPL), versión 3 o posterior.</translation>
     </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
     <message>
         <source>Add printer</source>
-        <translation>A&ntilde;adir impresora</translation>
+        <translation>Añadir impresora</translation>
     </message>
     <message>
         <source>On WiFi:</source>
@@ -120,11 +120,11 @@
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation>El sufijo uri no est&aacute; en la lista de impresoras soportadas.</translation>
+        <translation>El sufijo uri no está en la lista de impresoras soportadas.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
-        <translation>Es posible que no acepte trabajos de impresi&oacute;n en esta direcci&oacute;n.</translation>
+        <translation>Es posible que no acepte trabajos de impresión en esta dirección.</translation>
     </message>
     <message>
         <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
@@ -139,11 +139,11 @@
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation>Impresi&oacute;n correcta: </translation>
+        <translation>Impresión correcta: </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation>Impresi&oacute;n fallida: </translation>
+        <translation>Impresión fallida: </translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -203,14 +203,14 @@
     </message>
     <message>
         <source>Location</source>
-        <translation>Localizaci&oacute;n</translation>
+        <translation>Localización</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Add by URL</source>
-        <translation>A&ntilde;adir por URL</translation>
+        <translation>Añadir por URL</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -218,7 +218,7 @@
     </message>
     <message>
         <source>No file selected</source>
-        <translation>Ning&uacute;n archivo seleccionado</translation>
+        <translation>Ningún archivo seleccionado</translation>
     </message>
     <message>
         <source>View jobs</source>
@@ -308,7 +308,7 @@
     </message>
     <message>
         <source>Untitled job</source>
-        <translation>Trabajo sin t&iacute;tulo</translation>
+        <translation>Trabajo sin título</translation>
     </message>
     <message>
         <source>Cancel job</source>
@@ -339,7 +339,7 @@
     </message>
     <message>
         <source>Optional dependencies are not installed!</source>
-        <translation>¡Las dependencias opcionales no est&aacute;n instaladas!</translation>
+        <translation>¡Las dependencias opcionales no están instaladas!</translation>
     </message>
     <message>
         <source>Become root:</source>
@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
-        <translation>Para imprimir &quot;office&quot; documentos como odt y doc(x) necesitas &quot;calligraconverter&quot; del paquete &quot;calligra&quot; (versi&oacute;n 3.2.1+, Sailfish OS 4.2).</translation>
+        <translation>Para imprimir &quot;office&quot; documentos como odt y doc(x) necesitas &quot;calligraconverter&quot; del paquete &quot;calligra&quot; (versión 3.2.1+, Sailfish OS 4.2).</translation>
     </message>
 </context>
 <context>
@@ -386,7 +386,7 @@
     </message>
     <message>
         <source>Resolution</source>
-        <translation>Resoluci&oacute;n</translation>
+        <translation>Resolución</translation>
     </message>
     <message>
         <source>Print media</source>
@@ -410,7 +410,7 @@
     </message>
     <message>
         <source>Default settings for %1 on this printer</source>
-        <translation>Configuraci&oacute;n por defecto para %1 en esta impresora</translation>
+        <translation>Configuración por defecto para %1 en esta impresora</translation>
     </message>
     <message>
         <source>(loaded)</source>
@@ -446,7 +446,7 @@
     </message>
     <message>
         <source>Pages per page</source>
-        <translation>P&aacute;ginas por p&aacute;gina</translation>
+        <translation>Páginas por página</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -458,18 +458,18 @@
     </message>
     <message>
         <source>Reset default settings</source>
-        <translation>Restablecer la configuraci&oacute;n por defecto</translation>
+        <translation>Restablecer la configuración por defecto</translation>
     </message>
     <message>
         <source>Save as default settings</source>
-        <translation>Guardar como configuraci&oacute;n por defecto</translation>
+        <translation>Guardar como configuración por defecto</translation>
     </message>
 </context>
 <context>
     <name>PrinterWorker</name>
     <message>
         <source>Conversion error</source>
-        <translation>Error de conversi&oacute;n</translation>
+        <translation>Error de conversión</translation>
     </message>
     <message>
         <source>Failed to load image</source>
@@ -477,15 +477,15 @@
     </message>
     <message>
         <source>Unsupported PDF paper size</source>
-        <translation>Tama&ntilde;o de papel en PDF no soportado</translation>
+        <translation>Tamaño de papel en PDF no soportado</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
-        <translation>Tama&ntilde;o de papel no soportado</translation>
+        <translation>Tamaño de papel no soportado</translation>
     </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
-        <translation>Resoluci&oacute;n (ppp) no soportada</translation>
+        <translation>Resolución (ppp) no soportada</translation>
     </message>
     <message>
         <source>Unsupported target format</source>
@@ -501,11 +501,11 @@
     </message>
     <message>
         <source>Printing</source>
-        <translation>Impresi&oacute;n</translation>
+        <translation>Impresión</translation>
     </message>
     <message>
         <source>Conversion failed</source>
-        <translation>Fallo en la conversi&oacute;n</translation>
+        <translation>Fallo en la conversión</translation>
     </message>
     <message>
         <source>Upload error</source>
@@ -538,15 +538,15 @@
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation>Algunas impresoras admiten m&aacute;s formatos de los que anuncian. Sin embargo, es posible deducir formatos adicionales a partir de otros atributos. Principalmente es relevante para impresoras compatibles con Postscript que tambi&eacute;n admiten PDF.</translation>
+        <translation>Algunas impresoras admiten más formatos de los que anuncian. Sin embargo, es posible deducir formatos adicionales a partir de otros atributos. Principalmente es relevante para impresoras compatibles con Postscript que también admiten PDF.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
-        <translation>Mostrar p&aacute;gina de advertencia sobre las dependencias opcionales no instaladas cuando no est&aacute;n instaladas.</translation>
+        <translation>Mostrar página de advertencia sobre las dependencias opcionales no instaladas cuando no están instaladas.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Configuraci&oacute;n</translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Ignore SSL errors</source>
@@ -572,7 +572,7 @@
     <name>harbour-seaprint</name>
     <message>
         <source>images</source>
-        <translation>im&aacute;genes</translation>
+        <translation>imágenes</translation>
     </message>
     <message>
         <source>documents</source>
@@ -647,7 +647,7 @@
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation>orientaci&oacute;n desconocida </translation>
+        <translation>orientación desconocida </translation>
     </message>
     <message>
         <source>dpi</source>
@@ -667,11 +667,11 @@
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation>r&aacute;ster-PWG</translation>
+        <translation>ráster-PWG</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation>r&aacute;ster-URF</translation>
+        <translation>ráster-URF</translation>
     </message>
     <message>
         <source>PNG</source>
@@ -687,7 +687,7 @@
     </message>
     <message>
         <source>auto-sense</source>
-        <translation>auto-detecci&oacute;n</translation>
+        <translation>auto-detección</translation>
     </message>
     <message>
         <source>by-pass tray</source>
@@ -739,7 +739,7 @@
     </message>
     <message>
         <source>automatic</source>
-        <translation>autom&aacute;tico</translation>
+        <translation>automático</translation>
     </message>
     <message>
         <source>auto monochrome</source>
