@@ -14,8 +14,6 @@ IppPrinter::IppPrinter() : _worker(this)
 
     _worker.moveToThread(&_workerThread);
 
-    connect(&_workerThread, &QThread::finished, &_worker, &QObject::deleteLater);
-
     connect(this, &IppPrinter::doDoGetPrinterAttributes, &_worker, &PrinterWorker::getPrinterAttributes);
     connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
