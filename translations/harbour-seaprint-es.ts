@@ -402,7 +402,7 @@
     </message>
     <message>
         <source>Page range</source>
-        <translation>Fuente de medios</translation>
+        <translation>Rango de páginas</translation>
     </message>
     <message>
         <source>Collated copies</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
-        <translation>Para trabajar con certificados autofirmados de impresoras e instancias CUPS, es necesario ignorar los errores SSL.</translation>
+        <translation>Para funcionar con certificados autofirmados de impresoras e instancias de CUPS, se deben ignorar los errores de SSL.</translation>
     </message>
 </context>
 <context>
@@ -803,11 +803,11 @@
     </message>
     <message>
         <source>uncollated</source>
-        <translation>inacabado</translation>
+        <translation>no cotejada</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation>colocado</translation>
+        <translation>cotejada</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
