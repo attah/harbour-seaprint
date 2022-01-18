@@ -14,7 +14,10 @@ CurlRequester::CurlRequester(QUrl addr, Role role)
 
     curl_easy_setopt(_curl, CURLOPT_URL, addr.toString().toStdString().c_str());
 
-    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1L);
+    QLoggingCategory* defaultLoggingCategory = QLoggingCategory::defaultCategory();
+
+
+    curl_easy_setopt(_curl, CURLOPT_VERBOSE, defaultLoggingCategory->isDebugEnabled());
     if(Settings::instance()->ignoreSslErrors())
     {
         curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
