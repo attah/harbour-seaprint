@@ -99,10 +99,10 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("Dutch")+" - JSEHV, Rudi Timmermans\n"+
-                      qsTr("French")+" - ensag-dev, Quentí, phklrz\n"+
-                      qsTr("German")+" -  black-sheep-dev, wheelseal, cnlpete\n"+
+                      qsTr("French")+" - ensag-dev, phklrz, Quentí\n"+
+                      qsTr("German")+" -  black-sheep-dev, cnlpete, wheelseal\n"+
                       qsTr("Polish")+" - atlochowski\n"+
-                      qsTr("Spanish")+" - carmenfdezb"
+                      qsTr("Spanish")+" - carmenfdezb, JSEHV"
             }
 
             SectionHeader { text: qsTr("Optional dependencies") }
