@@ -254,14 +254,9 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
 
     QJsonArray unnamed = get_unnamed_attributes(data);
 
-//    qDebug() << name0 << tag << tmp_len << value << unnamed;
-
     if(tag == BeginCollection)
     {
-//        qDebug() << "Unnamed attrs for collection" << unnamed;
-
         QJsonValue collected = collect_attributes(unnamed);
-//        qDebug() << "collected" << collected;
         taggedValue = QJsonObject {{"tag", tag}, {"value", collected}};
     }
 

@@ -17,10 +17,8 @@ Page {
     Connections {
         target: wifi
         onConnectedChanged: {
-            console.log("conn", wifi.connected, wifi.ssid)
             if(wifi.connected) {
                 var favourites = db.getFavourites(wifi.ssid);
-                console.log(favourites);
                 IppDiscovery.favourites = favourites;
             }
             else {
@@ -31,7 +29,6 @@ Page {
         property bool initialSSIDchange: true
 
         onSsidChanged: {
-            console.log("ssid changed", wifi.ssid);
             if(!initialSSIDchange)
             {
                 IppDiscovery.reset();
@@ -61,12 +58,10 @@ Page {
     signal noFileSelected()
 
     Component.onCompleted: {
-        console.log("Selected file is", selectedFile)
         IppDiscovery.discover();
         if(selectedFile != "")
         {
             var type = Mimer.get_type(selectedFile);
-            console.log(type);
             selectedFileType = type;
         }
     }
@@ -76,7 +71,6 @@ Page {
     onStatusChanged: {
         if(status==PageStatus.Active && !nagged && nagScreenSetting.value != nagScreenSetting.expectedValue)
         {
-            console.log("Can convert from Office:", ConvertChecker.calligra)
             if(expectCalligra && !ConvertChecker.calligra)
             {
                 nagged=true
@@ -108,7 +102,6 @@ Page {
                 onClicked: {
                     var dialog = pageStack.push(Qt.resolvedUrl("AddPrinterDialog.qml"));
                         dialog.accepted.connect(function() {
-                            console.log("add", wifi.ssid, dialog.value);
                             db.addFavourite(wifi.ssid, dialog.value);
                             IppDiscovery.favourites = db.getFavourites(dialog.ssid);
                     })
@@ -167,7 +160,6 @@ Page {
                 Connections {
                     target: page
                     onRefreshed: {
-                        console.log("onRefreshed")
                         printer.refresh()
                     }
                 }
@@ -416,7 +408,6 @@ Page {
                 Connections {
                     target: page
                     onNoFileSelected: {
-                        console.log("onNoFileSelected")
                         noFileSelectedAnimation.start()
                     }
                 }
@@ -465,7 +456,6 @@ Page {
                     }
                     else
                     {
-                        console.log("UNSUPPORTED", mimeType);
                         notifier.notify(qsTr("Unsupported document format"))
                         page.selectedFile = ""
                         page.selectedFileType = ""

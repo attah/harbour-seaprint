@@ -55,8 +55,6 @@ void IppPrinter::setUrl(QString url_s)
 {
     QUrl url = QUrl(url_s);
 
-    qDebug() << url.scheme();
-
     // If not already a good scheme, try to fixup, or give an empty url
     if(url.scheme() != "ipp" && url.scheme() != "ipps" && url.scheme() != "file")
     {

@@ -35,7 +35,6 @@ QImage SvgProvider::requestImage(const QString &id, QSize *size, const QSize &re
     QImage img(*size, QImage::Format_ARGB32);
     img.fill(QColor("transparent"));
     QPainter painter(&img);
-    qDebug() << img << painter.isActive();
 
     renderer.render(&painter);
 

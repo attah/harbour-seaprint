@@ -84,6 +84,6 @@ Column {
                 delete jobParams[setting.subkey];
             }
         }
-        console.log(JSON.stringify(jobParams));
+//        console.log(JSON.stringify(jobParams));
     }
 }

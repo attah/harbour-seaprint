@@ -51,11 +51,9 @@ ApplicationWindow
             db_conn.transaction(function (tx) {
                 var res = tx.executeSql('SELECT * FROM Favourites WHERE ssid=?', [ssid]);
                 for (var i = 0; i < res.rows.length; i++) {
-                    console.log(res.rows.item(i).url)
                     favs.push(res.rows.item(i).url);
                 }
             });
-            console.log(ssid, favs);
             return favs
         }
 
@@ -123,7 +121,6 @@ ApplicationWindow
         expireTimeout: 4000
 
         function notify(data) {
-            console.log("notifyMessage", data)
             body = data
             previewBody = data
             publish()

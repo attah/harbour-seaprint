@@ -20,12 +20,10 @@ Item {
         Component.onCompleted: go()
 
         function servicesChanged() {
-            console.log("services changed");
             go();
         }
 
         function go() {
-            console.log("go!")
             call("GetServices", undefined,
                  function(result) {
                      for (var i = 0; i < result.length; i++) {

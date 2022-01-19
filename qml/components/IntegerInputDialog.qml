@@ -11,12 +11,6 @@ Dialog {
     property string title
     canAccept: valueField.acceptableInput
 
-    Component.onCompleted:
-    {
-
-        console.log("adasdsa", title)
-    }
-
     Column {
         width: parent.width
 

@@ -12,7 +12,6 @@ Setting {
     onChoiceChanged: {
         if(choice == undefined)
         {
-            console.log("choice unset");
             suppressChange = true;
             slider.value = slider.minimumValue;
             suppressChange = false;

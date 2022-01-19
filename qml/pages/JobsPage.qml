@@ -10,7 +10,6 @@ Page {
 
     Component.onCompleted: {
         printer.getJobs()
-        console.log(JSON.stringify(printer.jobs))
     }
 
     Connections {
@@ -37,7 +36,6 @@ Page {
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: {
-                    console.log(JSON.stringify(printer.jobs))
                     printer.getJobs();
                 }
             }
@@ -64,7 +62,6 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     color: Theme.highlightColor
                     text: printer.jobs[index]["job-id"].value
-                    Component.onCompleted: console.log(JSON.stringify(printer.jobs))
                 }
 
                 Column {
@@ -73,7 +70,6 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     Label {
                         text: printer.jobs[index]["job-name"] ? printer.jobs[index]["job-name"].value : qsTr("Untitled job")
-                        Component.onCompleted: console.log(JSON.stringify(printer.jobs))
                     }
                     Label {
                         font.pixelSize: Theme.fontSizeTiny

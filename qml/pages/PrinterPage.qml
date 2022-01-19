@@ -69,7 +69,6 @@ Page {
             MenuItem {
                 text: qsTr("Print")
                 onClicked: {
-                    console.log(JSON.stringify(jobParams))
                     pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                       PageStackAction.Immediate)
                     printer.print(jobParams, page.selectedFile)

@@ -43,7 +43,6 @@ Setting {
     onChoiceChanged: {
         if(choice == undefined)
         {
-            console.log("choice unset");
             suppressChange = true;
             low_slider.value = low_slider.minimumValue;
             high_slider.value = high_slider.minimumValue;
