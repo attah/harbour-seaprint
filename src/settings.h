@@ -10,11 +10,14 @@ public:
 
     Q_PROPERTY(QString ignoreSslErrorsPath READ ignoreSslErrorsPath CONSTANT)
     Q_PROPERTY(bool ignoreSslErrorsDefault MEMBER _ignoreSslErrorsDefault CONSTANT)
+    Q_PROPERTY(QString debugLogPath READ debugLogPath CONSTANT)
+    Q_PROPERTY(bool debugLogDefault MEMBER _debugLogDefault CONSTANT)
 
 public:
     static Settings* instance();
 
     bool ignoreSslErrors();
+    bool debugLog();
 
 private:
     Settings();
@@ -25,10 +28,14 @@ private:
     static Settings* m_Instance;
 
     MGConfItem _ignoreSslErrorsSetting;
+    MGConfItem _debugLogSetting;
 
     QString ignoreSslErrorsPath();
+    QString debugLogPath();
 
     bool _ignoreSslErrorsDefault = true;
+    bool _debugLogDefault = false;
+
 };
 
 #endif // SETTINGS_H

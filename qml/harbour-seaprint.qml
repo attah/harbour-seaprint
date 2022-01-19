@@ -152,5 +152,12 @@ ApplicationWindow
         defaultValue: SeaPrintSettings.ignoreSslErrorsDefault
     }
 
+    ConfigurationValue
+    {
+        id: debugLogSetting
+        key: SeaPrintSettings.debugLogPath
+        defaultValue: SeaPrintSettings.debugLogDefault
+    }
+
 }
 

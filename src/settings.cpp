@@ -2,7 +2,8 @@
 #include <QMutex>
 
 
-Settings::Settings() : _ignoreSslErrorsSetting("/apps/harbour-seaprint/settings/ignore-ssl-errors", this)
+Settings::Settings() : _ignoreSslErrorsSetting("/apps/harbour-seaprint/settings/ignore-ssl-errors", this),
+                       _debugLogSetting("/apps/harbour-seaprint/settings/debug-log", this)
 {
 
 }
@@ -36,4 +37,14 @@ bool Settings::ignoreSslErrors()
 QString Settings::ignoreSslErrorsPath()
 {
     return _ignoreSslErrorsSetting.key();
+}
+
+bool Settings::debugLog()
+{
+    return _debugLogSetting.value(_debugLogDefault).toBool();
+}
+
+QString Settings::debugLogPath()
+{
+    return _debugLogSetting.key();
 }

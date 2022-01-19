@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<CURLcode>();
     qRegisterMetaType<Bytestream>();
 
+    // Turn on/off logging according to setting
+    QLoggingCategory::defaultCategory()->setEnabled(QtMsgType::QtDebugMsg, Settings::instance()->debugLog());
+
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
     app->setOrganizationName(QStringLiteral("net.attah"));

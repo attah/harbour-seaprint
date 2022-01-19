@@ -53,6 +53,15 @@ Page {
                 }
             }
 
+            TextSwitch {
+                text: qsTr("Enable debug log")
+                description: qsTr("Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.")
+                checked: debugLogSetting.value
+                onCheckedChanged: {
+                    debugLogSetting.value = checked
+                }
+            }
+
         }
     }
 }

@@ -568,6 +568,14 @@
         <source>In order to work with self-signed certificates of printers and CUPS instances, SSL errors needs to be ignored.</source>
         <translation>Para funcionar con certificados autofirmados de impresoras e instancias de CUPS, se deben ignorar los errores de SSL.</translation>
     </message>
+    <message>
+        <source>Enable debug log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SupplyItem</name>
