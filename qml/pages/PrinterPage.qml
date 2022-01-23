@@ -61,7 +61,7 @@ Page {
                 onClicked: {
                     var tmp = jobParams;
                     // Varies between documents, would be confusing to save
-                    tmp["page-ranges"] = undefined;
+                    delete tmp["page-ranges"];
                     db.setJobSettings(printer.attrs["printer-uuid"].value, selectedFileType, JSON.stringify(tmp))
                 }
             }
