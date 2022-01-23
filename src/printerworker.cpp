@@ -131,8 +131,10 @@ try {
     float Width = size.width();
     float Height = size.height();
 
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+
     int res = pdf_to_printable(filename.toStdString(), WriteFun, Colors, Quality, PaperSize.toStdString(), Width, Height, HwResX, HwResY,
-                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh, ProgressFun);
+                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh, ProgressFun, verbose);
 
     if(res != 0)
     {
@@ -288,7 +290,10 @@ try {
             buf.read((char*)(inBts.raw()), inBts.size());
 
             outBts << (urf ? make_urf_file_hdr(1) : make_pwg_file_hdr());
-            bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false);
+
+            bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+
+            bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false, verbose);
             emit busyMessage(tr("Printing"));
         }
 
