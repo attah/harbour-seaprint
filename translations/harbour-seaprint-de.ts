@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation>Das uri Suffix ist nicht in der Liste der unterstützen Suffixe des Druckers enthalten.</translation>
+        <translation>Das URL Suffix ist nicht in der Liste der unterstützen Suffixe des Druckers enthalten.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
@@ -207,15 +207,15 @@
     </message>
     <message>
         <source>Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschwindigkeit</translation>
     </message>
     <message>
         <source>pages/min</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten/Min</translation>
     </message>
     <message>
         <source>pages/min (color)</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbseiten/Min</translation>
     </message>
 </context>
 <context>
@@ -551,7 +551,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Some printers support more formats than they advertise correctly. However, additional formats can be inferred from other attributes. Mainly relevant for Postscript-compatible printers that also support PDF.</source>
-        <translation>Einige Drucker ünterstützen mehr Formate als sie bekannt geben. Zusätzliche Formate können aus anderen Attributen geschlussfolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
+        <translation>Einige Drucker unterstützen mehr Formate als sie bekannt geben. Zusätzliche Formate können aus anderen Attributen geschlussfolgert werden. Das ist hauptsächlich relevant für Postscript kompatible Drucker die auch PDF unterstützen.</translation>
     </message>
     <message>
         <source>Display the warning page about optional dependencies not being installed, if they are not installed.</source>
@@ -571,11 +571,11 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Enable debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Protokoll aktivieren/translation>
     </message>
     <message>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckt das Debug-Protokoll in die Konsole (falls von hier ausgeführt) oder journal wenn normal gestartet wurde. Wird erst nach einem Neustart der App wirksam.</translation>
     </message>
 </context>
 <context>
