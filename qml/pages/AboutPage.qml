@@ -99,7 +99,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("Dutch")+" - JSEHV, Rudi Timmermans\n"+
-                      qsTr("French")+" - ensag-dev, phklrz, Quentí\n"+
+                      qsTr("French")+" - ensag-dev, pherjung, phklrz, Quentí\n"+
                       qsTr("German")+" -  black-sheep-dev, cnlpete, wheelseal\n"+
                       qsTr("Polish")+" - atlochowski\n"+
                       qsTr("Spanish")+" - carmenfdezb, JSEHV"
