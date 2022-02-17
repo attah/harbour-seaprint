@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Source code is available at GitHub. Translations, bug reports and other contributions are welcome!</source>
-        <translation>Le code Source est disponible sur Github. Traductions, rapports de bug et autres contributions sont bienvenues !</translation>
+        <translation>Le code source est disponible sur Github. Traductions, rapports de bug et autres contributions sont bienvenues !</translation>
     </message>
     <message>
         <source>Special thanks to</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>On WiFi:</source>
-        <translation>En Wifi :</translation>
+        <translation>En Wi-Fi :</translation>
     </message>
     <message>
         <source>Found:</source>
@@ -116,15 +116,15 @@
     </message>
     <message>
         <source>Port 9100 is not used for IPP.</source>
-        <translation>Le port 9100 n&apos;est pas utilisé pour IPP</translation>
+        <translation>Le port 9100 n&apos;est pas utilisé pour IPP.</translation>
     </message>
     <message>
         <source>The uri suffix is not in the printer&apos;s supported list.</source>
-        <translation>Le suffixe uri n&apos;est pas dans la liste supportée de l&apos;imprimante.</translation>
+        <translation>Le suffixe URI n&apos;est pas dans la liste supportée de l&apos;imprimante.</translation>
     </message>
     <message>
         <source>It might not accept print jobs on this address.</source>
-        <translation>Elle pourrait ne pas accepter les tâches d&apos;impression à cette adresse</translation>
+        <translation>Tâches d&apos;impression possiblement refusées à cette adresse</translation>
     </message>
     <message>
         <source>Consider using a suffix like &quot;/ipp/print&quot;.</source>
@@ -132,18 +132,18 @@
     </message>
     <message>
         <source>The printer/server lists these suffixes:</source>
-        <translation>L&apos;imprimante/le serveur liste ces suffixes :</translation>
+        <translation>L&apos;imprimante ou le serveur liste ces suffixes :</translation>
     </message>
 </context>
 <context>
     <name>BusyPage</name>
     <message>
         <source>Print success: </source>
-        <translation>Impression réussie :</translation>
+        <translation>Impression réussie : </translation>
     </message>
     <message>
         <source>Print failed: </source>
-        <translation>Échec de l&apos;impression :</translation>
+        <translation>Échec de l&apos;impression : </translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -207,15 +207,15 @@
     </message>
     <message>
         <source>Performance</source>
-        <translation type="unfinished"></translation>
+        <translation>Performance</translation>
     </message>
     <message>
         <source>pages/min</source>
-        <translation type="unfinished"></translation>
+        <translation>pages/min</translation>
     </message>
     <message>
         <source>pages/min (color)</source>
-        <translation type="unfinished"></translation>
+        <translation>pages/min (couleur)</translation>
     </message>
 </context>
 <context>
@@ -571,11 +571,11 @@ sur cette imprimante</translation>
     </message>
     <message>
         <source>Enable debug log</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le journal de débogage</translation>
     </message>
     <message>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les messages du journal de débogage vers le terminal (si exécuté à partir de là) ou dans le journal si exécuté normalement. Nécessite de (re)démarrer l&apos;application.</translation>
     </message>
 </context>
 <context>
@@ -632,7 +632,7 @@ sur cette imprimante</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation>état inconnu</translation>
+        <translation>état inconnu </translation>
     </message>
     <message>
         <source>draft</source>
