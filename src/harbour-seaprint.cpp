@@ -3,6 +3,7 @@
 #include <sailfishapp.h>
 #include <src/ippdiscovery.h>
 #include <src/ippprinter.h>
+#include <src/imageitem.h>
 #include <src/mimer.h>
 #include <src/convertchecker.h>
 #include <src/svgprovider.h>
@@ -41,12 +42,12 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<ConvertChecker>("seaprint.convertchecker", 1, 0, "ConvertChecker", singletontype_provider<ConvertChecker>);
     qmlRegisterSingletonType<ConvertChecker>("seaprint.settings", 1, 0, "SeaPrintSettings", singletontype_provider<Settings>);
     qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
+    qmlRegisterType<ImageItem>("seaprint.imageitem", 1, 0, "ImageItem");
     qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
 
     QQuickView* view = SailfishApp::createView();
 
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
-    view->engine()->addImageProvider(QLatin1String("ippdiscovery"), IppDiscovery::instance());
     view->engine()->addImageProvider(QLatin1String("svg"), SvgProvider::instance());
 
     view->setSource(SailfishApp::pathToMainQml());

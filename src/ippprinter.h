@@ -1,8 +1,7 @@
 #ifndef IPPPRINTER_H
 #define IPPPRINTER_H
 
-#include <QtNetwork>
-#include <QNetworkAccessManager>
+#include <QImage>
 #include "ippmsg.h"
 #include "printerworker.h"
 #include "curlrequester.h"
@@ -19,6 +18,7 @@ class IppPrinter : public QObject
     Q_PROPERTY(QJsonObject jobAttrs MEMBER _jobAttrs NOTIFY jobAttrsChanged)
     Q_PROPERTY(QJsonArray jobs MEMBER _jobs NOTIFY jobsChanged)
     Q_PROPERTY(QJsonObject strings MEMBER _strings NOTIFY stringsChanged)
+    Q_PROPERTY(QImage icon MEMBER _icon NOTIFY iconChanged)
     Q_PROPERTY(QStringList additionalDocumentFormats MEMBER _additionalDocumentFormats NOTIFY additionalDocumentFormatsChanged)
     Q_PROPERTY(QString busyMessage MEMBER _busyMessage NOTIFY busyMessageChanged)
     Q_PROPERTY(QString progress MEMBER _progress NOTIFY progressChanged)
@@ -49,6 +49,7 @@ signals:
     void jobsChanged();
 
     void stringsChanged();
+    void iconChanged();
 
     void jobFinished(bool status);
     void cancelStatus(bool status);
@@ -78,6 +79,7 @@ signals:
                             quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
     void doGetStrings(QUrl url);
+    void doGetImage(QUrl url);
 
     void additionalDocumentFormatsChanged();
     void busyMessageChanged();
@@ -89,6 +91,7 @@ public slots:
 
     void onUrlChanged();
     void MaybeGetStrings();
+    void MaybeGetIcon(bool retry=false);
     void UpdateAdditionalDocumentFormats();
     void getPrinterAttributesFinished(CURLcode res, Bytestream data);
     void printRequestFinished(CURLcode res, Bytestream data);
@@ -96,6 +99,7 @@ public slots:
     void cancelJobFinished(CURLcode res, Bytestream data);
 
     void getStringsFinished(CURLcode res, Bytestream data);
+    void getImageFinished(CURLcode res, Bytestream data);
 
     static void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
@@ -122,6 +126,7 @@ private:
     QJsonArray _jobs;
 
     QJsonObject _strings;
+    QImage _icon;
 
     QStringList _additionalDocumentFormats;
 

@@ -4,6 +4,7 @@ import Sailfish.Pickers 1.0
 import seaprint.ippdiscovery 1.0
 import seaprint.convertchecker 1.0
 import seaprint.ippprinter 1.0
+import seaprint.imageitem 1.0
 import seaprint.mimer 1.0
 import "utils.js" as Utils
 
@@ -212,7 +213,7 @@ Page {
                     }
                 }
 
-                Image {
+                ImageItem {
                     id: icon
                     anchors.top: parent.top
                     anchors.left: parent.left
@@ -221,13 +222,17 @@ Page {
 
                     height: Theme.itemSizeLarge
                     width: Theme.itemSizeLarge
-                    sourceSize.height: height
-                    sourceSize.width: width
-                    source: printer.attrs["printer-icons"] ? "image://ippdiscovery/"+Utils.selectIcon(printer.attrs["printer-icons"].value)
-                                                           : "image://svg/qml/pages/icon-seaprint-nobg.svg"
-                    // Some printers serve their icons over https with invalid certs...
-                    onStatusChanged: if (status == Image.Error) source = "image://svg/qml/pages/icon-seaprint-nobg.svg"
+                    image: printer.icon
 
+                    Image {
+                        id: placeholder
+                        anchors.fill: parent
+                        sourceSize.height: height
+                        sourceSize.width: width
+
+                        visible: !parent.valid
+                        source: "image://svg/qml/pages/icon-seaprint-nobg.svg"
+                    }
                 }
 
                 Image {

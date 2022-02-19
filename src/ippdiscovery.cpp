@@ -37,7 +37,7 @@ QStringList get_addr(Bytestream& bts)
     return addr;
 }
 
-IppDiscovery::IppDiscovery() : QStringListModel(), QQuickImageProvider(QQuickImageProvider::Image, ForceAsynchronousImageLoading)
+IppDiscovery::IppDiscovery() : QStringListModel()
 {
     socket = new QUdpSocket(this);
     connect(socket, &QUdpSocket::readyRead, this, &IppDiscovery::readPendingDatagrams);
@@ -418,38 +418,4 @@ void IppDiscovery::resolve(QUrl& url)
     {   // TODO: retry potential other IPs
         url.setHost(_AAs.value(host));
     }
-}
-
-QImage IppDiscovery::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
-{   //TODO: consider caching images (doesn't appear to be needed currently)
-    Q_UNUSED(requestedSize);
-    qDebug() << "requesting image" << id;
-
-    QImage img;
-
-    QNetworkAccessManager* nam = new QNetworkAccessManager();
-    QUrl url(id);
-
-    resolve(url);
-
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::UserAgentHeader, "SeaPrint " SEAPRINT_VERSION);
-    connect(nam, &QNetworkAccessManager::sslErrors, &IppPrinter::ignoreSslErrors);
-
-    QNetworkReply* reply = nam->get(request);
-
-    QEventLoop loop;
-    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-
-    if (reply->error() == QNetworkReply::NoError)
-    {
-        QImageReader imageReader(reply);
-        img = imageReader.read();
-     }
-
-    *size = img.size();
-    delete nam;
-    return img;
-
 }

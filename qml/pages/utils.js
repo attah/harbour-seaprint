@@ -461,26 +461,6 @@ function fixupChoices(name, choices, mimeType)
     }
 }
 
-function selectIcon(icons)
-{
-    for(var i=0; i < icons.length; i++)
-    {
-        if(endsWith("M.png", icons[i]) || endsWith("128.png", icons[i]) || endsWith("128.PNG", icons[i]))
-        {
-            return icons[i];
-        }
-    }
-    // Icons must be 48, 128 or 256px and sorted by size, so if all 3 are provided we want the middle one
-    if(icons.length == 3)
-    {
-        return icons[1];
-    }
-    else
-    {
-        return icons[0];
-    }
-}
-
 function isWaringState(printer)
 {
     if(printer.attrs["printer-state"].value > 4)

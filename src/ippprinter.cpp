@@ -25,6 +25,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doConvertPlaintext, &_worker, &PrinterWorker::convertPlaintext);
 
     connect(this, &IppPrinter::doGetStrings, &_worker, &PrinterWorker::getStrings);
+    connect(this, &IppPrinter::doGetImage, &_worker, &PrinterWorker::getImage);
 
     connect(&_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
     connect(&_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
@@ -106,7 +107,7 @@ void IppPrinter::refresh() {
         }
         emit attrsChanged();
 
-        MaybeGetStrings();
+//        MaybeGetStrings(); - for testing fake file-prinetrs with a strings file hosted elsewhere
         UpdateAdditionalDocumentFormats();
     }
     else
@@ -127,6 +128,41 @@ void IppPrinter::MaybeGetStrings()
         emit doGetStrings(url);
     }
 }
+
+void IppPrinter::MaybeGetIcon(bool retry)
+{
+    if(_attrs.contains("printer-icons") && (_icon.isNull() || retry))
+    {
+        QUrl url;
+        QJsonArray icons = _attrs["printer-icons"].toObject()["value"].toArray();
+
+        if(retry)
+        { // If there were more than one icon, try the last one on the retry
+            if(icons.size() > 1)
+            {
+                url = icons.last().toString();
+            }
+        }
+        else
+        {
+            if(icons.size() == 3)
+            { // If there are 3 icons, the first will be the 48px one, ignore it
+                url = icons.at(1).toString();
+            }
+            else
+            {
+                url = icons.at(0).toString();
+            }
+        }
+
+        if(!url.isEmpty())
+        {
+            IppDiscovery::instance()->resolve(url);
+            emit doGetImage(url);
+        }
+    }
+}
+
 
 void IppPrinter::UpdateAdditionalDocumentFormats()
 {
@@ -180,6 +216,7 @@ void IppPrinter::getPrinterAttributesFinished(CURLcode res, Bytestream data)
     emit attrsChanged();
 
     MaybeGetStrings();
+    MaybeGetIcon();
     UpdateAdditionalDocumentFormats();
 }
 
@@ -267,6 +304,26 @@ void IppPrinter::getStringsFinished(CURLcode res, Bytestream data)
             if(match.hasMatch())
             {
                 _strings[match.captured(1)] = match.captured(2);
+            }
+        }
+    }
+}
+
+void IppPrinter::getImageFinished(CURLcode res, Bytestream data)
+{
+    qDebug() << res << data.size();
+    if(res == CURLE_OK)
+    {
+        QImage tmp;
+        if(tmp.loadFromData(data.raw(), data.size(), "PNG"))
+        {
+            _icon = tmp;
+            qDebug() << "image loaded" << _icon;
+            emit iconChanged();
+
+            if(tmp.size().width() < 128)
+            {
+                MaybeGetIcon(true);
             }
         }
     }

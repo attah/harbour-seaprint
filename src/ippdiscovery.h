@@ -1,16 +1,11 @@
 #ifndef IPPDISCOVERY_H
 #define IPPDISCOVERY_H
 #include <QStringListModel>
-#include <QQuickImageProvider>
 #include <QUdpSocket>
 #include <QMutex>
-#include <QImageReader>
-#include <QtNetwork>
-#include <QNetworkAccessManager>
-#include <QEventLoop>
 #include "bytestream.h"
 
-class IppDiscovery : public  QStringListModel, public QQuickImageProvider
+class IppDiscovery : public  QStringListModel
 {
     Q_OBJECT
 public:
@@ -48,9 +43,6 @@ private:
     void sendQuery(quint16 qtype, QStringList prefixes, QStringList suffixes);
 
     void updateAndQueryPtrs(QStringList& ptrs, QStringList new_ptrs);
-
-
-    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override;
 
     QStringList _ipp;
     QStringList _ipps;

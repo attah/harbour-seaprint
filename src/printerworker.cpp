@@ -26,6 +26,13 @@ void PrinterWorker::getStrings(QUrl url)
     connect(&cr, &CurlRequester::done, _printer, &IppPrinter::getStringsFinished);
 }
 
+void PrinterWorker::getImage(QUrl url)
+{
+    CurlRequester cr(url, CurlRequester::HttpGetRequest);
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::getImageFinished);
+}
+
+
 void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
     CurlRequester cr(_printer->httpUrl());
