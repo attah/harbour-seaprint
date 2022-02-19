@@ -288,7 +288,7 @@ try {
 
             Bytestream inBts(Width*Height*Colors);
 
-            if((buf.size()-buf.pos()) != inBts.size())
+            if((((size_t)buf.size())-buf.pos()) != inBts.size())
             {
                 qDebug() << buf.size() << buf.pos() << inBts.size();
                 throw ConvertFailedException();
