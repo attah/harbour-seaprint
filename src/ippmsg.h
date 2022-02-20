@@ -4,11 +4,11 @@
 #include "bytestream.h"
 
 #include <QObject>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDate>
+#include <QTime>
 #include <QDebug>
-#include <QUrl>
-#include <QtNetwork>
-#include <QNetworkReply>
-#include <QIODevice>
 
 class IppMsg
 {

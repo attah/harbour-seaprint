@@ -1,5 +1,4 @@
 #include "printerworker.h"
-#include <sailfishapp.h>
 #include "papersizes.h"
 #include "convertchecker.h"
 #include "mimer.h"

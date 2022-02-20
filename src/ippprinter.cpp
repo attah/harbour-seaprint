@@ -329,16 +329,6 @@ void IppPrinter::getImageFinished(CURLcode res, Bytestream data)
     }
 }
 
-void IppPrinter::ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
-{
-    bool ignore = Settings::instance()->ignoreSslErrors();
-    qDebug() << reply->request().url() <<  "SSL handshake failed" << errors << ignore;
-    if(ignore)
-    {
-        reply->ignoreSslErrors(errors);
-    }
-}
-
 void IppPrinter::convertFailed(QString message)
 {
     _jobAttrs = QJsonObject();

@@ -4,7 +4,6 @@
 #include "convertchecker.h"
 #include <QProcess>
 #include <QtDebug>
-#include "mimer.h"
 
 ConvertChecker::ConvertChecker() : poppler("libpoppler-glib.so.8")
 {

@@ -1,11 +1,11 @@
 #ifndef IPPPRINTER_H
 #define IPPPRINTER_H
 
-#include <QImage>
 #include "ippmsg.h"
 #include "printerworker.h"
 #include "curlrequester.h"
-#include <mlite5/MGConfItem>
+#include <QImage>
+
 
 class IppPrinter : public QObject
 {
@@ -100,8 +100,6 @@ public slots:
 
     void getStringsFinished(CURLcode res, Bytestream data);
     void getImageFinished(CURLcode res, Bytestream data);
-
-    static void ignoreSslErrors(QNetworkReply *reply, const QList<QSslError> &errors);
 
     void convertFailed(QString message);
 

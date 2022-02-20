@@ -4,7 +4,6 @@
 #include <QUrl>
 #include <QThread>
 #include <QSemaphore>
-#include <QMetaMethod>
 #include <QtConcurrent/QtConcurrent>
 #include <curl/curl.h>
 #include <bytestream.h>

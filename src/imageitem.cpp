@@ -1,5 +1,4 @@
 #include "imageitem.h"
-#include "svgprovider.h"
 
 ImageItem::ImageItem()
 {
@@ -8,7 +7,6 @@ ImageItem::ImageItem()
 
 void ImageItem::paint(QPainter *painter)
 {
-
     QImage scaled = _image.scaledToHeight(boundingRect().height(), Qt::SmoothTransformation);
     painter->drawImage(QPoint {0, 0}, scaled);
 }
@@ -24,7 +22,6 @@ void ImageItem::setImage(const QImage &image)
     emit imageChanged();
     update();
 }
-
 
 bool ImageItem::isValid() const
 {

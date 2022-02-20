@@ -1,7 +1,6 @@
 #ifndef PRINTERWORKER_H
 #define PRINTERWORKER_H
 #include <QObject>
-#include <QtNetwork>
 #include "curlrequester.h"
 
 class IppPrinter;
@@ -9,14 +8,14 @@ class IppPrinter;
 class ConvertFailedException: public std::exception
 {
 private:
-    QString _msg;
+    std::string _msg;
 public:
-    ConvertFailedException(QString msg = "") : _msg(msg = msg)
+    ConvertFailedException(QString msg = "") : _msg(msg.toStdString())
     {
     }
     virtual const char* what() const throw()
     {
-        return _msg.toStdString().c_str();
+        return _msg.c_str();
     }
 };
 
@@ -58,7 +57,6 @@ public slots:
                           quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
 
 signals:
-    void done(QNetworkRequest request, QTemporaryFile* data);
     void progress(qint64 done, qint64 pages);
     void busyMessage(QString msg);
     void failed(QString message);
