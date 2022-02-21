@@ -6,7 +6,6 @@
 #include <src/imageitem.h>
 #include <src/mimer.h>
 #include <src/convertchecker.h>
-#include <src/svgprovider.h>
 #include <src/settings.h>
 
 Q_DECLARE_METATYPE(CURLcode)
@@ -48,7 +47,6 @@ int main(int argc, char *argv[])
     QQuickView* view = SailfishApp::createView();
 
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
-    view->engine()->addImageProvider(QLatin1String("svg"), SvgProvider::instance());
 
     view->setSource(SailfishApp::pathToMainQml());
     view->show();

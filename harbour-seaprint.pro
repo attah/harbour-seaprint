@@ -26,7 +26,6 @@ INSTALLS += i18n
 system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
-QT += svg
 PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1
@@ -46,8 +45,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
     src/printerworker.cpp \
-    src/settings.cpp \
-    src/svgprovider.cpp
+    src/settings.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/components/DependentOn.qml \
@@ -100,8 +98,7 @@ HEADERS += \
     src/overrider.h \
     src/papersizes.h \
     src/printerworker.h \
-    src/settings.h \
-    src/svgprovider.h
+    src/settings.h
 
 INCLUDEPATH += ppm2pwg \
                ppm2pwg/bytestream

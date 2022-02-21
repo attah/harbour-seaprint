@@ -231,7 +231,7 @@ Page {
                         sourceSize.width: width
 
                         visible: !parent.valid
-                        source: "image://svg/qml/pages/icon-seaprint-nobg.svg"
+                        source: "icon-seaprint-nobg.svg"
                     }
                 }
 
