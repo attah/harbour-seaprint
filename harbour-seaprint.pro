@@ -26,7 +26,7 @@ INSTALLS += i18n
 system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
-PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo
+PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo libjpeg
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1
 DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
@@ -42,6 +42,7 @@ SOURCES += src/harbour-seaprint.cpp \
     src/mimer.cpp \
     ppm2pwg/ppm2pwg.cpp \
     ppm2pwg/pdf2printable.cpp \
+    ppm2pwg/baselinify.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
     src/printerworker.cpp \
@@ -88,6 +89,7 @@ HEADERS += \
     src/mimer.h \
     ppm2pwg/ppm2pwg.h \
     ppm2pwg/pdf2printable.h \
+    ppm2pwg/baselinify.h \
     ppm2pwg/madness.h \
     ppm2pwg/PwgPgHdr.h \
     ppm2pwg/PwgPgHdr.codable \

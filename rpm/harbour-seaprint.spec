@@ -19,6 +19,7 @@ BuildRequires:  pkgconfig(poppler)
 BuildRequires:  pkgconfig(poppler-glib)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(libjpeg)
 
 %description
 Network printing for Sailfish OS

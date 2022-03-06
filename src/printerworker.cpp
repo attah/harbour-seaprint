@@ -11,6 +11,9 @@
 #include "ippprinter.h"
 #include "pdf2printable.h"
 #include "ppm2pwg.h"
+#include "baselinify.h"
+#include <fstream>
+#include <iostream>
 
 #define OK(call) if(!(call)) throw ConvertFailedException()
 
@@ -68,6 +71,29 @@ try {
     QByteArray tmp = file.readAll();
     OK(cr.write(tmp.data(), tmp.length()));
     file.close();
+}
+catch(const ConvertFailedException& e)
+{
+        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
+}
+}
+
+void PrinterWorker::fixupJpeg(QString filename, Bytestream header)
+{
+try {
+    CurlRequester cr(_printer->httpUrl());
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
+
+    std::ifstream ifs = std::ifstream(filename.toStdString(), std::ios::in | std::ios::binary);
+    Bytestream InBts(ifs);
+    Bytestream OutBts;
+
+    baselinify(InBts, OutBts);
+
+    emit busyMessage(tr("Printing"));
+
+    OK(cr.write((char*)header.raw(), header.size()));
+    OK(cr.write((char*)OutBts.raw(), OutBts.size()));
 }
 catch(const ConvertFailedException& e)
 {
@@ -300,11 +326,12 @@ try {
             bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
             bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false, verbose);
-            emit busyMessage(tr("Printing"));
         }
 
         CurlRequester cr(_printer->httpUrl());
         connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
+
+        emit busyMessage(tr("Printing"));
 
         OK(cr.write((char*)header.raw(), header.size()));
         OK(cr.write((char*)(outBts.raw()), outBts.size()));

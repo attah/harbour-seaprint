@@ -18,6 +18,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
     connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
+    connect(this, &IppPrinter::doFixupJpeg, &_worker, &PrinterWorker::fixupJpeg);
 
     connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, &_worker, &PrinterWorker::convertImage);
@@ -621,10 +622,15 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     IppMsg job = mk_msg(o, jobAttrs);
     Bytestream contents = job.encode(IppMsg::PrintJob);
 
-    // Shouldn't and can't process these formats respectively
-    if((mimeType == documentFormat) && (documentFormat == Mimer::JPEG || documentFormat == Mimer::Postscript))
-    {
+    setBusyMessage(tr("Preparing"));
+
+    if((mimeType == documentFormat) && (documentFormat == Mimer::Postscript))
+    { // Can't process Postscript
         emit doJustUpload(filename, contents);
+    }
+    else if((mimeType == documentFormat) && (documentFormat == Mimer::JPEG))
+    { // Just make the jpeg baseline-encoded, don't resize locally
+        emit doFixupJpeg(filename, contents);
     }
     else
     {
@@ -651,8 +657,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
             TwoSided = true;
             Tumble = true;
         }
-
-        setBusyMessage(tr("Preparing"));
 
         if(mimeType == Mimer::PDF)
         {

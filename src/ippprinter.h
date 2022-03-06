@@ -59,6 +59,7 @@ signals:
     void doCancelJob(Bytestream msg);
 
     void doJustUpload(QString filename, Bytestream header);
+    void doFixupJpeg(QString filename, Bytestream header);
 
     void doConvertPdf(QString filename, Bytestream header,
                       QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
