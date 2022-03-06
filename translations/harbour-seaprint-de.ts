@@ -571,7 +571,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Enable debug log</source>
-        <translation>Debug-Protokoll aktivieren/translation>
+        <translation>Debug-Protokoll aktivieren</translation>
     </message>
     <message>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
