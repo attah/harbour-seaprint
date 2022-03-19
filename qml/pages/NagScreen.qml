@@ -65,7 +65,7 @@ Page {
             width: parent.width
             wrapMode: Text.WordWrap
 
-            text: qsTr("Install calligra:") + " " + (ConvertChecker.calligra ? qsTr("(done)") : "")
+            text: qsTr("Install Calligra:") + " " + (ConvertChecker.calligra ? qsTr("(done)") : "")
         }
 
         Label {
@@ -76,6 +76,16 @@ Page {
 
             text: "pkcon install calligra"
             Clipper {}
+        }
+
+        Label {
+            visible: appWin.expectCalligra
+            width: parent.width
+            wrapMode: Text.WordWrap
+
+            text: qsTr("If you are still seeing this message despite installing Calligra, that can be because of SailJail "+
+                       "in Sailfish OS 4.x before the compatibility permission in 4.4. " +
+                       "You can either upgrade to 4.4 or edit out the SailJail section in /usr/share/applications/harbour-seaprint.desktop")
         }
 
         Item{

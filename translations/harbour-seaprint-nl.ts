@@ -366,7 +366,7 @@
         <translation>Schakel de ontwikkelaarsmodus in en open een terminal om te installeren.</translation>
     </message>
     <message>
-        <source>Install calligra:</source>
+        <source>Install Calligra:</source>
         <translation>Calligra installeren:</translation>
     </message>
     <message>
@@ -376,6 +376,10 @@
     <message>
         <source>In order to print &quot;office&quot; documents like odt and doc(x) you need &quot;calligraconverter&quot; from the &quot;calligra&quot; package (version 3.2.1+, Sailfish OS 4.2).</source>
         <translation>Om documenten zoals odt en doc(x) af te drukken, hebt u &quot;calligraconverter&quot; van het &quot;calligra&quot; pakket nodig (versie 3.2.1+, Sailfish OS 4.2).</translation>
+    </message>
+    <message>
+        <source>If you are still seeing this message despite installing Calligra, that can be because of SailJail in Sailfish OS 4.x before the compatibility permission in 4.4. You can either upgrade to 4.4 or edit out the SailJail section in /usr/share/applications/harbour-seaprint.desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
