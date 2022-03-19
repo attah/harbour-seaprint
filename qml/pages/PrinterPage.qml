@@ -196,6 +196,7 @@ Page {
                 name: "media-top-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Top")
+                valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
@@ -203,6 +204,7 @@ Page {
                 name: "media-bottom-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Bottom")
+                valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
@@ -210,6 +212,7 @@ Page {
                 name: "media-left-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Left")
+                valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
@@ -217,6 +220,7 @@ Page {
                 name: "media-right-margin"
                 subkey: "media-col"
                 prettyName: qsTr("Right")
+                valid: _valid && Mimer.isImage(selectedFileType)
             }
         }
     }

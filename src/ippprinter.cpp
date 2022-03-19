@@ -542,6 +542,37 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     QString PaperSize = getAttrOrDefault(jobAttrs, "media").toString();
 
+    QString documentFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
+    qDebug() << "target format:" << documentFormat;
+
+    QMargins margins(getAttrOrDefault(jobAttrs, "media-left-margin", "media-col").toInt(),
+                     getAttrOrDefault(jobAttrs, "media-top-margin", "media-col").toInt(),
+                     getAttrOrDefault(jobAttrs, "media-right-margin", "media-col").toInt(),
+                     getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
+
+    // Only keep margin setting for JPEG - but only attemt to remove it if media-col exists
+    if(!(mimeType == Mimer::JPEG && documentFormat == Mimer::JPEG) && jobAttrs.contains("media-col"))
+    {
+        QJsonObject MediaCol = jobAttrs["media-col"].toObject();
+        QJsonObject MediaColValue = MediaCol["value"].toObject();
+
+        MediaColValue.remove("media-left-margin");
+        MediaColValue.remove("media-top-margin");
+        MediaColValue.remove("media-right-margin");
+        MediaColValue.remove("media-bottom-margin");
+
+        if(!MediaColValue.empty())
+        {
+            MediaCol["value"] = MediaColValue;
+            jobAttrs["media-col"] = MediaCol;
+        }
+        else
+        {
+            jobAttrs.remove("media-col");
+        }
+    }
+
+
     if(jobAttrs.contains("media-col") && jobAttrs.contains("media"))
     {
         qDebug() << "moving media to media-col" << PaperSize;
@@ -570,9 +601,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
         jobAttrs.remove("media");
     }
-
-    QString documentFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
-    qDebug() << "target format:" << documentFormat;
 
     // document-format goes in the op-attrs and not the job-attrs
     o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", documentFormat}});
@@ -671,11 +699,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
         else if (Mimer::isImage(mimeType))
         {
-            QMargins margins(getAttrOrDefault(jobAttrs, "media-left-margin", "media-col").toInt(),
-                             getAttrOrDefault(jobAttrs, "media-top-margin", "media-col").toInt(),
-                             getAttrOrDefault(jobAttrs, "media-right-margin", "media-col").toInt(),
-                             getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
-
             emit doConvertImage(filename, contents, documentFormat, Colors, Quality,
                                 PaperSize, HwResX, HwResY, margins);
         }
