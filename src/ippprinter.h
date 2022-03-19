@@ -61,23 +61,13 @@ signals:
     void doJustUpload(QString filename, Bytestream header);
     void doFixupJpeg(QString filename, Bytestream header);
 
-    void doConvertPdf(QString filename, Bytestream header,
-                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                      quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                      quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
+    void doConvertPdf(QString filename, Bytestream header, PrintParameters Params);
 
-    void doConvertImage(QString filename,  Bytestream header,
-                        QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                        quint32 HwResX, quint32 HwResY, QMargins margins);
+    void doConvertImage(QString filename,  Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins);
 
-    void doConvertOfficeDocument(QString filename, Bytestream header,
-                                 QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                 quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                                 quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
+    void doConvertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
 
-    void doConvertPlaintext(QString filename, Bytestream header,
-                            QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                            quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
+    void doConvertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
     void doGetStrings(QUrl url);
     void doGetImage(QUrl url);

@@ -2,6 +2,7 @@
 #define PRINTERWORKER_H
 #include <QObject>
 #include "curlrequester.h"
+#include "ppm2pwg/printparameters.h"
 
 class IppPrinter;
 
@@ -40,23 +41,13 @@ public slots:
 
     void fixupJpeg(QString filename, Bytestream header);
 
-    void convertPdf(QString filename, Bytestream header,
-                    QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                    quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                    quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
+    void convertPdf(QString filename, Bytestream header, PrintParameters Params);
 
-    void convertImage(QString filename, Bytestream header,
-                      QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                      quint32 HwResX, quint32 HwResY, QMargins margins);
+    void convertImage(QString filename, Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins);
 
-    void convertOfficeDocument(QString filename, Bytestream header,
-                               QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                               quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                               quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip);
+    void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
 
-    void convertPlaintext(QString filename, Bytestream header,
-                          QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                          quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble, bool BackHFlip, bool BackVFlip);
+    void convertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
 signals:
     void progress(qint64 done, qint64 pages);

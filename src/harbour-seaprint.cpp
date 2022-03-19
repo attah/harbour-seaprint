@@ -10,6 +10,7 @@
 
 Q_DECLARE_METATYPE(CURLcode)
 Q_DECLARE_METATYPE(Bytestream)
+Q_DECLARE_METATYPE(PrintParameters)
 
 template <class T>
 static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
 {
     qRegisterMetaType<CURLcode>();
     qRegisterMetaType<Bytestream>();
+    qRegisterMetaType<PrintParameters>();
 
     // Turn on/off logging according to setting
     QLoggingCategory::defaultCategory()->setEnabled(QtMsgType::QtDebugMsg, Settings::instance()->debugLog());

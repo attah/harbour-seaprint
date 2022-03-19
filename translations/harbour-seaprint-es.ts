@@ -307,6 +307,10 @@
         <source>Preparing</source>
         <translation>Preparando</translation>
     </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Tamaño de papel no soportado</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -498,14 +502,6 @@
     <message>
         <source>Unsupported resolution (dpi)</source>
         <translation>Resolución (ppp) no soportada</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Formato de destino no soportado</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Error al obtener info de archivo PDF</translation>
     </message>
     <message>
         <source>Failed to open file</source>

@@ -517,6 +517,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     _progress = "";
     emit progressChanged();
 
+    PrintParameters Params;
     QFileInfo fileinfo(filename);
 
     if(!fileinfo.exists())
@@ -542,8 +543,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     QString PaperSize = getAttrOrDefault(jobAttrs, "media").toString();
 
-    QString documentFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
-    qDebug() << "target format:" << documentFormat;
+    QString targetFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
+    qDebug() << "target format:" << targetFormat;
 
     QMargins margins(getAttrOrDefault(jobAttrs, "media-left-margin", "media-col").toInt(),
                      getAttrOrDefault(jobAttrs, "media-top-margin", "media-col").toInt(),
@@ -551,7 +552,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
                      getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
 
     // Only keep margin setting for JPEG - but only attemt to remove it if media-col exists
-    if(!(mimeType == Mimer::JPEG && documentFormat == Mimer::JPEG) && jobAttrs.contains("media-col"))
+    if(!(mimeType == Mimer::JPEG && targetFormat == Mimer::JPEG) && jobAttrs.contains("media-col"))
     {
         QJsonObject MediaCol = jobAttrs["media-col"].toObject();
         QJsonObject MediaColValue = MediaCol["value"].toObject();
@@ -603,17 +604,44 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
 
     // document-format goes in the op-attrs and not the job-attrs
-    o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", documentFormat}});
+    o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", targetFormat}});
     jobAttrs.remove("document-format");
 
-    documentFormat = targetFormatIfAuto(documentFormat, mimeType, supportedMimeTypes);
-    qDebug() << "adjusted target format:" << documentFormat;
+    targetFormat = targetFormatIfAuto(targetFormat, mimeType, supportedMimeTypes);
+    qDebug() << "adjusted target format:" << targetFormat;
 
-    if(documentFormat == "" || documentFormat == Mimer::OctetStream)
+    if(targetFormat == "" || targetFormat == Mimer::OctetStream)
     {
         emit convertFailed(tr("Unknown document format"));
         return;
     }
+
+    if(targetFormat == Mimer::PDF)
+    {
+        Params.format = PrintParameters::PDF;
+    }
+    else if(targetFormat == Mimer::Postscript)
+    {
+        Params.format = PrintParameters::Postscript;
+    }
+    else if(targetFormat == Mimer::PWG)
+    {
+        Params.format = PrintParameters::PWG;
+    }
+    else if(targetFormat == Mimer::URF)
+    {
+        Params.format = PrintParameters::URF;
+    }
+
+    if(!PaperSizes.contains(Params.paperSizeName.c_str()))
+    {
+        qDebug() << "Unsupported paper size" << Params.paperSizeName.c_str();
+        emit convertFailed(tr("Unsupported paper size"));
+    }
+    QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
+    Params.paperSizeUnits = PrintParameters::Millimeters;
+    Params.paperSizeW = size.width();
+    Params.paperSizeH = size.height();
 
     qDebug() << "Printing job" << o << jobAttrs;
 
@@ -623,22 +651,20 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     bool BackHFlip = false;
     bool BackVFlip = false;
 
-    adjustRasterSettings(documentFormat, jobAttrs, HwResX, HwResY, BackHFlip, BackVFlip);
+    adjustRasterSettings(targetFormat, jobAttrs, HwResX, HwResY, BackHFlip, BackVFlip);
 
-    quint32 Quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
+    Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
-    quint32 Colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : 0;
+    Params.colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : Params.colors;
 
-    quint32 PageRangeLow = 0;
-    quint32 PageRangeHigh = 0;
     if(jobAttrs.contains("page-ranges"))
     {
         QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
-        PageRangeLow = PageRanges["low"].toInt();
-        PageRangeHigh = PageRanges["high"].toInt();
+        Params.fromPage = PageRanges["low"].toInt();
+        Params.toPage = PageRanges["high"].toInt();
         // Effected locally, unless it is Postscript which we cant't render
-        if(documentFormat != Mimer::Postscript)
+        if(targetFormat != Mimer::Postscript)
         {
             jobAttrs.remove("page-ranges");
         }
@@ -652,11 +678,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     setBusyMessage(tr("Preparing"));
 
-    if((mimeType == documentFormat) && (documentFormat == Mimer::Postscript))
+    if((mimeType == targetFormat) && (targetFormat == Mimer::Postscript))
     { // Can't process Postscript
         emit doJustUpload(filename, contents);
     }
-    else if((mimeType == documentFormat) && (documentFormat == Mimer::JPEG))
+    else if((mimeType == targetFormat) && (targetFormat == Mimer::JPEG))
     { // Just make the jpeg baseline-encoded, don't resize locally
         emit doFixupJpeg(filename, contents);
     }
@@ -672,41 +698,33 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
             return;
         }
 
-        bool TwoSided = false;
-        bool Tumble = false;
         QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
         if(Sides=="two-sided-long-edge")
         {
-            TwoSided = true;
+            Params.duplex = true;
         }
         else if(Sides=="two-sided-short-edge")
         {
-            TwoSided = true;
-            Tumble = true;
+            Params.duplex = true;
+            Params.tumble = true;
         }
 
         if(mimeType == Mimer::PDF)
         {
-            emit doConvertPdf(filename, contents, documentFormat, Colors, Quality,
-                              PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
-                              BackHFlip, BackVFlip);
+            emit doConvertPdf(filename, contents, Params);
         }
         else if(mimeType == Mimer::Plaintext)
         {
-            emit doConvertPlaintext(filename, contents, documentFormat, Colors, Quality,
-                                    PaperSize, HwResX, HwResY, TwoSided, Tumble, BackHFlip, BackVFlip);
+            emit doConvertPlaintext(filename, contents, Params);
         }
         else if (Mimer::isImage(mimeType))
         {
-            emit doConvertImage(filename, contents, documentFormat, Colors, Quality,
-                                PaperSize, HwResX, HwResY, margins);
+            emit doConvertImage(filename, contents, Params, targetFormat, margins);
         }
         else if(Mimer::isOffice(mimeType))
         {
-            emit doConvertOfficeDocument(filename, contents, documentFormat, Colors, Quality,
-                                         PaperSize, HwResX, HwResY, TwoSided, Tumble, PageRangeLow, PageRangeHigh,
-                                         BackHFlip, BackVFlip);
+            emit doConvertOfficeDocument(filename, contents, Params);
         }
         else
         {

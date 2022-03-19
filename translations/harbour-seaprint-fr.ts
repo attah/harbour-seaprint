@@ -307,6 +307,10 @@
         <source>Preparing</source>
         <translation>En cours de préparation</translation>
     </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Taille de papier non prise en charge</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -499,14 +503,6 @@ sur cette imprimante</translation>
     <message>
         <source>Unsupported resolution (dpi)</source>
         <translation>Résolution (dpi) non prise en charge</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Format cible non pris en charge</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Échec de l&apos;obtention d&apos;informations du fichier PDF</translation>
     </message>
     <message>
         <source>Failed to open file</source>

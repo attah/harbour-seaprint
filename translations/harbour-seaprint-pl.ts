@@ -307,6 +307,10 @@
         <source>Preparing</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -479,14 +483,6 @@
 </context>
 <context>
     <name>PrinterWorker</name>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unsupported resolution (dpi)</source>
         <translation type="unfinished"></translation>

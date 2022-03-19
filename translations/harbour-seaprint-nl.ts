@@ -307,6 +307,10 @@
         <source>Preparing</source>
         <translation>Voorbereiden</translation>
     </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>Niet-ondersteund papierformaat</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -498,14 +502,6 @@
     <message>
         <source>Unsupported resolution (dpi)</source>
         <translation>Niet-ondersteunde resolutie (dpi)</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>Niet-ondersteund doelformaat</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>Informatie over het PDF-bestand ophalen mislukt</translation>
     </message>
     <message>
         <source>Failed to open file</source>

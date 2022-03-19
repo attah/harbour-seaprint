@@ -307,6 +307,10 @@
         <source>Preparing</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation>纸张大小不受支持</translation>
+    </message>
 </context>
 <context>
     <name>JobsPage</name>
@@ -498,14 +502,6 @@
     <message>
         <source>Unsupported resolution (dpi)</source>
         <translation>分辨率不受支持（dpi）</translation>
-    </message>
-    <message>
-        <source>Unsupported target format</source>
-        <translation>目标格式不受支持</translation>
-    </message>
-    <message>
-        <source>Failed to get info about PDF file</source>
-        <translation>获取PDF文件信息错误</translation>
     </message>
     <message>
         <source>Failed to open file</source>

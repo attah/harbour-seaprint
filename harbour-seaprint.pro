@@ -91,6 +91,7 @@ HEADERS += \
     ppm2pwg/pdf2printable.h \
     ppm2pwg/baselinify.h \
     ppm2pwg/madness.h \
+    ppm2pwg/printparameters.h \
     ppm2pwg/PwgPgHdr.h \
     ppm2pwg/PwgPgHdr.codable \
     ppm2pwg/UrfPgHdr.h \

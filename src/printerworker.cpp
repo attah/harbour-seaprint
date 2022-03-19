@@ -101,42 +101,9 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::convertPdf(QString filename, Bytestream header,
-                               QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                               quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                               quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
+void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParameters Params)
 {
 try {
-    Format format;
-
-    emit busyMessage(tr("Printing"));
-
-    if(targetFormat == Mimer::URF)
-    {
-        format = Format::URF;
-    }
-    else if(targetFormat == Mimer::PWG)
-    {
-        format = Format::PWG;
-    }
-    else if(targetFormat == Mimer::Postscript)
-    {
-        format = Format::Postscript;
-    }
-    else if (targetFormat == Mimer::PDF)
-    {
-        format = Format::PDF;
-    }
-    else
-    {
-        throw ConvertFailedException(tr("Unsupported target format"));
-    }
-
-    if(Colors == 0)
-    {
-        Colors = 3;
-    }
-
     CurlRequester cr(_printer->httpUrl());
     connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
@@ -154,19 +121,9 @@ try {
                 emit progress(page, total);
               });
 
-    if(!PaperSizes.contains(PaperSize))
-    {
-        qDebug() << "Unsupported paper size" << PaperSize;
-        throw ConvertFailedException(tr("Unsupported paper size"));
-    }
-    QSizeF size = PaperSizes[PaperSize];
-    float Width = size.width();
-    float Height = size.height();
-
     bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
-    int res = pdf_to_printable(filename.toStdString(), WriteFun, Colors, Quality, PaperSize.toStdString(), Width, Height, HwResX, HwResY,
-                               format, TwoSided, Tumble, BackHFlip, BackVFlip, PageRangeLow, PageRangeHigh, ProgressFun, verbose);
+    int res = pdf_to_printable(filename.toStdString(), WriteFun, Params, ProgressFun, verbose);
 
     if(res != 0)
     {
@@ -181,60 +138,25 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::convertImage(QString filename, Bytestream header,
-                                 QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                 quint32 HwResX, quint32 HwResY, QMargins margins)
+void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins)
 {
 try {
 
-    bool urf = false;
-    bool pdfOrPostscript = false;
     QString imageFormat = "";
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
 
-    if(targetFormat == Mimer::URF)
-    {
-        urf = true;
-    }
-    else if(targetFormat == Mimer::PWG)
-    {
-        //ok
-    }
-    else if(targetFormat == Mimer::PDF || targetFormat == Mimer::Postscript)
-    {
-        HwResX = HwResY = std::min(HwResX, HwResY);
-        pdfOrPostscript = true;
-    }
-    else if(supportedImageFormats.contains(targetFormat))
+    if(supportedImageFormats.contains(targetFormat))
     {
         imageFormat = targetFormat.split("/")[1];
     }
-    else
-    {
-        throw ConvertFailedException(tr("Unsupported target format"));
-    }
 
-    if(Colors == 0)
-    {
-        Colors = 3;
-    }
-
-    if(urf && (HwResX != HwResY))
+    if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
     { // URF only supports symmetric resolutions
-        qDebug() << "Unsupported URF resolution" << PaperSize;
+        qDebug() << "Unsupported URF resolution";
         throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
-    if(!PaperSizes.contains(PaperSize))
-    {
-        qDebug() << "Unsupported paper size" << PaperSize;
-        throw ConvertFailedException(tr("Unsupported paper size"));
-    }
-    QSizeF size = PaperSizes[PaperSize];
-    quint32 Width = qRound(size.width()/25.4*HwResX);
-    quint32 Height = qRound(size.height()/25.4*HwResY);
-
-    qDebug() << "Size is" << Width << "x" << Height;
+    qDebug() << "Size is" << Params.getPaperSizeWInPixels() << "x" << Params.getPaperSizeHInPixels();
 
     QImage inImage;
     if(!inImage.load(filename))
@@ -248,39 +170,38 @@ try {
         inImage = inImage.transformed(QMatrix().rotate(270.0));
     }
 
-    int leftMarginPx = (margins.left()/2540.0)*HwResX;
-    int rightMarginPx = (margins.right()/2540.0)*HwResX;
-    int topMarginPx = (margins.top()/2540.0)*HwResY;
-    int bottomMarginPx = (margins.bottom()/2540.0)*HwResY;
+    int leftMarginPx = (margins.left()/2540.0)*Params.hwResW;
+    int rightMarginPx = (margins.right()/2540.0)*Params.hwResW;
+    int topMarginPx = (margins.top()/2540.0)*Params.hwResH;
+    int bottomMarginPx = (margins.bottom()/2540.0)*Params.hwResH;
 
     int totalXMarginPx = leftMarginPx+rightMarginPx;
     int totalYMarginPx = topMarginPx+bottomMarginPx;
 
-    inImage = inImage.scaled(Width-totalXMarginPx, Height-totalYMarginPx,
+    inImage = inImage.scaled(Params.getPaperSizeWInPixels()-totalXMarginPx, Params.getPaperSizeHInPixels()-totalYMarginPx,
                              Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    if(pdfOrPostscript)
+    if(imageFormat == "" && (Params.format == PrintParameters::PDF || Params.format == PrintParameters::Postscript))
     {
         QTemporaryFile tmpPdfFile;
         tmpPdfFile.open();
         QPdfWriter pdfWriter(tmpPdfFile.fileName());
         pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
-        QPageSize pageSize(size, QPageSize::Millimeter);
+        QPageSize pageSize({Params.getPaperSizeWInPoints(), Params.getPaperSizeHInPoints()}, QPageSize::Point);
         pdfWriter.setPageSize(pageSize);
-        pdfWriter.setResolution(HwResX);
+        pdfWriter.setResolution(Params.hwResH);
         QPainter painter(&pdfWriter);
         int xOffset = ((pdfWriter.width()-totalXMarginPx)-inImage.width())/2 + leftMarginPx;
         int yOffset = ((pdfWriter.height()-totalYMarginPx)-inImage.height())/2 + topMarginPx;
         painter.drawImage(xOffset, yOffset, inImage);
         painter.end();
 
-        convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize,
-                   HwResX, HwResY, false, false, 0, 0, false, false);
+        convertPdf(tmpPdfFile.fileName(), header, Params);
 
     }
     else
     {
-        QImage outImage = QImage(Width, Height, inImage.format());
+        QImage outImage = QImage(Params.getPaperSizeWInPixels(), Params.getPaperSizeHInPixels(), inImage.format());
         outImage.fill(Qt::white);
         QPainter painter(&outImage);
         int xOffset = ((outImage.width()-totalXMarginPx)-inImage.width())/2 + leftMarginPx;
@@ -302,16 +223,19 @@ try {
         else
         { // We are converting to a raster format
 
-            bool gray = Colors == 0 ? inImage.allGray() : Colors == 1;
+            if(inImage.allGray())
+            {
+                Params.colors = 1; // No need to waste space/bandwidth...
+            }
 
-            outImage.save(&buf, gray ? "pgm" : "ppm");
+            outImage.save(&buf, Params.colors==1 ? "pgm" : "ppm");
             buf.seek(0);
             // Skip header - TODO consider reimplementing
             buf.readLine(255);
             buf.readLine(255);
             buf.readLine(255);
 
-            Bytestream inBts(Width*Height*Colors);
+            Bytestream inBts(Params.getPaperSizeWInPixels() * Params.getPaperSizeHInPixels() * Params.colors);
 
             if((((size_t)buf.size())-buf.pos()) != inBts.size())
             {
@@ -321,11 +245,11 @@ try {
 
             buf.read((char*)(inBts.raw()), inBts.size());
 
-            outBts << (urf ? make_urf_file_hdr(1) : make_pwg_file_hdr());
+            outBts << (Params.format == PrintParameters::URF ? make_urf_file_hdr(1) : make_pwg_file_hdr());
 
             bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
-            bmp_to_pwg(inBts, outBts, urf, 1, Colors, Quality, HwResX, HwResY, Width, Height, false, false, PaperSize.toStdString(), false, false, verbose);
+            bmp_to_pwg(inBts, outBts, 1, Params, verbose);
         }
 
         CurlRequester cr(_printer->httpUrl());
@@ -346,27 +270,24 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::convertOfficeDocument(QString filename, Bytestream header,
-                                          QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                          quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                                          quint32 PageRangeLow, quint32 PageRangeHigh, bool BackHFlip, bool BackVFlip)
+void PrinterWorker::convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params)
 {
 try {
 
-    if(targetFormat == Mimer::URF && (HwResX != HwResY))
+    if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
     { // URF only supports symmetric resolutions
-        qDebug() << "Unsupported URF resolution" << PaperSize;
+        qDebug() << "Unsupported URF resolution";
         throw ConvertFailedException(tr("Unsupported resolution (dpi)"));
     }
 
     QString ShortPaperSize;
-    if(CalligraPaperSizes.contains(PaperSize))
+    if(CalligraPaperSizes.contains(Params.paperSizeName.c_str()))
     {
-        ShortPaperSize = CalligraPaperSizes[PaperSize];
+        ShortPaperSize = CalligraPaperSizes[Params.paperSizeName.c_str()];
     }
     else
     {
-        qDebug() << "Unsupported PDF paper size" << PaperSize;
+        qDebug() << "Unsupported PDF paper size" << Params.paperSizeName.c_str();
         throw ConvertFailedException(tr("Unsupported PDF paper size"));
     }
 
@@ -403,30 +324,7 @@ try {
 
 //    qDebug() << CalligraConverter->readAllStandardError();
 
-    quint32 pages = ConvertChecker::instance()->pdfPages(tmpPdfFile.fileName());
-    if (!pages)
-    {
-        qDebug() << "pdfinfo returned 0 pages";
-        throw ConvertFailedException(tr("Failed to get info about PDF file"));
-    }
-
-    if(PageRangeLow==0)
-    {
-        PageRangeLow=1;
-    }
-
-    if(PageRangeHigh==0 || PageRangeHigh > pages)
-    {
-        PageRangeHigh=pages;
-    }
-
-    // Actual number of pages to print
-    pages = PageRangeHigh-PageRangeLow+1;
-
-    qDebug() << "PageRangeLow" << PageRangeLow << "PageRangeHigh" << PageRangeHigh << "pages" << pages;
-
-    convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize, HwResX, HwResY, TwoSided, Tumble,
-               PageRangeLow, PageRangeHigh, BackHFlip, BackVFlip);
+    convertPdf(tmpPdfFile.fileName(), header, Params);
 
     qDebug() << "posted";
 
@@ -437,19 +335,16 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::convertPlaintext(QString filename, Bytestream header,
-                                     QString targetFormat, quint32 Colors, quint32 Quality, QString PaperSize,
-                                     quint32 HwResX, quint32 HwResY, bool TwoSided, bool Tumble,
-                                     bool BackHFlip, bool BackVFlip)
+void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintParameters Params)
 {
 try {
 
-    if(!PaperSizes.contains(PaperSize))
+    if(!PaperSizes.contains(Params.paperSizeName.c_str()))
     {
-        qDebug() << "Unsupported paper size" << PaperSize;
+        qDebug() << "Unsupported paper size" << Params.paperSizeName.c_str();
         throw ConvertFailedException(tr("Unsupported paper size"));
     }
-    QSizeF size = PaperSizes[PaperSize];
+    QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
 
     QFile inFile(filename);
     if(!inFile.open(QIODevice::ReadOnly))
@@ -457,7 +352,7 @@ try {
         throw ConvertFailedException(tr("Failed to open file"));
     }
 
-    quint32 resolution = std::min(HwResX, HwResY);
+    quint32 resolution = std::min(Params.hwResW, Params.hwResH);
 
     QTemporaryFile tmpPdfFile;
     tmpPdfFile.open();
@@ -578,8 +473,7 @@ try {
 
     painter.end();
 
-    convertPdf(tmpPdfFile.fileName(), header, targetFormat, Colors, Quality, PaperSize, HwResX, HwResY,
-               TwoSided, Tumble, 0, 0, BackHFlip, BackVFlip);
+    convertPdf(tmpPdfFile.fileName(), header, Params);
 
     qDebug() << "Finished";
     qDebug() << "posted";
