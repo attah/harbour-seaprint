@@ -541,7 +541,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     QJsonObject o = opAttrs();
     o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
 
-    QString PaperSize = getAttrOrDefault(jobAttrs, "media").toString();
+    Params.paperSizeName = getAttrOrDefault(jobAttrs, "media").toString(Params.paperSizeName.c_str()).toStdString();
 
     QString targetFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
     qDebug() << "target format:" << targetFormat;
@@ -573,18 +573,17 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
     }
 
-
     if(jobAttrs.contains("media-col") && jobAttrs.contains("media"))
     {
-        qDebug() << "moving media to media-col" << PaperSize;
-        if(!PaperSizes.contains(PaperSize))
+        qDebug() << "moving media to media-col" << Params.paperSizeName.c_str();
+        if(!PaperSizes.contains(Params.paperSizeName.c_str()))
         {
-            emit convertFailed(tr("Unknown document format dimensions"));
+            emit convertFailed(tr("Unsupported paper size"));
             return;
         }
 
-        int x = PaperSizes[PaperSize].width()*100;
-        int y = PaperSizes[PaperSize].height()*100;
+        int x = PaperSizes[Params.paperSizeName.c_str()].width()*100;
+        int y = PaperSizes[Params.paperSizeName.c_str()].height()*100;
 
         QJsonObject Dimensions =
             {{"tag", IppMsg::BeginCollection},
@@ -633,11 +632,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.format = PrintParameters::URF;
     }
 
-    if(!PaperSizes.contains(Params.paperSizeName.c_str()))
-    {
-        qDebug() << "Unsupported paper size" << Params.paperSizeName.c_str();
-        emit convertFailed(tr("Unsupported paper size"));
-    }
     QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
     Params.paperSizeUnits = PrintParameters::Millimeters;
     Params.paperSizeW = size.width();
@@ -688,16 +682,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
     else
     {
-        if(PaperSize == "")
-        {
-            PaperSize = "iso_a4_210x297mm";
-        }
-        else if(!PaperSizes.contains(PaperSize))
-        {
-            emit convertFailed(tr("Unsupported print media"));
-            return;
-        }
-
         QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
         if(Sides=="two-sided-long-edge")

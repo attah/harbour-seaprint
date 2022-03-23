@@ -288,15 +288,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown document format dimensions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unknown document format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unsupported print media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

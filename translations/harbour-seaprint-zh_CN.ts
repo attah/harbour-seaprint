@@ -288,20 +288,12 @@
         <translation>打开文件失败</translation>
     </message>
     <message>
-        <source>Unsupported print media</source>
-        <translation>不支持打印媒体文件</translation>
-    </message>
-    <message>
         <source>Cannot convert this file format</source>
         <translation>无法转换此文件格式</translation>
     </message>
     <message>
         <source>Unknown document format</source>
         <translation>未知文档格式</translation>
-    </message>
-    <message>
-        <source>Unknown document format dimensions</source>
-        <translation>未知稳定格式尺寸</translation>
     </message>
     <message>
         <source>Preparing</source>

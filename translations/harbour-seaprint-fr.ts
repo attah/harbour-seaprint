@@ -288,20 +288,12 @@
         <translation>Échec de l&apos;ouverture du fichier</translation>
     </message>
     <message>
-        <source>Unsupported print media</source>
-        <translation>Média d&apos;impression non supporté</translation>
-    </message>
-    <message>
         <source>Cannot convert this file format</source>
         <translation>Impossible de convertir ce format de fichier</translation>
     </message>
     <message>
         <source>Unknown document format</source>
         <translation>Format de document inconnu</translation>
-    </message>
-    <message>
-        <source>Unknown document format dimensions</source>
-        <translation>Format de dimensions du document inconnu</translation>
     </message>
     <message>
         <source>Preparing</source>

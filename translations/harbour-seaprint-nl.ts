@@ -288,20 +288,12 @@
         <translation>Bestand openen mislukt</translation>
     </message>
     <message>
-        <source>Unsupported print media</source>
-        <translation>Niet-ondersteunde afdrukmedia</translation>
-    </message>
-    <message>
         <source>Cannot convert this file format</source>
         <translation>Kan dit bestandsformaat niet converteren</translation>
     </message>
     <message>
         <source>Unknown document format</source>
         <translation>Onbekend documentformaat</translation>
-    </message>
-    <message>
-        <source>Unknown document format dimensions</source>
-        <translation>Onbekende afmetingen van documentformaat</translation>
     </message>
     <message>
         <source>Preparing</source>
