@@ -100,8 +100,7 @@ private:
 
     QJsonObject opAttrs();
 
-    void adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY,
-                              bool& BackHFlip, bool& BackVFlip);
+    void adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, PrintParameters& Params);
 
     void setBusyMessage(QString msg);
     void setProgress(qint64 sent, qint64 total);

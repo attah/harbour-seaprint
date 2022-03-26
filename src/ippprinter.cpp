@@ -382,8 +382,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, quint32& HwResX, quint32& HwResY,
-                                      bool& BackHFlip, bool& BackVFlip)
+void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, PrintParameters& Params)
 {
     if(documentFormat != Mimer::PWG && documentFormat != Mimer::URF)
     {
@@ -395,8 +394,8 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
     if(documentFormat == Mimer::PWG)
     {
         quint32 diff = std::numeric_limits<quint32>::max();
-        quint32 AdjustedHwResX = HwResX;
-        quint32 AdjustedHwResY = HwResY;
+        quint32 AdjustedHwResX = Params.hwResW;
+        quint32 AdjustedHwResY = Params.hwResH;
         foreach(QJsonValue res, _attrs["pwg-raster-document-resolution-supported"].toObject()["value"].toArray())
         {
             QJsonObject resObj = res.toObject();
@@ -404,7 +403,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
             {
                 continue;
             }
-            quint32 tmpDiff = std::abs(int(HwResX-resObj["x"].toInt())) + std::abs(int(HwResY-resObj["y"].toInt()));
+            quint32 tmpDiff = std::abs(int(Params.hwResW-resObj["x"].toInt())) + std::abs(int(Params.hwResH-resObj["y"].toInt()));
             if(tmpDiff < diff)
             {
                 diff = tmpDiff;
@@ -412,16 +411,16 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
                 AdjustedHwResY = resObj["y"].toInt();
             }
         }
-        HwResX = AdjustedHwResX;
-        HwResY = AdjustedHwResY;
+        Params.hwResW = AdjustedHwResX;
+        Params.hwResH = AdjustedHwResY;
     }
 
     if(documentFormat == Mimer::URF)
     { // Ensure symmetric resolution for URF
-        HwResX = HwResY = std::min(HwResX, HwResY);
+        Params.hwResW = Params.hwResH = std::min(Params.hwResW, Params.hwResH);
 
         quint32 diff = std::numeric_limits<quint32>::max();
-        quint32 AdjustedHwRes = HwResX;
+        quint32 AdjustedHwRes = Params.hwResW;
 
         QJsonArray urfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
         foreach(QJsonValue us, urfSupported)
@@ -432,7 +431,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
                 foreach(QString res, resolutions)
                 {
                     int intRes = res.toInt();
-                    quint32 tmpDiff = std::abs(int(HwResX - intRes));
+                    quint32 tmpDiff = std::abs(int(Params.hwResW - intRes));
                     if(tmpDiff < diff)
                     {
                         diff = tmpDiff;
@@ -440,7 +439,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
                     }
                 }
 
-                HwResX = HwResY = AdjustedHwRes;
+                Params.hwResW = Params.hwResH = AdjustedHwRes;
                 break;
             }
         }
@@ -457,24 +456,24 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
             {
                 if(DocumentSheetBack=="flipped")
                 {
-                    BackVFlip=true;
+                    Params.backVFlip=true;
                 }
                 else if(DocumentSheetBack=="rotated")
                 {
-                    BackHFlip=true;
-                    BackVFlip=true;
+                    Params.backHFlip=true;
+                    Params.backVFlip=true;
                 }
             }
             else if(Sides=="two-sided-short-edge")
             {
                 if(DocumentSheetBack=="flipped")
                 {
-                    BackHFlip=true;
+                    Params.backHFlip=true;
                 }
                 else if(DocumentSheetBack=="manual-tumble")
                 {
-                    BackHFlip=true;
-                    BackVFlip=true;
+                    Params.backHFlip=true;
+                    Params.backVFlip=true;
                 }
             }
         }
@@ -485,24 +484,24 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
             {
                 if(URfSupported.contains("DM2"))
                 {
-                    BackVFlip=true;
+                    Params.backVFlip=true;
                 }
                 else if(URfSupported.contains("DM3"))
                 {
-                    BackHFlip=true;
-                    BackVFlip=true;
+                    Params.backHFlip=true;
+                    Params.backVFlip=true;
                 }
             }
             else if(Sides=="two-sided-short-edge")
             {
                 if(URfSupported.contains("DM2"))
                 {
-                    BackHFlip=true;
+                    Params.backHFlip=true;
                 }
                 else if(URfSupported.contains("DM4"))
                 {
-                    BackHFlip=true;
-                    BackVFlip=true;
+                    Params.backHFlip=true;
+                    Params.backVFlip=true;
                 }
             }
         }
@@ -640,12 +639,10 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     qDebug() << "Printing job" << o << jobAttrs;
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
-    quint32 HwResX = PrinterResolutionRef.toObject()["x"].toInt(300);
-    quint32 HwResY = PrinterResolutionRef.toObject()["y"].toInt(300);
-    bool BackHFlip = false;
-    bool BackVFlip = false;
+    Params.hwResW = PrinterResolutionRef.toObject()["x"].toInt(Params.hwResW);
+    Params.hwResH = PrinterResolutionRef.toObject()["y"].toInt(Params.hwResH);
 
-    adjustRasterSettings(targetFormat, jobAttrs, HwResX, HwResY, BackHFlip, BackVFlip);
+    adjustRasterSettings(targetFormat, jobAttrs, Params);
 
     Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
