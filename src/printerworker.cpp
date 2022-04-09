@@ -454,6 +454,7 @@ try {
 
         while(true)
         {
+            painter.save();
             painter.translate(body.left(), body.top() - p*body.height());
             QRectF view(0, p*body.height(), body.width(), body.height());
             painter.setClipRect(view);
@@ -462,6 +463,7 @@ try {
             context.clip = view;
             context.palette.setColor(QPalette::Text, Qt::black);
             doc.documentLayout()->draw(&painter, context);
+            painter.restore();
 
             p++;
             pageCount++;
