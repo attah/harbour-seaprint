@@ -104,6 +104,8 @@ catch(const ConvertFailedException& e)
 void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParameters Params)
 {
 try {
+    emit busyMessage(tr("Printing"));
+
     CurlRequester cr(_printer->httpUrl());
     connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
