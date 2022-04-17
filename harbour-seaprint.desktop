@@ -5,7 +5,7 @@ X-Nemo-Application-Type=silica-qt5
 Exec=harbour-seaprint
 Name=SeaPrint
 [X-Sailjail]
-Permissions=Internet;Pictures;Documents;Downloads;MediaIndexing;Compatibility
+Permissions=Internet;Pictures;Documents;Downloads;RemovableMedia;MediaIndexing;Compatibility
 OrganizationName=net.attah
 ApplicationName=seaprint
 
