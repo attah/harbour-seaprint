@@ -79,6 +79,10 @@ ApplicationWindow
             {
                 return {simple: "image", translatable: qsTr("images")};
             }
+            else if(mimetype == Mimer.Plaintext)
+            {
+                return {simple: "plaintext", translatable: qsTr("plaintext")};
+            }
             else
             {
                 return {simple: "document", translatable: qsTr("documents")};

@@ -18,6 +18,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
     connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
+    connect(this, &IppPrinter::doFixupPlaintext, &_worker, &PrinterWorker::fixupPlaintext);
     connect(this, &IppPrinter::doFixupJpeg, &_worker, &PrinterWorker::fixupJpeg);
 
     connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
@@ -354,17 +355,22 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
 {
     if(documentFormat == Mimer::OctetStream)
     {
-        if(mimeType == Mimer::PDF || mimeType == Mimer::Plaintext)
+        QStringList PdfPrioList = {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF};
+        if(mimeType == Mimer::PDF)
         {
-            return firstMatch(supportedMimeTypes, {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF });
+            return firstMatch(supportedMimeTypes, PdfPrioList);
         }
         else if(mimeType == Mimer::Postscript)
         {
             return firstMatch(supportedMimeTypes, {Mimer::Postscript});
         }
+        else if(mimeType == Mimer::Plaintext)
+        {
+            return firstMatch(supportedMimeTypes, PdfPrioList << Mimer::Plaintext);
+        }
         else if(Mimer::isOffice(mimeType))
         {
-            return firstMatch(supportedMimeTypes, {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF });
+            return firstMatch(supportedMimeTypes, PdfPrioList);
         }
         else if(Mimer::isImage(mimeType))
         {
@@ -697,7 +703,14 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
         else if(mimeType == Mimer::Plaintext)
         {
-            emit doConvertPlaintext(filename, contents, Params);
+            if(targetFormat == Mimer::Plaintext)
+            {
+                emit doFixupPlaintext(filename, contents);
+            }
+            else
+            {
+                emit doConvertPlaintext(filename, contents, Params);
+            }
         }
         else if (Mimer::isImage(mimeType))
         {

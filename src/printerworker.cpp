@@ -101,6 +101,51 @@ catch(const ConvertFailedException& e)
 }
 }
 
+void PrinterWorker::fixupPlaintext(QString filename, Bytestream header)
+{
+try {
+    CurlRequester cr(_printer->httpUrl());
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
+
+    QFile inFile(filename);
+    if(!inFile.open(QIODevice::ReadOnly))
+    {
+        throw ConvertFailedException(tr("Failed to open file"));
+    }
+
+    QString allText = inFile.readAll();
+    if(allText.startsWith("\f"))
+    {
+        allText.remove(0, 1);
+    }
+
+    if(allText.endsWith("\f"))
+    {
+        allText.chop(1);
+    }
+    else if(allText.endsWith("\f\n"))
+    {
+        allText.chop(2);
+    }
+
+    QStringList lines;
+
+    foreach(QString rnline, allText.split("\r\n"))
+    {
+        lines.append(rnline.split("\n"));
+    }
+
+    QByteArray outData = lines.join("\r\n").toUtf8();
+
+    OK(cr.write((char*)header.raw(), header.size()));
+    OK(cr.write(outData.data(), outData.length()));
+}
+catch(const ConvertFailedException& e)
+{
+        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
+}
+}
+
 void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParameters Params)
 {
 try {

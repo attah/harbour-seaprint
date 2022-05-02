@@ -591,6 +591,10 @@ sur cette imprimante</translation>
         <source>documents</source>
         <translation>documents</translation>
     </message>
+    <message>
+        <source>plaintext</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>strings</name>
@@ -5476,6 +5480,10 @@ sur cette imprimante</translation>
     <message>
         <source>Unknown</source>
         <translation type="unfinished">Inconnu</translation>
+    </message>
+    <message>
+        <source>Plaintext</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

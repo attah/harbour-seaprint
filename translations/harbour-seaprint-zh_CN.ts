@@ -590,6 +590,10 @@
         <source>documents</source>
         <translation>文档</translation>
     </message>
+    <message>
+        <source>plaintext</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>strings</name>
@@ -5475,6 +5479,10 @@
     <message>
         <source>Unknown</source>
         <translation type="unfinished">未知</translation>
+    </message>
+    <message>
+        <source>Plaintext</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

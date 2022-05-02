@@ -590,6 +590,10 @@
         <source>documents</source>
         <translation>documentos</translation>
     </message>
+    <message>
+        <source>plaintext</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>strings</name>
@@ -5474,6 +5478,10 @@
     </message>
     <message>
         <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plaintext</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

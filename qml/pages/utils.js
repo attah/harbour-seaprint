@@ -26,17 +26,21 @@ function supported_formats(printer, considerAdditionalFormats)
     {
         pdf = true;
         mimetypes.push(Mimer.Mimer.PDF);
-        plaintext = true;
-        mimetypes.push(Mimer.Mimer.Plaintext);
     }
+
     if(has(formats, Mimer.Mimer.Postscript))
     {
         postscript = true;
         mimetypes.push(Mimer.Mimer.Postscript);
     }
 
-    if((ConvertChecker.ConvertChecker.calligra) &&
-            ( has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript) || raster ))
+    if(pdf || has(formats, Mimer.Mimer.Plaintext))
+    {
+        plaintext = true;
+        mimetypes.push(Mimer.Mimer.Plaintext);
+    }
+
+    if((ConvertChecker.ConvertChecker.calligra) && pdf)
     {
         office = true;
         mimetypes = mimetypes.concat(Mimer.Mimer.OfficeFormats);
@@ -243,6 +247,8 @@ function ippName(name, value, printerStrings)
             return qsTr("PDF");
         case Mimer.Mimer.Postscript:
             return qsTr("Postscript");
+        case Mimer.Mimer.Plaintext:
+            return qsTr("Plaintext");
         case Mimer.Mimer.PWG:
             return qsTr("PWG-raster");
         case Mimer.Mimer.URF:
@@ -372,10 +378,12 @@ function endsWith(ending, string)
     return string.lastIndexOf(ending) == (string.length - ending.length);
 }
 
+var pdfTargets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
+
+
 function canConvertPdfTo(type)
 {
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
-    return has(targets, type)
+    return has(pdfTargets, type)
 }
 
 function canTransferPostscriptAs(type)
@@ -384,10 +392,17 @@ function canTransferPostscriptAs(type)
     return has(targets, type)
 }
 
+function canConvertPlaintextTo(type)
+{
+    var targets = pdfTargets;
+    targets.push(Mimer.Mimer.Plaintext);
+    return has(targets, type)
+}
+
+
 function canConvertOfficeDocumentTo(type)
 {
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
-    return has(targets, type)
+    return has(pdfTargets, type)
 }
 
 function canConvertImageTo(type)
@@ -417,8 +432,7 @@ function fixupChoices(name, choices, mimeType)
         }
         else if(mimeType == Mimer.Mimer.Plaintext)
         {
-            // We convert plaintext to PDF internally
-            return choices.filter(canConvertPdfTo)
+            return choices.filter(canConvertPlaintextTo)
         }
         else if(mimeType == Mimer.Mimer.Postscript)
         {

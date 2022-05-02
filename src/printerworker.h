@@ -41,6 +41,8 @@ public slots:
 
     void fixupJpeg(QString filename, Bytestream header);
 
+    void fixupPlaintext(QString filename, Bytestream header);
+
     void convertPdf(QString filename, Bytestream header, PrintParameters Params);
 
     void convertImage(QString filename, Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins);
