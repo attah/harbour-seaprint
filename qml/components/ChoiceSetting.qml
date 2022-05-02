@@ -14,7 +14,11 @@ Setting {
     displayValue: Utils.ippName(name, choice != undefined ? choice : default_choice, strings)
 
     onClicked: {
-        if(actual_choices.length>num_large_choices)
+        if(hasMenu)
+        {
+            menu.open(this)
+        }
+        else if(actual_choices.length != 0)
         {
             var dialog = pageStack.push("LargeChoiceDialog.qml",
                                         {name:name, choice: choice != undefined ? choice : default_choice, choices: actual_choices,
@@ -23,10 +27,6 @@ Setting {
             dialog.accepted.connect(function() {
                                         choice = dialog.choice
                                     })
-        }
-        else
-        {
-            menu.open(this)
         }
     }
 
@@ -45,7 +45,5 @@ Setting {
 
     }
 
-    hasMenu: !actual_choices.length>num_large_choices
-
-
+    hasMenu: actual_choices.length != 0 && (actual_choices.length <= num_large_choices)
 }
