@@ -11,13 +11,16 @@ A minority of printers support only PCL and/or their own proprietary formats, th
 
 ## Format support
 
-For PDFs or plaintext, your printer needs to support one of the following formats:
+For PDFs, your printer needs to support one of the following formats:
  * PDF
  * Postscript
  * PWG-raster
  * URF-raster
 
 For Postscript, your printer needs to support Postscript natively. (SeaPrint just sends it as-is)
+
+For Plaintext, SeaPrint can render it to PDF internally and then the requirements follow those of PDF.
+You can also send Plaintext to supporting printers and leave the rendering up to the printer (SeaPrint will strip leading and trailing Form Feed characters and ensure CR-NL newlines, but not do any reflow or similar). Since rendering will differ between printers, this has lowest priority for automatic format selection.
 
 For printing "Office" files, like .doc(x) and odt, you need to install
  `calligraconverter` (from the `calligra` package in Sailfish OS 4.2 onwards).
