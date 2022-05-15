@@ -160,5 +160,12 @@ ApplicationWindow
         defaultValue: SeaPrintSettings.debugLogDefault
     }
 
+    ConfigurationValue
+    {
+        id: allowExternalConnectionsSetting
+        key: SeaPrintSettings.allowExternalConnectionsPath
+        defaultValue: SeaPrintSettings.allowExternalConnectionsDefault
+    }
+
 }
 

@@ -3,7 +3,8 @@
 
 
 Settings::Settings() : _ignoreSslErrorsSetting("/apps/harbour-seaprint/settings/ignore-ssl-errors", this),
-                       _debugLogSetting("/apps/harbour-seaprint/settings/debug-log", this)
+                       _debugLogSetting("/apps/harbour-seaprint/settings/debug-log", this),
+                       _allowExternalConnectionsSetting("/apps/harbour-seaprint/settings/allow-external-connections", this)
 {
 
 }
@@ -47,4 +48,14 @@ bool Settings::debugLog()
 QString Settings::debugLogPath()
 {
     return _debugLogSetting.key();
+}
+
+bool Settings::allowExternalConnections()
+{
+    return _allowExternalConnectionsSetting.value(_allowExternalConnectionsDefault).toBool();
+}
+
+QString Settings::allowExternalConnectionsPath()
+{
+    return _allowExternalConnectionsSetting.key();
 }

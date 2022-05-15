@@ -126,8 +126,11 @@ void IppPrinter::MaybeGetStrings()
     if(_attrs.contains("printer-strings-uri") && _strings.empty())
     {
         QUrl url(_attrs["printer-strings-uri"].toObject()["value"].toString());
-        IppDiscovery::instance()->resolve(url);
-        emit doGetStrings(url);
+        if(isAllowedAddress(url))
+        {
+            IppDiscovery::instance()->resolve(url);
+            emit doGetStrings(url);
+        }
     }
 }
 
@@ -157,7 +160,7 @@ void IppPrinter::MaybeGetIcon(bool retry)
             }
         }
 
-        if(!url.isEmpty())
+        if(isAllowedAddress(url))
         {
             IppDiscovery::instance()->resolve(url);
             emit doGetImage(url);
@@ -819,6 +822,13 @@ void IppPrinter::setProgress(qint64 sent, qint64 total)
     _progress = QString::number(100*sent/total);
     _progress += "%";
     emit progressChanged();
+}
+
+bool IppPrinter::isAllowedAddress(QUrl url)
+{
+    bool allowed = ((url.host() == _url.host()) || Settings::instance()->allowExternalConnections());
+    qDebug() << url << " is allowed: " << allowed;
+    return allowed;
 }
 
 QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name, QString subkey)

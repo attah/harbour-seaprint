@@ -62,6 +62,14 @@ Page {
                 }
             }
 
+            TextSwitch {
+                text: qsTr("Allow external connections")
+                description: qsTr("Allow SeaPrint to fetch recources like icons and option name dictionaries from addresses that are not the printer itself. Some printer makers store icons on their website as opposed to locally on the printer.")
+                checked: allowExternalConnectionsSetting.value
+                onCheckedChanged: {
+                    allowExternalConnectionsSetting.value = checked
+                }
+            }
         }
     }
 }

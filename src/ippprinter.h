@@ -106,6 +106,8 @@ private:
     void setBusyMessage(QString msg);
     void setProgress(qint64 sent, qint64 total);
 
+    bool isAllowedAddress(QUrl addr);
+
     QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name, QString subkey = "");
 
     IppMsg mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject());

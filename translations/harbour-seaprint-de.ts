@@ -569,6 +569,14 @@ auf diesem Drucker</translation>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
         <translation>Druckt das Debug-Protokoll in die Konsole (falls von hier ausgeführt) oder journal wenn normal gestartet wurde. Wird erst nach einem Neustart der App wirksam.</translation>
     </message>
+    <message>
+        <source>Allow external connections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow SeaPrint to fetch recources like icons and option name dictionaries from addresses that are not the printer itself. Some printer makers store icons on their website as opposed to locally on the printer.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SupplyItem</name>
