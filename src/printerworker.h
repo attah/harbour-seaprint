@@ -36,6 +36,7 @@ public slots:
     void getPrinterAttributes(Bytestream msg);
     void getJobs(Bytestream msg);
     void cancelJob(Bytestream msg);
+    void identify(Bytestream msg);
 
     void justUpload(QString filename, Bytestream header);
 

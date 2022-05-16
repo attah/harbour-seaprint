@@ -12,6 +12,17 @@ Page {
         anchors.fill: parent
         contentHeight: col.height
 
+        PullDownMenu {
+
+            MenuItem {
+                id: identifyLabel
+                text:  qsTr("Identify printer")
+                visible: printer.attrs.hasOwnProperty("identify-actions-supported")
+                onClicked: printer.identify()
+            }
+        }
+
+
         Column {
             id: col
 

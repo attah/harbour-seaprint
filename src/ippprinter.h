@@ -38,6 +38,7 @@ public:
 
     Q_INVOKABLE bool getJobs();
     Q_INVOKABLE bool cancelJob(qint32 jobId);
+    Q_INVOKABLE bool identify();
 
     bool correctSuffix();
     QStringList suffixes();
@@ -57,6 +58,7 @@ signals:
     void doDoGetPrinterAttributes(Bytestream msg);
     void doGetJobs(Bytestream msg);
     void doCancelJob(Bytestream msg);
+    void doIdentify(Bytestream msg);
 
     void doJustUpload(QString filename, Bytestream header);
     void doFixupPlaintext(QString filename, Bytestream header);
@@ -89,6 +91,7 @@ public slots:
     void printRequestFinished(CURLcode res, Bytestream data);
     void getJobsRequestFinished(CURLcode res, Bytestream data);
     void cancelJobFinished(CURLcode res, Bytestream data);
+    void identifyFinished(CURLcode res, Bytestream data);
 
     void getStringsFinished(CURLcode res, Bytestream data);
     void getImageFinished(CURLcode res, Bytestream data);

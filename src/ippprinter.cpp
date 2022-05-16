@@ -17,6 +17,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doDoGetPrinterAttributes, &_worker, &PrinterWorker::getPrinterAttributes);
     connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
+    connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
     connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
     connect(this, &IppPrinter::doFixupPlaintext, &_worker, &PrinterWorker::fixupPlaintext);
     connect(this, &IppPrinter::doFixupJpeg, &_worker, &PrinterWorker::fixupJpeg);
@@ -292,6 +293,11 @@ void IppPrinter::cancelJobFinished(CURLcode res, Bytestream data)
     }
     emit cancelStatus(status);
     getJobs();
+}
+
+void IppPrinter::identifyFinished(CURLcode /*res*/, Bytestream /*data*/)
+{
+
 }
 
 void IppPrinter::getStringsFinished(CURLcode res, Bytestream data)
@@ -756,6 +762,19 @@ bool IppPrinter::cancelJob(qint32 jobId) {
     IppMsg job = IppMsg(o, QJsonObject());
 
     emit doCancelJob(job.encode(IppMsg::CancelJob));
+
+    return true;
+}
+
+bool IppPrinter::identify() {
+
+    qDebug() << "identifying";
+
+    QJsonObject o = opAttrs();
+
+    IppMsg job = IppMsg(o, QJsonObject());
+
+    emit doCancelJob(job.encode(IppMsg::IdentifyPrinter));
 
     return true;
 }

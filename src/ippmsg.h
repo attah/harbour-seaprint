@@ -61,7 +61,8 @@ public:
         RestartJob        = 0x000E,
         PausePrinter      = 0x0010,
         ResumePrinter     = 0x0011,
-        PurgeJobs         = 0x0012
+        PurgeJobs         = 0x0012,
+        IdentifyPrinter   = 0x003C
     };
 
     explicit IppMsg();

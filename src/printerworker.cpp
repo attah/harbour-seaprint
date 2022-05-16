@@ -56,6 +56,13 @@ void PrinterWorker::cancelJob(Bytestream msg)
     cr.write((char*)msg.raw(), msg.size());
 }
 
+void PrinterWorker::identify(Bytestream msg)
+{
+    CurlRequester cr(_printer->httpUrl());
+    connect(&cr, &CurlRequester::done, _printer, &IppPrinter::identifyFinished);
+    cr.write((char*)msg.raw(), msg.size());
+}
+
 void PrinterWorker::justUpload(QString filename, Bytestream header)
 {
 try {

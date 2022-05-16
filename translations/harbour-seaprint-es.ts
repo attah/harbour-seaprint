@@ -217,6 +217,10 @@
         <source>pages/min (color)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Identify printer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
