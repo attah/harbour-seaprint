@@ -519,6 +519,10 @@
         <source>Upload error</source>
         <translation>Uploadfout</translation>
     </message>
+    <message>
+        <source>Unknown target format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

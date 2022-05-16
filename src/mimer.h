@@ -61,11 +61,16 @@ public:
 
     static const QString Plaintext;
 
+    static const QStringList RasterFormats;
     static const QStringList OfficeFormats;
 
     Q_INVOKABLE static bool isImage(QString mimeType)
     {
-        return mimeType.startsWith("image/");
+        return mimeType.startsWith("image/") && ! isRaster(mimeType);
+    }
+    Q_INVOKABLE static bool isRaster(QString mimeType)
+    {
+        return RasterFormats.contains(mimeType);
     }
     Q_INVOKABLE static bool isOffice(QString mimeType)
     {

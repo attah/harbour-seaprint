@@ -85,17 +85,54 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::fixupJpeg(QString filename, Bytestream header)
+void PrinterWorker::fixupImage(QString filename, Bytestream header, QString targetFormat)
 {
 try {
+    QString imageFormat = "";
+    QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
+
+    if(supportedImageFormats.contains(targetFormat))
+    {
+        imageFormat = targetFormat.split("/")[1];
+    }
+    else
+    {
+        throw ConvertFailedException(tr("Unknown target format"));
+    }
+
+    QString mimeType = Mimer::instance()->get_type(filename);
+    Bytestream OutBts;
+
     CurlRequester cr(_printer->httpUrl());
     connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
-    std::ifstream ifs = std::ifstream(filename.toStdString(), std::ios::in | std::ios::binary);
-    Bytestream InBts(ifs);
-    Bytestream OutBts;
+    if(mimeType == Mimer::JPEG && targetFormat == Mimer::JPEG)
+    {
+        std::ifstream ifs = std::ifstream(filename.toStdString(), std::ios::in | std::ios::binary);
+        Bytestream InBts(ifs);
 
-    baselinify(InBts, OutBts);
+        baselinify(InBts, OutBts);
+    }
+    else if(targetFormat == mimeType)
+    {
+        std::ifstream ifs = std::ifstream(filename.toStdString(), std::ios::in | std::ios::binary);
+        OutBts = Bytestream(ifs);
+    }
+    else
+    {
+        QImage inImage;
+        QBuffer buf;
+        if(!inImage.load(filename))
+        {
+            qDebug() << "failed to load";
+            throw ConvertFailedException(tr("Failed to load image"));
+        }
+        buf.open(QIODevice::ReadWrite);
+        inImage.save(&buf, imageFormat.toStdString().c_str());
+        buf.seek(0);
+        OutBts = Bytestream(buf.size());
+        buf.read((char*)(OutBts.raw()), buf.size());
+    }
 
     emit busyMessage(tr("Printing"));
 
@@ -192,17 +229,10 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins)
+void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins)
 {
 try {
 
-    QString imageFormat = "";
-    QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
-
-    if(supportedImageFormats.contains(targetFormat))
-    {
-        imageFormat = targetFormat.split("/")[1];
-    }
 
     if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
     { // URF only supports symmetric resolutions
@@ -235,7 +265,7 @@ try {
     inImage = inImage.scaled(Params.getPaperSizeWInPixels()-totalXMarginPx, Params.getPaperSizeHInPixels()-totalYMarginPx,
                              Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    if(imageFormat == "" && (Params.format == PrintParameters::PDF || Params.format == PrintParameters::Postscript))
+    if(Params.format == PrintParameters::PDF || Params.format == PrintParameters::Postscript)
     {
         QTemporaryFile tmpPdfFile;
         tmpPdfFile.open();
@@ -267,44 +297,34 @@ try {
         buf.open(QIODevice::ReadWrite);
         Bytestream outBts;
 
-        if(imageFormat != "")
-        { // We are converting to a supported image format
-            outImage.save(&buf, imageFormat.toStdString().c_str());
-            buf.seek(0);
-            outBts = Bytestream(buf.size());
-            buf.read((char*)(outBts.raw()), buf.size());
+
+        if(inImage.allGray())
+        {
+            Params.colors = 1; // No need to waste space/bandwidth...
         }
-        else
-        { // We are converting to a raster format
 
-            if(inImage.allGray())
-            {
-                Params.colors = 1; // No need to waste space/bandwidth...
-            }
+        outImage.save(&buf, Params.colors==1 ? "pgm" : "ppm");
+        buf.seek(0);
+        // Skip header - TODO consider reimplementing
+        buf.readLine(255);
+        buf.readLine(255);
+        buf.readLine(255);
 
-            outImage.save(&buf, Params.colors==1 ? "pgm" : "ppm");
-            buf.seek(0);
-            // Skip header - TODO consider reimplementing
-            buf.readLine(255);
-            buf.readLine(255);
-            buf.readLine(255);
+        Bytestream inBts(Params.getPaperSizeWInPixels() * Params.getPaperSizeHInPixels() * Params.colors);
 
-            Bytestream inBts(Params.getPaperSizeWInPixels() * Params.getPaperSizeHInPixels() * Params.colors);
-
-            if((((size_t)buf.size())-buf.pos()) != inBts.size())
-            {
-                qDebug() << buf.size() << buf.pos() << inBts.size();
-                throw ConvertFailedException();
-            }
-
-            buf.read((char*)(inBts.raw()), inBts.size());
-
-            outBts << (Params.format == PrintParameters::URF ? make_urf_file_hdr(1) : make_pwg_file_hdr());
-
-            bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-
-            bmp_to_pwg(inBts, outBts, 1, Params, verbose);
+        if((((size_t)buf.size())-buf.pos()) != inBts.size())
+        {
+            qDebug() << buf.size() << buf.pos() << inBts.size();
+            throw ConvertFailedException();
         }
+
+        buf.read((char*)(inBts.raw()), inBts.size());
+
+        outBts << (Params.format == PrintParameters::URF ? make_urf_file_hdr(1) : make_pwg_file_hdr());
+
+        bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+
+        bmp_to_pwg(inBts, outBts, 1, Params, verbose);
 
         CurlRequester cr(_printer->httpUrl());
         connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);

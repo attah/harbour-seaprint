@@ -148,10 +148,10 @@ Page {
                 tag: IppMsg.Keyword
                 name: "print-scaling"
                 prettyName: qsTr("Scaling")
-                valid: _valid && selectedFileType == Mimer.JPEG
+                valid: _valid && Mimer.isImage(selectedFileType)
                 DependentOn {
                     target: transferFormatSetting
-                    values: [Mimer.JPEG]
+                    values: [Mimer.JPEG, Mimer.PNG]
                 }
             }
             ChoiceSetting {

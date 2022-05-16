@@ -519,6 +519,10 @@
         <source>Upload error</source>
         <translation>Error de carga</translation>
     </message>
+    <message>
+        <source>Unknown target format</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

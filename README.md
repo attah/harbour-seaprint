@@ -34,9 +34,12 @@ For images, your printer needs to support one of the following formats:
  * PDF
  * Postscript
 
-For printing JPEG images, transferring the unaltered image has priority and the printer does the scaling.
-JPEGs are however (losslessly) re-encoded to the baseline encoding profile to work with all printers (since SeaPrint 1.1).
-Other image formats are lossless and SeaPrint does scale-and-rotate to fit, so JPEG has lowest prio there.
+When printing images the result may depend on how they are transferred.
+If a document-oriented format like PDF/Postscript/PWG/URF is used SeaPrint does scale-and-rotate to fit, otherwise (when transferred as PNG or JPEG) that is left up to the printer. Only when printing images *as images* can the scaling setting be used.
+
+For printing JPEG images, transferring them as JPEG has highest priority.
+JPEGs are then (losslessly) re-encoded to the baseline encoding profile to work with all printers (since SeaPrint 1.1).
+For other image formats JPEG has lowest priority as transfer format since it is lossy.
 
 Printers with any of these IPP certifications and derivative standards should likely be supported:
 

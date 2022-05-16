@@ -62,11 +62,11 @@ signals:
 
     void doJustUpload(QString filename, Bytestream header);
     void doFixupPlaintext(QString filename, Bytestream header);
-    void doFixupJpeg(QString filename, Bytestream header);
+    void doFixupImage(QString filename, Bytestream header, QString targetFormat);
 
     void doConvertPdf(QString filename, Bytestream header, PrintParameters Params);
 
-    void doConvertImage(QString filename,  Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins);
+    void doConvertImage(QString filename,  Bytestream header, PrintParameters Params, QMargins margins);
 
     void doConvertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
 

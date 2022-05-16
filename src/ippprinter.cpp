@@ -20,7 +20,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
     connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
     connect(this, &IppPrinter::doFixupPlaintext, &_worker, &PrinterWorker::fixupPlaintext);
-    connect(this, &IppPrinter::doFixupJpeg, &_worker, &PrinterWorker::fixupJpeg);
+    connect(this, &IppPrinter::doFixupImage, &_worker, &PrinterWorker::fixupImage);
 
     connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, &_worker, &PrinterWorker::convertImage);
@@ -566,7 +566,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
                      getAttrOrDefault(jobAttrs, "media-bottom-margin", "media-col").toInt());
 
     // Only keep margin setting for JPEG - but only attemt to remove it if media-col exists
-    if(!(mimeType == Mimer::JPEG && targetFormat == Mimer::JPEG) && jobAttrs.contains("media-col"))
+    if(!mimer->isImage(targetFormat) && jobAttrs.contains("media-col"))
     {
         QJsonObject MediaCol = jobAttrs["media-col"].toObject();
         QJsonObject MediaColValue = MediaCol["value"].toObject();
@@ -688,9 +688,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     { // Can't process Postscript
         emit doJustUpload(filename, contents);
     }
-    else if((mimeType == targetFormat) && (targetFormat == Mimer::JPEG))
-    { // Just make the jpeg baseline-encoded, don't resize locally
-        emit doFixupJpeg(filename, contents);
+    else if(mimer->isImage(targetFormat))
+    { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
+        emit doFixupImage(filename, contents, targetFormat);
     }
     else
     {
@@ -723,7 +723,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
         else if (Mimer::isImage(mimeType))
         {
-            emit doConvertImage(filename, contents, Params, targetFormat, margins);
+            emit doConvertImage(filename, contents, Params, margins);
         }
         else if(Mimer::isOffice(mimeType))
         {

@@ -40,13 +40,13 @@ public slots:
 
     void justUpload(QString filename, Bytestream header);
 
-    void fixupJpeg(QString filename, Bytestream header);
+    void fixupImage(QString filename, Bytestream header, QString targetFormat);
 
     void fixupPlaintext(QString filename, Bytestream header);
 
     void convertPdf(QString filename, Bytestream header, PrintParameters Params);
 
-    void convertImage(QString filename, Bytestream header, PrintParameters Params, QString targetFormat, QMargins margins);
+    void convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins);
 
     void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
 
