@@ -137,7 +137,7 @@ void IppPrinter::MaybeGetStrings()
 
 void IppPrinter::MaybeGetIcon(bool retry)
 {
-    if(_attrs.contains("printer-icons") && (_icon.isNull() || retry))
+    if(_attrs.contains("printer-icons") && (_icon.isNull() || retry) && !_iconRetried)
     {
         QUrl url;
         QJsonArray icons = _attrs["printer-icons"].toObject()["value"].toArray();
@@ -167,6 +167,7 @@ void IppPrinter::MaybeGetIcon(bool retry)
             emit doGetImage(url);
         }
     }
+    _iconRetried = retry;
 }
 
 

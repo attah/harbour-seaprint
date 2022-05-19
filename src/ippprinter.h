@@ -130,6 +130,7 @@ private:
     QThread _workerThread;
     PrinterWorker _worker;
 
+    bool _iconRetried = false;
 };
 
 #endif // IPPPRINTER_H
