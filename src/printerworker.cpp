@@ -174,7 +174,7 @@ try {
 
     QStringList lines;
 
-    foreach(QString rnline, allText.split("\r\n"))
+    for(QString rnline : allText.split("\r\n"))
     {
         lines.append(rnline.split("\n"));
     }
@@ -508,7 +508,7 @@ try {
     bool first = true;
     int pageCount = 0;
 
-    foreach(QString page, pages)
+    for(QString page : pages)
     {
         if(!first)
         {

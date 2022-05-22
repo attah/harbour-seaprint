@@ -159,7 +159,7 @@ QJsonArray IppMsg::get_unnamed_attributes(Bytestream& data)
 QJsonArray untag_values(QJsonArray taggedValues)
 {
     QJsonArray res;
-    foreach(QJsonValue it, taggedValues)
+    for(QJsonValue it : taggedValues)
     {
         res.append(it.toObject()["value"]);
     }
@@ -297,7 +297,7 @@ Bytestream IppMsg::encode(Operation op)
                                 "attributes-natural-language",
                                 "printer-uri",
                                 "requesting-user-name"};
-    foreach(QString key, InitialAttrs)
+    for(QString key : InitialAttrs)
     {
         QJsonObject val = _opAttrs.take(key).toObject();
         encode_attr(ipp, val["tag"].toInt(), key, val["value"]);
@@ -381,7 +381,7 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue v
             if(value.isObject())
             {
                 QJsonObject collection = value.toObject();
-                foreach(QString key, collection.keys())
+                for(QString key : collection.keys())
                 {
                     encode_attr(msg, collection[key].toObject()["tag"].toInt(), key,
                                 collection[key].toObject()["value"], true);

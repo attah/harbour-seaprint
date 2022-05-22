@@ -93,7 +93,7 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addrs) {
     QTime now = QTime::currentTime();
     QTime aWhileAgo = now.addSecs(-1);
 
-    foreach(QString oq, _outstandingQueries.keys())
+    for(QString oq : _outstandingQueries.keys())
     {
         if(_outstandingQueries[oq] < aWhileAgo)
         { // Housekeeping for _outstandingQueries
@@ -121,7 +121,7 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addrs) {
 
     query << _transactionid++ << flags << questions << (quint16)0 << (quint16)0 << (quint16)0;
 
-    foreach(QString addr, addrs)
+    for(QString addr : addrs)
     {
         _outstandingQueries.insert(addr, now);
 
@@ -187,7 +187,7 @@ void IppDiscovery::update()
     QList<QPair<QString,QString>> ippsIpRps;
     QString target, rp;
 
-    foreach(QString it, _ipps)
+    for(QString it : _ipps)
     {
         quint16 port = _ports[it];
         target = _targets[it];
@@ -208,7 +208,7 @@ void IppDiscovery::update()
         }
     }
 
-    foreach(QString it, _ipp)
+    for(QString it : _ipp)
     {
         quint16 port = _ports[it];
         target = _targets[it];
@@ -236,7 +236,7 @@ void IppDiscovery::update()
 
     // TODO?: replace this with some logica that can bpoth add and remove
     // and it can consider _favourites, so we can drop cleanUpdate
-    foreach(QString f, found)
+    for(QString f : found)
     {
         if(!this->stringList().contains(f))
         {
@@ -252,7 +252,7 @@ void IppDiscovery::update()
 void IppDiscovery::updateAndQueryPtrs(QStringList& ptrs, QStringList new_ptrs)
 {
     new_ptrs.removeDuplicates();
-    foreach(QString ptr, new_ptrs)
+    for(QString ptr : new_ptrs)
     {
         if(!ptrs.contains(ptr))
         {
@@ -385,7 +385,7 @@ void IppDiscovery::readPendingDatagrams()
 
         QStringList unresolvedAddrs;
 
-        foreach(QString t, new_targets)
+        for(QString t : new_targets)
         {
             // If target does not resolve to an address, query about it
             if(!_AAs.contains(t))

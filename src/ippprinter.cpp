@@ -310,7 +310,7 @@ void IppPrinter::getStringsFinished(CURLcode res, Bytestream data)
         // "media-type.com.epson-coated" = "Epson Photo Quality Ink Jet";
         QRegularExpression re("^\\\"(.*)\\\"\\s*=\\s*\\\"(.*)\\\";");
         QList<QByteArray> bl = ba.split('\n');
-        foreach(QByteArray l, bl)
+        for(QByteArray l : bl)
         {
             QRegularExpressionMatch match = re.match(l);
             if(match.hasMatch())
@@ -412,7 +412,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         quint32 diff = std::numeric_limits<quint32>::max();
         quint32 AdjustedHwResX = Params.hwResW;
         quint32 AdjustedHwResY = Params.hwResH;
-        foreach(QJsonValue res, _attrs["pwg-raster-document-resolution-supported"].toObject()["value"].toArray())
+        for(QJsonValue res : _attrs["pwg-raster-document-resolution-supported"].toObject()["value"].toArray())
         {
             QJsonObject resObj = res.toObject();
             if(resObj["units"] != 3)
@@ -439,12 +439,12 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         quint32 AdjustedHwRes = Params.hwResW;
 
         QJsonArray urfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
-        foreach(QJsonValue us, urfSupported)
+        for(QJsonValue us : urfSupported)
         {
             if(us.toString().startsWith("RS"))
             { //RS300[-600]
                 QStringList resolutions = us.toString().mid(2).split("-");
-                foreach(QString res, resolutions)
+                for(QString res : resolutions)
                 {
                     int intRes = res.toInt();
                     quint32 tmpDiff = std::abs(int(Params.hwResW - intRes));
@@ -782,7 +782,7 @@ bool IppPrinter::identify() {
 
 bool IppPrinter::correctSuffix()
 {
-    foreach(QJsonValue u, _attrs["printer-uri-supported"].toObject()["value"].toArray())
+    for(QJsonValue u : _attrs["printer-uri-supported"].toObject()["value"].toArray())
     {
         QUrl url(u.toString());
         if(url.path() == _url.path())
@@ -796,7 +796,7 @@ bool IppPrinter::correctSuffix()
 QStringList IppPrinter::suffixes()
 {
     QStringList res;
-    foreach(QJsonValue u, _attrs["printer-uri-supported"].toObject()["value"].toArray())
+    for(QJsonValue u : _attrs["printer-uri-supported"].toObject()["value"].toArray())
     {
         QUrl url(u.toString());
         if(!res.contains(url.path()))

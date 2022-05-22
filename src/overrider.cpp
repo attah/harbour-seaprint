@@ -40,7 +40,7 @@ Overrider* Overrider::instance()
 bool Overrider::apply(QJsonObject& attrs)
 {
     bool applied = false;
-    foreach(const QString& key, _overrides.keys())
+    for(const QString& key : _overrides.keys())
     {
         if(attrs.contains(key))
         {
@@ -48,7 +48,7 @@ bool Overrider::apply(QJsonObject& attrs)
             if(match != "" && _overrides[key].toObject().contains(match))
             {
                 QJsonObject overrideden_data = _overrides[key].toObject()[match].toObject();
-                foreach(const QString& o_key, overrideden_data.keys())
+                for(const QString& o_key : overrideden_data.keys())
                 {
                     attrs.insert(o_key, overrideden_data[o_key]);
                 }
