@@ -127,9 +127,9 @@ void IppPrinter::MaybeGetStrings()
     if(_attrs.contains("printer-strings-uri") && _strings.empty())
     {
         QUrl url(_attrs["printer-strings-uri"].toObject()["value"].toString());
+        resolveUrl(url);
         if(isAllowedAddress(url))
         {
-            IppDiscovery::instance()->resolve(url);
             emit doGetStrings(url);
         }
     }
@@ -161,9 +161,10 @@ void IppPrinter::MaybeGetIcon(bool retry)
             }
         }
 
+        resolveUrl(url);
+
         if(isAllowedAddress(url))
         {
-            IppDiscovery::instance()->resolve(url);
             emit doGetImage(url);
         }
     }
@@ -896,4 +897,25 @@ IppMsg IppPrinter::mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs)
         return IppMsg(opAttrs, jobAttrs, 2, 0);
     }
     return IppMsg(opAttrs, jobAttrs);
+}
+
+void IppPrinter::resolveUrl(QUrl& url)
+{
+    if(!IppDiscovery::instance()->resolve(url))
+    { // If "proper" resolution fails, cheat...
+        QString host = url.host();
+
+        if(host.endsWith("."))
+        {
+            host.chop(1);
+        }
+
+        QString dnsSdName = _attrs["printer-dns-sd-name"].toObject()["value"].toString();
+        dnsSdName = dnsSdName.append(".local");
+
+        if(host.compare(dnsSdName, Qt::CaseInsensitive) == 0)
+        { // This could be done unconditionally, but some might want their externally hosted stuff to work
+            url.setHost(_url.host());
+        }
+    }
 }

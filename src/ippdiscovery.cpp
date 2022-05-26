@@ -404,7 +404,7 @@ void IppDiscovery::readPendingDatagrams()
 
 }
 
-void IppDiscovery::resolve(QUrl& url)
+bool IppDiscovery::resolve(QUrl& url)
 {
     QString host = url.host();
 
@@ -417,5 +417,7 @@ void IppDiscovery::resolve(QUrl& url)
     if(_AAs.contains(host))
     {   // TODO: retry potential other IPs
         url.setHost(_AAs.value(host));
+        return true;
     }
+    return false;
 }

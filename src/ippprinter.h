@@ -101,6 +101,7 @@ public slots:
 private:
     QUrl _url;
     QUrl httpUrl();
+    void resolveUrl(QUrl& url);
 
     QJsonObject opAttrs();
 

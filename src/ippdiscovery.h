@@ -16,7 +16,7 @@ public:
     Q_INVOKABLE void discover();
     Q_INVOKABLE void reset();
 
-    void resolve(QUrl& url);
+    bool resolve(QUrl& url);
 
 signals:
     void favouritesChanged();
