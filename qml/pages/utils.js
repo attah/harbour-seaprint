@@ -46,7 +46,7 @@ function supported_formats(printer, considerAdditionalFormats)
         mimetypes = mimetypes.concat(Mimer.Mimer.OfficeFormats);
     }
 
-    if (raster || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) ||
+    if (raster || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) || has(formats, Mimer.Mimer.RBMP) ||
             has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript))
     {
         images = true;
@@ -259,6 +259,8 @@ function ippName(name, value, printerStrings)
             return qsTr("JPEG");
         case Mimer.Mimer.GIF:
             return qsTr("GIF");
+        case Mimer.Mimer.RBMP:
+            return qsTr("Reverse BMP");
         default:
             return value;
         }
@@ -407,7 +409,8 @@ function canConvertOfficeDocumentTo(type)
 
 function canConvertImageTo(type)
 {
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.JPEG, Mimer.Mimer.PNG, Mimer.Mimer.PWG, Mimer.Mimer.URF, Mimer.Mimer.PDF, Mimer.Mimer.Postscript];
+    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.JPEG, Mimer.Mimer.PNG, Mimer.Mimer.RBMP,
+                   Mimer.Mimer.PWG, Mimer.Mimer.URF, Mimer.Mimer.PDF, Mimer.Mimer.Postscript];
     return has(targets, type)
 }
 

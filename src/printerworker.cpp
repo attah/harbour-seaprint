@@ -85,13 +85,17 @@ catch(const ConvertFailedException& e)
 }
 }
 
-void PrinterWorker::fixupImage(QString filename, Bytestream header, QString targetFormat)
+void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QString targetFormat)
 {
 try {
     QString imageFormat = "";
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
 
-    if(supportedImageFormats.contains(targetFormat))
+    if(targetFormat == Mimer::RBMP)
+    {
+        // ok
+    }
+    else if(supportedImageFormats.contains(targetFormat))
     {
         imageFormat = targetFormat.split("/")[1];
     }
@@ -112,6 +116,28 @@ try {
         Bytestream InBts(ifs);
 
         baselinify(InBts, OutBts);
+    }
+    else if(targetFormat == Mimer::RBMP)
+    {
+        QImage inImage;
+        QBuffer buf;
+        if(!inImage.load(filename))
+        {
+            qDebug() << "failed to load";
+            throw ConvertFailedException(tr("Failed to load image"));
+        }
+        // TODO: calculate paper width minus margins
+        // (depends on understanding/parsing custom paper sizes)
+        int width = 576;
+        int height = inImage.height() * ((width*1.0)/inImage.width());
+        inImage = inImage.scaled(width, height);
+        inImage = inImage.convertToFormat(QImage::Format_Mono);
+        inImage = inImage.transformed(QMatrix().scale(1,-1));
+        buf.open(QIODevice::ReadWrite);
+        inImage.save(&buf, "bmp");
+        buf.seek(0);
+        OutBts = Bytestream(buf.size());
+        buf.read((char*)(OutBts.raw()), buf.size());
     }
     else if(targetFormat == mimeType)
     {

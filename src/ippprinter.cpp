@@ -20,7 +20,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
     connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
     connect(this, &IppPrinter::doFixupPlaintext, &_worker, &PrinterWorker::fixupPlaintext);
-    connect(this, &IppPrinter::doFixupImage, &_worker, &PrinterWorker::fixupImage);
+    connect(this, &IppPrinter::doPrintImageAsImage, &_worker, &PrinterWorker::printImageAsImage);
 
     connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
     connect(this, &IppPrinter::doConvertImage, &_worker, &PrinterWorker::convertImage);
@@ -691,7 +691,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
     else if(mimer->isImage(targetFormat))
     { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
-        emit doFixupImage(filename, contents, targetFormat);
+        emit doPrintImageAsImage(filename, contents, targetFormat);
     }
     else
     {

@@ -40,7 +40,7 @@ public slots:
 
     void justUpload(QString filename, Bytestream header);
 
-    void fixupImage(QString filename, Bytestream header, QString targetFormat);
+    void printImageAsImage(QString filename, Bytestream header, QString targetFormat);
 
     void fixupPlaintext(QString filename, Bytestream header);
 

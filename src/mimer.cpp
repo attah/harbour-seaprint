@@ -11,6 +11,7 @@ const QString Mimer::PNG = "image/png";
 const QString Mimer::GIF = "image/gif";
 const QString Mimer::JPEG = "image/jpeg";
 const QString Mimer::TIFF = "image/tiff";
+const QString Mimer::RBMP = "image/reverse-encoding-bmp";
 
 const QString Mimer::DOC = "application/msword";
 const QString Mimer::DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";

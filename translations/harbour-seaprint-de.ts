@@ -5501,5 +5501,9 @@ auf diesem Drucker</translation>
         <source>Plaintext</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reverse BMP</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

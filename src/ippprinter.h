@@ -62,7 +62,7 @@ signals:
 
     void doJustUpload(QString filename, Bytestream header);
     void doFixupPlaintext(QString filename, Bytestream header);
-    void doFixupImage(QString filename, Bytestream header, QString targetFormat);
+    void doPrintImageAsImage(QString filename, Bytestream header, QString targetFormat);
 
     void doConvertPdf(QString filename, Bytestream header, PrintParameters Params);
 
