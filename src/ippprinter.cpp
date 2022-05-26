@@ -630,6 +630,8 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         return;
     }
 
+    bool knownTargetFormat = true;
+
     if(targetFormat == Mimer::PDF)
     {
         Params.format = PrintParameters::PDF;
@@ -645,6 +647,10 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     else if(targetFormat == Mimer::URF)
     {
         Params.format = PrintParameters::URF;
+    }
+    else
+    {
+        knownTargetFormat = false;
     }
 
     QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
@@ -689,11 +695,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     { // Can't process Postscript
         emit doJustUpload(filename, contents);
     }
-    else if(mimer->isImage(targetFormat))
+    else if(mimer->isImage(mimeType) && mimer->isImage(targetFormat))
     { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
         emit doPrintImageAsImage(filename, contents, targetFormat);
     }
-    else
+    else if(knownTargetFormat) // Params.format can be trusted
     {
         QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
@@ -733,8 +739,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         else
         {
             emit convertFailed(tr("Cannot convert this file format"));
-            return;
         }
+    }
+    else
+    {
+        emit convertFailed(tr("Cannot convert this file format"));
     }
 
     return;
