@@ -93,15 +93,15 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addrs) {
     QTime now = QTime::currentTime();
     QTime aWhileAgo = now.addSecs(-1);
 
-    for(QString oq : _outstandingQueries.keys())
+    for(QPair<quint16, QString> oq : _outstandingQueries.keys())
     {
         if(_outstandingQueries[oq] < aWhileAgo)
         { // Housekeeping for _outstandingQueries
             _outstandingQueries.remove(oq);
         }
-        else if(addrs.contains(oq))
+        else if(oq.first == qtype && addrs.contains(oq.second))
         { // we recently asked about this, remove it
-            addrs.removeOne(oq);
+            addrs.removeOne(oq.second);
         }
     }
 
@@ -123,7 +123,7 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addrs) {
 
     for(QString addr : addrs)
     {
-        _outstandingQueries.insert(addr, now);
+        _outstandingQueries.insert({qtype, addr}, now);
 
         QStringList addrParts = addr.split(".");
         QString addrPart, restAddr;
@@ -153,9 +153,7 @@ void IppDiscovery::sendQuery(quint16 qtype, QStringList addrs) {
 
     }
 
-    QByteArray bytes((char*)(query.raw()), query.size());
-    socket->writeDatagram(bytes, QHostAddress("224.0.0.251"), 5353);
-
+    socket->writeDatagram((char*)(query.raw()), query.size(), QHostAddress("224.0.0.251"), 5353);
 }
 
 QString make_addr(QString proto, int defaultPort, quint16 port, QString ip, QString rp)
@@ -189,9 +187,13 @@ void IppDiscovery::update()
 
     for(QString it : _ipps)
     {
-        quint16 port = _ports[it];
-        target = _targets[it];
-        rp = _rps[it];
+        if(!_targets.contains(it) || !_ports.contains(it) || !_rps.contains(it))
+            continue;
+
+        quint16 port = _ports.value(it);
+        target = _targets.value(it);
+        rp = _rps.value(it);
+
 
         for(QMultiMap<QString,QString>::Iterator ait = _AAs.begin(); ait != _AAs.end(); ait++)
         {
@@ -210,9 +212,12 @@ void IppDiscovery::update()
 
     for(QString it : _ipp)
     {
-        quint16 port = _ports[it];
-        target = _targets[it];
-        rp = _rps[it];
+        if(!_targets.contains(it) || !_ports.contains(it) || !_rps.contains(it))
+            continue;
+
+        quint16 port = _ports.value(it);
+        target = _targets.value(it);
+        rp = _rps.value(it);
 
         for(QMultiMap<QString,QString>::Iterator ait = _AAs.begin(); ait != _AAs.end(); ait++)
         {
@@ -234,7 +239,7 @@ void IppDiscovery::update()
 
     // Counting on that _ipp duplicates doesn't resolve fully any erlier than their _ipps counterpart
 
-    // TODO?: replace this with some logica that can bpoth add and remove
+    // TODO?: replace this with some logic that can bpoth add and remove
     // and it can consider _favourites, so we can drop cleanUpdate
     for(QString f : found)
     {
@@ -259,9 +264,16 @@ void IppDiscovery::updateAndQueryPtrs(QStringList& ptrs, QStringList new_ptrs)
             ptrs.append(ptr);
         }
         // If pointer does not resolve to a target or is missing information, query about it
-        if(!_targets.contains(ptr) || !_ports.contains(ptr) || !_rps.contains(ptr))
-        {  // if the PTR doesn't already resolve, ask for everything about it
-            sendQuery(ALL, {ptr});
+        if(!_rps.contains(ptr))
+        {
+            // Avahi *really* hates sending TXT to anything else than a TXT query
+            qDebug() << "querying txt " << ptr;
+            sendQuery(TXT, {ptr});
+        }
+        if(!_targets.contains(ptr) || !_ports.contains(ptr))
+        {
+            qDebug() << "querying srv " << ptr;
+            sendQuery(SRV, {ptr});
         }
     }
 }
@@ -328,6 +340,7 @@ void IppDiscovery::readPendingDatagrams()
                         {
                             std::string tmprp;
                             tmp/tmp.remaining() >> tmprp;
+                            qDebug() << "tmprp" << aaddr << tmprp.c_str();
                             _rps[aaddr] = tmprp.c_str();
                         }
                     }
@@ -370,7 +383,7 @@ void IppDiscovery::readPendingDatagrams()
         qDebug() << "new ipp ptrs" << new_ipp_ptrs;
         qDebug() << "new ipps ptrs" << new_ipps_ptrs;
         qDebug() << "ipp ptrs" << _ipp;
-        qDebug() << "ipp ptrs" << _ipps;
+        qDebug() << "ipps ptrs" << _ipps;
         qDebug() << "rps" << _rps;
         qDebug() << "ports" << _ports;
         qDebug() << "new targets" << new_targets;
@@ -380,8 +393,8 @@ void IppDiscovery::readPendingDatagrams()
 
         // These will send one query per unique new ptr.
         // some responders doesn't give TXT records for more than one thing at at time :(
-        updateAndQueryPtrs(_ipp, new_ipp_ptrs);
         updateAndQueryPtrs(_ipps, new_ipps_ptrs);
+        updateAndQueryPtrs(_ipp, new_ipp_ptrs);
 
         QStringList unresolvedAddrs;
 

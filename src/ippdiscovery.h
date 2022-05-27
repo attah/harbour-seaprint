@@ -53,7 +53,7 @@ private:
     QMultiMap<QString,QString> _AAs;
     QMultiMap<QString,QString> _AAAAs;
 
-    QMap<QString, QTime> _outstandingQueries;
+    QMap<QPair<quint16, QString>, QTime> _outstandingQueries;
 
     QStringList _favourites;
     QUdpSocket* socket;
