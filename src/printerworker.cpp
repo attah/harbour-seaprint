@@ -8,6 +8,7 @@
 #include <QTextDocument>
 #include <QPdfWriter>
 #include <QAbstractTextDocumentLayout>
+#include <QtSvg>
 #include "ippprinter.h"
 #include "pdf2printable.h"
 #include "ppm2pwg.h"
@@ -258,7 +259,7 @@ catch(const ConvertFailedException& e)
 void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins)
 {
 try {
-
+    QString mimeType = Mimer::instance()->get_type(filename);
 
     if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
     { // URF only supports symmetric resolutions
@@ -268,18 +269,6 @@ try {
 
     qDebug() << "Size is" << Params.getPaperSizeWInPixels() << "x" << Params.getPaperSizeHInPixels();
 
-    QImage inImage;
-    if(!inImage.load(filename))
-    {
-        qDebug() << "failed to load";
-        throw ConvertFailedException(tr("Failed to load image"));
-    }
-
-    if(inImage.width() > inImage.height())
-    {
-        inImage = inImage.transformed(QMatrix().rotate(270.0));
-    }
-
     int leftMarginPx = (margins.left()/2540.0)*Params.hwResW;
     int rightMarginPx = (margins.right()/2540.0)*Params.hwResW;
     int topMarginPx = (margins.top()/2540.0)*Params.hwResH;
@@ -288,8 +277,57 @@ try {
     int totalXMarginPx = leftMarginPx+rightMarginPx;
     int totalYMarginPx = topMarginPx+bottomMarginPx;
 
-    inImage = inImage.scaled(Params.getPaperSizeWInPixels()-totalXMarginPx, Params.getPaperSizeHInPixels()-totalYMarginPx,
-                             Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    size_t targetWidth = Params.getPaperSizeWInPixels()-totalXMarginPx;
+    size_t targetHeight = Params.getPaperSizeHInPixels()-totalYMarginPx;
+
+    QImage inImage;
+    if(mimeType == Mimer::SVG)
+    {
+        QSvgRenderer renderer(filename);
+        if(!renderer.isValid())
+        {
+            qDebug() << "failed to load svg";
+            throw ConvertFailedException(tr("Failed to load image"));
+        }
+        QSize defaultSize = renderer.defaultSize();
+        QSize targetSize(targetWidth, targetHeight);
+
+        if(defaultSize.width() > defaultSize.height())
+        {
+            targetSize.transpose();
+        }
+
+        QSize initialSize = defaultSize.scaled(targetSize, Qt::KeepAspectRatio);
+
+        inImage = QImage(initialSize, QImage::Format_RGB32);
+        inImage.fill(QColor("white"));
+        QPainter painter(&inImage);
+
+        renderer.render(&painter);
+        painter.end(); // Or else the painter segfaults on destruction if we have messed with the image
+
+        if(inImage.width() > inImage.height())
+        {
+            inImage = inImage.transformed(QMatrix().rotate(270.0));
+        }
+
+    }
+    else
+    {
+        if(!inImage.load(filename))
+        {
+            qDebug() << "failed to load";
+            throw ConvertFailedException(tr("Failed to load image"));
+        }
+        if(inImage.width() > inImage.height())
+        {
+            inImage = inImage.transformed(QMatrix().rotate(270.0));
+        }
+
+        inImage = inImage.scaled(targetWidth, targetHeight,
+                                 Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+
 
     if(Params.format == PrintParameters::PDF || Params.format == PrintParameters::Postscript)
     {

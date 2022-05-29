@@ -148,7 +148,7 @@ Page {
                 tag: IppMsg.Keyword
                 name: "print-scaling"
                 prettyName: qsTr("Scaling")
-                valid: _valid && Mimer.isImage(selectedFileType)
+                valid: _valid && Mimer.isImage(selectedFileType) && selectedFileType != Mimer.SVG
                 DependentOn {
                     target: transferFormatSetting
                     values: [Mimer.JPEG, Mimer.PNG]

@@ -1,4 +1,5 @@
 #include "mimer.h"
+#include <QDebug>
 
 const QString Mimer::OctetStream = "application/octet-stream";
 
@@ -11,6 +12,7 @@ const QString Mimer::PNG = "image/png";
 const QString Mimer::GIF = "image/gif";
 const QString Mimer::JPEG = "image/jpeg";
 const QString Mimer::TIFF = "image/tiff";
+const QString Mimer::SVG = "image/svg+xml";
 const QString Mimer::RBMP = "image/reverse-encoding-bmp";
 
 const QString Mimer::DOC = "application/msword";
@@ -51,5 +53,7 @@ Mimer* Mimer::instance()
 }
 
 QString Mimer::get_type(QString filename) {
-    return _db.mimeTypeForFile(filename).name();
+    QString type = _db.mimeTypeForFile(filename).name();
+    qDebug() << "MimeType:" << type;
+    return type;
 }

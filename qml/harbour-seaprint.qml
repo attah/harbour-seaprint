@@ -75,7 +75,11 @@ ApplicationWindow
         }
 
         function simplifyType(mimetype) {
-            if(Mimer.isImage(mimetype))
+            if(mimetype == Mimer.SVG)
+            {
+                return {simple: "svg", translatable: qsTr("SVGs")};
+            }
+            else if(Mimer.isImage(mimetype))
             {
                 return {simple: "image", translatable: qsTr("images")};
             }

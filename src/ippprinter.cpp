@@ -383,6 +383,11 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
         {
             return firstMatch(supportedMimeTypes, PdfPrioList);
         }
+        else if(documentFormat == Mimer::SVG)
+        {
+            QStringList SvgPrioList {Mimer::PWG, Mimer::URF, Mimer::PDF, Mimer::Postscript};
+            return firstMatch(supportedMimeTypes, SvgPrioList);
+        }
         else if(Mimer::isImage(mimeType))
         {
             QStringList ImageFormatPrioList {Mimer::PNG, Mimer::PWG, Mimer::URF, Mimer::PDF, Mimer::Postscript, Mimer::JPEG};
@@ -696,7 +701,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     { // Can't process Postscript
         emit doJustUpload(filename, contents);
     }
-    else if(mimer->isImage(mimeType) && mimer->isImage(targetFormat))
+    else if((mimeType != Mimer::SVG) && mimer->isImage(mimeType) && mimer->isImage(targetFormat))
     { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
         emit doPrintImageAsImage(filename, contents, targetFormat);
     }

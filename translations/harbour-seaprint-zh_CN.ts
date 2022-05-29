@@ -610,6 +610,10 @@
         <source>plaintext</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>SVGs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>strings</name>
@@ -5502,6 +5506,10 @@
     </message>
     <message>
         <source>Reverse BMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SVG</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

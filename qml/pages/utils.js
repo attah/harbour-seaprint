@@ -46,14 +46,18 @@ function supported_formats(printer, considerAdditionalFormats)
         mimetypes = mimetypes.concat(Mimer.Mimer.OfficeFormats);
     }
 
-    if (raster || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) || has(formats, Mimer.Mimer.RBMP) ||
-            has(formats, Mimer.Mimer.PDF) || has(formats, Mimer.Mimer.Postscript))
+    if(pdf || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) || has(formats, Mimer.Mimer.RBMP))
     {
         images = true;
         mimetypes.push(Mimer.Mimer.JPEG);
         mimetypes.push(Mimer.Mimer.PNG);
         mimetypes.push(Mimer.Mimer.TIFF);
         mimetypes.push(Mimer.Mimer.GIF);
+    }
+
+    if(pdf)
+    {
+        mimetypes.push(Mimer.Mimer.SVG);
     }
 
     return {pdf: pdf, postscript: postscript, plaintext: plaintext, office: office, images: images, mimetypes: mimetypes};
@@ -259,6 +263,8 @@ function ippName(name, value, printerStrings)
             return qsTr("JPEG");
         case Mimer.Mimer.GIF:
             return qsTr("GIF");
+        case Mimer.Mimer.SVG:
+            return qsTr("SVG");
         case Mimer.Mimer.RBMP:
             return qsTr("Reverse BMP");
         default:
@@ -401,8 +407,12 @@ function canConvertPlaintextTo(type)
     return has(targets, type)
 }
 
-
 function canConvertOfficeDocumentTo(type)
+{
+    return has(pdfTargets, type)
+}
+
+function canConvertSvgTo(type)
 {
     return has(pdfTargets, type)
 }
@@ -444,6 +454,10 @@ function fixupChoices(name, choices, mimeType)
         else if(Mimer.Mimer.isOffice(mimeType))
         {
             return choices.filter(canConvertOfficeDocumentTo)
+        }
+        else if(mimeType == Mimer.Mimer.SVG)
+        {
+            return choices.filter(canConvertSvgTo)
         }
         else if(Mimer.Mimer.isImage(mimeType))
         {

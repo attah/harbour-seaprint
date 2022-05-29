@@ -26,6 +26,7 @@ INSTALLS += i18n
 system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
+QT += svg
 PKGCONFIG += mlite5 libcurl poppler glib-2.0 cairo libjpeg
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1

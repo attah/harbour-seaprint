@@ -24,6 +24,7 @@ public:
     Q_PROPERTY(const QString GIF MEMBER GIF CONSTANT);
     Q_PROPERTY(const QString JPEG MEMBER JPEG CONSTANT);
     Q_PROPERTY(const QString TIFF MEMBER TIFF CONSTANT);
+    Q_PROPERTY(const QString SVG MEMBER SVG CONSTANT);
     Q_PROPERTY(const QString RBMP MEMBER RBMP CONSTANT);
 
     Q_PROPERTY(const QString DOC MEMBER DOC CONSTANT);
@@ -50,6 +51,7 @@ public:
     static const QString GIF;
     static const QString JPEG;
     static const QString TIFF;
+    static const QString SVG;
     static const QString RBMP;
 
     static const QString DOC;
