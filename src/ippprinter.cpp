@@ -124,11 +124,13 @@ void IppPrinter::refresh() {
                 file.close();
             }
         }
-        _attrs.remove("printer-icons");
         Overrider::instance()->apply(_attrs);
         emit attrsChanged();
 
-//        MaybeGetStrings(); - for testing fake file-prinetrs with a strings file hosted elsewhere
+        // For testing fake file-prinetrs with a strings file hosted elsewhere
+        // MaybeGetIcon();
+        // MaybeGetStrings();
+
         UpdateAdditionalDocumentFormats();
     }
     else
