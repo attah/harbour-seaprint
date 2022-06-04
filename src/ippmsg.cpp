@@ -76,40 +76,63 @@ QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
             Q_ASSERT(false);
         case Integer:
         case Enum:
-            quint32 tmp_u32;
-            data >> tmp_len >> tmp_u32;
+        {
+            quint32 tmp_u32=0;
+            if(!(data >>= (quint16)0))
+            {
+                data >> (quint16)4 >> tmp_u32;
+            }
             value = (int)tmp_u32;
             break;
+        }
         case Boolean:
-            quint8 tmp_bool;
-            data >> tmp_len >> tmp_bool;
+        {
+            quint8 tmp_bool=0;
+            if(!(data >>= (quint16)0))
+            {
+                data >> (quint16)1 >> tmp_bool;
+            }
             value = (bool)tmp_bool;
             break;
+        }
         case DateTime:
         {
-            quint16 year;
-            quint8 month, day, hour, minutes, seconds, deci_seconds,
-                   plus_minus, utc_h_offset, utc_m_offset;
-            data >> tmp_len >> year >> month >> day >> hour >> minutes >> seconds >> deci_seconds
-                 >> plus_minus >> utc_h_offset >> utc_m_offset;
-            QDate date(year, month, day);
-            QTime time(hour, minutes, seconds, deci_seconds*100);
-            int offset_seconds = (plus_minus == '+' ? 1 : -1)*(utc_h_offset*60*60+utc_m_offset*60);
-            value = QDateTime(date, time, Qt::OffsetFromUTC, offset_seconds).toString(Qt::ISODate);
+            QDateTime tmp_datetime;
+            if(!(data >>= (quint16)0))
+            {
+                quint16 year;
+                quint8 month, day, hour, minutes, seconds, deci_seconds,
+                       plus_minus, utc_h_offset, utc_m_offset;
+                data >> (quint16)11 >> year >> month >> day >> hour >> minutes >> seconds >> deci_seconds
+                     >> plus_minus >> utc_h_offset >> utc_m_offset;
+                QDate date(year, month, day);
+                QTime time(hour, minutes, seconds, deci_seconds*100);
+                int offset_seconds = (plus_minus == '+' ? 1 : -1)*(utc_h_offset*60*60+utc_m_offset*60);
+                tmp_datetime = QDateTime(date, time, Qt::OffsetFromUTC, offset_seconds);
+            }
+            value = tmp_datetime.toString(Qt::ISODate);
             break;
         }
         case Resolution:
         {
-            qint32 x, y;
-            qint8 units;
-            data >> tmp_len >> x >> y >> units;
+            qint32 x=0;
+            qint32 y=0;
+            qint8 units=0;
+            if(!(data >>= (quint16)0))
+            {
+                data >> (quint16)9 >> x >> y >> units;
+            }
             value = QJsonObject {{"x", x}, {"y", y}, {"units", units}};
             break;
         }
         case IntegerRange:
         {
-            qint32 low, high;
-            data >> tmp_len >> low >> high;
+            qint32 low=0;
+            qint32 high=0;
+            if(!(data >>= (quint16)0))
+            {
+                data >> (quint16)8 >> low >> high;
+            }
             value = QJsonObject {{"low", low}, {"high", high}};
             break;
         }
@@ -251,7 +274,6 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
     name = tmp_str.c_str();
 
     taggedValue = consume_value(tag, data);
-
     QJsonArray unnamed = get_unnamed_attributes(data);
 
     if(tag == BeginCollection)
