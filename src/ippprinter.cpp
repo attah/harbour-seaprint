@@ -4,6 +4,7 @@
 #include "papersizes.h"
 #include "overrider.h"
 #include "settings.h"
+#include <fstream>
 
 Q_DECLARE_METATYPE(QMargins)
 
@@ -96,18 +97,35 @@ void IppPrinter::refresh() {
     if(_url.scheme() == "file")
     {
         _attrs = QJsonObject();
+        QString localFile = _url.toLocalFile();
 
-        QFile file(_url.toLocalFile());
-        if(file.open(QIODevice::ReadOnly))
+        if(localFile.endsWith(".raw") || localFile.endsWith(".bin"))
         {
-            QJsonDocument JsonDocument = QJsonDocument::fromJson(file.readAll());
-
-            _attrs = JsonDocument.object();
-            // These won't load anyway...r
-            _attrs.remove("printer-icons");
-            file.close();
-            Overrider::instance()->apply(_attrs);
+            try
+            {
+                std::ifstream ifs = std::ifstream(localFile.toStdString(), std::ios::in | std::ios::binary);
+                Bytestream InBts(ifs);
+                IppMsg resp(InBts);
+                qDebug() << resp.getStatus() << resp.getOpAttrs() << resp.getPrinterAttrs();
+                _attrs = resp.getPrinterAttrs();
+            }
+            catch(const std::exception& e)
+            {
+                qDebug() << e.what();
+            }
         }
+        else
+        {
+            QFile file(localFile);
+            if(file.open(QIODevice::ReadOnly))
+            {
+                QJsonDocument JsonDocument = QJsonDocument::fromJson(file.readAll());
+                _attrs = JsonDocument.object();
+                file.close();
+            }
+        }
+        _attrs.remove("printer-icons");
+        Overrider::instance()->apply(_attrs);
         emit attrsChanged();
 
 //        MaybeGetStrings(); - for testing fake file-prinetrs with a strings file hosted elsewhere
