@@ -360,12 +360,16 @@ Page {
             }
         }
     }
-    DockedPanel {
+    Rectangle {
         id: fileDock
-        open: true
         height: panelColumn.implicitHeight
         width: parent.width
-        dock: Dock.Bottom
+        anchors.bottom: parent.bottom
+
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightBackgroundColor, 0.15) }
+            GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightBackgroundColor, 0.3) }
+        }
 
         Column {
             id: panelColumn
