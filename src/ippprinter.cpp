@@ -721,6 +721,10 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     { // Can't process Postscript
         emit doJustUpload(filename, contents);
     }
+    else if((mimeType == targetFormat) && (targetFormat == Mimer::Plaintext))
+    {
+        emit doFixupPlaintext(filename, contents);
+    }
     else if((mimeType != Mimer::SVG) && mimer->isImage(mimeType) && mimer->isImage(targetFormat))
     { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
         emit doPrintImageAsImage(filename, contents, targetFormat);
@@ -745,14 +749,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
         else if(mimeType == Mimer::Plaintext)
         {
-            if(targetFormat == Mimer::Plaintext)
-            {
-                emit doFixupPlaintext(filename, contents);
-            }
-            else
-            {
-                emit doConvertPlaintext(filename, contents, Params);
-            }
+            emit doConvertPlaintext(filename, contents, Params);
         }
         else if (Mimer::isImage(mimeType))
         {
