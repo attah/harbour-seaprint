@@ -26,7 +26,7 @@ import "../components"
         {
             anchors.verticalCenter: parent.verticalCenter
             width: Theme.itemSizeExtraSmall
-            text: ""+(100*value_fraction)+"%"
+            text: ""+Math.round(100*value_fraction)+"%"
             color: level <= low_level ? "red" : Theme.highlightColor
             font.pixelSize: Theme.fontSizeExtraSmall
         }
