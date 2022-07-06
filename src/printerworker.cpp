@@ -120,13 +120,17 @@ try {
     }
     else if(targetFormat == Mimer::RBMP)
     {
-        QImage inImage;
+        QImageReader reader(filename);
+        reader.setAutoTransform(true);
+        QImage inImage = reader.read();
         QBuffer buf;
-        if(!inImage.load(filename))
+
+        if(inImage.isNull())
         {
             qDebug() << "failed to load";
             throw ConvertFailedException(tr("Failed to load image"));
         }
+
         // TODO: calculate paper width minus margins
         // (depends on understanding/parsing custom paper sizes)
         int width = 576;
@@ -147,13 +151,17 @@ try {
     }
     else
     {
-        QImage inImage;
+        QImageReader reader(filename);
+        reader.setAutoTransform(true);
+        QImage inImage = reader.read();
         QBuffer buf;
-        if(!inImage.load(filename))
+
+        if(inImage.isNull())
         {
             qDebug() << "failed to load";
             throw ConvertFailedException(tr("Failed to load image"));
         }
+
         buf.open(QIODevice::ReadWrite);
         inImage.save(&buf, imageFormat.toStdString().c_str());
         buf.seek(0);
@@ -314,7 +322,11 @@ try {
     }
     else
     {
-        if(!inImage.load(filename))
+        QImageReader reader(filename);
+        reader.setAutoTransform(true);
+        inImage = reader.read();
+
+        if(inImage.isNull())
         {
             qDebug() << "failed to load";
             throw ConvertFailedException(tr("Failed to load image"));
