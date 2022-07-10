@@ -21,6 +21,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
     connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
     connect(this, &IppPrinter::doPrint, &_worker, &PrinterWorker::print);
+    connect(this, &IppPrinter::doPrint2, &_worker, &PrinterWorker::print2);
 
     connect(this, &IppPrinter::doGetStrings, &_worker, &PrinterWorker::getStrings);
     connect(this, &IppPrinter::doGetImage, &_worker, &PrinterWorker::getImage);
@@ -574,9 +575,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    QJsonObject o = opAttrs();
-    o.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
-
     Params.paperSizeName = getAttrOrDefault(jobAttrs, "media").toString(Params.paperSizeName.c_str()).toStdString();
 
     QString targetFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
@@ -638,8 +636,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         jobAttrs.remove("media");
     }
 
+    QJsonObject jobOpAttrs = opAttrs();
     // document-format goes in the op-attrs and not the job-attrs
-    o.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", targetFormat}});
+    jobOpAttrs.insert("document-format", QJsonObject {{"tag", IppMsg::MimeMediaType}, {"value", targetFormat}});
     jobAttrs.remove("document-format");
 
     targetFormat = targetFormatIfAuto(targetFormat, mimeType, supportedMimeTypes);
@@ -677,7 +676,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     Params.paperSizeW = size.width();
     Params.paperSizeH = size.height();
 
-    qDebug() << "Printing job" << o << jobAttrs;
+    qDebug() << "Printing job" << jobOpAttrs << jobAttrs;
 
     QJsonValue PrinterResolutionRef = getAttrOrDefault(jobAttrs, "printer-resolution");
     Params.hwResW = PrinterResolutionRef.toObject()["x"].toInt(Params.hwResW);
@@ -702,10 +701,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
     }
 
-    qDebug() << "Final op attributes:" << o;
-    qDebug() << "Final job attributes:" << jobAttrs;
-
-
     QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
     if(Sides=="two-sided-long-edge")
@@ -718,8 +713,34 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.tumble = true;
     }
 
-    IppMsg job = mk_msg(IppMsg::PrintJob, o, jobAttrs);
-    emit doPrint(filename, mimeType, targetFormat, job, Params, margins);
+    QJsonArray supportedOperations = _attrs["operations-supported"].toObject()["value"].toArray();
+
+    if(supportedOperations.contains(IppMsg::CreateJob) && supportedOperations.contains(IppMsg::SendDocument))
+    {
+        QJsonObject createJobOpAttrs = opAttrs();
+        createJobOpAttrs.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
+
+        qDebug() << "Final create op attributes:" << createJobOpAttrs;
+        qDebug() << "Final job attributes:" << jobAttrs;
+
+        IppMsg createJob = mk_msg(IppMsg::CreateJob, createJobOpAttrs, jobAttrs);
+        qDebug() << "Final job op attributes:" << jobOpAttrs;
+
+        IppMsg sendDoc = mk_msg(IppMsg::SendDocument, jobOpAttrs);
+
+        emit doPrint2(filename, mimeType, targetFormat, createJob, sendDoc, Params, margins);
+    }
+    else
+    {
+        jobOpAttrs.insert("job-name", QJsonObject {{"tag", IppMsg::NameWithoutLanguage}, {"value", fileinfo.fileName()}});
+
+        qDebug() << "Final op attributes:" << jobOpAttrs;
+        qDebug() << "Final job attributes:" << jobAttrs;
+
+        IppMsg job = mk_msg(IppMsg::PrintJob, jobOpAttrs, jobAttrs);
+        emit doPrint(filename, mimeType, targetFormat, job, Params, margins);
+    }
+
 }
 
 bool IppPrinter::getJobs() {

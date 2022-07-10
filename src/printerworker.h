@@ -39,6 +39,7 @@ public slots:
     void cancelJob(Bytestream msg);
     void identify(Bytestream msg);
     void print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins);
+    void print2(QString filename, QString mimeType, QString targetFormat, IppMsg createJob, IppMsg sendDocument, PrintParameters Params, QMargins margins);
 
 signals:
     void progress(qint64 done, qint64 pages);

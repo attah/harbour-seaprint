@@ -441,3 +441,8 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue v
             break;
     }
 }
+
+void IppMsg::setOpAttr(QString name, IppMsg::IppTag type, QJsonValue value)
+{
+    _opAttrs.insert(name, QJsonObject {{"tag", type}, {"value", value}});
+}

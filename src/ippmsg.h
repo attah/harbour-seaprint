@@ -76,6 +76,8 @@ public:
     QJsonArray getJobAttrs() {return _jobAttrs;}
     QJsonObject getOpAttrs() {return _opAttrs;}
 
+    void setOpAttr(QString name, IppMsg::IppTag type, QJsonValue value);
+
     quint16 getStatus() {return _status;}
 
 
