@@ -73,6 +73,7 @@ signals:
     void doConvertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
     void doPrint(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins);
+    void doPrint2(QString filename, QString mimeType, QString targetFormat, IppMsg createJob, IppMsg sendDocument, PrintParameters Params, QMargins margins);
 
     void doGetStrings(QUrl url);
     void doGetImage(QUrl url);
@@ -83,7 +84,6 @@ signals:
 
 public slots:
     void print(QJsonObject attrs, QString file);
-
 
     void onUrlChanged();
     void MaybeGetStrings();

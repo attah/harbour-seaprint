@@ -60,15 +60,54 @@ void PrinterWorker::identify(Bytestream msg)
     awaitResult(cr, "identifyFinished");
 }
 
+void PrinterWorker::print2(QString filename, QString mimeType, QString targetFormat, IppMsg createJob, IppMsg sendDocument, PrintParameters Params, QMargins margins)
+{
+    emit busyMessage(tr("Preparing"));
+
+    Bytestream header = createJob.encode();
+
+    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &header);
+
+    Bytestream resData;
+    CURLcode res = cr.await(&resData);
+
+    if(res == CURLE_OK)
+    {
+        IppMsg resMsg(resData);
+        qDebug() << resMsg.getOpAttrs() << resMsg.getJobAttrs();
+
+        QJsonObject resJobAttrs = resMsg.getJobAttrs()[0].toObject();
+        if(resMsg.getStatus() <= 0xff && resJobAttrs.contains("job-id"))
+        {
+            int jobId = resJobAttrs["job-id"].toObject()["value"].toInt();
+            sendDocument.setOpAttr("job-id", IppMsg::Integer, jobId);
+            sendDocument.setOpAttr("last-document", IppMsg::Boolean, true);
+            print(filename, mimeType, targetFormat, sendDocument, Params, margins);
+        }
+        else
+        {
+            QMetaObject::invokeMethod(_printer, "printRequestFinished", Qt::QueuedConnection,
+                                      Q_ARG(CURLcode, res),
+                                      Q_ARG(Bytestream, resData));
+        }
+    }
+    else
+    {
+        QMetaObject::invokeMethod(_printer, "printRequestFinished", Qt::QueuedConnection,
+                                  Q_ARG(CURLcode, res),
+                                  Q_ARG(Bytestream, resData));
+    }
+}
+
 void PrinterWorker::print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins)
 {
-    try {
+    try
+    {
         Mimer* mimer = Mimer::instance();
 
         Bytestream contents = job.encode();
 
         emit busyMessage(tr("Preparing"));
-
 
         if((mimeType == targetFormat) && (targetFormat == Mimer::Postscript))
         { // Can't process Postscript
