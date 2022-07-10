@@ -374,7 +374,7 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue v
         }
         case Boolean:
         {
-            quint32 tmp_u8 = value.toBool();
+            quint8 tmp_u8 = value.toBool();
             msg << (quint16)1 << tmp_u8;
             break;
         }
