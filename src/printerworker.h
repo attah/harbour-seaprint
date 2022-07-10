@@ -2,6 +2,7 @@
 #define PRINTERWORKER_H
 #include <QObject>
 #include "curlrequester.h"
+#include "ippmsg.h"
 #include "ppm2pwg/printparameters.h"
 
 class IppPrinter;
@@ -37,20 +38,7 @@ public slots:
     void getJobs(Bytestream msg);
     void cancelJob(Bytestream msg);
     void identify(Bytestream msg);
-
-    void justUpload(QString filename, Bytestream header);
-
-    void printImageAsImage(QString filename, Bytestream header, QString targetFormat);
-
-    void fixupPlaintext(QString filename, Bytestream header);
-
-    void convertPdf(QString filename, Bytestream header, PrintParameters Params);
-
-    void convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins);
-
-    void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
-
-    void convertPlaintext(QString filename, Bytestream header, PrintParameters Params);
+    void print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins);
 
 signals:
     void progress(qint64 done, qint64 pages);
@@ -58,6 +46,13 @@ signals:
     void failed(QString message);
 
 private:
+    void justUpload(QString filename, Bytestream header);
+    void printImageAsImage(QString filename, Bytestream header, QString targetFormat);
+    void fixupPlaintext(QString filename, Bytestream header);
+    void convertPdf(QString filename, Bytestream header, PrintParameters Params);
+    void convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins);
+    void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
+    void convertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
     IppPrinter* _printer;
 

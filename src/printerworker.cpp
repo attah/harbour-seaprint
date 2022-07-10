@@ -64,9 +64,66 @@ void PrinterWorker::identify(Bytestream msg)
     cr.write((char*)msg.raw(), msg.size());
 }
 
+void PrinterWorker::print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins)
+{
+    try {
+        Mimer* mimer = Mimer::instance();
+
+        Bytestream contents = job.encode(IppMsg::PrintJob);
+
+        emit busyMessage(tr("Preparing"));
+
+
+        if((mimeType == targetFormat) && (targetFormat == Mimer::Postscript))
+        { // Can't process Postscript
+            justUpload(filename, contents);
+        }
+        else if((mimeType == targetFormat) && (targetFormat == Mimer::Plaintext))
+        {
+            fixupPlaintext(filename, contents);
+        }
+        else if((mimeType != Mimer::SVG) && mimer->isImage(mimeType) && mimer->isImage(targetFormat))
+        { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
+            printImageAsImage(filename, contents, targetFormat);
+        }
+        else if(Params.format != PrintParameters::Invalid) // Params.format can be trusted
+        {
+            if(mimeType == Mimer::PDF)
+            {
+                convertPdf(filename, contents, Params);
+            }
+            else if(mimeType == Mimer::Plaintext)
+            {
+                convertPlaintext(filename, contents, Params);
+            }
+            else if(Mimer::isImage(mimeType))
+            {
+                convertImage(filename, contents, Params, margins);
+            }
+            else if(Mimer::isOffice(mimeType))
+            {
+                convertOfficeDocument(filename, contents, Params);
+            }
+            else
+            {
+                emit failed(tr("Cannot convert this file format"));
+            }
+        }
+        else
+        {
+            emit failed(tr("Cannot convert this file format"));
+        }
+
+        return;
+    }
+    catch(const ConvertFailedException& e)
+    {
+        emit failed(e.what() == QString("") ? tr("Print error") : e.what());
+    }
+}
+
 void PrinterWorker::justUpload(QString filename, Bytestream header)
 {
-try {
     emit busyMessage(tr("Printing"));
 
     CurlRequester cr(_printer->httpUrl());
@@ -80,17 +137,14 @@ try {
     OK(cr.write(tmp.data(), tmp.length()));
     file.close();
 }
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
-}
-}
 
 void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QString targetFormat)
 {
-try {
     QString imageFormat = "";
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
+
+
+    qDebug() << ((IppPrinter*)parent())->_attrs;
 
     if(targetFormat == Mimer::RBMP)
     {
@@ -174,15 +228,9 @@ try {
     OK(cr.write((char*)header.raw(), header.size()));
     OK(cr.write((char*)OutBts.raw(), OutBts.size()));
 }
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
-}
-}
 
 void PrinterWorker::fixupPlaintext(QString filename, Bytestream header)
 {
-try {
     CurlRequester cr(_printer->httpUrl());
     connect(&cr, &CurlRequester::done, _printer, &IppPrinter::printRequestFinished);
 
@@ -219,15 +267,9 @@ try {
     OK(cr.write((char*)header.raw(), header.size()));
     OK(cr.write(outData.data(), outData.length()));
 }
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Upload error") : e.what());
-}
-}
 
 void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParameters Params)
 {
-try {
     emit busyMessage(tr("Printing"));
 
     CurlRequester cr(_printer->httpUrl());
@@ -258,15 +300,9 @@ try {
 
     qDebug() << "Finished";
 }
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
-}
-}
 
 void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins)
 {
-try {
     QString mimeType = Mimer::instance()->get_type(filename);
 
     if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
@@ -412,18 +448,10 @@ try {
     }
 
     qDebug() << "posted";
-
-}
-catch(const ConvertFailedException& e)
-{
-    emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
-}
 }
 
 void PrinterWorker::convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params)
 {
-try {
-
     if(Params.format == PrintParameters::URF && (Params.hwResW != Params.hwResH))
     { // URF only supports symmetric resolutions
         qDebug() << "Unsupported URF resolution";
@@ -477,18 +505,10 @@ try {
     convertPdf(tmpPdfFile.fileName(), header, Params);
 
     qDebug() << "posted";
-
-}
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
-}
 }
 
 void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintParameters Params)
 {
-try {
-
     if(!PaperSizes.contains(Params.paperSizeName.c_str()))
     {
         qDebug() << "Unsupported paper size" << Params.paperSizeName.c_str();
@@ -629,10 +649,4 @@ try {
 
     qDebug() << "Finished";
     qDebug() << "posted";
-
-}
-catch(const ConvertFailedException& e)
-{
-        emit failed(e.what() == QString("") ? tr("Conversion error") : e.what());
-}
 }

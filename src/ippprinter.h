@@ -72,6 +72,8 @@ signals:
 
     void doConvertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
+    void doPrint(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins);
+
     void doGetStrings(QUrl url);
     void doGetImage(QUrl url);
 

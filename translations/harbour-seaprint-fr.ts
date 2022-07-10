@@ -292,16 +292,8 @@
         <translation>Échec de l&apos;ouverture du fichier</translation>
     </message>
     <message>
-        <source>Cannot convert this file format</source>
-        <translation>Impossible de convertir ce format de fichier</translation>
-    </message>
-    <message>
         <source>Unknown document format</source>
         <translation>Format de document inconnu</translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation>En cours de préparation</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
@@ -485,10 +477,6 @@ sur cette imprimante</translation>
 <context>
     <name>PrinterWorker</name>
     <message>
-        <source>Conversion error</source>
-        <translation>Erreur de conversion</translation>
-    </message>
-    <message>
         <source>Failed to load image</source>
         <translation>Chargement impossible de l&apos;image</translation>
     </message>
@@ -517,11 +505,19 @@ sur cette imprimante</translation>
         <translation>Échec de la conversion</translation>
     </message>
     <message>
-        <source>Upload error</source>
-        <translation>Erreur de chargement</translation>
+        <source>Unknown target format</source>
+        <translation></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
+        <source>Preparing</source>
+        <translation>En cours de préparation</translation>
+    </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation>Impossible de convertir ce format de fichier</translation>
+    </message>
+    <message>
+        <source>Print error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

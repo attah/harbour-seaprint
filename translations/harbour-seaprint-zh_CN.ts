@@ -292,16 +292,8 @@
         <translation>打开文件失败</translation>
     </message>
     <message>
-        <source>Cannot convert this file format</source>
-        <translation>无法转换此文件格式</translation>
-    </message>
-    <message>
         <source>Unknown document format</source>
         <translation>未知文档格式</translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
@@ -484,10 +476,6 @@
 <context>
     <name>PrinterWorker</name>
     <message>
-        <source>Conversion error</source>
-        <translation>转换错误</translation>
-    </message>
-    <message>
         <source>Failed to load image</source>
         <translation>加载图像错误</translation>
     </message>
@@ -516,11 +504,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upload error</source>
+        <source>Unknown target format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
+        <source>Preparing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation>无法转换此文件格式</translation>
+    </message>
+    <message>
+        <source>Print error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -7,6 +7,7 @@
 #include <fstream>
 
 Q_DECLARE_METATYPE(QMargins)
+Q_DECLARE_METATYPE(IppMsg)
 
 IppPrinter::IppPrinter() : _worker(this)
 {
@@ -19,14 +20,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
     connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
     connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
-    connect(this, &IppPrinter::doJustUpload, &_worker, &PrinterWorker::justUpload);
-    connect(this, &IppPrinter::doFixupPlaintext, &_worker, &PrinterWorker::fixupPlaintext);
-    connect(this, &IppPrinter::doPrintImageAsImage, &_worker, &PrinterWorker::printImageAsImage);
-
-    connect(this, &IppPrinter::doConvertPdf, &_worker, &PrinterWorker::convertPdf);
-    connect(this, &IppPrinter::doConvertImage, &_worker, &PrinterWorker::convertImage);
-    connect(this, &IppPrinter::doConvertOfficeDocument, &_worker, &PrinterWorker::convertOfficeDocument);
-    connect(this, &IppPrinter::doConvertPlaintext, &_worker, &PrinterWorker::convertPlaintext);
+    connect(this, &IppPrinter::doPrint, &_worker, &PrinterWorker::print);
 
     connect(this, &IppPrinter::doGetStrings, &_worker, &PrinterWorker::getStrings);
     connect(this, &IppPrinter::doGetImage, &_worker, &PrinterWorker::getImage);
@@ -36,6 +30,7 @@ IppPrinter::IppPrinter() : _worker(this)
     connect(&_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
 
     qRegisterMetaType<QMargins>();
+    qRegisterMetaType<IppMsg>();
 
     _workerThread.start();
 }
@@ -656,8 +651,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         return;
     }
 
-    bool knownTargetFormat = true;
-
     if(targetFormat == Mimer::PDF)
     {
         Params.format = PrintParameters::PDF;
@@ -676,7 +669,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
     else
     {
-        knownTargetFormat = false;
+        Params.format = PrintParameters::Invalid;
     }
 
     QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
@@ -713,63 +706,20 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     qDebug() << "Final job attributes:" << jobAttrs;
 
     IppMsg job = mk_msg(o, jobAttrs);
-    Bytestream contents = job.encode(IppMsg::PrintJob);
 
-    setBusyMessage(tr("Preparing"));
+    QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
-    if((mimeType == targetFormat) && (targetFormat == Mimer::Postscript))
-    { // Can't process Postscript
-        emit doJustUpload(filename, contents);
-    }
-    else if((mimeType == targetFormat) && (targetFormat == Mimer::Plaintext))
+    if(Sides=="two-sided-long-edge")
     {
-        emit doFixupPlaintext(filename, contents);
+        Params.duplex = true;
     }
-    else if((mimeType != Mimer::SVG) && mimer->isImage(mimeType) && mimer->isImage(targetFormat))
-    { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
-        emit doPrintImageAsImage(filename, contents, targetFormat);
-    }
-    else if(knownTargetFormat) // Params.format can be trusted
+    else if(Sides=="two-sided-short-edge")
     {
-        QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
-
-        if(Sides=="two-sided-long-edge")
-        {
-            Params.duplex = true;
-        }
-        else if(Sides=="two-sided-short-edge")
-        {
-            Params.duplex = true;
-            Params.tumble = true;
-        }
-
-        if(mimeType == Mimer::PDF)
-        {
-            emit doConvertPdf(filename, contents, Params);
-        }
-        else if(mimeType == Mimer::Plaintext)
-        {
-            emit doConvertPlaintext(filename, contents, Params);
-        }
-        else if (Mimer::isImage(mimeType))
-        {
-            emit doConvertImage(filename, contents, Params, margins);
-        }
-        else if(Mimer::isOffice(mimeType))
-        {
-            emit doConvertOfficeDocument(filename, contents, Params);
-        }
-        else
-        {
-            emit convertFailed(tr("Cannot convert this file format"));
-        }
-    }
-    else
-    {
-        emit convertFailed(tr("Cannot convert this file format"));
+        Params.duplex = true;
+        Params.tumble = true;
     }
 
-    return;
+    emit doPrint(filename, mimeType, targetFormat, job, Params, margins);
 }
 
 bool IppPrinter::getJobs() {

@@ -296,14 +296,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot convert this file format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unsupported paper size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -492,10 +484,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Conversion error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unsupported paper size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -516,11 +504,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upload error</source>
+        <source>Unknown target format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
+        <source>Preparing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

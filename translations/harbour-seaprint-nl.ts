@@ -292,16 +292,8 @@
         <translation>Bestand openen mislukt</translation>
     </message>
     <message>
-        <source>Cannot convert this file format</source>
-        <translation>Kan dit bestandsformaat niet converteren</translation>
-    </message>
-    <message>
         <source>Unknown document format</source>
         <translation>Onbekend documentformaat</translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation>Voorbereiden</translation>
     </message>
     <message>
         <source>Unsupported paper size</source>
@@ -484,10 +476,6 @@
 <context>
     <name>PrinterWorker</name>
     <message>
-        <source>Conversion error</source>
-        <translation>Conversiefout</translation>
-    </message>
-    <message>
         <source>Failed to load image</source>
         <translation>Afbeelding laden mislukt</translation>
     </message>
@@ -516,11 +504,19 @@
         <translation>Conversie mislukt</translation>
     </message>
     <message>
-        <source>Upload error</source>
-        <translation>Uploadfout</translation>
+        <source>Unknown target format</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
+        <source>Preparing</source>
+        <translation>Voorbereiden</translation>
+    </message>
+    <message>
+        <source>Cannot convert this file format</source>
+        <translation>Kan dit bestandsformaat niet converteren</translation>
+    </message>
+    <message>
+        <source>Print error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
