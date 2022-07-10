@@ -69,7 +69,7 @@ void PrinterWorker::print(QString filename, QString mimeType, QString targetForm
     try {
         Mimer* mimer = Mimer::instance();
 
-        Bytestream contents = job.encode(IppMsg::PrintJob);
+        Bytestream contents = job.encode();
 
         emit busyMessage(tr("Preparing"));
 

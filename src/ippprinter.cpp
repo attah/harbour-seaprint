@@ -132,8 +132,8 @@ void IppPrinter::refresh() {
     {
         QJsonObject o = opAttrs();
 
-        IppMsg msg = IppMsg(o);
-        emit doDoGetPrinterAttributes(msg.encode(IppMsg::GetPrinterAttrs));
+        IppMsg msg = IppMsg(IppMsg::GetPrinterAttrs, o);
+        emit doDoGetPrinterAttributes(msg.encode());
     }
 }
 
@@ -705,7 +705,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     qDebug() << "Final op attributes:" << o;
     qDebug() << "Final job attributes:" << jobAttrs;
 
-    IppMsg job = mk_msg(o, jobAttrs);
 
     QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
@@ -719,6 +718,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.tumble = true;
     }
 
+    IppMsg job = mk_msg(IppMsg::PrintJob, o, jobAttrs);
     emit doPrint(filename, mimeType, targetFormat, job, Params, margins);
 }
 
@@ -728,9 +728,9 @@ bool IppPrinter::getJobs() {
     QJsonObject o = opAttrs();
     o.insert("requested-attributes", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "all"}});
 
-    IppMsg job = IppMsg(o, QJsonObject());
+    IppMsg job = IppMsg(IppMsg::GetJobs, o, QJsonObject());
 
-    emit doGetJobs(job.encode(IppMsg::GetJobs));
+    emit doGetJobs(job.encode());
 
     return true;
 }
@@ -742,9 +742,9 @@ bool IppPrinter::cancelJob(qint32 jobId) {
     QJsonObject o = opAttrs();
     o.insert("job-id", QJsonObject {{"tag", IppMsg::Integer}, {"value", jobId}});
 
-    IppMsg job = IppMsg(o, QJsonObject());
+    IppMsg job = IppMsg(IppMsg::CancelJob, o, QJsonObject());
 
-    emit doCancelJob(job.encode(IppMsg::CancelJob));
+    emit doCancelJob(job.encode());
 
     return true;
 }
@@ -755,9 +755,9 @@ bool IppPrinter::identify() {
 
     QJsonObject o = opAttrs();
 
-    IppMsg job = IppMsg(o, QJsonObject());
+    IppMsg job = IppMsg(IppMsg::IdentifyPrinter, o, QJsonObject());
 
-    emit doCancelJob(job.encode(IppMsg::IdentifyPrinter));
+    emit doCancelJob(job.encode());
 
     return true;
 }
@@ -860,15 +860,15 @@ QJsonValue IppPrinter::getAttrOrDefault(QJsonObject jobAttrs, QString name, QStr
     }
 }
 
-IppMsg IppPrinter::mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs)
+IppMsg IppPrinter::mk_msg(IppMsg::Operation operation, QJsonObject opAttrs, QJsonObject jobAttrs)
 {
     if(_attrs.contains("ipp-versions-supported") &&
        _attrs["ipp-versions-supported"].toObject()["value"].toArray().contains("2.0"))
     {
         qDebug() << "TWO-POINT-ZERO";
-        return IppMsg(opAttrs, jobAttrs, 2, 0);
+        return IppMsg(operation, opAttrs, jobAttrs, 2, 0);
     }
-    return IppMsg(opAttrs, jobAttrs);
+    return IppMsg(operation, opAttrs, jobAttrs);
 }
 
 void IppPrinter::resolveUrl(QUrl& url)

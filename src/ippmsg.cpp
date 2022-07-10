@@ -6,8 +6,9 @@ IppMsg::IppMsg()
 {
 }
 
-IppMsg::IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs, quint8 majVsn, quint8 minVsn)
+IppMsg::IppMsg(Operation operation, QJsonObject opAttrs, QJsonObject jobAttrs, quint8 majVsn, quint8 minVsn)
 {
+    _operation = operation;
     _majVsn = majVsn;
     _minVsn = minVsn;
     _opAttrs = opAttrs;
@@ -302,13 +303,13 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
     return name;
 }
 
-Bytestream IppMsg::encode(Operation op)
+Bytestream IppMsg::encode()
 {
     Bytestream ipp;
 
     ipp << _majVsn << _minVsn;
 
-    ipp << quint16(op);
+    ipp << quint16(_operation);
     ipp << _reqid++;
 
 

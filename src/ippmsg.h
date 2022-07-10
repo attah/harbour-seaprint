@@ -67,11 +67,11 @@ public:
 
     explicit IppMsg();
     explicit IppMsg(Bytestream& resp);
-    IppMsg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject(), quint8 majVsn=1, quint8 minVsn=1);
+    IppMsg(Operation operation, QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject(), quint8 majVsn=1, quint8 minVsn=1);
     IppMsg(const IppMsg& other) = default;
     ~IppMsg();
 
-    Bytestream encode(Operation op);
+    Bytestream encode();
     QJsonObject getPrinterAttrs() {return _printerAttrs;}
     QJsonArray getJobAttrs() {return _jobAttrs;}
     QJsonObject getOpAttrs() {return _opAttrs;}
@@ -86,6 +86,8 @@ private:
     QJsonValue collect_attributes(QJsonArray& attrs);
     QString consume_attribute(QJsonObject& attrs, Bytestream& data);
     void encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue value, bool subCollection=false);
+
+    Operation _operation;
 
     quint8 _majVsn;
     quint8 _minVsn;

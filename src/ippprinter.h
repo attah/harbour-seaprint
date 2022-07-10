@@ -116,7 +116,7 @@ private:
 
     QJsonValue getAttrOrDefault(QJsonObject jobAttrs, QString name, QString subkey = "");
 
-    IppMsg mk_msg(QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject());
+    IppMsg mk_msg(IppMsg::Operation operation, QJsonObject opAttrs, QJsonObject jobAttrs=QJsonObject());
 
     QJsonObject _attrs;
     QJsonObject _jobAttrs;
