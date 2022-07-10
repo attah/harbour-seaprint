@@ -59,22 +59,14 @@ CurlRequester::CurlRequester(QUrl addr, Role role)
         if(res != CURLE_OK)
             qDebug() <<  "curl_easy_perform() failed: " << curl_easy_strerror(res);
 
-        emit done(res, buf);
+        _result = res;
+        _resultMsg = buf;
     });
 }
 
 CurlRequester::~CurlRequester()
 {
-    while(!_canWrite.tryAcquire(1, 500))
-    {
-        if(!_worker.isRunning())
-        {
-            break;
-        }
-    }
-    _done = true;
-    _canRead.release();
-    _worker.waitForFinished();
+    await();
 
     if(_dest != nullptr)
     {
@@ -83,6 +75,22 @@ CurlRequester::~CurlRequester()
 
     curl_slist_free_all(_opts);
     curl_easy_cleanup(_curl);
+}
+
+CURLcode CurlRequester::await(Bytestream* data)
+{
+    while(_worker.isRunning() && !_canWrite.tryAcquire(1, 500))
+    {}
+
+    _done = true;
+    _canRead.release();
+    _worker.waitForFinished();
+
+    if(data != nullptr)
+    {
+        (*data) = _resultMsg;
+    }
+    return _result;
 }
 
 bool CurlRequester::write(const char *data, size_t size)

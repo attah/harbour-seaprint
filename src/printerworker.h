@@ -54,6 +54,8 @@ private:
     void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
     void convertPlaintext(QString filename, Bytestream header, PrintParameters Params);
 
+    void awaitResult(CurlRequester& cr, QString callback);
+
     IppPrinter* _printer;
 
 };

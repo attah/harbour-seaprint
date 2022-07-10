@@ -22,6 +22,8 @@ public:
     CurlRequester(QUrl addr, Role role = IppRequest);
     ~CurlRequester();
 
+    CURLcode await(Bytestream* = nullptr);
+
     bool write(const char *data, size_t size);
     size_t requestWrite(char* dest, size_t size);
 
@@ -31,9 +33,6 @@ public:
         ((Bytestream*)userdata)->putBytes(ptr, bytes_to_write);
         return bytes_to_write;
     }
-
-signals:
-    void done(CURLcode, Bytestream);
 
 private:
     CurlRequester();
@@ -60,6 +59,9 @@ private:
     QSemaphore _canRead;
     bool _reading;
     bool _done;
+
+    CURLcode _result;
+    Bytestream _resultMsg;
 
     char* _dest;
     size_t _size;
