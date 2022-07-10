@@ -38,29 +38,25 @@ void PrinterWorker::getImage(QUrl url)
 
 void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl());
-    cr.write((char*)msg.raw(), msg.size());
+    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getPrinterAttributesFinished");
 }
 
 void PrinterWorker::getJobs(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl());
-    cr.write((char*)msg.raw(), msg.size());
+    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getJobsRequestFinished");
 }
 
 void PrinterWorker::cancelJob(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl());
-    cr.write((char*)msg.raw(), msg.size());
+    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
     awaitResult(cr, "cancelJobFinished");
 }
 
 void PrinterWorker::identify(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl());
-    cr.write((char*)msg.raw(), msg.size());
+    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
     awaitResult(cr, "identifyFinished");
 }
 

@@ -8,7 +8,7 @@ static size_t trampoline(char* dest, size_t size, size_t nmemb, void* userp)
     return cid->requestWrite(dest, size*nmemb);
 }
 
-CurlRequester::CurlRequester(QUrl addr, Role role)
+CurlRequester::CurlRequester(QUrl addr, Role role, Bytestream* singleData)
     : _addr(addr), _canWrite(1), _canRead(), _reading(false), _done(false), _dest(nullptr), _size(0), _offset(0), _curl(curl_easy_init())
 {
 
@@ -36,7 +36,15 @@ CurlRequester::CurlRequester(QUrl addr, Role role)
             curl_easy_setopt(_curl, CURLOPT_READDATA, this);
 
             _opts = curl_slist_append(_opts, "Expect:");
-            _opts = curl_slist_append(_opts, "Transfer-Encoding: chunked");
+            if(singleData != nullptr)
+            {
+                curl_easy_setopt(_curl, CURLOPT_POSTFIELDSIZE, singleData->size());
+                write((char*)(singleData->raw()), singleData->size());
+            }
+            else
+            {
+                _opts = curl_slist_append(_opts, "Transfer-Encoding: chunked");
+            }
             _opts = curl_slist_append(_opts, "Content-Type: application/ipp");
             _opts = curl_slist_append(_opts, "Accept-Encoding: identity");
             break;
@@ -121,7 +129,7 @@ size_t CurlRequester::requestWrite(char* dest, size_t size)
     if(!_reading)
     {
         _canRead.acquire();
-        if(_done) // Can only have been set by write() - only relevant to check if strating to write
+        if(_done) // Can only have been set by await() - only relevant to check if strating to write
         {
             return 0;
         }
