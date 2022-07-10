@@ -19,7 +19,7 @@ public:
         HttpGetRequest
     };
 
-    CurlRequester(QUrl addr, Role role = IppRequest);
+    CurlRequester(QUrl addr, Role role = IppRequest, Bytestream* = nullptr);
     ~CurlRequester();
 
     CURLcode await(Bytestream* = nullptr);
