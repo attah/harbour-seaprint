@@ -4,8 +4,8 @@ Summary:    SeaPrint
 Version:    0
 Release:    1
 Group:      Qt/Qt
-License:    LICENSE
-URL:        http://example.org/
+License:    GPLv3
+URL:        https://github.com/attah/harbour-seaprint
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
