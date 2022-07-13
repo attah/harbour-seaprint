@@ -506,7 +506,7 @@ sur cette imprimante</translation>
     </message>
     <message>
         <source>Unknown target format</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Preparing</source>
