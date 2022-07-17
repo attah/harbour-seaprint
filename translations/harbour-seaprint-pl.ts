@@ -5474,11 +5474,11 @@
     </message>
     <message>
         <source>stacker</source>
-        <translation type="unfinished"></translation>
+        <translation>układarka</translation>
     </message>
     <message>
         <source>mailbox</source>
-        <translation>skrzynka e-mail</translation>
+        <translation>skrzynka na pocztę</translation>
     </message>
     <message>
         <source>face-up</source>
@@ -5490,7 +5490,7 @@
     </message>
     <message>
         <source>my mailbox</source>
-        <translation>moja skrzynka e-mail</translation>
+        <translation>moja skrzynka na pocztę</translation>
     </message>
     <message>
         <source>Unknown</source>
