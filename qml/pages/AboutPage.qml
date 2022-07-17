@@ -101,7 +101,7 @@ Page {
                       qsTr("Dutch")+" - JSEHV, Rudi Timmermans\n"+
                       qsTr("French")+" - ensag-dev, pherjung, phklrz, Quentí\n"+
                       qsTr("German")+" -  black-sheep-dev, cnlpete, wheelseal\n"+
-                      qsTr("Polish")+" - atlochowski\n"+
+                      qsTr("Polish")+" - atlochowski, karolkurek\n"+
                       qsTr("Spanish")+" - carmenfdezb, JSEHV"
             }
 
