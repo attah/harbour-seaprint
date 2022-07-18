@@ -319,11 +319,15 @@ Bytestream IppMsg::encode()
     QStringList InitialAttrs = {"attributes-charset",
                                 "attributes-natural-language",
                                 "printer-uri",
+                                "job-id",
                                 "requesting-user-name"};
     for(QString key : InitialAttrs)
     {
-        QJsonObject val = _opAttrs.take(key).toObject();
-        encode_attr(ipp, val["tag"].toInt(), key, val["value"]);
+        if(_opAttrs.find(key) != _opAttrs.end())
+        {
+            QJsonObject val = _opAttrs.take(key).toObject();
+            encode_attr(ipp, val["tag"].toInt(), key, val["value"]);
+        }
     }
     for(QJsonObject::iterator it = _opAttrs.begin(); it != _opAttrs.end(); it++)
     { // encode any remaining op-attrs
