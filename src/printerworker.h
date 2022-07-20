@@ -1,6 +1,7 @@
 #ifndef PRINTERWORKER_H
 #define PRINTERWORKER_H
 #include <QObject>
+#include <memory>
 #include "curlrequester.h"
 #include "ippmsg.h"
 #include "ppm2pwg/printparameters.h"
@@ -27,11 +28,13 @@ class PrinterWorker : public QObject
 
 public:
     PrinterWorker(IppPrinter* parent);
+    ~PrinterWorker();
 
 private:
     PrinterWorker();
 
 public slots:
+    void urlChanged(QUrl url);
     void getStrings(QUrl url);
     void getImage(QUrl url);
     void getPrinterAttributes(Bytestream msg);
@@ -40,6 +43,9 @@ public slots:
     void identify(Bytestream msg);
     void print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins);
     void print2(QString filename, QString mimeType, QString targetFormat, IppMsg createJob, IppMsg sendDocument, PrintParameters Params, QMargins margins);
+
+private slots:
+    void cleanup();
 
 signals:
     void progress(qint64 done, qint64 pages);
@@ -57,8 +63,9 @@ private:
 
     void awaitResult(CurlRequester& cr, QString callback);
 
-    IppPrinter* _printer;
-
+    std::unique_ptr<QThread> _thread;
+    QPointer<IppPrinter> _printer;
+    QUrl _url;
 };
 
 #endif // PRINTERWORKER_H

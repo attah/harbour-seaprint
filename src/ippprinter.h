@@ -130,8 +130,7 @@ private:
     QString _busyMessage;
     QString _progress;
 
-    QThread _workerThread;
-    PrinterWorker _worker;
+    PrinterWorker* _worker;
 
     bool _iconRetried = false;
 };

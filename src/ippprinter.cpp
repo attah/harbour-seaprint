@@ -9,35 +9,32 @@
 Q_DECLARE_METATYPE(QMargins)
 Q_DECLARE_METATYPE(IppMsg)
 
-IppPrinter::IppPrinter() : _worker(this)
+IppPrinter::IppPrinter()
 {
+    _worker = new PrinterWorker(this);
+
     QObject::connect(this, &IppPrinter::urlChanged, this, &IppPrinter::onUrlChanged);
     qRegisterMetaType<QTemporaryFile*>("QTemporaryFile*");
 
-    _worker.moveToThread(&_workerThread);
+    connect(this, &IppPrinter::doDoGetPrinterAttributes, _worker, &PrinterWorker::getPrinterAttributes);
+    connect(this, &IppPrinter::doGetJobs, _worker, &PrinterWorker::getJobs);
+    connect(this, &IppPrinter::doCancelJob, _worker, &PrinterWorker::cancelJob);
+    connect(this, &IppPrinter::doIdentify, _worker, &PrinterWorker::identify);
+    connect(this, &IppPrinter::doPrint, _worker, &PrinterWorker::print);
+    connect(this, &IppPrinter::doPrint2, _worker, &PrinterWorker::print2);
 
-    connect(this, &IppPrinter::doDoGetPrinterAttributes, &_worker, &PrinterWorker::getPrinterAttributes);
-    connect(this, &IppPrinter::doGetJobs, &_worker, &PrinterWorker::getJobs);
-    connect(this, &IppPrinter::doCancelJob, &_worker, &PrinterWorker::cancelJob);
-    connect(this, &IppPrinter::doIdentify, &_worker, &PrinterWorker::identify);
-    connect(this, &IppPrinter::doPrint, &_worker, &PrinterWorker::print);
-    connect(this, &IppPrinter::doPrint2, &_worker, &PrinterWorker::print2);
+    connect(this, &IppPrinter::doGetStrings, _worker, &PrinterWorker::getStrings);
+    connect(this, &IppPrinter::doGetImage, _worker, &PrinterWorker::getImage);
 
-    connect(this, &IppPrinter::doGetStrings, &_worker, &PrinterWorker::getStrings);
-    connect(this, &IppPrinter::doGetImage, &_worker, &PrinterWorker::getImage);
-
-    connect(&_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
-    connect(&_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
-    connect(&_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
+    connect(_worker, &PrinterWorker::progress, this, &IppPrinter::setProgress);
+    connect(_worker, &PrinterWorker::busyMessage, this, &IppPrinter::setBusyMessage);
+    connect(_worker, &PrinterWorker::failed, this, &IppPrinter::convertFailed);
 
     qRegisterMetaType<QMargins>();
     qRegisterMetaType<IppMsg>();
-
-    _workerThread.start();
 }
 
 IppPrinter::~IppPrinter() {
-
 }
 
 QJsonObject IppPrinter::opAttrs() {
@@ -85,6 +82,7 @@ void IppPrinter::setUrl(QString url_s)
 
 void IppPrinter::onUrlChanged()
 {
+    QMetaObject::invokeMethod(_worker, "urlChanged", Q_ARG(QUrl, httpUrl()));
     refresh();
 }
 

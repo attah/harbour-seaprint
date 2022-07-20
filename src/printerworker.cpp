@@ -21,6 +21,26 @@
 PrinterWorker::PrinterWorker(IppPrinter* parent)
 {
     _printer = parent;
+    _url = parent->httpUrl();
+    _thread.reset(new QThread);
+    moveToThread(_thread.get());
+    _thread->start();
+}
+
+PrinterWorker::~PrinterWorker()
+{
+    QMetaObject::invokeMethod(this, "cleanup");
+    _thread->wait();
+}
+
+void PrinterWorker::cleanup()
+{
+    _thread->quit();
+}
+
+void PrinterWorker::urlChanged(QUrl url)
+{
+    _url = url;
 }
 
 void PrinterWorker::getStrings(QUrl url)
@@ -38,25 +58,25 @@ void PrinterWorker::getImage(QUrl url)
 
 void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
+    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getPrinterAttributesFinished");
 }
 
 void PrinterWorker::getJobs(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
+    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getJobsRequestFinished");
 }
 
 void PrinterWorker::cancelJob(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
+    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "cancelJobFinished");
 }
 
 void PrinterWorker::identify(Bytestream msg)
 {
-    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &msg);
+    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "identifyFinished");
 }
 
@@ -66,7 +86,7 @@ void PrinterWorker::print2(QString filename, QString mimeType, QString targetFor
 
     Bytestream header = createJob.encode();
 
-    CurlRequester cr(_printer->httpUrl(), CurlRequester::IppRequest, &header);
+    CurlRequester cr(_url, CurlRequester::IppRequest, &header);
 
     Bytestream resData;
     CURLcode res = cr.await(&resData);
@@ -161,7 +181,7 @@ void PrinterWorker::justUpload(QString filename, Bytestream header)
 {
     emit busyMessage(tr("Printing"));
 
-    CurlRequester cr(_printer->httpUrl());
+    CurlRequester cr(_url);
 
     QFile file(filename);
     file.open(QFile::ReadOnly);
@@ -180,8 +200,6 @@ void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QStri
     QStringList supportedImageFormats = {Mimer::JPEG, Mimer::PNG};
 
 
-    qDebug() << ((IppPrinter*)parent())->_attrs;
-
     if(targetFormat == Mimer::RBMP)
     {
         // ok
@@ -198,7 +216,7 @@ void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QStri
     QString mimeType = Mimer::instance()->get_type(filename);
     Bytestream OutBts;
 
-    CurlRequester cr(_printer->httpUrl());
+    CurlRequester cr(_url);
 
     if(mimeType == Mimer::JPEG && targetFormat == Mimer::JPEG)
     {
@@ -268,7 +286,7 @@ void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QStri
 
 void PrinterWorker::fixupPlaintext(QString filename, Bytestream header)
 {
-    CurlRequester cr(_printer->httpUrl());
+    CurlRequester cr(_url);
 
     QFile inFile(filename);
     if(!inFile.open(QIODevice::ReadOnly))
@@ -310,7 +328,7 @@ void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParamet
 {
     emit busyMessage(tr("Printing"));
 
-    CurlRequester cr(_printer->httpUrl());
+    CurlRequester cr(_url);
 
     OK(cr.write((char*)header.raw(), header.size()));
 
@@ -476,7 +494,7 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
 
         bmp_to_pwg(inBts, outBts, 1, Params, verbose);
 
-        CurlRequester cr(_printer->httpUrl());
+        CurlRequester cr(_url);
 
         emit busyMessage(tr("Printing"));
 
