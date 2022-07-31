@@ -425,7 +425,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         return;
     }
 
-    //TODO? jobAttrs.remove("printer-resolution");
+    jobAttrs.remove("printer-resolution");
 
     if(documentFormat == Mimer::PWG)
     {
@@ -450,8 +450,7 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         Params.hwResW = AdjustedHwResX;
         Params.hwResH = AdjustedHwResY;
     }
-
-    if(documentFormat == Mimer::URF)
+    else if(documentFormat == Mimer::URF)
     { // Ensure symmetric resolution for URF
         Params.hwResW = Params.hwResH = std::min(Params.hwResW, Params.hwResH);
 
