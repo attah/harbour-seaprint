@@ -2,8 +2,21 @@ import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 Setting {
-    property int low: valid ? parent.printer.attrs[name+"-supported"].value.low : 0
-    property int high: valid ? parent.printer.attrs[name+"-supported"].value.high : 0
+    property int minimum_high: 0
+    property int low: _valid ? parent.printer.attrs[name+"-supported"].value.low : (minimum_high != 0) ? 1 : 0
+    property int high: _valid ? ensure_minimum(parent.printer.attrs[name+"-supported"].value.high) : minimum_high
+
+    function ensure_minimum(orig)
+    {
+        if(orig < minimum_high)
+        {
+            return minimum_high;
+        }
+        else
+        {
+            return orig;
+        }
+    }
 
     property bool suppressChange: false
 

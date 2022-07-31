@@ -1,6 +1,7 @@
 #include "ippprinter.h"
 #include "ippdiscovery.h"
 #include "mimer.h"
+#include "convertchecker.h"
 #include "papersizes.h"
 #include "overrider.h"
 #include "settings.h"
@@ -542,6 +543,27 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
         }
     }
 
+    int copies_requested = getAttrOrDefault(jobAttrs, "copies").toInt(1);
+    QJsonArray varying_attributes = _attrs["document-format-varying-attributes"].toObject()["value"].toArray();
+    bool supports_copies = _attrs.contains("copies-supported")
+                         && _attrs["copies-supported"].toObject()["value"].toObject()["high"].toInt(1) != 1
+                         // assume raster formats causes the variation in supported copies
+                         && !(varying_attributes.contains("copies-supported") || varying_attributes.contains("copies"));
+
+    if(copies_requested > 1 && !supports_copies)
+    {
+        QString copyMode = getAttrOrDefault(jobAttrs, "multiple-document-handling").toString();
+        qDebug() << "Doing local copies" << copyMode << copies_requested;
+        if(copyMode == "separate-documents-uncollated-copies")
+        { // Only do silly copies if explicitly requested
+            Params.pageCopies = copies_requested;
+        }
+        else
+        {
+            Params.documentCopies = copies_requested;
+        }
+        jobAttrs.remove("copies");
+    }
 }
 
 void IppPrinter::print(QJsonObject jobAttrs, QString filename)
@@ -679,18 +701,19 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     Params.hwResW = PrinterResolutionRef.toObject()["x"].toInt(Params.hwResW);
     Params.hwResH = PrinterResolutionRef.toObject()["y"].toInt(Params.hwResH);
 
-    adjustRasterSettings(targetFormat, jobAttrs, Params);
-
-    Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
-
-    QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
-    Params.colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : Params.colors;
+    bool singlePageRange = false;
 
     if(jobAttrs.contains("page-ranges"))
     {
         QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
-        Params.fromPage = PageRanges["low"].toInt();
-        Params.toPage = PageRanges["high"].toInt();
+        size_t fromPage = PageRanges["low"].toInt();
+        size_t toPage = PageRanges["high"].toInt();
+        if(fromPage != 0 || toPage != 0)
+        {
+          Params.pageRangeList = {{fromPage, toPage}};
+          singlePageRange = toPage == fromPage;
+        }
+
         // Effected locally, unless it is Postscript which we cant't render
         if(targetFormat != Mimer::Postscript)
         {
@@ -699,6 +722,19 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
 
     QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
+    int copies_requested = getAttrOrDefault(jobAttrs, "copies").toInt(1);
+
+    if((Params.format == PrintParameters::PWG || Params.format == PrintParameters::URF) &&
+       copies_requested > 1 &&
+       Sides != "one-sided" &&
+       (Mimer::instance()->isImage(mimeType) ||
+        (mimeType == Mimer::PDF && (singlePageRange || ConvertChecker::instance()->pdfPages(filename) == 1))))
+    {
+        jobAttrs.insert("sides", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "one-sided"}});
+        qDebug() << "Optimizing one-page document to one-sided";
+    }
+
+    Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
     if(Sides=="two-sided-long-edge")
     {
@@ -709,6 +745,13 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.duplex = true;
         Params.tumble = true;
     }
+
+    adjustRasterSettings(targetFormat, jobAttrs, Params);
+
+    Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
+
+    QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
+    Params.colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : Params.colors;
 
     QJsonArray supportedOperations = _attrs["operations-supported"].toObject()["value"].toArray();
 

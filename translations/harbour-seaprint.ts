@@ -519,6 +519,10 @@
         <source>Unknown target format</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Inconsistent duplex setting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

@@ -63,6 +63,16 @@ function supported_formats(printer, considerAdditionalFormats)
     return {pdf: pdf, postscript: postscript, plaintext: plaintext, office: office, images: images, mimetypes: mimetypes};
 }
 
+function supports_raster(printer)
+{
+    var formats = printer.attrs["document-format-supported"].value;
+    if(considerAdditionalFormats)
+    {
+        formats=formats+printer.additionalDocumentFormats;
+    }
+    return (has(formats, Mimer.Mimer.PWG) || has(formats, Mimer.Mimer.URF));
+}
+
 function has(arrayish, what)
 {
     return arrayish.indexOf(what) != -1;

@@ -453,6 +453,14 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
     }
     else
     {
+        size_t total_pages = Params.documentCopies*Params.pageCopies;
+
+        if(total_pages > 1 && Params.duplex)
+        { // Images are one page by definition - if we need to do client-side copies, they must be one-sided or we'd have to insert backsides
+            qDebug() << "Inconsistent duplex setting";
+            throw ConvertFailedException(tr("Inconsistent duplex setting"));
+        }
+
         QImage outImage = QImage(Params.getPaperSizeWInPixels(), Params.getPaperSizeHInPixels(), inImage.format());
         outImage.fill(Qt::white);
         QPainter painter(&outImage);
@@ -463,7 +471,7 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
 
         QBuffer buf;
         buf.open(QIODevice::ReadWrite);
-        Bytestream outBts;
+        Bytestream fileHdr, outBts;
 
 
         if(inImage.allGray())
@@ -488,7 +496,7 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
 
         buf.read((char*)(inBts.raw()), inBts.size());
 
-        outBts << (Params.format == PrintParameters::URF ? make_urf_file_hdr(1) : make_pwg_file_hdr());
+        fileHdr << (Params.format == PrintParameters::URF ? make_urf_file_hdr(1) : make_pwg_file_hdr());
 
         bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
@@ -499,7 +507,12 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
         emit busyMessage(tr("Printing"));
 
         OK(cr.write((char*)header.raw(), header.size()));
-        OK(cr.write((char*)(outBts.raw()), outBts.size()));
+        OK(cr.write((char*)fileHdr.raw(), fileHdr.size()));
+        for(size_t c = 0; c < total_pages; c++)
+        {
+            OK(cr.write((char*)(outBts.raw()), outBts.size()));
+            emit progress(c+1, total_pages);
+        }
 
         awaitResult(cr, "printRequestFinished");
     }

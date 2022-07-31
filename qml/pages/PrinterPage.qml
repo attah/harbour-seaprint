@@ -104,6 +104,8 @@ Page {
                 tag: IppMsg.Integer
                 name: "copies"
                 prettyName: qsTr("Copies")
+                valid: _valid || Utils.supports_raster(printer)
+                minimum_high: 99
             }
             ChoiceSetting {
                 tag: IppMsg.Keyword
