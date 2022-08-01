@@ -419,7 +419,7 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAttrs, PrintParameters& Params)
+void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QString documentFormat, QJsonObject& jobAttrs, PrintParameters& Params)
 {
     if(documentFormat != Mimer::PWG && documentFormat != Mimer::URF)
     {
@@ -563,6 +563,26 @@ void IppPrinter::adjustRasterSettings(QString documentFormat, QJsonObject& jobAt
             Params.documentCopies = copies_requested;
         }
         jobAttrs.remove("copies");
+
+
+        if(Sides != "one-sided")
+        {
+            bool singlePageRange = false;
+            if(Params.pageRangeList.size() == 1)
+            {
+                size_t fromPage = Params.pageRangeList.begin()->first;
+                size_t toPage = Params.pageRangeList.begin()->second;
+                singlePageRange = fromPage != 0 && fromPage == toPage;
+            }
+            bool singlePageDocument = (Mimer::instance()->isImage(mimeType) ||
+                                      (mimeType == Mimer::PDF && ConvertChecker::instance()->pdfPages(filename) == 1));
+
+            if(singlePageDocument || singlePageRange)
+            {
+                jobAttrs.insert("sides", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "one-sided"}});
+                qDebug() << "Optimizing one-page document to one-sided";
+            }
+        }
     }
 }
 
@@ -701,8 +721,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     Params.hwResW = PrinterResolutionRef.toObject()["x"].toInt(Params.hwResW);
     Params.hwResH = PrinterResolutionRef.toObject()["y"].toInt(Params.hwResH);
 
-    bool singlePageRange = false;
-
     if(jobAttrs.contains("page-ranges"))
     {
         QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
@@ -711,7 +729,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         if(fromPage != 0 || toPage != 0)
         {
           Params.pageRangeList = {{fromPage, toPage}};
-          singlePageRange = toPage == fromPage;
         }
 
         // Effected locally, unless it is Postscript which we cant't render
@@ -721,20 +738,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
     }
 
+    adjustRasterSettings(filename, mimeType, targetFormat, jobAttrs, Params);
+
     QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
-    int copies_requested = getAttrOrDefault(jobAttrs, "copies").toInt(1);
-
-    if((Params.format == PrintParameters::PWG || Params.format == PrintParameters::URF) &&
-       copies_requested > 1 &&
-       Sides != "one-sided" &&
-       (Mimer::instance()->isImage(mimeType) ||
-        (mimeType == Mimer::PDF && (singlePageRange || ConvertChecker::instance()->pdfPages(filename) == 1))))
-    {
-        jobAttrs.insert("sides", QJsonObject {{"tag", IppMsg::Keyword}, {"value", "one-sided"}});
-        qDebug() << "Optimizing one-page document to one-sided";
-    }
-
-    Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
     if(Sides=="two-sided-long-edge")
     {
@@ -745,8 +751,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.duplex = true;
         Params.tumble = true;
     }
-
-    adjustRasterSettings(targetFormat, jobAttrs, Params);
 
     Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
