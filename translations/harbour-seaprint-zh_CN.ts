@@ -530,6 +530,10 @@
         <source>all</source>
         <translation>全部</translation>
     </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Setting</name>

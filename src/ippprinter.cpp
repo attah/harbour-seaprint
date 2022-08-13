@@ -721,21 +721,24 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     Params.hwResW = PrinterResolutionRef.toObject()["x"].toInt(Params.hwResW);
     Params.hwResH = PrinterResolutionRef.toObject()["y"].toInt(Params.hwResH);
 
-    if(jobAttrs.contains("page-ranges"))
+    // Effected locally, unless it is Postscript which we cant't render
+    if(jobAttrs.contains("page-ranges") && mimeType != Mimer::Postscript)
     {
-        QJsonObject PageRanges = getAttrOrDefault(jobAttrs, "page-ranges").toObject();
-        size_t fromPage = PageRanges["low"].toInt();
-        size_t toPage = PageRanges["high"].toInt();
-        if(fromPage != 0 || toPage != 0)
+        QJsonArray tmp;
+        QJsonValue pageRanges = getAttrOrDefault(jobAttrs, "page-ranges");
+        if(pageRanges.isArray())
         {
-          Params.pageRangeList = {{fromPage, toPage}};
+            tmp = pageRanges.toArray();
         }
-
-        // Effected locally, unless it is Postscript which we cant't render
-        if(targetFormat != Mimer::Postscript)
+        else if(pageRanges.isObject())
         {
-            jobAttrs.remove("page-ranges");
+            tmp = {pageRanges.toObject()};
         }
+        for(QJsonValueRef ref : tmp)
+        {
+            Params.pageRangeList.push_back({ref.toObject()["low"].toInt(), ref.toObject()["high"].toInt()});
+        }
+        jobAttrs.remove("page-ranges");
     }
 
     adjustRasterSettings(filename, mimeType, jobAttrs, Params);

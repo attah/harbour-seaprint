@@ -120,6 +120,7 @@ Page {
 
                 property var pdfpages: ConvertChecker.pdfPages(selectedFile)
                 high: pdfpages == 0 ? 65535 : pdfpages
+                acceptRangeList: true
             }
             ChoiceSetting {
                 tag: IppMsg.Integer

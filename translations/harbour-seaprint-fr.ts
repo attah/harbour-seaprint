@@ -531,6 +531,10 @@ sur cette imprimante</translation>
         <source>all</source>
         <translation>tout</translation>
     </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Setting</name>

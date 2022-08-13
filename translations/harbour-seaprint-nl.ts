@@ -530,6 +530,10 @@
         <source>all</source>
         <translation>alles</translation>
     </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Setting</name>

@@ -5,6 +5,7 @@ Setting {
     property int high
     property int choice_low: 1
     property int choice_high: 0
+    property bool acceptRangeList: false
 
     property bool suppressChange: false
 
@@ -41,7 +42,7 @@ Setting {
     }
 
     onChoiceChanged: {
-        if(choice == undefined)
+        if(choice == undefined || choice.constructor.name !== "Object")
         {
             suppressChange = true;
             low_slider.value = low_slider.minimumValue;
@@ -50,7 +51,39 @@ Setting {
         }
     }
 
-    displayValue: choice == undefined ? qsTr("all") : ""+choice.low+" - "+choice.high
+    displayValue: prettify(choice)
+
+    function prettify(choice)
+    {
+        if(choice == undefined)
+        {
+            return qsTr("all");
+        }
+        else if(choice.constructor.name === "Object")
+        {
+            return (""+choice.low+" - "+choice.high)
+        }
+        else
+        {
+            var ret = "";
+            for(var i = 0; i <  choice.length; i++)
+            {
+                if(i!=0)
+                {
+                    ret = ret+","
+                }
+                if(choice[i].low == choice[i].high)
+                {
+                    ret=ret+choice[i].low
+                }
+                else
+                {
+                    ret=ret+choice[i].low+"-"+choice[i].high
+                }
+            }
+            return ret
+        }
+    }
 
     menu: ContextMenu {
         MenuItem {
@@ -107,6 +140,17 @@ Setting {
                 }
             }
 
+        }
+
+        MenuItem {
+            visible: acceptRangeList
+            text: qsTr("Advanced")
+            onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("RangeListInputDialog.qml"),
+                                                    {value: choice, title: prettyName});
+                        dialog.accepted.connect(function() {
+                            choice = dialog.value;
+                        })
+            }
         }
 
     }

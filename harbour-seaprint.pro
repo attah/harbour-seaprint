@@ -34,6 +34,7 @@ DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
 DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 
 SOURCES += src/harbour-seaprint.cpp \
+    src/rangelistchecker.cpp \
     src/convertchecker.cpp \
     src/curlrequester.cpp \
     src/imageitem.cpp \
@@ -51,6 +52,7 @@ SOURCES += src/harbour-seaprint.cpp \
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/components/DependentOn.qml \
+    qml/components/RangeListInputDialog.qml \
     qml/cover/CoverPage.qml \
     qml/components/*qml \
     qml/pages/*.qml \
@@ -81,6 +83,7 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-pl.ts
 
 HEADERS += \
+    src/rangelistchecker.h \
     src/convertchecker.h \
     src/curlrequester.h \
     src/imageitem.h \
