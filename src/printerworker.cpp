@@ -106,6 +106,7 @@ void PrinterWorker::print2(QString filename, QString mimeType, QString targetFor
         }
         else
         {
+            resData.setPos(0);
             QMetaObject::invokeMethod(_printer, "printRequestFinished", Qt::QueuedConnection,
                                       Q_ARG(CURLcode, res),
                                       Q_ARG(Bytestream, resData));
