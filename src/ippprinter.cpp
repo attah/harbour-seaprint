@@ -419,16 +419,16 @@ QString targetFormatIfAuto(QString documentFormat, QString mimeType, QJsonArray 
     return documentFormat;
 }
 
-void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QString documentFormat, QJsonObject& jobAttrs, PrintParameters& Params)
+void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QJsonObject& jobAttrs, PrintParameters& Params)
 {
-    if(documentFormat != Mimer::PWG && documentFormat != Mimer::URF)
+    if(Params.format != PrintParameters::PWG && Params.format != PrintParameters::URF)
     {
         return;
     }
 
     jobAttrs.remove("printer-resolution");
 
-    if(documentFormat == Mimer::PWG)
+    if(Params.format == PrintParameters::PWG)
     {
         quint32 diff = std::numeric_limits<quint32>::max();
         quint32 AdjustedHwResX = Params.hwResW;
@@ -451,8 +451,8 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QStrin
         Params.hwResW = AdjustedHwResX;
         Params.hwResH = AdjustedHwResY;
     }
-    else if(documentFormat == Mimer::URF)
-    { // Ensure symmetric resolution for URF
+    else if(Params.format == PrintParameters::URF)
+    { // Ensure Params.format resolution for URF
         Params.hwResW = Params.hwResH = std::min(Params.hwResW, Params.hwResH);
 
         quint32 diff = std::numeric_limits<quint32>::max();
@@ -485,7 +485,7 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QStrin
 
     if(Sides != "" && Sides != "one-sided")
     {
-        if(documentFormat == Mimer::PWG)
+        if(Params.format == PrintParameters::PWG)
         {
             QString DocumentSheetBack = _attrs["pwg-raster-document-sheet-back"].toObject()["value"].toString();
             if(Sides=="two-sided-long-edge")
@@ -513,7 +513,7 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QStrin
                 }
             }
         }
-        else if(documentFormat == Mimer::URF)
+        else if(Params.format == PrintParameters::URF)
         {
             QJsonArray URfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
             if(Sides=="two-sided-long-edge")
@@ -738,7 +738,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         }
     }
 
-    adjustRasterSettings(filename, mimeType, targetFormat, jobAttrs, Params);
+    adjustRasterSettings(filename, mimeType, jobAttrs, Params);
 
     QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
