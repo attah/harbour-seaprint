@@ -88,6 +88,7 @@ private:
     QJsonValue collect_attributes(QJsonArray& attrs);
     QString consume_attribute(QJsonObject& attrs, Bytestream& data);
     void encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue value, bool subCollection=false);
+    void encode_value(Bytestream& msg, quint8 tag, QJsonValue value);
 
     Operation _operation;
 

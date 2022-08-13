@@ -361,7 +361,25 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue v
         name = "";
     }
     msg << tag << quint16(name.length()) << name.toStdString();
+    if(value.isArray())
+    {
+        QJsonArray array = value.toArray();
+        value = array.takeAt(0);
+        encode_value(msg, tag, value);
+        for(QJsonValue v : array)
+        {
+            msg << tag << quint16(0);
+            encode_value(msg, tag, v);
+        }
+    }
+    else
+    {
+        encode_value(msg, tag, value);
+    }
+}
 
+void IppMsg::encode_value(Bytestream& msg, quint8 tag, QJsonValue value)
+{
 
     switch (tag) {
         case OpAttrs:
@@ -405,19 +423,11 @@ void IppMsg::encode_attr(Bytestream& msg, quint8 tag, QString name, QJsonValue v
         case BeginCollection:
         {
             msg << (quint16)0; // length of value
-            if(value.isObject())
+            QJsonObject collection = value.toObject();
+            for(QString key : collection.keys())
             {
-                QJsonObject collection = value.toObject();
-                for(QString key : collection.keys())
-                {
-                    encode_attr(msg, collection[key].toObject()["tag"].toInt(), key,
-                                collection[key].toObject()["value"], true);
-                }
-            }
-            else
-            {
-                // TODO add support for 1-setOf in collections
-                Q_ASSERT("FIXME-array");
+                encode_attr(msg, collection[key].toObject()["tag"].toInt(), key,
+                            collection[key].toObject()["value"], true);
             }
             msg << (quint8)EndCollection << (quint16)0 << (quint16)0;
             break;
