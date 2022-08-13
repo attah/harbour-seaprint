@@ -579,12 +579,22 @@ void PrinterWorker::convertOfficeDocument(QString filename, Bytestream header, P
 
 void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintParameters Params)
 {
-    if(!PaperSizes.contains(Params.paperSizeName.c_str()))
+
+    QPageSize pageSize;
+
+    if(Params.paperSizeUnits == PrintParameters::Millimeters)
+    {
+        pageSize = QPageSize(QSizeF {Params.paperSizeW, Params.paperSizeH}, QPageSize::Millimeter);
+    }
+    else if(Params.paperSizeUnits == PrintParameters::Inches)
+    {
+        pageSize = QPageSize(QSizeF {Params.paperSizeW, Params.paperSizeH}, QPageSize::Inch);
+    }
+    else
     {
         qDebug() << "Unsupported paper size" << Params.paperSizeName.c_str();
         throw ConvertFailedException(tr("Unsupported paper size"));
     }
-    QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
 
     QFile inFile(filename);
     if(!inFile.open(QIODevice::ReadOnly))
@@ -599,7 +609,7 @@ void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintP
 
     QPdfWriter pdfWriter(tmpPdfFile.fileName());
     pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
-    QPageSize pageSize(size, QPageSize::Millimeter);
+
     pdfWriter.setPageSize(pageSize);
     pdfWriter.setResolution(resolution);
 

@@ -614,7 +614,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     qDebug() << supportedMimeTypes << supportedMimeTypes.contains(mimeType);
 
-    Params.paperSizeName = getAttrOrDefault(jobAttrs, "media").toString(Params.paperSizeName.c_str()).toStdString();
+    if(!Params.setPaperSize(getAttrOrDefault(jobAttrs, "media").toString(Params.paperSizeName.c_str()).toStdString()))
+    {
+        emit convertFailed(tr("Unsupported paper size"));
+        return;
+    }
 
     QString targetFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
     qDebug() << "target format:" << targetFormat;
@@ -649,14 +653,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     if(jobAttrs.contains("media-col") && jobAttrs.contains("media"))
     {
         qDebug() << "moving media to media-col" << Params.paperSizeName.c_str();
-        if(!PaperSizes.contains(Params.paperSizeName.c_str()))
-        {
-            emit convertFailed(tr("Unsupported paper size"));
-            return;
-        }
 
-        int x = PaperSizes[Params.paperSizeName.c_str()].width()*100;
-        int y = PaperSizes[Params.paperSizeName.c_str()].height()*100;
+        int x = Params.getPaperSizeWInMillimeters()*100;
+        int y = Params.getPaperSizeHInMillimeters()*100;
 
         QJsonObject Dimensions =
             {{"tag", IppMsg::BeginCollection},
@@ -709,11 +708,6 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     {
         Params.format = PrintParameters::Invalid;
     }
-
-    QSizeF size = PaperSizes[Params.paperSizeName.c_str()];
-    Params.paperSizeUnits = PrintParameters::Millimeters;
-    Params.paperSizeW = size.width();
-    Params.paperSizeH = size.height();
 
     qDebug() << "Printing job" << jobOpAttrs << jobAttrs;
 
