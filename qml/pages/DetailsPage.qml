@@ -13,6 +13,7 @@ Page {
         contentHeight: col.height
 
         PullDownMenu {
+            visible: identifyLabel.visible
 
             MenuItem {
                 id: identifyLabel
