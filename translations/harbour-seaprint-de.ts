@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>Identify printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker identifizieren</translation>
     </message>
 </context>
 <context>
@@ -367,7 +367,7 @@
     </message>
     <message>
         <source>If you are still seeing this message despite installing Calligra, that can be because of SailJail in Sailfish OS 4.x before the compatibility permission in 4.4. You can either upgrade to 4.4 or edit out the SailJail section in /usr/share/applications/harbour-seaprint.desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie diese Meldung trotz der installation von Calligra immer noch sehen, kann das an Sailjail in SailfishOS 4.x liegen, da die entsprechende Kompatibilitätsberechtigung erst mit 4.4 hinzugefügt wurde. Sie können jetzt entweder auf SailfishOS 4.4 upgraden oder den SailJail Abschnitt in der Datei /usr/share/applications/harbour-seaprint.desktop bearbeiten.</translation>
     </message>
 </context>
 <context>
@@ -506,7 +506,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Unknown target format</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekanntes Zielformat</translation>
     </message>
     <message>
         <source>Preparing</source>
@@ -518,11 +518,11 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation type="unfinished"></translation>
+        <translation> Fehler beim Drucken</translation>
     </message>
     <message>
         <source>Inconsistent duplex setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Uneinheitliche Duplex-Einstellung</translation>
     </message>
 </context>
 <context>
@@ -533,7 +533,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortgeschrittene</translation>
     </message>
 </context>
 <context>
@@ -583,11 +583,11 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Allow external connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Verbindungen erlauben</translation>
     </message>
     <message>
         <source>Allow SeaPrint to fetch recources like icons and option name dictionaries from addresses that are not the printer itself. Some printer makers store icons on their website as opposed to locally on the printer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Seaprint Ressourcen wie Icons und Wörterbücher für optionale Namen zu holen die nicht vom Drucker selbst sind. Einige Druckerhersteller speichern Icons auf ihren Webseiten und nicht auf ihren Druckern.</translation>
     </message>
 </context>
 <context>
@@ -613,1234 +613,1201 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>plaintext</source>
-        <translation type="unfinished"></translation>
+        <translation>Klartext</translation>
     </message>
     <message>
         <source>SVGs</source>
-        <translation type="unfinished"></translation>
+        <translation>SVGs</translation>
     </message>
 </context>
 <context>
     <name>strings</name>
     <message>
         <source>28 x 40″</source>
-        <translation type="unfinished"></translation>
+        <translation>28 x 40 Zoll</translation>
     </message>
     <message>
         <source>2a0</source>
-        <translation type="unfinished"></translation>
+        <translation>2a0</translation>
     </message>
     <message>
         <source>A0</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A0</translation>
     </message>
     <message>
         <source>A0x3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A0x3</translation>
     </message>
     <message>
         <source>A10</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A10</translation>
     </message>
     <message>
         <source>A1</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A1</translation>
     </message>
     <message>
         <source>A1x3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A1x3</translation>
     </message>
     <message>
         <source>A1x4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A1x4</translation>
     </message>
     <message>
         <source>A2</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A2</translation>
     </message>
     <message>
         <source>A2x3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A2x3</translation>
     </message>
     <message>
         <source>A2x4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A2x4</translation>
     </message>
     <message>
         <source>A2x5</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A2x5</translation>
     </message>
     <message>
         <source>A3 (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3+</translation>
     </message>
     <message>
         <source>A3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3</translation>
     </message>
     <message>
         <source>A3x3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3x3</translation>
     </message>
     <message>
         <source>A3x4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3x4</translation>
     </message>
     <message>
         <source>A3x5</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3x5</translation>
     </message>
     <message>
         <source>A3x6</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3x6</translation>
     </message>
     <message>
         <source>A3x7</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A3x7</translation>
     </message>
     <message>
         <source>A4 (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4+</translation>
     </message>
     <message>
         <source>A4 (Tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4 (Tablet)</translation>
     </message>
     <message>
         <source>A4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4</translation>
     </message>
     <message>
         <source>A4x3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x3</translation>
     </message>
     <message>
         <source>A4x4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x4</translation>
     </message>
     <message>
         <source>A4x5</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x5</translation>
     </message>
     <message>
         <source>A4x6</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x6</translation>
     </message>
     <message>
         <source>A4x7</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x7</translation>
     </message>
     <message>
         <source>A4x8</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x8</translation>
     </message>
     <message>
         <source>A4x9</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A4x9</translation>
     </message>
     <message>
         <source>A5 (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A5+</translation>
     </message>
     <message>
         <source>A5</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A5</translation>
     </message>
     <message>
         <source>A6</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A6</translation>
     </message>
     <message>
         <source>A7</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A7</translation>
     </message>
     <message>
         <source>A8</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A8</translation>
     </message>
     <message>
         <source>A9</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN A9</translation>
     </message>
     <message>
         <source>B0</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B0</translation>
     </message>
     <message>
         <source>B10</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B10</translation>
     </message>
     <message>
         <source>B1</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B1</translation>
     </message>
     <message>
         <source>B2</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B2</translation>
     </message>
     <message>
         <source>B3</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B3</translation>
     </message>
     <message>
         <source>B4</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B4</translation>
     </message>
     <message>
         <source>B5 (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B5+</translation>
     </message>
     <message>
         <source>Envelope B5</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN B5</translation>
     </message>
     <message>
         <source>B6</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B6</translation>
     </message>
     <message>
         <source>Envelope B6/C4</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN B6/C4</translation>
     </message>
     <message>
         <source>B7</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B7</translation>
     </message>
     <message>
         <source>B8</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B8</translation>
     </message>
     <message>
         <source>B9</source>
-        <translation type="unfinished"></translation>
+        <translation>DIN B9</translation>
     </message>
     <message>
         <source>CEnvelope 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C0</translation>
     </message>
     <message>
         <source>CEnvelope 10</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C10</translation>
     </message>
     <message>
         <source>CEnvelope 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C1</translation>
     </message>
     <message>
         <source>CEnvelope 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C2</translation>
     </message>
     <message>
         <source>CEnvelope 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C3</translation>
     </message>
     <message>
         <source>CEnvelope 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C4</translation>
     </message>
     <message>
         <source>CEnvelope 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C5</translation>
     </message>
     <message>
         <source>CEnvelope 6</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C6</translation>
     </message>
     <message>
         <source>CEnvelope 6c5</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C6/5</translation>
     </message>
     <message>
         <source>CEnvelope 7</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C7</translation>
     </message>
     <message>
         <source>CEnvelope 7c6</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C7/6</translation>
     </message>
     <message>
         <source>CEnvelope 8</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C8</translation>
     </message>
     <message>
         <source>CEnvelope 9</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN C9</translation>
     </message>
     <message>
         <source>Envelope DL</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag DIN Lang</translation>
     </message>
     <message>
         <source>Id-1</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO/IEC ID-1 (Kreditkarte)</translation>
     </message>
     <message>
         <source>Id-3</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO/IEC ID-3 (Kreditkarte)</translation>
     </message>
     <message>
         <source>ISO RA0</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO RA0 (A0 unbeschitten)</translation>
     </message>
     <message>
         <source>ISO RA1</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO RA1 (A1 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO RA2</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO RA2 (A2 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO RA3</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO RA3 (A3 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO RA4</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO RA4 (A4 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO SRA0</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO SRA0 (A0 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO SRA1</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO SRA1 (A1 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO SRA2</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO SRA2 (A2 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO SRA3</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO SRA3 (A3 unbeschnitten)</translation>
     </message>
     <message>
         <source>ISO SRA4</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO SRA4 (A4 unbeschnitten)</translation>
     </message>
     <message>
         <source>JIS B0</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B0</translation>
     </message>
     <message>
         <source>JIS B10</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B10</translation>
     </message>
     <message>
         <source>JIS B1</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B1</translation>
     </message>
     <message>
         <source>JIS B2</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B2</translation>
     </message>
     <message>
         <source>JIS B3</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B3</translation>
     </message>
     <message>
         <source>JIS B4</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B4</translation>
     </message>
     <message>
         <source>JIS B5</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B5</translation>
     </message>
     <message>
         <source>JIS B6</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B6</translation>
     </message>
     <message>
         <source>JIS B7</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B7</translation>
     </message>
     <message>
         <source>JIS B8</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B8</translation>
     </message>
     <message>
         <source>JIS B9</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS B9</translation>
     </message>
     <message>
         <source>JIS Executive</source>
-        <translation type="unfinished"></translation>
+        <translation>JIS Executive</translation>
     </message>
     <message>
         <source>Envelope Chou 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Chou 2</translation>
     </message>
     <message>
         <source>Envelope Chou 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Chou 3</translation>
     </message>
     <message>
         <source>Envelope Chou 40</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Chou 40</translation>
     </message>
     <message>
         <source>Envelope Chou 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Chou 4</translation>
     </message>
     <message>
         <source>Hagaki</source>
-        <translation type="unfinished"></translation>
+        <translation>Hagaki (Japanische Postkarte)</translation>
     </message>
     <message>
         <source>Envelope Kahu</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Kahu</translation>
     </message>
     <message>
         <source>270 x 382mm</source>
-        <translation type="unfinished"></translation>
+        <translation>270 x 382 mm</translation>
     </message>
     <message>
         <source>Envelope Kahu 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Kahu 2</translation>
     </message>
     <message>
         <source>216 x 277mm</source>
-        <translation type="unfinished"></translation>
+        <translation>216 x 277 mm</translation>
     </message>
     <message>
         <source>197 x 267mm</source>
-        <translation type="unfinished"></translation>
+        <translation>197 x 267 mm</translation>
     </message>
     <message>
         <source>190 x 240mm</source>
-        <translation type="unfinished"></translation>
+        <translation>190 x 240 mm</translation>
     </message>
     <message>
         <source>142 x 205mm</source>
-        <translation type="unfinished"></translation>
+        <translation>142 x 205 mm</translation>
     </message>
     <message>
         <source>119 x 197mm</source>
-        <translation type="unfinished"></translation>
+        <translation>119 x 197 mm</translation>
     </message>
     <message>
         <source>Oufuku Reply Postcard</source>
-        <translation type="unfinished"></translation>
+        <translation>Oufuku Reply (Japanische Postkarte)</translation>
     </message>
     <message>
         <source>Envelope You 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag You 4</translation>
     </message>
     <message>
         <source>10 x 11″</source>
-        <translation type="unfinished"></translation>
+        <translation>10 x 11″</translation>
     </message>
     <message>
-        <source>10 x 13″</source>
-        <translation type="unfinished"></translation>
+        <source>10 x 13 Zoll</source>
+        <translation>10 x 13 Zoll</translation>
     </message>
     <message>
         <source>10 x 14″</source>
-        <translation type="unfinished"></translation>
+        <translation>10 x 14 Zoll</translation>
     </message>
     <message>
         <source>10 x 15″</source>
-        <translation type="unfinished"></translation>
+        <translation>10 x 15 Zoll</translation>
     </message>
     <message>
         <source>11 x 12″</source>
-        <translation type="unfinished"></translation>
+        <translation>10 x 12 Zoll</translation>
     </message>
     <message>
         <source>11 x 15″</source>
-        <translation type="unfinished"></translation>
+        <translation>11 x 15 Zoll</translation>
     </message>
     <message>
         <source>12 x 19″</source>
-        <translation type="unfinished"></translation>
+        <translation>12 x 19 Zoll</translation>
     </message>
     <message>
         <source>5 x 7″</source>
-        <translation type="unfinished"></translation>
+        <translation>5 x 7 Zoll</translation>
     </message>
     <message>
         <source>6 x 9″</source>
-        <translation type="unfinished"></translation>
+        <translation>6 x 9 Zoll</translation>
     </message>
     <message>
         <source>7 x 9″</source>
-        <translation type="unfinished"></translation>
+        <translation>7 x 9 Zoll</translation>
     </message>
     <message>
         <source>9 x 11″</source>
-        <translation type="unfinished"></translation>
+        <translation>9 x 11 Zoll</translation>
     </message>
     <message>
         <source>Envelope A2</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag A2</translation>
     </message>
     <message>
         <source>9 x 12″</source>
-        <translation type="unfinished"></translation>
+        <translation>9 x 12 Zoll</translation>
     </message>
     <message>
         <source>12 x 18″</source>
-        <translation type="unfinished"></translation>
+        <translation>12 x 18 Zoll</translation>
     </message>
     <message>
         <source>18 x 24″</source>
-        <translation type="unfinished"></translation>
+        <translation>18 x 24 Zoll</translation>
     </message>
     <message>
         <source>24 x 36″</source>
-        <translation type="unfinished"></translation>
+        <translation>24 x 36 Zoll</translation>
     </message>
     <message>
         <source>26 x 38″</source>
-        <translation type="unfinished"></translation>
+        <translation>26 x 38 Zoll</translation>
     </message>
     <message>
         <source>27 x 39″</source>
-        <translation type="unfinished"></translation>
+        <translation>27 x 39 Zoll</translation>
     </message>
     <message>
         <source>36 x 48″</source>
-        <translation type="unfinished"></translation>
+        <translation>36 x 48 Zoll</translation>
     </message>
     <message>
         <source>12 x 19.17″</source>
-        <translation type="unfinished"></translation>
+        <translation>12 x 19,17 Zoll</translation>
     </message>
     <message>
         <source>Envelope C5</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag C5</translation>
     </message>
     <message>
         <source>17 x 22″</source>
-        <translation type="unfinished"></translation>
+        <translation>17 x 22 Zoll</translation>
     </message>
     <message>
         <source>22 x 34″</source>
-        <translation type="unfinished"></translation>
+        <translation>22 x 34 Zoll</translation>
     </message>
     <message>
         <source>34 x 44″</source>
-        <translation type="unfinished"></translation>
+        <translation>34 x 44 Zoll</translation>
     </message>
     <message>
         <source>11 x 14″</source>
-        <translation type="unfinished"></translation>
+        <translation>11 x 14 Zoll</translation>
     </message>
     <message>
         <source>12 x 14″</source>
-        <translation type="unfinished"></translation>
+        <translation>12 x 14 Zoll</translation>
     </message>
     <message>
         <source>Executive</source>
-        <translation type="unfinished"></translation>
+        <translation>Executive</translation>
     </message>
     <message>
         <source>44 x 68″</source>
-        <translation type="unfinished"></translation>
+        <translation>44 x 68 Zoll</translation>
     </message>
     <message>
         <source>European Fanfold</source>
-        <translation type="unfinished"></translation>
+        <translation>Europäische Zickzackfaltung</translation>
     </message>
     <message>
         <source>US Fanfold</source>
-        <translation type="unfinished"></translation>
+        <translation>US Zickzackfaltung</translation>
     </message>
     <message>
         <source>Foolscap</source>
-        <translation type="unfinished"></translation>
+        <translation>Foolscap</translation>
     </message>
     <message>
         <source>8 x 13″</source>
-        <translation type="unfinished"></translation>
+        <translation>8 x 13 Zoll</translation>
     </message>
     <message>
         <source>8 x 10″</source>
-        <translation type="unfinished"></translation>
+        <translation>8 x 10 Zoll</translation>
     </message>
     <message>
         <source>3 x 5″</source>
-        <translation type="unfinished"></translation>
+        <translation>3 x 5 Zoll</translation>
     </message>
     <message>
         <source>6 x 8″</source>
-        <translation type="unfinished"></translation>
+        <translation>6 x 8 Zoll</translation>
     </message>
     <message>
         <source>4 x 6″</source>
-        <translation type="unfinished"></translation>
+        <translation>4 x 6 Zoll</translation>
     </message>
     <message>
         <source>5 x 8″</source>
-        <translation type="unfinished"></translation>
+        <translation>5 x 8 Zoll</translation>
     </message>
     <message>
         <source>Statement</source>
-        <translation type="unfinished"></translation>
+        <translation>Anweisung</translation>
     </message>
     <message>
         <source>11 x 17″</source>
-        <translation type="unfinished"></translation>
+        <translation>11 x 17 Zoll</translation>
     </message>
     <message>
         <source>US Legal (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>US Legal (Extra)</translation>
     </message>
     <message>
         <source>US Legal</source>
-        <translation type="unfinished"></translation>
+        <translation>US Legal</translation>
     </message>
     <message>
         <source>US Letter (Extra)</source>
-        <translation type="unfinished"></translation>
+        <translation>US Letter (Extra)</translation>
     </message>
     <message>
         <source>US Letter (Plus)</source>
-        <translation type="unfinished"></translation>
+        <translation>US Letter (Plus)</translation>
     </message>
     <message>
         <source>US Letter</source>
-        <translation type="unfinished"></translation>
+        <translation>US Letter</translation>
     </message>
     <message>
         <source>Envelope Monarch</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Monarch</translation>
     </message>
     <message>
         <source>Envelope #10</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Nr. 10</translation>
     </message>
     <message>
         <source>Envelope #11</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Nr. 11</translation>
     </message>
     <message>
         <source>Envelope #12</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Nr. 12</translation>
     </message>
     <message>
         <source>Envelope #14</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Nr. 14</translation>
     </message>
     <message>
         <source>Envelope #9</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Nr. 9</translation>
     </message>
     <message>
         <source>8.5 x 13.4″</source>
-        <translation type="unfinished"></translation>
+        <translation>8,5 x 13,4 Zoll</translation>
     </message>
     <message>
         <source>Envelope Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Personal</translation>
     </message>
     <message>
         <source>Quarto</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarto</translation>
     </message>
     <message>
         <source>8.94 x 14″</source>
-        <translation type="unfinished"></translation>
+        <translation>8,94 x 14 Zoll</translation>
     </message>
     <message>
         <source>13 x 19″</source>
-        <translation type="unfinished"></translation>
+        <translation>13 x 19 Zoll</translation>
     </message>
     <message>
         <source>30 x 42″</source>
-        <translation type="unfinished"></translation>
+        <translation>30 x 42 Zoll</translation>
     </message>
     <message>
         <source>12 x 16″</source>
-        <translation type="unfinished"></translation>
+        <translation>12 x 16 Zoll</translation>
     </message>
     <message>
         <source>14 x 17″</source>
-        <translation type="unfinished"></translation>
+        <translation>14 x 17 Zoll</translation>
     </message>
     <message>
         <source>18 x 22″</source>
-        <translation type="unfinished"></translation>
+        <translation>18 x 22 Zoll</translation>
     </message>
     <message>
         <source>17 x 24″</source>
-        <translation type="unfinished"></translation>
+        <translation>17 x 24 Zoll</translation>
     </message>
     <message>
         <source>2 x 3.5″</source>
-        <translation type="unfinished"></translation>
+        <translation>2 x 3,5 Zoll</translation>
     </message>
     <message>
         <source>10 x 12″</source>
-        <translation type="unfinished"></translation>
+        <translation>10 x 12 Zoll</translation>
     </message>
     <message>
         <source>20 x 24″</source>
-        <translation type="unfinished"></translation>
+        <translation>20 x 24 Zoll</translation>
     </message>
     <message>
         <source>3.5 x 5″</source>
-        <translation type="unfinished"></translation>
+        <translation>3,5 x 5 Zoll</translation>
     </message>
     <message>
         <source>4 x 4″</source>
-        <translation type="unfinished"></translation>
+        <translation>4 x 4 Zoll</translation>
     </message>
     <message>
         <source>5 x 5″</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>184 x 260mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>195 x 270mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>55 x 85mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>55 x 91mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>54 x 86mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>275 x 395mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>89 x 119mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <translation>5 x 5 Zoll</translation>
+    </message>-*
         <source>Folio (Special)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spezialfolie</translation>
     </message>
     <message>
         <source>Envelope Invitation</source>
-        <translation type="unfinished"></translation>
+        <translation>Einladungsumschlag</translation>
     </message>
     <message>
         <source>Envelope Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Italienischer Umschlag</translation>
     </message>
     <message>
         <source>198 x 275mm</source>
-        <translation type="unfinished"></translation>
+        <translation>198 x 275 mm</translation>
     </message>
     <message>
         <source>200 x 300</source>
-        <translation type="unfinished"></translation>
+        <translation>200 x 300 mm</translation>
     </message>
     <message>
         <source>130 x 180mm</source>
-        <translation type="unfinished"></translation>
+        <translation>130 x 180 mm</translation>
     </message>
     <message>
         <source>267 x 389mm</source>
-        <translation type="unfinished"></translation>
+        <translation>267 x 389 mm</translation>
     </message>
     <message>
         <source>Envelope Postfix</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag Postfix</translation>
     </message>
     <message>
         <source>100 x 150mm</source>
-        <translation type="unfinished"></translation>
+        <translation>100 x 150 mm</translation>
     </message>
     <message>
         <source>89 x 89mm</source>
-        <translation type="unfinished"></translation>
+        <translation>89 x 89 mm</translation>
     </message>
     <message>
         <source>100 x 200mm</source>
-        <translation type="unfinished"></translation>
+        <translation>100 x 200 mm</translation>
     </message>
     <message>
         <source>Envelope Chinese #10</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 10</translation>
     </message>
     <message>
         <source>Chinese 16k</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesisch 16k</translation>
     </message>
     <message>
         <source>Envelope Chinese #1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 1</translation>
     </message>
     <message>
         <source>Envelope Chinese #2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 2</translation>
     </message>
     <message>
         <source>Chinese 32k</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesisch 32k</translation>
     </message>
     <message>
         <source>Envelope Chinese #3</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 3</translation>
     </message>
     <message>
         <source>Envelope Chinese #4</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 4</translation>
     </message>
     <message>
         <source>Envelope Chinese #5</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 5</translation>
     </message>
     <message>
         <source>Envelope Chinese #6</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 6</translation>
     </message>
     <message>
         <source>Envelope Chinese #7</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 7</translation>
     </message>
     <message>
         <source>Envelope Chinese #8</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinesischer Umschlag Nr. 8</translation>
     </message>
     <message>
         <source>ROC 16k</source>
-        <translation type="unfinished"></translation>
+        <translation>ROC 16k</translation>
     </message>
     <message>
         <source>ROC 8k</source>
-        <translation type="unfinished"></translation>
+        <translation>ROC 8k</translation>
     </message>
     <message>
         <source>Aluminum</source>
-        <translation type="unfinished"></translation>
+        <translation>Aluminium</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Back Print Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückseitig bedruckter Film</translation>
     </message>
     <message>
         <source>Cardboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Karton</translation>
     </message>
     <message>
         <source>Cardstock</source>
-        <translation type="unfinished"></translation>
+        <translation>Karteikarte</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontinuierlich</translation>
     </message>
     <message>
         <source>Continuous Long</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontinuierlich lang</translation>
     </message>
     <message>
         <source>Continuous Short</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontinuierlich kurz</translation>
     </message>
     <message>
         <source>Corrugated Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Wellpappe</translation>
     </message>
     <message>
         <source>Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Optische Disk</translation>
     </message>
     <message>
         <source>Glossy Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Glänzende Optische Disk</translation>
     </message>
     <message>
         <source>High Gloss Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochglänzende Optische Disk</translation>
     </message>
     <message>
         <source>Matte Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Matte Optische Disk</translation>
     </message>
     <message>
         <source>Satin Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Satinierte Optische Disk</translation>
     </message>
     <message>
         <source>Semi-Gloss Optical Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Seidenmatte Optische Disk</translation>
     </message>
     <message>
         <source>Double Wall</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppelwandig</translation>
     </message>
     <message>
         <source>Dry Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Trockener Film</translation>
     </message>
     <message>
         <source>DVD</source>
-        <translation type="unfinished"></translation>
+        <translation>DVD</translation>
     </message>
     <message>
         <source>Embossing Foil</source>
-        <translation type="unfinished"></translation>
+        <translation>Prägefolie</translation>
     </message>
     <message>
         <source>End Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Abschluss Brett</translation>
     </message>
     <message>
         <source>Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag</translation>
     </message>
     <message>
         <source>Archival Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivierungsumschlag</translation>
     </message>
     <message>
         <source>Bond Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlag</translation>
     </message>
     <message>
         <source>Coated Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschichteter Umschlag</translation>
     </message>
     <message>
         <source>Cotton Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag aus Baumwolle</translation>
     </message>
     <message>
         <source>Fine Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Edler Umschlag</translation>
     </message>
     <message>
         <source>Heavyweight Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwerer Umschlag</translation>
     </message>
     <message>
         <source>Inkjet Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Tintenstrahl Umschlag</translation>
     </message>
     <message>
         <source>Lightweight Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Leichter Umschlag</translation>
     </message>
     <message>
         <source>Plain Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfacher Umschlag</translation>
     </message>
     <message>
         <source>Preprinted Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgedruckter Umschlag</translation>
     </message>
     <message>
         <source>Windowed Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag mit Sichtfenster</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoff</translation>
     </message>
     <message>
         <source>Archival Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivirung Stoff</translation>
     </message>
     <message>
         <source>Glossy Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Glänzender Stoff</translation>
     </message>
     <message>
         <source>High Gloss Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochglänzender Stoff</translation>
     </message>
     <message>
         <source>Matte Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Matter Stoff</translation>
     </message>
     <message>
         <source>Semi-Gloss Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Seidenmatter Stoff</translation>
     </message>
     <message>
         <source>Waterproof Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserdichter Stoff</translation>
     </message>
     <message>
         <source>Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Film</translation>
     </message>
     <message>
         <source>Flexo Base</source>
-        <translation type="unfinished"></translation>
+        <translation>Flexo Untergrund</translation>
     </message>
     <message>
         <source>Flexo Photo Polymer</source>
-        <translation type="unfinished"></translation>
+        <translation>Flexo-Foto-Plastik</translation>
     </message>
     <message>
         <source>Flute</source>
-        <translation type="unfinished"></translation>
+        <translation>Flöte</translation>
     </message>
     <message>
         <source>Foil</source>
-        <translation type="unfinished"></translation>
+        <translation>Folie</translation>
     </message>
     <message>
         <source>Full Cut Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständig ausgeschnittene Registerkarten</translation>
     </message>
     <message>
         <source>Glass</source>
-        <translation type="unfinished"></translation>
+        <translation>Glas</translation>
     </message>
     <message>
         <source>Glass Colored</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbiges Glas</translation>
     </message>
     <message>
         <source>Glass Opaque</source>
-        <translation type="unfinished"></translation>
+        <translation>Glas Undurchsichtig</translation>
     </message>
     <message>
         <source>Glass Surfaced</source>
-        <translation type="unfinished"></translation>
+        <translation>Glas überzogen</translation>
     </message>
     <message>
         <source>Glass Textured</source>
-        <translation type="unfinished"></translation>
+        <translation>Glas strukturiert</translation>
     </message>
     <message>
         <source>Gravure Cylinder</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefdruck Zylinder</translation>
     </message>
     <message>
         <source>Image Setter Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Image Setter Papier</translation>
     </message>
     <message>
         <source>Imaging Cylinder</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildgebende Walze</translation>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiketten</translation>
     </message>
     <message>
         <source>Colored Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbige Etiketten</translation>
     </message>
     <message>
         <source>Glossy Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Glänzende Etiketten</translation>
     </message>
     <message>
         <source>High Gloss Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochglänzende Etiketten</translation>
     </message>
     <message>
         <source>Inkjet Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiketten für Tintenstrahldrucker</translation>
     </message>
     <message>
         <source>Matte Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Matte Etiketten</translation>
     </message>
     <message>
         <source>Permanent Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Dauerhafte Etiketten</translation>
     </message>
     <message>
         <source>Satin Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Satinierte Etiketten</translation>
     </message>
     <message>
         <source>Security Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheits Etiketten</translation>
     </message>
     <message>
         <source>Semi-Gloss Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Seidenmatte Etiketten</translation>
     </message>
     <message>
         <source>Laminating Foil</source>
-        <translation type="unfinished"></translation>
+        <translation>Laminierfolie</translation>
     </message>
     <message>
         <source>Letterhead</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefpapier</translation>
     </message>
     <message>
         <source>Metal</source>
-        <translation type="unfinished"></translation>
+        <translation>Matall</translation>
     </message>
     <message>
         <source>Metal Glossy</source>
-        <translation type="unfinished"></translation>
+        <translation>Glänzendes Metall</translation>
     </message>
     <message>
         <source>Metal High Gloss</source>
-        <translation type="unfinished"></translation>
+        <translation>hochglänzendes Metall</translation>
     </message>
     <message>
         <source>Metal Matte</source>
-        <translation type="unfinished"></translation>
+        <translation>Mattes Metall</translation>
     </message>
     <message>
         <source>Metal Satin</source>
-        <translation type="unfinished"></translation>
+        <translation>Satiniertes Metall</translation>
     </message>
     <message>
         <source>Metal Semi Gloss</source>
-        <translation type="unfinished"></translation>
+        <translation>Seidenmattes Metall</translation>
     </message>
     <message>
         <source>Mounting Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Klebeband</translation>
     </message>
     <message>
         <source>Multi Layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrschichtig</translation>
     </message>
     <message>
         <source>Multi Part Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrteilige Form</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere</translation>
     </message>
     <message>
         <source>Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Papier</translation>
     </message>
     <message>
         <source>Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto Papier</translation>
     </message>
     <message>
         <source>Photographic Archival</source>
-        <translation type="unfinished"></translation>
+        <translation>Fotografische Archivierung</translation>
     </message>
     <message>
         <source>Photo Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto Film</translation>
     </message>
     <message>
         <source>Glossy Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Glänzendes Foto Papier</translation>
     </message>
     <message>
         <source>High Gloss Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochglänzendes Foto Papier</translation>
     </message>
     <message>
         <source>Matte Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Mattes Foto Papier</translation>
     </message>
     <message>
         <source>Satin Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Satiniertes Foto Papier</translation>
     </message>
     <message>
         <source>Semi-Gloss Photo Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Seidenmattes Foto Papier</translation>
     </message>
     <message>
         <source>Plastic</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik</translation>
     </message>
     <message>
         <source>Plastic Archival</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Archivierung</translation>
     </message>
     <message>
         <source>Plastic Colored</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Gefärbt</translation>
     </message>
     <message>
         <source>Plastic Glossy</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Glänzend</translation>
     </message>
     <message>
         <source>Plastic High Gloss</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Hochglänzened</translation>
     </message>
     <message>
         <source>Plastic Matte</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Matt</translation>
     </message>
     <message>
         <source>Plastic Satin</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Satiniert</translation>
     </message>
     <message>
         <source>Plastic Semi Gloss</source>
-        <translation type="unfinished"></translation>
+        <translation>Plastik Seidenmatt</translation>
     </message>
     <message>
         <source>Plate</source>
-        <translation type="unfinished"></translation>
+        <translation>Platte</translation>
     </message>
     <message>
         <source>Polyester</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyester</translation>
     </message>
     <message>
         <source>Pre Cut Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgeschnittene Registerkarten</translation>
     </message>
     <message>
         <source>Roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolle</translation>
     </message>
     <message>
         <source>Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildschirm</translation>
     </message>
     <message>
         <source>Screen Paged</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildschirm Ausgelagert</translation>
     </message>
     <message>
         <source>Self Adhesive</source>
-        <translation type="unfinished"></translation>
+        <translation>Selbstklebend</translation>
     </message>
     <message>
         <source>Self Adhesive Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Selbstklebender Film</translation>
     </message>
     <message>
         <source>Shrink Foil</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrumpfschlauch</translation>
     </message>
     <message>
         <source>Single Face</source>
-        <translation type="unfinished"></translation>
+        <translation>einseitig</translation>
     </message>
     <message>
         <source>Single Wall</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzelne Wand</translation>
     </message>
     <message>
         <source>Sleeve</source>
-        <translation type="unfinished"></translation>
+        <translation>Hülse</translation>
     </message>
     <message>
         <source>Stationery</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreibwaren</translation>
     </message>
     <message>
         <source>Stationery Archival</source>
