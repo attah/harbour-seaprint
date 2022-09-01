@@ -1807,835 +1807,835 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Stationery</source>
-        <translation>Schreibwaren</translation>
+        <translation>Briefpapier</translation>
     </message>
     <message>
         <source>Stationery Archival</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivpapier</translation>
     </message>
     <message>
         <source>Coated Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestrichenes Papier</translation>
     </message>
     <message>
         <source>Stationery Cotton</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefpapier aus Baumwolle</translation>
     </message>
     <message>
         <source>Vellum Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Pergamentpapier</translation>
     </message>
     <message>
         <source>Heavyweight Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Schweres Papier</translation>
     </message>
     <message>
         <source>Stationery Heavyweight Coated</source>
-        <translation type="unfinished"></translation>
+        <translation>Schweres gestrichenes Papier</translation>
     </message>
     <message>
         <source>Stationery Inkjet Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Tintenstrahler Briefpapier</translation>
     </message>
     <message>
         <source>Lightweight Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Leichtes Papier</translation>
     </message>
     <message>
         <source>Preprinted Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgedrucktes Papier</translation>
     </message>
     <message>
         <source>Punched Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelochtes Papier</translation>
     </message>
     <message>
         <source>Tab Stock</source>
-        <translation type="unfinished"></translation>
+        <translation>Registerkarten Bestahnd</translation>
     </message>
     <message>
         <source>Tractor</source>
-        <translation type="unfinished"></translation>
+        <translation>Traktor</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Übertragung</translation>
     </message>
     <message>
         <source>Transparency</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparenz</translation>
     </message>
     <message>
         <source>Triple Wall</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreiwandig</translation>
     </message>
     <message>
         <source>Wet Film</source>
-        <translation type="unfinished"></translation>
+        <translation>Nassfilm</translation>
     </message>
     <message>
         <source>Old Alerts Have Been Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Alte Ausschreibungen wurden entfernt</translation>
     </message>
     <message>
         <source>Bander Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Bandeerole hinzugefügt</translation>
     </message>
     <message>
         <source>Bander Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole fast leer</translation>
     </message>
     <message>
         <source>Bander Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole fast voll</translation>
     </message>
     <message>
         <source>Bander At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole am Limit</translation>
     </message>
     <message>
         <source>Bander Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole geschlossen</translation>
     </message>
     <message>
         <source>Bander Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolenkonfiguration ändern</translation>
     </message>
     <message>
         <source>Bander Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderoledeckel geschlossen</translation>
     </message>
     <message>
         <source>Bander Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolendeckel offen</translation>
     </message>
     <message>
         <source>Bander Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole leer</translation>
     </message>
     <message>
         <source>Bander Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole voll</translation>
     </message>
     <message>
         <source>Bander Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderoliererverriegelung geschossen</translation>
     </message>
     <message>
         <source>Bander Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderoliererverriegelung offen</translation>
     </message>
     <message>
         <source>Bander Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolenstau</translation>
     </message>
     <message>
         <source>Bander Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Banderole fast zu Ende</translation>
     </message>
     <message>
         <source>Bander Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Banderole zu Ende</translation>
     </message>
     <message>
         <source>Bander Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolenspeicher Erschöpft</translation>
     </message>
     <message>
         <source>Bander Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole fehlt</translation>
     </message>
     <message>
         <source>Bander Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Banderolierers ausgefallen</translation>
     </message>
     <message>
         <source>Bander Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole Nahe am Limit</translation>
     </message>
     <message>
         <source>Bander Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer Offline</translation>
     </message>
     <message>
         <source>Bander Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole geöffned</translation>
     </message>
     <message>
         <source>Bander Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole über Temperatur</translation>
     </message>
     <message>
         <source>Bander Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer im Energiesparmodus</translation>
     </message>
     <message>
         <source>Bander Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer wiederherstellbahrer Fehler</translation>
     </message>
     <message>
         <source>Bander Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer wiederherstellbahrer Speicher</translation>
     </message>
     <message>
         <source>Bander Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole entfernt</translation>
     </message>
     <message>
         <source>Bander Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Bander Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole Ressource entfernt</translation>
     </message>
     <message>
         <source>Bander Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer Thermister-Ausfall</translation>
     </message>
     <message>
         <source>Bander Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer Zeitfehler</translation>
     </message>
     <message>
         <source>Bander Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer ausgeschaltet</translation>
     </message>
     <message>
         <source>Bander Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer eingeschaltet</translation>
     </message>
     <message>
         <source>Bander Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderole unter Temperatur</translation>
     </message>
     <message>
         <source>Bander Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer Unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Bander Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer Unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Bander Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Banderolierer aufwärmen</translation>
     </message>
     <message>
         <source>Binder Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel hinzugefügt</translation>
     </message>
     <message>
         <source>Binder Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel fast leer</translation>
     </message>
     <message>
         <source>Binder Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel fast voll</translation>
     </message>
     <message>
         <source>Binder At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel am Limit</translation>
     </message>
     <message>
         <source>Binder Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel geschlossen</translation>
     </message>
     <message>
         <source>Binder Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderung der Bindemittel</translation>
     </message>
     <message>
         <source>Binder Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemitteldeckel geschlossen</translation>
     </message>
     <message>
         <source>Binder Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemitteldeckel offen</translation>
     </message>
     <message>
         <source>Binder Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel leer</translation>
     </message>
     <message>
         <source>Binder Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel voll</translation>
     </message>
     <message>
         <source>Binder Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel verriegelung geschlossen</translation>
     </message>
     <message>
         <source>Binder Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel verriegelung offen</translation>
     </message>
     <message>
         <source>Binder Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelstau</translation>
     </message>
     <message>
         <source>Binder Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Bindemittels fast zu Ende</translation>
     </message>
     <message>
         <source>Binder Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Bindemittels zu Ende</translation>
     </message>
     <message>
         <source>Binder Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelspeicher erschöpft</translation>
     </message>
     <message>
         <source>Binder Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel fehlt</translation>
     </message>
     <message>
         <source>Binder Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Bindemittelmschine ausgefallen</translation>
     </message>
     <message>
         <source>Binder Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittels Nahe am Limit</translation>
     </message>
     <message>
         <source>Binder Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine offline</translation>
     </message>
     <message>
         <source>Binder Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine offen</translation>
     </message>
     <message>
         <source>Binder Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel über Temperatur</translation>
     </message>
     <message>
         <source>Binder Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Binder Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine wiederherstellbahrer Fehler</translation>
     </message>
     <message>
         <source>Binder Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine wiederherstellbahrer Speicher</translation>
     </message>
     <message>
         <source>Binder Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel entfernt</translation>
     </message>
     <message>
         <source>Binder Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Binder Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel Ressource entfernt</translation>
     </message>
     <message>
         <source>Binder Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel Thermister-Ausfall</translation>
     </message>
     <message>
         <source>Binder Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine Zeitfehler</translation>
     </message>
     <message>
         <source>Binder Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Binder Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Binder Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel unter Temperatur</translation>
     </message>
     <message>
         <source>Binder Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine nicht behebbarer Ausfall</translation>
     </message>
     <message>
         <source>Binder Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittelmaschine nicht behebbarer Speicherausfall</translation>
     </message>
     <message>
         <source>Binder Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Bindemittel aufwärmen</translation>
     </message>
     <message>
         <source>Camera Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall der Kamera</translation>
     </message>
     <message>
         <source>Chamber Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Kammerkühlung</translation>
     </message>
     <message>
         <source>Chamber Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kammerfehler</translation>
     </message>
     <message>
         <source>Chamber Heating</source>
-        <translation type="unfinished"></translation>
+        <translation>Kammerheitung</translation>
     </message>
     <message>
         <source>Chamber Temperature High</source>
-        <translation type="unfinished"></translation>
+        <translation>Kammer Temperatur hoch</translation>
     </message>
     <message>
         <source>Chamber Temperature Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Kammer Temperatur niedrig</translation>
     </message>
     <message>
         <source>Cleaner Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Kammer fast zu Ende</translation>
     </message>
     <message>
         <source>Cleaner Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Kammer zu Ende</translation>
     </message>
     <message>
         <source>Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration ändern</translation>
     </message>
     <message>
         <source>Connecting To Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Gerät Verbinden</translation>
     </message>
     <message>
         <source>Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung offen</translation>
     </message>
     <message>
         <source>Deactivated</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviert</translation>
     </message>
     <message>
         <source>Developer Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Entwickler leer</translation>
     </message>
     <message>
         <source>Developer Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Entwickler niedrig</translation>
     </message>
     <message>
         <source>Die Cutter Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Kammer fast zu Ende</translation>
     </message>
     <message>
         <source>Die Cutter Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine fast Leer</translation>
     </message>
     <message>
         <source>Die Cutter Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine fast Voll</translation>
     </message>
     <message>
         <source>Die Cutter At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzform am Limit</translation>
     </message>
     <message>
         <source>Die Cutter Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine geschlossen</translation>
     </message>
     <message>
         <source>Die Cutter Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Konfiguration ändern</translation>
     </message>
     <message>
         <source>Die Cutter Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Stanzmaschine geschlossen</translation>
     </message>
     <message>
         <source>Die Cutter Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Stanzmaschine offen</translation>
     </message>
     <message>
         <source>Die Cutter Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Leer</translation>
     </message>
     <message>
         <source>Die Cutter Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Voll</translation>
     </message>
     <message>
         <source>Die Cutter Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung Stanzmaschine geschlossen</translation>
     </message>
     <message>
         <source>Die Cutter Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung Stanzmaschine offen</translation>
     </message>
     <message>
         <source>Die Cutter Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzwerkzeugstau</translation>
     </message>
     <message>
         <source>Die Cutter Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebendsdauer der Stanzform fast zu Ende</translation>
     </message>
     <message>
         <source>Die Cutter Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebendsdauer der Stanzform zu Ende</translation>
     </message>
     <message>
         <source>Die Cutter Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschinenspeicher erschöpft</translation>
     </message>
     <message>
         <source>Die Cutter Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzform fehlt</translation>
     </message>
     <message>
         <source>Die Cutter Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall des Stanzmaschinenmotors</translation>
     </message>
     <message>
         <source>Die Cutter Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzform Nahe am Limit</translation>
     </message>
     <message>
         <source>Die Cutter Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine offline</translation>
     </message>
     <message>
         <source>Die Cutter Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine geöffnet</translation>
     </message>
     <message>
         <source>Die Cutter Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine über Temperatur</translation>
     </message>
     <message>
         <source>Die Cutter Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Die Cutter Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine behebbarer Fehler</translation>
     </message>
     <message>
         <source>Die Cutter Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine behebbarer Speicher</translation>
     </message>
     <message>
         <source>Die Cutter Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzform entfernt</translation>
     </message>
     <message>
         <source>Die Cutter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Die Cutter Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Ressource entfernt</translation>
     </message>
     <message>
         <source>Die Cutter Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Thermister-Ausfall</translation>
     </message>
     <message>
         <source>Die Cutter Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine Zeitfehler</translation>
     </message>
     <message>
         <source>Die Cutter Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Die Cutter Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Die Cutter Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine unter Temperatur</translation>
     </message>
     <message>
         <source>Die Cutter Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Die Cutter Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Die Cutter Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzmaschine aufwärmen</translation>
     </message>
     <message>
         <source>Door Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Tür geöffnet</translation>
     </message>
     <message>
         <source>Extruder Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Extruderkühlung</translation>
     </message>
     <message>
         <source>Extruder Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall des Extruders</translation>
     </message>
     <message>
         <source>Extruder Heating</source>
-        <translation type="unfinished"></translation>
+        <translation>Extruderheizung</translation>
     </message>
     <message>
         <source>Extruder Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Extruderstau</translation>
     </message>
     <message>
         <source>Extruder Temperature High</source>
-        <translation type="unfinished"></translation>
+        <translation>Extruder Temperatur hoch</translation>
     </message>
     <message>
         <source>Extruder Temperature Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Extruder Temperatur niedrig</translation>
     </message>
     <message>
         <source>Fan Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall des Lüfter</translation>
     </message>
     <message>
         <source>Fax Modem Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Faxmodems fast zu Ende</translation>
     </message>
     <message>
         <source>Fax Modem Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Faxmodems zu Ende</translation>
     </message>
     <message>
         <source>Fax Modem Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Faxmodem fehlt</translation>
     </message>
     <message>
         <source>Fax Modem Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Faxmodem ausgeschaltet</translation>
     </message>
     <message>
         <source>Fax Modem Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Faxmodem eingeschaltet</translation>
     </message>
     <message>
         <source>Folder Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine hinzugefügt</translation>
     </message>
     <message>
         <source>Folder Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine fast leer</translation>
     </message>
     <message>
         <source>Folder Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine fast voll</translation>
     </message>
     <message>
         <source>Folder At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine am Limit</translation>
     </message>
     <message>
         <source>Folder Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine geschlossen</translation>
     </message>
     <message>
         <source>Folder Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Faltmaschine ändern</translation>
     </message>
     <message>
         <source>Folder Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Faltmaschine geschlossen</translation>
     </message>
     <message>
         <source>Folder Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Faltmaschine offen</translation>
     </message>
     <message>
         <source>Folder Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine leer</translation>
     </message>
     <message>
         <source>Folder Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine voll</translation>
     </message>
     <message>
         <source>Folder Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Faltmaschine geschlossen</translation>
     </message>
     <message>
         <source>Folder Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Faltmaschine offen</translation>
     </message>
     <message>
         <source>Folder Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Faltmaschine</translation>
     </message>
     <message>
         <source>Folder Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Faltmaschine fast zu Ende</translation>
     </message>
     <message>
         <source>Folder Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Faltmaschine zu Ende</translation>
     </message>
     <message>
         <source>Folder Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Faltmaschine erschöpft</translation>
     </message>
     <message>
         <source>Folder Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine fehlt</translation>
     </message>
     <message>
         <source>Folder Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall des Faltblattmotors</translation>
     </message>
     <message>
         <source>Folder Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Nahe am Limit</translation>
     </message>
     <message>
         <source>Folder Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Offline</translation>
     </message>
     <message>
         <source>Folder Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine geöffnet</translation>
     </message>
     <message>
         <source>Folder Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine über Temperatur</translation>
     </message>
     <message>
         <source>Folder Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Folder Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine behebbarer Fehler</translation>
     </message>
     <message>
         <source>Folder Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine behebbarer Speicher</translation>
     </message>
     <message>
         <source>Folder Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine entfernt</translation>
     </message>
     <message>
         <source>Folder Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Folder Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Ressource entfernt</translation>
     </message>
     <message>
         <source>Folder Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Rermistor-Ausfall</translation>
     </message>
     <message>
         <source>Folder Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine Zeitfehler</translation>
     </message>
     <message>
         <source>Folder Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Folder Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Folder Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine unter Temperatur</translation>
     </message>
     <message>
         <source>Folder Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Folder Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Folder Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Faltmaschine aufwärmen</translation>
     </message>
     <message>
         <source>Fuser temperature high</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatur der Fixiereinheit hoch</translation>
     </message>
     <message>
         <source>Fuser temperature low</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatur der Fixiereinheit niedrig</translation>
     </message>
     <message>
         <source>Hold New Jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Arbeitsplätze schaffenn</translation>
     </message>
     <message>
         <source>Identify Printer</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker idendifizieren</translation>
     </message>
     <message>
         <source>Imprinter Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine hinzugefügt</translation>
     </message>
     <message>
         <source>Imprinter Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine fast leer</translation>
     </message>
     <message>
         <source>Imprinter Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine fast voll</translation>
     </message>
     <message>
         <source>Imprinter At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine am Limit</translation>
     </message>
     <message>
         <source>Imprinter Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine geschlossen</translation>
     </message>
     <message>
         <source>Imprinter Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Druckmaschine ändern</translation>
     </message>
     <message>
         <source>Imprinter Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Druckmaschine geschlossen</translation>
     </message>
     <message>
         <source>Imprinter Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Druckmaschine offen</translation>
     </message>
     <message>
         <source>Imprinter Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine leer</translation>
     </message>
     <message>
         <source>Imprinter Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine voll</translation>
     </message>
     <message>
         <source>Imprinter Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Druckmaschine geschlossen</translation>
     </message>
     <message>
         <source>Imprinter Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Druckmaschine offen</translation>
     </message>
     <message>
         <source>Imprinter Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Druckmaschine</translation>
     </message>
     <message>
         <source>Imprinter Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Druckmaschine fast zu Ende</translation>
     </message>
     <message>
         <source>Imprinter Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Druckmaschine zu Ende</translation>
     </message>
     <message>
         <source>Imprinter Memory Exhausted</source>
