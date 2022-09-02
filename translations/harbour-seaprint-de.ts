@@ -1995,7 +1995,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Bander Timing Failure</source>
-        <translation>Banderolierer Zeitfehler</translation>
+        <translation>Banderolierer Messfehler</translation>
     </message>
     <message>
         <source>Bander Turned Off</source>
@@ -2139,7 +2139,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Binder Timing Failure</source>
-        <translation>Bindemittelmaschine Zeitfehler</translation>
+        <translation>Bindemittelmaschine Messfehler</translation>
     </message>
     <message>
         <source>Binder Turned Off</source>
@@ -2339,7 +2339,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Die Cutter Timing Failure</source>
-        <translation>Stanzmaschine Zeitfehler</translation>
+        <translation>Stanzmaschine Messfehler</translation>
     </message>
     <message>
         <source>Die Cutter Turned Off</source>
@@ -2535,7 +2535,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Folder Timing Failure</source>
-        <translation>Faltmaschine Zeitfehler</translation>
+        <translation>Faltmaschine Messfehler</translation>
     </message>
     <message>
         <source>Folder Turned Off</source>
@@ -2683,11 +2683,11 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Imprinter Resource Added</source>
-        <translation>Druckmaschine Ressourcen hinzugefügt</translation>
+        <translation>Druckmaschine Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Imprinter Resource Removed</source>
-        <translation>Druckmaschine Ressourcen entfernt</translation>
+        <translation>Druckmaschine Ressource entfernt</translation>
     </message>
     <message>
         <source>Imprinter Thermistor Failure</source>
@@ -2695,7 +2695,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Imprinter Timing Failure</source>
-        <translation>Druckmaschine Zeitfehler</translation>
+        <translation>Druckmaschine Messfehler</translation>
     </message>
     <message>
         <source>Imprinter Turned Off</source>
@@ -2831,231 +2831,231 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Inserter Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Kuvertierers geschlossen</translation>
     </message>
     <message>
         <source>Inserter Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Kuvertierers offen</translation>
     </message>
     <message>
         <source>Inserter Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Kuvertierer</translation>
     </message>
     <message>
         <source>Inserter Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Kuvertierers fast zu Ende</translation>
     </message>
     <message>
         <source>Inserter Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Kuvertierers zu Ende</translation>
     </message>
     <message>
         <source>Inserter Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Kuvertierers erschöpft</translation>
     </message>
     <message>
         <source>Inserter Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>LKuvertierer fehlt</translation>
     </message>
     <message>
         <source>Inserter Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierers ausgefallen</translation>
     </message>
     <message>
         <source>Inserter Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Nahe am Limit</translation>
     </message>
     <message>
         <source>Inserter Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Offline</translation>
     </message>
     <message>
         <source>Inserter Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer geöffnet</translation>
     </message>
     <message>
         <source>Inserter Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer über Temperatur</translation>
     </message>
     <message>
         <source>Inserter Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer im Energiesparmodus</translation>
     </message>
     <message>
         <source>Inserter Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer wiederherstellbarer Fehler</translation>
     </message>
     <message>
         <source>Inserter Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer wiederherstellbarer Speicher</translation>
     </message>
     <message>
         <source>Inserter Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer entfernt</translation>
     </message>
     <message>
         <source>Inserter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Inserter Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Ressource entfernt</translation>
     </message>
     <message>
         <source>Inserter Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Inserter Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer Messfehler</translation>
     </message>
     <message>
         <source>Inserter Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer ausgeschaltet</translation>
     </message>
     <message>
         <source>Inserter Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer eingeschaltet</translation>
     </message>
     <message>
         <source>Inserter Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer unter Temperatur</translation>
     </message>
     <message>
         <source>Inserter Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Inserter Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Inserter Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer aufwärmen</translation>
     </message>
     <message>
         <source>Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung geschlossen</translation>
     </message>
     <message>
         <source>Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung offen</translation>
     </message>
     <message>
         <source>Interpreter Cartridge Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Auserter Patrone hinzugefügt</translation>
     </message>
     <message>
         <source>Interpreter Cartridge Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswerter Patrone entfernt</translation>
     </message>
     <message>
         <source>Interpreter Complex Page Encountered</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswerter hat kmplexe Seite aufgefunden</translation>
     </message>
     <message>
         <source>Interpreter Memory Decrease</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Auswerters nimmt ab</translation>
     </message>
     <message>
         <source>Interpreter Memory Increase</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Auswerters nimmt zu</translation>
     </message>
     <message>
         <source>Interpreter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswerter Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Interpreter Resource Deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswerter Ressource gelöscht</translation>
     </message>
     <message>
         <source>Printer resource unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker Ressource nicht verfügbar</translation>
     </message>
     <message>
         <source>Lamp At End of Life</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Lampe zu Ende</translation>
     </message>
     <message>
         <source>Lamp Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Lampe fehler</translation>
     </message>
     <message>
         <source>Lamp Near End of Life</source>
-        <translation type="unfinished"></translation>
+        <translation>Lampe Nahe am Ende der Lebensdauer</translation>
     </message>
     <message>
         <source>Laser At End of Life</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Lasers zu Ende</translation>
     </message>
     <message>
         <source>Laser Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Laser fehler</translation>
     </message>
     <message>
         <source>Laser Near End of Life</source>
-        <translation type="unfinished"></translation>
+        <translation>Laser Nahe am Ende der Lebensdauer</translation>
     </message>
     <message>
         <source>Envelope Maker Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine hinzugefügt</translation>
     </message>
     <message>
         <source>Envelope Maker Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine fast leer</translation>
     </message>
     <message>
         <source>Envelope Maker Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine fast voll</translation>
     </message>
     <message>
         <source>Envelope Maker At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine Nahe am Limit</translation>
     </message>
     <message>
         <source>Envelope Maker Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Envelope Maker Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Briefumschlagsmaschine ändern</translation>
     </message>
     <message>
         <source>Envelope Maker Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Briefumschlagsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Envelope Maker Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Briefumschlagsmaschine offen</translation>
     </message>
     <message>
         <source>Envelope Maker Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine leer</translation>
     </message>
     <message>
         <source>Envelope Maker Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine voll</translation>
     </message>
     <message>
         <source>Envelope Maker Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Briefumschlagsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Envelope Maker Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Briefumschlagsmaschine offen</translation>
     </message>
     <message>
         <source>Envelope Maker Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Briefumschlagsmaschine</translation>
     </message>
     <message>
         <source>Envelope Maker Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Briefumschlagsmaschine fast zu Ende</translation>
     </message>
     <message>
         <source>Envelope Maker Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Briefumschlagsmaschine zu Ende</translation>
     </message>
     <message>
         <source>Envelope Maker Memory Exhausted</source>
