@@ -3059,131 +3059,131 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Envelope Maker Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Briefumschlagsmaschine erschöpft</translation>
     </message>
     <message>
         <source>Envelope Maker Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine fehlt</translation>
     </message>
     <message>
         <source>Envelope Maker Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Briefumschlagsmaschine ausgefallen</translation>
     </message>
     <message>
         <source>Envelope Maker Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine nahe am Limit</translation>
     </message>
     <message>
         <source>Envelope Maker Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine offline</translation>
     </message>
     <message>
         <source>Envelope Maker Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine geöffnet</translation>
     </message>
     <message>
         <source>Envelope Maker Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine über Temperatur</translation>
     </message>
     <message>
         <source>Envelope Maker Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Envelope Maker Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine behebbarer Fehler</translation>
     </message>
     <message>
         <source>Envelope Maker Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine behebbarer Speicher</translation>
     </message>
     <message>
         <source>Envelope Maker Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine entfernt</translation>
     </message>
     <message>
         <source>Envelope Maker Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Envelope Maker Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine Ressource entfernt</translation>
     </message>
     <message>
         <source>Envelope Maker Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Envelope Maker Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine Messfehler</translation>
     </message>
     <message>
         <source>Envelope Maker Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Envelope Maker Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Envelope Maker Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine unter Temperatur</translation>
     </message>
     <message>
         <source>Envelope Maker Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Envelope Maker Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Envelope Maker Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Briefumschlagsmaschine wärmt auf</translation>
     </message>
     <message>
         <source>Marker Adjusting Print Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung für die Druckqualität einstellen</translation>
     </message>
     <message>
         <source>Marker Cleaner Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Reinigungsmittel fehlt</translation>
     </message>
     <message>
         <source>Marker Developer Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung für den Entwickler fast leer</translation>
     </message>
     <message>
         <source>Marker Developer Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung für den Entwickler leer</translation>
     </message>
     <message>
         <source>Marker Developer Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Markierung für den Entwickler fehlt</translation>
     </message>
     <message>
         <source>Marker Fuser Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung für die Fixiereinheit fehlt</translation>
     </message>
     <message>
         <source>Marker Fuser Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Fixiereinheit Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Marker Fuser Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Fixiereinheit Messfehler</translation>
     </message>
     <message>
         <source>Marker Ink Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Tinte fast leer</translation>
     </message>
     <message>
         <source>Marker Ink Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Tinte leer</translation>
     </message>
     <message>
         <source>Marker Ink Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Tinte fehlt</translation>
     </message>
     <message>
         <source>Marker Opc Missing</source>
@@ -3191,419 +3191,419 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Marker Print Ribbon Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Druckerfarbband fast leer</translation>
     </message>
     <message>
         <source>Marker Print Ribbon Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Druckerfarbband leer</translation>
     </message>
     <message>
         <source>Marker Print Ribbon Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Druckerfarbband fehlt</translation>
     </message>
     <message>
         <source>Marker Supply Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung zuführung fast leer</translation>
     </message>
     <message>
         <source>Ink/toner empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinte/Toner leer</translation>
     </message>
     <message>
         <source>Ink/toner low</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinte/Toner niedrig</translation>
     </message>
     <message>
         <source>Marker Supply Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung zuführung fehlt</translation>
     </message>
     <message>
         <source>Marker Toner Cartridge Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Tonerkasette fehlt</translation>
     </message>
     <message>
         <source>Marker Toner Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Toner fehlt</translation>
     </message>
     <message>
         <source>Ink/toner waste bin almost full</source>
-        <translation type="unfinished"></translation>
+        <translation>Abfallbehälter für Tinte/Toner fast voll</translation>
     </message>
     <message>
         <source>Ink/toner waste bin full</source>
-        <translation type="unfinished"></translation>
+        <translation>Abfallbehälter für Tinte/Toner voll</translation>
     </message>
     <message>
         <source>Marker Waste Ink Receptacle Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Tinte fast voll</translation>
     </message>
     <message>
         <source>Marker Waste Ink Receptacle Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Tinte voll</translation>
     </message>
     <message>
         <source>Marker Waste Ink Receptacle Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Tinte fehlt</translation>
     </message>
     <message>
         <source>Marker Waste Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Apfall fehlt</translation>
     </message>
     <message>
         <source>Marker Waste Toner Receptacle Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Toner fast voll</translation>
     </message>
     <message>
         <source>Marker Waste Toner Receptacle Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Toner voll</translation>
     </message>
     <message>
         <source>Marker Waste Toner Receptacle Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Resteauffangbehälter für Toner fehlt</translation>
     </message>
     <message>
         <source>Material Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Material leer</translation>
     </message>
     <message>
         <source>Material Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Material niedrig</translation>
     </message>
     <message>
         <source>Material Needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Material benötigt</translation>
     </message>
     <message>
         <source>Media Drying</source>
-        <translation type="unfinished"></translation>
+        <translation>Medientrocknung</translation>
     </message>
     <message>
         <source>Paper tray is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Papierfach leer</translation>
     </message>
     <message>
         <source>Paper jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Papierstau</translation>
     </message>
     <message>
         <source>Paper tray is almost empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Papierfach fast leer</translation>
     </message>
     <message>
         <source>Load paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Paper einlegen</translation>
     </message>
     <message>
         <source>Media Path Cannot Do 2-Sided Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf diesem weg kann nicht Duplex gedruckt werden</translation>
     </message>
     <message>
         <source>Media Path Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler auf dem Medienpfad</translation>
     </message>
     <message>
         <source>Media Path Input Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad eingabe leer</translation>
     </message>
     <message>
         <source>Media Path Input Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad eingabe fehler</translation>
     </message>
     <message>
         <source>Media Path Input Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad eingabe stau</translation>
     </message>
     <message>
         <source>Media Path Input Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad eingabe rückfrage</translation>
     </message>
     <message>
         <source>Media Path Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad stau</translation>
     </message>
     <message>
         <source>Media Path Media Tray Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad im Medienfach fast voll</translation>
     </message>
     <message>
         <source>Media Path Media Tray Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad im Medienfach voll</translation>
     </message>
     <message>
         <source>Media Path Media Tray Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad im Medienfach fehlt</translation>
     </message>
     <message>
         <source>Media Path Output Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfadausgabe zuführungsfehler</translation>
     </message>
     <message>
         <source>Media Path Output Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfadausgabe voll</translation>
     </message>
     <message>
         <source>Media Path Output Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfadausgabe Stau</translation>
     </message>
     <message>
         <source>Media Path Pick Roller Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienpfad Einzugsrollen fehler</translation>
     </message>
     <message>
         <source>Media Path Pick Roller Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Medienpfad Einzugsrollen zu Ende</translation>
     </message>
     <message>
         <source>Media Path Pick Roller Life Warn</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Medienpfad Einzugsrollen Warnung</translation>
     </message>
     <message>
         <source>Media Path Pick Roller Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Medienpfad Einzugsrollen fehlen</translation>
     </message>
     <message>
         <source>Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor fehler</translation>
     </message>
     <message>
         <source>Printer going offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker geht offline</translation>
     </message>
     <message>
         <source>Optical Photoconductor Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des optischen Fotoleiters zu Ende</translation>
     </message>
     <message>
         <source>OPC almost at end-of-life</source>
-        <translation type="unfinished"></translation>
+        <translation>OPC fast am lebensende</translation>
     </message>
     <message>
         <source>Check the printer for errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Überprüfe den Drucker auf fehler</translation>
     </message>
     <message>
         <source>Output bin is almost full</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabefach ist fast voll</translation>
     </message>
     <message>
         <source>Output bin is full</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabefach ist voll</translation>
     </message>
     <message>
         <source>Output Mailbox Select Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Auswahl des Ausgangspostfachs</translation>
     </message>
     <message>
         <source>Output Media Tray Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>fehler im Ausgbefach</translation>
     </message>
     <message>
         <source>Output Media Tray Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabemedienfach zufuhr fehler</translation>
     </message>
     <message>
         <source>Output Media Tray Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Ausgabemedienfach</translation>
     </message>
     <message>
         <source>Output tray is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabemedienfach fehlt</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiert</translation>
     </message>
     <message>
         <source>Perforater Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer hinzugefügt</translation>
     </message>
     <message>
         <source>Perforater Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer fast leer</translation>
     </message>
     <message>
         <source>Perforater Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer fast voll</translation>
     </message>
     <message>
         <source>Perforater At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer am Limit</translation>
     </message>
     <message>
         <source>Perforater Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer geschlossen</translation>
     </message>
     <message>
         <source>Perforater Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Perforierers ändern</translation>
     </message>
     <message>
         <source>Perforater Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Perforierers geschlossen</translation>
     </message>
     <message>
         <source>Perforater Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Perforierers offen</translation>
     </message>
     <message>
         <source>Perforater Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer leer</translation>
     </message>
     <message>
         <source>Perforater Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer voll</translation>
     </message>
     <message>
         <source>Perforater Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Perforierers geschlossen</translation>
     </message>
     <message>
         <source>Perforater Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Perforierers offen</translation>
     </message>
     <message>
         <source>Perforater Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Stau</translation>
     </message>
     <message>
         <source>Perforater Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Perforierers fast zu Ende</translation>
     </message>
     <message>
         <source>Perforater Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Perforierers zu Ende</translation>
     </message>
     <message>
         <source>Perforater Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Perforierers erschöpft</translation>
     </message>
     <message>
         <source>Perforater Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierers fehlt</translation>
     </message>
     <message>
         <source>Perforater Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motorausfall des Perforierers</translation>
     </message>
     <message>
         <source>Perforater Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Nahe am Limit</translation>
     </message>
     <message>
         <source>Perforater Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer offline</translation>
     </message>
     <message>
         <source>Perforater Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer geöffnet</translation>
     </message>
     <message>
         <source>Perforater Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer über Temperatur</translation>
     </message>
     <message>
         <source>Perforater Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer im Energiesparmodus</translation>
     </message>
     <message>
         <source>Perforater Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer behebbarer Fehler</translation>
     </message>
     <message>
         <source>Perforater Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer behebbarer Speicher</translation>
     </message>
     <message>
         <source>Perforater Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer entfernt</translation>
     </message>
     <message>
         <source>Perforater Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Perforater Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Ressource entfernt</translation>
     </message>
     <message>
         <source>Perforater Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Perforater Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer Messfehler</translation>
     </message>
     <message>
         <source>Perforater Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer ausgeschaltet</translation>
     </message>
     <message>
         <source>Perforater Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer eingeschaltet</translation>
     </message>
     <message>
         <source>Perforater Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer unter Temperatur</translation>
     </message>
     <message>
         <source>Perforater Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Perforater Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer unbehebbarer speicherfehler</translation>
     </message>
     <message>
         <source>Perforater Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Perforierer aufwärmen</translation>
     </message>
     <message>
         <source>Platform Cooling</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattformkühlung</translation>
     </message>
     <message>
         <source>Platform Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattform Fehler</translation>
     </message>
     <message>
         <source>Platform Heating</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattformheizung</translation>
     </message>
     <message>
         <source>Platform Temperature High</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattform Temperatur hoch</translation>
     </message>
     <message>
         <source>Platform Temperature Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Plattform Temperatur niedrig</translation>
     </message>
     <message>
         <source>Power Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschalten</translation>
     </message>
     <message>
         <source>Power Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Einschalten</translation>
     </message>
     <message>
         <source>Printer Reset Manually</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker manuell zurücksetzen</translation>
     </message>
     <message>
         <source>Printer Reset Remotely</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker ferngesteuert zurücksetzen</translation>
     </message>
     <message>
         <source>Printer Ready To Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker bereit zum Drucken</translation>
     </message>
     <message>
         <source>Puncher Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzer hinzugefügt</translation>
     </message>
     <message>
         <source>Puncher Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzer fast leer</translation>
     </message>
     <message>
         <source>Puncher Almost Full</source>
