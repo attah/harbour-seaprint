@@ -2639,11 +2639,11 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Imprinter Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Druckmaschine erschöpft</translation>
     </message>
     <message>
         <source>Imprinter Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmascine fehlt</translation>
     </message>
     <message>
         <source>Imprinter Motor Failure</source>
