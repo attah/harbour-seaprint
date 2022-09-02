@@ -2531,7 +2531,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Folder Thermistor Failure</source>
-        <translation>Faltmaschine Rermistor-Ausfall</translation>
+        <translation>Faltmaschine Termistor-Ausfall</translation>
     </message>
     <message>
         <source>Folder Timing Failure</source>
@@ -2643,191 +2643,191 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Imprinter Missing</source>
-        <translation>Druckmascine fehlt</translation>
+        <translation>Druckmaschine fehlt</translation>
     </message>
     <message>
         <source>Imprinter Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Druckmaschine ausgefallen</translation>
     </message>
     <message>
         <source>Imprinter Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine Nahe am Limit</translation>
     </message>
     <message>
         <source>Imprinter Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Imprinter Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine geöffnet</translation>
     </message>
     <message>
         <source>Imprinter Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine über Temperatur</translation>
     </message>
     <message>
         <source>Imprinter Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Imprinter Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine wiederherstellbare Fehler</translation>
     </message>
     <message>
         <source>Imprinter Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine wiederherstellbarer Speicher</translation>
     </message>
     <message>
         <source>Imprinter Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine entfernt</translation>
     </message>
     <message>
         <source>Imprinter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine Ressourcen hinzugefügt</translation>
     </message>
     <message>
         <source>Imprinter Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine Ressourcen entfernt</translation>
     </message>
     <message>
         <source>Imprinter Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Imprinter Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine Zeitfehler</translation>
     </message>
     <message>
         <source>Imprinter Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Imprinter Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Imprinter Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine unter Temperatur</translation>
     </message>
     <message>
         <source>Imprinter Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall der Druckmaschine</translation>
     </message>
     <message>
         <source>Imprinter Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Imprinter Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckmaschine wärmt auf</translation>
     </message>
     <message>
         <source>Input Cannot Feed Size Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte größe kann nicht übernommen werden</translation>
     </message>
     <message>
         <source>Input Manual Input Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuelle eingabe der Anfrage</translation>
     </message>
     <message>
         <source>Input Media Color Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingegebene Medienfarbe ändern</translation>
     </message>
     <message>
         <source>Input Media Form Parts Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingegebene Formteile ändern</translation>
     </message>
     <message>
         <source>Input Media Size Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingegebene Mediengröße ändern</translation>
     </message>
     <message>
         <source>Input Media Tray Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler im Medienzufuhrfach</translation>
     </message>
     <message>
         <source>Input Media Tray Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der zuführung von Medien</translation>
     </message>
     <message>
         <source>Input Media Tray Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Medienzufuhrfach</translation>
     </message>
     <message>
         <source>Input Media Type Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Medientyp ändern</translation>
     </message>
     <message>
         <source>Input Media Weight Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediengewicht ändern</translation>
     </message>
     <message>
         <source>Input Pick Roller Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzugsrolle fehler</translation>
     </message>
     <message>
         <source>Input Pick Roller Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Einzugsrolle zu Ende</translation>
     </message>
     <message>
         <source>Input Pick Roller Life Warn</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Einzugsrolle Warnung</translation>
     </message>
     <message>
         <source>Input Pick Roller Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzugsrolle fehlt</translation>
     </message>
     <message>
         <source>Input Tray Elevation Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anheben des Eingabefachs</translation>
     </message>
     <message>
         <source>Paper tray is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Papiereingabefach fehlt</translation>
     </message>
     <message>
         <source>Input Tray Position Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Zufhrfach richtig einsetzen</translation>
     </message>
     <message>
         <source>Inserter Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer hinzugefügt</translation>
     </message>
     <message>
         <source>Inserter Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer fast leer</translation>
     </message>
     <message>
         <source>Inserter Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer fast voll</translation>
     </message>
     <message>
         <source>Inserter At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer am Limit</translation>
     </message>
     <message>
         <source>Inserter Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer geschlossen</translation>
     </message>
     <message>
         <source>Inserter Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Kuvertierers ändern</translation>
     </message>
     <message>
         <source>Inserter Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Kuvertierers geschlossen</translation>
     </message>
     <message>
         <source>Inserter Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Kuvertierers offen</translation>
     </message>
     <message>
         <source>Inserter Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer leer</translation>
     </message>
     <message>
         <source>Inserter Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvertierer voll</translation>
     </message>
     <message>
         <source>Inserter Interlock Closed</source>
