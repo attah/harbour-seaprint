@@ -3847,19 +3847,19 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Separation Cutter At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider am Limit</translation>
     </message>
     <message>
         <source>Separation Cutter Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider geschlossen</translation>
     </message>
     <message>
         <source>Separation Cutter Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Abscheiders ändern</translation>
     </message>
     <message>
         <source>Separation Cutter Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Abscheiders geschlossen</translation>
     </message>
     <message>
         <source>Separation Cutter Cover Open</source>
