@@ -3187,7 +3187,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Marker Opc Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kennzeichnung Opc fehlt</translation>
     </message>
     <message>
         <source>Marker Print Ribbon Almost Empty</source>
@@ -3607,243 +3607,243 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Puncher Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzer fast voll</translation>
     </message>
     <message>
         <source>Puncher At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzer am Limit</translation>
     </message>
     <message>
         <source>Puncher Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanzer fast leer</translation>
     </message>
     <message>
         <source>Puncher Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Stanze ändern</translation>
     </message>
     <message>
         <source>Puncher Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Stanze geschlossen</translation>
     </message>
     <message>
         <source>Puncher Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Stanze offen</translation>
     </message>
     <message>
         <source>Puncher Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze leer</translation>
     </message>
     <message>
         <source>Puncher Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze voll</translation>
     </message>
     <message>
         <source>Puncher Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Stanze geschlossen</translation>
     </message>
     <message>
         <source>Puncher Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Stanze offen</translation>
     </message>
     <message>
         <source>Puncher Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Stanze</translation>
     </message>
     <message>
         <source>Puncher Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Stanze geschlossen</translation>
     </message>
     <message>
         <source>Puncher Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Stanze fast zu Ende</translation>
     </message>
     <message>
         <source>Puncher Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Stanze erschöpft</translation>
     </message>
     <message>
         <source>Puncher Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze fehlt</translation>
     </message>
     <message>
         <source>Puncher Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Stanze ausgefallen</translation>
     </message>
     <message>
         <source>Puncher Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze Nahe am Limit</translation>
     </message>
     <message>
         <source>Puncher Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze offline</translation>
     </message>
     <message>
         <source>Puncher Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze geöffnet</translation>
     </message>
     <message>
         <source>Puncher Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze über Temperatur</translation>
     </message>
     <message>
         <source>Puncher Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze im Energiesparmodus</translation>
     </message>
     <message>
         <source>Puncher Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Puncher Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Puncher Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze entfernt</translation>
     </message>
     <message>
         <source>Puncher Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Puncher Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze Ressource entfernt</translation>
     </message>
     <message>
         <source>Puncher Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze Thermitor-Ausfall</translation>
     </message>
     <message>
         <source>Puncher Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze Messfehler</translation>
     </message>
     <message>
         <source>Puncher Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze ausgeschaltet</translation>
     </message>
     <message>
         <source>Puncher Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze eingeschaltet</translation>
     </message>
     <message>
         <source>Puncher Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze unter Temperatur</translation>
     </message>
     <message>
         <source>Puncher Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Puncher Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Puncher Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanze aufwärmen</translation>
     </message>
     <message>
         <source>Scan Media Path Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler im Arbeitspfad zum Medium</translation>
     </message>
     <message>
         <source>Scan Media Path Input Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim einrichten des Arbeitspfades zum Medium</translation>
     </message>
     <message>
         <source>Scan Media Path Input Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Arbeitspfad zum Scan-Medium</translation>
     </message>
     <message>
         <source>Scan Media Path Input Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium zum Abeitspfad Anfrage</translation>
     </message>
     <message>
         <source>Scan Media Path Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Scanmediumspfad</translation>
     </message>
     <message>
         <source>Scan Media Path Output Feed Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Ausgabe des Arbeitspfades zum Medium</translation>
     </message>
     <message>
         <source>Scan Media Path Output Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Ausgabe voll</translation>
     </message>
     <message>
         <source>Scan Media Path Output Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Ausgabe Stau</translation>
     </message>
     <message>
         <source>Scan Media Path Pick Roller Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Aufnahmewalten fehler</translation>
     </message>
     <message>
         <source>Scan Media Path Pick Roller Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scan-Medium Aufnahmewalten zu Ende</translation>
     </message>
     <message>
         <source>Scan Media Path Pick Roller Life Warn</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scan-Medium Aufnahmewalten Warnung</translation>
     </message>
     <message>
         <source>Scan Media Path Pick Roller Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Aufnahmewalten fehltzu Ende</translation>
     </message>
     <message>
         <source>Scan Media Path Tray Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Aufnahmefach fast voll</translation>
     </message>
     <message>
         <source>Scan Media Path Tray Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Aufnahmefach voll</translation>
     </message>
     <message>
         <source>Scan Media Path Tray Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan-Medium Aufnahmefach fehlt</translation>
     </message>
     <message>
         <source>Scanner Light Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausfall der Scannerlampe</translation>
     </message>
     <message>
         <source>Scanner Light Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scannerlampe fast zu Ende</translation>
     </message>
     <message>
         <source>Scanner Light Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scannerlampe zu Ende</translation>
     </message>
     <message>
         <source>Scanner Light Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scannerlampe fast zu Ende</translation>
     </message>
     <message>
         <source>Scanner Sensor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Scannersensor Fehler</translation>
     </message>
     <message>
         <source>Scanner Sensor Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scannersensors fast zu Ende</translation>
     </message>
     <message>
         <source>Scanner Sensor Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Scannersensors zu Ende</translation>
     </message>
     <message>
         <source>Scanner Sensor Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Scannersensor fehlt</translation>
     </message>
     <message>
         <source>Separation Cutter Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider hinzugefügt</translation>
     </message>
     <message>
         <source>Separation Cutter Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider fast leer</translation>
     </message>
     <message>
         <source>Separation Cutter Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider fast leer</translation>
     </message>
     <message>
         <source>Separation Cutter At Limit</source>
