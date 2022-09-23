@@ -3863,415 +3863,415 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Separation Cutter Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Abscheiders offen</translation>
     </message>
     <message>
         <source>Separation Cutter Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider leer</translation>
     </message>
     <message>
         <source>Separation Cutter Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider voll</translation>
     </message>
     <message>
         <source>Separation Cutter Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Abscheiders geschlossen</translation>
     </message>
     <message>
         <source>Separation Cutter Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Abscheiders offen</translation>
     </message>
     <message>
         <source>Separation Cutter Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Anscheider</translation>
     </message>
     <message>
         <source>Separation Cutter Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Abscheiders fast zu Ende</translation>
     </message>
     <message>
         <source>Separation Cutter Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Abscheiders zu Ende</translation>
     </message>
     <message>
         <source>Separation Cutter Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Abscheiders erschöpft</translation>
     </message>
     <message>
         <source>Separation Cutter Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider fehlt</translation>
     </message>
     <message>
         <source>Separation Cutter Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Abscheiders ausgefallen</translation>
     </message>
     <message>
         <source>Separation Cutter Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider Nahe am Limit</translation>
     </message>
     <message>
         <source>Separation Cutter Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider offline</translation>
     </message>
     <message>
         <source>Separation Cutter Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider geöffnet</translation>
     </message>
     <message>
         <source>Separation Cutter Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider über der Temperatur</translation>
     </message>
     <message>
         <source>Separation Cutter Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider im Energiesparmodus</translation>
     </message>
     <message>
         <source>Separation Cutter Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider behebbarer fehler</translation>
     </message>
     <message>
         <source>Separation Cutter Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider behebbarer Speicher</translation>
     </message>
     <message>
         <source>Separation Cutter Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider entfernt</translation>
     </message>
     <message>
         <source>Separation Cutter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Separation Cutter Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider Ressource entfernt</translation>
     </message>
     <message>
         <source>Separation Cutter Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider Thermitor-Ausfall</translation>
     </message>
     <message>
         <source>Separation Cutter Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider Messfehler</translation>
     </message>
     <message>
         <source>Separation Cutter Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider ausgeschaltet</translation>
     </message>
     <message>
         <source>Separation Cutter Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider eingeschaltet</translation>
     </message>
     <message>
         <source>Separation Cutter Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider unter Temperatur</translation>
     </message>
     <message>
         <source>Separation Cutter Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Separation Cutter Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Separation Cutter Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Abscheider aufwärmen</translation>
     </message>
     <message>
         <source>Sheet Rotator Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender hinzugefügt</translation>
     </message>
     <message>
         <source>Sheet Rotator Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender fast leer</translation>
     </message>
     <message>
         <source>Sheet Rotator Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender fast voll</translation>
     </message>
     <message>
         <source>Sheet Rotator At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender am Limit</translation>
     </message>
     <message>
         <source>Sheet Rotator Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender geschlossen</translation>
     </message>
     <message>
         <source>Sheet Rotator Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Bogenwenders ändern</translation>
     </message>
     <message>
         <source>Sheet Rotator Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Bogenwenders geschlossen</translation>
     </message>
     <message>
         <source>Sheet Rotator Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Bogenwenders offen</translation>
     </message>
     <message>
         <source>Sheet Rotator Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender leer</translation>
     </message>
     <message>
         <source>Sheet Rotator Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender voll</translation>
     </message>
     <message>
         <source>Sheet Rotator Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Bogenwenders geschlossen</translation>
     </message>
     <message>
         <source>Sheet Rotator Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Bogenwenders offen</translation>
     </message>
     <message>
         <source>Sheet Rotator Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Bogenwender</translation>
     </message>
     <message>
         <source>Sheet Rotator Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Bogenwenders fast zu Ende</translation>
     </message>
     <message>
         <source>Sheet Rotator Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Bogenwenders zu Ende</translation>
     </message>
     <message>
         <source>Sheet Rotator Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Bogenwenders erschöpft</translation>
     </message>
     <message>
         <source>Sheet Rotator Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender fehlt</translation>
     </message>
     <message>
         <source>Sheet Rotator Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Bogenwenders ausgefallen</translation>
     </message>
     <message>
         <source>Sheet Rotator Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender Nahe am Limit</translation>
     </message>
     <message>
         <source>Sheet Rotator Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender offline</translation>
     </message>
     <message>
         <source>Sheet Rotator Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender offen</translation>
     </message>
     <message>
         <source>Sheet Rotator Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender über Temperatur</translation>
     </message>
     <message>
         <source>Sheet Rotator Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender im Energiesparmodus</translation>
     </message>
     <message>
         <source>Sheet Rotator Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender behebbarer fehler</translation>
     </message>
     <message>
         <source>Sheet Rotator Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender behebbarer Speicher</translation>
     </message>
     <message>
         <source>Sheet Rotator Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender entfernt</translation>
     </message>
     <message>
         <source>Sheet Rotator Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Sheet Rotator Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender Ressource entfernt</translation>
     </message>
     <message>
         <source>Sheet Rotator Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Sheet Rotator Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender Messfehler</translation>
     </message>
     <message>
         <source>Sheet Rotator Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender ausgeschaltet</translation>
     </message>
     <message>
         <source>Sheet Rotator Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender eingeschaltet</translation>
     </message>
     <message>
         <source>Sheet Rotator Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender unter Temperatur</translation>
     </message>
     <message>
         <source>Sheet Rotator Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender unbehebbarer fehler</translation>
     </message>
     <message>
         <source>Sheet Rotator Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Sheet Rotator Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogenwender aufwärmen</translation>
     </message>
     <message>
         <source>Printer offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker offline</translation>
     </message>
     <message>
         <source>Slitter Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidwerk hinzugefügt</translation>
     </message>
     <message>
         <source>Slitter Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider fast leer</translation>
     </message>
     <message>
         <source>Slitter Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider fast voll</translation>
     </message>
     <message>
         <source>Slitter At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider am Limit</translation>
     </message>
     <message>
         <source>Slitter Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider geschlossen</translation>
     </message>
     <message>
         <source>Slitter Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Rollenschneiders ändern</translation>
     </message>
     <message>
         <source>Slitter Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Rollenschneiders geschlossen</translation>
     </message>
     <message>
         <source>Slitter Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Rollenschneiders offen</translation>
     </message>
     <message>
         <source>Slitter Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider leer</translation>
     </message>
     <message>
         <source>Slitter Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider voll</translation>
     </message>
     <message>
         <source>Slitter Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Rollenschneiders geschlossen</translation>
     </message>
     <message>
         <source>Slitter Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Rollenschneiders offen</translation>
     </message>
     <message>
         <source>Slitter Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Rollenschneider</translation>
     </message>
     <message>
         <source>Slitter Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Rollenschneiders fast zu Ende</translation>
     </message>
     <message>
         <source>Slitter Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Rollenschneiders zu Ende</translation>
     </message>
     <message>
         <source>Slitter Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Rollenschneiders erschöpft</translation>
     </message>
     <message>
         <source>Slitter Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidwerk fehlt</translation>
     </message>
     <message>
         <source>Slitter Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Rollenschneiders ausgefallen</translation>
     </message>
     <message>
         <source>Slitter Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider Nahe am Limit</translation>
     </message>
     <message>
         <source>Slitter Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider offline</translation>
     </message>
     <message>
         <source>Slitter Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider geöffnet</translation>
     </message>
     <message>
         <source>Slitter Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider über Temperatur</translation>
     </message>
     <message>
         <source>Slitter Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider im Energiesparmodus</translation>
     </message>
     <message>
         <source>Slitter Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider behebbarer fehler</translation>
     </message>
     <message>
         <source>Slitter Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider behebbarer Speicher</translation>
     </message>
     <message>
         <source>Slitter Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidwerk entfernt</translation>
     </message>
     <message>
         <source>Slitter Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Slitter Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider Ressource entfernt</translation>
     </message>
     <message>
         <source>Slitter Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Slitter Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider Messfehler</translation>
     </message>
     <message>
         <source>Slitter Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider ausgeschaltet</translation>
     </message>
     <message>
         <source>Slitter Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider eingeschaltet</translation>
     </message>
     <message>
         <source>Slitter Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider unter Temperatur</translation>
     </message>
     <message>
         <source>Slitter Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider unbehebbarer fehler</translation>
     </message>
     <message>
         <source>Slitter Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Slitter Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Rollenschneider aufwärmenr</translation>
     </message>
     <message>
         <source>Spool Area Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Anzahl an Ausdrucken erreicht</translation>
     </message>
     <message>
         <source>Stacker Added</source>
