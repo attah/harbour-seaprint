@@ -4606,379 +4606,379 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Stitcher Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Hefters offen</translation>
     </message>
     <message>
         <source>Stitcher Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Hefter</translation>
     </message>
     <message>
         <source>Stitcher Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Hefters fast zu Ende</translation>
     </message>
     <message>
         <source>Stitcher Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Hefters zu Ende</translation>
     </message>
     <message>
         <source>Stitcher Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Hefters erschöpft</translation>
     </message>
     <message>
         <source>Stitcher Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fehlt</translation>
     </message>
     <message>
         <source>Stitcher Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Hefters ausgefallen</translation>
     </message>
     <message>
         <source>Stitcher Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Nahe am Limit</translation>
     </message>
     <message>
         <source>Stitcher Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter offline</translation>
     </message>
     <message>
         <source>Stitcher Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter geöffnet</translation>
     </message>
     <message>
         <source>Stitcher Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter über Temperatur</translation>
     </message>
     <message>
         <source>Stitcher Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter im Energiesparmodus</translation>
     </message>
     <message>
         <source>Stitcher Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter behebbarer Fehler</translation>
     </message>
     <message>
         <source>Stitcher Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter behebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Stitcher Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter entfernt</translation>
     </message>
     <message>
         <source>Stitcher Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Stitcher Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Ressource entfernt</translation>
     </message>
     <message>
         <source>Stitcher Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Stitcher Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Messfehler</translation>
     </message>
     <message>
         <source>Stitcher Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter ausgeschaltet</translation>
     </message>
     <message>
         <source>Stitcher Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter eingeschaltet</translation>
     </message>
     <message>
         <source>Stitcher Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unter Temperatur</translation>
     </message>
     <message>
         <source>Stitcher Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Stitcher Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Stitcher Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter aufwärmen</translation>
     </message>
     <message>
         <source>Partially stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilweise gestoppt</translation>
     </message>
     <message>
         <source>Stopping</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhalten</translation>
     </message>
     <message>
         <source>Subunit Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit hinzugefügt</translation>
     </message>
     <message>
         <source>Subunit Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit fast leer</translation>
     </message>
     <message>
         <source>Subunit Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit fast voll</translation>
     </message>
     <message>
         <source>Subunit At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit am Limit</translation>
     </message>
     <message>
         <source>Subunit Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit geschlossen</translation>
     </message>
     <message>
         <source>Subunit Cooling Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit abkühlenr</translation>
     </message>
     <message>
         <source>Subunit Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit leer</translation>
     </message>
     <message>
         <source>Subunit Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit voll</translation>
     </message>
     <message>
         <source>Subunit Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Untereinheit fast zu Ende</translation>
     </message>
     <message>
         <source>Subunit Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Untereinheit zu Ende</translation>
     </message>
     <message>
         <source>Subunit Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Untereinheit erschöpft</translation>
     </message>
     <message>
         <source>Subunit Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit fehlt</translation>
     </message>
     <message>
         <source>Subunit Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Untereinheit ausgefallen</translation>
     </message>
     <message>
         <source>Subunit Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit Nahe am Limit</translation>
     </message>
     <message>
         <source>Subunit Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit offline</translation>
     </message>
     <message>
         <source>Subunit Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit geöffnet</translation>
     </message>
     <message>
         <source>Subunit Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit über Temperatur</translation>
     </message>
     <message>
         <source>Subunit Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit im Energiesparmodus</translation>
     </message>
     <message>
         <source>Subunit Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit behebbarer Fehler</translation>
     </message>
     <message>
         <source>Subunit Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit behebbarer Speicher</translation>
     </message>
     <message>
         <source>Subunit Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit entfernt</translation>
     </message>
     <message>
         <source>Subunit Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Subunit Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit Ressource entfernt</translation>
     </message>
     <message>
         <source>Subunit Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Subunit Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit Messfehler</translation>
     </message>
     <message>
         <source>Subunit Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit ausgeschaltet</translation>
     </message>
     <message>
         <source>Subunit Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit eingeschaltet</translation>
     </message>
     <message>
         <source>Subunit Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit unter Temperatur</translation>
     </message>
     <message>
         <source>Subunit Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Subunit Unrecoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit unbehebbarer Speicher</translation>
     </message>
     <message>
         <source>Subunit Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Untereinheit aufwärmen</translation>
     </message>
     <message>
         <source>Printer stopped responding</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker reagiert nicht mehr</translation>
     </message>
     <message>
         <source>Out of toner</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Toner mehr</translation>
     </message>
     <message>
         <source>Toner low</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenig Toner</translation>
     </message>
     <message>
         <source>Trimmer Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung hinzugefügt</translation>
     </message>
     <message>
         <source>Trimmer Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung fast leer</translation>
     </message>
     <message>
         <source>Trimmer Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung fast voll</translation>
     </message>
     <message>
         <source>Trimmer At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung am Limit</translation>
     </message>
     <message>
         <source>Trimmer Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung geschlossen</translation>
     </message>
     <message>
         <source>Trimmer Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Schneidevorrichtung ändern</translation>
     </message>
     <message>
         <source>Trimmer Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Schneidevorrichtung geschlossen</translation>
     </message>
     <message>
         <source>Trimmer Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Schneidevorrichtung offen</translation>
     </message>
     <message>
         <source>Trimmer Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung leer</translation>
     </message>
     <message>
         <source>Trimmer Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung voll</translation>
     </message>
     <message>
         <source>Trimmer Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Schneidevorrichtung geschlossen</translation>
     </message>
     <message>
         <source>Trimmer Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Schneidevorrichtung offen</translation>
     </message>
     <message>
         <source>Trimmer Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Schneidevorrichtung</translation>
     </message>
     <message>
         <source>Trimmer Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Schneidevorrichtung fast zu Ende</translation>
     </message>
     <message>
         <source>Trimmer Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Schneidevorrichtung zu Ende</translation>
     </message>
     <message>
         <source>Trimmer Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Schneidevorrichtung erschöpft</translation>
     </message>
     <message>
         <source>Trimmer Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung fehlt</translation>
     </message>
     <message>
         <source>Trimmer Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Schneidevorrichtung ausgefallen</translation>
     </message>
     <message>
         <source>Trimmer Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung Nahe am Limit</translation>
     </message>
     <message>
         <source>Trimmer Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung offline</translation>
     </message>
     <message>
         <source>Trimmer Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung geöffnet</translation>
     </message>
     <message>
         <source>Trimmer Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung über Temperatur</translation>
     </message>
     <message>
         <source>Trimmer Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung im Energiesparmodus</translation>
     </message>
     <message>
         <source>Trimmer Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung behebbarer Fehler</translation>
     </message>
     <message>
         <source>Trimmer Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung behebbarer Speicher</translation>
     </message>
     <message>
         <source>Trimmer Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung entfernt</translation>
     </message>
     <message>
         <source>Trimmer Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Trimmer Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung Ressource entfernt</translation>
     </message>
     <message>
         <source>Trimmer Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Trimmer Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung Messfehler</translation>
     </message>
     <message>
         <source>Trimmer Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung ausschalten</translation>
     </message>
     <message>
         <source>Trimmer Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung einschalten</translation>
     </message>
     <message>
         <source>Trimmer Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung unter Temperatur</translation>
     </message>
     <message>
         <source>Trimmer Unrecoverable Failure</source>
