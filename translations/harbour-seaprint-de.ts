@@ -4982,163 +4982,163 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Trimmer Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Trimmer Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Trimmer Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Schneidevorrichtung aufwärmen</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>Wrapper Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackung hinzugefügt</translation>
     </message>
     <message>
         <source>Wrapper Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine fast leer</translation>
     </message>
     <message>
         <source>Wrapper Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine fast voll</translation>
     </message>
     <message>
         <source>Wrapper At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine am Limit</translation>
     </message>
     <message>
         <source>Wrapper Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Wrapper Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration der Verpackungsmaschine ändern</translation>
     </message>
     <message>
         <source>Wrapper Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Verpackungsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Wrapper Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung der Verpackungsmaschine offen</translation>
     </message>
     <message>
         <source>Wrapper Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine leer</translation>
     </message>
     <message>
         <source>Wrapper Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine voll</translation>
     </message>
     <message>
         <source>Wrapper Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Verpackungsmaschine geschlossen</translation>
     </message>
     <message>
         <source>Wrapper Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung der Verpackungsmaschine offen</translation>
     </message>
     <message>
         <source>Wrapper Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau in der Verpackungsmaschine</translation>
     </message>
     <message>
         <source>Wrapper Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Verpackungsmaschine fast zu Ende</translation>
     </message>
     <message>
         <source>Wrapper Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer der Verpackungsmaschine zu Ende</translation>
     </message>
     <message>
         <source>Wrapper Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher der Verpackungsmaschine erschöpft</translation>
     </message>
     <message>
         <source>Wrapper Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine fehlt</translation>
     </message>
     <message>
         <source>Wrapper Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor der Verpackungsmaschine ausgefallen</translation>
     </message>
     <message>
         <source>Wrapper Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine Nahe am Limit</translation>
     </message>
     <message>
         <source>Wrapper Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine offline</translation>
     </message>
     <message>
         <source>Wrapper Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine geöffnet</translation>
     </message>
     <message>
         <source>Wrapper Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine über Temperatur</translation>
     </message>
     <message>
         <source>Wrapper Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine im Energiesparmodus</translation>
     </message>
     <message>
         <source>Wrapper Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine behebbarer Fehler</translation>
     </message>
     <message>
         <source>Wrapper Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine behebbarer Speicher</translation>
     </message>
     <message>
         <source>Wrapper Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine entfernt</translation>
     </message>
     <message>
         <source>Wrapper Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Wrapper Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine Ressource entfernt</translation>
     </message>
     <message>
         <source>Wrapper Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Wrapper Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine Messfehler</translation>
     </message>
     <message>
         <source>Wrapper Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine ausgeschaltet</translation>
     </message>
     <message>
         <source>Wrapper Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine eingeschaltet</translation>
     </message>
     <message>
         <source>Wrapper Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine unter Temperatur</translation>
     </message>
     <message>
         <source>Wrapper Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Wrapper Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Wrapper Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verpackungsmaschine aufwärmen</translation>
     </message>
 </context>
 <context>
@@ -5149,175 +5149,175 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausstehend</translation>
     </message>
     <message>
         <source>pending-held</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausstehend-gehalten</translation>
     </message>
     <message>
         <source>processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitung</translation>
     </message>
     <message>
         <source>processing-stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeutung gestoppt</translation>
     </message>
     <message>
         <source>canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbestellt</translation>
     </message>
     <message>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgebrochen</translation>
     </message>
     <message>
         <source>completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertiggestellt</translation>
     </message>
     <message>
         <source>unknown state </source>
-        <translation type="unfinished"></translation>
+        <translation>Status unbekannt</translation>
     </message>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Leerlauf</translation>
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitung</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestoppt</translation>
     </message>
     <message>
         <source>Unknown State </source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Status</translation>
     </message>
     <message>
         <source>draft</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlage</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>high</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>unknown quality </source>
-        <translation type="unfinished"></translation>
+        <translation>Qualität unbekannt</translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochformat</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Querformat</translation>
     </message>
     <message>
         <source>reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgekehrtes Querformat</translation>
     </message>
     <message>
         <source>reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgekehrtes Hochormat</translation>
     </message>
     <message>
         <source>unknown orientation </source>
-        <translation type="unfinished"></translation>
+        <translation>unbekannte Ausrichtung</translation>
     </message>
     <message>
         <source>dpi</source>
-        <translation type="unfinished"></translation>
+        <translation>dpi</translation>
     </message>
     <message>
         <source>dots/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte/cm</translation>
     </message>
     <message>
         <source>Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>one-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Einseitig</translation>
     </message>
     <message>
         <source>two-sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiseitig</translation>
     </message>
     <message>
         <source>two-sided flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiseitig gedreht</translation>
     </message>
     <message>
         <source>single document</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzelnes Dokument</translation>
     </message>
     <message>
         <source>uncollated</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht zusammengestellt</translation>
     </message>
     <message>
         <source>collated</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammengestellt</translation>
     </message>
     <message>
         <source>single document (new sheet)</source>
-        <translation type="unfinished"></translation>
+        <translation>Einzelnes Dokument (neue Seite)</translation>
     </message>
     <message>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatusch</translation>
     </message>
     <message>
         <source>auto monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-Monochrom</translation>
     </message>
     <message>
         <source>bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweistufig</translation>
     </message>
     <message>
         <source>color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <source>highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Hervorheben</translation>
     </message>
     <message>
         <source>monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Monochrom</translation>
     </message>
     <message>
         <source>process bi-level</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeite zweistufig</translation>
     </message>
     <message>
         <source>process monochrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeite monochrom</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>auto (fit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto (passen)</translation>
     </message>
     <message>
         <source>fill</source>
@@ -5325,83 +5325,83 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>fit</source>
-        <translation type="unfinished"></translation>
+        <translation>Füllen</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein</translation>
     </message>
     <message>
         <source>auto-sense</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische Erkennung</translation>
     </message>
     <message>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
         <source>Postscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Postscript</translation>
     </message>
     <message>
         <source>PWG-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>PWG-Raster</translation>
     </message>
     <message>
         <source>URF-raster</source>
-        <translation type="unfinished"></translation>
+        <translation>URF-Raster</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
         <source>GIF</source>
-        <translation type="unfinished"></translation>
+        <translation>GIF</translation>
     </message>
     <message>
         <source>tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Zufuhr</translation>
     </message>
     <message>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolle</translation>
     </message>
     <message>
         <source>alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternativ</translation>
     </message>
     <message>
         <source>alternate-roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Abwechselnde Rolle</translation>
     </message>
     <message>
         <source>bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <source>by-pass tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusatzzufuhr</translation>
     </message>
     <message>
         <source>center</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte</translation>
     </message>
     <message>
         <source>disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk</translation>
     </message>
     <message>
         <source>envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Umschlag</translation>
     </message>
     <message>
         <source>hagaki</source>
-        <translation type="unfinished"></translation>
+        <translation>Japanische Postkarte (Hagaki)</translation>
     </message>
     <message>
         <source>large capacity</source>
