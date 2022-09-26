@@ -4267,7 +4267,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Slitter Warming Up</source>
-        <translation>Rollenschneider aufwärmenr</translation>
+        <translation>Rollenschneider aufwärmen</translation>
     </message>
     <message>
         <source>Spool Area Full</source>
@@ -4275,335 +4275,334 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Stacker Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler hinzugefügt</translation>
     </message>
     <message>
         <source>Stacker Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler fast leer</translation>
     </message>
     <message>
         <source>Stacker Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler fast voll</translation>
     </message>
     <message>
         <source>Stacker At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler am Limit</translation>
     </message>
     <message>
         <source>Stacker Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler geschlossen</translation>
     </message>
     <message>
         <source>Stacker Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Staplers ändern</translation>
     </message>
     <message>
         <source>Stacker Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Staplers geschlossen</translation>
     </message>
     <message>
         <source>Stacker Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Staplers offen</translation>
     </message>
     <message>
         <source>Stacker Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler leer</translation>
     </message>
     <message>
         <source>Stacker Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler voll</translation>
     </message>
     <message>
         <source>Stacker Interlock Closed</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stacker Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Staplers offen</translation>
     </message>
     <message>
         <source>Stacker Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Stapler</translation>
     </message>
     <message>
         <source>Stacker Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Staplers fast zu Ende</translation>
     </message>
     <message>
         <source>Stacker Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Staplers zu Ende</translation>
     </message>
     <message>
         <source>Stacker Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Staplers erschöpft</translation>
     </message>
     <message>
         <source>Stacker Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler fehlt</translation>
     </message>
     <message>
         <source>Stacker Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Staplers ausgefallen</translation>
     </message>
     <message>
         <source>Stacker Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler Nahe am Limit</translation>
     </message>
     <message>
         <source>Stacker Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler offline</translation>
     </message>
     <message>
         <source>Stacker Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler geöffnet</translation>
     </message>
     <message>
         <source>Stacker Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler über Temperatur</translation>
     </message>
     <message>
         <source>Stacker Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler im Energiesparmodus</translation>
     </message>
     <message>
         <source>Stacker Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler behebbarer Fehler</translation>
     </message>
     <message>
         <source>Stacker Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler behebbarer Speicher</translation>
     </message>
     <message>
         <source>Stacker Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler entfernt</translation>
     </message>
     <message>
         <source>Stacker Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Stacker Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler Ressource entfernt</translation>
     </message>
     <message>
         <source>Stacker Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Stacker Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler Messfehler</translation>
     </message>
     <message>
         <source>Stacker Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler ausgeschaltet</translation>
     </message>
     <message>
         <source>Stacker Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler eingeschaltet</translation>
     </message>
     <message>
         <source>Stacker Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler unter Temparatur</translation>
     </message>
     <message>
         <source>Stacker Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Stacker Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Stacker Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler aufwärmen</translation>
     </message>
     <message>
         <source>Stapler Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter hinzugefügt</translation>
     </message>
     <message>
         <source>Stapler Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fast leer</translation>
     </message>
     <message>
         <source>Stapler Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fast voll</translation>
     </message>
     <message>
         <source>Stapler At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter am Limit</translation>
     </message>
     <message>
         <source>Stapler Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter geschlossen</translation>
     </message>
     <message>
         <source>Stapler Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Hefters ändern</translation>
     </message>
     <message>
         <source>Stapler Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Hefters geschlossen</translation>
     </message>
     <message>
         <source>Stapler Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Hefters offen</translation>
     </message>
     <message>
         <source>Stapler Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter leer</translation>
     </message>
     <message>
         <source>Stapler Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter voll</translation>
     </message>
     <message>
         <source>Stapler Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Hefters geschlossen</translation>
     </message>
     <message>
         <source>Stapler Interlock Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Hefters offen</translation>
     </message>
     <message>
         <source>Stapler Jam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stau im Hefter</translation>
     </message>
     <message>
         <source>Stapler Life Almost Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Hefters fast zu Ende</translation>
     </message>
     <message>
         <source>Stapler Life Over</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebensdauer des Hefters zu Ende</translation>
     </message>
     <message>
         <source>Stapler Memory Exhausted</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher des Hefters erschöpft</translation>
     </message>
     <message>
         <source>Stapler Missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fehlt</translation>
     </message>
     <message>
         <source>Stapler Motor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor des Hefters ausgefallen</translation>
     </message>
     <message>
         <source>Stapler Near Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Nahe am Limit</translation>
     </message>
     <message>
         <source>Stapler Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter offline</translation>
     </message>
     <message>
         <source>Stapler Opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter geöffnet</translation>
     </message>
     <message>
         <source>Stapler Over Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter über Temperatur</translation>
     </message>
     <message>
         <source>Stapler Power Saver</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter im Energiesparmodus</translation>
     </message>
     <message>
         <source>Stapler Recoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter behebbarer Fehler</translation>
     </message>
     <message>
         <source>Stapler Recoverable Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter behebbarer Speicher</translation>
     </message>
     <message>
         <source>Stapler Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter entfernt</translation>
     </message>
     <message>
         <source>Stapler Resource Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Ressource hinzugefügt</translation>
     </message>
     <message>
         <source>Stapler Resource Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Ressource entfernt</translation>
     </message>
     <message>
         <source>Stapler Thermistor Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Thermistor-Ausfall</translation>
     </message>
     <message>
         <source>Stapler Timing Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter Messfehler</translation>
     </message>
     <message>
         <source>Stapler Turned Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter ausgeschaltet</translation>
     </message>
     <message>
         <source>Stapler Turned On</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter eingeschaltet</translation>
     </message>
     <message>
         <source>Stapler Under Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unter Temperatur</translation>
     </message>
     <message>
         <source>Stapler Unrecoverable Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unbehebbarer Fehler</translation>
     </message>
     <message>
         <source>Stapler Unrecoverable Storage Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter unbehebbarer Speicherfehler</translation>
     </message>
     <message>
         <source>Stapler Warming Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter aufwärmen</translation>
     </message>
     <message>
         <source>Stitcher Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter hinzugefügt</translation>
     </message>
     <message>
         <source>Stitcher Almost Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fast leer</translation>
     </message>
     <message>
         <source>Stitcher Almost Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter fast voll</translation>
     </message>
     <message>
         <source>Stitcher At Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter am Limit</translation>
     </message>
     <message>
         <source>Stitcher Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter geschlossen</translation>
     </message>
     <message>
         <source>Stitcher Configuration Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des Hefters ändern</translation>
     </message>
     <message>
         <source>Stitcher Cover Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Hefters geschlossen</translation>
     </message>
     <message>
         <source>Stitcher Cover Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abdeckung des Hefters offen</translation>
     </message>
     <message>
         <source>Stitcher Empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter leer</translation>
     </message>
     <message>
         <source>Stitcher Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Hefter voll</translation>
     </message>
     <message>
         <source>Stitcher Interlock Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verriegelung des Hefters geschlossen</translation>
     </message>
     <message>
         <source>Stitcher Interlock Open</source>
