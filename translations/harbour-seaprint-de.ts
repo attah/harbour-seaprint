@@ -5405,83 +5405,83 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>large capacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Große Capazität</translation>
     </message>
     <message>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>main</source>
-        <translation type="unfinished"></translation>
+        <translation>Haupt</translation>
     </message>
     <message>
         <source>main roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptwalze</translation>
     </message>
     <message>
         <source>manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Handbuch</translation>
     </message>
     <message>
         <source>middle</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte</translation>
     </message>
     <message>
         <source>photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinten</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>side</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite</translation>
     </message>
     <message>
         <source>top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <source>stacker</source>
-        <translation type="unfinished"></translation>
+        <translation>Stapler</translation>
     </message>
     <message>
         <source>mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Postfach</translation>
     </message>
     <message>
         <source>face-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach oben gerichtet</translation>
     </message>
     <message>
         <source>face-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach unten gerichtet</translation>
     </message>
     <message>
         <source>my mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>mein Postfach</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>Plaintext</source>
-        <translation type="unfinished"></translation>
+        <translation>Klartext</translation>
     </message>
     <message>
         <source>Reverse BMP</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgekehrtes BMP</translation>
     </message>
     <message>
         <source>SVG</source>
-        <translation type="unfinished"></translation>
+        <translation>SVG</translation>
     </message>
 </context>
 </TS>
