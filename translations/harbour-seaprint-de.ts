@@ -1031,7 +1031,7 @@ auf diesem Drucker</translation>
         <translation>10 x 11″</translation>
     </message>
     <message>
-        <source>10 x 13 Zoll</source>
+        <source>10 x 13″</source>
         <translation>10 x 13 Zoll</translation>
     </message>
     <message>
@@ -1290,6 +1290,39 @@ auf diesem Drucker</translation>
         <source>5 x 5″</source>
         <translation>5 x 5 Zoll</translation>
     </message>
+    <message>
+        <source>184 x 260mm</source>
+        <translation type="unfinished">184 x 260mm</translation>
+    </message>
+    <message>
+        <source>195 x 270mm</source>
+        <translation type="unfinished">195 x 270mm</translation>
+    </message>
+    <message>
+        <source>55 x 85mm</source>
+        <translation type="unfinished">55 x 85mm</translation>
+    </message>
+    <message>
+        <source>55 x 91mm</source>
+        <translation type="unfinished">55 x 91mm</translation>
+    </message>
+    <message>
+        <source>54 x 86mm</source>
+        <translation type="unfinished">54 x 86mm</translation>
+    </message>
+    <message>
+        <source>275 x 395mm</source>
+        <translation type="unfinished">275 x 395mm</translation>
+    </message>
+    <message>
+        <source>89 x 119mm</source>
+        <translation type="unfinished">89 x 119mm</translation>
+    </message>
+    <message>
+        <source>Folio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Folio (Special)</source>
         <translation>Spezialfolie</translation>
     </message>
@@ -1651,7 +1684,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Metal</source>
-        <translation>Matall</translation>
+        <translation>Metall</translation>
     </message>
     <message>
         <source>Metal Glossy</source>
@@ -4315,6 +4348,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Stacker Interlock Closed</source>
+        <translation>Verriegelung des Staplers geschlossen</translation>
     </message>
     <message>
         <source>Stacker Interlock Open</source>
