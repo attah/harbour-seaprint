@@ -146,7 +146,7 @@ Setting {
             visible: acceptRangeList
             text: qsTr("Advanced")
             onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("RangeListInputDialog.qml"),
-                                                    {value: choice, title: prettyName});
+                                                    {title: prettyName});
                         dialog.accepted.connect(function() {
                             choice = dialog.value;
                         })

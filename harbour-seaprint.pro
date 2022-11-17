@@ -51,10 +51,8 @@ SOURCES += src/harbour-seaprint.cpp \
     src/settings.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
-    qml/components/DependentOn.qml \
-    qml/components/RangeListInputDialog.qml \
     qml/cover/CoverPage.qml \
-    qml/components/*qml \
+    qml/components/*.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
