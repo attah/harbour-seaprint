@@ -20,7 +20,7 @@ For PDFs, your printer needs to support one of the following formats:
 For Postscript, your printer needs to support Postscript natively. (SeaPrint just sends it as-is)
 
 For Plaintext, SeaPrint can render it to PDF internally and then the requirements follow those of PDF.
-You can also send Plaintext to supporting printers and leave the rendering up to the printer (SeaPrint will strip leading and trailing Form Feed characters and ensure CR-NL newlines, but not do any reflow or similar). Since rendering will differ between printers, this has lowest priority for automatic format selection.
+You can also send Plaintext to supporting printers and leave the rendering up to the printer (SeaPrint will strip leading and trailing Form Feed characters and ensure CR+LF newlines, but not do any reflow or similar). Since rendering will differ between printers, this has lowest priority for automatic format selection.
 
 For printing "Office" files, like .doc(x) and odt, you need to install
  `calligraconverter` (from the `calligra` package in Sailfish OS 4.2 onwards).
@@ -42,6 +42,10 @@ JPEGs are then (losslessly) re-encoded to the baseline encoding profile to work 
 For other image formats JPEG has lowest priority as transfer format since it is lossy.
 
 ![Format flowchart](doc/pipeline.svg)
+
+Flowchart made with [GoAT](https://github.com/blampe/goat).
+
+pdf2printable, ppm2pwg and baselinify were made especially for SeaPrint and can be found [here](https://github.com/attah/ppm2pwg).
 
 Printers with any of these IPP certifications and derivative standards should likely be supported:
 
