@@ -1,10 +1,10 @@
-  If conversion is required:
+  Normal flow:
                                                  .---------------.
     PDF        -------------------------------->|                 |
-                     .------------------.       |                 +----------------> Postscript
-    Plaintext  ---->|   QTextDocument    +----->|  pdf2printable  |
-                    |   + QPdfWriter     |      |                 +----------------> PDF
-                     '------------------'       |                 |
+                     .-----------------.        |                 +----------------> Postscript 2
+    Plaintext  ---->|   QTextDocument   +------>|  pdf2printable  |
+                    |   + QPdfWriter    |       |                 +----------------> PDF 1.5
+                     '-----------------'        | (Poppler+Cairo) |
     DOC/PPT          .-------------------.      |                 |
     ODT/ODP    ---->|  Calligraconverter  +---->|                  '---------.
                     |     (optional)      |      '---------------.            +----> PWG-Raster
