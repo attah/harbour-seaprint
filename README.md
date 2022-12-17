@@ -41,6 +41,8 @@ For printing JPEG images, transferring them as JPEG has highest priority.
 JPEGs are then (losslessly) re-encoded to the baseline encoding profile to work with all printers (since SeaPrint 1.1).
 For other image formats JPEG has lowest priority as transfer format since it is lossy.
 
+![Format flowchart](doc/pipeline.svg)
+
 Printers with any of these IPP certifications and derivative standards should likely be supported:
 
  * IPP Everywhere
