@@ -42,6 +42,7 @@ SOURCES += src/harbour-seaprint.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
     src/mimer.cpp \
+    ppm2pwg/printparameters.cpp \
     ppm2pwg/ppm2pwg.cpp \
     ppm2pwg/pdf2printable.cpp \
     ppm2pwg/baselinify.cpp \
