@@ -769,7 +769,7 @@ void PrinterWorker::convertPlaintextLabel(QString filename, Bytestream header, P
     QString bigText = "AXgjqÈÅÄÖþ";
     QRect rect = fm.boundingRect(bigText);
 
-    while(rect.height() > pixelHeight*(14.0/16))
+    while(rect.height() > pixelHeight*(8.0/10.0))
     {
         font.setPixelSize(font.pixelSize()-1);
         fm = QFontMetrics(font);
@@ -791,7 +791,7 @@ void PrinterWorker::convertPlaintextLabel(QString filename, Bytestream header, P
 
     QPainter painter(&pdfWriter);
     int xOffset = -rect.x() + pixelHeight/4;
-    int yOffset = -rect.y() + pixelHeight/16;
+    int yOffset = -rect.y() + pixelHeight/10;
     painter.setFont(font);
     painter.drawText(xOffset, yOffset, allText);
     painter.end();
