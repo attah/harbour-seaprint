@@ -445,7 +445,7 @@ function knownPaperSize(mediaName)
 }
 
 
-function fixupChoices(name, choices, mimeType)
+function fixupChoices(name, choices, mimeType, printer)
 {
     switch(name) {
     case "document-format":
@@ -497,7 +497,18 @@ function fixupChoices(name, choices, mimeType)
             return choices;
         }
     case "media":
-        return choices.filter(knownPaperSize);
+        if(printer.attrs.hasOwnProperty("media-ready"))
+        {
+            for(var m in printer.attrs["media-ready"].value)
+            {
+                var value = printer.attrs["media-ready"].value[m];
+                if(!has(choices, value))
+                {
+                    choices.push(value);
+                }
+            }
+        }
+        return choices;
     default:
         return choices;
     }

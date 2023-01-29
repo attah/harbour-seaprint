@@ -524,6 +524,10 @@ auf diesem Drucker</translation>
         <source>Inconsistent duplex setting</source>
         <translation>Uneinheitliche Duplex-Einstellung</translation>
     </message>
+    <message>
+        <source>Multiline label not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

@@ -150,7 +150,14 @@ void PrinterWorker::print(QString filename, QString mimeType, QString targetForm
             }
             else if(mimeType == Mimer::Plaintext)
             {
-                convertPlaintext(filename, contents, Params);
+                if(Params.paperSizeH == 0 && Params.getPaperSizeWInMillimeters() < 26)
+                {
+                    convertPlaintextLabel(filename, contents, Params);
+                }
+                else
+                {
+                    convertPlaintext(filename, contents, Params);
+                }
             }
             else if(Mimer::isImage(mimeType))
             {
@@ -649,7 +656,6 @@ void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintP
     doc.setDefaultFont(font);
     (void)doc.documentLayout(); // wat
 
-
     // Needs to be before painter
     pdfWriter.setMargins({mmMargin, mmMargin, mmMargin, mmMargin});
 
@@ -724,6 +730,70 @@ void PrinterWorker::convertPlaintext(QString filename, Bytestream header, PrintP
         }
     }
 
+    painter.end();
+
+    convertPdf(tmpPdfFile.fileName(), header, Params);
+
+    qDebug() << "Finished";
+    qDebug() << "posted";
+}
+
+void PrinterWorker::convertPlaintextLabel(QString filename, Bytestream header, PrintParameters Params)
+{
+    QFile inFile(filename);
+    if(!inFile.open(QIODevice::ReadOnly))
+    {
+        throw ConvertFailedException(tr("Failed to open file"));
+    }
+
+    QString allText = inFile.readAll();
+    while(allText.endsWith('\n'))
+    {
+        allText.chop(1);
+    }
+
+    if(allText.contains('\n') || allText.contains('\f'))
+    {
+        throw ConvertFailedException(tr("Multiline label not supported"));
+    }
+
+    QTemporaryFile tmpPdfFile;
+    tmpPdfFile.open();
+
+    // NB: running with rotated format - pdf2printable will sort that out
+    int pixelHeight = Params.getPaperSizeWInPixels();
+    QFont font = QFont("Arial");
+    font.setPixelSize(pixelHeight);
+
+    QFontMetrics fm(font);
+    QString bigText = "AXgjqÈÅÄÖþ";
+    QRect rect = fm.boundingRect(bigText);
+
+    while(rect.height() > pixelHeight*(14.0/16))
+    {
+        font.setPixelSize(font.pixelSize()-1);
+        fm = QFontMetrics(font);
+        rect = fm.boundingRect(bigText);
+    }
+
+    rect = fm.boundingRect(allText);
+
+    int pixelWidth = rect.width() + pixelHeight/2;
+    float ratio = pixelWidth*1.0/pixelHeight;
+    Params.paperSizeH = Params.paperSizeW * ratio;
+
+    QPdfWriter pdfWriter(tmpPdfFile.fileName());
+    pdfWriter.setCreator("SeaPrint " SEAPRINT_VERSION);
+    QPageSize pageSize({Params.getPaperSizeHInPoints(), Params.getPaperSizeWInPoints()}, QPageSize::Point);
+    pdfWriter.setPageSize(pageSize);
+    pdfWriter.setMargins({0,0,0,0});
+    pdfWriter.setResolution(Params.hwResH);
+
+    QPainter painter(&pdfWriter);
+    int xOffset = -rect.x() + pixelHeight/4;
+    int yOffset = -rect.y() + pixelHeight/16;
+    painter.setFont(font);
+    painter.drawText(xOffset, yOffset, allText);
     painter.end();
 
     convertPdf(tmpPdfFile.fileName(), header, Params);

@@ -288,6 +288,7 @@ QString IppMsg::consume_attribute(QJsonObject& attrs, Bytestream& data)
                                    || name.startsWith("printer-firmware")
                                    || name.endsWith("-supported")
                                    || name == "printer-icons"
+                                   || name == "media-ready"
                                    || name.endsWith("-reasons")));
 
     if(!unnamed.empty() || forceArray)

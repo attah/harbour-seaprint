@@ -7,7 +7,7 @@ Setting {
     property var preferred_choices: []
     property string preferred_choice_suffix: ""
 
-    property var actual_choices: Utils.fixupChoices(name, choices, parent.selectedFileType)
+    property var actual_choices: Utils.fixupChoices(name, choices, parent.selectedFileType, parent.printer)
 
     property int num_large_choices: 8
 

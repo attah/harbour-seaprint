@@ -60,6 +60,7 @@ private:
     void convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins);
     void convertOfficeDocument(QString filename, Bytestream header, PrintParameters Params);
     void convertPlaintext(QString filename, Bytestream header, PrintParameters Params);
+    void convertPlaintextLabel(QString filename, Bytestream header, PrintParameters Params);
 
     void awaitResult(CurlRequester& cr, QString callback);
 

@@ -523,6 +523,10 @@
         <source>Inconsistent duplex setting</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multiline label not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RangeSetting</name>

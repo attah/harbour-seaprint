@@ -53,7 +53,7 @@ SOURCES += src/harbour-seaprint.cpp \
 
 DISTFILES += qml/harbour-seaprint.qml \
     qml/cover/CoverPage.qml \
-    qml/components/*.qml \
+    qml/components/*qml \
     qml/pages/*.qml \
     qml/pages/*.js \
     qml/pages/*svg \
