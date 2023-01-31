@@ -62,7 +62,7 @@ Page {
             AboutLabel {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
-                text: "© 2019-2022 Anton Thomasson et al."
+                text: "© 2019-2023 Anton Thomasson et al."
             }
 
 
