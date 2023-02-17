@@ -3,6 +3,8 @@ import Sailfish.Silica 1.0
 import "utils.js" as Utils
 
 Page {
+    property bool busyPage: true
+
     allowedOrientations: Orientation.All
 
     Component.onCompleted: {

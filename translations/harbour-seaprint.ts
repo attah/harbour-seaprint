@@ -277,10 +277,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unsupported document format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This format may not render correctly</source>
         <translation type="unfinished"></translation>
     </message>
@@ -620,6 +616,14 @@
     </message>
     <message>
         <source>plaintext</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New file selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

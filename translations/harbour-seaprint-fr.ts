@@ -277,10 +277,6 @@
         <translation>Pas en WiFi</translation>
     </message>
     <message>
-        <source>Unsupported document format</source>
-        <translation>Format de document non supporté</translation>
-    </message>
-    <message>
         <source>This format may not render correctly</source>
         <translation>Ce format peut ne pas être rendu correctement</translation>
     </message>
@@ -621,6 +617,14 @@ sur cette imprimante</translation>
     </message>
     <message>
         <source>SVGs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation>Format de document non supporté</translation>
+    </message>
+    <message>
+        <source>New file selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

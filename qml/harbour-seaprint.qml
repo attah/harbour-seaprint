@@ -13,9 +13,37 @@ ApplicationWindow
 {
     id: appWin
 
+    property Page _mainPage
+
     property bool expectCalligra: true
 
-    initialPage: Component { FirstPage { selectedFile: Qt.application.arguments[1] ? Qt.application.arguments[1] : "" } }
+
+    function openFile(file) {
+        selectedFile = file
+        selectedFileType = Mimer.get_type(selectedFile);
+        if(selectedFileType == "")
+        {
+            selectedFile = ""
+            notifier.notify(qsTr("Unsupported document format"))
+        }
+        if(pageStack.currentPage.busyPage)
+        {
+            notifier.notify(qsTr("New file selected"))
+        }
+        else
+        {
+            pageStack.pop(appWin._mainPage, PageStackAction.Immediate)
+        }
+    }
+
+    property string selectedFile: ""
+    property string selectedFileType
+
+    initialPage: Component {
+        FirstPage {
+            Component.onCompleted: appWin._mainPage = this
+        }
+    }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
 

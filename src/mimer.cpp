@@ -55,5 +55,12 @@ Mimer* Mimer::instance()
 QString Mimer::get_type(QString filename) {
     QString type = _db.mimeTypeForFile(filename).name();
     qDebug() << "MimeType:" << type;
-    return type;
+    if(type == PDF || type == Postscript || type == Plaintext || isImage(type) || isOffice(type))
+    {
+        return type;
+    }
+    else
+    {
+        return "";
+    }
 }

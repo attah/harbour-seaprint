@@ -277,10 +277,6 @@
         <translation>未连接WiFi</translation>
     </message>
     <message>
-        <source>Unsupported document format</source>
-        <translation>不受支持的格式</translation>
-    </message>
-    <message>
         <source>This format may not render correctly</source>
         <translation>格式可能无法正确呈现</translation>
     </message>
@@ -620,6 +616,14 @@
     </message>
     <message>
         <source>SVGs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation>不受支持的格式</translation>
+    </message>
+    <message>
+        <source>New file selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

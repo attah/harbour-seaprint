@@ -1,4 +1,6 @@
 #include <QtQuick>
+#include <QVariant>
+#include <QDBusConnection>
 
 #include <sailfishapp.h>
 #include <src/ippdiscovery.h>
@@ -8,6 +10,9 @@
 #include <src/convertchecker.h>
 #include <src/settings.h>
 #include <src/rangelistchecker.h>
+#include <src/dbusadaptor.h>
+#include "argget.h"
+#include <iostream>
 
 Q_DECLARE_METATYPE(CURLcode)
 Q_DECLARE_METATYPE(Bytestream)
@@ -26,6 +31,17 @@ static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngi
 
 int main(int argc, char *argv[])
 {
+    bool prestart = false;
+    std::string FileName;
+    SwitchArg<bool> pretsartOpt(prestart, {"--prestart"}, "Run prestart");
+
+    PosArg fileArg(FileName, "File to print", true);
+    ArgGet args({&pretsartOpt}, {&fileArg});
+    if(!args.get_args(argc, argv))
+    {
+        return 1;
+    }
+
     qRegisterMetaType<CURLcode>();
     qRegisterMetaType<Bytestream>();
     qRegisterMetaType<PrintParameters>();
@@ -52,8 +68,25 @@ int main(int argc, char *argv[])
     QQuickView* view = SailfishApp::createView();
 
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
-
     view->setSource(SailfishApp::pathToMainQml());
-    view->show();
+
+    DBusAdaptor dbus(view);
+
+    if (!QDBusConnection::sessionBus().registerObject("/net/attah/seaprint", view))
+        qWarning() << "Could not register /net/attah/seaprint D-Bus object.";
+
+    if (!QDBusConnection::sessionBus().registerService("net.attah.seaprint"))
+        qWarning() << "Could not register net.attah.seaprint D-Bus service.";
+
+    if(!FileName.empty())
+    {
+        qDebug() << "Opening" << FileName.c_str();
+        QVariant fileNameVariant(FileName.c_str());
+        QMetaObject::invokeMethod(view->rootObject(), "openFile", Q_ARG(QVariant, fileNameVariant));
+    }
+    if(!prestart)
+    {
+        view->show();
+    }
     return app->exec();
 }

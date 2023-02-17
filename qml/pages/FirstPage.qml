@@ -12,9 +12,6 @@ Page {
     id: page
     allowedOrientations: Orientation.All
 
-    property string selectedFile: ""
-    property string selectedFileType
-
     Connections {
         target: wifi
         onConnectedChanged: {
@@ -60,11 +57,6 @@ Page {
 
     Component.onCompleted: {
         IppDiscovery.discover();
-        if(selectedFile != "")
-        {
-            var type = Mimer.get_type(selectedFile);
-            selectedFileType = type;
-        }
     }
 
     property bool nagged: false
@@ -143,7 +135,7 @@ Page {
 
                 property string name: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
                 property var supported_formats: Utils.supported_formats(printer, considerAdditionalFormatsSetting.value)
-                property bool canPrint: supported_formats.mimetypes.indexOf(selectedFileType) != -1
+                property bool canPrint: supported_formats.mimetypes.indexOf(appWin.selectedFileType) != -1
 
                 Connections {
                     target: printer
@@ -182,7 +174,7 @@ Page {
                 {
                     if(printer.attrs.hasOwnProperty("printer-uuid"))
                     {
-                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value, selectedFileType));
+                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value, appWin.selectedFileType));
                     }
                     else
                     {
@@ -199,7 +191,7 @@ Page {
                         return;
                     }
                     debugCountReset.restart();
-                    if(selectedFile == "")
+                    if(appWin.selectedFile == "")
                     {
                         noFileSelected();
                     }
@@ -209,7 +201,7 @@ Page {
                     }
                     else
                     {
-                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: selectedFile, jobParams: maybeGetParams()})
+                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: appWin.selectedFile, jobParams: maybeGetParams()})
                     }
                 }
 
@@ -250,13 +242,13 @@ Page {
 
                     Label {
                         id: name_label
-                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || appWin.selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         text: name
                     }
 
                     Label {
                         id: mm_label
-                        color: canPrint || selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
+                        color: canPrint || appWin.selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
                               + (Utils.existsAndNotEmpty("printer-location", printer)  ? "  •  "+printer.attrs["printer-location"].value : "")
@@ -264,7 +256,7 @@ Page {
 
                     Label {
                         id: uri_label
-                        color: canPrint || selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
+                        color: canPrint || appWin.selectedFile == "" ? Theme.highlightColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeTiny
                         text: printer.url
                     }
@@ -285,7 +277,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.pdf
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-pdf"
                         }
                         HighlightImage {
@@ -293,7 +285,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.postscript
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-other"
 
                         }
@@ -302,7 +294,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.plaintext
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-document"
                         }
                         HighlightImage {
@@ -310,7 +302,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.office
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-formatted"
                         }
                         HighlightImage {
@@ -318,7 +310,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.office
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-presentation"
                         }
                         HighlightImage {
@@ -326,7 +318,7 @@ Page {
                             width: Theme.itemSizeExtraSmall/2
                             visible: supported_formats.images
                             highlightColor: "red"
-                            highlighted: !(selectedFile == "" || canPrint)
+                            highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-image"
                         }
                     }
@@ -381,7 +373,7 @@ Page {
             Row {
                 id: warningRow
                 anchors.horizontalCenter: parent.horizontalCenter
-                visible: Mimer.isOffice(page.selectedFileType)
+                visible: Mimer.isOffice(appWin.selectedFileType)
 
                 HighlightImage {
                     source: "image://theme/icon-s-warning"
@@ -404,7 +396,7 @@ Page {
 
                 horizontalAlignment: contentWidth > width ? Text.AlignRight : Text.AlignHCenter
                 truncationMode: TruncationMode.Fade
-                text: selectedFile != "" ? selectedFile : qsTr("No file selected")
+                text: appWin.selectedFile != "" ? appWin.selectedFile : qsTr("No file selected")
 
                 SequentialAnimation {
                     id: noFileSelectedAnimation
@@ -457,18 +449,7 @@ Page {
                 title: qsTr("Choose file")
 
                 onSelectedContentPropertiesChanged: {
-                    var mimeType = Mimer.get_type(selectedContentProperties.filePath)
-                    if(mimeType == Mimer.PDF || mimeType == Mimer.Postscript || mimeType == Mimer.Plaintext || Mimer.isOffice(mimeType))
-                    {
-                        page.selectedFile = selectedContentProperties.filePath
-                        page.selectedFileType = mimeType
-                    }
-                    else
-                    {
-                        notifier.notify(qsTr("Unsupported document format"))
-                        page.selectedFile = ""
-                        page.selectedFileType = ""
-                    }
+                    appWin.openFile(selectedContentProperties.filePath);
                 }
             }
         }
@@ -478,8 +459,7 @@ Page {
                 allowedOrientations: Orientation.All
 
                 onSelectedContentPropertiesChanged: {
-                    page.selectedFile = selectedContentProperties.filePath
-                    page.selectedFileType = Mimer.get_type(selectedContentProperties.filePath)
+                    appWin.openFile(selectedContentProperties.filePath);
                 }
             }
         }

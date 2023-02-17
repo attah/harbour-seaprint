@@ -277,10 +277,6 @@
         <translation>No hay WiFi</translation>
     </message>
     <message>
-        <source>Unsupported document format</source>
-        <translation>Formato de documento no soportado</translation>
-    </message>
-    <message>
         <source>This format may not render correctly</source>
         <translation>Este formato puede no renderizarse correctamente</translation>
     </message>
@@ -620,6 +616,14 @@
     </message>
     <message>
         <source>SVGs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation>Formato de documento no soportado</translation>
+    </message>
+    <message>
+        <source>New file selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -277,10 +277,6 @@
         <translation>Niet met WiFi netwerk verbonden</translation>
     </message>
     <message>
-        <source>Unsupported document format</source>
-        <translation>Niet-ondersteunde documentindeling</translation>
-    </message>
-    <message>
         <source>This format may not render correctly</source>
         <translation>Dit formaat wordt mogelijk niet correct weergegeven</translation>
     </message>
@@ -620,6 +616,14 @@
     </message>
     <message>
         <source>SVGs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported document format</source>
+        <translation>Niet-ondersteunde documentindeling</translation>
+    </message>
+    <message>
+        <source>New file selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

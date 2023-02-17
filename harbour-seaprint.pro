@@ -26,7 +26,7 @@ INSTALLS += i18n
 system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
-QT += svg
+QT += svg dbus
 PKGCONFIG += mlite5 libcurl poppler-glib glib-2.0 cairo libjpeg
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
 DEFINES += MADNESS=1
@@ -34,6 +34,7 @@ DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
 DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 
 SOURCES += src/harbour-seaprint.cpp \
+    src/dbusadaptor.cpp \
     src/rangelistchecker.cpp \
     src/convertchecker.cpp \
     src/curlrequester.cpp \
@@ -82,6 +83,7 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-pl.ts
 
 HEADERS += \
+    src/dbusadaptor.h \
     src/rangelistchecker.h \
     src/convertchecker.h \
     src/curlrequester.h \
@@ -101,6 +103,7 @@ HEADERS += \
     ppm2pwg/UrfPgHdr.codable \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
+    ppm2pwg/argget.h \
     src/overrider.h \
     src/papersizes.h \
     src/printerworker.h \
