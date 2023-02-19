@@ -12,10 +12,20 @@ DBusAdaptor::~DBusAdaptor()
 {
 }
 
-void DBusAdaptor::Open(const QStringList &uris, const QVariantMap &)
+void DBusAdaptor::Open(const QStringList& uris, const QVariantMap& platformData)
 {
-    if (!uris.isEmpty()) {
+    qDebug() << platformData;
+    if (!uris.isEmpty() &&  uris[0] != "") {
         QMetaObject::invokeMethod(_view->rootObject(), "openFile", Q_ARG(QVariant, uris.at(0)));
+    }
+    else if(platformData.contains("data"))
+    {
+        QTemporaryFile tmpfile(QDir::tempPath() + "/" + (platformData.contains("name") ? platformData["name"].toString() : "seaprint"));
+        tmpfile.setAutoRemove(false);
+        tmpfile.open();
+        tmpfile.write(platformData["data"].toString().toUtf8());
+        tmpfile.close();
+        QMetaObject::invokeMethod(_view->rootObject(), "openFile", Q_ARG(QVariant, tmpfile.fileName()));
     }
     QMetaObject::invokeMethod(_view->rootObject(), "activate");
 }
