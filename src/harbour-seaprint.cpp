@@ -10,7 +10,8 @@
 #include <src/convertchecker.h>
 #include <src/settings.h>
 #include <src/rangelistchecker.h>
-#include <src/dbusadaptor.h>
+#include <src/freedesktopdbusadaptor.h>
+#include <src/seaprintdbusadaptor.h>
 #include "argget.h"
 #include <iostream>
 
@@ -70,7 +71,8 @@ int main(int argc, char *argv[])
     view->engine()->addImportPath(SailfishApp::pathTo("qml/pages").toString());
     view->setSource(SailfishApp::pathToMainQml());
 
-    DBusAdaptor dbus(view);
+    FreedesktopDBusAdaptor freedesktopDbus(view);
+    SeaPrintDBusAdaptor seaprintDbus(view);
 
     if (!QDBusConnection::sessionBus().registerObject("/net/attah/seaprint", view))
         qWarning() << "Could not register /net/attah/seaprint D-Bus object.";

@@ -34,7 +34,8 @@ DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
 DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 
 SOURCES += src/harbour-seaprint.cpp \
-    src/dbusadaptor.cpp \
+    src/dbusadaptorbase.cpp \
+    src/freedesktopdbusadaptor.cpp \
     src/rangelistchecker.cpp \
     src/convertchecker.cpp \
     src/curlrequester.cpp \
@@ -50,6 +51,7 @@ SOURCES += src/harbour-seaprint.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
     src/printerworker.cpp \
+    src/seaprintdbusadaptor.cpp \
     src/settings.cpp
 
 DISTFILES += qml/harbour-seaprint.qml \
@@ -83,7 +85,8 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
                 translations/harbour-seaprint-pl.ts
 
 HEADERS += \
-    src/dbusadaptor.h \
+    src/dbusadaptorbase.h \
+    src/freedesktopdbusadaptor.h \
     src/rangelistchecker.h \
     src/convertchecker.h \
     src/curlrequester.h \
@@ -107,6 +110,7 @@ HEADERS += \
     src/overrider.h \
     src/papersizes.h \
     src/printerworker.h \
+    src/seaprintdbusadaptor.h \
     src/settings.h
 
 INCLUDEPATH += ppm2pwg \
