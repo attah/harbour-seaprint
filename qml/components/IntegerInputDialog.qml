@@ -20,10 +20,9 @@ Dialog {
             id: valueField
             validator: IntValidator{bottom: min; top: max;}
             width: parent.width
-            placeholderText: ""+min+"-"+max
+            placeholderText: ""+min+"-"+(max == 65535 ? "..." : max)
             label: title
             focus: true
-            labelVisible: true
             inputMethodHints: Qt.ImhDigitsOnly
 
         }

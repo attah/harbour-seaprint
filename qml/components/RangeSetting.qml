@@ -104,7 +104,7 @@ Setting {
                 anchors.right: parent.right
                 icon.source: "image://theme/icon-s-edit"
                 onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("IntegerInputDialog.qml"),
-                                                        {value: choice, title: prettyName,
+                                                        {title: prettyName + " (" + qsTr("Low") + ")",
                                                          min: 1, max: high});
                             dialog.accepted.connect(function() {
                                 choice_low = dialog.value;
@@ -132,7 +132,7 @@ Setting {
                 anchors.right: parent.right
                 icon.source: "image://theme/icon-s-edit"
                 onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("IntegerInputDialog.qml"),
-                                                        {value: choice, title: prettyName,
+                                                        {title: prettyName + " (" + qsTr("High") + ")",
                                                          min: 1, max: high});
                             dialog.accepted.connect(function() {
                                 choice_high = dialog.value;

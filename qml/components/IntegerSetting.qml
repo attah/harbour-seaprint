@@ -53,7 +53,7 @@ Setting {
                 anchors.right: parent.right
                 icon.source: "image://theme/icon-s-edit"
                 onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("IntegerInputDialog.qml"),
-                                                        {value: choice, title: prettyName,
+                                                        {title: prettyName,
                                                          min: low, max: high});
                             dialog.accepted.connect(function() {
                                 choice = dialog.value;
