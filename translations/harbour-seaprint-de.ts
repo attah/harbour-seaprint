@@ -522,7 +522,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>Multiline label not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrzeilige Etiketten werden nicht unterstützt</translation>
     </message>
 </context>
 <context>
@@ -625,7 +625,7 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>New file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Datei ausgewählt</translation>
     </message>
 </context>
 <context>
@@ -1300,35 +1300,35 @@ auf diesem Drucker</translation>
     </message>
     <message>
         <source>184 x 260mm</source>
-        <translation type="unfinished">184 x 260mm</translation>
+        <translation>184 x 260mm</translation>
     </message>
     <message>
         <source>195 x 270mm</source>
-        <translation type="unfinished">195 x 270mm</translation>
+        <translation>195 x 270mm</translation>
     </message>
     <message>
         <source>55 x 85mm</source>
-        <translation type="unfinished">55 x 85mm</translation>
+        <translation>55 x 85mm</translation>
     </message>
     <message>
         <source>55 x 91mm</source>
-        <translation type="unfinished">55 x 91mm</translation>
+        <translation>55 x 91mm</translation>
     </message>
     <message>
         <source>54 x 86mm</source>
-        <translation type="unfinished">54 x 86mm</translation>
+        <translation>54 x 86mm</translation>
     </message>
     <message>
         <source>275 x 395mm</source>
-        <translation type="unfinished">275 x 395mm</translation>
+        <translation>275 x 395mm</translation>
     </message>
     <message>
         <source>89 x 119mm</source>
-        <translation type="unfinished">89 x 119mm</translation>
+        <translation>89 x 119mm</translation>
     </message>
     <message>
         <source>Folio</source>
-        <translation type="unfinished"></translation>
+        <translation>Folie</translation>
     </message>
     <message>
         <source>Folio (Special)</source>
