@@ -5185,10 +5185,6 @@
 <context>
     <name>utils</name>
     <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
         <source>pending</source>
         <translation>oczekujące</translation>
     </message>

@@ -5186,10 +5186,6 @@ auf diesem Drucker</translation>
 <context>
     <name>utils</name>
     <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
         <source>pending</source>
         <translation>Ausstehend</translation>
     </message>
