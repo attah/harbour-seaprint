@@ -2,11 +2,11 @@
 Type=Application
 Icon=harbour-seaprint
 X-Nemo-Application-Type=silica-qt5
-Exec=/usr/bin/harbour-seaprint
+Exec=harbour-seaprint
 X-DBusActivatable=true
 Name=SeaPrint
 [X-Sailjail]
 Permissions=Internet;Pictures;Documents;Downloads;RemovableMedia;MediaIndexing;Compatibility
 OrganizationName=net.attah
 ApplicationName=seaprint
-ExecDBus=/usr/bin/harbour-seaprint --prestart
+ExecDBus=harbour-seaprint --prestart
