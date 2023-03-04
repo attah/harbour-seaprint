@@ -21,6 +21,9 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(libjpeg)
 
+%define _source_payload w6T.xzdio
+%define _binary_payload w6T.xzdio
+
 %description
 Network printing for Sailfish OS
 
