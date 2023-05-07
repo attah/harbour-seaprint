@@ -23,7 +23,7 @@ private:
     ConvertChecker(const ConvertChecker &);
     ConvertChecker& operator=(const ConvertChecker &);
 
-    LibLoader poppler;
+    LibLoader libpoppler;
     bool _calligra;
 };
 

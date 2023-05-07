@@ -5,7 +5,7 @@
 #include <QProcess>
 #include <QtDebug>
 
-ConvertChecker::ConvertChecker() : poppler("libpoppler-glib.so.8")
+ConvertChecker::ConvertChecker() : libpoppler("libpoppler-glib.so.8")
 {
     _calligra = false;
 

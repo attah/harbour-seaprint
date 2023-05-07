@@ -752,7 +752,9 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
 
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
-    Params.colors = PrintColorMode.contains("color") ? 3 : PrintColorMode.contains("monochrome") ? 1 : Params.colors;
+    Params.colorMode = PrintColorMode.contains("color") ? PrintParameters::sRGB24
+                     : PrintColorMode.contains("monochrome") ? PrintParameters::Gray8
+                     : Params.colorMode;
 
     QJsonArray supportedOperations = _attrs["operations-supported"].toObject()["value"].toArray();
 

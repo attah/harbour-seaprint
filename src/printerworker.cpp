@@ -340,21 +340,21 @@ void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParamet
 
     OK(cr.write((char*)header.raw(), header.size()));
 
-    write_fun WriteFun([&cr](unsigned char const* buf, unsigned int len) -> bool
-              {
-                if(len == 0)
-                    return true;
-                return cr.write((const char*)buf, len);
-              });
+    WriteFun writeFun([&cr](unsigned char const* buf, unsigned int len) -> bool
+             {
+               if(len == 0)
+                   return true;
+               return cr.write((const char*)buf, len);
+             });
 
-    progress_fun ProgressFun([this](size_t page, size_t total) -> void
-              {
-                emit progress(page, total);
-              });
+    ProgressFun progressFun([this](size_t page, size_t total) -> void
+                {
+                  emit progress(page, total);
+                });
 
     bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
-    int res = pdf_to_printable(filename.toStdString(), WriteFun, Params, ProgressFun, verbose);
+    int res = pdf_to_printable(filename.toStdString(), writeFun, Params, progressFun, verbose);
 
     if(res != 0)
     {
@@ -484,17 +484,17 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
 
         if(inImage.allGray())
         {
-            Params.colors = 1; // No need to waste space/bandwidth...
+            Params.colorMode = PrintParameters::Gray8; // No need to waste space/bandwidth...
         }
 
-        outImage.save(&buf, Params.colors==1 ? "pgm" : "ppm");
+        outImage.save(&buf, Params.getNumberOfColors() == 1 ? "pgm" : "ppm");
         buf.seek(0);
         // Skip header - TODO consider reimplementing
         buf.readLine(255);
         buf.readLine(255);
         buf.readLine(255);
 
-        Bytestream inBts(Params.getPaperSizeWInPixels() * Params.getPaperSizeHInPixels() * Params.colors);
+        Bytestream inBts(Params.getPaperSizeWInPixels() * Params.getPaperSizeHInPixels() * Params.getNumberOfColors());
 
         if((((size_t)buf.size())-buf.pos()) != inBts.size())
         {
