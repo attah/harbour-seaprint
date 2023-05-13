@@ -481,65 +481,36 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QJsonO
         }
     }
 
-    QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
-
-    if(Sides != "" && Sides != "one-sided")
+    if(Params.format == PrintParameters::PWG)
     {
-        if(Params.format == PrintParameters::PWG)
+        QString DocumentSheetBack = _attrs["pwg-raster-document-sheet-back"].toObject()["value"].toString();
+        if(DocumentSheetBack=="flipped")
         {
-            QString DocumentSheetBack = _attrs["pwg-raster-document-sheet-back"].toObject()["value"].toString();
-            if(Sides=="two-sided-long-edge")
-            {
-                if(DocumentSheetBack=="flipped")
-                {
-                    Params.backVFlip=true;
-                }
-                else if(DocumentSheetBack=="rotated")
-                {
-                    Params.backHFlip=true;
-                    Params.backVFlip=true;
-                }
-            }
-            else if(Sides=="two-sided-short-edge")
-            {
-                if(DocumentSheetBack=="flipped")
-                {
-                    Params.backHFlip=true;
-                }
-                else if(DocumentSheetBack=="manual-tumble")
-                {
-                    Params.backHFlip=true;
-                    Params.backVFlip=true;
-                }
-            }
+            Params.backXformMode=PrintParameters::Flipped;
         }
-        else if(Params.format == PrintParameters::URF)
+        else if(DocumentSheetBack=="rotated")
         {
-            QJsonArray URfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
-            if(Sides=="two-sided-long-edge")
-            {
-                if(URfSupported.contains("DM2"))
-                {
-                    Params.backVFlip=true;
-                }
-                else if(URfSupported.contains("DM3"))
-                {
-                    Params.backHFlip=true;
-                    Params.backVFlip=true;
-                }
-            }
-            else if(Sides=="two-sided-short-edge")
-            {
-                if(URfSupported.contains("DM2"))
-                {
-                    Params.backHFlip=true;
-                }
-                else if(URfSupported.contains("DM4"))
-                {
-                    Params.backHFlip=true;
-                    Params.backVFlip=true;
-                }
-            }
+            Params.backXformMode=PrintParameters::Rotated;
+        }
+        else if(DocumentSheetBack=="manual-tumble")
+        {
+            Params.backXformMode=PrintParameters::ManualTumble;
+        }
+    }
+    else if(Params.format == PrintParameters::URF)
+    {
+        QJsonArray URfSupported = _attrs["urf-supported"].toObject()["value"].toArray();
+        if(URfSupported.contains("DM2"))
+        {
+            Params.backXformMode=PrintParameters::Flipped;
+        }
+        else if(URfSupported.contains("DM3"))
+        {
+            Params.backXformMode=PrintParameters::Rotated;
+        }
+        else if(URfSupported.contains("DM4"))
+        {
+            Params.backXformMode=PrintParameters::ManualTumble;
         }
     }
 
@@ -564,6 +535,8 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QJsonO
         }
         jobAttrs.remove("copies");
 
+
+        QString Sides = getAttrOrDefault(jobAttrs, "sides").toString();
 
         if(Sides != "one-sided")
         {
@@ -749,7 +722,21 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         Params.tumble = true;
     }
 
-    Params.quality = getAttrOrDefault(jobAttrs, "print-quality").toInt();
+    switch (getAttrOrDefault(jobAttrs, "print-quality").toInt())
+    {
+    case 3:
+        Params.quality = PrintParameters::DraftQuality;
+        break;
+    case 4:
+        Params.quality = PrintParameters::NormalQuality;
+        break;
+    case 5:
+        Params.quality = PrintParameters::HighQuality;
+        break;
+    default:
+        Params.quality = PrintParameters::DefaultQuality;
+        break;
+    }
 
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
     Params.colorMode = PrintColorMode.contains("color") ? PrintParameters::sRGB24
