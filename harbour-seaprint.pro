@@ -39,16 +39,16 @@ SOURCES += src/harbour-seaprint.cpp \
     src/freedesktopdbusadaptor.cpp \
     src/rangelistchecker.cpp \
     src/convertchecker.cpp \
-    src/curlrequester.cpp \
     src/imageitem.cpp \
     src/ippdiscovery.cpp \
     src/ippmsg.cpp \
     src/ippprinter.cpp \
     src/mimer.cpp \
-    ppm2pwg/printparameters.cpp \
-    ppm2pwg/ppm2pwg.cpp \
-    ppm2pwg/pdf2printable.cpp \
-    ppm2pwg/baselinify.cpp \
+    ppm2pwg/lib/printparameters.cpp \
+    ppm2pwg/lib/ppm2pwg.cpp \
+    ppm2pwg/lib/pdf2printable.cpp \
+    ppm2pwg/lib/baselinify.cpp \
+    ppm2pwg/lib/curlrequester.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
     src/overrider.cpp \
     src/printerworker.cpp \
@@ -90,21 +90,21 @@ HEADERS += \
     src/freedesktopdbusadaptor.h \
     src/rangelistchecker.h \
     src/convertchecker.h \
-    src/curlrequester.h \
     src/imageitem.h \
     src/ippdiscovery.h \
     src/ippmsg.h \
     src/ippprinter.h \
     src/mimer.h \
-    ppm2pwg/ppm2pwg.h \
-    ppm2pwg/pdf2printable.h \
-    ppm2pwg/baselinify.h \
-    ppm2pwg/madness.h \
-    ppm2pwg/printparameters.h \
-    ppm2pwg/PwgPgHdr.h \
-    ppm2pwg/PwgPgHdr.codable \
-    ppm2pwg/UrfPgHdr.h \
-    ppm2pwg/UrfPgHdr.codable \
+    ppm2pwg/lib/ppm2pwg.h \
+    ppm2pwg/lib/pdf2printable.h \
+    ppm2pwg/lib/baselinify.h \
+    ppm2pwg/lib/madness.h \
+    ppm2pwg/lib/printparameters.h \
+    ppm2pwg/lib/PwgPgHdr.h \
+    ppm2pwg/lib/PwgPgHdr.codable \
+    ppm2pwg/lib/UrfPgHdr.h \
+    ppm2pwg/lib/UrfPgHdr.codable \
+    ppm2pwg/lib/curlrequester.h \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
     ppm2pwg/bytestream/array.h \
@@ -115,5 +115,5 @@ HEADERS += \
     src/seaprintdbusadaptor.h \
     src/settings.h
 
-INCLUDEPATH += ppm2pwg \
+INCLUDEPATH += ppm2pwg/lib \
                ppm2pwg/bytestream

@@ -46,38 +46,50 @@ void PrinterWorker::urlChanged(QUrl url)
 
 void PrinterWorker::getStrings(QUrl url)
 {
-    CurlRequester cr(url, CurlRequester::HttpGetRequest);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::HttpGetRequest);
     awaitResult(cr, "getStringsFinished");
 }
 
 void PrinterWorker::getImage(QUrl url)
 {
-    CurlRequester cr(url, CurlRequester::HttpGetRequest);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::HttpGetRequest);
     awaitResult(cr, "getImageFinished");
 }
 
 
 void PrinterWorker::getPrinterAttributes(Bytestream msg)
 {
-    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getPrinterAttributesFinished");
 }
 
 void PrinterWorker::getJobs(Bytestream msg)
 {
-    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "getJobsRequestFinished");
 }
 
 void PrinterWorker::cancelJob(Bytestream msg)
 {
-    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "cancelJobFinished");
 }
 
 void PrinterWorker::identify(Bytestream msg)
 {
-    CurlRequester cr(_url, CurlRequester::IppRequest, &msg);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::IppRequest, &msg);
     awaitResult(cr, "identifyFinished");
 }
 
@@ -87,7 +99,9 @@ void PrinterWorker::print2(QString filename, QString mimeType, QString targetFor
 
     Bytestream header = createJob.encode();
 
-    CurlRequester cr(_url, CurlRequester::IppRequest, &header);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose, CurlRequester::IppRequest, &header);
 
     Bytestream resData;
     CURLcode res = cr.await(&resData);
@@ -190,7 +204,9 @@ void PrinterWorker::justUpload(QString filename, Bytestream header)
 {
     emit busyMessage(tr("Printing"));
 
-    CurlRequester cr(_url);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
 
     QFile file(filename);
     file.open(QFile::ReadOnly);
@@ -225,7 +241,7 @@ void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QStri
     QString mimeType = Mimer::instance()->get_type(filename);
     Bytestream OutBts;
 
-    CurlRequester cr(_url);
+    CurlRequester cr(_url.toString().toStdString());
 
     if(mimeType == Mimer::JPEG && targetFormat == Mimer::JPEG)
     {
@@ -295,7 +311,9 @@ void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QStri
 
 void PrinterWorker::fixupPlaintext(QString filename, Bytestream header)
 {
-    CurlRequester cr(_url);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
 
     QFile inFile(filename);
     if(!inFile.open(QIODevice::ReadOnly))
@@ -337,7 +355,9 @@ void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParamet
 {
     emit busyMessage(tr("Printing"));
 
-    CurlRequester cr(_url);
+    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
+    CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
 
     OK(cr.write((char*)header.raw(), header.size()));
 
@@ -352,8 +372,6 @@ void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParamet
                 {
                   emit progress(page, total);
                 });
-
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
 
     int res = pdf_to_printable(filename.toStdString(), writeFun, Params, progressFun, verbose);
 
@@ -511,7 +529,8 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
 
         bmp_to_pwg(inBts, outBts, 1, Params, verbose);
 
-        CurlRequester cr(_url);
+        bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
+        CurlRequester cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
 
         emit busyMessage(tr("Printing"));
 
