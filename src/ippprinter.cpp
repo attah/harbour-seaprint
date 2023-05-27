@@ -6,6 +6,9 @@
 #include "overrider.h"
 #include "settings.h"
 #include <fstream>
+#include <QRegularExpression>
+#include <QTemporaryFile>
+#include <QFileInfo>
 
 Q_DECLARE_METATYPE(QMargins)
 Q_DECLARE_METATYPE(IppMsg)

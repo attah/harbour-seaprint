@@ -1,10 +1,13 @@
 #ifndef PRINTERWORKER_H
 #define PRINTERWORKER_H
 #include <QObject>
+#include <QPointer>
+#include <QUrl>
+#include <QMargins>
 #include <memory>
 #include "curlrequester.h"
 #include "ippmsg.h"
-#include "ppm2pwg/printparameters.h"
+#include "printparameters.h"
 
 class IppPrinter;
 

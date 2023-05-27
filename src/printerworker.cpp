@@ -2,6 +2,7 @@
 #include "papersizes.h"
 #include "convertchecker.h"
 #include "mimer.h"
+#include "settings.h"
 #include <QImage>
 #include <QMatrix>
 #include <QPainter>
