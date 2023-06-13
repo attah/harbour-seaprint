@@ -528,13 +528,10 @@ void IppPrinter::adjustRasterSettings(QString filename, QString mimeType, QJsonO
     {
         QString copyMode = getAttrOrDefault(jobAttrs, "multiple-document-handling").toString();
         qDebug() << "Doing local copies" << copyMode << copies_requested;
+        Params.copies = copies_requested;
         if(copyMode == "separate-documents-uncollated-copies")
         { // Only do silly copies if explicitly requested
-            Params.pageCopies = copies_requested;
-        }
-        else
-        {
-            Params.documentCopies = copies_requested;
+            Params.collatedCopies = false;
         }
         jobAttrs.remove("copies");
 
@@ -717,12 +714,11 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
 
     if(Sides=="two-sided-long-edge")
     {
-        Params.duplex = true;
+        Params.duplexMode = PrintParameters::TwoSidedLongEdge;
     }
     else if(Sides=="two-sided-short-edge")
     {
-        Params.duplex = true;
-        Params.tumble = true;
+        Params.duplexMode = PrintParameters::TwoSidedShortEdge;
     }
 
     switch (getAttrOrDefault(jobAttrs, "print-quality").toInt())

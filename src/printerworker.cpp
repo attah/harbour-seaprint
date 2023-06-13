@@ -480,9 +480,9 @@ void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParam
     }
     else
     {
-        size_t total_pages = Params.documentCopies*Params.pageCopies;
+        size_t total_pages = Params.copies;
 
-        if(total_pages > 1 && Params.duplex)
+        if(total_pages > 1 && Params.isTwoSided())
         { // Images are one page by definition - if we need to do client-side copies, they must be one-sided or we'd have to insert backsides
             qDebug() << "Inconsistent duplex setting";
             throw ConvertFailedException(tr("Inconsistent duplex setting"));
