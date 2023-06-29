@@ -105,10 +105,10 @@ HEADERS += \
     ppm2pwg/lib/UrfPgHdr.h \
     ppm2pwg/lib/UrfPgHdr.codable \
     ppm2pwg/lib/curlrequester.h \
+    ppm2pwg/lib/argget.h \
     ppm2pwg/bytestream/bytestream.h \
     ppm2pwg/bytestream/codable.h \
     ppm2pwg/bytestream/array.h \
-    ppm2pwg/argget.h \
     src/overrider.h \
     src/papersizes.h \
     src/printerworker.h \
