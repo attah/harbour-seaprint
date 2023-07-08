@@ -594,6 +594,14 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
     }
 
     QString targetFormat = getAttrOrDefault(jobAttrs, "document-format").toString();
+    QStringList goodFormats = {Mimer::PDF, Mimer::Postscript, Mimer::PWG, Mimer::URF};
+    bool imageToImage = Mimer::isImage(mimeType) && Mimer::isImage(targetFormat);
+    if(!jobAttrs.contains("document-format") && !(goodFormats.contains(targetFormat) || imageToImage))
+    { // User made no choice, and we don't know the target format - treat as if auto
+        targetFormat = Mimer::OctetStream;
+    }
+
+
     qDebug() << "target format:" << targetFormat;
 
     QMargins margins(getAttrOrDefault(jobAttrs, "media-left-margin", "media-col").toInt(),
@@ -737,10 +745,13 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         break;
     }
 
+    bool supportsColor = _attrs["operations-supported"].toObject()["value"].toArray().contains("color");
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
     Params.colorMode = PrintColorMode.contains("color") ? PrintParameters::sRGB24
-                     : PrintColorMode.contains("monochrome") ? PrintParameters::Gray8
+                     : PrintColorMode.contains("monochrome") || !supportsColor ? PrintParameters::Gray8
                      : Params.colorMode;
+
+    qDebug() << "Color mode" << Params.colorMode;
 
     QJsonArray supportedOperations = _attrs["operations-supported"].toObject()["value"].toArray();
 
