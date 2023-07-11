@@ -13,12 +13,11 @@ Page {
         contentHeight: col.height
 
         PullDownMenu {
-            visible: identifyLabel.visible
+            visible: printer.attrs.hasOwnProperty("identify-actions-supported")
 
             MenuItem {
                 id: identifyLabel
                 text:  qsTr("Identify printer")
-                visible: printer.attrs.hasOwnProperty("identify-actions-supported")
                 onClicked: printer.identify()
             }
         }
