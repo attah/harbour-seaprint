@@ -29,7 +29,8 @@ CONFIG += sailfishapp
 QT += svg dbus
 PKGCONFIG += mlite5 libcurl glib-2.0
 INCLUDEPATH += $$system(pkg-config --cflags-only-I poppler-glib | sed 's/-I//g')
-LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl
+LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl -lstdc++fs
+QMAKE_CXXFLAGS += -std=c++17
 DEFINES += MADNESS=1
 DEFINES += PDF_CREATOR='\\"SeaPrint\ $$VERSION\\"'
 DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
