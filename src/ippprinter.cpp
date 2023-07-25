@@ -745,7 +745,7 @@ void IppPrinter::print(QJsonObject jobAttrs, QString filename)
         break;
     }
 
-    bool supportsColor = _attrs["operations-supported"].toObject()["value"].toArray().contains("color");
+    bool supportsColor = _attrs["print-color-mode-supported"].toObject()["value"].toArray().contains("color");
     QString PrintColorMode = getAttrOrDefault(jobAttrs, "print-color-mode").toString();
     Params.colorMode = PrintColorMode.contains("color") ? PrintParameters::sRGB24
                      : PrintColorMode.contains("monochrome") || !supportsColor ? PrintParameters::Gray8
