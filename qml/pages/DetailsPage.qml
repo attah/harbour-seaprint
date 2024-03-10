@@ -132,7 +132,7 @@ Page {
 
             SectionHeader {
                 text: qsTr("Firmware")
-                visible: printer.attrs.hasOwnProperty("marker-colors")
+                visible: printer.attrs.hasOwnProperty("printer-firmware-name")
             }
 
             Repeater
