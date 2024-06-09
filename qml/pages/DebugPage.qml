@@ -18,7 +18,7 @@ Page {
 
         PageHeader {
             id: header
-            title: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
+            title: Utils.unknownForEmptyString(printer.name)
         }
 
         TextArea {
@@ -31,7 +31,7 @@ Page {
             font.family: "courier"
             font.pixelSize: Theme.fontSizeTiny
             wrapMode: TextEdit.Wrap
-            text: JSON.stringify(printer.attrs, null, "  ")
+            text: JSON.stringify(printer.debugJSON, null, "  ")
 
             onPressAndHold: {
                 selectAll()

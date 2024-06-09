@@ -131,20 +131,19 @@ Page {
                     url: model.display
                 }
 
-                visible: Object.keys(printer.attrs).length !== 0
+                visible: printer.isOk
 
-                property string name: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
-                property var supported_formats: Utils.supported_formats(printer, considerAdditionalFormatsSetting.value)
-                property bool canPrint: supported_formats.mimetypes.indexOf(appWin.selectedFileType) != -1
+                property string name: Utils.unknownForEmptyString(printer.name)
+                property bool canPrint: printer.supportedFormats.indexOf(appWin.selectedFileType) != -1
 
                 Connections {
                     target: printer
-                    onAttrsChanged: {
-                        if(Object.keys(printer.attrs).length === 0) {
-                            delegate.visible = false
+                    onDataChanged: {
+                        if(printer.isOk) {
+                            delegate.visible = true
                         }
                         else {
-                            delegate.visible = true
+                            delegate.visible = false
                         }
                     }
                 }
@@ -170,19 +169,6 @@ Page {
 
                 property int debugCount: 0
 
-                function maybeGetParams()
-                {
-                    if(printer.attrs.hasOwnProperty("printer-uuid"))
-                    {
-                        return JSON.parse(db.getJobSettings(printer.attrs["printer-uuid"].value, appWin.selectedFileType));
-                    }
-                    else
-                    {
-                        return new Object();
-                    }
-                }
-
-
                 onClicked: {
 
                     if(++debugCount == 5)
@@ -201,7 +187,7 @@ Page {
                     }
                     else
                     {
-                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: appWin.selectedFile, jobParams: maybeGetParams()})
+                        pageStack.push(Qt.resolvedUrl("PrinterPage.qml"), {printer: printer, selectedFile: appWin.selectedFile})
                     }
                 }
 
@@ -232,7 +218,7 @@ Page {
                     source: "image://theme/icon-lock-warning"
                     anchors.bottom: icon.bottom
                     anchors.right: icon.right
-                    visible: Utils.isWaringState(printer)
+                    visible: printer.isWarningState
                 }
 
                 Column {
@@ -250,8 +236,8 @@ Page {
                         id: mm_label
                         color: canPrint || appWin.selectedFile == "" ? Theme.primaryColor : Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
-                        text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
-                              + (Utils.existsAndNotEmpty("printer-location", printer)  ? "  •  "+printer.attrs["printer-location"].value : "")
+                        text: Utils.unknownForEmptyString(printer.makeAndModel)
+                              + (printer.location !== ""  ? "  •  " + printer.location : "")
                     }
 
                     Label {
@@ -265,58 +251,64 @@ Page {
                         spacing: Theme.paddingMedium
                         Label {
                             id: format_unsupported_label
-                            visible: !supported_formats.pdf && !supported_formats.postscript && !supported_formats.plaintext
-                                     && !supported_formats.office && !supported_formats.images
+                            visible: !pdfIcon.visible && !postscriptIcon.visible && !plaintextIcon.visible
+                                     && !formattedIcon.visible && !presentationIcon.visible && !imageIcon.visible
                             color: "red"
                             font.pixelSize: Theme.fontSizeExtraSmall
                             text: qsTr("No compatible formats supported")
                         }
 
                         HighlightImage {
+                            id: pdfIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.pdf
+                            visible: printer.supportedFormats.indexOf(Mimer.PDF) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-pdf"
                         }
                         HighlightImage {
+                            id: postscriptIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.postscript
+                            visible: printer.supportedFormats.indexOf(Mimer.Postscript) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-other"
 
                         }
                         HighlightImage {
+                            id: plaintextIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.plaintext
+                            visible: printer.supportedFormats.indexOf(Mimer.Plaintext) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-document"
                         }
                         HighlightImage {
+                            id: formattedIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.office
+                            visible: printer.supportedFormats.indexOf(Mimer.DOC) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-formatted"
                         }
                         HighlightImage {
+                            id: presentationIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.office
+                            visible: printer.supportedFormats.indexOf(Mimer.PPT) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-presentation"
                         }
                         HighlightImage {
+                            id: imageIcon
                             height: Theme.itemSizeExtraSmall/2
                             width: Theme.itemSizeExtraSmall/2
-                            visible: supported_formats.images
+                            visible: printer.supportedFormats.indexOf(Mimer.JPEG) != -1
                             highlightColor: "red"
                             highlighted: !(appWin.selectedFile == "" || canPrint)
                             source: "image://theme/icon-m-file-image"

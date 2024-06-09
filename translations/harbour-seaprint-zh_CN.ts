@@ -111,10 +111,6 @@
         <translation>没有找到打印机</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>未知</translation>
-    </message>
-    <message>
         <source>Port 9100 is not used for IPP.</source>
         <translation>端口9100未用于IPP。</translation>
     </message>
@@ -138,16 +134,8 @@
 <context>
     <name>BusyPage</name>
     <message>
-        <source>Print success: </source>
-        <translation>打印成功:</translation>
-    </message>
-    <message>
-        <source>Print failed: </source>
-        <translation>打印失败:</translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation>未知</translation>
+        <source>Print success</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -253,10 +241,6 @@
         <translation>关于 SeaPrint（海印）</translation>
     </message>
     <message>
-        <source>No compatible formats supported</source>
-        <translation>不支持相关格式</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <translation>选择文件</translation>
     </message>
@@ -280,20 +264,9 @@
         <source>This format may not render correctly</source>
         <translation>格式可能无法正确呈现</translation>
     </message>
-</context>
-<context>
-    <name>IppPrinter</name>
     <message>
-        <source>Failed to open file</source>
-        <translation>打开文件失败</translation>
-    </message>
-    <message>
-        <source>Unknown document format</source>
-        <translation>未知文档格式</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>纸张大小不受支持</translation>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -370,62 +343,38 @@
     <name>PrinterPage</name>
     <message>
         <source>Print</source>
-        <translation>打印</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sides</source>
-        <translation>面</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation>打印份数</translation>
-    </message>
-    <message>
-        <source>Color mode</source>
-        <translation>颜色模式</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation>质量</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation>分辨率</translation>
-    </message>
-    <message>
-        <source>Print media</source>
-        <translation>打印媒体</translation>
-    </message>
-    <message>
-        <source>Transfer format</source>
-        <translation>传输格式</translation>
-    </message>
-    <message>
-        <source>Media source</source>
-        <translation>媒体源</translation>
-    </message>
-    <message>
-        <source>Page range</source>
-        <translation>页面范围</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Collated copies</source>
-        <translation>整理后的副本</translation>
-    </message>
-    <message>
-        <source>Default settings for %1 on this printer</source>
-        <translation>此打印机上的 %1 默认设置。</translation>
-    </message>
-    <message>
-        <source>(loaded)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Output bin</source>
+        <source>Pages per page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Media type</source>
+        <source>Color mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -445,78 +394,74 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pages per page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scaling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Media handling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset default settings</source>
+        <source>Media type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save as default settings</source>
+        <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output bin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(loaded)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page range</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PrinterWorker</name>
     <message>
+        <source>Unknown target format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Failed to load image</source>
-        <translation>加载图像错误</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>PDF纸张大小不受支持</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>纸张大小不受支持</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>分辨率不受支持（dpi）</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>打开文件失败</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Printing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Conversion failed</source>
+        <source>Failed to open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot convert this file format</source>
-        <translation>无法转换此文件格式</translation>
-    </message>
-    <message>
-        <source>Print error</source>
+        <source>Unsupported resolution (dpi)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Inconsistent duplex setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -525,11 +470,14 @@
     </message>
 </context>
 <context>
-    <name>RangeSetting</name>
+    <name>QIppPrinter</name>
     <message>
-        <source>all</source>
-        <translation>全部</translation>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>RangeSetting</name>
     <message>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
@@ -540,6 +488,10 @@
     </message>
     <message>
         <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -586,14 +538,6 @@
     </message>
     <message>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow external connections</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow SeaPrint to fetch recources like icons and option name dictionaries from addresses that are not the printer itself. Some printer makers store icons on their website as opposed to locally on the printer.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

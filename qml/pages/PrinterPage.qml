@@ -1,8 +1,8 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import seaprint.mimer 1.0
-import seaprint.ippmsg 1.0
 import seaprint.convertchecker 1.0
+import seaprint.ippprinter 1.0
 import "utils.js" as Utils
 import "../components"
 
@@ -11,9 +11,9 @@ Page {
 
     id: page
     property alias printer: settingsColumn.printer
-    property alias jobParams: settingsColumn.jobParams
-    property alias selectedFile: settingsColumn.selectedFile
-    property alias selectedFileType: settingsColumn.selectedFileType
+    property string selectedFile
+    property string selectedFileType: Mimer.get_type(selectedFile)
+
 
     Connections {
         target: wifi
@@ -26,8 +26,8 @@ Page {
 
     Connections {
         target: printer
-        onAttrsChanged: {
-            if(Object.keys(printer.attrs).length === 0) {
+        onDataChanged: {
+            if(!printer.isOk) {
                 pageStack.pop()
             }
         }
@@ -41,80 +41,77 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
 
-            MenuLabel {
-                text:  qsTr("Default settings for %1 on this printer").arg(db.simplifyType(selectedFileType).translatable)
-                visible: printer.attrs.hasOwnProperty("printer-uuid")
-            }
+//            MenuLabel {
+//                text:  qsTr("Default settings for %1 on this printer").arg(db.simplifyType(selectedFileType).translatable)
+//                visible: printer.attrs.hasOwnProperty("printer-uuid")
+//            }
+//            MenuItem {
+//                text: qsTr("Reset default settings")
+//                visible: printer.attrs.hasOwnProperty("printer-uuid")
+//                onClicked: {
+//                    db.removeJobSettings(printer.attrs["printer-uuid"].value, selectedFileType);
+//                    pageStack.pop();
+//                }
+//            }
 
-            MenuItem {
-                text: qsTr("Reset default settings")
-                visible: printer.attrs.hasOwnProperty("printer-uuid")
-                onClicked: {
-                    db.removeJobSettings(printer.attrs["printer-uuid"].value, selectedFileType);
-                    pageStack.pop();
-                }
-            }
-
-            MenuItem {
-                text: qsTr("Save as default settings")
-                visible: printer.attrs.hasOwnProperty("printer-uuid")
-                onClicked: {
-                    var tmp = jobParams;
-                    // Varies between documents, would be confusing to save
-                    delete tmp["page-ranges"];
-                    db.setJobSettings(printer.attrs["printer-uuid"].value, selectedFileType, JSON.stringify(tmp))
-                }
-            }
+//            MenuItem {
+//                text: qsTr("Save as default settings")
+//                visible: printer.attrs.hasOwnProperty("printer-uuid")
+//                onClicked: {
+//                    var tmp = jobParams;
+//                    // Varies between documents, would be confusing to save
+//                    delete tmp["page-ranges"];
+//                    db.setJobSettings(printer.attrs["printer-uuid"].value, selectedFileType, JSON.stringify(tmp))
+//                }
+//            }
 
             MenuItem {
                 text: qsTr("Print")
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("BusyPage.qml"),{printer:printer},
                                       PageStackAction.Immediate)
-                    printer.print(jobParams, page.selectedFile)
+                    printer.print(page.selectedFile)
                 }
             }
         }
 
         VerticalScrollDecorator {}
 
-        SettingsColumn {
+        Column {
             id: settingsColumn
             width: parent.width
 
+            property IppPrinter printer
+            property alias selectedFileType: page.selectedFileType
+
             PageHeader {
                 id: pageHeader
-                title: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
+                title: Utils.unknownForEmptyString(printer.name)
                 description: Utils.basename(selectedFile)
             }
 
             ChoiceSetting {
-                tag: IppMsg.Keyword
-                name: "sides"
+                setting: printer.sides
                 prettyName: qsTr("Sides")
             }
             ChoiceSetting {
-                tag: IppMsg.Keyword
-                name: "media"
+                setting: printer.media
                 prettyName: qsTr("Print media")
-                preferred_choices: printer.attrs.hasOwnProperty("media-ready") ? printer.attrs["media-ready"].value : []
+                preferred_choices: setting.preferredChoices
                 preferred_choice_suffix: qsTr("(loaded)")
             }
             IntegerSetting {
-                tag: IppMsg.Integer
-                name: "copies"
+                setting: printer.copies
                 prettyName: qsTr("Copies")
                 valid: _valid || Utils.supports_raster(printer)
                 minimum_high: 99
             }
             ChoiceSetting {
-                tag: IppMsg.Keyword
-                name: "multiple-document-handling"
+                setting: printer.multipleDocumentHandling
                 prettyName: qsTr("Collated copies")
             }
             RangeSetting {
-                tag: IppMsg.IntegerRange
-                name: "page-ranges"
+                setting: printer.pageRanges
                 prettyName: qsTr("Page range")
                 valid: (selectedFileType == Mimer.PDF || Mimer.isOffice(selectedFileType) || (_valid && selectedFileType == Mimer.Postscript))
 
@@ -123,8 +120,7 @@ Page {
                 acceptRangeList: true
             }
             ChoiceSetting {
-                tag: IppMsg.Integer
-                name: "number-up"
+                setting: printer.numberUp
                 prettyName: qsTr("Pages per page")
                 valid: _valid && !Mimer.isImage(selectedFileType)
                 DependentOn {
@@ -133,23 +129,19 @@ Page {
                 }
             }
             ChoiceSetting {
-                tag: IppMsg.Keyword
-                name: "print-color-mode"
+                setting: printer.colorMode
                 prettyName: qsTr("Color mode")
             }
             ChoiceSetting {
-                tag: IppMsg.Enum
-                name: "print-quality"
+                setting: printer.printQuality
                 prettyName: qsTr("Quality")
             }
             ChoiceSetting {
-                tag: IppMsg.Resolution
-                name: "printer-resolution"
+                setting: printer.resolution
                 prettyName: qsTr("Resolution")
             }
             ChoiceSetting {
-                tag: IppMsg.Keyword
-                name: "print-scaling"
+                setting: printer.scaling
                 prettyName: qsTr("Scaling")
                 valid: _valid && Mimer.isImage(selectedFileType) && selectedFileType != Mimer.SVG
                 DependentOn {
@@ -159,8 +151,7 @@ Page {
             }
             ChoiceSetting {
                 id: transferFormatSetting
-                tag: IppMsg.MimeMediaType
-                name: "document-format"
+                setting: printer.documentFormat
                 prettyName: qsTr("Transfer format")
             }
 
@@ -170,22 +161,17 @@ Page {
             }
             ChoiceSetting {
                 visible:  mediaButton.active
-                tag: IppMsg.Keyword
-                name: "media-type"
-                subkey: "media-col"
+                setting: printer.mediaType
                 prettyName: qsTr("Media type")
             }
             ChoiceSetting {
                 visible:  mediaButton.active
-                tag: IppMsg.Keyword
-                name: "media-source"
-                subkey: "media-col"
+                setting: printer.mediaSource
                 prettyName: qsTr("Media source")
             }
             ChoiceSetting {
                 visible:  mediaButton.active
-                tag: IppMsg.Keyword
-                name: "output-bin"
+                setting: printer.outputBin
                 prettyName: qsTr("Output bin")
             }
 
@@ -195,33 +181,25 @@ Page {
             }
             ChoiceSetting {
                 visible: marginsButton.active
-                tag: IppMsg.Integer
-                name: "media-top-margin"
-                subkey: "media-col"
+                setting: printer.topMargin
                 prettyName: qsTr("Top")
                 valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
-                tag: IppMsg.Integer
-                name: "media-bottom-margin"
-                subkey: "media-col"
+                setting: printer.bottomMargin
                 prettyName: qsTr("Bottom")
                 valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
-                tag: IppMsg.Integer
-                name: "media-left-margin"
-                subkey: "media-col"
+                setting: printer.leftMargin
                 prettyName: qsTr("Left")
                 valid: _valid && Mimer.isImage(selectedFileType)
             }
             ChoiceSetting {
                 visible: marginsButton.active
-                tag: IppMsg.Integer
-                name: "media-right-margin"
-                subkey: "media-col"
+                setting: printer.rightMargin
                 prettyName: qsTr("Right")
                 valid: _valid && Mimer.isImage(selectedFileType)
             }

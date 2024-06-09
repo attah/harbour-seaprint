@@ -1,223 +1,74 @@
-#include "printerworker.h"
-#include "papersizes.h"
-#include "convertchecker.h"
+#include <converter.h>
 #include "mimer.h"
-#include "settings.h"
-#include <QImage>
-#include <QMatrix>
-#include <QPainter>
-#include <QTextDocument>
-#include <QPdfWriter>
-#include <QAbstractTextDocumentLayout>
-#include <QtSvg>
-#include "ippprinter.h"
-#include "pdf2printable.h"
-#include "ppm2pwg.h"
-#include "baselinify.h"
-#include <fstream>
-#include <iostream>
+#include "papersizes.h"
 
-#define OK(call) if(!(call)) throw ConvertFailedException()
+#include <QProcess>
+#include <QTemporaryFile>
 
-PrinterWorker::PrinterWorker(IppPrinter* parent)
+#include <QDebug>
+
+Error convertOffice(std::string inFileName, const IppPrintJob& job, WriteFun writeFun, ProgressFun progressFun)
 {
-    _printer = parent;
-    _url = parent->httpUrl();
-    _thread.reset(new QThread);
-    moveToThread(_thread.get());
-    _thread->start();
-}
-
-PrinterWorker::~PrinterWorker()
-{
-    QMetaObject::invokeMethod(this, "cleanup");
-    _thread->wait();
-}
-
-void PrinterWorker::cleanup()
-{
-    _thread->quit();
-}
-
-void PrinterWorker::urlChanged(QUrl url)
-{
-    _url = url;
-}
-
-void PrinterWorker::getStrings(QUrl url)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlHttpGetter cr(url.toString().toStdString(), ignoreSslErrors, verbose);
-    awaitResult(cr, "getStringsFinished");
-}
-
-void PrinterWorker::getImage(QUrl url)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlHttpGetter cr(url.toString().toStdString(), ignoreSslErrors, verbose);
-    awaitResult(cr, "getImageFinished");
-}
-
-
-void PrinterWorker::getPrinterAttributes(Bytestream msg)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppPoster cr(_url.toString().toStdString(), msg, ignoreSslErrors, verbose);
-    awaitResult(cr, "getPrinterAttributesFinished");
-}
-
-void PrinterWorker::getJobs(Bytestream msg)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppPoster cr(_url.toString().toStdString(), msg, ignoreSslErrors, verbose);
-    awaitResult(cr, "getJobsRequestFinished");
-}
-
-void PrinterWorker::cancelJob(Bytestream msg)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppPoster cr(_url.toString().toStdString(), msg, ignoreSslErrors, verbose);
-    awaitResult(cr, "cancelJobFinished");
-}
-
-void PrinterWorker::identify(Bytestream msg)
-{
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppPoster cr(_url.toString().toStdString(), msg, ignoreSslErrors, verbose);
-    awaitResult(cr, "identifyFinished");
-}
-
-void PrinterWorker::print2(QString filename, QString mimeType, QString targetFormat, IppMsg createJob, IppMsg sendDocument, PrintParameters Params, QMargins margins)
-{
-    emit busyMessage(tr("Preparing"));
-
-    Bytestream header = createJob.encode();
-
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppPoster cr(_url.toString().toStdString(), header, ignoreSslErrors, verbose);
-
-    Bytestream resData;
-    CURLcode res = cr.await(&resData);
-
-    if(res == CURLE_OK)
+    QString PaperSize = job.media.get().c_str();
+    QString ShortPaperSize;
+    if(CalligraPaperSizes.contains(PaperSize))
     {
-        IppMsg resMsg(resData);
-        qDebug() << resMsg.getOpAttrs() << resMsg.getJobAttrs();
-
-        QJsonObject resJobAttrs = resMsg.getJobAttrs()[0].toObject();
-        if(resMsg.getStatus() <= 0xff && resJobAttrs.contains("job-id"))
-        {
-            int jobId = resJobAttrs["job-id"].toObject()["value"].toInt();
-            sendDocument.setOpAttr("job-id", IppMsg::Integer, jobId);
-            sendDocument.setOpAttr("last-document", IppMsg::Boolean, true);
-            print(filename, mimeType, targetFormat, sendDocument, Params, margins);
-        }
-        else
-        {
-            resData.setPos(0);
-            QMetaObject::invokeMethod(_printer, "printRequestFinished", Qt::QueuedConnection,
-                                      Q_ARG(CURLcode, res),
-                                      Q_ARG(Bytestream, resData));
-        }
+        ShortPaperSize = CalligraPaperSizes[PaperSize];
     }
     else
     {
-        QMetaObject::invokeMethod(_printer, "printRequestFinished", Qt::QueuedConnection,
-                                  Q_ARG(CURLcode, res),
-                                  Q_ARG(Bytestream, resData));
+        qDebug() << "Unsupported Calligra paper size" << PaperSize;
+        return Error("Unsupported Calligra paper size");
     }
-}
 
-void PrinterWorker::print(QString filename, QString mimeType, QString targetFormat, IppMsg job, PrintParameters Params, QMargins margins)
-{
-    try
+    QProcess CalligraConverter;
+    CalligraConverter.setProgram("calligraconverter");
+    QStringList CalligraConverterArgs = {"--batch", "--mimetype", Mimer::PDF, "--print-orientation", "Portrait", "--print-papersize", ShortPaperSize};
+
+    CalligraConverterArgs << inFileName.c_str();
+
+    QTemporaryFile tmpPdfFile;
+    tmpPdfFile.open();
+    CalligraConverterArgs << tmpPdfFile.fileName();
+
+    qDebug() << "CalligraConverteArgs is" << CalligraConverterArgs;
+    CalligraConverter.setArguments(CalligraConverterArgs);
+
+    CalligraConverter.start();
+
+    qDebug() << "CalligraConverter Starting";
+
+    if(!CalligraConverter.waitForStarted())
     {
-        Mimer* mimer = Mimer::instance();
-
-        Bytestream contents = job.encode();
-
-        emit busyMessage(tr("Preparing"));
-
-        if((mimeType == targetFormat) && (targetFormat == Mimer::Postscript))
-        { // Can't process Postscript
-            justUpload(filename, contents);
-        }
-        else if((mimeType == targetFormat) && (targetFormat == Mimer::Plaintext))
-        {
-            fixupPlaintext(filename, contents);
-        }
-        else if((mimeType != Mimer::SVG) && mimer->isImage(mimeType) && mimer->isImage(targetFormat))
-        { // Just make sure the image is in the desired format (and jpeg baseline-encoded), don't resize locally
-            printImageAsImage(filename, contents, targetFormat);
-        }
-        else if(Params.format != PrintParameters::Invalid) // Params.format can be trusted
-        {
-            if(mimeType == Mimer::PDF)
-            {
-                convertPdf(filename, contents, Params);
-            }
-            else if(mimeType == Mimer::Plaintext)
-            {
-                if(Params.paperSizeH == 0 && Params.getPaperSizeWInMillimeters() < 26)
-                {
-                    convertPlaintextLabel(filename, contents, Params);
-                }
-                else
-                {
-                    convertPlaintext(filename, contents, Params);
-                }
-            }
-            else if(Mimer::isImage(mimeType))
-            {
-                convertImage(filename, contents, Params, margins);
-            }
-            else if(Mimer::isOffice(mimeType))
-            {
-                convertOfficeDocument(filename, contents, Params);
-            }
-            else
-            {
-                emit failed(tr("Cannot convert this file format"));
-            }
-        }
-        else
-        {
-            emit failed(tr("Cannot convert this file format"));
-        }
-
-        return;
+        qDebug() << "CalligraConverter died";
+        return Error("CalligraConverter died");
     }
-    catch(const ConvertFailedException& e)
+
+    qDebug() << "CalligraConverter Started";
+
+    if(!CalligraConverter.waitForFinished(-1))
     {
-        emit failed(e.what() == QString("") ? tr("Print error") : e.what());
+        qDebug() << "CalligraConverter failed";
+        return Error("CalligraConverter failed");
+    }
+    qDebug() << "YYYYYYYYYYYYY" << tmpPdfFile.fileName();
+    return Converter::instance().Pdf2Printable(tmpPdfFile.fileName().toStdString(), job, writeFun, progressFun);
+}
+
+void addExtraConverters()
+{
+    Converter::ConvertFun Office = [](std::string inFileName, const IppPrintJob& job, WriteFun writeFun, ProgressFun progressFun)
+                                   {return convertOffice(inFileName, job, writeFun, progressFun);};
+    for(const QString& fromFormat : Mimer::OfficeFormats)
+    {
+        for(const std::string& toFormat : Converter::instance().possibleOutputFormats(Mimer::PDF.toStdString()))
+        {
+            Converter::instance().Pipelines.push_back({{fromFormat.toStdString(), toFormat}, Office});
+        }
     }
 }
 
-void PrinterWorker::justUpload(QString filename, Bytestream header)
-{
-    emit busyMessage(tr("Printing"));
-
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppStreamer cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
-
-    QFile file(filename);
-    file.open(QFile::ReadOnly);
-
-    OK(cr.write((char*)header.raw(), header.size()));
-    QByteArray tmp = file.readAll();
-    OK(cr.write(tmp.data(), tmp.length()));
-    file.close();
-
-    awaitResult(cr, "printRequestFinished");
-}
+#if 0
 
 void PrinterWorker::printImageAsImage(QString filename, Bytestream header, QString targetFormat)
 {
@@ -351,39 +202,6 @@ void PrinterWorker::fixupPlaintext(QString filename, Bytestream header)
     OK(cr.write(outData.data(), outData.length()));
 
     awaitResult(cr, "printRequestFinished");
-}
-
-void PrinterWorker::convertPdf(QString filename, Bytestream header, PrintParameters Params)
-{
-    emit busyMessage(tr("Printing"));
-
-    bool ignoreSslErrors = Settings::instance()->ignoreSslErrors();
-    bool verbose = QLoggingCategory::defaultCategory()->isDebugEnabled();
-    CurlIppStreamer cr(_url.toString().toStdString(), ignoreSslErrors, verbose);
-
-    OK(cr.write((char*)header.raw(), header.size()));
-
-    WriteFun writeFun([&cr](unsigned char const* buf, unsigned int len) -> bool
-             {
-               if(len == 0)
-                   return true;
-               return cr.write((const char*)buf, len);
-             });
-
-    ProgressFun progressFun([this](size_t page, size_t total) -> void
-                {
-                  emit progress(page, total);
-                });
-
-    int res = pdf_to_printable(filename.toStdString(), writeFun, Params, progressFun, verbose);
-
-    if(res != 0)
-    {
-        throw ConvertFailedException(tr("Conversion failed"));
-    }
-
-    awaitResult(cr, "printRequestFinished");
-    qDebug() << "Finished";
 }
 
 void PrinterWorker::convertImage(QString filename, Bytestream header, PrintParameters Params, QMargins margins)
@@ -823,12 +641,4 @@ void PrinterWorker::convertPlaintextLabel(QString filename, Bytestream header, P
     qDebug() << "Finished";
     qDebug() << "posted";
 }
-
-void PrinterWorker::awaitResult(CurlRequester& cr, QString callback)
-{
-    Bytestream resMsg;
-    CURLcode res = cr.await(&resMsg);
-    QMetaObject::invokeMethod(_printer, callback.toStdString().c_str(), Qt::QueuedConnection,
-                              Q_ARG(CURLcode, res),
-                              Q_ARG(Bytestream, resMsg));
-}
+#endif

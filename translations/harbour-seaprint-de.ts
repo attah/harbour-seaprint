@@ -111,10 +111,6 @@
         <translation>Kein Drucker gefunden</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Unbekannt</translation>
-    </message>
-    <message>
         <source>Port 9100 is not used for IPP.</source>
         <translation>Der Port 9100 wird mit Ipp nicht verwendet</translation>
     </message>
@@ -138,16 +134,8 @@
 <context>
     <name>BusyPage</name>
     <message>
-        <source>Print success: </source>
-        <translation>Druckvorgang erfolgreich abgeschlossen: </translation>
-    </message>
-    <message>
-        <source>Print failed: </source>
-        <translation>Druckvorgang fehlgeschlagen: </translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation>Unbekannt</translation>
+        <source>Print success</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -253,10 +241,6 @@
         <translation>Über SeaPrint</translation>
     </message>
     <message>
-        <source>No compatible formats supported</source>
-        <translation>Keine kompatiblen Formate unterstützt</translation>
-    </message>
-    <message>
         <source>Choose file</source>
         <translation>Datei auswählen</translation>
     </message>
@@ -280,20 +264,9 @@
         <source>This format may not render correctly</source>
         <translation>Dieses Format wird möglicherweise nicht richtig dargestellt</translation>
     </message>
-</context>
-<context>
-    <name>IppPrinter</name>
     <message>
-        <source>Failed to open file</source>
-        <translation>Öffnen der Datei fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Unknown document format</source>
-        <translation>Unbekanntes Dokumentenformat</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Nicht unterstütztes Papierformat</translation>
+        <source>No compatible formats supported</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -370,167 +343,141 @@
     <name>PrinterPage</name>
     <message>
         <source>Print</source>
-        <translation>Drucken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sides</source>
-        <translation>Duplex</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation>Kopien</translation>
-    </message>
-    <message>
-        <source>Color mode</source>
-        <translation>Farbmodus</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation>Qualität</translation>
-    </message>
-    <message>
-        <source>Resolution</source>
-        <translation>Auflösung</translation>
-    </message>
-    <message>
-        <source>Print media</source>
-        <translation>Druckmedien</translation>
-    </message>
-    <message>
-        <source>Transfer format</source>
-        <translation>Transfer Format</translation>
-    </message>
-    <message>
-        <source>Media source</source>
-        <translation>Papierquelle</translation>
-    </message>
-    <message>
-        <source>Page range</source>
-        <translation>Seitenbereich</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Collated copies</source>
-        <translation>Sortierte Kopien</translation>
-    </message>
-    <message>
-        <source>Default settings for %1 on this printer</source>
-        <translation>Standardeinstellung für %1
-auf diesem Drucker</translation>
-    </message>
-    <message>
-        <source>(loaded)</source>
-        <translation>(geladen)</translation>
-    </message>
-    <message>
-        <source>Output bin</source>
-        <translation>Ausgabefach</translation>
-    </message>
-    <message>
-        <source>Media type</source>
-        <translation>Papiertyp</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation>Oben</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation>Unten</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation>Links</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation>Rechts</translation>
-    </message>
-    <message>
-        <source>Margins</source>
-        <translation>Seitenränder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pages per page</source>
-        <translation>Seiten pro Blatt</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Skalierung</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Media handling</source>
-        <translation>Umgang mit Medien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset default settings</source>
-        <translation>Standardeinstellungen zurücksetzen</translation>
+        <source>Media type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save as default settings</source>
-        <translation>Als Standarteinstellung speichern</translation>
+        <source>Media source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output bin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(loaded)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page range</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PrinterWorker</name>
     <message>
+        <source>Unknown target format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Failed to load image</source>
-        <translation>Bild konnte nicht geladen werden</translation>
-    </message>
-    <message>
-        <source>Unsupported PDF paper size</source>
-        <translation>Nicht unterstützte PDF-Papierformat</translation>
-    </message>
-    <message>
-        <source>Unsupported paper size</source>
-        <translation>Nicht unterstütztes Papierformat</translation>
-    </message>
-    <message>
-        <source>Unsupported resolution (dpi)</source>
-        <translation>Nicht unterstützte Auflösung (dpi)</translation>
-    </message>
-    <message>
-        <source>Failed to open file</source>
-        <translation>Öffnen der Datei fehlgeschlagen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation>Es wird gedruckt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Conversion failed</source>
-        <translation>Konvertierung fehlgeschlagen</translation>
+        <source>Failed to open file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown target format</source>
-        <translation>Unbekanntes Zielformat</translation>
-    </message>
-    <message>
-        <source>Preparing</source>
-        <translation>Vorbereiten</translation>
-    </message>
-    <message>
-        <source>Cannot convert this file format</source>
-        <translation>Dateiformat konnte nicht konvertiert werden</translation>
-    </message>
-    <message>
-        <source>Print error</source>
-        <translation> Fehler beim Drucken</translation>
+        <source>Unsupported resolution (dpi)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Inconsistent duplex setting</source>
-        <translation>Uneinheitliche Duplex-Einstellung</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported PDF paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Multiline label not supported</source>
-        <translation>Mehrzeilige Etiketten werden nicht unterstützt</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIppPrinter</name>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RangeSetting</name>
-    <message>
-        <source>all</source>
-        <translation>Alle</translation>
-    </message>
     <message>
         <source>Advanced</source>
         <translation>Fortgeschrittene</translation>
@@ -542,6 +489,10 @@ auf diesem Drucker</translation>
     <message>
         <source>High</source>
         <translation>Höchster</translation>
+    </message>
+    <message>
+        <source>all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -588,14 +539,6 @@ auf diesem Drucker</translation>
     <message>
         <source>Print debug log messages to console (if launched from there) or journal if launched normally. Takes effect on app (re-)start.</source>
         <translation>Druckt das Debug-Protokoll in die Konsole (falls von hier ausgeführt) oder journal wenn normal gestartet wurde. Wird erst nach einem Neustart der App wirksam.</translation>
-    </message>
-    <message>
-        <source>Allow external connections</source>
-        <translation>Externe Verbindungen erlauben</translation>
-    </message>
-    <message>
-        <source>Allow SeaPrint to fetch recources like icons and option name dictionaries from addresses that are not the printer itself. Some printer makers store icons on their website as opposed to locally on the printer.</source>
-        <translation>Erlaube Seaprint Ressourcen wie Icons und Wörterbücher für optionale Namen zu holen die nicht vom Drucker selbst sind. Einige Druckerhersteller speichern Icons auf ihren Webseiten und nicht auf ihren Druckern.</translation>
     </message>
 </context>
 <context>

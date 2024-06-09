@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 
 Item {
     id: cylinderGraph
-    property string color
+    property var colors
     property real value
     width: Theme.itemSizeSmall/2
     height: Theme.itemSizeSmall
@@ -45,22 +45,7 @@ Item {
             GradientStop {}
         }
 
-        function splitColors(color) {
-            if(color.indexOf("#") != 0)
-            {
-                return ["black"];
-            }
-            var colors = [];
-            var parts = color.split("#");
-            for(var i = 1; i < parts.length; i++)
-            {
-                colors.push("#"+parts[i])
-            }
-            return colors;
-        }
-
         Component.onCompleted: {
-            var colors = splitColors(cylinderGraph.color);
             var stops = [];
 
             stops.push(stopComponent.createObject(fill, {"position": 0.0, "color": "#00000000"}));

@@ -12,11 +12,11 @@ Setting {
     function update_choice() {
         if (choice_high == 0)
         {
-            choice = undefined;
+            setting.value = undefined;
         }
         else
         {
-            choice = new Object({low: choice_low, high: choice_high});
+            setting.value = [({low: choice_low, high: choice_high})];
         }
     }
 
@@ -41,49 +41,7 @@ Setting {
         }
     }
 
-    onChoiceChanged: {
-        if(choice == undefined || choice.constructor.name !== "Object")
-        {
-            suppressChange = true;
-            low_slider.value = low_slider.minimumValue;
-            high_slider.value = high_slider.minimumValue;
-            suppressChange = false;
-        }
-    }
-
-    displayValue: prettify(choice)
-
-    function prettify(choice)
-    {
-        if(choice == undefined)
-        {
-            return qsTr("all");
-        }
-        else if(choice.constructor.name === "Object")
-        {
-            return (""+choice.low+" - "+choice.high)
-        }
-        else
-        {
-            var ret = "";
-            for(var i = 0; i <  choice.length; i++)
-            {
-                if(i!=0)
-                {
-                    ret = ret+","
-                }
-                if(choice[i].low == choice[i].high)
-                {
-                    ret=ret+choice[i].low
-                }
-                else
-                {
-                    ret=ret+choice[i].low+"-"+choice[i].high
-                }
-            }
-            return ret
-        }
-    }
+    displayValue: setting.pretty != "" ? setting.pretty : qsTr("all")
 
     menu: ContextMenu {
         MenuItem {
@@ -148,7 +106,7 @@ Setting {
             onClicked: {var dialog = pageStack.push(Qt.resolvedUrl("RangeListInputDialog.qml"),
                                                     {title: prettyName});
                         dialog.accepted.connect(function() {
-                            choice = dialog.value;
+                            setting.value = dialog.value;
                         })
             }
         }

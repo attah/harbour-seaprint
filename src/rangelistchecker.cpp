@@ -31,17 +31,11 @@ RangeListChecker* RangeListChecker::instance()
 QJsonArray RangeListChecker::parse(QString str) const
 {
     PrintParameters params;
-    params.setPageRange(str.toStdString());
+    params.setPageSelection(str.toStdString());
     QJsonArray ret;
-    size_t previous = 0;
-    for(const std::pair<size_t, size_t>& p : params.pageRangeList)
+    for(const std::pair<size_t, size_t>& p : params.pageSelection)
     {
-        if(p.first <= previous)
-        {
-            return {};
-        }
         ret.append(QJsonObject {{"low", int(p.first)}, {"high", int(p.second)}});
-        previous = p.second;
     }
     return ret;
 }

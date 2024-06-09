@@ -27,7 +27,7 @@ system(lrelease $$PWD/translations/*.ts)
 
 CONFIG += sailfishapp
 QT += svg dbus
-PKGCONFIG += mlite5 libcurl glib-2.0
+PKGCONFIG += mlite5 libcurl glib-2.0 zlib
 INCLUDEPATH += $$system(pkg-config --cflags-only-I poppler-glib | sed 's/-I//g')
 LIBS += -lcurl -lglib-2.0 -lgobject-2.0 -ldl -lstdc++fs
 QMAKE_CXXFLAGS += -std=c++17
@@ -38,21 +38,26 @@ DEFINES += SEAPRINT_VERSION='\\"$$VERSION\\"'
 SOURCES += src/harbour-seaprint.cpp \
     src/dbusadaptorbase.cpp \
     src/freedesktopdbusadaptor.cpp \
+    src/qconvertfunctions.cpp \
+    src/qippdiscovery.cpp \
+    src/qippprinter.cpp \
     src/rangelistchecker.cpp \
     src/convertchecker.cpp \
     src/imageitem.cpp \
-    src/ippdiscovery.cpp \
-    src/ippmsg.cpp \
-    src/ippprinter.cpp \
     src/mimer.cpp \
     ppm2pwg/lib/printparameters.cpp \
     ppm2pwg/lib/ppm2pwg.cpp \
     ppm2pwg/lib/pdf2printable.cpp \
     ppm2pwg/lib/baselinify.cpp \
     ppm2pwg/lib/curlrequester.cpp \
+    ppm2pwg/lib/ippprinter.cpp \
+    ppm2pwg/lib/ippprintjob.cpp \
+    ppm2pwg/lib/ippmsg.cpp \
+    ppm2pwg/lib/ippattr.cpp \
+    ppm2pwg/lib/minimime.cpp \
+    ppm2pwg/lib/ippdiscovery.cpp \
     ppm2pwg/bytestream/bytestream.cpp \
-    src/overrider.cpp \
-    src/printerworker.cpp \
+    ppm2pwg/json11/json11.cpp \
     src/seaprintdbusadaptor.cpp \
     src/settings.cpp
 
@@ -89,12 +94,11 @@ TRANSLATIONS += translations/harbour-seaprint-de.ts \
 HEADERS += \
     src/dbusadaptorbase.h \
     src/freedesktopdbusadaptor.h \
+    src/qippdiscovery.h \
+    src/qippprinter.h \
     src/rangelistchecker.h \
     src/convertchecker.h \
     src/imageitem.h \
-    src/ippdiscovery.h \
-    src/ippmsg.h \
-    src/ippprinter.h \
     src/mimer.h \
     ppm2pwg/lib/ppm2pwg.h \
     ppm2pwg/lib/pdf2printable.h \
@@ -106,15 +110,21 @@ HEADERS += \
     ppm2pwg/lib/UrfPgHdr.h \
     ppm2pwg/lib/UrfPgHdr.codable \
     ppm2pwg/lib/curlrequester.h \
+    ppm2pwg/lib/ippprinter.h \
+    ppm2pwg/lib/ippprintjob.h \
+    ppm2pwg/lib/ippmsg.h \
+    ppm2pwg/lib/ippattr.h \
+    ppm2pwg/lib/minimime.h \
     ppm2pwg/lib/argget.h \
     ppm2pwg/bytestream/bytestream.h \
+    ppm2pwg/lib/setting.h \
     ppm2pwg/bytestream/codable.h \
     ppm2pwg/bytestream/array.h \
-    src/overrider.h \
+    ppm2pwg/json11/json11.hpp \
     src/papersizes.h \
-    src/printerworker.h \
     src/seaprintdbusadaptor.h \
     src/settings.h
 
 INCLUDEPATH += ppm2pwg/lib \
-               ppm2pwg/bytestream
+               ppm2pwg/bytestream \
+               ppm2pwg/json11

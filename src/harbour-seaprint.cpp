@@ -3,8 +3,8 @@
 #include <QDBusConnection>
 
 #include <sailfishapp.h>
-#include <src/ippdiscovery.h>
-#include <src/ippprinter.h>
+#include <src/qippdiscovery.h>
+#include <src/qippprinter.h>
 #include <src/imageitem.h>
 #include <src/mimer.h>
 #include <src/convertchecker.h>
@@ -14,10 +14,14 @@
 #include <src/seaprintdbusadaptor.h>
 #include "argget.h"
 #include <iostream>
+#include "log.h"
 
 Q_DECLARE_METATYPE(CURLcode)
 Q_DECLARE_METATYPE(Bytestream)
 Q_DECLARE_METATYPE(PrintParameters)
+Q_DECLARE_METATYPE(IppPrintJob)
+
+void addExtraConverters();
 
 template <class T>
 static QObject* singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -46,9 +50,15 @@ int main(int argc, char *argv[])
     qRegisterMetaType<CURLcode>();
     qRegisterMetaType<Bytestream>();
     qRegisterMetaType<PrintParameters>();
+    qRegisterMetaType<IppPrintJob>();
+    qRegisterMetaType<size_t>("size_t");
 
     // Turn on/off logging according to setting
     QLoggingCategory::defaultCategory()->setEnabled(QtMsgType::QtDebugMsg, Settings::instance()->debugLog());
+    if(Settings::instance()->debugLog())
+    {
+        LogController::instance().enable(LogController::Debug);
+    }
 
     QGuiApplication* app = SailfishApp::application(argc, argv);
 
@@ -56,15 +66,15 @@ int main(int argc, char *argv[])
     app->setApplicationName(QStringLiteral("seaprint"));
     app->setApplicationVersion(QStringLiteral(SEAPRINT_VERSION));
 
-    qmlRegisterSingletonType<IppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<IppDiscovery>);
+    qmlRegisterSingletonType<QIppDiscovery>("seaprint.ippdiscovery", 1, 0, "IppDiscovery", singletontype_provider<QIppDiscovery>);
     qmlRegisterSingletonType<Mimer>("seaprint.mimer", 1, 0, "Mimer", singletontype_provider<Mimer>);
     qmlRegisterSingletonType<ConvertChecker>("seaprint.convertchecker", 1, 0, "ConvertChecker", singletontype_provider<ConvertChecker>);
     qmlRegisterSingletonType<Settings>("seaprint.settings", 1, 0, "SeaPrintSettings", singletontype_provider<Settings>);
     qmlRegisterSingletonType<RangeListChecker>("seaprint.rangelistchecker", 1, 0, "RangeListChecker", singletontype_provider<RangeListChecker>);
 
-    qmlRegisterType<IppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
+    qmlRegisterType<QIppPrinter>("seaprint.ippprinter", 1, 0, "IppPrinter");
     qmlRegisterType<ImageItem>("seaprint.imageitem", 1, 0, "ImageItem");
-    qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
+//    qmlRegisterUncreatableType<IppMsg>("seaprint.ippmsg", 1, 0, "IppMsg", "Only used to supply an enum type");
 
     QQuickView* view = SailfishApp::createView();
 
@@ -79,6 +89,8 @@ int main(int argc, char *argv[])
 
     if (!QDBusConnection::sessionBus().registerService("net.attah.seaprint"))
         qWarning() << "Could not register net.attah.seaprint D-Bus service.";
+
+    addExtraConverters();
 
     if(!FileName.empty())
     {

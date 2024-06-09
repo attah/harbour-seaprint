@@ -5,21 +5,12 @@ Item {
     height: button.height + (menu != undefined ? menu.height : 0) + resetMenu.height
     width: parent.width
 
-    property string name
     property string prettyName
-    property int tag
-    property string subkey: ""
-    property bool _valid: parent.isValid(name)
+    property var setting
     property bool valid: _valid
-
-    property var choice
-    property var default_choice: parent.getDefaultChoice(name)
+    property bool _valid: true
 
     property var strings: parent.printer.strings
-
-    Component.onCompleted: parent.setInitialChoice(this)
-
-    onChoiceChanged: parent.choiceMade(this)
 
     signal clicked()
     onClicked: {
@@ -42,7 +33,7 @@ Item {
         label: prettyName
         onClicked: parent.clicked()
         onPressAndHold: parent.pressAndHold()
-        valueColor: choice != undefined ? Theme.highlightColor : Theme.secondaryHighlightColor
+        valueColor: setting.isSet ? Theme.highlightColor : Theme.secondaryHighlightColor
     }
 
     property var menu
@@ -50,7 +41,7 @@ Item {
 
     function reset()
     {
-        choice = undefined
+        setting.value = undefined
     }
 
     ContextMenu {

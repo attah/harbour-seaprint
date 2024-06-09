@@ -3,73 +3,9 @@
 .import seaprint.convertchecker 1.0 as ConvertChecker
 .import "strings.js" as Strings
 
-// TODO move to IppPrinter?
-function supported_formats(printer, considerAdditionalFormats)
-{
-    var formats = printer.attrs["document-format-supported"].value;
-    if(considerAdditionalFormats)
-    {
-        formats=formats+printer.additionalDocumentFormats;
-    }
-
-    var raster = (has(formats, Mimer.Mimer.PWG) || has(formats, Mimer.Mimer.URF));
-
-    var mimetypes = [];
-    var pdf = false;
-    var postscript = false;
-    var office = false;
-    var images = false;
-    var plaintext = false;
-
-    if(has(formats, Mimer.Mimer.PDF) ||
-       (has(formats, Mimer.Mimer.Postscript) || raster ))
-    {
-        pdf = true;
-        mimetypes.push(Mimer.Mimer.PDF);
-    }
-
-    if(has(formats, Mimer.Mimer.Postscript))
-    {
-        postscript = true;
-        mimetypes.push(Mimer.Mimer.Postscript);
-    }
-
-    if(pdf || has(formats, Mimer.Mimer.Plaintext))
-    {
-        plaintext = true;
-        mimetypes.push(Mimer.Mimer.Plaintext);
-    }
-
-    if((ConvertChecker.ConvertChecker.calligra) && pdf)
-    {
-        office = true;
-        mimetypes = mimetypes.concat(Mimer.Mimer.OfficeFormats);
-    }
-
-    if(pdf || has(formats, Mimer.Mimer.JPEG) || has(formats, Mimer.Mimer.PNG) || has(formats, Mimer.Mimer.RBMP))
-    {
-        images = true;
-        mimetypes.push(Mimer.Mimer.JPEG);
-        mimetypes.push(Mimer.Mimer.PNG);
-        mimetypes.push(Mimer.Mimer.TIFF);
-        mimetypes.push(Mimer.Mimer.GIF);
-    }
-
-    if(pdf)
-    {
-        mimetypes.push(Mimer.Mimer.SVG);
-    }
-
-    return {pdf: pdf, postscript: postscript, plaintext: plaintext, office: office, images: images, mimetypes: mimetypes};
-}
-
 function supports_raster(printer)
 {
-    var formats = printer.attrs["document-format-supported"].value;
-    if(considerAdditionalFormats)
-    {
-        formats=formats+printer.additionalDocumentFormats;
-    }
+    var formats = printer.supportedFormats;
     return (has(formats, Mimer.Mimer.PWG) || has(formats, Mimer.Mimer.URF));
 }
 
@@ -396,143 +332,25 @@ function endsWith(ending, string)
     return string.lastIndexOf(ending) == (string.length - ending.length);
 }
 
-var pdfTargets = [Mimer.Mimer.OctetStream, Mimer.Mimer.PDF, Mimer.Mimer.Postscript, Mimer.Mimer.PWG, Mimer.Mimer.URF];
-
-
-function canConvertPdfTo(type)
-{
-    return has(pdfTargets, type)
-}
-
-function canTransferPostscriptAs(type)
-{
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.Postscript];
-    return has(targets, type)
-}
-
-function canConvertPlaintextTo(type)
-{
-    var targets = pdfTargets;
-    targets.push(Mimer.Mimer.Plaintext);
-    return has(targets, type)
-}
-
-function canConvertOfficeDocumentTo(type)
-{
-    return has(pdfTargets, type)
-}
-
-function canConvertSvgTo(type)
-{
-    return has(pdfTargets, type)
-}
-
-function canConvertImageTo(type)
-{
-    var targets = [Mimer.Mimer.OctetStream, Mimer.Mimer.JPEG, Mimer.Mimer.PNG, Mimer.Mimer.RBMP,
-                   Mimer.Mimer.PWG, Mimer.Mimer.URF, Mimer.Mimer.PDF, Mimer.Mimer.Postscript];
-    return has(targets, type)
-}
-
 function unitsIsDpi(resolution)
 {
     return resolution.units == 3;
 }
 
-function knownPaperSize(mediaName)
-{
-    return Strings.media.hasOwnProperty(mediaName);
-}
-
-
 function fixupChoices(name, choices, mimeType, printer)
 {
     switch(name) {
     case "document-format":
-        if(mimeType == Mimer.Mimer.PDF)
-        {
-            return choices.filter(canConvertPdfTo)
-        }
-        else if(mimeType == Mimer.Mimer.Plaintext)
-        {
-            return choices.filter(canConvertPlaintextTo)
-        }
-        else if(mimeType == Mimer.Mimer.Postscript)
-        {
-            return choices.filter(canTransferPostscriptAs)
-        }
-        else if(Mimer.Mimer.isOffice(mimeType))
-        {
-            return choices.filter(canConvertOfficeDocumentTo)
-        }
-        else if(mimeType == Mimer.Mimer.SVG)
-        {
-            return choices.filter(canConvertSvgTo)
-        }
-        else if(Mimer.Mimer.isImage(mimeType))
-        {
-            return choices.filter(canConvertImageTo);
-        }
-        else
-        {
-            return [Mimer.Mimer.OctetStream];
-        }
+        var possibleTransferFormats = printer.possibleTransferFormats(mimeType);
+        return choices.filter(function(n) {return n == Mimer.Mimer.OctetStream || possibleTransferFormats.indexOf(n) !== -1;});
     case "printer-resolution":
         return choices.filter(unitsIsDpi);
     case "multiple-document-handling" :
         // Only collation settings valid, multiple documents not used
         return choices.filter(function(elem) {return elem.indexOf("collated") != -1});
-    case "number-up":
-        if(choices.constructor.name === "Object")
-        {
-            var choice_array = [];
-            for(var i=choices.low; i <= choices.high; i++)
-            {
-                choice_array.push(i);
-            }
-            return choice_array;
-        }
-        else
-        {
-            return choices;
-        }
-    case "media":
-        if(printer.attrs.hasOwnProperty("media-ready"))
-        {
-            for(var m in printer.attrs["media-ready"].value)
-            {
-                var value = printer.attrs["media-ready"].value[m];
-                if(!has(choices, value))
-                {
-                    choices.push(value);
-                }
-            }
-        }
-        return choices;
     default:
         return choices;
     }
-}
-
-function isWaringState(printer)
-{
-    if(printer.attrs["printer-state"].value > 4)
-    {
-        return true;
-    }
-
-    if(printer.attrs.hasOwnProperty("printer-state-reasons"))
-    {
-        for(var i in printer.attrs["printer-state-reasons"].value)
-        {
-            var value = printer.attrs["printer-state-reasons"].value[i];
-            if(value != "none" && !(endsWith("-report", value)))
-            {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 function unknownForEmptyString(s)
@@ -546,19 +364,6 @@ function unknownForEmptyString(s)
         return s;
     }
 }
-
-function existsAndNotEmpty(attrName, printer)
-{
-    if(printer.attrs.hasOwnProperty(attrName))
-    {
-        return printer.attrs[attrName].value != ""
-    }
-    else
-    {
-        return false
-    }
-}
-
 
 function basename(filewithpath)
 {

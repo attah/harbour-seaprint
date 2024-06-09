@@ -1,7 +1,8 @@
 import QtQuick 2.6
 
 Item {
-    property alias target: targetConnection.target
+    id: dependentOn
+    property var target
     property var values
     property var overlap: []
 
@@ -18,10 +19,10 @@ Item {
     }
 
     Connections {
-        id: targetConnection
-        onChoiceChanged:
+        target: dependentOn.target.setting
+        onChanged:
         {
-            if(parent.choice != undefined && overlap.indexOf(target.choice) == -1)
+            if(parent.setting.isSet && overlap.indexOf(target.value) == -1)
             {
                 parent.reset()
                 parent.highlight()
@@ -29,12 +30,12 @@ Item {
         }
     }
     Connections {
-        target: parent
-        onChoiceChanged:
+        target: parent.setting
+        onChanged:
         {
-            if(parent.choice != undefined && overlap.indexOf(targetConnection.target.choice) == -1)
+            if(parent.setting.value != undefined && overlap.indexOf(targetConnection.target.value) == -1)
             {
-                targetConnection.target.choice = overlap[0]
+                targetConnection.target.value = overlap[0]
                 targetConnection.target.highlight()
             }
         }

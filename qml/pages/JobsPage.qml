@@ -14,10 +14,8 @@ Page {
 
     Connections {
         target: printer
-        onCancelStatus: {
-            if(status != true) {
-                notifier.notify(qsTr("Cancelling job failed"))
-            }
+        onCancelJobFailed: {
+            notifier.notify(qsTr("Cancelling job failed"))
         }
     }
 
@@ -49,7 +47,7 @@ Page {
 
             header: PageHeader {
                 id: pageHeader
-                title: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
+                title: Utils.unknownForEmptyString(printer.name)
                 description: printer.jobs.length==1 ?  printer.jobs.length+" "+qsTr("job") : printer.jobs.length+" "+qsTr("jobs")
             }
 
@@ -61,7 +59,7 @@ Page {
                     leftPadding: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
                     color: Theme.highlightColor
-                    text: printer.jobs[index]["job-id"].value
+                    text: printer.jobs[index]["id"]
                 }
 
                 Column {
@@ -69,14 +67,12 @@ Page {
                     anchors.leftMargin: Theme.horizontalPageMargin
                     anchors.verticalCenter: parent.verticalCenter
                     Label {
-                        text: printer.jobs[index]["job-name"] ? printer.jobs[index]["job-name"].value : qsTr("Untitled job")
+                        text: printer.jobs[index]["name"] != "" ? printer.jobs[index]["name"] : qsTr("Untitled job")
                     }
                     Label {
                         font.pixelSize: Theme.fontSizeTiny
                         color: Theme.secondaryColor
-                        property var msg: printer.jobs[index]["job-printer-state-message"] && printer.jobs[index]["job-printer-state-message"].value != ""
-                                         ? " ("+printer.jobs[index]["job-printer-state-message"].value+")" : ""
-                        text: Utils.ippName("job-state", printer.jobs[index]["job-state"].value)+msg
+                        text: Utils.ippName("job-state", printer.jobs[index]["state"])+" "+printer.jobs[index]["stateMessage"]
                     }
                 }
 
@@ -89,7 +85,7 @@ Page {
                         text: qsTr("Cancel job")
                         onClicked: {
                             cancelRemorse.execute(jobDelegate, qsTr("Cancelling job"),
-                                                  function() {printer.cancelJob(printer.jobs[index]["job-id"].value) })
+                                                  function() {printer.cancelJob(printer.jobs[index]["id"]) })
                         }
                     }
                 }

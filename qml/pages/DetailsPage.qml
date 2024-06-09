@@ -13,7 +13,7 @@ Page {
         contentHeight: col.height
 
         PullDownMenu {
-            visible: printer.attrs.hasOwnProperty("identify-actions-supported")
+            visible: printer.identifySupported
 
             MenuItem {
                 id: identifyLabel
@@ -30,7 +30,7 @@ Page {
             width: Math.min(Screen.width, detailsFlickable.width)-2*Theme.paddingLarge
             PageHeader {
                 title: qsTr("Details")
-                description: Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
+                description: Utils.unknownForEmptyString(printer.name)
             }
 
             // TODO:
@@ -45,17 +45,17 @@ Page {
             }
 
             Label {
-                text: Utils.unknownForEmptyString(printer.attrs["printer-make-and-model"].value)
+                text: Utils.unknownForEmptyString(printer.makeAndModel)
             }
 
             SectionHeader {
                 text: qsTr("Location")
-                visible: Utils.existsAndNotEmpty("printer-location", printer)
+                visible: printer.location != ""
             }
 
             Label {
-                text: printer.attrs["printer-location"].value
-                visible: Utils.existsAndNotEmpty("printer-location", printer)
+                text: printer.location
+                visible: printer.location != ""
             }
 
 
@@ -64,105 +64,99 @@ Page {
             }
 
             Label {
-                text: Utils.ippName("printer-state", printer.attrs["printer-state"].value)
+                text: Utils.ippName("printer-state", printer.state)
             }
 
             Repeater
             {
-                model: printer.attrs["printer-state-reasons"].value
+                model: printer.stateReasons
                 Label {
-                    text: Utils.ippName("printer-state-reasons", printer.attrs["printer-state-reasons"].value[index])
+                    text: Utils.ippName("printer-state-reasons", printer.stateReasons[index])
                 }
             }
 
             Label {
-                text: printer.attrs["printer-state-message"].value
-                visible: printer.attrs.hasOwnProperty("printer-state-message")
+                text: printer.stateMessage
+                visible: printer.stateMessage != ""
             }
 
             SectionHeader {
                 text: qsTr("Supply status")
-                visible: printer.attrs.hasOwnProperty("marker-colors")
+                visible: printer.supplies.length != 0
             }
 
             Repeater
             {
-                model: printer.attrs["marker-colors"].value.length
+                model: printer.supplies.length
 
                 SupplyItem
                 {
-                    color: printer.attrs["marker-colors"].value[index]
-                    level: printer.attrs["marker-levels"].value[index]
-                    high_level: printer.attrs["marker-high-levels"].value[index]
-                    low_level: printer.attrs["marker-low-levels"].value[index]
-                    name: printer.attrs["marker-names"].value[index]
-                    type: printer.attrs["marker-types"].value[index]
-
+                    name: printer.supplies[index].name
+                    type: printer.supplies[index].type
+                    colors: printer.supplies[index].colors
+                    percentage: printer.supplies[index].percentage
+                    isLow: printer.supplies[index].isLow
                 }
             }
 
             SectionHeader {
                 text: qsTr("IPP versions")
-                visible: printer.attrs.hasOwnProperty("ipp-versions-supported")
+                visible: printer.ippVersions.length != 0
             }
 
 
             Label
             {
-                text: printer.attrs["ipp-versions-supported"].value.join(" ")
-                visible: printer.attrs.hasOwnProperty("ipp-versions-supported")
-
+                text: printer.ippVersions.join(" ")
+                visible: printer.ippVersions.length != 0
             }
 
             SectionHeader {
                 text: qsTr("IPP features")
-                visible: printer.attrs.hasOwnProperty("ipp-features-supported")
+                visible: printer.ippFeatures.length != 0
             }
 
 
             Repeater
             {
-                model: printer.attrs["ipp-features-supported"].value.length
+                model: printer.ippFeatures.length
                 Label
                 {
-                    text: printer.attrs["ipp-features-supported"].value[index]
+                    text: printer.ippFeatures[index]
                 }
-
             }
 
             SectionHeader {
                 text: qsTr("Firmware")
-                visible: printer.attrs.hasOwnProperty("printer-firmware-name")
+                visible: printer.firmware.length != 0
             }
 
             Repeater
             {
-                model: printer.attrs["printer-firmware-name"].value.length
+                model: printer.firmware.length
                 Label
                 {
-                    text: printer.attrs["printer-firmware-name"].value[index]+": "
-                          + printer.attrs["printer-firmware-string-version"].value[index]
+                    text: printer.firmware[index].name + ": " + printer.firmware[index].version
                 }
 
             }
 
             SectionHeader {
                 text: qsTr("Performance")
-                visible: printer.attrs.hasOwnProperty("pages-per-minute") || printer.attrs.hasOwnProperty("pages-per-minute-color")
+                visible: printer.pagesPerMinute != 0 || printer.pagesPerMinuteColor != 0
             }
 
             Label
             {
-                text: ""+printer.attrs["pages-per-minute"].value+" "+qsTr("pages/min")
-                visible: printer.attrs.hasOwnProperty("pages-per-minute")
+                text: ""+printer.pagesPerMinute+" "+qsTr("pages/min")
+                visible: printer.pagesPerMinute != 0
 
             }
 
             Label
             {
-                text: ""+printer.attrs["pages-per-minute-color"].value+" "+qsTr("pages/min (color)")
-                visible: printer.attrs.hasOwnProperty("pages-per-minute-color")
-
+                text: ""+printer.pagesPerMinuteColor+" "+qsTr("pages/min (color)")
+                visible: printer.pagesPerMinuteColor != 0
             }
 
         }

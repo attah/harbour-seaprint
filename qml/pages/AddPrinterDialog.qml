@@ -10,7 +10,7 @@ Dialog {
     property string value
     property string ssid
     property var printerName: false
-    canAccept: Object.keys(printer.attrs).length != 0
+    canAccept: printer.isOk
 
     Connections {
         target: wifi
@@ -28,15 +28,8 @@ Dialog {
     IppPrinter {
         id: printer
         url: valueField.text
-        onAttrsChanged: {
-            if(printer.attrs.hasOwnProperty("printer-name")) {
-                printerName = Utils.unknownForEmptyString(printer.attrs["printer-name"].value)
-            }
-            else
-            {
-                printerName = qsTr("Unknown")
-            }
-
+        onDataChanged: {
+            printerName = Utils.unknownForEmptyString(printer.name)
         }
     }
 

@@ -5,13 +5,11 @@ import "../components"
     Row
     {
         id: item
-        property var color: "white"
-        property int level: 100
-        property int high_level: 100
-        property int low_level: 10
         property string name: ""
         property string type: ""
-        property real value_fraction: level/(high_level == 0 ? 100 : high_level)
+        property var colors: ["white"]
+        property int percentage: 100
+        property bool isLow: false
 
         spacing: Theme.paddingMedium
         bottomPadding: Theme.paddingMedium
@@ -19,15 +17,15 @@ import "../components"
         CylinderGraph
         {
             anchors.verticalCenter: parent.verticalCenter
-            color: parent.color
-            value: value_fraction
+            colors: parent.colors
+            value: percentage/100
         }
         Label
         {
             anchors.verticalCenter: parent.verticalCenter
             width: Theme.itemSizeExtraSmall
-            text: ""+Math.round(100*value_fraction)+"%"
-            color: level <= low_level ? "red" : Theme.highlightColor
+            text: ""+percentage+"%"
+            color: isLow ? "red" : Theme.highlightColor
             font.pixelSize: Theme.fontSizeExtraSmall
         }
         Column

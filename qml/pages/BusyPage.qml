@@ -16,22 +16,14 @@ Page {
     Connections {
         target: printer
         onJobFinished: {
-            var msg = qsTr("Unknown")
-            if (printer.jobAttrs.hasOwnProperty("job-state-message") && printer.jobAttrs["job-state-message"].value != "") {
-                msg = printer.jobAttrs["job-state-message"].value
-            }
-            else if (printer.jobAttrs.hasOwnProperty("status-message") && printer.jobAttrs["status-message"].value != "") {
-                msg = printer.jobAttrs["status-message"].value
-            }
-            else if (printer.jobAttrs.hasOwnProperty("job-state") && printer.jobAttrs["job-state"].value != "") {
-                msg = Utils.ippName("job-state", printer.jobAttrs["job-state"].value)
-            }
             pageStack.pop()
-            if(status == true) {
-                notifier.notify(qsTr("Print success: ") + msg)
+            if(errMsg == "")
+            {
+                notifier.notify(qsTr("Print success"))
             }
-            else {
-                notifier.notify(qsTr("Print failed: ") + msg)
+            else
+            {
+                notifier.notify(qsTr("Print failed: " + errMsg))
             }
         }
         onBusyMessageChanged: {

@@ -3,8 +3,8 @@ import Sailfish.Silica 1.0
 
 Setting {
     property int minimum_high: 0
-    property int low: _valid ? parent.printer.attrs[name+"-supported"].value.low : (minimum_high != 0) ? 1 : 0
-    property int high: _valid ? ensure_minimum(parent.printer.attrs[name+"-supported"].value.high) : minimum_high
+    property int low: _valid ? setting.low : 0
+    property int high: _valid ? ensure_minimum(setting.high) : 0
 
     function ensure_minimum(orig)
     {
@@ -18,18 +18,7 @@ Setting {
         }
     }
 
-    property bool suppressChange: false
-
-    displayValue: choice != undefined ? choice : default_choice
-
-    onChoiceChanged: {
-        if(choice == undefined)
-        {
-            suppressChange = true;
-            slider.value = slider.minimumValue;
-            suppressChange = false;
-        }
-    }
+    displayValue: setting.value
 
     menu: ContextMenu {
         MenuItem {
@@ -42,10 +31,7 @@ Setting {
                 stepSize: 1
                 onValueChanged:
                 {
-                    if(!suppressChange)
-                    {
-                        choice = value;
-                    }
+                    setting.value = value;
                 }
             }
             IconButton
@@ -56,7 +42,7 @@ Setting {
                                                         {title: prettyName,
                                                          min: low, max: high});
                             dialog.accepted.connect(function() {
-                                choice = dialog.value;
+                                setting.value = dialog.value;
                             })
                 }
             }
