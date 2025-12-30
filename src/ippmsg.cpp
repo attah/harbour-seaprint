@@ -137,9 +137,19 @@ QJsonValue IppMsg::consume_value(quint8 tag, Bytestream& data)
             value = QJsonObject {{"low", low}, {"high", high}};
             break;
         }
-        case OctetStringUnknown:
         case TextWithLanguage:
         case NameWithLanguage:
+        {
+            std::string tmpString;
+            if(data.getU16() != 0) // Check and consume over-all length
+            {
+                data.getString(data.getU16()); // ignore language
+                tmpString = data.getString(data.getU16());
+            }
+            value = tmpString.c_str();
+            break;
+        }
+        case OctetStringUnknown:
         case TextWithoutLanguage:
         case NameWithoutLanguage:
         case Keyword:
@@ -433,9 +443,19 @@ void IppMsg::encode_value(Bytestream& msg, quint8 tag, QJsonValue value)
             msg << (quint8)EndCollection << (quint16)0 << (quint16)0;
             break;
         }
-        case OctetStringUnknown:
         case TextWithLanguage:
         case NameWithLanguage:
+        {
+            std::string language = "en-us";
+            QByteArray tmpstr = value.toString().toUtf8();
+            msg << uint16_t(tmpstr.length() + language.length() + 4);
+            msg << uint16_t(language.length());
+            msg.putBytes(language.data(), language.length());
+            msg << uint16_t(tmpstr.length());
+            msg.putBytes(tmpstr.data(), tmpstr.length());
+            break;
+        }
+        case OctetStringUnknown:
         case TextWithoutLanguage:
         case NameWithoutLanguage:
         case Keyword:
