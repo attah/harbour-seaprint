@@ -100,7 +100,8 @@ Page {
                 text: qsTr("Chinese")+" - dashinfantry\n"+
                       qsTr("Dutch")+" - JSEHV, Rudi Timmermans\n"+
                       qsTr("French")+" - ensag-dev, pherjung, phklrz, Quentí\n"+
-                      qsTr("German")+" -  black-sheep-dev, cnlpete, wheelseal\n"+
+                      qsTr("German")+" - black-sheep-dev, cnlpete, wheelseal\n"+
+                      qsTr("Italian")+" - legacychimera247\n"+
                       qsTr("Polish")+" - atlochowski, karolkurek\n"+
                       qsTr("Spanish")+" - carmenfdezb, JSEHV"
             }

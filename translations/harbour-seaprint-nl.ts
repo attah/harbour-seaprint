@@ -91,6 +91,10 @@
         <source>SeaPrint is free software released under the GNU General Public License (GPL), version 3 or later.</source>
         <translation>SeaPrint is vrije software die is uitgebracht onder de GNU General Public License (GPL), versie 3 of hoger.</translation>
     </message>
+    <message>
+        <source>Italian</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddPrinterDialog</name>
